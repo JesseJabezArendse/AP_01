@@ -99,6 +99,7 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  HAL_GPIO_WritePin(GREEN_LED_GPIO_Port,GREEN_LED_Pin,1);
   while (1)
   {
     getVL53L1A1();
