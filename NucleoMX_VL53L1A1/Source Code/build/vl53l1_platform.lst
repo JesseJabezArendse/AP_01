@@ -1,0 +1,2151 @@
+ARM GAS  C:\Temp\ccCySX2p.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"vl53l1_platform.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c"
+  20              		.section	.text.VL53L1_Delay,"ax",%progbits
+  21              		.align	1
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	VL53L1_Delay:
+  27              	.LVL0:
+  28              	.LFB19:
+   1:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** /**
+   2:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****  ******************************************************************************
+   3:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****  * Copyright (c) 2020, STMicroelectronics - All Rights Reserved
+   4:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****  *
+   5:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****  * This software is licensed under terms that can be found in the LICENSE file
+   6:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****  * in the root directory of this software component.
+   7:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****  * If no LICENSE file comes with this software, it is provided AS-IS.
+   8:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****  *
+   9:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****  ******************************************************************************
+  10:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****  */
+  11:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+  12:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #include <vl53l1_platform.h>
+  13:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #ifndef SMALL_FOOTPRINT
+  14:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #include "vl53l1_platform_ipp.h"
+  15:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #endif
+  16:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #include <vl53l1_platform_log.h>
+  17:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #include "vl53l1_api.h"
+  18:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+  19:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #include <time.h>
+  20:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #include <math.h>
+  21:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+  22:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #ifdef VL53L1_LOG_ENABLE
+  23:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #define trace_print(level, ...) VL53L1_trace_print_module_function(VL53L1_TRACE_MODULE_PLATFORM, le
+  24:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #define trace_i2c(...) VL53L1_trace_print_module_function(VL53L1_TRACE_MODULE_NONE, VL53L1_TRACE_LE
+  25:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #endif
+  26:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+  27:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** /* when not customized by application define dummy one */
+  28:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #ifndef VL53L1_GetI2cBus
+  29:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** /** This macro can be overloaded by user to enforce i2c sharing in RTOS context
+  30:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****  */
+ARM GAS  C:\Temp\ccCySX2p.s 			page 2
+
+
+  31:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #define VL53L1_GetI2cBus(...) (void)0
+  32:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #endif
+  33:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+  34:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #ifndef VL53L1_PutI2cBus
+  35:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** /** This macro can be overloaded by user to enforce i2c sharing in RTOS context
+  36:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****  */
+  37:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #define VL53L1_PutI2cBus(...) (void)0
+  38:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #endif
+  39:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+  40:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** uint8_t _I2CBuffer[256];
+  41:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** unsigned int i2creadCount = 0;
+  42:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** unsigned int i2cwriteCount = 0;
+  43:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** unsigned char SPI2C_Buffer[256];
+  44:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+  45:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** /* Private functions prototypes */
+  46:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** static VL53L1_Error VL53L1_Delay(VL53L1_DEV Dev, uint32_t Delay);
+  47:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+  48:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** int _I2CWrite(VL53L1_DEV Dev, uint8_t *pdata, uint32_t count) {
+  49:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	return Dev->IO.WriteReg(Dev->IO.Address, pdata, count);
+  50:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+  51:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+  52:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** int _I2CRead(VL53L1_DEV Dev, uint8_t *pdata, uint32_t count) {
+  53:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	return Dev->IO.ReadReg(Dev->IO.Address, pdata, count);
+  54:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+  55:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+  56:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** VL53L1_Error VL53L1_WriteMulti(VL53L1_DEV Dev, uint16_t index, uint8_t *pdata, uint32_t count) {
+  57:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     int status_int;
+  58:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_Error Status = VL53L1_ERROR_NONE;
+  59:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (count > sizeof(_I2CBuffer) - 1) {
+  60:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         return VL53L1_ERROR_INVALID_PARAMS;
+  61:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     }
+  62:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[0] = index>>8;
+  63:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[1] = index&0xFF;
+  64:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     memcpy(&_I2CBuffer[2], pdata, count);
+  65:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_GetI2cBus();
+  66:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     status_int = _I2CWrite(Dev, _I2CBuffer, count + 2);
+  67:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+  68:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+  69:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     }
+  70:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_PutI2cBus();
+  71:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     return Status;
+  72:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+  73:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+  74:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** VL53L1_Error VL53L1_ReadMulti(VL53L1_DEV Dev, uint16_t index, uint8_t *pdata, uint32_t count) {
+  75:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_Error Status = VL53L1_ERROR_NONE;
+  76:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     int32_t status_int;
+  77:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+  78:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[0] = index>>8;
+  79:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[1] = index&0xFF;
+  80:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_GetI2cBus();
+  81:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     status_int = _I2CWrite(Dev, _I2CBuffer, 2);
+  82:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+  83:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+  84:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         goto done;
+  85:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     }
+  86:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     status_int = _I2CRead(Dev, pdata, count);
+  87:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ARM GAS  C:\Temp\ccCySX2p.s 			page 3
+
+
+  88:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+  89:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     }
+  90:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** done:
+  91:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_PutI2cBus();
+  92:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     return Status;
+  93:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+  94:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+  95:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** VL53L1_Error VL53L1_WrByte(VL53L1_DEV Dev, uint16_t index, uint8_t data) {
+  96:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_Error Status = VL53L1_ERROR_NONE;
+  97:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     int32_t status_int;
+  98:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+  99:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[0] = index>>8;
+ 100:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[1] = index&0xFF;
+ 101:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[2] = data;
+ 102:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 103:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_GetI2cBus();
+ 104:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     status_int = _I2CWrite(Dev, _I2CBuffer, 3);
+ 105:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 106:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 107:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     }
+ 108:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_PutI2cBus();
+ 109:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     return Status;
+ 110:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 111:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 112:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** VL53L1_Error VL53L1_WrWord(VL53L1_DEV Dev, uint16_t index, uint16_t data) {
+ 113:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_Error Status = VL53L1_ERROR_NONE;
+ 114:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     int32_t status_int;
+ 115:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 116:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[0] = index>>8;
+ 117:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[1] = index&0xFF;
+ 118:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[2] = data >> 8;
+ 119:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[3] = data & 0x00FF;
+ 120:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 121:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_GetI2cBus();
+ 122:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     status_int = _I2CWrite(Dev, _I2CBuffer, 4);
+ 123:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 124:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 125:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     }
+ 126:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_PutI2cBus();
+ 127:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     return Status;
+ 128:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 129:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 130:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** VL53L1_Error VL53L1_WrDWord(VL53L1_DEV Dev, uint16_t index, uint32_t data) {
+ 131:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_Error Status = VL53L1_ERROR_NONE;
+ 132:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     int32_t status_int;
+ 133:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[0] = index>>8;
+ 134:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[1] = index&0xFF;
+ 135:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[2] = (data >> 24) & 0xFF;
+ 136:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[3] = (data >> 16) & 0xFF;
+ 137:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[4] = (data >> 8)  & 0xFF;
+ 138:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[5] = (data >> 0 ) & 0xFF;
+ 139:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_GetI2cBus();
+ 140:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     status_int = _I2CWrite(Dev, _I2CBuffer, 6);
+ 141:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 142:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 143:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     }
+ 144:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_PutI2cBus();
+ARM GAS  C:\Temp\ccCySX2p.s 			page 4
+
+
+ 145:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     return Status;
+ 146:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 147:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 148:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** VL53L1_Error VL53L1_UpdateByte(VL53L1_DEV Dev, uint16_t index, uint8_t AndData, uint8_t OrData) {
+ 149:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_Error Status = VL53L1_ERROR_NONE;
+ 150:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     uint8_t data;
+ 151:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 152:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     Status = VL53L1_RdByte(Dev, index, &data);
+ 153:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (Status) {
+ 154:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         goto done;
+ 155:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     }
+ 156:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     data = (data & AndData) | OrData;
+ 157:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     Status = VL53L1_WrByte(Dev, index, data);
+ 158:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** done:
+ 159:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     return Status;
+ 160:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 161:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 162:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** VL53L1_Error VL53L1_RdByte(VL53L1_DEV Dev, uint16_t index, uint8_t *data) {
+ 163:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_Error Status = VL53L1_ERROR_NONE;
+ 164:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     int32_t status_int;
+ 165:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 166:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	_I2CBuffer[0] = index>>8;
+ 167:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	_I2CBuffer[1] = index&0xFF;
+ 168:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_GetI2cBus();
+ 169:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     status_int = _I2CWrite(Dev, _I2CBuffer, 2);
+ 170:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if( status_int ){
+ 171:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 172:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         goto done;
+ 173:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     }
+ 174:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     status_int = _I2CRead(Dev, data, 1);
+ 175:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 176:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 177:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     }
+ 178:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** done:
+ 179:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_PutI2cBus();
+ 180:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     return Status;
+ 181:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 182:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 183:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** VL53L1_Error VL53L1_RdWord(VL53L1_DEV Dev, uint16_t index, uint16_t *data) {
+ 184:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_Error Status = VL53L1_ERROR_NONE;
+ 185:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     int32_t status_int;
+ 186:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 187:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[0] = index>>8;
+ 188:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	_I2CBuffer[1] = index&0xFF;
+ 189:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_GetI2cBus();
+ 190:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     status_int = _I2CWrite(Dev, _I2CBuffer, 2);
+ 191:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 192:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if( status_int ){
+ 193:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 194:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         goto done;
+ 195:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     }
+ 196:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     status_int = _I2CRead(Dev, _I2CBuffer, 2);
+ 197:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 198:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 199:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         goto done;
+ 200:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     }
+ 201:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ARM GAS  C:\Temp\ccCySX2p.s 			page 5
+
+
+ 202:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     *data = ((uint16_t)_I2CBuffer[0]<<8) + (uint16_t)_I2CBuffer[1];
+ 203:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** done:
+ 204:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_PutI2cBus();
+ 205:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     return Status;
+ 206:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 207:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 208:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** VL53L1_Error VL53L1_RdDWord(VL53L1_DEV Dev, uint16_t index, uint32_t *data) {
+ 209:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_Error Status = VL53L1_ERROR_NONE;
+ 210:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     int32_t status_int;
+ 211:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 212:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[0] = index>>8;
+ 213:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	_I2CBuffer[1] = index&0xFF;
+ 214:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_GetI2cBus();
+ 215:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     status_int = _I2CWrite(Dev, _I2CBuffer, 2);
+ 216:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 217:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 218:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         goto done;
+ 219:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     }
+ 220:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     status_int = _I2CRead(Dev, _I2CBuffer, 4);
+ 221:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 222:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 223:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         goto done;
+ 224:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     }
+ 225:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 226:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     *data = ((uint32_t)_I2CBuffer[0]<<24) + ((uint32_t)_I2CBuffer[1]<<16) + ((uint32_t)_I2CBuffer[2
+ 227:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 228:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** done:
+ 229:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_PutI2cBus();
+ 230:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     return Status;
+ 231:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 232:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 233:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** VL53L1_Error VL53L1_GetTickCount(VL53L1_DEV Dev, uint32_t *ptick_count_ms)
+ 234:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** {
+ 235:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 236:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     /* Returns current tick count in [ms] */
+ 237:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 238:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	VL53L1_Error status  = VL53L1_ERROR_NONE;
+ 239:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 240:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	*ptick_count_ms = Dev->IO.GetTick();
+ 241:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	
+ 242:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #ifdef VL53L1_LOG_ENABLE
+ 243:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	trace_print(
+ 244:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 		VL53L1_TRACE_LEVEL_DEBUG,
+ 245:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 		"VL53L1_GetTickCount() = %5u ms;\n",
+ 246:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	*ptick_count_ms);
+ 247:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #endif
+ 248:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 249:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	return status;
+ 250:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 251:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 252:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #define trace_print(level, ...) \
+ 253:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	_LOG_TRACE_PRINT(VL53L1_TRACE_MODULE_PLATFORM, \
+ 254:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	level, VL53L1_TRACE_FUNCTION_NONE, ##__VA_ARGS__)
+ 255:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 256:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #define trace_i2c(...) \
+ 257:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	_LOG_TRACE_PRINT(VL53L1_TRACE_MODULE_NONE, \
+ 258:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	VL53L1_TRACE_LEVEL_NONE, VL53L1_TRACE_FUNCTION_I2C, ##__VA_ARGS__)
+ARM GAS  C:\Temp\ccCySX2p.s 			page 6
+
+
+ 259:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 260:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** VL53L1_Error VL53L1_GetTimerFrequency(int32_t *ptimer_freq_hz)
+ 261:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** {
+ 262:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	*ptimer_freq_hz = 0;
+ 263:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	
+ 264:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	trace_print(VL53L1_TRACE_LEVEL_INFO, "VL53L1_GetTimerFrequency: Freq : %dHz\n", *ptimer_freq_hz);
+ 265:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	return VL53L1_ERROR_NONE;
+ 266:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 267:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 268:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** VL53L1_Error VL53L1_WaitMs(VL53L1_DEV Dev, int32_t wait_ms){
+ 269:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	VL53L1_Delay(Dev, wait_ms);
+ 270:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     return VL53L1_ERROR_NONE;
+ 271:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 272:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 273:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** VL53L1_Error VL53L1_WaitUs(VL53L1_DEV Dev, int32_t wait_us){
+ 274:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	VL53L1_Delay(Dev, wait_us/1000);
+ 275:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     return VL53L1_ERROR_NONE;
+ 276:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 277:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 278:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** VL53L1_Error VL53L1_WaitValueMaskEx(
+ 279:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	VL53L1_DEV    Dev,
+ 280:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	uint32_t      timeout_ms,
+ 281:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	uint16_t      index,
+ 282:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	uint8_t       value,
+ 283:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	uint8_t       mask,
+ 284:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	uint32_t      poll_delay_ms)
+ 285:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** {
+ 286:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 287:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	/*
+ 288:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	 * Platform implementation of WaitValueMaskEx V2WReg script command
+ 289:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	 *
+ 290:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	 * WaitValueMaskEx(
+ 291:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	 *          duration_ms,
+ 292:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	 *          index,
+ 293:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	 *          value,
+ 294:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	 *          mask,
+ 295:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	 *          poll_delay_ms);
+ 296:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	 */
+ 297:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 298:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	VL53L1_Error status         = VL53L1_ERROR_NONE;
+ 299:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	uint32_t     start_time_ms = 0;
+ 300:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	uint32_t     current_time_ms = 0;
+ 301:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	uint32_t     polling_time_ms = 0;
+ 302:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	uint8_t      byte_value      = 0;
+ 303:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	uint8_t      found           = 0;
+ 304:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #ifdef VL53L1_LOG_ENABLE
+ 305:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	uint8_t      trace_functions = VL53L1_TRACE_FUNCTION_NONE;
+ 306:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #endif
+ 307:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 308:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	char   register_name[VL53L1_MAX_STRING_LENGTH];
+ 309:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 310:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     /* look up register name */
+ 311:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #ifdef PAL_EXTENDED
+ 312:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	VL53L1_get_register_name(
+ 313:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 			index,
+ 314:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 			register_name);
+ 315:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #else
+ARM GAS  C:\Temp\ccCySX2p.s 			page 7
+
+
+ 316:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	VL53L1_COPYSTRING(register_name, "");
+ 317:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #endif
+ 318:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 319:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	/* Output to I2C logger for FMT/DFT  */
+ 320:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 321:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     /*trace_i2c("WaitValueMaskEx(%5d, 0x%04X, 0x%02X, 0x%02X, %5d);\n",
+ 322:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     		     timeout_ms, index, value, mask, poll_delay_ms); */
+ 323:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     trace_i2c("WaitValueMaskEx(%5d, %s, 0x%02X, 0x%02X, %5d);\n",
+ 324:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     		     timeout_ms, register_name, value, mask, poll_delay_ms);
+ 325:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 326:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	/* calculate time limit in absolute time */
+ 327:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 328:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	 VL53L1_GetTickCount(Dev, &start_time_ms);
+ 329:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 330:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	/* remember current trace functions and temporarily disable
+ 331:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	 * function logging
+ 332:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	 */
+ 333:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 334:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #ifdef VL53L1_LOG_ENABLE
+ 335:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	trace_functions = VL53L1_get_trace_functions();
+ 336:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	VL53L1_set_trace_functions(VL53L1_TRACE_FUNCTION_NONE);
+ 337:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #endif
+ 338:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 339:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	/* wait until value is found, timeout reached on error occurred */
+ 340:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 341:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	while ((status == VL53L1_ERROR_NONE) &&
+ 342:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 		   (polling_time_ms < timeout_ms) &&
+ 343:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 		   (found == 0)) {
+ 344:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 345:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 		if (status == VL53L1_ERROR_NONE)
+ 346:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 			status = VL53L1_RdByte(
+ 347:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 							Dev,
+ 348:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 							index,
+ 349:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 							&byte_value);
+ 350:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 351:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 		if ((byte_value & mask) == value)
+ 352:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 			found = 1;
+ 353:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 354:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 		if (status == VL53L1_ERROR_NONE  &&
+ 355:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 			found == 0 &&
+ 356:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 			poll_delay_ms > 0)
+ 357:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 			status = VL53L1_WaitMs(
+ 358:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 					Dev,
+ 359:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 					poll_delay_ms);
+ 360:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 361:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 		/* Update polling time (Compare difference rather than absolute to
+ 362:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 		negate 32bit wrap around issue) */
+ 363:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 		VL53L1_GetTickCount(Dev, &current_time_ms);
+ 364:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 		polling_time_ms = current_time_ms - start_time_ms;
+ 365:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 366:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	}
+ 367:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 368:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #ifdef VL53L1_LOG_ENABLE
+ 369:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	/* Restore function logging */
+ 370:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	VL53L1_set_trace_functions(trace_functions);
+ 371:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #endif
+ 372:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ARM GAS  C:\Temp\ccCySX2p.s 			page 8
+
+
+ 373:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	if (found == 0 && status == VL53L1_ERROR_NONE)
+ 374:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 		status = VL53L1_ERROR_TIME_OUT;
+ 375:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 376:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	return status;
+ 377:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 378:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 379:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** /**
+ 380:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****   * @brief This function provides accurate delay (in milliseconds)
+ 381:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****   * @param Dev   pointer to component object
+ 382:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****   * @param Delay  specifies the delay time length, in milliseconds
+ 383:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****   * @retval VL53L1_Error
+ 384:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****   */
+ 385:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** static VL53L1_Error VL53L1_Delay(VL53L1_DEV Dev, uint32_t Delay)
+ 386:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** {
+  29              		.loc 1 386 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		.loc 1 386 1 is_stmt 0 view .LVU1
+  34 0000 70B5     		push	{r4, r5, r6, lr}
+  35              		.cfi_def_cfa_offset 16
+  36              		.cfi_offset 4, -16
+  37              		.cfi_offset 5, -12
+  38              		.cfi_offset 6, -8
+  39              		.cfi_offset 14, -4
+  40 0002 0446     		mov	r4, r0
+  41 0004 0E46     		mov	r6, r1
+ 387:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****   uint32_t tickstart;
+  42              		.loc 1 387 3 is_stmt 1 view .LVU2
+ 388:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****   tickstart = Dev->IO.GetTick();
+  43              		.loc 1 388 3 view .LVU3
+  44              		.loc 1 388 22 is_stmt 0 view .LVU4
+  45 0006 4369     		ldr	r3, [r0, #20]
+  46              		.loc 1 388 15 view .LVU5
+  47 0008 9847     		blx	r3
+  48              	.LVL1:
+  49              		.loc 1 388 15 view .LVU6
+  50 000a 0546     		mov	r5, r0
+  51              	.LVL2:
+ 389:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 390:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****   while ((Dev->IO.GetTick() - tickstart) < Delay)
+  52              		.loc 1 390 3 is_stmt 1 view .LVU7
+  53              	.L2:
+ 391:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****   {
+ 392:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****   }
+  54              		.loc 1 392 3 discriminator 1 view .LVU8
+ 390:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****   {
+  55              		.loc 1 390 42 discriminator 1 view .LVU9
+ 390:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****   {
+  56              		.loc 1 390 18 is_stmt 0 discriminator 1 view .LVU10
+  57 000c 6369     		ldr	r3, [r4, #20]
+ 390:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****   {
+  58              		.loc 1 390 11 discriminator 1 view .LVU11
+  59 000e 9847     		blx	r3
+  60              	.LVL3:
+ 390:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****   {
+  61              		.loc 1 390 29 discriminator 1 view .LVU12
+ARM GAS  C:\Temp\ccCySX2p.s 			page 9
+
+
+  62 0010 401B     		subs	r0, r0, r5
+ 390:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****   {
+  63              		.loc 1 390 42 discriminator 1 view .LVU13
+  64 0012 B042     		cmp	r0, r6
+  65 0014 FAD3     		bcc	.L2
+ 393:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 394:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****   return VL53L1_ERROR_NONE;
+  66              		.loc 1 394 3 is_stmt 1 view .LVU14
+ 395:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+  67              		.loc 1 395 1 is_stmt 0 view .LVU15
+  68 0016 0020     		movs	r0, #0
+  69 0018 70BD     		pop	{r4, r5, r6, pc}
+  70              		.loc 1 395 1 view .LVU16
+  71              		.cfi_endproc
+  72              	.LFE19:
+  74              		.section	.text._I2CWrite,"ax",%progbits
+  75              		.align	1
+  76              		.global	_I2CWrite
+  77              		.syntax unified
+  78              		.thumb
+  79              		.thumb_func
+  81              	_I2CWrite:
+  82              	.LVL4:
+  83              	.LFB3:
+  48:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	return Dev->IO.WriteReg(Dev->IO.Address, pdata, count);
+  84              		.loc 1 48 63 is_stmt 1 view -0
+  85              		.cfi_startproc
+  86              		@ args = 0, pretend = 0, frame = 0
+  87              		@ frame_needed = 0, uses_anonymous_args = 0
+  48:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	return Dev->IO.WriteReg(Dev->IO.Address, pdata, count);
+  88              		.loc 1 48 63 is_stmt 0 view .LVU18
+  89 0000 08B5     		push	{r3, lr}
+  90              		.cfi_def_cfa_offset 8
+  91              		.cfi_offset 3, -8
+  92              		.cfi_offset 14, -4
+  49:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+  93              		.loc 1 49 2 is_stmt 1 view .LVU19
+  49:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+  94              		.loc 1 49 16 is_stmt 0 view .LVU20
+  95 0002 C368     		ldr	r3, [r0, #12]
+  49:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+  96              		.loc 1 49 9 view .LVU21
+  97 0004 92B2     		uxth	r2, r2
+  98              	.LVL5:
+  49:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+  99              		.loc 1 49 9 view .LVU22
+ 100 0006 0089     		ldrh	r0, [r0, #8]
+ 101              	.LVL6:
+  49:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 102              		.loc 1 49 9 view .LVU23
+ 103 0008 9847     		blx	r3
+ 104              	.LVL7:
+  50:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 105              		.loc 1 50 1 view .LVU24
+ 106 000a 08BD     		pop	{r3, pc}
+ 107              		.cfi_endproc
+ 108              	.LFE3:
+ARM GAS  C:\Temp\ccCySX2p.s 			page 10
+
+
+ 110              		.section	.text._I2CRead,"ax",%progbits
+ 111              		.align	1
+ 112              		.global	_I2CRead
+ 113              		.syntax unified
+ 114              		.thumb
+ 115              		.thumb_func
+ 117              	_I2CRead:
+ 118              	.LVL8:
+ 119              	.LFB4:
+  52:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	return Dev->IO.ReadReg(Dev->IO.Address, pdata, count);
+ 120              		.loc 1 52 62 is_stmt 1 view -0
+ 121              		.cfi_startproc
+ 122              		@ args = 0, pretend = 0, frame = 0
+ 123              		@ frame_needed = 0, uses_anonymous_args = 0
+  52:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	return Dev->IO.ReadReg(Dev->IO.Address, pdata, count);
+ 124              		.loc 1 52 62 is_stmt 0 view .LVU26
+ 125 0000 08B5     		push	{r3, lr}
+ 126              		.cfi_def_cfa_offset 8
+ 127              		.cfi_offset 3, -8
+ 128              		.cfi_offset 14, -4
+  53:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 129              		.loc 1 53 2 is_stmt 1 view .LVU27
+  53:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 130              		.loc 1 53 16 is_stmt 0 view .LVU28
+ 131 0002 0369     		ldr	r3, [r0, #16]
+  53:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 132              		.loc 1 53 9 view .LVU29
+ 133 0004 92B2     		uxth	r2, r2
+ 134              	.LVL9:
+  53:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 135              		.loc 1 53 9 view .LVU30
+ 136 0006 0089     		ldrh	r0, [r0, #8]
+ 137              	.LVL10:
+  53:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 138              		.loc 1 53 9 view .LVU31
+ 139 0008 9847     		blx	r3
+ 140              	.LVL11:
+  54:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 141              		.loc 1 54 1 view .LVU32
+ 142 000a 08BD     		pop	{r3, pc}
+ 143              		.cfi_endproc
+ 144              	.LFE4:
+ 146              		.section	.text.VL53L1_WriteMulti,"ax",%progbits
+ 147              		.align	1
+ 148              		.global	VL53L1_WriteMulti
+ 149              		.syntax unified
+ 150              		.thumb
+ 151              		.thumb_func
+ 153              	VL53L1_WriteMulti:
+ 154              	.LVL12:
+ 155              	.LFB5:
+  56:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     int status_int;
+ 156              		.loc 1 56 96 is_stmt 1 view -0
+ 157              		.cfi_startproc
+ 158              		@ args = 0, pretend = 0, frame = 0
+ 159              		@ frame_needed = 0, uses_anonymous_args = 0
+  57:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_Error Status = VL53L1_ERROR_NONE;
+ARM GAS  C:\Temp\ccCySX2p.s 			page 11
+
+
+ 160              		.loc 1 57 5 view .LVU34
+  58:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (count > sizeof(_I2CBuffer) - 1) {
+ 161              		.loc 1 58 5 view .LVU35
+  59:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         return VL53L1_ERROR_INVALID_PARAMS;
+ 162              		.loc 1 59 5 view .LVU36
+  59:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         return VL53L1_ERROR_INVALID_PARAMS;
+ 163              		.loc 1 59 8 is_stmt 0 view .LVU37
+ 164 0000 FF2B     		cmp	r3, #255
+ 165 0002 15D8     		bhi	.L10
+  56:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     int status_int;
+ 166              		.loc 1 56 96 view .LVU38
+ 167 0004 70B5     		push	{r4, r5, r6, lr}
+ 168              		.cfi_def_cfa_offset 16
+ 169              		.cfi_offset 4, -16
+ 170              		.cfi_offset 5, -12
+ 171              		.cfi_offset 6, -8
+ 172              		.cfi_offset 14, -4
+ 173 0006 0646     		mov	r6, r0
+ 174 0008 8C46     		mov	ip, r1
+ 175 000a 1146     		mov	r1, r2
+ 176              	.LVL13:
+  56:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     int status_int;
+ 177              		.loc 1 56 96 view .LVU39
+ 178 000c 1C46     		mov	r4, r3
+  62:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[1] = index&0xFF;
+ 179              		.loc 1 62 5 is_stmt 1 view .LVU40
+  62:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[1] = index&0xFF;
+ 180              		.loc 1 62 19 is_stmt 0 view .LVU41
+ 181 000e 0B4D     		ldr	r5, .L16
+ 182 0010 4FEA1C23 		lsr	r3, ip, #8
+ 183              	.LVL14:
+  62:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[1] = index&0xFF;
+ 184              		.loc 1 62 19 view .LVU42
+ 185 0014 2B70     		strb	r3, [r5]
+  63:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     memcpy(&_I2CBuffer[2], pdata, count);
+ 186              		.loc 1 63 5 is_stmt 1 view .LVU43
+  63:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     memcpy(&_I2CBuffer[2], pdata, count);
+ 187              		.loc 1 63 19 is_stmt 0 view .LVU44
+ 188 0016 85F801C0 		strb	ip, [r5, #1]
+  64:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_GetI2cBus();
+ 189              		.loc 1 64 5 is_stmt 1 view .LVU45
+ 190 001a 2246     		mov	r2, r4
+ 191              	.LVL15:
+  64:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_GetI2cBus();
+ 192              		.loc 1 64 5 is_stmt 0 view .LVU46
+ 193 001c A81C     		adds	r0, r5, #2
+ 194              	.LVL16:
+  64:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_GetI2cBus();
+ 195              		.loc 1 64 5 view .LVU47
+ 196 001e FFF7FEFF 		bl	memcpy
+ 197              	.LVL17:
+  65:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     status_int = _I2CWrite(Dev, _I2CBuffer, count + 2);
+ 198              		.loc 1 65 5 is_stmt 1 view .LVU48
+  66:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 199              		.loc 1 66 5 view .LVU49
+  66:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 200              		.loc 1 66 18 is_stmt 0 view .LVU50
+ARM GAS  C:\Temp\ccCySX2p.s 			page 12
+
+
+ 201 0022 A21C     		adds	r2, r4, #2
+ 202 0024 2946     		mov	r1, r5
+ 203 0026 3046     		mov	r0, r6
+ 204 0028 FFF7FEFF 		bl	_I2CWrite
+ 205              	.LVL18:
+  67:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 206              		.loc 1 67 5 is_stmt 1 view .LVU51
+  67:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 207              		.loc 1 67 8 is_stmt 0 view .LVU52
+ 208 002c 18B9     		cbnz	r0, .L11
+ 209              	.LVL19:
+ 210              	.L9:
+  72:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 211              		.loc 1 72 1 view .LVU53
+ 212 002e 70BD     		pop	{r4, r5, r6, pc}
+ 213              	.LVL20:
+ 214              	.L10:
+ 215              		.cfi_def_cfa_offset 0
+ 216              		.cfi_restore 4
+ 217              		.cfi_restore 5
+ 218              		.cfi_restore 6
+ 219              		.cfi_restore 14
+  60:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     }
+ 220              		.loc 1 60 16 view .LVU54
+ 221 0030 6FF00300 		mvn	r0, #3
+ 222              	.LVL21:
+  72:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 223              		.loc 1 72 1 view .LVU55
+ 224 0034 7047     		bx	lr
+ 225              	.LVL22:
+ 226              	.L11:
+ 227              		.cfi_def_cfa_offset 16
+ 228              		.cfi_offset 4, -16
+ 229              		.cfi_offset 5, -12
+ 230              		.cfi_offset 6, -8
+ 231              		.cfi_offset 14, -4
+  68:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     }
+ 232              		.loc 1 68 16 view .LVU56
+ 233 0036 6FF00C00 		mvn	r0, #12
+ 234              	.LVL23:
+  68:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     }
+ 235              		.loc 1 68 16 view .LVU57
+ 236 003a F8E7     		b	.L9
+ 237              	.L17:
+ 238              		.align	2
+ 239              	.L16:
+ 240 003c 00000000 		.word	_I2CBuffer
+ 241              		.cfi_endproc
+ 242              	.LFE5:
+ 244              		.section	.text.VL53L1_ReadMulti,"ax",%progbits
+ 245              		.align	1
+ 246              		.global	VL53L1_ReadMulti
+ 247              		.syntax unified
+ 248              		.thumb
+ 249              		.thumb_func
+ 251              	VL53L1_ReadMulti:
+ 252              	.LVL24:
+ARM GAS  C:\Temp\ccCySX2p.s 			page 13
+
+
+ 253              	.LFB6:
+  74:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_Error Status = VL53L1_ERROR_NONE;
+ 254              		.loc 1 74 95 is_stmt 1 view -0
+ 255              		.cfi_startproc
+ 256              		@ args = 0, pretend = 0, frame = 0
+ 257              		@ frame_needed = 0, uses_anonymous_args = 0
+  74:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_Error Status = VL53L1_ERROR_NONE;
+ 258              		.loc 1 74 95 is_stmt 0 view .LVU59
+ 259 0000 70B5     		push	{r4, r5, r6, lr}
+ 260              		.cfi_def_cfa_offset 16
+ 261              		.cfi_offset 4, -16
+ 262              		.cfi_offset 5, -12
+ 263              		.cfi_offset 6, -8
+ 264              		.cfi_offset 14, -4
+ 265 0002 0446     		mov	r4, r0
+ 266 0004 8C46     		mov	ip, r1
+ 267 0006 1546     		mov	r5, r2
+ 268 0008 1E46     		mov	r6, r3
+  75:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     int32_t status_int;
+ 269              		.loc 1 75 5 is_stmt 1 view .LVU60
+ 270              	.LVL25:
+  76:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 271              		.loc 1 76 5 view .LVU61
+  78:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[1] = index&0xFF;
+ 272              		.loc 1 78 5 view .LVU62
+  78:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[1] = index&0xFF;
+ 273              		.loc 1 78 19 is_stmt 0 view .LVU63
+ 274 000a 0B49     		ldr	r1, .L23
+ 275              	.LVL26:
+  78:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[1] = index&0xFF;
+ 276              		.loc 1 78 19 view .LVU64
+ 277 000c 4FEA1C23 		lsr	r3, ip, #8
+ 278              	.LVL27:
+  78:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[1] = index&0xFF;
+ 279              		.loc 1 78 19 view .LVU65
+ 280 0010 0B70     		strb	r3, [r1]
+  79:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_GetI2cBus();
+ 281              		.loc 1 79 5 is_stmt 1 view .LVU66
+  79:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_GetI2cBus();
+ 282              		.loc 1 79 19 is_stmt 0 view .LVU67
+ 283 0012 81F801C0 		strb	ip, [r1, #1]
+  80:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     status_int = _I2CWrite(Dev, _I2CBuffer, 2);
+ 284              		.loc 1 80 5 is_stmt 1 view .LVU68
+  81:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 285              		.loc 1 81 5 view .LVU69
+  81:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 286              		.loc 1 81 18 is_stmt 0 view .LVU70
+ 287 0016 0222     		movs	r2, #2
+ 288              	.LVL28:
+  81:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 289              		.loc 1 81 18 view .LVU71
+ 290 0018 FFF7FEFF 		bl	_I2CWrite
+ 291              	.LVL29:
+  82:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 292              		.loc 1 82 5 is_stmt 1 view .LVU72
+  82:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 293              		.loc 1 82 8 is_stmt 0 view .LVU73
+ARM GAS  C:\Temp\ccCySX2p.s 			page 14
+
+
+ 294 001c 30B9     		cbnz	r0, .L20
+  86:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 295              		.loc 1 86 5 is_stmt 1 view .LVU74
+  86:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 296              		.loc 1 86 18 is_stmt 0 view .LVU75
+ 297 001e 3246     		mov	r2, r6
+ 298 0020 2946     		mov	r1, r5
+ 299 0022 2046     		mov	r0, r4
+ 300              	.LVL30:
+  86:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 301              		.loc 1 86 18 view .LVU76
+ 302 0024 FFF7FEFF 		bl	_I2CRead
+ 303              	.LVL31:
+  87:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 304              		.loc 1 87 5 is_stmt 1 view .LVU77
+  87:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 305              		.loc 1 87 8 is_stmt 0 view .LVU78
+ 306 0028 18B9     		cbnz	r0, .L21
+ 307              	.LVL32:
+ 308              	.L19:
+  91:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     return Status;
+ 309              		.loc 1 91 5 is_stmt 1 view .LVU79
+  92:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 310              		.loc 1 92 5 view .LVU80
+  93:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 311              		.loc 1 93 1 is_stmt 0 view .LVU81
+ 312 002a 70BD     		pop	{r4, r5, r6, pc}
+ 313              	.LVL33:
+ 314              	.L20:
+  83:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         goto done;
+ 315              		.loc 1 83 16 view .LVU82
+ 316 002c 6FF00C00 		mvn	r0, #12
+ 317              	.LVL34:
+  83:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         goto done;
+ 318              		.loc 1 83 16 view .LVU83
+ 319 0030 FBE7     		b	.L19
+ 320              	.LVL35:
+ 321              	.L21:
+  88:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     }
+ 322              		.loc 1 88 16 view .LVU84
+ 323 0032 6FF00C00 		mvn	r0, #12
+ 324              	.LVL36:
+  88:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     }
+ 325              		.loc 1 88 16 view .LVU85
+ 326 0036 F8E7     		b	.L19
+ 327              	.L24:
+ 328              		.align	2
+ 329              	.L23:
+ 330 0038 00000000 		.word	_I2CBuffer
+ 331              		.cfi_endproc
+ 332              	.LFE6:
+ 334              		.section	.text.VL53L1_WrByte,"ax",%progbits
+ 335              		.align	1
+ 336              		.global	VL53L1_WrByte
+ 337              		.syntax unified
+ 338              		.thumb
+ 339              		.thumb_func
+ARM GAS  C:\Temp\ccCySX2p.s 			page 15
+
+
+ 341              	VL53L1_WrByte:
+ 342              	.LVL37:
+ 343              	.LFB7:
+  95:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_Error Status = VL53L1_ERROR_NONE;
+ 344              		.loc 1 95 74 is_stmt 1 view -0
+ 345              		.cfi_startproc
+ 346              		@ args = 0, pretend = 0, frame = 0
+ 347              		@ frame_needed = 0, uses_anonymous_args = 0
+  95:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_Error Status = VL53L1_ERROR_NONE;
+ 348              		.loc 1 95 74 is_stmt 0 view .LVU87
+ 349 0000 08B5     		push	{r3, lr}
+ 350              		.cfi_def_cfa_offset 8
+ 351              		.cfi_offset 3, -8
+ 352              		.cfi_offset 14, -4
+ 353 0002 0B46     		mov	r3, r1
+  96:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     int32_t status_int;
+ 354              		.loc 1 96 5 is_stmt 1 view .LVU88
+ 355              	.LVL38:
+  97:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 356              		.loc 1 97 5 view .LVU89
+  99:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[1] = index&0xFF;
+ 357              		.loc 1 99 5 view .LVU90
+  99:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[1] = index&0xFF;
+ 358              		.loc 1 99 19 is_stmt 0 view .LVU91
+ 359 0004 0749     		ldr	r1, .L30
+ 360              	.LVL39:
+  99:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[1] = index&0xFF;
+ 361              		.loc 1 99 19 view .LVU92
+ 362 0006 4FEA132C 		lsr	ip, r3, #8
+ 363 000a 81F800C0 		strb	ip, [r1]
+ 100:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[2] = data;
+ 364              		.loc 1 100 5 is_stmt 1 view .LVU93
+ 100:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[2] = data;
+ 365              		.loc 1 100 19 is_stmt 0 view .LVU94
+ 366 000e 4B70     		strb	r3, [r1, #1]
+ 101:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 367              		.loc 1 101 5 is_stmt 1 view .LVU95
+ 101:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 368              		.loc 1 101 19 is_stmt 0 view .LVU96
+ 369 0010 8A70     		strb	r2, [r1, #2]
+ 103:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     status_int = _I2CWrite(Dev, _I2CBuffer, 3);
+ 370              		.loc 1 103 5 is_stmt 1 view .LVU97
+ 104:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 371              		.loc 1 104 5 view .LVU98
+ 104:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 372              		.loc 1 104 18 is_stmt 0 view .LVU99
+ 373 0012 0322     		movs	r2, #3
+ 374              	.LVL40:
+ 104:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 375              		.loc 1 104 18 view .LVU100
+ 376 0014 FFF7FEFF 		bl	_I2CWrite
+ 377              	.LVL41:
+ 105:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 378              		.loc 1 105 5 is_stmt 1 view .LVU101
+ 105:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 379              		.loc 1 105 8 is_stmt 0 view .LVU102
+ 380 0018 00B9     		cbnz	r0, .L29
+ARM GAS  C:\Temp\ccCySX2p.s 			page 16
+
+
+ 381              	.LVL42:
+ 382              	.L26:
+ 108:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     return Status;
+ 383              		.loc 1 108 5 is_stmt 1 view .LVU103
+ 109:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 384              		.loc 1 109 5 view .LVU104
+ 110:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 385              		.loc 1 110 1 is_stmt 0 view .LVU105
+ 386 001a 08BD     		pop	{r3, pc}
+ 387              	.LVL43:
+ 388              	.L29:
+ 106:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     }
+ 389              		.loc 1 106 16 view .LVU106
+ 390 001c 6FF00C00 		mvn	r0, #12
+ 391              	.LVL44:
+ 106:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     }
+ 392              		.loc 1 106 16 view .LVU107
+ 393 0020 FBE7     		b	.L26
+ 394              	.L31:
+ 395 0022 00BF     		.align	2
+ 396              	.L30:
+ 397 0024 00000000 		.word	_I2CBuffer
+ 398              		.cfi_endproc
+ 399              	.LFE7:
+ 401              		.section	.text.VL53L1_WrWord,"ax",%progbits
+ 402              		.align	1
+ 403              		.global	VL53L1_WrWord
+ 404              		.syntax unified
+ 405              		.thumb
+ 406              		.thumb_func
+ 408              	VL53L1_WrWord:
+ 409              	.LVL45:
+ 410              	.LFB8:
+ 112:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_Error Status = VL53L1_ERROR_NONE;
+ 411              		.loc 1 112 75 is_stmt 1 view -0
+ 412              		.cfi_startproc
+ 413              		@ args = 0, pretend = 0, frame = 0
+ 414              		@ frame_needed = 0, uses_anonymous_args = 0
+ 112:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_Error Status = VL53L1_ERROR_NONE;
+ 415              		.loc 1 112 75 is_stmt 0 view .LVU109
+ 416 0000 08B5     		push	{r3, lr}
+ 417              		.cfi_def_cfa_offset 8
+ 418              		.cfi_offset 3, -8
+ 419              		.cfi_offset 14, -4
+ 420 0002 0B46     		mov	r3, r1
+ 113:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     int32_t status_int;
+ 421              		.loc 1 113 5 is_stmt 1 view .LVU110
+ 422              	.LVL46:
+ 114:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 423              		.loc 1 114 5 view .LVU111
+ 116:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[1] = index&0xFF;
+ 424              		.loc 1 116 5 view .LVU112
+ 116:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[1] = index&0xFF;
+ 425              		.loc 1 116 19 is_stmt 0 view .LVU113
+ 426 0004 0849     		ldr	r1, .L37
+ 427              	.LVL47:
+ 116:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[1] = index&0xFF;
+ARM GAS  C:\Temp\ccCySX2p.s 			page 17
+
+
+ 428              		.loc 1 116 19 view .LVU114
+ 429 0006 4FEA132C 		lsr	ip, r3, #8
+ 430 000a 81F800C0 		strb	ip, [r1]
+ 117:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[2] = data >> 8;
+ 431              		.loc 1 117 5 is_stmt 1 view .LVU115
+ 117:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[2] = data >> 8;
+ 432              		.loc 1 117 19 is_stmt 0 view .LVU116
+ 433 000e 4B70     		strb	r3, [r1, #1]
+ 118:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[3] = data & 0x00FF;
+ 434              		.loc 1 118 5 is_stmt 1 view .LVU117
+ 118:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[3] = data & 0x00FF;
+ 435              		.loc 1 118 19 is_stmt 0 view .LVU118
+ 436 0010 130A     		lsrs	r3, r2, #8
+ 437 0012 8B70     		strb	r3, [r1, #2]
+ 119:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 438              		.loc 1 119 5 is_stmt 1 view .LVU119
+ 119:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 439              		.loc 1 119 19 is_stmt 0 view .LVU120
+ 440 0014 CA70     		strb	r2, [r1, #3]
+ 121:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     status_int = _I2CWrite(Dev, _I2CBuffer, 4);
+ 441              		.loc 1 121 5 is_stmt 1 view .LVU121
+ 122:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 442              		.loc 1 122 5 view .LVU122
+ 122:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 443              		.loc 1 122 18 is_stmt 0 view .LVU123
+ 444 0016 0422     		movs	r2, #4
+ 445              	.LVL48:
+ 122:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 446              		.loc 1 122 18 view .LVU124
+ 447 0018 FFF7FEFF 		bl	_I2CWrite
+ 448              	.LVL49:
+ 123:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 449              		.loc 1 123 5 is_stmt 1 view .LVU125
+ 123:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 450              		.loc 1 123 8 is_stmt 0 view .LVU126
+ 451 001c 00B9     		cbnz	r0, .L36
+ 452              	.LVL50:
+ 453              	.L33:
+ 126:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     return Status;
+ 454              		.loc 1 126 5 is_stmt 1 view .LVU127
+ 127:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 455              		.loc 1 127 5 view .LVU128
+ 128:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 456              		.loc 1 128 1 is_stmt 0 view .LVU129
+ 457 001e 08BD     		pop	{r3, pc}
+ 458              	.LVL51:
+ 459              	.L36:
+ 124:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     }
+ 460              		.loc 1 124 16 view .LVU130
+ 461 0020 6FF00C00 		mvn	r0, #12
+ 462              	.LVL52:
+ 124:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     }
+ 463              		.loc 1 124 16 view .LVU131
+ 464 0024 FBE7     		b	.L33
+ 465              	.L38:
+ 466 0026 00BF     		.align	2
+ 467              	.L37:
+ARM GAS  C:\Temp\ccCySX2p.s 			page 18
+
+
+ 468 0028 00000000 		.word	_I2CBuffer
+ 469              		.cfi_endproc
+ 470              	.LFE8:
+ 472              		.section	.text.VL53L1_WrDWord,"ax",%progbits
+ 473              		.align	1
+ 474              		.global	VL53L1_WrDWord
+ 475              		.syntax unified
+ 476              		.thumb
+ 477              		.thumb_func
+ 479              	VL53L1_WrDWord:
+ 480              	.LVL53:
+ 481              	.LFB9:
+ 130:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_Error Status = VL53L1_ERROR_NONE;
+ 482              		.loc 1 130 76 is_stmt 1 view -0
+ 483              		.cfi_startproc
+ 484              		@ args = 0, pretend = 0, frame = 0
+ 485              		@ frame_needed = 0, uses_anonymous_args = 0
+ 130:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_Error Status = VL53L1_ERROR_NONE;
+ 486              		.loc 1 130 76 is_stmt 0 view .LVU133
+ 487 0000 08B5     		push	{r3, lr}
+ 488              		.cfi_def_cfa_offset 8
+ 489              		.cfi_offset 3, -8
+ 490              		.cfi_offset 14, -4
+ 491 0002 0B46     		mov	r3, r1
+ 131:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     int32_t status_int;
+ 492              		.loc 1 131 5 is_stmt 1 view .LVU134
+ 493              	.LVL54:
+ 132:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[0] = index>>8;
+ 494              		.loc 1 132 5 view .LVU135
+ 133:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[1] = index&0xFF;
+ 495              		.loc 1 133 5 view .LVU136
+ 133:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[1] = index&0xFF;
+ 496              		.loc 1 133 19 is_stmt 0 view .LVU137
+ 497 0004 0A49     		ldr	r1, .L44
+ 498              	.LVL55:
+ 133:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[1] = index&0xFF;
+ 499              		.loc 1 133 19 view .LVU138
+ 500 0006 4FEA132C 		lsr	ip, r3, #8
+ 501 000a 81F800C0 		strb	ip, [r1]
+ 134:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[2] = (data >> 24) & 0xFF;
+ 502              		.loc 1 134 5 is_stmt 1 view .LVU139
+ 134:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[2] = (data >> 24) & 0xFF;
+ 503              		.loc 1 134 19 is_stmt 0 view .LVU140
+ 504 000e 4B70     		strb	r3, [r1, #1]
+ 135:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[3] = (data >> 16) & 0xFF;
+ 505              		.loc 1 135 5 is_stmt 1 view .LVU141
+ 135:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[3] = (data >> 16) & 0xFF;
+ 506              		.loc 1 135 27 is_stmt 0 view .LVU142
+ 507 0010 130E     		lsrs	r3, r2, #24
+ 135:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[3] = (data >> 16) & 0xFF;
+ 508              		.loc 1 135 19 view .LVU143
+ 509 0012 8B70     		strb	r3, [r1, #2]
+ 136:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[4] = (data >> 8)  & 0xFF;
+ 510              		.loc 1 136 5 is_stmt 1 view .LVU144
+ 136:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[4] = (data >> 8)  & 0xFF;
+ 511              		.loc 1 136 27 is_stmt 0 view .LVU145
+ 512 0014 130C     		lsrs	r3, r2, #16
+ARM GAS  C:\Temp\ccCySX2p.s 			page 19
+
+
+ 136:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[4] = (data >> 8)  & 0xFF;
+ 513              		.loc 1 136 19 view .LVU146
+ 514 0016 CB70     		strb	r3, [r1, #3]
+ 137:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[5] = (data >> 0 ) & 0xFF;
+ 515              		.loc 1 137 5 is_stmt 1 view .LVU147
+ 137:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[5] = (data >> 0 ) & 0xFF;
+ 516              		.loc 1 137 27 is_stmt 0 view .LVU148
+ 517 0018 130A     		lsrs	r3, r2, #8
+ 137:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     _I2CBuffer[5] = (data >> 0 ) & 0xFF;
+ 518              		.loc 1 137 19 view .LVU149
+ 519 001a 0B71     		strb	r3, [r1, #4]
+ 138:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_GetI2cBus();
+ 520              		.loc 1 138 5 is_stmt 1 view .LVU150
+ 138:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_GetI2cBus();
+ 521              		.loc 1 138 19 is_stmt 0 view .LVU151
+ 522 001c 4A71     		strb	r2, [r1, #5]
+ 139:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     status_int = _I2CWrite(Dev, _I2CBuffer, 6);
+ 523              		.loc 1 139 5 is_stmt 1 view .LVU152
+ 140:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 524              		.loc 1 140 5 view .LVU153
+ 140:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 525              		.loc 1 140 18 is_stmt 0 view .LVU154
+ 526 001e 0622     		movs	r2, #6
+ 527              	.LVL56:
+ 140:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 528              		.loc 1 140 18 view .LVU155
+ 529 0020 FFF7FEFF 		bl	_I2CWrite
+ 530              	.LVL57:
+ 141:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 531              		.loc 1 141 5 is_stmt 1 view .LVU156
+ 141:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 532              		.loc 1 141 8 is_stmt 0 view .LVU157
+ 533 0024 00B9     		cbnz	r0, .L43
+ 534              	.LVL58:
+ 535              	.L40:
+ 144:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     return Status;
+ 536              		.loc 1 144 5 is_stmt 1 view .LVU158
+ 145:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 537              		.loc 1 145 5 view .LVU159
+ 146:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 538              		.loc 1 146 1 is_stmt 0 view .LVU160
+ 539 0026 08BD     		pop	{r3, pc}
+ 540              	.LVL59:
+ 541              	.L43:
+ 142:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     }
+ 542              		.loc 1 142 16 view .LVU161
+ 543 0028 6FF00C00 		mvn	r0, #12
+ 544              	.LVL60:
+ 142:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     }
+ 545              		.loc 1 142 16 view .LVU162
+ 546 002c FBE7     		b	.L40
+ 547              	.L45:
+ 548 002e 00BF     		.align	2
+ 549              	.L44:
+ 550 0030 00000000 		.word	_I2CBuffer
+ 551              		.cfi_endproc
+ 552              	.LFE9:
+ARM GAS  C:\Temp\ccCySX2p.s 			page 20
+
+
+ 554              		.section	.text.VL53L1_RdByte,"ax",%progbits
+ 555              		.align	1
+ 556              		.global	VL53L1_RdByte
+ 557              		.syntax unified
+ 558              		.thumb
+ 559              		.thumb_func
+ 561              	VL53L1_RdByte:
+ 562              	.LVL61:
+ 563              	.LFB11:
+ 162:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_Error Status = VL53L1_ERROR_NONE;
+ 564              		.loc 1 162 75 is_stmt 1 view -0
+ 565              		.cfi_startproc
+ 566              		@ args = 0, pretend = 0, frame = 0
+ 567              		@ frame_needed = 0, uses_anonymous_args = 0
+ 162:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_Error Status = VL53L1_ERROR_NONE;
+ 568              		.loc 1 162 75 is_stmt 0 view .LVU164
+ 569 0000 38B5     		push	{r3, r4, r5, lr}
+ 570              		.cfi_def_cfa_offset 16
+ 571              		.cfi_offset 3, -16
+ 572              		.cfi_offset 4, -12
+ 573              		.cfi_offset 5, -8
+ 574              		.cfi_offset 14, -4
+ 575 0002 0446     		mov	r4, r0
+ 576 0004 0B46     		mov	r3, r1
+ 577 0006 1546     		mov	r5, r2
+ 163:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     int32_t status_int;
+ 578              		.loc 1 163 5 is_stmt 1 view .LVU165
+ 579              	.LVL62:
+ 164:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 580              		.loc 1 164 5 view .LVU166
+ 166:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	_I2CBuffer[1] = index&0xFF;
+ 581              		.loc 1 166 2 view .LVU167
+ 166:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	_I2CBuffer[1] = index&0xFF;
+ 582              		.loc 1 166 16 is_stmt 0 view .LVU168
+ 583 0008 0A49     		ldr	r1, .L51
+ 584              	.LVL63:
+ 166:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	_I2CBuffer[1] = index&0xFF;
+ 585              		.loc 1 166 16 view .LVU169
+ 586 000a 1A0A     		lsrs	r2, r3, #8
+ 587              	.LVL64:
+ 166:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	_I2CBuffer[1] = index&0xFF;
+ 588              		.loc 1 166 16 view .LVU170
+ 589 000c 0A70     		strb	r2, [r1]
+ 167:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_GetI2cBus();
+ 590              		.loc 1 167 2 is_stmt 1 view .LVU171
+ 167:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_GetI2cBus();
+ 591              		.loc 1 167 16 is_stmt 0 view .LVU172
+ 592 000e 4B70     		strb	r3, [r1, #1]
+ 168:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     status_int = _I2CWrite(Dev, _I2CBuffer, 2);
+ 593              		.loc 1 168 5 is_stmt 1 view .LVU173
+ 169:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if( status_int ){
+ 594              		.loc 1 169 5 view .LVU174
+ 169:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if( status_int ){
+ 595              		.loc 1 169 18 is_stmt 0 view .LVU175
+ 596 0010 0222     		movs	r2, #2
+ 597 0012 FFF7FEFF 		bl	_I2CWrite
+ 598              	.LVL65:
+ARM GAS  C:\Temp\ccCySX2p.s 			page 21
+
+
+ 170:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 599              		.loc 1 170 5 is_stmt 1 view .LVU176
+ 170:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 600              		.loc 1 170 7 is_stmt 0 view .LVU177
+ 601 0016 30B9     		cbnz	r0, .L48
+ 174:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 602              		.loc 1 174 5 is_stmt 1 view .LVU178
+ 174:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 603              		.loc 1 174 18 is_stmt 0 view .LVU179
+ 604 0018 0122     		movs	r2, #1
+ 605 001a 2946     		mov	r1, r5
+ 606 001c 2046     		mov	r0, r4
+ 607              	.LVL66:
+ 174:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 608              		.loc 1 174 18 view .LVU180
+ 609 001e FFF7FEFF 		bl	_I2CRead
+ 610              	.LVL67:
+ 175:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 611              		.loc 1 175 5 is_stmt 1 view .LVU181
+ 175:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 612              		.loc 1 175 8 is_stmt 0 view .LVU182
+ 613 0022 18B9     		cbnz	r0, .L49
+ 614              	.LVL68:
+ 615              	.L47:
+ 179:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     return Status;
+ 616              		.loc 1 179 5 is_stmt 1 view .LVU183
+ 180:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 617              		.loc 1 180 5 view .LVU184
+ 181:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 618              		.loc 1 181 1 is_stmt 0 view .LVU185
+ 619 0024 38BD     		pop	{r3, r4, r5, pc}
+ 620              	.LVL69:
+ 621              	.L48:
+ 171:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         goto done;
+ 622              		.loc 1 171 16 view .LVU186
+ 623 0026 6FF00C00 		mvn	r0, #12
+ 624              	.LVL70:
+ 171:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         goto done;
+ 625              		.loc 1 171 16 view .LVU187
+ 626 002a FBE7     		b	.L47
+ 627              	.LVL71:
+ 628              	.L49:
+ 176:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     }
+ 629              		.loc 1 176 16 view .LVU188
+ 630 002c 6FF00C00 		mvn	r0, #12
+ 631              	.LVL72:
+ 176:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     }
+ 632              		.loc 1 176 16 view .LVU189
+ 633 0030 F8E7     		b	.L47
+ 634              	.L52:
+ 635 0032 00BF     		.align	2
+ 636              	.L51:
+ 637 0034 00000000 		.word	_I2CBuffer
+ 638              		.cfi_endproc
+ 639              	.LFE11:
+ 641              		.section	.text.VL53L1_UpdateByte,"ax",%progbits
+ 642              		.align	1
+ARM GAS  C:\Temp\ccCySX2p.s 			page 22
+
+
+ 643              		.global	VL53L1_UpdateByte
+ 644              		.syntax unified
+ 645              		.thumb
+ 646              		.thumb_func
+ 648              	VL53L1_UpdateByte:
+ 649              	.LVL73:
+ 650              	.LFB10:
+ 148:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_Error Status = VL53L1_ERROR_NONE;
+ 651              		.loc 1 148 97 is_stmt 1 view -0
+ 652              		.cfi_startproc
+ 653              		@ args = 0, pretend = 0, frame = 8
+ 654              		@ frame_needed = 0, uses_anonymous_args = 0
+ 148:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_Error Status = VL53L1_ERROR_NONE;
+ 655              		.loc 1 148 97 is_stmt 0 view .LVU191
+ 656 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 657              		.cfi_def_cfa_offset 20
+ 658              		.cfi_offset 4, -20
+ 659              		.cfi_offset 5, -16
+ 660              		.cfi_offset 6, -12
+ 661              		.cfi_offset 7, -8
+ 662              		.cfi_offset 14, -4
+ 663 0002 83B0     		sub	sp, sp, #12
+ 664              		.cfi_def_cfa_offset 32
+ 665 0004 0646     		mov	r6, r0
+ 666 0006 0F46     		mov	r7, r1
+ 667 0008 1546     		mov	r5, r2
+ 668 000a 1C46     		mov	r4, r3
+ 149:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     uint8_t data;
+ 669              		.loc 1 149 5 is_stmt 1 view .LVU192
+ 670              	.LVL74:
+ 150:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 671              		.loc 1 150 5 view .LVU193
+ 152:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (Status) {
+ 672              		.loc 1 152 5 view .LVU194
+ 152:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (Status) {
+ 673              		.loc 1 152 14 is_stmt 0 view .LVU195
+ 674 000c 0DF10702 		add	r2, sp, #7
+ 675              	.LVL75:
+ 152:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (Status) {
+ 676              		.loc 1 152 14 view .LVU196
+ 677 0010 FFF7FEFF 		bl	VL53L1_RdByte
+ 678              	.LVL76:
+ 153:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         goto done;
+ 679              		.loc 1 153 5 is_stmt 1 view .LVU197
+ 153:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         goto done;
+ 680              		.loc 1 153 8 is_stmt 0 view .LVU198
+ 681 0014 08B1     		cbz	r0, .L56
+ 682              	.LVL77:
+ 683              	.L54:
+ 159:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 684              		.loc 1 159 5 is_stmt 1 view .LVU199
+ 160:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 685              		.loc 1 160 1 is_stmt 0 view .LVU200
+ 686 0016 03B0     		add	sp, sp, #12
+ 687              		.cfi_remember_state
+ 688              		.cfi_def_cfa_offset 20
+ 689              		@ sp needed
+ARM GAS  C:\Temp\ccCySX2p.s 			page 23
+
+
+ 690 0018 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 691              	.LVL78:
+ 692              	.L56:
+ 693              		.cfi_restore_state
+ 156:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     Status = VL53L1_WrByte(Dev, index, data);
+ 694              		.loc 1 156 5 is_stmt 1 view .LVU201
+ 156:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     Status = VL53L1_WrByte(Dev, index, data);
+ 695              		.loc 1 156 10 is_stmt 0 view .LVU202
+ 696 001a 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 697 001e 05EA0302 		and	r2, r5, r3
+ 698 0022 2243     		orrs	r2, r2, r4
+ 699 0024 8DF80720 		strb	r2, [sp, #7]
+ 157:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** done:
+ 700              		.loc 1 157 5 is_stmt 1 view .LVU203
+ 157:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** done:
+ 701              		.loc 1 157 14 is_stmt 0 view .LVU204
+ 702 0028 3946     		mov	r1, r7
+ 703 002a 3046     		mov	r0, r6
+ 704 002c FFF7FEFF 		bl	VL53L1_WrByte
+ 705              	.LVL79:
+ 157:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** done:
+ 706              		.loc 1 157 14 view .LVU205
+ 707 0030 F1E7     		b	.L54
+ 708              		.cfi_endproc
+ 709              	.LFE10:
+ 711              		.section	.text.VL53L1_RdWord,"ax",%progbits
+ 712              		.align	1
+ 713              		.global	VL53L1_RdWord
+ 714              		.syntax unified
+ 715              		.thumb
+ 716              		.thumb_func
+ 718              	VL53L1_RdWord:
+ 719              	.LVL80:
+ 720              	.LFB12:
+ 183:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_Error Status = VL53L1_ERROR_NONE;
+ 721              		.loc 1 183 76 is_stmt 1 view -0
+ 722              		.cfi_startproc
+ 723              		@ args = 0, pretend = 0, frame = 0
+ 724              		@ frame_needed = 0, uses_anonymous_args = 0
+ 183:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_Error Status = VL53L1_ERROR_NONE;
+ 725              		.loc 1 183 76 is_stmt 0 view .LVU207
+ 726 0000 38B5     		push	{r3, r4, r5, lr}
+ 727              		.cfi_def_cfa_offset 16
+ 728              		.cfi_offset 3, -16
+ 729              		.cfi_offset 4, -12
+ 730              		.cfi_offset 5, -8
+ 731              		.cfi_offset 14, -4
+ 732 0002 0446     		mov	r4, r0
+ 733 0004 0B46     		mov	r3, r1
+ 734 0006 1546     		mov	r5, r2
+ 184:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     int32_t status_int;
+ 735              		.loc 1 184 5 is_stmt 1 view .LVU208
+ 736              	.LVL81:
+ 185:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 737              		.loc 1 185 5 view .LVU209
+ 187:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	_I2CBuffer[1] = index&0xFF;
+ 738              		.loc 1 187 5 view .LVU210
+ARM GAS  C:\Temp\ccCySX2p.s 			page 24
+
+
+ 187:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	_I2CBuffer[1] = index&0xFF;
+ 739              		.loc 1 187 19 is_stmt 0 view .LVU211
+ 740 0008 0D49     		ldr	r1, .L62
+ 741              	.LVL82:
+ 187:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	_I2CBuffer[1] = index&0xFF;
+ 742              		.loc 1 187 19 view .LVU212
+ 743 000a 1A0A     		lsrs	r2, r3, #8
+ 744              	.LVL83:
+ 187:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	_I2CBuffer[1] = index&0xFF;
+ 745              		.loc 1 187 19 view .LVU213
+ 746 000c 0A70     		strb	r2, [r1]
+ 188:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_GetI2cBus();
+ 747              		.loc 1 188 2 is_stmt 1 view .LVU214
+ 188:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_GetI2cBus();
+ 748              		.loc 1 188 16 is_stmt 0 view .LVU215
+ 749 000e 4B70     		strb	r3, [r1, #1]
+ 189:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     status_int = _I2CWrite(Dev, _I2CBuffer, 2);
+ 750              		.loc 1 189 5 is_stmt 1 view .LVU216
+ 190:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 751              		.loc 1 190 5 view .LVU217
+ 190:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 752              		.loc 1 190 18 is_stmt 0 view .LVU218
+ 753 0010 0222     		movs	r2, #2
+ 754 0012 FFF7FEFF 		bl	_I2CWrite
+ 755              	.LVL84:
+ 192:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 756              		.loc 1 192 5 is_stmt 1 view .LVU219
+ 192:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 757              		.loc 1 192 7 is_stmt 0 view .LVU220
+ 758 0016 60B9     		cbnz	r0, .L59
+ 196:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 759              		.loc 1 196 5 is_stmt 1 view .LVU221
+ 196:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 760              		.loc 1 196 18 is_stmt 0 view .LVU222
+ 761 0018 0222     		movs	r2, #2
+ 762 001a 0949     		ldr	r1, .L62
+ 763 001c 2046     		mov	r0, r4
+ 764              	.LVL85:
+ 196:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 765              		.loc 1 196 18 view .LVU223
+ 766 001e FFF7FEFF 		bl	_I2CRead
+ 767              	.LVL86:
+ 197:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 768              		.loc 1 197 5 is_stmt 1 view .LVU224
+ 197:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 769              		.loc 1 197 8 is_stmt 0 view .LVU225
+ 770 0022 48B9     		cbnz	r0, .L60
+ 202:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** done:
+ 771              		.loc 1 202 5 is_stmt 1 view .LVU226
+ 202:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** done:
+ 772              		.loc 1 202 34 is_stmt 0 view .LVU227
+ 773 0024 064B     		ldr	r3, .L62
+ 774 0026 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 202:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** done:
+ 775              		.loc 1 202 64 view .LVU228
+ 776 0028 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 202:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** done:
+ARM GAS  C:\Temp\ccCySX2p.s 			page 25
+
+
+ 777              		.loc 1 202 42 view .LVU229
+ 778 002a 03EB0223 		add	r3, r3, r2, lsl #8
+ 202:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** done:
+ 779              		.loc 1 202 11 view .LVU230
+ 780 002e 2B80     		strh	r3, [r5]	@ movhi
+ 781              	.LVL87:
+ 782              	.L58:
+ 204:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     return Status;
+ 783              		.loc 1 204 5 is_stmt 1 view .LVU231
+ 205:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 784              		.loc 1 205 5 view .LVU232
+ 206:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 785              		.loc 1 206 1 is_stmt 0 view .LVU233
+ 786 0030 38BD     		pop	{r3, r4, r5, pc}
+ 787              	.LVL88:
+ 788              	.L59:
+ 193:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         goto done;
+ 789              		.loc 1 193 16 view .LVU234
+ 790 0032 6FF00C00 		mvn	r0, #12
+ 791              	.LVL89:
+ 193:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         goto done;
+ 792              		.loc 1 193 16 view .LVU235
+ 793 0036 FBE7     		b	.L58
+ 794              	.LVL90:
+ 795              	.L60:
+ 198:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         goto done;
+ 796              		.loc 1 198 16 view .LVU236
+ 797 0038 6FF00C00 		mvn	r0, #12
+ 798              	.LVL91:
+ 198:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         goto done;
+ 799              		.loc 1 198 16 view .LVU237
+ 800 003c F8E7     		b	.L58
+ 801              	.L63:
+ 802 003e 00BF     		.align	2
+ 803              	.L62:
+ 804 0040 00000000 		.word	_I2CBuffer
+ 805              		.cfi_endproc
+ 806              	.LFE12:
+ 808              		.section	.text.VL53L1_RdDWord,"ax",%progbits
+ 809              		.align	1
+ 810              		.global	VL53L1_RdDWord
+ 811              		.syntax unified
+ 812              		.thumb
+ 813              		.thumb_func
+ 815              	VL53L1_RdDWord:
+ 816              	.LVL92:
+ 817              	.LFB13:
+ 208:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_Error Status = VL53L1_ERROR_NONE;
+ 818              		.loc 1 208 77 is_stmt 1 view -0
+ 819              		.cfi_startproc
+ 820              		@ args = 0, pretend = 0, frame = 0
+ 821              		@ frame_needed = 0, uses_anonymous_args = 0
+ 208:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_Error Status = VL53L1_ERROR_NONE;
+ 822              		.loc 1 208 77 is_stmt 0 view .LVU239
+ 823 0000 38B5     		push	{r3, r4, r5, lr}
+ 824              		.cfi_def_cfa_offset 16
+ 825              		.cfi_offset 3, -16
+ARM GAS  C:\Temp\ccCySX2p.s 			page 26
+
+
+ 826              		.cfi_offset 4, -12
+ 827              		.cfi_offset 5, -8
+ 828              		.cfi_offset 14, -4
+ 829 0002 0546     		mov	r5, r0
+ 830 0004 0B46     		mov	r3, r1
+ 831 0006 1446     		mov	r4, r2
+ 209:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     int32_t status_int;
+ 832              		.loc 1 209 5 is_stmt 1 view .LVU240
+ 833              	.LVL93:
+ 210:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 834              		.loc 1 210 5 view .LVU241
+ 212:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	_I2CBuffer[1] = index&0xFF;
+ 835              		.loc 1 212 5 view .LVU242
+ 212:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	_I2CBuffer[1] = index&0xFF;
+ 836              		.loc 1 212 19 is_stmt 0 view .LVU243
+ 837 0008 1049     		ldr	r1, .L69
+ 838              	.LVL94:
+ 212:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	_I2CBuffer[1] = index&0xFF;
+ 839              		.loc 1 212 19 view .LVU244
+ 840 000a 1A0A     		lsrs	r2, r3, #8
+ 841              	.LVL95:
+ 212:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	_I2CBuffer[1] = index&0xFF;
+ 842              		.loc 1 212 19 view .LVU245
+ 843 000c 0A70     		strb	r2, [r1]
+ 213:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_GetI2cBus();
+ 844              		.loc 1 213 2 is_stmt 1 view .LVU246
+ 213:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     VL53L1_GetI2cBus();
+ 845              		.loc 1 213 16 is_stmt 0 view .LVU247
+ 846 000e 4B70     		strb	r3, [r1, #1]
+ 214:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     status_int = _I2CWrite(Dev, _I2CBuffer, 2);
+ 847              		.loc 1 214 5 is_stmt 1 view .LVU248
+ 215:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 848              		.loc 1 215 5 view .LVU249
+ 215:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 849              		.loc 1 215 18 is_stmt 0 view .LVU250
+ 850 0010 0222     		movs	r2, #2
+ 851 0012 FFF7FEFF 		bl	_I2CWrite
+ 852              	.LVL96:
+ 216:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 853              		.loc 1 216 5 is_stmt 1 view .LVU251
+ 216:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 854              		.loc 1 216 8 is_stmt 0 view .LVU252
+ 855 0016 90B9     		cbnz	r0, .L66
+ 220:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 856              		.loc 1 220 5 is_stmt 1 view .LVU253
+ 220:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 857              		.loc 1 220 18 is_stmt 0 view .LVU254
+ 858 0018 0422     		movs	r2, #4
+ 859 001a 0C49     		ldr	r1, .L69
+ 860 001c 2846     		mov	r0, r5
+ 861              	.LVL97:
+ 220:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     if (status_int != 0) {
+ 862              		.loc 1 220 18 view .LVU255
+ 863 001e FFF7FEFF 		bl	_I2CRead
+ 864              	.LVL98:
+ 221:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 865              		.loc 1 221 5 is_stmt 1 view .LVU256
+ARM GAS  C:\Temp\ccCySX2p.s 			page 27
+
+
+ 221:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         Status = VL53L1_ERROR_CONTROL_INTERFACE;
+ 866              		.loc 1 221 8 is_stmt 0 view .LVU257
+ 867 0022 78B9     		cbnz	r0, .L67
+ 226:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 868              		.loc 1 226 5 is_stmt 1 view .LVU258
+ 226:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 869              		.loc 1 226 34 is_stmt 0 view .LVU259
+ 870 0024 0949     		ldr	r1, .L69
+ 871 0026 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 226:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 872              		.loc 1 226 66 view .LVU260
+ 873 0028 4B78     		ldrb	r3, [r1, #1]	@ zero_extendqisi2
+ 226:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 874              		.loc 1 226 69 view .LVU261
+ 875 002a 1B04     		lsls	r3, r3, #16
+ 226:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 876              		.loc 1 226 43 view .LVU262
+ 877 002c 03EB0263 		add	r3, r3, r2, lsl #24
+ 226:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 878              		.loc 1 226 98 view .LVU263
+ 879 0030 8A78     		ldrb	r2, [r1, #2]	@ zero_extendqisi2
+ 226:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 880              		.loc 1 226 75 view .LVU264
+ 881 0032 03EB0223 		add	r3, r3, r2, lsl #8
+ 226:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 882              		.loc 1 226 128 view .LVU265
+ 883 0036 CA78     		ldrb	r2, [r1, #3]	@ zero_extendqisi2
+ 226:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 884              		.loc 1 226 106 view .LVU266
+ 885 0038 1344     		add	r3, r3, r2
+ 226:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 886              		.loc 1 226 11 view .LVU267
+ 887 003a 2360     		str	r3, [r4]
+ 888              	.LVL99:
+ 889              	.L65:
+ 229:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     return Status;
+ 890              		.loc 1 229 5 is_stmt 1 view .LVU268
+ 230:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 891              		.loc 1 230 5 view .LVU269
+ 231:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 892              		.loc 1 231 1 is_stmt 0 view .LVU270
+ 893 003c 38BD     		pop	{r3, r4, r5, pc}
+ 894              	.LVL100:
+ 895              	.L66:
+ 217:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         goto done;
+ 896              		.loc 1 217 16 view .LVU271
+ 897 003e 6FF00C00 		mvn	r0, #12
+ 898              	.LVL101:
+ 217:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         goto done;
+ 899              		.loc 1 217 16 view .LVU272
+ 900 0042 FBE7     		b	.L65
+ 901              	.LVL102:
+ 902              	.L67:
+ 222:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         goto done;
+ 903              		.loc 1 222 16 view .LVU273
+ 904 0044 6FF00C00 		mvn	r0, #12
+ 905              	.LVL103:
+ARM GAS  C:\Temp\ccCySX2p.s 			page 28
+
+
+ 222:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****         goto done;
+ 906              		.loc 1 222 16 view .LVU274
+ 907 0048 F8E7     		b	.L65
+ 908              	.L70:
+ 909 004a 00BF     		.align	2
+ 910              	.L69:
+ 911 004c 00000000 		.word	_I2CBuffer
+ 912              		.cfi_endproc
+ 913              	.LFE13:
+ 915              		.section	.text.VL53L1_GetTickCount,"ax",%progbits
+ 916              		.align	1
+ 917              		.global	VL53L1_GetTickCount
+ 918              		.syntax unified
+ 919              		.thumb
+ 920              		.thumb_func
+ 922              	VL53L1_GetTickCount:
+ 923              	.LVL104:
+ 924              	.LFB14:
+ 234:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 925              		.loc 1 234 1 is_stmt 1 view -0
+ 926              		.cfi_startproc
+ 927              		@ args = 0, pretend = 0, frame = 0
+ 928              		@ frame_needed = 0, uses_anonymous_args = 0
+ 234:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 929              		.loc 1 234 1 is_stmt 0 view .LVU276
+ 930 0000 10B5     		push	{r4, lr}
+ 931              		.cfi_def_cfa_offset 8
+ 932              		.cfi_offset 4, -8
+ 933              		.cfi_offset 14, -4
+ 934 0002 0C46     		mov	r4, r1
+ 238:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 935              		.loc 1 238 2 is_stmt 1 view .LVU277
+ 936              	.LVL105:
+ 240:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	
+ 937              		.loc 1 240 2 view .LVU278
+ 240:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	
+ 938              		.loc 1 240 27 is_stmt 0 view .LVU279
+ 939 0004 4369     		ldr	r3, [r0, #20]
+ 240:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	
+ 940              		.loc 1 240 20 view .LVU280
+ 941 0006 9847     		blx	r3
+ 942              	.LVL106:
+ 240:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	
+ 943              		.loc 1 240 18 view .LVU281
+ 944 0008 2060     		str	r0, [r4]
+ 249:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 945              		.loc 1 249 2 is_stmt 1 view .LVU282
+ 250:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 946              		.loc 1 250 1 is_stmt 0 view .LVU283
+ 947 000a 0020     		movs	r0, #0
+ 948 000c 10BD     		pop	{r4, pc}
+ 250:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 949              		.loc 1 250 1 view .LVU284
+ 950              		.cfi_endproc
+ 951              	.LFE14:
+ 953              		.section	.text.VL53L1_GetTimerFrequency,"ax",%progbits
+ 954              		.align	1
+ARM GAS  C:\Temp\ccCySX2p.s 			page 29
+
+
+ 955              		.global	VL53L1_GetTimerFrequency
+ 956              		.syntax unified
+ 957              		.thumb
+ 958              		.thumb_func
+ 960              	VL53L1_GetTimerFrequency:
+ 961              	.LVL107:
+ 962              	.LFB15:
+ 261:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	*ptimer_freq_hz = 0;
+ 963              		.loc 1 261 1 is_stmt 1 view -0
+ 964              		.cfi_startproc
+ 965              		@ args = 0, pretend = 0, frame = 0
+ 966              		@ frame_needed = 0, uses_anonymous_args = 0
+ 967              		@ link register save eliminated.
+ 261:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	*ptimer_freq_hz = 0;
+ 968              		.loc 1 261 1 is_stmt 0 view .LVU286
+ 969 0000 0346     		mov	r3, r0
+ 262:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	
+ 970              		.loc 1 262 2 is_stmt 1 view .LVU287
+ 262:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	
+ 971              		.loc 1 262 18 is_stmt 0 view .LVU288
+ 972 0002 0020     		movs	r0, #0
+ 973              	.LVL108:
+ 262:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	
+ 974              		.loc 1 262 18 view .LVU289
+ 975 0004 1860     		str	r0, [r3]
+ 264:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	return VL53L1_ERROR_NONE;
+ 976              		.loc 1 264 98 is_stmt 1 view .LVU290
+ 265:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 977              		.loc 1 265 2 view .LVU291
+ 266:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 978              		.loc 1 266 1 is_stmt 0 view .LVU292
+ 979 0006 7047     		bx	lr
+ 980              		.cfi_endproc
+ 981              	.LFE15:
+ 983              		.section	.text.VL53L1_WaitMs,"ax",%progbits
+ 984              		.align	1
+ 985              		.global	VL53L1_WaitMs
+ 986              		.syntax unified
+ 987              		.thumb
+ 988              		.thumb_func
+ 990              	VL53L1_WaitMs:
+ 991              	.LVL109:
+ 992              	.LFB16:
+ 268:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	VL53L1_Delay(Dev, wait_ms);
+ 993              		.loc 1 268 60 is_stmt 1 view -0
+ 994              		.cfi_startproc
+ 995              		@ args = 0, pretend = 0, frame = 0
+ 996              		@ frame_needed = 0, uses_anonymous_args = 0
+ 268:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	VL53L1_Delay(Dev, wait_ms);
+ 997              		.loc 1 268 60 is_stmt 0 view .LVU294
+ 998 0000 08B5     		push	{r3, lr}
+ 999              		.cfi_def_cfa_offset 8
+ 1000              		.cfi_offset 3, -8
+ 1001              		.cfi_offset 14, -4
+ 269:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     return VL53L1_ERROR_NONE;
+ 1002              		.loc 1 269 2 is_stmt 1 view .LVU295
+ 1003 0002 FFF7FEFF 		bl	VL53L1_Delay
+ARM GAS  C:\Temp\ccCySX2p.s 			page 30
+
+
+ 1004              	.LVL110:
+ 270:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 1005              		.loc 1 270 5 view .LVU296
+ 271:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 1006              		.loc 1 271 1 is_stmt 0 view .LVU297
+ 1007 0006 0020     		movs	r0, #0
+ 1008 0008 08BD     		pop	{r3, pc}
+ 1009              		.cfi_endproc
+ 1010              	.LFE16:
+ 1012              		.section	.text.VL53L1_WaitUs,"ax",%progbits
+ 1013              		.align	1
+ 1014              		.global	VL53L1_WaitUs
+ 1015              		.syntax unified
+ 1016              		.thumb
+ 1017              		.thumb_func
+ 1019              	VL53L1_WaitUs:
+ 1020              	.LVL111:
+ 1021              	.LFB17:
+ 273:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	VL53L1_Delay(Dev, wait_us/1000);
+ 1022              		.loc 1 273 60 is_stmt 1 view -0
+ 1023              		.cfi_startproc
+ 1024              		@ args = 0, pretend = 0, frame = 0
+ 1025              		@ frame_needed = 0, uses_anonymous_args = 0
+ 273:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	VL53L1_Delay(Dev, wait_us/1000);
+ 1026              		.loc 1 273 60 is_stmt 0 view .LVU299
+ 1027 0000 08B5     		push	{r3, lr}
+ 1028              		.cfi_def_cfa_offset 8
+ 1029              		.cfi_offset 3, -8
+ 1030              		.cfi_offset 14, -4
+ 274:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     return VL53L1_ERROR_NONE;
+ 1031              		.loc 1 274 2 is_stmt 1 view .LVU300
+ 274:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     return VL53L1_ERROR_NONE;
+ 1032              		.loc 1 274 27 is_stmt 0 view .LVU301
+ 1033 0002 054B     		ldr	r3, .L78
+ 1034 0004 83FB0123 		smull	r2, r3, r3, r1
+ 1035 0008 C917     		asrs	r1, r1, #31
+ 1036              	.LVL112:
+ 274:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c ****     return VL53L1_ERROR_NONE;
+ 1037              		.loc 1 274 2 view .LVU302
+ 1038 000a C1EBA311 		rsb	r1, r1, r3, asr #6
+ 1039 000e FFF7FEFF 		bl	VL53L1_Delay
+ 1040              	.LVL113:
+ 275:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 1041              		.loc 1 275 5 is_stmt 1 view .LVU303
+ 276:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 1042              		.loc 1 276 1 is_stmt 0 view .LVU304
+ 1043 0012 0020     		movs	r0, #0
+ 1044 0014 08BD     		pop	{r3, pc}
+ 1045              	.L79:
+ 1046 0016 00BF     		.align	2
+ 1047              	.L78:
+ 1048 0018 D34D6210 		.word	274877907
+ 1049              		.cfi_endproc
+ 1050              	.LFE17:
+ 1052              		.section	.rodata.VL53L1_WaitValueMaskEx.str1.4,"aMS",%progbits,1
+ 1053              		.align	2
+ 1054              	.LC0:
+ARM GAS  C:\Temp\ccCySX2p.s 			page 31
+
+
+ 1055 0000 00       		.ascii	"\000"
+ 1056              		.section	.text.VL53L1_WaitValueMaskEx,"ax",%progbits
+ 1057              		.align	1
+ 1058              		.global	VL53L1_WaitValueMaskEx
+ 1059              		.syntax unified
+ 1060              		.thumb
+ 1061              		.thumb_func
+ 1063              	VL53L1_WaitValueMaskEx:
+ 1064              	.LVL114:
+ 1065              	.LFB18:
+ 285:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 1066              		.loc 1 285 1 is_stmt 1 view -0
+ 1067              		.cfi_startproc
+ 1068              		@ args = 8, pretend = 0, frame = 528
+ 1069              		@ frame_needed = 0, uses_anonymous_args = 0
+ 285:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 1070              		.loc 1 285 1 is_stmt 0 view .LVU306
+ 1071 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 1072              		.cfi_def_cfa_offset 36
+ 1073              		.cfi_offset 4, -36
+ 1074              		.cfi_offset 5, -32
+ 1075              		.cfi_offset 6, -28
+ 1076              		.cfi_offset 7, -24
+ 1077              		.cfi_offset 8, -20
+ 1078              		.cfi_offset 9, -16
+ 1079              		.cfi_offset 10, -12
+ 1080              		.cfi_offset 11, -8
+ 1081              		.cfi_offset 14, -4
+ 1082 0004 ADF5057D 		sub	sp, sp, #532
+ 1083              		.cfi_def_cfa_offset 568
+ 1084 0008 0546     		mov	r5, r0
+ 1085 000a 0F46     		mov	r7, r1
+ 1086 000c 9146     		mov	r9, r2
+ 1087 000e 9846     		mov	r8, r3
+ 1088 0010 9DF838A2 		ldrb	r10, [sp, #568]	@ zero_extendqisi2
+ 1089 0014 DDF83CB2 		ldr	fp, [sp, #572]
+ 298:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	uint32_t     start_time_ms = 0;
+ 1090              		.loc 1 298 2 is_stmt 1 view .LVU307
+ 1091              	.LVL115:
+ 299:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	uint32_t     current_time_ms = 0;
+ 1092              		.loc 1 299 2 view .LVU308
+ 299:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	uint32_t     current_time_ms = 0;
+ 1093              		.loc 1 299 15 is_stmt 0 view .LVU309
+ 1094 0018 0024     		movs	r4, #0
+ 1095 001a 8394     		str	r4, [sp, #524]
+ 300:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	uint32_t     polling_time_ms = 0;
+ 1096              		.loc 1 300 2 is_stmt 1 view .LVU310
+ 300:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	uint32_t     polling_time_ms = 0;
+ 1097              		.loc 1 300 15 is_stmt 0 view .LVU311
+ 1098 001c 8294     		str	r4, [sp, #520]
+ 301:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	uint8_t      byte_value      = 0;
+ 1099              		.loc 1 301 2 is_stmt 1 view .LVU312
+ 1100              	.LVL116:
+ 302:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	uint8_t      found           = 0;
+ 1101              		.loc 1 302 2 view .LVU313
+ 302:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	uint8_t      found           = 0;
+ 1102              		.loc 1 302 15 is_stmt 0 view .LVU314
+ARM GAS  C:\Temp\ccCySX2p.s 			page 32
+
+
+ 1103 001e 8DF80742 		strb	r4, [sp, #519]
+ 303:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #ifdef VL53L1_LOG_ENABLE
+ 1104              		.loc 1 303 2 is_stmt 1 view .LVU315
+ 1105              	.LVL117:
+ 308:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 1106              		.loc 1 308 2 view .LVU316
+ 316:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #endif
+ 1107              		.loc 1 316 2 view .LVU317
+ 1108 0022 40F2FF12 		movw	r2, #511
+ 1109              	.LVL118:
+ 316:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #endif
+ 1110              		.loc 1 316 2 is_stmt 0 view .LVU318
+ 1111 0026 1E49     		ldr	r1, .L92
+ 1112              	.LVL119:
+ 316:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #endif
+ 1113              		.loc 1 316 2 view .LVU319
+ 1114 0028 01A8     		add	r0, sp, #4
+ 1115              	.LVL120:
+ 316:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #endif
+ 1116              		.loc 1 316 2 view .LVU320
+ 1117 002a FFF7FEFF 		bl	strncpy
+ 1118              	.LVL121:
+ 324:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 1119              		.loc 1 324 66 is_stmt 1 view .LVU321
+ 328:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 1120              		.loc 1 328 3 view .LVU322
+ 1121 002e 83A9     		add	r1, sp, #524
+ 1122 0030 2846     		mov	r0, r5
+ 1123 0032 FFF7FEFF 		bl	VL53L1_GetTickCount
+ 1124              	.LVL122:
+ 341:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 		   (polling_time_ms < timeout_ms) &&
+ 1125              		.loc 1 341 2 view .LVU323
+ 303:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** #ifdef VL53L1_LOG_ENABLE
+ 1126              		.loc 1 303 15 is_stmt 0 view .LVU324
+ 1127 0036 2646     		mov	r6, r4
+ 301:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 	uint8_t      byte_value      = 0;
+ 1128              		.loc 1 301 15 view .LVU325
+ 1129 0038 2346     		mov	r3, r4
+ 341:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 		   (polling_time_ms < timeout_ms) &&
+ 1130              		.loc 1 341 8 view .LVU326
+ 1131 003a 08E0     		b	.L81
+ 1132              	.LVL123:
+ 1133              	.L90:
+ 352:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 1134              		.loc 1 352 10 view .LVU327
+ 1135 003c 0126     		movs	r6, #1
+ 1136              	.LVL124:
+ 352:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 1137              		.loc 1 352 10 view .LVU328
+ 1138 003e 17E0     		b	.L82
+ 1139              	.LVL125:
+ 1140              	.L83:
+ 363:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 		polling_time_ms = current_time_ms - start_time_ms;
+ 1141              		.loc 1 363 3 is_stmt 1 view .LVU329
+ 1142 0040 82A9     		add	r1, sp, #520
+ 1143 0042 2846     		mov	r0, r5
+ 1144 0044 FFF7FEFF 		bl	VL53L1_GetTickCount
+ARM GAS  C:\Temp\ccCySX2p.s 			page 33
+
+
+ 1145              	.LVL126:
+ 364:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 1146              		.loc 1 364 3 view .LVU330
+ 364:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 1147              		.loc 1 364 19 is_stmt 0 view .LVU331
+ 1148 0048 829B     		ldr	r3, [sp, #520]
+ 1149 004a 839A     		ldr	r2, [sp, #524]
+ 1150 004c 9B1A     		subs	r3, r3, r2
+ 1151              	.LVL127:
+ 1152              	.L81:
+ 342:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 		   (found == 0)) {
+ 1153              		.loc 1 342 37 is_stmt 1 view .LVU332
+ 1154 004e E4B9     		cbnz	r4, .L84
+ 341:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 		   (polling_time_ms < timeout_ms) &&
+ 1155              		.loc 1 341 39 is_stmt 0 view .LVU333
+ 1156 0050 BB42     		cmp	r3, r7
+ 1157 0052 1AD2     		bcs	.L84
+ 342:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 		   (found == 0)) {
+ 1158              		.loc 1 342 37 view .LVU334
+ 1159 0054 CEB9     		cbnz	r6, .L84
+ 345:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 			status = VL53L1_RdByte(
+ 1160              		.loc 1 345 3 is_stmt 1 view .LVU335
+ 346:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 							Dev,
+ 1161              		.loc 1 346 4 view .LVU336
+ 346:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 							Dev,
+ 1162              		.loc 1 346 13 is_stmt 0 view .LVU337
+ 1163 0056 0DF20722 		addw	r2, sp, #519
+ 1164 005a 4946     		mov	r1, r9
+ 1165 005c 2846     		mov	r0, r5
+ 1166 005e FFF7FEFF 		bl	VL53L1_RdByte
+ 1167              	.LVL128:
+ 346:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 							Dev,
+ 1168              		.loc 1 346 13 view .LVU338
+ 1169 0062 0446     		mov	r4, r0
+ 1170              	.LVL129:
+ 351:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 			found = 1;
+ 1171              		.loc 1 351 3 is_stmt 1 view .LVU339
+ 351:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 			found = 1;
+ 1172              		.loc 1 351 27 is_stmt 0 view .LVU340
+ 1173 0064 9DF80732 		ldrb	r3, [sp, #519]	@ zero_extendqisi2
+ 1174 0068 0AEA0303 		and	r3, r10, r3
+ 351:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 			found = 1;
+ 1175              		.loc 1 351 6 view .LVU341
+ 1176 006c 4345     		cmp	r3, r8
+ 1177 006e E5D0     		beq	.L90
+ 1178              	.LVL130:
+ 1179              	.L82:
+ 354:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 			found == 0 &&
+ 1180              		.loc 1 354 3 is_stmt 1 view .LVU342
+ 354:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 			found == 0 &&
+ 1181              		.loc 1 354 6 is_stmt 0 view .LVU343
+ 1182 0070 002C     		cmp	r4, #0
+ 1183 0072 E5D1     		bne	.L83
+ 354:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 			found == 0 &&
+ 1184              		.loc 1 354 36 discriminator 1 view .LVU344
+ 1185 0074 002E     		cmp	r6, #0
+ 1186 0076 E3D1     		bne	.L83
+ARM GAS  C:\Temp\ccCySX2p.s 			page 34
+
+
+ 355:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 			poll_delay_ms > 0)
+ 1187              		.loc 1 355 15 view .LVU345
+ 1188 0078 BBF1000F 		cmp	fp, #0
+ 1189 007c E0D0     		beq	.L83
+ 357:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 					Dev,
+ 1190              		.loc 1 357 4 is_stmt 1 view .LVU346
+ 357:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 					Dev,
+ 1191              		.loc 1 357 13 is_stmt 0 view .LVU347
+ 1192 007e 5946     		mov	r1, fp
+ 1193 0080 2846     		mov	r0, r5
+ 1194 0082 FFF7FEFF 		bl	VL53L1_WaitMs
+ 1195              	.LVL131:
+ 1196 0086 0446     		mov	r4, r0
+ 1197              	.LVL132:
+ 357:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 					Dev,
+ 1198              		.loc 1 357 13 view .LVU348
+ 1199 0088 DAE7     		b	.L83
+ 1200              	.LVL133:
+ 1201              	.L84:
+ 373:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 		status = VL53L1_ERROR_TIME_OUT;
+ 1202              		.loc 1 373 2 is_stmt 1 view .LVU349
+ 373:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 		status = VL53L1_ERROR_TIME_OUT;
+ 1203              		.loc 1 373 5 is_stmt 0 view .LVU350
+ 1204 008a 06B9     		cbnz	r6, .L86
+ 373:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 		status = VL53L1_ERROR_TIME_OUT;
+ 1205              		.loc 1 373 17 discriminator 1 view .LVU351
+ 1206 008c 24B1     		cbz	r4, .L91
+ 1207              	.LVL134:
+ 1208              	.L86:
+ 376:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** }
+ 1209              		.loc 1 376 2 is_stmt 1 view .LVU352
+ 377:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 1210              		.loc 1 377 1 is_stmt 0 view .LVU353
+ 1211 008e 2046     		mov	r0, r4
+ 1212 0090 0DF5057D 		add	sp, sp, #532
+ 1213              		.cfi_remember_state
+ 1214              		.cfi_def_cfa_offset 36
+ 1215              		@ sp needed
+ 1216 0094 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 1217              	.LVL135:
+ 1218              	.L91:
+ 1219              		.cfi_restore_state
+ 374:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 1220              		.loc 1 374 10 view .LVU354
+ 1221 0098 6FF00604 		mvn	r4, #6
+ 1222              	.LVL136:
+ 374:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c **** 
+ 1223              		.loc 1 374 10 view .LVU355
+ 1224 009c F7E7     		b	.L86
+ 1225              	.L93:
+ 1226 009e 00BF     		.align	2
+ 1227              	.L92:
+ 1228 00a0 00000000 		.word	.LC0
+ 1229              		.cfi_endproc
+ 1230              	.LFE18:
+ 1232              		.global	SPI2C_Buffer
+ 1233              		.section	.bss.SPI2C_Buffer,"aw",%nobits
+ARM GAS  C:\Temp\ccCySX2p.s 			page 35
+
+
+ 1234              		.align	2
+ 1237              	SPI2C_Buffer:
+ 1238 0000 00000000 		.space	256
+ 1238      00000000 
+ 1238      00000000 
+ 1238      00000000 
+ 1238      00000000 
+ 1239              		.global	i2cwriteCount
+ 1240              		.section	.bss.i2cwriteCount,"aw",%nobits
+ 1241              		.align	2
+ 1244              	i2cwriteCount:
+ 1245 0000 00000000 		.space	4
+ 1246              		.global	i2creadCount
+ 1247              		.section	.bss.i2creadCount,"aw",%nobits
+ 1248              		.align	2
+ 1251              	i2creadCount:
+ 1252 0000 00000000 		.space	4
+ 1253              		.global	_I2CBuffer
+ 1254              		.section	.bss._I2CBuffer,"aw",%nobits
+ 1255              		.align	2
+ 1258              	_I2CBuffer:
+ 1259 0000 00000000 		.space	256
+ 1259      00000000 
+ 1259      00000000 
+ 1259      00000000 
+ 1259      00000000 
+ 1260              		.text
+ 1261              	.Letext0:
+ 1262              		.file 2 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 1263              		.file 3 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 1264              		.file 4 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 1265              		.file 5 "Drivers/BSP/Components/vl53l1cb/porting/vl53l1_types.h"
+ 1266              		.file 6 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_codes.h"
+ 1267              		.file 7 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_register_structs.h"
+ 1268              		.file 8 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_ll_device.h"
+ 1269              		.file 9 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax_structs.h"
+ 1270              		.file 10 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_structs.h"
+ 1271              		.file 11 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_ll_def.h"
+ 1272              		.file 12 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_def.h"
+ 1273              		.file 13 "Drivers/BSP/Components/vl53l1cb/vl53l1cb.h"
+ 1274              		.file 14 "Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_user_data.h"
+ 1275              		.file 15 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for
+ 1276              		.file 16 "<built-in>"
+ARM GAS  C:\Temp\ccCySX2p.s 			page 36
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 vl53l1_platform.c
+  C:\Temp\ccCySX2p.s:21     .text.VL53L1_Delay:00000000 $t
+  C:\Temp\ccCySX2p.s:26     .text.VL53L1_Delay:00000000 VL53L1_Delay
+  C:\Temp\ccCySX2p.s:75     .text._I2CWrite:00000000 $t
+  C:\Temp\ccCySX2p.s:81     .text._I2CWrite:00000000 _I2CWrite
+  C:\Temp\ccCySX2p.s:111    .text._I2CRead:00000000 $t
+  C:\Temp\ccCySX2p.s:117    .text._I2CRead:00000000 _I2CRead
+  C:\Temp\ccCySX2p.s:147    .text.VL53L1_WriteMulti:00000000 $t
+  C:\Temp\ccCySX2p.s:153    .text.VL53L1_WriteMulti:00000000 VL53L1_WriteMulti
+  C:\Temp\ccCySX2p.s:240    .text.VL53L1_WriteMulti:0000003c $d
+  C:\Temp\ccCySX2p.s:1258   .bss._I2CBuffer:00000000 _I2CBuffer
+  C:\Temp\ccCySX2p.s:245    .text.VL53L1_ReadMulti:00000000 $t
+  C:\Temp\ccCySX2p.s:251    .text.VL53L1_ReadMulti:00000000 VL53L1_ReadMulti
+  C:\Temp\ccCySX2p.s:330    .text.VL53L1_ReadMulti:00000038 $d
+  C:\Temp\ccCySX2p.s:335    .text.VL53L1_WrByte:00000000 $t
+  C:\Temp\ccCySX2p.s:341    .text.VL53L1_WrByte:00000000 VL53L1_WrByte
+  C:\Temp\ccCySX2p.s:397    .text.VL53L1_WrByte:00000024 $d
+  C:\Temp\ccCySX2p.s:402    .text.VL53L1_WrWord:00000000 $t
+  C:\Temp\ccCySX2p.s:408    .text.VL53L1_WrWord:00000000 VL53L1_WrWord
+  C:\Temp\ccCySX2p.s:468    .text.VL53L1_WrWord:00000028 $d
+  C:\Temp\ccCySX2p.s:473    .text.VL53L1_WrDWord:00000000 $t
+  C:\Temp\ccCySX2p.s:479    .text.VL53L1_WrDWord:00000000 VL53L1_WrDWord
+  C:\Temp\ccCySX2p.s:550    .text.VL53L1_WrDWord:00000030 $d
+  C:\Temp\ccCySX2p.s:555    .text.VL53L1_RdByte:00000000 $t
+  C:\Temp\ccCySX2p.s:561    .text.VL53L1_RdByte:00000000 VL53L1_RdByte
+  C:\Temp\ccCySX2p.s:637    .text.VL53L1_RdByte:00000034 $d
+  C:\Temp\ccCySX2p.s:642    .text.VL53L1_UpdateByte:00000000 $t
+  C:\Temp\ccCySX2p.s:648    .text.VL53L1_UpdateByte:00000000 VL53L1_UpdateByte
+  C:\Temp\ccCySX2p.s:712    .text.VL53L1_RdWord:00000000 $t
+  C:\Temp\ccCySX2p.s:718    .text.VL53L1_RdWord:00000000 VL53L1_RdWord
+  C:\Temp\ccCySX2p.s:804    .text.VL53L1_RdWord:00000040 $d
+  C:\Temp\ccCySX2p.s:809    .text.VL53L1_RdDWord:00000000 $t
+  C:\Temp\ccCySX2p.s:815    .text.VL53L1_RdDWord:00000000 VL53L1_RdDWord
+  C:\Temp\ccCySX2p.s:911    .text.VL53L1_RdDWord:0000004c $d
+  C:\Temp\ccCySX2p.s:916    .text.VL53L1_GetTickCount:00000000 $t
+  C:\Temp\ccCySX2p.s:922    .text.VL53L1_GetTickCount:00000000 VL53L1_GetTickCount
+  C:\Temp\ccCySX2p.s:954    .text.VL53L1_GetTimerFrequency:00000000 $t
+  C:\Temp\ccCySX2p.s:960    .text.VL53L1_GetTimerFrequency:00000000 VL53L1_GetTimerFrequency
+  C:\Temp\ccCySX2p.s:984    .text.VL53L1_WaitMs:00000000 $t
+  C:\Temp\ccCySX2p.s:990    .text.VL53L1_WaitMs:00000000 VL53L1_WaitMs
+  C:\Temp\ccCySX2p.s:1013   .text.VL53L1_WaitUs:00000000 $t
+  C:\Temp\ccCySX2p.s:1019   .text.VL53L1_WaitUs:00000000 VL53L1_WaitUs
+  C:\Temp\ccCySX2p.s:1048   .text.VL53L1_WaitUs:00000018 $d
+  C:\Temp\ccCySX2p.s:1053   .rodata.VL53L1_WaitValueMaskEx.str1.4:00000000 $d
+  C:\Temp\ccCySX2p.s:1057   .text.VL53L1_WaitValueMaskEx:00000000 $t
+  C:\Temp\ccCySX2p.s:1063   .text.VL53L1_WaitValueMaskEx:00000000 VL53L1_WaitValueMaskEx
+  C:\Temp\ccCySX2p.s:1228   .text.VL53L1_WaitValueMaskEx:000000a0 $d
+  C:\Temp\ccCySX2p.s:1237   .bss.SPI2C_Buffer:00000000 SPI2C_Buffer
+  C:\Temp\ccCySX2p.s:1234   .bss.SPI2C_Buffer:00000000 $d
+  C:\Temp\ccCySX2p.s:1244   .bss.i2cwriteCount:00000000 i2cwriteCount
+  C:\Temp\ccCySX2p.s:1241   .bss.i2cwriteCount:00000000 $d
+  C:\Temp\ccCySX2p.s:1251   .bss.i2creadCount:00000000 i2creadCount
+  C:\Temp\ccCySX2p.s:1248   .bss.i2creadCount:00000000 $d
+  C:\Temp\ccCySX2p.s:1255   .bss._I2CBuffer:00000000 $d
+
+UNDEFINED SYMBOLS
+ARM GAS  C:\Temp\ccCySX2p.s 			page 37
+
+
+memcpy
+strncpy

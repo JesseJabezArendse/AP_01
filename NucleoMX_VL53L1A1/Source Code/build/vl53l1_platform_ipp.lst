@@ -1,0 +1,474 @@
+ARM GAS  C:\Temp\ccuo5Jtx.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"vl53l1_platform_ipp.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c"
+  20              		.section	.text.VL53L1_ipp_hist_process_data,"ax",%progbits
+  21              		.align	1
+  22              		.global	VL53L1_ipp_hist_process_data
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	VL53L1_ipp_hist_process_data:
+  28              	.LVL0:
+  29              	.LFB3:
+   1:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** /**
+   2:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c ****  ******************************************************************************
+   3:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c ****  * Copyright (c) 2020, STMicroelectronics - All Rights Reserved
+   4:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c ****  *
+   5:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c ****  * This software is licensed under terms that can be found in the LICENSE file
+   6:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c ****  * in the root directory of this software component.
+   7:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c ****  * If no LICENSE file comes with this software, it is provided AS-IS.
+   8:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c ****  *
+   9:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c ****  ******************************************************************************
+  10:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c ****  */
+  11:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+  12:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+  13:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+  14:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+  15:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+  16:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** #include "vl53l1_ll_def.h"
+  17:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** #include "vl53l1_platform_user_data.h"
+  18:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** #include "vl53l1_hist_structs.h"
+  19:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** #include "vl53l1_hist_funcs.h"
+  20:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** #include "vl53l1_xtalk.h"
+  21:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** #include "vl53l1_platform_ipp.h"
+  22:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+  23:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+  24:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** #define LOG_FUNCTION_START(fmt, ...) \
+  25:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	_LOG_FUNCTION_START(VL53L1_TRACE_MODULE_CORE, fmt, ##__VA_ARGS__)
+  26:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** #define LOG_FUNCTION_END(status, ...) \
+  27:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	_LOG_FUNCTION_END(VL53L1_TRACE_MODULE_CORE, status, ##__VA_ARGS__)
+  28:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+  29:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+ARM GAS  C:\Temp\ccuo5Jtx.s 			page 2
+
+
+  30:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** VL53L1_Error VL53L1_ipp_hist_process_data(
+  31:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_DEV                         Dev,
+  32:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_dmax_calibration_data_t    *pdmax_cal,
+  33:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_hist_gen3_dmax_config_t    *pdmax_cfg,
+  34:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_hist_post_process_config_t *ppost_cfg,
+  35:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_histogram_bin_data_t       *pbins,
+  36:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_xtalk_histogram_data_t     *pxtalk,
+  37:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	uint8_t                           *pArea1,
+  38:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	uint8_t                           *pArea2,
+  39:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	uint8_t                           *phisto_merge_nb,
+  40:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_range_results_t            *presults)
+  41:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** {
+  30              		.loc 1 41 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 24, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 41 1 is_stmt 0 view .LVU1
+  35 0000 00B5     		push	{lr}
+  36              		.cfi_def_cfa_offset 4
+  37              		.cfi_offset 14, -4
+  38 0002 87B0     		sub	sp, sp, #28
+  39              		.cfi_def_cfa_offset 32
+  40 0004 0846     		mov	r0, r1
+  41              	.LVL1:
+  42              		.loc 1 41 1 view .LVU2
+  43 0006 1146     		mov	r1, r2
+  44              	.LVL2:
+  45              		.loc 1 41 1 view .LVU3
+  46 0008 1A46     		mov	r2, r3
+  47              	.LVL3:
+  42:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+  43:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+  44:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+  45:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_Error status         = VL53L1_ERROR_NONE;
+  48              		.loc 1 45 2 is_stmt 1 view .LVU4
+  46:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+  47:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	SUPPRESS_UNUSED_WARNING(Dev);
+  49              		.loc 1 47 2 view .LVU5
+  48:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+  49:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	status =
+  50              		.loc 1 49 2 view .LVU6
+  50:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 		VL53L1_hist_process_data(
+  51              		.loc 1 50 3 is_stmt 0 view .LVU7
+  52 000a 0C9B     		ldr	r3, [sp, #48]
+  53              	.LVL4:
+  54              		.loc 1 50 3 view .LVU8
+  55 000c 0493     		str	r3, [sp, #16]
+  56 000e 0D9B     		ldr	r3, [sp, #52]
+  57 0010 0393     		str	r3, [sp, #12]
+  58 0012 0B9B     		ldr	r3, [sp, #44]
+  59 0014 0293     		str	r3, [sp, #8]
+  60 0016 0A9B     		ldr	r3, [sp, #40]
+  61 0018 0193     		str	r3, [sp, #4]
+  62 001a 099B     		ldr	r3, [sp, #36]
+  63 001c 0093     		str	r3, [sp]
+  64 001e 089B     		ldr	r3, [sp, #32]
+  65 0020 FFF7FEFF 		bl	VL53L1_hist_process_data
+ARM GAS  C:\Temp\ccuo5Jtx.s 			page 3
+
+
+  66              	.LVL5:
+  51:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 			pdmax_cal,
+  52:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 			pdmax_cfg,
+  53:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 			ppost_cfg,
+  54:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 			pbins,
+  55:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 			pxtalk,
+  56:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 			pArea1,
+  57:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 			pArea2,
+  58:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 			presults,
+  59:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 			phisto_merge_nb);
+  60:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+  61:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	return status;
+  67              		.loc 1 61 2 is_stmt 1 view .LVU9
+  62:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** }
+  68              		.loc 1 62 1 is_stmt 0 view .LVU10
+  69 0024 07B0     		add	sp, sp, #28
+  70              		.cfi_def_cfa_offset 4
+  71              		@ sp needed
+  72 0026 5DF804FB 		ldr	pc, [sp], #4
+  73              		.loc 1 62 1 view .LVU11
+  74              		.cfi_endproc
+  75              	.LFE3:
+  77              		.section	.text.VL53L1_ipp_hist_ambient_dmax,"ax",%progbits
+  78              		.align	1
+  79              		.global	VL53L1_ipp_hist_ambient_dmax
+  80              		.syntax unified
+  81              		.thumb
+  82              		.thumb_func
+  84              	VL53L1_ipp_hist_ambient_dmax:
+  85              	.LVL6:
+  86              	.LFB4:
+  63:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+  64:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+  65:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** VL53L1_Error VL53L1_ipp_hist_ambient_dmax(
+  66:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_DEV                         Dev,
+  67:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	uint16_t                           target_reflectance,
+  68:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_dmax_calibration_data_t    *pdmax_cal,
+  69:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_hist_gen3_dmax_config_t    *pdmax_cfg,
+  70:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_histogram_bin_data_t       *pbins,
+  71:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	int16_t                           *pambient_dmax_mm)
+  72:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** {
+  87              		.loc 1 72 1 is_stmt 1 view -0
+  88              		.cfi_startproc
+  89              		@ args = 8, pretend = 0, frame = 0
+  90              		@ frame_needed = 0, uses_anonymous_args = 0
+  91              		.loc 1 72 1 is_stmt 0 view .LVU13
+  92 0000 00B5     		push	{lr}
+  93              		.cfi_def_cfa_offset 4
+  94              		.cfi_offset 14, -4
+  95 0002 83B0     		sub	sp, sp, #12
+  96              		.cfi_def_cfa_offset 16
+  97 0004 0846     		mov	r0, r1
+  98              	.LVL7:
+  99              		.loc 1 72 1 view .LVU14
+ 100 0006 1146     		mov	r1, r2
+ 101              	.LVL8:
+ 102              		.loc 1 72 1 view .LVU15
+ARM GAS  C:\Temp\ccuo5Jtx.s 			page 4
+
+
+ 103 0008 1A46     		mov	r2, r3
+ 104              	.LVL9:
+  73:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+  74:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+  75:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+  76:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c ****     VL53L1_Error status         = VL53L1_ERROR_NONE;
+ 105              		.loc 1 76 5 is_stmt 1 view .LVU16
+  77:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+  78:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	SUPPRESS_UNUSED_WARNING(Dev);
+ 106              		.loc 1 78 2 view .LVU17
+  79:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+  80:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c ****     status =
+ 107              		.loc 1 80 5 view .LVU18
+  81:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c ****     	VL53L1_hist_ambient_dmax(
+ 108              		.loc 1 81 6 is_stmt 0 view .LVU19
+ 109 000a 059B     		ldr	r3, [sp, #20]
+ 110              	.LVL10:
+ 111              		.loc 1 81 6 view .LVU20
+ 112 000c 0093     		str	r3, [sp]
+ 113 000e 049B     		ldr	r3, [sp, #16]
+ 114 0010 FFF7FEFF 		bl	VL53L1_hist_ambient_dmax
+ 115              	.LVL11:
+  82:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c ****     		target_reflectance,
+  83:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c ****     		pdmax_cal,
+  84:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c ****     		pdmax_cfg,
+  85:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 			pbins,
+  86:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 			pambient_dmax_mm);
+  87:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+  88:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	return status;
+ 116              		.loc 1 88 2 is_stmt 1 view .LVU21
+  89:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** }
+ 117              		.loc 1 89 1 is_stmt 0 view .LVU22
+ 118 0014 03B0     		add	sp, sp, #12
+ 119              		.cfi_def_cfa_offset 4
+ 120              		@ sp needed
+ 121 0016 5DF804FB 		ldr	pc, [sp], #4
+ 122              		.loc 1 89 1 view .LVU23
+ 123              		.cfi_endproc
+ 124              	.LFE4:
+ 126              		.section	.text.VL53L1_ipp_xtalk_calibration_process_data,"ax",%progbits
+ 127              		.align	1
+ 128              		.global	VL53L1_ipp_xtalk_calibration_process_data
+ 129              		.syntax unified
+ 130              		.thumb
+ 131              		.thumb_func
+ 133              	VL53L1_ipp_xtalk_calibration_process_data:
+ 134              	.LVL12:
+ 135              	.LFB5:
+  90:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+  91:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+  92:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** VL53L1_Error VL53L1_ipp_xtalk_calibration_process_data(
+  93:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_DEV                          Dev,
+  94:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_xtalk_range_results_t       *pxtalk_ranges,
+  95:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_xtalk_histogram_data_t      *pxtalk_shape,
+  96:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_xtalk_calibration_results_t *pxtalk_cal)
+  97:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** {
+ 136              		.loc 1 97 1 is_stmt 1 view -0
+ARM GAS  C:\Temp\ccuo5Jtx.s 			page 5
+
+
+ 137              		.cfi_startproc
+ 138              		@ args = 0, pretend = 0, frame = 0
+ 139              		@ frame_needed = 0, uses_anonymous_args = 0
+ 140              		.loc 1 97 1 is_stmt 0 view .LVU25
+ 141 0000 08B5     		push	{r3, lr}
+ 142              		.cfi_def_cfa_offset 8
+ 143              		.cfi_offset 3, -8
+ 144              		.cfi_offset 14, -4
+ 145 0002 0846     		mov	r0, r1
+ 146              	.LVL13:
+ 147              		.loc 1 97 1 view .LVU26
+ 148 0004 1146     		mov	r1, r2
+ 149              	.LVL14:
+  98:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+  99:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+ 100:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+ 101:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_Error status         = VL53L1_ERROR_NONE;
+ 150              		.loc 1 101 2 is_stmt 1 view .LVU27
+ 102:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+ 103:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	SUPPRESS_UNUSED_WARNING(Dev);
+ 151              		.loc 1 103 2 view .LVU28
+ 104:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+ 105:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	status =
+ 152              		.loc 1 105 2 view .LVU29
+ 106:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 		VL53L1_xtalk_calibration_process_data(
+ 153              		.loc 1 106 3 is_stmt 0 view .LVU30
+ 154 0006 1A46     		mov	r2, r3
+ 155              	.LVL15:
+ 156              		.loc 1 106 3 view .LVU31
+ 157 0008 FFF7FEFF 		bl	VL53L1_xtalk_calibration_process_data
+ 158              	.LVL16:
+ 107:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 			pxtalk_ranges,
+ 108:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 			pxtalk_shape,
+ 109:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 			pxtalk_cal);
+ 110:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+ 111:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	return status;
+ 159              		.loc 1 111 2 is_stmt 1 view .LVU32
+ 112:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** }
+ 160              		.loc 1 112 1 is_stmt 0 view .LVU33
+ 161 000c 08BD     		pop	{r3, pc}
+ 162              		.cfi_endproc
+ 163              	.LFE5:
+ 165              		.section	.text.VL53L1_ipp_hist_xtalk_correction,"ax",%progbits
+ 166              		.align	1
+ 167              		.global	VL53L1_ipp_hist_xtalk_correction
+ 168              		.syntax unified
+ 169              		.thumb
+ 170              		.thumb_func
+ 172              	VL53L1_ipp_hist_xtalk_correction:
+ 173              	.LVL17:
+ 174              	.LFB6:
+ 113:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+ 114:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+ 115:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** VL53L1_Error VL53L1_ipp_hist_xtalk_correction(
+ 116:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_DEV                     Dev,
+ 117:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_customer_nvm_managed_t *pcustomer,
+ 118:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_dynamic_config_t       *pdyn_cfg,
+ARM GAS  C:\Temp\ccuo5Jtx.s 			page 6
+
+
+ 119:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_xtalk_histogram_data_t *pxtalk_shape,
+ 120:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_histogram_bin_data_t   *pip_hist_data,
+ 121:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_histogram_bin_data_t   *pop_hist_data,
+ 122:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_histogram_bin_data_t   *pxtalk_count_data)
+ 123:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** {
+ 175              		.loc 1 123 1 is_stmt 1 view -0
+ 176              		.cfi_startproc
+ 177              		@ args = 12, pretend = 0, frame = 0
+ 178              		@ frame_needed = 0, uses_anonymous_args = 0
+ 179              		.loc 1 123 1 is_stmt 0 view .LVU35
+ 180 0000 00B5     		push	{lr}
+ 181              		.cfi_def_cfa_offset 4
+ 182              		.cfi_offset 14, -4
+ 183 0002 83B0     		sub	sp, sp, #12
+ 184              		.cfi_def_cfa_offset 16
+ 185 0004 0846     		mov	r0, r1
+ 186              	.LVL18:
+ 187              		.loc 1 123 1 view .LVU36
+ 188 0006 1146     		mov	r1, r2
+ 189              	.LVL19:
+ 190              		.loc 1 123 1 view .LVU37
+ 191 0008 1A46     		mov	r2, r3
+ 192              	.LVL20:
+ 124:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+ 125:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+ 126:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+ 127:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_Error status         = VL53L1_ERROR_NONE;
+ 193              		.loc 1 127 2 is_stmt 1 view .LVU38
+ 128:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+ 129:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	SUPPRESS_UNUSED_WARNING(Dev);
+ 194              		.loc 1 129 2 view .LVU39
+ 130:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+ 131:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	status =
+ 195              		.loc 1 131 2 view .LVU40
+ 132:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 		VL53L1_f_054(
+ 196              		.loc 1 132 3 is_stmt 0 view .LVU41
+ 197 000a 069B     		ldr	r3, [sp, #24]
+ 198              	.LVL21:
+ 199              		.loc 1 132 3 view .LVU42
+ 200 000c 0193     		str	r3, [sp, #4]
+ 201 000e 059B     		ldr	r3, [sp, #20]
+ 202 0010 0093     		str	r3, [sp]
+ 203 0012 049B     		ldr	r3, [sp, #16]
+ 204 0014 FFF7FEFF 		bl	VL53L1_f_054
+ 205              	.LVL22:
+ 133:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 			pcustomer,
+ 134:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 			pdyn_cfg,
+ 135:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 			pxtalk_shape,
+ 136:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 			pip_hist_data,
+ 137:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 			pop_hist_data,
+ 138:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 			pxtalk_count_data);
+ 139:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+ 140:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	return status;
+ 206              		.loc 1 140 2 is_stmt 1 view .LVU43
+ 141:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** }
+ 207              		.loc 1 141 1 is_stmt 0 view .LVU44
+ 208 0018 03B0     		add	sp, sp, #12
+ARM GAS  C:\Temp\ccuo5Jtx.s 			page 7
+
+
+ 209              		.cfi_def_cfa_offset 4
+ 210              		@ sp needed
+ 211 001a 5DF804FB 		ldr	pc, [sp], #4
+ 212              		.loc 1 141 1 view .LVU45
+ 213              		.cfi_endproc
+ 214              	.LFE6:
+ 216              		.section	.text.VL53L1_ipp_generate_dual_reflectance_xtalk_samples,"ax",%progbits
+ 217              		.align	1
+ 218              		.global	VL53L1_ipp_generate_dual_reflectance_xtalk_samples
+ 219              		.syntax unified
+ 220              		.thumb
+ 221              		.thumb_func
+ 223              	VL53L1_ipp_generate_dual_reflectance_xtalk_samples:
+ 224              	.LVL23:
+ 225              	.LFB7:
+ 142:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+ 143:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** VL53L1_Error VL53L1_ipp_generate_dual_reflectance_xtalk_samples(
+ 144:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_DEV                     Dev,
+ 145:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_xtalk_range_results_t  *pxtalk_results,
+ 146:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	uint16_t 			           expected_target_distance_mm,
+ 147:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	uint8_t                        higher_reflectance,
+ 148:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_histogram_bin_data_t	  *pxtalk_avg_samples)
+ 149:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** {
+ 226              		.loc 1 149 1 is_stmt 1 view -0
+ 227              		.cfi_startproc
+ 228              		@ args = 4, pretend = 0, frame = 0
+ 229              		@ frame_needed = 0, uses_anonymous_args = 0
+ 230              		.loc 1 149 1 is_stmt 0 view .LVU47
+ 231 0000 08B5     		push	{r3, lr}
+ 232              		.cfi_def_cfa_offset 8
+ 233              		.cfi_offset 3, -8
+ 234              		.cfi_offset 14, -4
+ 235 0002 0846     		mov	r0, r1
+ 236              	.LVL24:
+ 237              		.loc 1 149 1 view .LVU48
+ 238 0004 1146     		mov	r1, r2
+ 239              	.LVL25:
+ 240              		.loc 1 149 1 view .LVU49
+ 241 0006 1A46     		mov	r2, r3
+ 242              	.LVL26:
+ 150:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+ 151:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+ 152:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	VL53L1_Error status         = VL53L1_ERROR_NONE;
+ 243              		.loc 1 152 2 is_stmt 1 view .LVU50
+ 153:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+ 154:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	SUPPRESS_UNUSED_WARNING(Dev);
+ 244              		.loc 1 154 2 view .LVU51
+ 155:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+ 156:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	status = VL53L1_generate_dual_reflectance_xtalk_samples(
+ 245              		.loc 1 156 2 view .LVU52
+ 246              		.loc 1 156 11 is_stmt 0 view .LVU53
+ 247 0008 029B     		ldr	r3, [sp, #8]
+ 248              	.LVL27:
+ 249              		.loc 1 156 11 view .LVU54
+ 250 000a FFF7FEFF 		bl	VL53L1_generate_dual_reflectance_xtalk_samples
+ 251              	.LVL28:
+ 157:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 			pxtalk_results,
+ARM GAS  C:\Temp\ccuo5Jtx.s 			page 8
+
+
+ 158:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 		    expected_target_distance_mm,
+ 159:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 		    higher_reflectance,
+ 160:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 		    pxtalk_avg_samples);
+ 161:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+ 162:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 	return status;
+ 252              		.loc 1 162 2 is_stmt 1 view .LVU55
+ 163:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** 
+ 164:Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c **** }
+ 253              		.loc 1 164 1 is_stmt 0 view .LVU56
+ 254 000e 08BD     		pop	{r3, pc}
+ 255              		.loc 1 164 1 view .LVU57
+ 256              		.cfi_endproc
+ 257              	.LFE7:
+ 259              		.text
+ 260              	.Letext0:
+ 261              		.file 2 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 262              		.file 3 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 263              		.file 4 "Drivers/BSP/Components/vl53l1cb/porting/vl53l1_types.h"
+ 264              		.file 5 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_codes.h"
+ 265              		.file 6 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_register_structs.h"
+ 266              		.file 7 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_ll_device.h"
+ 267              		.file 8 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax_structs.h"
+ 268              		.file 9 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_structs.h"
+ 269              		.file 10 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_ll_def.h"
+ 270              		.file 11 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_def.h"
+ 271              		.file 12 "Drivers/BSP/Components/vl53l1cb/vl53l1cb.h"
+ 272              		.file 13 "Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_user_data.h"
+ 273              		.file 14 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_xtalk.h"
+ 274              		.file 15 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_funcs.h"
+ARM GAS  C:\Temp\ccuo5Jtx.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 vl53l1_platform_ipp.c
+  C:\Temp\ccuo5Jtx.s:21     .text.VL53L1_ipp_hist_process_data:00000000 $t
+  C:\Temp\ccuo5Jtx.s:27     .text.VL53L1_ipp_hist_process_data:00000000 VL53L1_ipp_hist_process_data
+  C:\Temp\ccuo5Jtx.s:78     .text.VL53L1_ipp_hist_ambient_dmax:00000000 $t
+  C:\Temp\ccuo5Jtx.s:84     .text.VL53L1_ipp_hist_ambient_dmax:00000000 VL53L1_ipp_hist_ambient_dmax
+  C:\Temp\ccuo5Jtx.s:127    .text.VL53L1_ipp_xtalk_calibration_process_data:00000000 $t
+  C:\Temp\ccuo5Jtx.s:133    .text.VL53L1_ipp_xtalk_calibration_process_data:00000000 VL53L1_ipp_xtalk_calibration_process_data
+  C:\Temp\ccuo5Jtx.s:166    .text.VL53L1_ipp_hist_xtalk_correction:00000000 $t
+  C:\Temp\ccuo5Jtx.s:172    .text.VL53L1_ipp_hist_xtalk_correction:00000000 VL53L1_ipp_hist_xtalk_correction
+  C:\Temp\ccuo5Jtx.s:217    .text.VL53L1_ipp_generate_dual_reflectance_xtalk_samples:00000000 $t
+  C:\Temp\ccuo5Jtx.s:223    .text.VL53L1_ipp_generate_dual_reflectance_xtalk_samples:00000000 VL53L1_ipp_generate_dual_reflectance_xtalk_samples
+
+UNDEFINED SYMBOLS
+VL53L1_hist_process_data
+VL53L1_hist_ambient_dmax
+VL53L1_xtalk_calibration_process_data
+VL53L1_f_054
+VL53L1_generate_dual_reflectance_xtalk_samples

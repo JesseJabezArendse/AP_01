@@ -1,0 +1,1049 @@
+ARM GAS  C:\Temp\ccVHKVOa.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"vl53l1_api_strings.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c"
+  20              		.section	.rodata.VL53L1_get_range_status_string.str1.4,"aMS",%progbits,1
+  21              		.align	2
+  22              	.LC0:
+  23 0000 52616E67 		.ascii	"Range Valid\000"
+  23      65205661 
+  23      6C696400 
+  24              		.align	2
+  25              	.LC1:
+  26 000c 5369676D 		.ascii	"Sigma Fail\000"
+  26      61204661 
+  26      696C00
+  27 0017 00       		.align	2
+  28              	.LC2:
+  29 0018 5369676E 		.ascii	"Signal Fail\000"
+  29      616C2046 
+  29      61696C00 
+  30              		.align	2
+  31              	.LC3:
+  32 0024 4D696E20 		.ascii	"Min Range Fail\000"
+  32      52616E67 
+  32      65204661 
+  32      696C00
+  33 0033 00       		.align	2
+  34              	.LC4:
+  35 0034 50686173 		.ascii	"Phase Fail\000"
+  35      65204661 
+  35      696C00
+  36 003f 00       		.align	2
+  37              	.LC5:
+  38 0040 48617264 		.ascii	"Hardware Fail\000"
+  38      77617265 
+  38      20466169 
+  38      6C00
+  39 004e 0000     		.align	2
+  40              	.LC6:
+  41 0050 4E6F2055 		.ascii	"No Update\000"
+  41      70646174 
+  41      6500
+ARM GAS  C:\Temp\ccVHKVOa.s 			page 2
+
+
+  42              		.section	.text.VL53L1_get_range_status_string,"ax",%progbits
+  43              		.align	1
+  44              		.global	VL53L1_get_range_status_string
+  45              		.syntax unified
+  46              		.thumb
+  47              		.thumb_func
+  49              	VL53L1_get_range_status_string:
+  50              	.LVL0:
+  51              	.LFB3:
+   1:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** /**
+   2:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c ****  ******************************************************************************
+   3:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c ****  * Copyright (c) 2020, STMicroelectronics - All Rights Reserved
+   4:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c ****  *
+   5:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c ****  * This software is licensed under terms that can be found in the LICENSE file
+   6:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c ****  * in the root directory of this software component.
+   7:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c ****  * If no LICENSE file comes with this software, it is provided AS-IS.
+   8:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c ****  *
+   9:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c ****  ******************************************************************************
+  10:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c ****  */
+  11:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+  12:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+  13:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+  14:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+  15:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+  16:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+  17:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** #include "vl53l1_api_core.h"
+  18:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** #include "vl53l1_api_strings.h"
+  19:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** #include "vl53l1_error_codes.h"
+  20:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** #include "vl53l1_error_strings.h"
+  21:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+  22:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** #define LOG_FUNCTION_START(fmt, ...) \
+  23:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	_LOG_FUNCTION_START(VL53L1_TRACE_MODULE_API, fmt, ##__VA_ARGS__)
+  24:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** #define LOG_FUNCTION_END(status, ...) \
+  25:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	_LOG_FUNCTION_END(VL53L1_TRACE_MODULE_API, status, ##__VA_ARGS__)
+  26:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** #define LOG_FUNCTION_END_FMT(status, fmt, ...) \
+  27:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	_LOG_FUNCTION_END_FMT(VL53L1_TRACE_MODULE_API, status, fmt, \
+  28:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			##__VA_ARGS__)
+  29:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+  30:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+  31:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** VL53L1_Error VL53L1_get_range_status_string(
+  32:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	uint8_t   RangeStatus,
+  33:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	char    *pRangeStatusString)
+  34:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** {
+  52              		.loc 1 34 1 view -0
+  53              		.cfi_startproc
+  54              		@ args = 0, pretend = 0, frame = 0
+  55              		@ frame_needed = 0, uses_anonymous_args = 0
+  56              		.loc 1 34 1 is_stmt 0 view .LVU1
+  57 0000 08B5     		push	{r3, lr}
+  58              		.cfi_def_cfa_offset 8
+  59              		.cfi_offset 3, -8
+  60              		.cfi_offset 14, -4
+  61 0002 0B46     		mov	r3, r1
+  35:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	VL53L1_Error status = VL53L1_ERROR_NONE;
+  62              		.loc 1 35 2 is_stmt 1 view .LVU2
+  63              	.LVL1:
+  36:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+ARM GAS  C:\Temp\ccVHKVOa.s 			page 3
+
+
+  37:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	LOG_FUNCTION_START("");
+  64              		.loc 1 37 24 view .LVU3
+  38:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+  39:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** #ifdef VL53L1_USE_EMPTY_STRING
+  40:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	SUPPRESS_UNUSED_WARNING(RangeStatus);
+  41:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	VL53L1_COPYSTRING(pRangeStatusString, "");
+  42:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** #else
+  43:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	switch (RangeStatus) {
+  65              		.loc 1 43 2 view .LVU4
+  66 0004 0528     		cmp	r0, #5
+  67 0006 2FD8     		bhi	.L2
+  68 0008 DFE800F0 		tbb	[pc, r0]
+  69              	.L4:
+  70 000c 03       		.byte	(.L9-.L4)/2
+  71 000d 0B       		.byte	(.L8-.L4)/2
+  72 000e 12       		.byte	(.L7-.L4)/2
+  73 000f 19       		.byte	(.L6-.L4)/2
+  74 0010 20       		.byte	(.L5-.L4)/2
+  75 0011 27       		.byte	(.L3-.L4)/2
+  76              		.p2align 1
+  77              	.L9:
+  44:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case 0:
+  45:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_COPYSTRING(pRangeStatusString,
+  78              		.loc 1 45 3 view .LVU5
+  79 0012 40F2FF12 		movw	r2, #511
+  80 0016 1849     		ldr	r1, .L12
+  81              	.LVL2:
+  82              		.loc 1 45 3 is_stmt 0 view .LVU6
+  83 0018 1846     		mov	r0, r3
+  84              	.LVL3:
+  85              		.loc 1 45 3 view .LVU7
+  86 001a FFF7FEFF 		bl	strncpy
+  87              	.LVL4:
+  46:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_RANGESTATUS_RANGEVALID);
+  47:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	break;
+  88              		.loc 1 47 2 is_stmt 1 view .LVU8
+  89              	.L10:
+  48:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case 1:
+  49:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_COPYSTRING(pRangeStatusString,
+  50:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_RANGESTATUS_SIGMA);
+  51:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	break;
+  52:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case 2:
+  53:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_COPYSTRING(pRangeStatusString,
+  54:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_RANGESTATUS_SIGNAL);
+  55:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	break;
+  56:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case 3:
+  57:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_COPYSTRING(pRangeStatusString,
+  58:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_RANGESTATUS_MINRANGE);
+  59:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	break;
+  60:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case 4:
+  61:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_COPYSTRING(pRangeStatusString,
+  62:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_RANGESTATUS_PHASE);
+  63:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	break;
+  64:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case 5:
+  65:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_COPYSTRING(pRangeStatusString,
+  66:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_RANGESTATUS_HW);
+  67:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	break;
+ARM GAS  C:\Temp\ccVHKVOa.s 			page 4
+
+
+  68:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+  69:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	default:
+  70:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_COPYSTRING(pRangeStatusString,
+  71:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_RANGESTATUS_NONE);
+  72:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	}
+  73:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** #endif
+  74:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+  75:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	LOG_FUNCTION_END(status);
+  90              		.loc 1 75 26 view .LVU9
+  76:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	return status;
+  91              		.loc 1 76 2 view .LVU10
+  77:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** }
+  92              		.loc 1 77 1 is_stmt 0 view .LVU11
+  93 001e 0020     		movs	r0, #0
+  94 0020 08BD     		pop	{r3, pc}
+  95              	.LVL5:
+  96              	.L8:
+  49:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_RANGESTATUS_SIGMA);
+  97              		.loc 1 49 3 is_stmt 1 view .LVU12
+  98 0022 40F2FF12 		movw	r2, #511
+  99 0026 1549     		ldr	r1, .L12+4
+ 100              	.LVL6:
+  49:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_RANGESTATUS_SIGMA);
+ 101              		.loc 1 49 3 is_stmt 0 view .LVU13
+ 102 0028 1846     		mov	r0, r3
+ 103              	.LVL7:
+  49:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_RANGESTATUS_SIGMA);
+ 104              		.loc 1 49 3 view .LVU14
+ 105 002a FFF7FEFF 		bl	strncpy
+ 106              	.LVL8:
+  51:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case 2:
+ 107              		.loc 1 51 2 is_stmt 1 view .LVU15
+ 108 002e F6E7     		b	.L10
+ 109              	.LVL9:
+ 110              	.L7:
+  53:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_RANGESTATUS_SIGNAL);
+ 111              		.loc 1 53 3 view .LVU16
+ 112 0030 40F2FF12 		movw	r2, #511
+ 113 0034 1249     		ldr	r1, .L12+8
+ 114              	.LVL10:
+  53:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_RANGESTATUS_SIGNAL);
+ 115              		.loc 1 53 3 is_stmt 0 view .LVU17
+ 116 0036 1846     		mov	r0, r3
+ 117              	.LVL11:
+  53:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_RANGESTATUS_SIGNAL);
+ 118              		.loc 1 53 3 view .LVU18
+ 119 0038 FFF7FEFF 		bl	strncpy
+ 120              	.LVL12:
+  55:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case 3:
+ 121              		.loc 1 55 2 is_stmt 1 view .LVU19
+ 122 003c EFE7     		b	.L10
+ 123              	.LVL13:
+ 124              	.L6:
+  57:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_RANGESTATUS_MINRANGE);
+ 125              		.loc 1 57 3 view .LVU20
+ 126 003e 40F2FF12 		movw	r2, #511
+ 127 0042 1049     		ldr	r1, .L12+12
+ARM GAS  C:\Temp\ccVHKVOa.s 			page 5
+
+
+ 128              	.LVL14:
+  57:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_RANGESTATUS_MINRANGE);
+ 129              		.loc 1 57 3 is_stmt 0 view .LVU21
+ 130 0044 1846     		mov	r0, r3
+ 131              	.LVL15:
+  57:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_RANGESTATUS_MINRANGE);
+ 132              		.loc 1 57 3 view .LVU22
+ 133 0046 FFF7FEFF 		bl	strncpy
+ 134              	.LVL16:
+  59:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case 4:
+ 135              		.loc 1 59 2 is_stmt 1 view .LVU23
+ 136 004a E8E7     		b	.L10
+ 137              	.LVL17:
+ 138              	.L5:
+  61:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_RANGESTATUS_PHASE);
+ 139              		.loc 1 61 3 view .LVU24
+ 140 004c 40F2FF12 		movw	r2, #511
+ 141 0050 0D49     		ldr	r1, .L12+16
+ 142              	.LVL18:
+  61:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_RANGESTATUS_PHASE);
+ 143              		.loc 1 61 3 is_stmt 0 view .LVU25
+ 144 0052 1846     		mov	r0, r3
+ 145              	.LVL19:
+  61:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_RANGESTATUS_PHASE);
+ 146              		.loc 1 61 3 view .LVU26
+ 147 0054 FFF7FEFF 		bl	strncpy
+ 148              	.LVL20:
+  63:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case 5:
+ 149              		.loc 1 63 2 is_stmt 1 view .LVU27
+ 150 0058 E1E7     		b	.L10
+ 151              	.LVL21:
+ 152              	.L3:
+  65:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_RANGESTATUS_HW);
+ 153              		.loc 1 65 3 view .LVU28
+ 154 005a 40F2FF12 		movw	r2, #511
+ 155 005e 0B49     		ldr	r1, .L12+20
+ 156              	.LVL22:
+  65:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_RANGESTATUS_HW);
+ 157              		.loc 1 65 3 is_stmt 0 view .LVU29
+ 158 0060 1846     		mov	r0, r3
+ 159              	.LVL23:
+  65:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_RANGESTATUS_HW);
+ 160              		.loc 1 65 3 view .LVU30
+ 161 0062 FFF7FEFF 		bl	strncpy
+ 162              	.LVL24:
+  67:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+ 163              		.loc 1 67 2 is_stmt 1 view .LVU31
+ 164 0066 DAE7     		b	.L10
+ 165              	.LVL25:
+ 166              	.L2:
+  70:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_RANGESTATUS_NONE);
+ 167              		.loc 1 70 3 view .LVU32
+ 168 0068 40F2FF12 		movw	r2, #511
+ 169 006c 0849     		ldr	r1, .L12+24
+ 170              	.LVL26:
+  70:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_RANGESTATUS_NONE);
+ 171              		.loc 1 70 3 is_stmt 0 view .LVU33
+ARM GAS  C:\Temp\ccVHKVOa.s 			page 6
+
+
+ 172 006e 1846     		mov	r0, r3
+ 173              	.LVL27:
+  70:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_RANGESTATUS_NONE);
+ 174              		.loc 1 70 3 view .LVU34
+ 175 0070 FFF7FEFF 		bl	strncpy
+ 176              	.LVL28:
+  70:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_RANGESTATUS_NONE);
+ 177              		.loc 1 70 3 view .LVU35
+ 178 0074 D3E7     		b	.L10
+ 179              	.L13:
+ 180 0076 00BF     		.align	2
+ 181              	.L12:
+ 182 0078 00000000 		.word	.LC0
+ 183 007c 0C000000 		.word	.LC1
+ 184 0080 18000000 		.word	.LC2
+ 185 0084 24000000 		.word	.LC3
+ 186 0088 34000000 		.word	.LC4
+ 187 008c 40000000 		.word	.LC5
+ 188 0090 50000000 		.word	.LC6
+ 189              		.cfi_endproc
+ 190              	.LFE3:
+ 192              		.section	.rodata.VL53L1_get_pal_state_string.str1.4,"aMS",%progbits,1
+ 193              		.align	2
+ 194              	.LC7:
+ 195 0000 504F5745 		.ascii	"POWERDOWN State\000"
+ 195      52444F57 
+ 195      4E205374 
+ 195      61746500 
+ 196              		.align	2
+ 197              	.LC8:
+ 198 0010 57616974 		.ascii	"Wait for staticinit State\000"
+ 198      20666F72 
+ 198      20737461 
+ 198      74696369 
+ 198      6E697420 
+ 199 002a 0000     		.align	2
+ 200              	.LC9:
+ 201 002c 5354414E 		.ascii	"STANDBY State\000"
+ 201      44425920 
+ 201      53746174 
+ 201      6500
+ 202 003a 0000     		.align	2
+ 203              	.LC10:
+ 204 003c 49444C45 		.ascii	"IDLE State\000"
+ 204      20537461 
+ 204      746500
+ 205 0047 00       		.align	2
+ 206              	.LC11:
+ 207 0048 52554E4E 		.ascii	"RUNNING State\000"
+ 207      494E4720 
+ 207      53746174 
+ 207      6500
+ 208 0056 0000     		.align	2
+ 209              	.LC12:
+ 210 0058 52455345 		.ascii	"RESET State\000"
+ 210      54205374 
+ 210      61746500 
+ARM GAS  C:\Temp\ccVHKVOa.s 			page 7
+
+
+ 211              		.align	2
+ 212              	.LC13:
+ 213 0064 554E4B4E 		.ascii	"UNKNOWN State\000"
+ 213      4F574E20 
+ 213      53746174 
+ 213      6500
+ 214 0072 0000     		.align	2
+ 215              	.LC14:
+ 216 0074 4552524F 		.ascii	"ERROR State\000"
+ 216      52205374 
+ 216      61746500 
+ 217              		.section	.text.VL53L1_get_pal_state_string,"ax",%progbits
+ 218              		.align	1
+ 219              		.global	VL53L1_get_pal_state_string
+ 220              		.syntax unified
+ 221              		.thumb
+ 222              		.thumb_func
+ 224              	VL53L1_get_pal_state_string:
+ 225              	.LVL29:
+ 226              	.LFB4:
+  78:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+  79:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+  80:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** VL53L1_Error VL53L1_get_pal_state_string(
+  81:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	VL53L1_State PalStateCode,
+  82:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	char *pPalStateString)
+  83:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** {
+ 227              		.loc 1 83 1 is_stmt 1 view -0
+ 228              		.cfi_startproc
+ 229              		@ args = 0, pretend = 0, frame = 0
+ 230              		@ frame_needed = 0, uses_anonymous_args = 0
+ 231              		.loc 1 83 1 is_stmt 0 view .LVU37
+ 232 0000 08B5     		push	{r3, lr}
+ 233              		.cfi_def_cfa_offset 8
+ 234              		.cfi_offset 3, -8
+ 235              		.cfi_offset 14, -4
+ 236 0002 0346     		mov	r3, r0
+ 237 0004 0846     		mov	r0, r1
+ 238              	.LVL30:
+  84:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	VL53L1_Error status = VL53L1_ERROR_NONE;
+ 239              		.loc 1 84 2 is_stmt 1 view .LVU38
+  85:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+  86:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	LOG_FUNCTION_START("");
+ 240              		.loc 1 86 24 view .LVU39
+  87:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+  88:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** #ifdef VL53L1_USE_EMPTY_STRING
+  89:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	SUPPRESS_UNUSED_WARNING(PalStateCode);
+  90:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	VL53L1_COPYSTRING(pPalStateString, "");
+  91:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** #else
+  92:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	switch (PalStateCode) {
+ 241              		.loc 1 92 2 view .LVU40
+ 242 0006 052B     		cmp	r3, #5
+ 243 0008 06D8     		bhi	.L15
+ 244 000a 052B     		cmp	r3, #5
+ 245 000c 39D8     		bhi	.L16
+ 246 000e DFE803F0 		tbb	[pc, r3]
+ 247              	.L18:
+ 248 0012 0D       		.byte	(.L23-.L18)/2
+ARM GAS  C:\Temp\ccVHKVOa.s 			page 8
+
+
+ 249 0013 14       		.byte	(.L22-.L18)/2
+ 250 0014 1A       		.byte	(.L21-.L18)/2
+ 251 0015 20       		.byte	(.L20-.L18)/2
+ 252 0016 26       		.byte	(.L19-.L18)/2
+ 253 0017 2C       		.byte	(.L17-.L18)/2
+ 254              		.p2align 1
+ 255              	.L15:
+ 256 0018 622B     		cmp	r3, #98
+ 257 001a 2CD0     		beq	.L24
+ 258 001c 632B     		cmp	r3, #99
+ 259 001e 30D1     		bne	.L16
+  93:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_STATE_POWERDOWN:
+  94:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_COPYSTRING(pPalStateString,
+  95:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_STATE_POWERDOWN);
+  96:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	break;
+  97:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_STATE_WAIT_STATICINIT:
+  98:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_COPYSTRING(pPalStateString,
+  99:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_STATE_WAIT_STATICINIT);
+ 100:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	break;
+ 101:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_STATE_STANDBY:
+ 102:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_COPYSTRING(pPalStateString,
+ 103:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_STATE_STANDBY);
+ 104:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	break;
+ 105:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_STATE_IDLE:
+ 106:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_COPYSTRING(pPalStateString,
+ 107:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_STATE_IDLE);
+ 108:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	break;
+ 109:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_STATE_RUNNING:
+ 110:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_COPYSTRING(pPalStateString,
+ 111:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_STATE_RUNNING);
+ 112:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	break;
+ 113:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_STATE_RESET:
+ 114:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_COPYSTRING(pPalStateString,
+ 115:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_STATE_RESET);
+ 116:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	break;
+ 117:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_STATE_UNKNOWN:
+ 118:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_COPYSTRING(pPalStateString,
+ 119:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_STATE_UNKNOWN);
+ 120:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	break;
+ 121:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_STATE_ERROR:
+ 122:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_COPYSTRING(pPalStateString,
+ 260              		.loc 1 122 3 view .LVU41
+ 261 0020 40F2FF12 		movw	r2, #511
+ 262 0024 1A49     		ldr	r1, .L29
+ 263              	.LVL31:
+ 264              		.loc 1 122 3 is_stmt 0 view .LVU42
+ 265 0026 FFF7FEFF 		bl	strncpy
+ 266              	.LVL32:
+ 123:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_STATE_ERROR);
+ 124:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	break;
+ 267              		.loc 1 124 2 is_stmt 1 view .LVU43
+ 268 002a 04E0     		b	.L26
+ 269              	.LVL33:
+ 270              	.L23:
+  94:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_STATE_POWERDOWN);
+ 271              		.loc 1 94 3 view .LVU44
+ 272 002c 40F2FF12 		movw	r2, #511
+ARM GAS  C:\Temp\ccVHKVOa.s 			page 9
+
+
+ 273 0030 1849     		ldr	r1, .L29+4
+ 274 0032 FFF7FEFF 		bl	strncpy
+ 275              	.LVL34:
+  96:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_STATE_WAIT_STATICINIT:
+ 276              		.loc 1 96 2 view .LVU45
+ 277              	.L26:
+ 125:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+ 126:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	default:
+ 127:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_COPYSTRING(pPalStateString,
+ 128:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_STATE_UNKNOWN);
+ 129:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	}
+ 130:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** #endif
+ 131:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+ 132:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	LOG_FUNCTION_END(status);
+ 278              		.loc 1 132 26 view .LVU46
+ 133:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	return status;
+ 279              		.loc 1 133 2 view .LVU47
+ 134:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** }
+ 280              		.loc 1 134 1 is_stmt 0 view .LVU48
+ 281 0036 0020     		movs	r0, #0
+ 282 0038 08BD     		pop	{r3, pc}
+ 283              	.LVL35:
+ 284              	.L22:
+  98:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_STATE_WAIT_STATICINIT);
+ 285              		.loc 1 98 3 is_stmt 1 view .LVU49
+ 286 003a 40F2FF12 		movw	r2, #511
+ 287 003e 1649     		ldr	r1, .L29+8
+ 288 0040 FFF7FEFF 		bl	strncpy
+ 289              	.LVL36:
+ 100:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_STATE_STANDBY:
+ 290              		.loc 1 100 2 view .LVU50
+ 291 0044 F7E7     		b	.L26
+ 292              	.LVL37:
+ 293              	.L21:
+ 102:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_STATE_STANDBY);
+ 294              		.loc 1 102 3 view .LVU51
+ 295 0046 40F2FF12 		movw	r2, #511
+ 296 004a 1449     		ldr	r1, .L29+12
+ 297 004c FFF7FEFF 		bl	strncpy
+ 298              	.LVL38:
+ 104:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_STATE_IDLE:
+ 299              		.loc 1 104 2 view .LVU52
+ 300 0050 F1E7     		b	.L26
+ 301              	.LVL39:
+ 302              	.L20:
+ 106:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_STATE_IDLE);
+ 303              		.loc 1 106 3 view .LVU53
+ 304 0052 40F2FF12 		movw	r2, #511
+ 305 0056 1249     		ldr	r1, .L29+16
+ 306 0058 FFF7FEFF 		bl	strncpy
+ 307              	.LVL40:
+ 108:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_STATE_RUNNING:
+ 308              		.loc 1 108 2 view .LVU54
+ 309 005c EBE7     		b	.L26
+ 310              	.LVL41:
+ 311              	.L19:
+ 110:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_STATE_RUNNING);
+ARM GAS  C:\Temp\ccVHKVOa.s 			page 10
+
+
+ 312              		.loc 1 110 3 view .LVU55
+ 313 005e 40F2FF12 		movw	r2, #511
+ 314 0062 1049     		ldr	r1, .L29+20
+ 315 0064 FFF7FEFF 		bl	strncpy
+ 316              	.LVL42:
+ 112:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_STATE_RESET:
+ 317              		.loc 1 112 2 view .LVU56
+ 318 0068 E5E7     		b	.L26
+ 319              	.LVL43:
+ 320              	.L17:
+ 114:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_STATE_RESET);
+ 321              		.loc 1 114 3 view .LVU57
+ 322 006a 40F2FF12 		movw	r2, #511
+ 323 006e 0E49     		ldr	r1, .L29+24
+ 324 0070 FFF7FEFF 		bl	strncpy
+ 325              	.LVL44:
+ 116:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_STATE_UNKNOWN:
+ 326              		.loc 1 116 2 view .LVU58
+ 327 0074 DFE7     		b	.L26
+ 328              	.LVL45:
+ 329              	.L24:
+ 118:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_STATE_UNKNOWN);
+ 330              		.loc 1 118 3 view .LVU59
+ 331 0076 40F2FF12 		movw	r2, #511
+ 332 007a 0C49     		ldr	r1, .L29+28
+ 333 007c FFF7FEFF 		bl	strncpy
+ 334              	.LVL46:
+ 120:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_STATE_ERROR:
+ 335              		.loc 1 120 2 view .LVU60
+ 336 0080 D9E7     		b	.L26
+ 337              	.LVL47:
+ 338              	.L16:
+ 127:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_STATE_UNKNOWN);
+ 339              		.loc 1 127 3 view .LVU61
+ 340 0082 40F2FF12 		movw	r2, #511
+ 341 0086 0949     		ldr	r1, .L29+28
+ 342 0088 FFF7FEFF 		bl	strncpy
+ 343              	.LVL48:
+ 127:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_STATE_UNKNOWN);
+ 344              		.loc 1 127 3 is_stmt 0 view .LVU62
+ 345 008c D3E7     		b	.L26
+ 346              	.L30:
+ 347 008e 00BF     		.align	2
+ 348              	.L29:
+ 349 0090 74000000 		.word	.LC14
+ 350 0094 00000000 		.word	.LC7
+ 351 0098 10000000 		.word	.LC8
+ 352 009c 2C000000 		.word	.LC9
+ 353 00a0 3C000000 		.word	.LC10
+ 354 00a4 48000000 		.word	.LC11
+ 355 00a8 58000000 		.word	.LC12
+ 356 00ac 64000000 		.word	.LC13
+ 357              		.cfi_endproc
+ 358              	.LFE4:
+ 360              		.section	.rodata.VL53L1_get_sequence_steps_info.str1.4,"aMS",%progbits,1
+ 361              		.align	2
+ 362              	.LC15:
+ARM GAS  C:\Temp\ccVHKVOa.s 			page 11
+
+
+ 363 0000 56485600 		.ascii	"VHV\000"
+ 364              		.align	2
+ 365              	.LC16:
+ 366 0004 50484153 		.ascii	"PHASE CAL\000"
+ 366      45204341 
+ 366      4C00
+ 367 000e 0000     		.align	2
+ 368              	.LC17:
+ 369 0010 44535331 		.ascii	"DSS1\000"
+ 369      00
+ 370 0015 000000   		.align	2
+ 371              	.LC18:
+ 372 0018 44535332 		.ascii	"DSS2\000"
+ 372      00
+ 373 001d 000000   		.align	2
+ 374              	.LC19:
+ 375 0020 4D4D3100 		.ascii	"MM1\000"
+ 376              		.align	2
+ 377              	.LC20:
+ 378 0024 4D4D3200 		.ascii	"MM2\000"
+ 379              		.align	2
+ 380              	.LC21:
+ 381 0028 52414E47 		.ascii	"RANGE\000"
+ 381      4500
+ 382              		.section	.text.VL53L1_get_sequence_steps_info,"ax",%progbits
+ 383              		.align	1
+ 384              		.global	VL53L1_get_sequence_steps_info
+ 385              		.syntax unified
+ 386              		.thumb
+ 387              		.thumb_func
+ 389              	VL53L1_get_sequence_steps_info:
+ 390              	.LVL49:
+ 391              	.LFB5:
+ 135:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+ 136:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** VL53L1_Error VL53L1_get_sequence_steps_info(
+ 137:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_SequenceStepId SequenceStepId,
+ 138:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		char *pSequenceStepsString)
+ 139:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** {
+ 392              		.loc 1 139 1 is_stmt 1 view -0
+ 393              		.cfi_startproc
+ 394              		@ args = 0, pretend = 0, frame = 0
+ 395              		@ frame_needed = 0, uses_anonymous_args = 0
+ 396              		.loc 1 139 1 is_stmt 0 view .LVU64
+ 397 0000 08B5     		push	{r3, lr}
+ 398              		.cfi_def_cfa_offset 8
+ 399              		.cfi_offset 3, -8
+ 400              		.cfi_offset 14, -4
+ 401 0002 0346     		mov	r3, r0
+ 402 0004 0846     		mov	r0, r1
+ 403              	.LVL50:
+ 140:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	VL53L1_Error Status = VL53L1_ERROR_NONE;
+ 404              		.loc 1 140 2 is_stmt 1 view .LVU65
+ 141:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+ 142:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	LOG_FUNCTION_START("");
+ 405              		.loc 1 142 24 view .LVU66
+ 143:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+ 144:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** #ifdef VL53L1_USE_EMPTY_STRING
+ARM GAS  C:\Temp\ccVHKVOa.s 			page 12
+
+
+ 145:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	SUPPRESS_UNUSED_WARNING(SequenceStepId);
+ 146:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	VL53L1_COPYSTRING(pSequenceStepsString, "");
+ 147:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** #else
+ 148:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	switch (SequenceStepId) {
+ 406              		.loc 1 148 2 view .LVU67
+ 407 0006 072B     		cmp	r3, #7
+ 408 0008 3DD8     		bhi	.L42
+ 409 000a DFE803F0 		tbb	[pc, r3]
+ 410              	.L34:
+ 411 000e 04       		.byte	(.L41-.L34)/2
+ 412 000f 0B       		.byte	(.L40-.L34)/2
+ 413 0010 12       		.byte	(.L39-.L34)/2
+ 414 0011 19       		.byte	(.L38-.L34)/2
+ 415 0012 20       		.byte	(.L37-.L34)/2
+ 416 0013 27       		.byte	(.L36-.L34)/2
+ 417 0014 2E       		.byte	(.L35-.L34)/2
+ 418 0015 35       		.byte	(.L33-.L34)/2
+ 419              		.p2align 1
+ 420              	.L41:
+ 149:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_SEQUENCESTEP_VHV:
+ 150:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_COPYSTRING(pSequenceStepsString,
+ 421              		.loc 1 150 3 view .LVU68
+ 422 0016 40F2FF12 		movw	r2, #511
+ 423 001a 1C49     		ldr	r1, .L44
+ 424              	.LVL51:
+ 425              		.loc 1 150 3 is_stmt 0 view .LVU69
+ 426 001c FFF7FEFF 		bl	strncpy
+ 427              	.LVL52:
+ 151:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 				VL53L1_STRING_SEQUENCESTEP_VHV);
+ 152:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	break;
+ 428              		.loc 1 152 2 is_stmt 1 view .LVU70
+ 140:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+ 429              		.loc 1 140 15 is_stmt 0 view .LVU71
+ 430 0020 0020     		movs	r0, #0
+ 431              	.L32:
+ 432              	.LVL53:
+ 153:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_SEQUENCESTEP_PHASECAL:
+ 154:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_COPYSTRING(pSequenceStepsString,
+ 155:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 				VL53L1_STRING_SEQUENCESTEP_PHASECAL);
+ 156:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	break;
+ 157:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_SEQUENCESTEP_REFPHASE:
+ 158:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_COPYSTRING(pSequenceStepsString,
+ 159:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 				VL53L1_STRING_SEQUENCESTEP_DSS1);
+ 160:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	break;
+ 161:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_SEQUENCESTEP_DSS1:
+ 162:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_COPYSTRING(pSequenceStepsString,
+ 163:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 				VL53L1_STRING_SEQUENCESTEP_DSS1);
+ 164:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	break;
+ 165:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_SEQUENCESTEP_DSS2:
+ 166:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_COPYSTRING(pSequenceStepsString,
+ 167:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 				VL53L1_STRING_SEQUENCESTEP_DSS2);
+ 168:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	break;
+ 169:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_SEQUENCESTEP_MM1:
+ 170:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_COPYSTRING(pSequenceStepsString,
+ 171:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 				VL53L1_STRING_SEQUENCESTEP_MM1);
+ 172:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	break;
+ 173:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_SEQUENCESTEP_MM2:
+ARM GAS  C:\Temp\ccVHKVOa.s 			page 13
+
+
+ 174:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_COPYSTRING(pSequenceStepsString,
+ 175:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 				VL53L1_STRING_SEQUENCESTEP_MM2);
+ 176:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	break;
+ 177:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_SEQUENCESTEP_RANGE:
+ 178:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_COPYSTRING(pSequenceStepsString,
+ 179:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 				VL53L1_STRING_SEQUENCESTEP_RANGE);
+ 180:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	break;
+ 181:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	default:
+ 182:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		Status = VL53L1_ERROR_INVALID_PARAMS;
+ 183:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	}
+ 184:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** #endif
+ 185:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+ 186:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	LOG_FUNCTION_END(Status);
+ 433              		.loc 1 186 26 is_stmt 1 view .LVU72
+ 187:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+ 188:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	return Status;
+ 434              		.loc 1 188 2 view .LVU73
+ 189:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** }
+ 435              		.loc 1 189 1 is_stmt 0 view .LVU74
+ 436 0022 08BD     		pop	{r3, pc}
+ 437              	.LVL54:
+ 438              	.L40:
+ 154:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 				VL53L1_STRING_SEQUENCESTEP_PHASECAL);
+ 439              		.loc 1 154 3 is_stmt 1 view .LVU75
+ 440 0024 40F2FF12 		movw	r2, #511
+ 441 0028 1949     		ldr	r1, .L44+4
+ 442 002a FFF7FEFF 		bl	strncpy
+ 443              	.LVL55:
+ 156:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_SEQUENCESTEP_REFPHASE:
+ 444              		.loc 1 156 2 view .LVU76
+ 140:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+ 445              		.loc 1 140 15 is_stmt 0 view .LVU77
+ 446 002e 0020     		movs	r0, #0
+ 156:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_SEQUENCESTEP_REFPHASE:
+ 447              		.loc 1 156 2 view .LVU78
+ 448 0030 F7E7     		b	.L32
+ 449              	.LVL56:
+ 450              	.L39:
+ 158:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 				VL53L1_STRING_SEQUENCESTEP_DSS1);
+ 451              		.loc 1 158 3 is_stmt 1 view .LVU79
+ 452 0032 40F2FF12 		movw	r2, #511
+ 453 0036 1749     		ldr	r1, .L44+8
+ 454 0038 FFF7FEFF 		bl	strncpy
+ 455              	.LVL57:
+ 160:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_SEQUENCESTEP_DSS1:
+ 456              		.loc 1 160 2 view .LVU80
+ 140:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+ 457              		.loc 1 140 15 is_stmt 0 view .LVU81
+ 458 003c 0020     		movs	r0, #0
+ 160:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_SEQUENCESTEP_DSS1:
+ 459              		.loc 1 160 2 view .LVU82
+ 460 003e F0E7     		b	.L32
+ 461              	.LVL58:
+ 462              	.L38:
+ 162:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 				VL53L1_STRING_SEQUENCESTEP_DSS1);
+ 463              		.loc 1 162 3 is_stmt 1 view .LVU83
+ 464 0040 40F2FF12 		movw	r2, #511
+ARM GAS  C:\Temp\ccVHKVOa.s 			page 14
+
+
+ 465 0044 1349     		ldr	r1, .L44+8
+ 466 0046 FFF7FEFF 		bl	strncpy
+ 467              	.LVL59:
+ 164:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_SEQUENCESTEP_DSS2:
+ 468              		.loc 1 164 2 view .LVU84
+ 140:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+ 469              		.loc 1 140 15 is_stmt 0 view .LVU85
+ 470 004a 0020     		movs	r0, #0
+ 164:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_SEQUENCESTEP_DSS2:
+ 471              		.loc 1 164 2 view .LVU86
+ 472 004c E9E7     		b	.L32
+ 473              	.LVL60:
+ 474              	.L37:
+ 166:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 				VL53L1_STRING_SEQUENCESTEP_DSS2);
+ 475              		.loc 1 166 3 is_stmt 1 view .LVU87
+ 476 004e 40F2FF12 		movw	r2, #511
+ 477 0052 1149     		ldr	r1, .L44+12
+ 478 0054 FFF7FEFF 		bl	strncpy
+ 479              	.LVL61:
+ 168:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_SEQUENCESTEP_MM1:
+ 480              		.loc 1 168 2 view .LVU88
+ 140:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+ 481              		.loc 1 140 15 is_stmt 0 view .LVU89
+ 482 0058 0020     		movs	r0, #0
+ 168:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_SEQUENCESTEP_MM1:
+ 483              		.loc 1 168 2 view .LVU90
+ 484 005a E2E7     		b	.L32
+ 485              	.LVL62:
+ 486              	.L36:
+ 170:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 				VL53L1_STRING_SEQUENCESTEP_MM1);
+ 487              		.loc 1 170 3 is_stmt 1 view .LVU91
+ 488 005c 40F2FF12 		movw	r2, #511
+ 489 0060 0E49     		ldr	r1, .L44+16
+ 490 0062 FFF7FEFF 		bl	strncpy
+ 491              	.LVL63:
+ 172:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_SEQUENCESTEP_MM2:
+ 492              		.loc 1 172 2 view .LVU92
+ 140:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+ 493              		.loc 1 140 15 is_stmt 0 view .LVU93
+ 494 0066 0020     		movs	r0, #0
+ 172:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_SEQUENCESTEP_MM2:
+ 495              		.loc 1 172 2 view .LVU94
+ 496 0068 DBE7     		b	.L32
+ 497              	.LVL64:
+ 498              	.L35:
+ 174:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 				VL53L1_STRING_SEQUENCESTEP_MM2);
+ 499              		.loc 1 174 3 is_stmt 1 view .LVU95
+ 500 006a 40F2FF12 		movw	r2, #511
+ 501 006e 0C49     		ldr	r1, .L44+20
+ 502 0070 FFF7FEFF 		bl	strncpy
+ 503              	.LVL65:
+ 176:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_SEQUENCESTEP_RANGE:
+ 504              		.loc 1 176 2 view .LVU96
+ 140:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+ 505              		.loc 1 140 15 is_stmt 0 view .LVU97
+ 506 0074 0020     		movs	r0, #0
+ 176:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_SEQUENCESTEP_RANGE:
+ARM GAS  C:\Temp\ccVHKVOa.s 			page 15
+
+
+ 507              		.loc 1 176 2 view .LVU98
+ 508 0076 D4E7     		b	.L32
+ 509              	.LVL66:
+ 510              	.L33:
+ 178:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 				VL53L1_STRING_SEQUENCESTEP_RANGE);
+ 511              		.loc 1 178 3 is_stmt 1 view .LVU99
+ 512 0078 40F2FF12 		movw	r2, #511
+ 513 007c 0949     		ldr	r1, .L44+24
+ 514 007e FFF7FEFF 		bl	strncpy
+ 515              	.LVL67:
+ 180:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	default:
+ 516              		.loc 1 180 2 view .LVU100
+ 140:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+ 517              		.loc 1 140 15 is_stmt 0 view .LVU101
+ 518 0082 0020     		movs	r0, #0
+ 180:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	default:
+ 519              		.loc 1 180 2 view .LVU102
+ 520 0084 CDE7     		b	.L32
+ 521              	.LVL68:
+ 522              	.L42:
+ 148:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_SEQUENCESTEP_VHV:
+ 523              		.loc 1 148 2 view .LVU103
+ 524 0086 6FF00300 		mvn	r0, #3
+ 525              	.LVL69:
+ 148:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_SEQUENCESTEP_VHV:
+ 526              		.loc 1 148 2 view .LVU104
+ 527 008a CAE7     		b	.L32
+ 528              	.L45:
+ 529              		.align	2
+ 530              	.L44:
+ 531 008c 00000000 		.word	.LC15
+ 532 0090 04000000 		.word	.LC16
+ 533 0094 10000000 		.word	.LC17
+ 534 0098 18000000 		.word	.LC18
+ 535 009c 20000000 		.word	.LC19
+ 536 00a0 24000000 		.word	.LC20
+ 537 00a4 28000000 		.word	.LC21
+ 538              		.cfi_endproc
+ 539              	.LFE5:
+ 541              		.section	.rodata.VL53L1_get_limit_check_info.str1.4,"aMS",%progbits,1
+ 542              		.align	2
+ 543              	.LC22:
+ 544 0000 5349474D 		.ascii	"SIGMA FINAL RANGE\000"
+ 544      41204649 
+ 544      4E414C20 
+ 544      52414E47 
+ 544      4500
+ 545 0012 0000     		.align	2
+ 546              	.LC23:
+ 547 0014 5349474E 		.ascii	"SIGNAL RATE FINAL RANGE\000"
+ 547      414C2052 
+ 547      41544520 
+ 547      46494E41 
+ 547      4C205241 
+ 548              		.align	2
+ 549              	.LC24:
+ 550 002c 556E6B6E 		.ascii	"Unknown Error Code\000"
+ARM GAS  C:\Temp\ccVHKVOa.s 			page 16
+
+
+ 550      6F776E20 
+ 550      4572726F 
+ 550      7220436F 
+ 550      646500
+ 551              		.section	.text.VL53L1_get_limit_check_info,"ax",%progbits
+ 552              		.align	1
+ 553              		.global	VL53L1_get_limit_check_info
+ 554              		.syntax unified
+ 555              		.thumb
+ 556              		.thumb_func
+ 558              	VL53L1_get_limit_check_info:
+ 559              	.LVL70:
+ 560              	.LFB6:
+ 190:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+ 191:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** VL53L1_Error VL53L1_get_limit_check_info(uint16_t LimitCheckId,
+ 192:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	char *pLimitCheckString)
+ 193:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** {
+ 561              		.loc 1 193 1 is_stmt 1 view -0
+ 562              		.cfi_startproc
+ 563              		@ args = 0, pretend = 0, frame = 0
+ 564              		@ frame_needed = 0, uses_anonymous_args = 0
+ 565              		.loc 1 193 1 is_stmt 0 view .LVU106
+ 566 0000 08B5     		push	{r3, lr}
+ 567              		.cfi_def_cfa_offset 8
+ 568              		.cfi_offset 3, -8
+ 569              		.cfi_offset 14, -4
+ 570 0002 0346     		mov	r3, r0
+ 571 0004 0846     		mov	r0, r1
+ 572              	.LVL71:
+ 194:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	VL53L1_Error Status = VL53L1_ERROR_NONE;
+ 573              		.loc 1 194 2 is_stmt 1 view .LVU107
+ 195:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+ 196:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	LOG_FUNCTION_START("");
+ 574              		.loc 1 196 24 view .LVU108
+ 197:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+ 198:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** #ifdef VL53L1_USE_EMPTY_STRING
+ 199:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	SUPPRESS_UNUSED_WARNING(LimitCheckId);
+ 200:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	VL53L1_COPYSTRING(pLimitCheckString, "");
+ 201:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** #else
+ 202:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	switch (LimitCheckId) {
+ 575              		.loc 1 202 2 view .LVU109
+ 576 0006 3BB1     		cbz	r3, .L47
+ 577 0008 012B     		cmp	r3, #1
+ 578 000a 0CD0     		beq	.L48
+ 203:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_CHECKENABLE_SIGMA_FINAL_RANGE:
+ 204:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_COPYSTRING(pLimitCheckString,
+ 205:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_CHECKENABLE_SIGMA_FINAL_RANGE);
+ 206:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	break;
+ 207:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_CHECKENABLE_SIGNAL_RATE_FINAL_RANGE:
+ 208:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_COPYSTRING(pLimitCheckString,
+ 209:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_CHECKENABLE_SIGNAL_RATE_FINAL_RANGE);
+ 210:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	break;
+ 211:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	default:
+ 212:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 		VL53L1_COPYSTRING(pLimitCheckString,
+ 579              		.loc 1 212 3 view .LVU110
+ 580 000c 40F2FF12 		movw	r2, #511
+ 581 0010 0849     		ldr	r1, .L53
+ARM GAS  C:\Temp\ccVHKVOa.s 			page 17
+
+
+ 582              	.LVL72:
+ 583              		.loc 1 212 3 is_stmt 0 view .LVU111
+ 584 0012 FFF7FEFF 		bl	strncpy
+ 585              	.LVL73:
+ 586              		.loc 1 212 3 view .LVU112
+ 587 0016 04E0     		b	.L50
+ 588              	.LVL74:
+ 589              	.L47:
+ 204:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_CHECKENABLE_SIGMA_FINAL_RANGE);
+ 590              		.loc 1 204 3 is_stmt 1 view .LVU113
+ 591 0018 40F2FF12 		movw	r2, #511
+ 592 001c 0649     		ldr	r1, .L53+4
+ 593 001e FFF7FEFF 		bl	strncpy
+ 594              	.LVL75:
+ 206:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	case VL53L1_CHECKENABLE_SIGNAL_RATE_FINAL_RANGE:
+ 595              		.loc 1 206 2 view .LVU114
+ 596              	.L50:
+ 213:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_UNKNOW_ERROR_CODE);
+ 214:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	}
+ 215:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** #endif
+ 216:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 
+ 217:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	LOG_FUNCTION_END(Status);
+ 597              		.loc 1 217 26 view .LVU115
+ 218:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	return Status;
+ 598              		.loc 1 218 2 view .LVU116
+ 219:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** }
+ 599              		.loc 1 219 1 is_stmt 0 view .LVU117
+ 600 0022 0020     		movs	r0, #0
+ 601 0024 08BD     		pop	{r3, pc}
+ 602              	.LVL76:
+ 603              	.L48:
+ 208:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 			VL53L1_STRING_CHECKENABLE_SIGNAL_RATE_FINAL_RANGE);
+ 604              		.loc 1 208 3 is_stmt 1 view .LVU118
+ 605 0026 40F2FF12 		movw	r2, #511
+ 606 002a 0449     		ldr	r1, .L53+8
+ 607 002c FFF7FEFF 		bl	strncpy
+ 608              	.LVL77:
+ 210:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c **** 	default:
+ 609              		.loc 1 210 2 view .LVU119
+ 610 0030 F7E7     		b	.L50
+ 611              	.L54:
+ 612 0032 00BF     		.align	2
+ 613              	.L53:
+ 614 0034 2C000000 		.word	.LC24
+ 615 0038 00000000 		.word	.LC22
+ 616 003c 14000000 		.word	.LC23
+ 617              		.cfi_endproc
+ 618              	.LFE6:
+ 620              		.text
+ 621              	.Letext0:
+ 622              		.file 2 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 623              		.file 3 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 624              		.file 4 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 625              		.file 5 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_codes.h"
+ 626              		.file 6 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_def.h"
+ 627              		.file 7 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ARM GAS  C:\Temp\ccVHKVOa.s 			page 18
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 vl53l1_api_strings.c
+  C:\Temp\ccVHKVOa.s:21     .rodata.VL53L1_get_range_status_string.str1.4:00000000 $d
+  C:\Temp\ccVHKVOa.s:43     .text.VL53L1_get_range_status_string:00000000 $t
+  C:\Temp\ccVHKVOa.s:49     .text.VL53L1_get_range_status_string:00000000 VL53L1_get_range_status_string
+  C:\Temp\ccVHKVOa.s:70     .text.VL53L1_get_range_status_string:0000000c $d
+  C:\Temp\ccVHKVOa.s:76     .text.VL53L1_get_range_status_string:00000012 $t
+  C:\Temp\ccVHKVOa.s:182    .text.VL53L1_get_range_status_string:00000078 $d
+  C:\Temp\ccVHKVOa.s:193    .rodata.VL53L1_get_pal_state_string.str1.4:00000000 $d
+  C:\Temp\ccVHKVOa.s:218    .text.VL53L1_get_pal_state_string:00000000 $t
+  C:\Temp\ccVHKVOa.s:224    .text.VL53L1_get_pal_state_string:00000000 VL53L1_get_pal_state_string
+  C:\Temp\ccVHKVOa.s:248    .text.VL53L1_get_pal_state_string:00000012 $d
+  C:\Temp\ccVHKVOa.s:254    .text.VL53L1_get_pal_state_string:00000018 $t
+  C:\Temp\ccVHKVOa.s:349    .text.VL53L1_get_pal_state_string:00000090 $d
+  C:\Temp\ccVHKVOa.s:361    .rodata.VL53L1_get_sequence_steps_info.str1.4:00000000 $d
+  C:\Temp\ccVHKVOa.s:383    .text.VL53L1_get_sequence_steps_info:00000000 $t
+  C:\Temp\ccVHKVOa.s:389    .text.VL53L1_get_sequence_steps_info:00000000 VL53L1_get_sequence_steps_info
+  C:\Temp\ccVHKVOa.s:411    .text.VL53L1_get_sequence_steps_info:0000000e $d
+  C:\Temp\ccVHKVOa.s:419    .text.VL53L1_get_sequence_steps_info:00000016 $t
+  C:\Temp\ccVHKVOa.s:531    .text.VL53L1_get_sequence_steps_info:0000008c $d
+  C:\Temp\ccVHKVOa.s:542    .rodata.VL53L1_get_limit_check_info.str1.4:00000000 $d
+  C:\Temp\ccVHKVOa.s:552    .text.VL53L1_get_limit_check_info:00000000 $t
+  C:\Temp\ccVHKVOa.s:558    .text.VL53L1_get_limit_check_info:00000000 VL53L1_get_limit_check_info
+  C:\Temp\ccVHKVOa.s:614    .text.VL53L1_get_limit_check_info:00000034 $d
+
+UNDEFINED SYMBOLS
+strncpy

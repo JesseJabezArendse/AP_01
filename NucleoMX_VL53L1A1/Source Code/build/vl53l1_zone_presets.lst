@@ -1,0 +1,621 @@
+ARM GAS  C:\Temp\ccD319t5.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"vl53l1_zone_presets.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c"
+  20              		.section	.text.VL53L1_init_zone_config_histogram_bins,"ax",%progbits
+  21              		.align	1
+  22              		.global	VL53L1_init_zone_config_histogram_bins
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	VL53L1_init_zone_config_histogram_bins:
+  28              	.LVL0:
+  29              	.LFB5:
+   1:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** /**
+   2:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c ****  ******************************************************************************
+   3:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c ****  * Copyright (c) 2020, STMicroelectronics - All Rights Reserved
+   4:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c ****  *
+   5:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c ****  * This software is licensed under terms that can be found in the LICENSE file
+   6:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c ****  * in the root directory of this software component.
+   7:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c ****  * If no LICENSE file comes with this software, it is provided AS-IS.
+   8:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c ****  *
+   9:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c ****  ******************************************************************************
+  10:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c ****  */
+  11:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  12:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  13:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  14:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  15:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** #include "vl53l1_ll_def.h"
+  16:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** #include "vl53l1_ll_device.h"
+  17:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** #include "vl53l1_platform_log.h"
+  18:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** #include "vl53l1_zone_presets.h"
+  19:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  20:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  21:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** #define LOG_FUNCTION_START(fmt, ...) \
+  22:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	_LOG_FUNCTION_START(VL53L1_TRACE_MODULE_CORE, fmt, ##__VA_ARGS__)
+  23:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** #define LOG_FUNCTION_END(status, ...) \
+  24:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	_LOG_FUNCTION_END(VL53L1_TRACE_MODULE_CORE, status, ##__VA_ARGS__)
+  25:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** #define LOG_FUNCTION_END_FMT(status, fmt, ...) \
+  26:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	_LOG_FUNCTION_END_FMT(VL53L1_TRACE_MODULE_CORE,\
+  27:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 			status, fmt, ##__VA_ARGS__)
+  28:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  29:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ARM GAS  C:\Temp\ccD319t5.s 			page 2
+
+
+  30:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** VL53L1_Error VL53L1_init_zone_config_structure(
+  31:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	uint8_t x_off,
+  32:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	uint8_t x_inc,
+  33:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	uint8_t x_zones,
+  34:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	uint8_t y_off,
+  35:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	uint8_t y_inc,
+  36:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	uint8_t y_zones,
+  37:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	uint8_t width,
+  38:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	uint8_t height,
+  39:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	VL53L1_zone_config_t   *pdata)
+  40:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** {
+  41:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  42:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  43:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	VL53L1_Error  status = VL53L1_ERROR_NONE;
+  44:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  45:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	uint8_t  x  = 0;
+  46:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	uint8_t  y  = 0;
+  47:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	uint16_t  i  = 0;
+  48:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  49:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	LOG_FUNCTION_START("");
+  50:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  51:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pdata->max_zones = VL53L1_MAX_USER_ZONES;
+  52:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  53:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	i = 0;
+  54:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  55:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	for (x = 0 ; x < x_zones ; x++) {
+  56:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 		for (y = 0 ; y <  y_zones ; y++) {
+  57:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  58:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 			if (i < VL53L1_MAX_USER_ZONES) {
+  59:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  60:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 				pdata->active_zones = (uint8_t)i;
+  61:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 				pdata->user_zones[i].height   = height;
+  62:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 				pdata->user_zones[i].width    = width;
+  63:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 				pdata->user_zones[i].x_centre =
+  64:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 						x_off + (x * x_inc);
+  65:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 				pdata->user_zones[i].y_centre =
+  66:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 						y_off + (y * y_inc);
+  67:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 			}
+  68:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  69:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 			i++;
+  70:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 		}
+  71:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	}
+  72:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  73:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	status = VL53L1_init_zone_config_histogram_bins(pdata);
+  74:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  75:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  76:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	LOG_FUNCTION_END(status);
+  77:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  78:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	return status;
+  79:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** }
+  80:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  81:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  82:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** VL53L1_Error VL53L1_zone_preset_xtalk_planar(
+  83:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	VL53L1_general_config_t	*pgeneral,
+  84:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	VL53L1_zone_config_t    *pzone_cfg)
+  85:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** {
+  86:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ARM GAS  C:\Temp\ccD319t5.s 			page 3
+
+
+  87:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  88:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	VL53L1_Error  status = VL53L1_ERROR_NONE;
+  89:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  90:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	LOG_FUNCTION_START("");
+  91:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  92:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  93:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pgeneral->global_config__stream_divider = 0x05;
+  94:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  95:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  96:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->active_zones                 = 0x04;
+  97:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  98:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[0].height         = 15;
+  99:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[0].width          = 7;
+ 100:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[0].x_centre       = 4;
+ 101:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[0].y_centre       = 8;
+ 102:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 103:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[1].height         = 15;
+ 104:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[1].width          = 7;
+ 105:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[1].x_centre       = 12;
+ 106:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[1].y_centre       = 8;
+ 107:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 108:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[2].height         = 7;
+ 109:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[2].width          = 15;
+ 110:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[2].x_centre       = 8;
+ 111:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[2].y_centre       = 4;
+ 112:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 113:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[3].height         = 7;
+ 114:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[3].width          = 15;
+ 115:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[3].x_centre       = 8;
+ 116:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[3].y_centre       = 12;
+ 117:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 118:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 119:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 120:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[4].height         = 15;
+ 121:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[4].width          = 15;
+ 122:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[4].x_centre       = 8;
+ 123:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[4].y_centre       = 8;
+ 124:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 125:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	status = VL53L1_init_zone_config_histogram_bins(pzone_cfg);
+ 126:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 127:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 128:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	LOG_FUNCTION_END(status);
+ 129:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 130:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	return status;
+ 131:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** }
+ 132:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 133:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 134:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** VL53L1_Error VL53L1_init_zone_config_histogram_bins(
+ 135:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	VL53L1_zone_config_t   *pdata)
+ 136:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** {
+  30              		.loc 1 136 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+ 137:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 138:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ARM GAS  C:\Temp\ccD319t5.s 			page 4
+
+
+ 139:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	VL53L1_Error  status = VL53L1_ERROR_NONE;
+  35              		.loc 1 139 2 view .LVU1
+ 140:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 141:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	uint8_t i;
+  36              		.loc 1 141 2 view .LVU2
+ 142:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 143:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	LOG_FUNCTION_START("");
+  37              		.loc 1 143 24 view .LVU3
+ 144:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 145:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	for (i = 0; i < pdata->max_zones; i++)
+  38              		.loc 1 145 2 view .LVU4
+  39              		.loc 1 145 9 is_stmt 0 view .LVU5
+  40 0000 0023     		movs	r3, #0
+  41              		.loc 1 145 2 view .LVU6
+  42 0002 05E0     		b	.L2
+  43              	.LVL1:
+  44              	.L3:
+ 146:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 		pdata->bin_config[i] = VL53L1_ZONECONFIG_BINCONFIG__LOWAMB;
+  45              		.loc 1 146 3 is_stmt 1 discriminator 3 view .LVU7
+  46              		.loc 1 146 24 is_stmt 0 discriminator 3 view .LVU8
+  47 0004 C218     		adds	r2, r0, r3
+  48 0006 0121     		movs	r1, #1
+  49 0008 82F85C10 		strb	r1, [r2, #92]
+ 145:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 		pdata->bin_config[i] = VL53L1_ZONECONFIG_BINCONFIG__LOWAMB;
+  50              		.loc 1 145 37 is_stmt 1 discriminator 3 view .LVU9
+  51 000c 0B44     		add	r3, r3, r1
+  52              	.LVL2:
+ 145:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 		pdata->bin_config[i] = VL53L1_ZONECONFIG_BINCONFIG__LOWAMB;
+  53              		.loc 1 145 37 is_stmt 0 discriminator 3 view .LVU10
+  54 000e DBB2     		uxtb	r3, r3
+  55              	.LVL3:
+  56              	.L2:
+ 145:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 		pdata->bin_config[i] = VL53L1_ZONECONFIG_BINCONFIG__LOWAMB;
+  57              		.loc 1 145 16 is_stmt 1 discriminator 1 view .LVU11
+ 145:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 		pdata->bin_config[i] = VL53L1_ZONECONFIG_BINCONFIG__LOWAMB;
+  58              		.loc 1 145 23 is_stmt 0 discriminator 1 view .LVU12
+  59 0010 0278     		ldrb	r2, [r0]	@ zero_extendqisi2
+ 145:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 		pdata->bin_config[i] = VL53L1_ZONECONFIG_BINCONFIG__LOWAMB;
+  60              		.loc 1 145 16 discriminator 1 view .LVU13
+  61 0012 9A42     		cmp	r2, r3
+  62 0014 F6D8     		bhi	.L3
+ 147:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 148:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	LOG_FUNCTION_END(status);
+  63              		.loc 1 148 26 is_stmt 1 view .LVU14
+ 149:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 150:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	return status;
+  64              		.loc 1 150 2 view .LVU15
+ 151:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** }
+  65              		.loc 1 151 1 is_stmt 0 view .LVU16
+  66 0016 0020     		movs	r0, #0
+  67              	.LVL4:
+  68              		.loc 1 151 1 view .LVU17
+  69 0018 7047     		bx	lr
+  70              		.cfi_endproc
+  71              	.LFE5:
+  73              		.section	.text.VL53L1_init_zone_config_structure,"ax",%progbits
+  74              		.align	1
+ARM GAS  C:\Temp\ccD319t5.s 			page 5
+
+
+  75              		.global	VL53L1_init_zone_config_structure
+  76              		.syntax unified
+  77              		.thumb
+  78              		.thumb_func
+  80              	VL53L1_init_zone_config_structure:
+  81              	.LVL5:
+  82              	.LFB3:
+  40:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  83              		.loc 1 40 1 is_stmt 1 view -0
+  84              		.cfi_startproc
+  85              		@ args = 20, pretend = 0, frame = 0
+  86              		@ frame_needed = 0, uses_anonymous_args = 0
+  40:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+  87              		.loc 1 40 1 is_stmt 0 view .LVU19
+  88 0000 2DE9F84F 		push	{r3, r4, r5, r6, r7, r8, r9, r10, fp, lr}
+  89              		.cfi_def_cfa_offset 40
+  90              		.cfi_offset 3, -40
+  91              		.cfi_offset 4, -36
+  92              		.cfi_offset 5, -32
+  93              		.cfi_offset 6, -28
+  94              		.cfi_offset 7, -24
+  95              		.cfi_offset 8, -20
+  96              		.cfi_offset 9, -16
+  97              		.cfi_offset 10, -12
+  98              		.cfi_offset 11, -8
+  99              		.cfi_offset 14, -4
+ 100 0004 0546     		mov	r5, r0
+ 101 0006 0C46     		mov	r4, r1
+ 102 0008 9046     		mov	r8, r2
+ 103 000a 1946     		mov	r1, r3
+ 104              	.LVL6:
+  40:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 105              		.loc 1 40 1 view .LVU20
+ 106 000c 9DF82890 		ldrb	r9, [sp, #40]	@ zero_extendqisi2
+ 107 0010 9DF82C20 		ldrb	r2, [sp, #44]	@ zero_extendqisi2
+ 108              	.LVL7:
+  40:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 109              		.loc 1 40 1 view .LVU21
+ 110 0014 9DF83070 		ldrb	r7, [sp, #48]	@ zero_extendqisi2
+ 111 0018 9DF83460 		ldrb	r6, [sp, #52]	@ zero_extendqisi2
+ 112 001c 0E98     		ldr	r0, [sp, #56]
+ 113              	.LVL8:
+  43:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 114              		.loc 1 43 2 is_stmt 1 view .LVU22
+  45:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	uint8_t  y  = 0;
+ 115              		.loc 1 45 2 view .LVU23
+  46:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	uint16_t  i  = 0;
+ 116              		.loc 1 46 2 view .LVU24
+  47:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 117              		.loc 1 47 2 view .LVU25
+  49:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 118              		.loc 1 49 24 view .LVU26
+  51:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 119              		.loc 1 51 2 view .LVU27
+  51:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 120              		.loc 1 51 19 is_stmt 0 view .LVU28
+ 121 001e 1023     		movs	r3, #16
+ARM GAS  C:\Temp\ccD319t5.s 			page 6
+
+
+ 122              	.LVL9:
+  51:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 123              		.loc 1 51 19 view .LVU29
+ 124 0020 0370     		strb	r3, [r0]
+  53:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 125              		.loc 1 53 2 is_stmt 1 view .LVU30
+  55:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 		for (y = 0 ; y <  y_zones ; y++) {
+ 126              		.loc 1 55 2 view .LVU31
+  53:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 127              		.loc 1 53 4 is_stmt 0 view .LVU32
+ 128 0022 4FF0000C 		mov	ip, #0
+  55:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 		for (y = 0 ; y <  y_zones ; y++) {
+ 129              		.loc 1 55 9 view .LVU33
+ 130 0026 6346     		mov	r3, ip
+  55:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 		for (y = 0 ; y <  y_zones ; y++) {
+ 131              		.loc 1 55 2 view .LVU34
+ 132 0028 25E0     		b	.L5
+ 133              	.LVL10:
+ 134              	.L6:
+  69:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 		}
+ 135              		.loc 1 69 4 is_stmt 1 discriminator 2 view .LVU35
+  69:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 		}
+ 136              		.loc 1 69 5 is_stmt 0 discriminator 2 view .LVU36
+ 137 002a 0CF1010C 		add	ip, ip, #1
+ 138              	.LVL11:
+  69:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 		}
+ 139              		.loc 1 69 5 discriminator 2 view .LVU37
+ 140 002e 1FFA8CFC 		uxth	ip, ip
+ 141              	.LVL12:
+  56:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 142              		.loc 1 56 32 is_stmt 1 discriminator 2 view .LVU38
+ 143 0032 0AF1010E 		add	lr, r10, #1
+ 144 0036 5FFA8EFA 		uxtb	r10, lr
+ 145              	.LVL13:
+ 146              	.L8:
+  56:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 147              		.loc 1 56 18 discriminator 1 view .LVU39
+ 148 003a 9245     		cmp	r10, r2
+ 149 003c 19D2     		bcs	.L11
+  58:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 150              		.loc 1 58 4 view .LVU40
+  58:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 151              		.loc 1 58 7 is_stmt 0 view .LVU41
+ 152 003e BCF10F0F 		cmp	ip, #15
+ 153 0042 F2D8     		bhi	.L6
+  60:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 				pdata->user_zones[i].height   = height;
+ 154              		.loc 1 60 5 is_stmt 1 view .LVU42
+  60:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 				pdata->user_zones[i].height   = height;
+ 155              		.loc 1 60 25 is_stmt 0 view .LVU43
+ 156 0044 80F801C0 		strb	ip, [r0, #1]
+  61:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 				pdata->user_zones[i].width    = width;
+ 157              		.loc 1 61 5 is_stmt 1 view .LVU44
+  61:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 				pdata->user_zones[i].width    = width;
+ 158              		.loc 1 61 35 is_stmt 0 view .LVU45
+ 159 0048 0CF1060E 		add	lr, ip, #6
+ 160 004c 00EB8E0E 		add	lr, r0, lr, lsl #2
+ 161 0050 8EF80760 		strb	r6, [lr, #7]
+ARM GAS  C:\Temp\ccD319t5.s 			page 7
+
+
+  62:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 				pdata->user_zones[i].x_centre =
+ 162              		.loc 1 62 5 is_stmt 1 view .LVU46
+  62:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 				pdata->user_zones[i].x_centre =
+ 163              		.loc 1 62 35 is_stmt 0 view .LVU47
+ 164 0054 8EF80670 		strb	r7, [lr, #6]
+  63:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 						x_off + (x * x_inc);
+ 165              		.loc 1 63 5 is_stmt 1 view .LVU48
+  64:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 				pdata->user_zones[i].y_centre =
+ 166              		.loc 1 64 18 is_stmt 0 view .LVU49
+ 167 0058 13FB04FB 		smulbb	fp, r3, r4
+  64:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 				pdata->user_zones[i].y_centre =
+ 168              		.loc 1 64 13 view .LVU50
+ 169 005c 55FA8BFB 		uxtab	fp, r5, fp
+  63:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 						x_off + (x * x_inc);
+ 170              		.loc 1 63 35 view .LVU51
+ 171 0060 8EF804B0 		strb	fp, [lr, #4]
+  65:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 						y_off + (y * y_inc);
+ 172              		.loc 1 65 5 is_stmt 1 view .LVU52
+  66:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 			}
+ 173              		.loc 1 66 18 is_stmt 0 view .LVU53
+ 174 0064 1AFB09FB 		smulbb	fp, r10, r9
+  66:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 			}
+ 175              		.loc 1 66 13 view .LVU54
+ 176 0068 51FA8BFB 		uxtab	fp, r1, fp
+  65:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 						y_off + (y * y_inc);
+ 177              		.loc 1 65 35 view .LVU55
+ 178 006c 8EF805B0 		strb	fp, [lr, #5]
+ 179 0070 DBE7     		b	.L6
+ 180              	.L11:
+  55:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 		for (y = 0 ; y <  y_zones ; y++) {
+ 181              		.loc 1 55 30 is_stmt 1 discriminator 2 view .LVU56
+ 182 0072 0133     		adds	r3, r3, #1
+ 183              	.LVL14:
+  55:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 		for (y = 0 ; y <  y_zones ; y++) {
+ 184              		.loc 1 55 30 is_stmt 0 discriminator 2 view .LVU57
+ 185 0074 DBB2     		uxtb	r3, r3
+ 186              	.LVL15:
+ 187              	.L5:
+  55:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 		for (y = 0 ; y <  y_zones ; y++) {
+ 188              		.loc 1 55 17 is_stmt 1 discriminator 1 view .LVU58
+ 189 0076 4345     		cmp	r3, r8
+ 190 0078 02D2     		bcs	.L12
+  56:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 191              		.loc 1 56 10 is_stmt 0 view .LVU59
+ 192 007a 4FF0000A 		mov	r10, #0
+ 193 007e DCE7     		b	.L8
+ 194              	.L12:
+  73:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 195              		.loc 1 73 2 is_stmt 1 view .LVU60
+  73:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 196              		.loc 1 73 11 is_stmt 0 view .LVU61
+ 197 0080 FFF7FEFF 		bl	VL53L1_init_zone_config_histogram_bins
+ 198              	.LVL16:
+  76:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 199              		.loc 1 76 26 is_stmt 1 view .LVU62
+  78:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** }
+ 200              		.loc 1 78 2 view .LVU63
+ARM GAS  C:\Temp\ccD319t5.s 			page 8
+
+
+  79:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 201              		.loc 1 79 1 is_stmt 0 view .LVU64
+ 202 0084 BDE8F88F 		pop	{r3, r4, r5, r6, r7, r8, r9, r10, fp, pc}
+  79:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 203              		.loc 1 79 1 view .LVU65
+ 204              		.cfi_endproc
+ 205              	.LFE3:
+ 207              		.section	.text.VL53L1_zone_preset_xtalk_planar,"ax",%progbits
+ 208              		.align	1
+ 209              		.global	VL53L1_zone_preset_xtalk_planar
+ 210              		.syntax unified
+ 211              		.thumb
+ 212              		.thumb_func
+ 214              	VL53L1_zone_preset_xtalk_planar:
+ 215              	.LVL17:
+ 216              	.LFB4:
+  85:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 217              		.loc 1 85 1 is_stmt 1 view -0
+ 218              		.cfi_startproc
+ 219              		@ args = 0, pretend = 0, frame = 0
+ 220              		@ frame_needed = 0, uses_anonymous_args = 0
+  85:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 221              		.loc 1 85 1 is_stmt 0 view .LVU67
+ 222 0000 08B5     		push	{r3, lr}
+ 223              		.cfi_def_cfa_offset 8
+ 224              		.cfi_offset 3, -8
+ 225              		.cfi_offset 14, -4
+  88:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 226              		.loc 1 88 2 is_stmt 1 view .LVU68
+ 227              	.LVL18:
+  90:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 228              		.loc 1 90 24 view .LVU69
+  93:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 229              		.loc 1 93 2 view .LVU70
+  93:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 230              		.loc 1 93 42 is_stmt 0 view .LVU71
+ 231 0002 0523     		movs	r3, #5
+ 232 0004 4370     		strb	r3, [r0, #1]
+  96:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 233              		.loc 1 96 2 is_stmt 1 view .LVU72
+  96:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 234              		.loc 1 96 42 is_stmt 0 view .LVU73
+ 235 0006 4FF0040C 		mov	ip, #4
+ 236 000a 81F801C0 		strb	ip, [r1, #1]
+  98:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[0].width          = 7;
+ 237              		.loc 1 98 2 is_stmt 1 view .LVU74
+  98:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[0].width          = 7;
+ 238              		.loc 1 98 42 is_stmt 0 view .LVU75
+ 239 000e 0F22     		movs	r2, #15
+ 240 0010 CA77     		strb	r2, [r1, #31]
+  99:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[0].x_centre       = 4;
+ 241              		.loc 1 99 2 is_stmt 1 view .LVU76
+  99:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[0].x_centre       = 4;
+ 242              		.loc 1 99 42 is_stmt 0 view .LVU77
+ 243 0012 0720     		movs	r0, #7
+ 244              	.LVL19:
+  99:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[0].x_centre       = 4;
+ARM GAS  C:\Temp\ccD319t5.s 			page 9
+
+
+ 245              		.loc 1 99 42 view .LVU78
+ 246 0014 8877     		strb	r0, [r1, #30]
+ 100:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[0].y_centre       = 8;
+ 247              		.loc 1 100 2 is_stmt 1 view .LVU79
+ 100:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[0].y_centre       = 8;
+ 248              		.loc 1 100 42 is_stmt 0 view .LVU80
+ 249 0016 81F81CC0 		strb	ip, [r1, #28]
+ 101:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 250              		.loc 1 101 2 is_stmt 1 view .LVU81
+ 101:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 251              		.loc 1 101 42 is_stmt 0 view .LVU82
+ 252 001a 0823     		movs	r3, #8
+ 253 001c 4B77     		strb	r3, [r1, #29]
+ 103:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[1].width          = 7;
+ 254              		.loc 1 103 2 is_stmt 1 view .LVU83
+ 103:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[1].width          = 7;
+ 255              		.loc 1 103 42 is_stmt 0 view .LVU84
+ 256 001e 81F82320 		strb	r2, [r1, #35]
+ 104:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[1].x_centre       = 12;
+ 257              		.loc 1 104 2 is_stmt 1 view .LVU85
+ 104:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[1].x_centre       = 12;
+ 258              		.loc 1 104 42 is_stmt 0 view .LVU86
+ 259 0022 81F82200 		strb	r0, [r1, #34]
+ 105:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[1].y_centre       = 8;
+ 260              		.loc 1 105 2 is_stmt 1 view .LVU87
+ 105:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[1].y_centre       = 8;
+ 261              		.loc 1 105 42 is_stmt 0 view .LVU88
+ 262 0026 4FF00C0E 		mov	lr, #12
+ 263 002a 81F820E0 		strb	lr, [r1, #32]
+ 106:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 264              		.loc 1 106 2 is_stmt 1 view .LVU89
+ 106:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 265              		.loc 1 106 42 is_stmt 0 view .LVU90
+ 266 002e 81F82130 		strb	r3, [r1, #33]
+ 108:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[2].width          = 15;
+ 267              		.loc 1 108 2 is_stmt 1 view .LVU91
+ 108:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[2].width          = 15;
+ 268              		.loc 1 108 42 is_stmt 0 view .LVU92
+ 269 0032 81F82700 		strb	r0, [r1, #39]
+ 109:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[2].x_centre       = 8;
+ 270              		.loc 1 109 2 is_stmt 1 view .LVU93
+ 109:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[2].x_centre       = 8;
+ 271              		.loc 1 109 42 is_stmt 0 view .LVU94
+ 272 0036 81F82620 		strb	r2, [r1, #38]
+ 110:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[2].y_centre       = 4;
+ 273              		.loc 1 110 2 is_stmt 1 view .LVU95
+ 110:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[2].y_centre       = 4;
+ 274              		.loc 1 110 42 is_stmt 0 view .LVU96
+ 275 003a 81F82430 		strb	r3, [r1, #36]
+ 111:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 276              		.loc 1 111 2 is_stmt 1 view .LVU97
+ 111:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 277              		.loc 1 111 42 is_stmt 0 view .LVU98
+ 278 003e 81F825C0 		strb	ip, [r1, #37]
+ 113:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[3].width          = 15;
+ 279              		.loc 1 113 2 is_stmt 1 view .LVU99
+ 113:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[3].width          = 15;
+ARM GAS  C:\Temp\ccD319t5.s 			page 10
+
+
+ 280              		.loc 1 113 42 is_stmt 0 view .LVU100
+ 281 0042 81F82B00 		strb	r0, [r1, #43]
+ 114:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[3].x_centre       = 8;
+ 282              		.loc 1 114 2 is_stmt 1 view .LVU101
+ 114:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[3].x_centre       = 8;
+ 283              		.loc 1 114 42 is_stmt 0 view .LVU102
+ 284 0046 81F82A20 		strb	r2, [r1, #42]
+ 115:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[3].y_centre       = 12;
+ 285              		.loc 1 115 2 is_stmt 1 view .LVU103
+ 115:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[3].y_centre       = 12;
+ 286              		.loc 1 115 42 is_stmt 0 view .LVU104
+ 287 004a 81F82830 		strb	r3, [r1, #40]
+ 116:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 288              		.loc 1 116 2 is_stmt 1 view .LVU105
+ 116:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 289              		.loc 1 116 42 is_stmt 0 view .LVU106
+ 290 004e 81F829E0 		strb	lr, [r1, #41]
+ 120:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[4].width          = 15;
+ 291              		.loc 1 120 2 is_stmt 1 view .LVU107
+ 120:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[4].width          = 15;
+ 292              		.loc 1 120 42 is_stmt 0 view .LVU108
+ 293 0052 81F82F20 		strb	r2, [r1, #47]
+ 121:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[4].x_centre       = 8;
+ 294              		.loc 1 121 2 is_stmt 1 view .LVU109
+ 121:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[4].x_centre       = 8;
+ 295              		.loc 1 121 42 is_stmt 0 view .LVU110
+ 296 0056 81F82E20 		strb	r2, [r1, #46]
+ 122:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[4].y_centre       = 8;
+ 297              		.loc 1 122 2 is_stmt 1 view .LVU111
+ 122:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 	pzone_cfg->user_zones[4].y_centre       = 8;
+ 298              		.loc 1 122 42 is_stmt 0 view .LVU112
+ 299 005a 81F82C30 		strb	r3, [r1, #44]
+ 123:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 300              		.loc 1 123 2 is_stmt 1 view .LVU113
+ 123:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 301              		.loc 1 123 42 is_stmt 0 view .LVU114
+ 302 005e 81F82D30 		strb	r3, [r1, #45]
+ 125:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 303              		.loc 1 125 2 is_stmt 1 view .LVU115
+ 125:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 304              		.loc 1 125 11 is_stmt 0 view .LVU116
+ 305 0062 0846     		mov	r0, r1
+ 306 0064 FFF7FEFF 		bl	VL53L1_init_zone_config_histogram_bins
+ 307              	.LVL20:
+ 128:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 308              		.loc 1 128 26 is_stmt 1 view .LVU117
+ 130:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** }
+ 309              		.loc 1 130 2 view .LVU118
+ 131:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c **** 
+ 310              		.loc 1 131 1 is_stmt 0 view .LVU119
+ 311 0068 08BD     		pop	{r3, pc}
+ 312              		.cfi_endproc
+ 313              	.LFE4:
+ 315              		.text
+ 316              	.Letext0:
+ 317              		.file 2 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 318              		.file 3 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ARM GAS  C:\Temp\ccD319t5.s 			page 11
+
+
+ 319              		.file 4 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_codes.h"
+ 320              		.file 5 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_register_structs.h"
+ 321              		.file 6 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_ll_device.h"
+ 322              		.file 7 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_structs.h"
+ 323              		.file 8 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_ll_def.h"
+ARM GAS  C:\Temp\ccD319t5.s 			page 12
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 vl53l1_zone_presets.c
+  C:\Temp\ccD319t5.s:21     .text.VL53L1_init_zone_config_histogram_bins:00000000 $t
+  C:\Temp\ccD319t5.s:27     .text.VL53L1_init_zone_config_histogram_bins:00000000 VL53L1_init_zone_config_histogram_bins
+  C:\Temp\ccD319t5.s:74     .text.VL53L1_init_zone_config_structure:00000000 $t
+  C:\Temp\ccD319t5.s:80     .text.VL53L1_init_zone_config_structure:00000000 VL53L1_init_zone_config_structure
+  C:\Temp\ccD319t5.s:208    .text.VL53L1_zone_preset_xtalk_planar:00000000 $t
+  C:\Temp\ccD319t5.s:214    .text.VL53L1_zone_preset_xtalk_planar:00000000 VL53L1_zone_preset_xtalk_planar
+
+NO UNDEFINED SYMBOLS
