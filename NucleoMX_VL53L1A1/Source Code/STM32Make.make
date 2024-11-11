@@ -78,6 +78,7 @@ C_SOURCES =  \
 Core/Src/VL53L1A1_Simulink.c \
 Core/Src/main.c \
 Core/Src/stm32f4xx_hal_msp.c \
+Core/Src/stm32f4xx_hal_timebase_tim.c \
 Core/Src/stm32f4xx_it.c \
 Core/Src/stm32f4xx_nucleo_bus.c \
 Core/Src/syscalls.c \

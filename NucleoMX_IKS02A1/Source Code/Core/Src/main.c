@@ -42,6 +42,7 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+TIM_HandleTypeDef htim2;
 
 /* USER CODE BEGIN PV */
 IKS02A1_MOTION_SENSOR_Axes_t accel1_axis;
@@ -52,6 +53,7 @@ IKS02A1_MOTION_SENSOR_Axes_t mag_axis;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
 // #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
 /* USER CODE END PFP */
@@ -62,6 +64,9 @@ const uint8_t expectedHeader[3] = {'J', '_', 'A'};
 const uint8_t expectedTerminator[3] = {'A', '_', 'J'};
 const int numberOfSimulinkBytes = 4*(2+2+2+1);
 uint8_t bigBuffer[28+3+3] = {0};
+uint8_t clearToSend = 0;
+uint8_t calibrated = 0;
+
 /* USER CODE END 0 */
 
 /**
@@ -94,18 +99,16 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_DMA_Init();
+  MX_TIM2_Init();
   MX_MEMS_Init();
   /* USER CODE BEGIN 2 */
-  HAL_GPIO_WritePin(LED2_GPIO_PORT,LED2_PIN,1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-  while (1)
-  {
+  while(calibrated == 0){
     HAL_UART_Receive_DMA(&hcom_uart,(uint8_t *) &bigBuffer, (size_t) (numberOfSimulinkBytes+3+3));
-    getIKS02A1();
     if (bigBuffer[0] == expectedHeader[0] &&
         bigBuffer[1] == expectedHeader[1] &&
         bigBuffer[2] == expectedHeader[2] &&
@@ -113,8 +116,20 @@ int main(void)
         bigBuffer[numberOfSimulinkBytes+3+1] == expectedTerminator[1] &&
         bigBuffer[numberOfSimulinkBytes+3+2] == expectedTerminator[2]){
       receivedFromSimulink(&bigBuffer);
+      calibrated = 1;
     }
+  }
+
+  HAL_TIM_Base_Start_IT(&htim2);
+  HAL_GPIO_WritePin(LED2_GPIO_PORT,LED2_PIN,1);
+
+  while (1)
+  {
+    if (clearToSend == 1){
+    getIKS02A1();
     sendToSimulink();
+    clearToSend = 0;
+    }
     
     /* USER CODE END WHILE */
 
@@ -147,7 +162,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
   RCC_OscInitStruct.PLL.PLLM = 8;
-  RCC_OscInitStruct.PLL.PLLN = 96;
+  RCC_OscInitStruct.PLL.PLLN = 100;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 4;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
@@ -168,6 +183,51 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief TIM2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM2_Init(void)
+{
+
+  /* USER CODE BEGIN TIM2_Init 0 */
+
+  /* USER CODE END TIM2_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM2_Init 1 */
+
+  /* USER CODE END TIM2_Init 1 */
+  htim2.Instance = TIM2;
+  htim2.Init.Prescaler = 1000-1;
+  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim2.Init.Period = 1000-1;
+  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+  if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim2, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM2_Init 2 */
+
+  /* USER CODE END TIM2_Init 2 */
+
 }
 
 /**
@@ -253,6 +313,27 @@ void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 
 /* USER CODE END 4 */
+
+/**
+  * @brief  Period elapsed callback in non blocking mode
+  * @note   This function is called  when TIM1 interrupt took place, inside
+  * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
+  * a global variable "uwTick" used as application time base.
+  * @param  htim : TIM handle
+  * @retval None
+  */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  /* USER CODE BEGIN Callback 0 */
+
+  /* USER CODE END Callback 0 */
+  if (htim->Instance == TIM1) {
+    HAL_IncTick();
+  }
+  /* USER CODE BEGIN Callback 1 */
+
+  /* USER CODE END Callback 1 */
+}
 
 /**
   * @brief  This function is executed in case of error occurrence.

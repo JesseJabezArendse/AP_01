@@ -25,6 +25,8 @@ build/debug/Drivers/BSP/53L1A2/53l1a2.o: Drivers/BSP/53L1A2/53l1a2.c \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
  Core/Inc/stm32f4xx_nucleo_bus.h Core/Inc/stm32f4xx_nucleo_conf.h \
  Core/Inc/stm32f4xx_nucleo_errno.h Core/Inc/stm32f4xx_nucleo_errno.h
@@ -57,6 +59,8 @@ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c_ex.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 Core/Inc/stm32f4xx_nucleo_bus.h:
 Core/Inc/stm32f4xx_nucleo_conf.h:

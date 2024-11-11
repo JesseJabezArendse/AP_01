@@ -1,4 +1,4 @@
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
   18:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****   * in the root directory of this software component.
   19:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****   * If no LICENSE file comes with this software, it is provided AS-IS.
   20:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****   *
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 2
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 2
 
 
   21:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****   ******************************************************************************
@@ -118,7 +118,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
   75:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****         (++) In case of external interrupt/event selection the "Mode" member from 
   76:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****              GPIO_InitTypeDef structure select the type (interrupt or event) and 
   77:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****              the corresponding trigger event (rising or falling or both).
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 3
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 3
 
 
   78:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c **** 
@@ -178,7 +178,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  132:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c **** /* Private variables ---------------------------------------------------------*/
  133:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c **** /* Private function prototypes -----------------------------------------------*/
  134:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c **** /* Private functions ---------------------------------------------------------*/
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 4
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 4
 
 
  135:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c **** /* Exported functions --------------------------------------------------------*/
@@ -238,7 +238,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
   55              		.loc 1 168 3 view .LVU4
  169:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****   uint32_t temp = 0x00U;
   56              		.loc 1 169 3 view .LVU5
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 5
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 5
 
 
  170:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c **** 
@@ -298,7 +298,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  106 0054 7368     		ldr	r3, [r6, #4]
  107 0056 012B     		cmp	r3, #1
  108 0058 10D9     		bls	.L5
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 6
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 6
 
 
  109 005a B3F5041F 		cmp	r3, #2162688
@@ -358,7 +358,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  213:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****         temp &= ~(GPIO_PUPDR_PUPDR0 << (position * 2U));
  214:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****         temp |= ((GPIO_Init->Pull) << (position * 2U));
  215:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****         GPIOx->PUPDR = temp;
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 7
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 7
 
 
  216:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****       }
@@ -418,7 +418,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  192:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****         /* Configure the IO Speed */
  148              		.loc 1 192 9 is_stmt 1 view .LVU21
  149 00a2 F368     		ldr	r3, [r6, #12]
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 8
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 8
 
 
  150 00a4 032B     		cmp	r3, #3
@@ -478,7 +478,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  186              		.loc 1 202 29 is_stmt 0 view .LVU39
  187 00c2 7368     		ldr	r3, [r6, #4]
  202:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****         GPIOx->OTYPER = temp;
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 9
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 9
 
 
  188              		.loc 1 202 51 view .LVU40
@@ -538,7 +538,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  225:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****         temp |= ((uint32_t)(GPIO_Init->Alternate) << (((uint32_t)position & 0x07U) * 4U));
  232              		.loc 1 225 9 is_stmt 1 view .LVU51
  225:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****         temp |= ((uint32_t)(GPIO_Init->Alternate) << (((uint32_t)position & 0x07U) * 4U));
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 10
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 10
 
 
  233              		.loc 1 225 28 is_stmt 0 view .LVU52
@@ -598,7 +598,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  246:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****         SYSCFG->EXTICR[position >> 2U] = temp;
  277              		.loc 1 246 9 is_stmt 1 discriminator 20 view .LVU67
  278              		.loc 1 246 40 is_stmt 0 discriminator 20 view .LVU68
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 11
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 11
 
 
  279 0130 0232     		adds	r2, r2, #2
@@ -658,7 +658,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  320 015a 7068     		ldr	r0, [r6, #4]
  321              		.loc 1 259 11 view .LVU88
  322 015c 10F4001F 		tst	r0, #2097152
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 12
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 12
 
 
  323 0160 01D0     		beq	.L20
@@ -718,7 +718,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  361              		.loc 1 275 14 is_stmt 0 view .LVU107
  362 0182 1340     		ands	r3, r3, r2
  363              	.LVL35:
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 13
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 13
 
 
  276:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****         if((GPIO_Init->Mode & EXTI_IT) != 0x00U)
@@ -778,7 +778,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  403              		.loc 1 188 7 is_stmt 1 view .LVU124
  188:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****           (GPIO_Init->Mode & GPIO_MODE) == MODE_AF)
  404              		.loc 1 188 21 is_stmt 0 view .LVU125
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 14
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 14
 
 
  405 01aa 7368     		ldr	r3, [r6, #4]
@@ -838,7 +838,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  214:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****         GPIOx->PUPDR = temp;
  443              		.loc 1 214 36 view .LVU142
  444 01d6 8B40     		lsls	r3, r3, r1
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 15
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 15
 
 
  214:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****         GPIOx->PUPDR = temp;
@@ -898,7 +898,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  233:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****       GPIOx->MODER = temp;
  482              		.loc 1 233 12 view .LVU160
  483 01fc 1343     		orrs	r3, r3, r2
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 16
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 16
 
 
  484              	.LVL47:
@@ -958,7 +958,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  244:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****         temp |= ((uint32_t)(GPIO_GET_INDEX(GPIOx)) << (4U * (position & 0x03U)));
  523              		.loc 1 244 44 is_stmt 0 view .LVU176
  524 022a 04F00301 		and	r1, r4, #3
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 17
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 17
 
 
  244:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****         temp |= ((uint32_t)(GPIO_GET_INDEX(GPIOx)) << (4U * (position & 0x03U)));
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  282:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****     }
  283:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****   }
  284:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c **** }
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 18
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 18
 
 
  568              		.loc 1 284 1 view .LVU187
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  297:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****   uint32_t ioposition = 0x00U;
  612              		.loc 1 297 3 view .LVU192
  613              	.LVL55:
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 19
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 19
 
 
  298:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****   uint32_t iocurrent = 0x00U;
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  316:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****       tmp &= (0x0FU << (4U * (position & 0x03U)));
  317:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****       if(tmp == ((uint32_t)(GPIO_GET_INDEX(GPIOx)) << (4U * (position & 0x03U))))
  650              		.loc 1 317 29 discriminator 1 view .LVU204
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 20
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 20
 
 
  651 003e 0023     		movs	r3, #0
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  685              		.loc 1 337 48 view .LVU216
  686 0066 03F0070E 		and	lr, r3, #7
  687              		.loc 1 337 77 view .LVU217
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 21
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 21
 
 
  688 006a 4FEA8E0E 		lsl	lr, lr, #2
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  729              	.LVL64:
  310:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c **** 
  730              		.loc 1 310 5 is_stmt 1 view .LVU235
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 22
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 22
 
 
  310:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c **** 
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  317:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****       {
  770              		.loc 1 317 29 discriminator 5 view .LVU251
  771 00dc 06F58066 		add	r6, r6, #1024
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 23
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 23
 
 
  772 00e0 B442     		cmp	r4, r6
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  813 0116 8868     		ldr	r0, [r1, #8]
  325:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c **** 
  814              		.loc 1 325 20 view .LVU265
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 24
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 24
 
 
  815 0118 20EA0C00 		bic	r0, r0, ip
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  360:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****                        ##### IO operation functions #####
  361:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****  ===============================================================================
  362:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c **** 
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 25
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 25
 
 
  363:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c **** @endverbatim
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  389:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****   }
  390:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****   return bitstatus;
  882              		.loc 1 390 3 is_stmt 1 view .LVU280
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 26
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 26
 
 
  391:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c **** }
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  408:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****   * @retval None
  409:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****   */
  410:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c **** void HAL_GPIO_WritePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState)
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 27
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 27
 
 
  411:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c **** {
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  956              	.LVL83:
  413:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****   assert_param(IS_GPIO_PIN_ACTION(PinState));
  957              		.loc 1 413 3 discriminator 1 view .LVU297
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 28
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 28
 
 
  958 001a FFF7FEFF 		bl	assert_failed
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  999 0000 38B5     		push	{r3, r4, r5, lr}
  1000              		.cfi_def_cfa_offset 16
  1001              		.cfi_offset 3, -16
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 29
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 29
 
 
  1002              		.cfi_offset 4, -12
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  1042 0028 00000000 		.word	.LC0
  1043              		.cfi_endproc
  1044              	.LFE138:
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 30
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 30
 
 
  1046              		.section	.text.HAL_GPIO_LockPin,"ax",%progbits
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  1080 0010 019B     		ldr	r3, [sp, #4]
  1081 0012 2B43     		orrs	r3, r3, r5
  1082 0014 0193     		str	r3, [sp, #4]
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 31
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 31
 
 
  467:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****   /* Set LCKx bit(s): LCKK='1' + LCK[15-0] */
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  1117              		.loc 1 463 3 discriminator 1 view .LVU340
  1118 0032 40F2CF11 		movw	r1, #463
  1119              	.LVL96:
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 32
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 32
 
 
  463:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c **** 
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  1150              		@ args = 0, pretend = 0, frame = 0
  1151              		@ frame_needed = 0, uses_anonymous_args = 0
  1152              		@ link register save eliminated.
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 33
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 33
 
 
  509:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c ****   /* Prevent unused argument(s) compilation warning */
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  1195 0010 FFF7FEFF 		bl	HAL_GPIO_EXTI_Callback
  1196              	.LVL103:
  500:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c **** 
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 34
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 34
 
 
  1197              		.loc 1 500 1 is_stmt 0 view .LVU355
@@ -1998,35 +1998,35 @@ ARM GAS  C:\Temp\ccHWHhJX.s 			page 1
  1212              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
  1213              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
  1214              		.file 8 "Core/Inc/stm32f4xx_hal_conf.h"
-ARM GAS  C:\Temp\ccHWHhJX.s 			page 35
+ARM GAS  C:\Temp\cc5JHpcI.s 			page 35
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_hal_gpio.c
-  C:\Temp\ccHWHhJX.s:21     .rodata.HAL_GPIO_Init.str1.4:00000000 $d
-  C:\Temp\ccHWHhJX.s:26     .text.HAL_GPIO_Init:00000000 $t
-  C:\Temp\ccHWHhJX.s:32     .text.HAL_GPIO_Init:00000000 HAL_GPIO_Init
-  C:\Temp\ccHWHhJX.s:578    .text.HAL_GPIO_Init:00000278 $d
-  C:\Temp\ccHWHhJX.s:587    .text.HAL_GPIO_DeInit:00000000 $t
-  C:\Temp\ccHWHhJX.s:593    .text.HAL_GPIO_DeInit:00000000 HAL_GPIO_DeInit
-  C:\Temp\ccHWHhJX.s:837    .text.HAL_GPIO_DeInit:00000134 $d
-  C:\Temp\ccHWHhJX.s:845    .text.HAL_GPIO_ReadPin:00000000 $t
-  C:\Temp\ccHWHhJX.s:851    .text.HAL_GPIO_ReadPin:00000000 HAL_GPIO_ReadPin
-  C:\Temp\ccHWHhJX.s:904    .text.HAL_GPIO_ReadPin:00000024 $d
-  C:\Temp\ccHWHhJX.s:909    .text.HAL_GPIO_WritePin:00000000 $t
-  C:\Temp\ccHWHhJX.s:915    .text.HAL_GPIO_WritePin:00000000 HAL_GPIO_WritePin
-  C:\Temp\ccHWHhJX.s:980    .text.HAL_GPIO_WritePin:00000034 $d
-  C:\Temp\ccHWHhJX.s:985    .text.HAL_GPIO_TogglePin:00000000 $t
-  C:\Temp\ccHWHhJX.s:991    .text.HAL_GPIO_TogglePin:00000000 HAL_GPIO_TogglePin
-  C:\Temp\ccHWHhJX.s:1042   .text.HAL_GPIO_TogglePin:00000028 $d
-  C:\Temp\ccHWHhJX.s:1047   .text.HAL_GPIO_LockPin:00000000 $t
-  C:\Temp\ccHWHhJX.s:1053   .text.HAL_GPIO_LockPin:00000000 HAL_GPIO_LockPin
-  C:\Temp\ccHWHhJX.s:1134   .text.HAL_GPIO_LockPin:00000044 $d
-  C:\Temp\ccHWHhJX.s:1139   .text.HAL_GPIO_EXTI_Callback:00000000 $t
-  C:\Temp\ccHWHhJX.s:1145   .text.HAL_GPIO_EXTI_Callback:00000000 HAL_GPIO_EXTI_Callback
-  C:\Temp\ccHWHhJX.s:1160   .text.HAL_GPIO_EXTI_IRQHandler:00000000 $t
-  C:\Temp\ccHWHhJX.s:1166   .text.HAL_GPIO_EXTI_IRQHandler:00000000 HAL_GPIO_EXTI_IRQHandler
-  C:\Temp\ccHWHhJX.s:1202   .text.HAL_GPIO_EXTI_IRQHandler:00000018 $d
+  C:\Temp\cc5JHpcI.s:21     .rodata.HAL_GPIO_Init.str1.4:00000000 $d
+  C:\Temp\cc5JHpcI.s:26     .text.HAL_GPIO_Init:00000000 $t
+  C:\Temp\cc5JHpcI.s:32     .text.HAL_GPIO_Init:00000000 HAL_GPIO_Init
+  C:\Temp\cc5JHpcI.s:578    .text.HAL_GPIO_Init:00000278 $d
+  C:\Temp\cc5JHpcI.s:587    .text.HAL_GPIO_DeInit:00000000 $t
+  C:\Temp\cc5JHpcI.s:593    .text.HAL_GPIO_DeInit:00000000 HAL_GPIO_DeInit
+  C:\Temp\cc5JHpcI.s:837    .text.HAL_GPIO_DeInit:00000134 $d
+  C:\Temp\cc5JHpcI.s:845    .text.HAL_GPIO_ReadPin:00000000 $t
+  C:\Temp\cc5JHpcI.s:851    .text.HAL_GPIO_ReadPin:00000000 HAL_GPIO_ReadPin
+  C:\Temp\cc5JHpcI.s:904    .text.HAL_GPIO_ReadPin:00000024 $d
+  C:\Temp\cc5JHpcI.s:909    .text.HAL_GPIO_WritePin:00000000 $t
+  C:\Temp\cc5JHpcI.s:915    .text.HAL_GPIO_WritePin:00000000 HAL_GPIO_WritePin
+  C:\Temp\cc5JHpcI.s:980    .text.HAL_GPIO_WritePin:00000034 $d
+  C:\Temp\cc5JHpcI.s:985    .text.HAL_GPIO_TogglePin:00000000 $t
+  C:\Temp\cc5JHpcI.s:991    .text.HAL_GPIO_TogglePin:00000000 HAL_GPIO_TogglePin
+  C:\Temp\cc5JHpcI.s:1042   .text.HAL_GPIO_TogglePin:00000028 $d
+  C:\Temp\cc5JHpcI.s:1047   .text.HAL_GPIO_LockPin:00000000 $t
+  C:\Temp\cc5JHpcI.s:1053   .text.HAL_GPIO_LockPin:00000000 HAL_GPIO_LockPin
+  C:\Temp\cc5JHpcI.s:1134   .text.HAL_GPIO_LockPin:00000044 $d
+  C:\Temp\cc5JHpcI.s:1139   .text.HAL_GPIO_EXTI_Callback:00000000 $t
+  C:\Temp\cc5JHpcI.s:1145   .text.HAL_GPIO_EXTI_Callback:00000000 HAL_GPIO_EXTI_Callback
+  C:\Temp\cc5JHpcI.s:1160   .text.HAL_GPIO_EXTI_IRQHandler:00000000 $t
+  C:\Temp\cc5JHpcI.s:1166   .text.HAL_GPIO_EXTI_IRQHandler:00000000 HAL_GPIO_EXTI_IRQHandler
+  C:\Temp\cc5JHpcI.s:1202   .text.HAL_GPIO_EXTI_IRQHandler:00000018 $d
 
 UNDEFINED SYMBOLS
 assert_failed

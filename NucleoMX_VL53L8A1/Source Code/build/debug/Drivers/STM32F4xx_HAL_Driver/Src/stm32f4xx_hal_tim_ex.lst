@@ -1,4 +1,4 @@
-ARM GAS  C:\Temp\ccfniJxb.s 			page 1
+ARM GAS  C:\Temp\ccmom20W.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
   28:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   [..]
   29:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     The Timer Extended features include:
   30:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     (#) Complementary outputs with programmable dead-time for :
-ARM GAS  C:\Temp\ccfniJxb.s 			page 2
+ARM GAS  C:\Temp\ccmom20W.s 			page 2
 
 
   31:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****         (++) Output Compare
@@ -118,7 +118,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
   85:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   */
   86:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
   87:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** /** @defgroup TIMEx TIMEx
-ARM GAS  C:\Temp\ccfniJxb.s 			page 3
+ARM GAS  C:\Temp\ccmom20W.s 			page 3
 
 
   88:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   * @brief TIM Extended HAL module driver
@@ -178,7 +178,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  142:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   /* Check the TIM handle allocation */
  143:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   if (htim == NULL)
  144:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   {
-ARM GAS  C:\Temp\ccfniJxb.s 			page 4
+ARM GAS  C:\Temp\ccmom20W.s 			page 4
 
 
  145:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     return HAL_ERROR;
@@ -238,7 +238,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  199:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
  200:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   /* Use the TIM_TS_TI1F_ED signal to reset the TIM counter each edge detection */
  201:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   htim->Instance->SMCR &= ~TIM_SMCR_SMS;
-ARM GAS  C:\Temp\ccfniJxb.s 			page 5
+ARM GAS  C:\Temp\ccmom20W.s 			page 5
 
 
  202:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   htim->Instance->SMCR |= TIM_SLAVEMODE_RESET;
@@ -298,7 +298,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  256:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   htim->HallSensor_MspDeInitCallback(htim);
  257:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** #else
  258:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   /* DeInit the low level hardware: GPIO, CLOCK, NVIC */
-ARM GAS  C:\Temp\ccfniJxb.s 			page 6
+ARM GAS  C:\Temp\ccmom20W.s 			page 6
 
 
  259:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   HAL_TIMEx_HallSensor_MspDeInit(htim);
@@ -358,7 +358,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  313:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   * @retval HAL status
  314:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   */
  315:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** HAL_StatusTypeDef HAL_TIMEx_HallSensor_Start(TIM_HandleTypeDef *htim)
-ARM GAS  C:\Temp\ccfniJxb.s 			page 7
+ARM GAS  C:\Temp\ccmom20W.s 			page 7
 
 
  316:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** {
@@ -418,7 +418,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  370:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** {
  371:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   /* Check the parameters */
  372:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   assert_param(IS_TIM_HALL_SENSOR_INTERFACE_INSTANCE(htim->Instance));
-ARM GAS  C:\Temp\ccfniJxb.s 			page 8
+ARM GAS  C:\Temp\ccmom20W.s 			page 8
 
 
  373:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
@@ -478,7 +478,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  427:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   (in the Hall Sensor Interface the three possible channels that can be used are TIM_CHANNEL_1,
  428:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   TIM_CHANNEL_2 and TIM_CHANNEL_3) */
  429:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   TIM_CCxChannelCmd(htim->Instance, TIM_CHANNEL_1, TIM_CCx_ENABLE);
-ARM GAS  C:\Temp\ccfniJxb.s 			page 9
+ARM GAS  C:\Temp\ccmom20W.s 			page 9
 
 
  430:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
@@ -538,7 +538,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  484:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   * @param  Length The length of data to be transferred from TIM peripheral to memory.
  485:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   * @retval HAL status
  486:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   */
-ARM GAS  C:\Temp\ccfniJxb.s 			page 10
+ARM GAS  C:\Temp\ccmom20W.s 			page 10
 
 
  487:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** HAL_StatusTypeDef HAL_TIMEx_HallSensor_Start_DMA(TIM_HandleTypeDef *htim, uint32_t *pData, uint16_t
@@ -598,7 +598,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  541:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   if (IS_TIM_SLAVE_INSTANCE(htim->Instance))
  542:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   {
  543:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     tmpsmcr = htim->Instance->SMCR & TIM_SMCR_SMS;
-ARM GAS  C:\Temp\ccfniJxb.s 			page 11
+ARM GAS  C:\Temp\ccmom20W.s 			page 11
 
 
  544:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     if (!IS_TIM_SLAVEMODE_TRIGGER_ENABLED(tmpsmcr))
@@ -658,7 +658,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  598:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   ==============================================================================
  599:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****               ##### Timer Complementary Output Compare functions #####
  600:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   ==============================================================================
-ARM GAS  C:\Temp\ccfniJxb.s 			page 12
+ARM GAS  C:\Temp\ccmom20W.s 			page 12
 
 
  601:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   [..]
@@ -718,7 +718,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  655:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   }
  656:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   else
  657:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   {
-ARM GAS  C:\Temp\ccfniJxb.s 			page 13
+ARM GAS  C:\Temp\ccmom20W.s 			page 13
 
 
  658:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     __HAL_TIM_ENABLE(htim);
@@ -778,7 +778,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  712:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
  713:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   /* Check the parameters */
  714:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   assert_param(IS_TIM_CCXN_INSTANCE(htim->Instance, Channel));
-ARM GAS  C:\Temp\ccfniJxb.s 			page 14
+ARM GAS  C:\Temp\ccmom20W.s 			page 14
 
 
  715:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
@@ -838,7 +838,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  769:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****       if (!IS_TIM_SLAVEMODE_TRIGGER_ENABLED(tmpsmcr))
  770:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****       {
  771:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****         __HAL_TIM_ENABLE(htim);
-ARM GAS  C:\Temp\ccfniJxb.s 			page 15
+ARM GAS  C:\Temp\ccmom20W.s 			page 15
 
 
  772:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****       }
@@ -898,7 +898,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  826:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     default:
  827:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****       status = HAL_ERROR;
  828:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****       break;
-ARM GAS  C:\Temp\ccfniJxb.s 			page 16
+ARM GAS  C:\Temp\ccmom20W.s 			page 16
 
 
  829:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   }
@@ -958,7 +958,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  883:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   }
  884:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   else if (TIM_CHANNEL_N_STATE_GET(htim, Channel) == HAL_TIM_CHANNEL_STATE_READY)
  885:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   {
-ARM GAS  C:\Temp\ccfniJxb.s 			page 17
+ARM GAS  C:\Temp\ccmom20W.s 			page 17
 
 
  886:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     if ((pData == NULL) || (Length == 0U))
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  940:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****       __HAL_TIM_ENABLE_DMA(htim, TIM_DMA_CC2);
  941:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****       break;
  942:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     }
-ARM GAS  C:\Temp\ccfniJxb.s 			page 18
+ARM GAS  C:\Temp\ccmom20W.s 			page 18
 
 
  943:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  997:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** /**
  998:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   * @brief  Stops the TIM Output Compare signal generation in DMA mode
  999:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   *         on the complementary output.
-ARM GAS  C:\Temp\ccfniJxb.s 			page 19
+ARM GAS  C:\Temp\ccmom20W.s 			page 19
 
 
 1000:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   * @param  htim TIM Output Compare handle
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1054:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     /* Disable the Peripheral */
 1055:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     __HAL_TIM_DISABLE(htim);
 1056:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
-ARM GAS  C:\Temp\ccfniJxb.s 			page 20
+ARM GAS  C:\Temp\ccmom20W.s 			page 20
 
 
 1057:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     /* Set the TIM complementary channel state */
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1111:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   /* Set the TIM complementary channel state */
 1112:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   TIM_CHANNEL_N_STATE_SET(htim, Channel, HAL_TIM_CHANNEL_STATE_BUSY);
 1113:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
-ARM GAS  C:\Temp\ccfniJxb.s 			page 21
+ARM GAS  C:\Temp\ccmom20W.s 			page 21
 
 
 1114:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   /* Enable the complementary PWM output  */
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1168:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
 1169:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** /**
 1170:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   * @brief  Starts the PWM signal generation in interrupt mode on the
-ARM GAS  C:\Temp\ccfniJxb.s 			page 22
+ARM GAS  C:\Temp\ccmom20W.s 			page 22
 
 
 1171:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   *         complementary output.
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1225:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   if (status == HAL_OK)
 1226:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   {
 1227:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     /* Enable the TIM Break interrupt */
-ARM GAS  C:\Temp\ccfniJxb.s 			page 23
+ARM GAS  C:\Temp\ccmom20W.s 			page 23
 
 
 1228:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     __HAL_TIM_ENABLE_IT(htim, TIM_IT_BREAK);
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1282:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
 1283:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     case TIM_CHANNEL_2:
 1284:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     {
-ARM GAS  C:\Temp\ccfniJxb.s 			page 24
+ARM GAS  C:\Temp\ccmom20W.s 			page 24
 
 
 1285:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****       /* Disable the TIM Capture/Compare 2 interrupt */
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1339:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   * @retval HAL status
 1340:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   */
 1341:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** HAL_StatusTypeDef HAL_TIMEx_PWMN_Start_DMA(TIM_HandleTypeDef *htim, uint32_t Channel, const uint32_
-ARM GAS  C:\Temp\ccfniJxb.s 			page 25
+ARM GAS  C:\Temp\ccmom20W.s 			page 25
 
 
 1342:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****                                            uint16_t Length)
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1396:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****       /* Set the DMA compare callbacks */
 1397:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****       htim->hdma[TIM_DMA_ID_CC2]->XferCpltCallback = TIM_DMADelayPulseNCplt;
 1398:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****       htim->hdma[TIM_DMA_ID_CC2]->XferHalfCpltCallback = TIM_DMADelayPulseHalfCplt;
-ARM GAS  C:\Temp\ccfniJxb.s 			page 26
+ARM GAS  C:\Temp\ccmom20W.s 			page 26
 
 
 1399:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1453:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****       if (!IS_TIM_SLAVEMODE_TRIGGER_ENABLED(tmpsmcr))
 1454:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****       {
 1455:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****         __HAL_TIM_ENABLE(htim);
-ARM GAS  C:\Temp\ccfniJxb.s 			page 27
+ARM GAS  C:\Temp\ccmom20W.s 			page 27
 
 
 1456:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****       }
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1510:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     }
 1511:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
 1512:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     default:
-ARM GAS  C:\Temp\ccfniJxb.s 			page 28
+ARM GAS  C:\Temp\ccmom20W.s 			page 28
 
 
 1513:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****       status = HAL_ERROR;
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1567:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   *            @arg TIM_CHANNEL_2: TIM Channel 2 selected
 1568:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   * @retval HAL status
 1569:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   */
-ARM GAS  C:\Temp\ccfniJxb.s 			page 29
+ARM GAS  C:\Temp\ccmom20W.s 			page 29
 
 
 1570:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** HAL_StatusTypeDef HAL_TIMEx_OnePulseN_Start(TIM_HandleTypeDef *htim, uint32_t OutputChannel)
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1624:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   assert_param(IS_TIM_CCXN_INSTANCE(htim->Instance, OutputChannel));
 1625:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
 1626:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   /* Disable the complementary One Pulse output channel and the Input Capture channel */
-ARM GAS  C:\Temp\ccfniJxb.s 			page 30
+ARM GAS  C:\Temp\ccmom20W.s 			page 30
 
 
 1627:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   TIM_CCxNChannelCmd(htim->Instance, OutputChannel, TIM_CCxN_DISABLE);
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1681:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   TIM_CHANNEL_N_STATE_SET(htim, TIM_CHANNEL_1, HAL_TIM_CHANNEL_STATE_BUSY);
 1682:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   TIM_CHANNEL_N_STATE_SET(htim, TIM_CHANNEL_2, HAL_TIM_CHANNEL_STATE_BUSY);
 1683:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
-ARM GAS  C:\Temp\ccfniJxb.s 			page 31
+ARM GAS  C:\Temp\ccmom20W.s 			page 31
 
 
 1684:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   /* Enable the TIM Capture/Compare 1 interrupt */
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1738:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   TIM_CHANNEL_STATE_SET(htim, TIM_CHANNEL_2, HAL_TIM_CHANNEL_STATE_READY);
 1739:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   TIM_CHANNEL_N_STATE_SET(htim, TIM_CHANNEL_1, HAL_TIM_CHANNEL_STATE_READY);
 1740:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   TIM_CHANNEL_N_STATE_SET(htim, TIM_CHANNEL_2, HAL_TIM_CHANNEL_STATE_READY);
-ARM GAS  C:\Temp\ccfniJxb.s 			page 32
+ARM GAS  C:\Temp\ccmom20W.s 			page 32
 
 
 1741:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1795:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   /* Check the parameters */
 1796:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   assert_param(IS_TIM_COMMUTATION_EVENT_INSTANCE(htim->Instance));
 1797:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   assert_param(IS_TIM_INTERNAL_TRIGGEREVENT_SELECTION(InputTrigger));
-ARM GAS  C:\Temp\ccfniJxb.s 			page 33
+ARM GAS  C:\Temp\ccmom20W.s 			page 33
 
 
 1798:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1852:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   assert_param(IS_TIM_COMMUTATION_EVENT_INSTANCE(htim->Instance));
 1853:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   assert_param(IS_TIM_INTERNAL_TRIGGEREVENT_SELECTION(InputTrigger));
 1854:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
-ARM GAS  C:\Temp\ccfniJxb.s 			page 34
+ARM GAS  C:\Temp\ccmom20W.s 			page 34
 
 
 1855:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   __HAL_LOCK(htim);
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1909:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   assert_param(IS_TIM_COMMUTATION_EVENT_INSTANCE(htim->Instance));
 1910:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   assert_param(IS_TIM_INTERNAL_TRIGGEREVENT_SELECTION(InputTrigger));
 1911:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
-ARM GAS  C:\Temp\ccfniJxb.s 			page 35
+ARM GAS  C:\Temp\ccmom20W.s 			page 35
 
 
 1912:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   __HAL_LOCK(htim);
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1966:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   __HAL_LOCK(htim);
 1967:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
 1968:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   /* Change the handler state */
-ARM GAS  C:\Temp\ccfniJxb.s 			page 36
+ARM GAS  C:\Temp\ccmom20W.s 			page 36
 
 
 1969:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   htim->State = HAL_TIM_STATE_BUSY;
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 2023:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   assert_param(IS_TIM_OSSR_STATE(sBreakDeadTimeConfig->OffStateRunMode));
 2024:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   assert_param(IS_TIM_OSSI_STATE(sBreakDeadTimeConfig->OffStateIDLEMode));
 2025:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   assert_param(IS_TIM_LOCK_LEVEL(sBreakDeadTimeConfig->LockLevel));
-ARM GAS  C:\Temp\ccfniJxb.s 			page 37
+ARM GAS  C:\Temp\ccmom20W.s 			page 37
 
 
 2026:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   assert_param(IS_TIM_DEADTIME(sBreakDeadTimeConfig->DeadTime));
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 2080:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   *
 2081:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   *         For TIM11, the parameter can have the following values:
 2082:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   *           @arg TIM_TIM11_GPIO:     TIM11 TI1 is connected to GPIO
-ARM GAS  C:\Temp\ccfniJxb.s 			page 38
+ARM GAS  C:\Temp\ccmom20W.s 			page 38
 
 
 2083:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   *           @arg TIM_TIM11_HSE:      TIM11 TI1 is connected to HSE_RTC clock
@@ -2278,7 +2278,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 2137:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
 2138:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** @endverbatim
 2139:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   * @{
-ARM GAS  C:\Temp\ccfniJxb.s 			page 39
+ARM GAS  C:\Temp\ccmom20W.s 			page 39
 
 
 2140:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   */
@@ -2338,7 +2338,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 2194:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****                 ##### Extended Peripheral State functions #####
 2195:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   ==============================================================================
 2196:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   [..]
-ARM GAS  C:\Temp\ccfniJxb.s 			page 40
+ARM GAS  C:\Temp\ccmom20W.s 			page 40
 
 
 2197:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     This subsection permits to get in run-time the status of the peripheral
@@ -2398,7 +2398,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 2251:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   * @retval None
 2252:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   */
 2253:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** void TIMEx_DMACommutationCplt(DMA_HandleTypeDef *hdma)
-ARM GAS  C:\Temp\ccfniJxb.s 			page 41
+ARM GAS  C:\Temp\ccmom20W.s 			page 41
 
 
 2254:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** {
@@ -2458,7 +2458,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 2308:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
 2309:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     if (hdma->Init.Mode == DMA_NORMAL)
 2310:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     {
-ARM GAS  C:\Temp\ccfniJxb.s 			page 42
+ARM GAS  C:\Temp\ccmom20W.s 			page 42
 
 
 2311:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****       TIM_CHANNEL_N_STATE_SET(htim, TIM_CHANNEL_2, HAL_TIM_CHANNEL_STATE_READY);
@@ -2518,7 +2518,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 2365:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
 2366:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** #if (USE_HAL_TIM_REGISTER_CALLBACKS == 1)
 2367:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   htim->ErrorCallback(htim);
-ARM GAS  C:\Temp\ccfniJxb.s 			page 43
+ARM GAS  C:\Temp\ccmom20W.s 			page 43
 
 
 2368:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** #else
@@ -2578,7 +2578,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
   53 0016 8A40     		lsls	r2, r2, r1
   54              	.LVL3:
   55              		.loc 1 2397 14 view .LVU11
-ARM GAS  C:\Temp\ccfniJxb.s 			page 44
+ARM GAS  C:\Temp\ccmom20W.s 			page 44
 
 
   56 0018 1343     		orrs	r3, r3, r2
@@ -2638,7 +2638,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
   99 0010 E36A     		ldr	r3, [r4, #44]
 2356:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   {
  100              		.loc 1 2356 11 view .LVU25
-ARM GAS  C:\Temp\ccfniJxb.s 			page 45
+ARM GAS  C:\Temp\ccmom20W.s 			page 45
 
 
  101 0012 8342     		cmp	r3, r0
@@ -2698,7 +2698,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  140              		.loc 1 2359 5 is_stmt 1 view .LVU40
  141 003c 0123     		movs	r3, #1
  142 003e 84F84430 		strb	r3, [r4, #68]
-ARM GAS  C:\Temp\ccfniJxb.s 			page 46
+ARM GAS  C:\Temp\ccmom20W.s 			page 46
 
 
  143 0042 E8E7     		b	.L4
@@ -2758,7 +2758,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  186 0014 17D0     		beq	.L17
  187              	.L12:
 2326:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
-ARM GAS  C:\Temp\ccfniJxb.s 			page 47
+ARM GAS  C:\Temp\ccmom20W.s 			page 47
 
 
  188              		.loc 1 2326 3 is_stmt 1 view .LVU54
@@ -2818,7 +2818,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  226 003a 002B     		cmp	r3, #0
  227 003c EBD1     		bne	.L12
 2311:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     }
-ARM GAS  C:\Temp\ccfniJxb.s 			page 48
+ARM GAS  C:\Temp\ccmom20W.s 			page 48
 
 
  228              		.loc 1 2311 7 is_stmt 1 view .LVU71
@@ -2878,7 +2878,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  274      53544D33 
  274      32463478 
  274      785F4841 
-ARM GAS  C:\Temp\ccfniJxb.s 			page 49
+ARM GAS  C:\Temp\ccmom20W.s 			page 49
 
 
  275 0033 65782E63 		.ascii	"ex.c\000"
@@ -2938,7 +2938,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  320 0028 9342     		cmp	r3, r2
  321 002a 07D0     		beq	.L21
  149:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   assert_param(IS_TIM_COUNTER_MODE(htim->Init.CounterMode));
-ARM GAS  C:\Temp\ccfniJxb.s 			page 50
+ARM GAS  C:\Temp\ccmom20W.s 			page 50
 
 
  322              		.loc 1 149 3 discriminator 4 view .LVU90
@@ -2998,7 +2998,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  364 0062 0BB1     		cbz	r3, .L24
  152:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   assert_param(IS_TIM_IC_POLARITY(sConfig->IC1Polarity));
  365              		.loc 1 152 3 is_stmt 0 discriminator 1 view .LVU103
-ARM GAS  C:\Temp\ccfniJxb.s 			page 51
+ARM GAS  C:\Temp\ccmom20W.s 			page 51
 
 
  366 0064 802B     		cmp	r3, #128
@@ -3058,7 +3058,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  411              		.loc 1 152 3 discriminator 2 view .LVU112
  412 00a8 9821     		movs	r1, #152
  413 00aa 4948     		ldr	r0, .L46+4
-ARM GAS  C:\Temp\ccfniJxb.s 			page 52
+ARM GAS  C:\Temp\ccmom20W.s 			page 52
 
 
  414 00ac FFF7FEFF 		bl	assert_failed
@@ -3118,7 +3118,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  158:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   {
  460              		.loc 1 158 6 view .LVU121
  461 00f2 002B     		cmp	r3, #0
-ARM GAS  C:\Temp\ccfniJxb.s 			page 53
+ARM GAS  C:\Temp\ccmom20W.s 			page 53
 
 
  462 00f4 62D0     		beq	.L45
@@ -3178,7 +3178,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  500              		.loc 1 194 3 is_stmt 1 view .LVU137
  194:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
  501              		.loc 1 194 7 is_stmt 0 view .LVU138
-ARM GAS  C:\Temp\ccfniJxb.s 			page 54
+ARM GAS  C:\Temp\ccmom20W.s 			page 54
 
 
  502 0126 2268     		ldr	r2, [r4]
@@ -3238,7 +3238,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  538 0152 43F00403 		orr	r3, r3, #4
  539 0156 9360     		str	r3, [r2, #8]
  205:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   OC_Config.OCIdleState = TIM_OCIDLESTATE_RESET;
-ARM GAS  C:\Temp\ccfniJxb.s 			page 55
+ARM GAS  C:\Temp\ccmom20W.s 			page 55
 
 
  540              		.loc 1 205 3 is_stmt 1 view .LVU157
@@ -3298,7 +3298,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  575              		.loc 1 217 23 view .LVU176
  576 0178 23F07003 		bic	r3, r3, #112
  577 017c 5360     		str	r3, [r2, #4]
-ARM GAS  C:\Temp\ccfniJxb.s 			page 56
+ARM GAS  C:\Temp\ccmom20W.s 			page 56
 
 
  218:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
@@ -3358,7 +3358,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  616 01ac FFF7FEFF 		bl	assert_failed
  617              	.LVL28:
  618 01b0 8AE7     		b	.L29
-ARM GAS  C:\Temp\ccfniJxb.s 			page 57
+ARM GAS  C:\Temp\ccmom20W.s 			page 57
 
 
  619              	.L44:
@@ -3418,7 +3418,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  668              		@ args = 0, pretend = 0, frame = 0
  669              		@ frame_needed = 0, uses_anonymous_args = 0
  670              		@ link register save eliminated.
-ARM GAS  C:\Temp\ccfniJxb.s 			page 58
+ARM GAS  C:\Temp\ccmom20W.s 			page 58
 
 
  303:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
@@ -3478,7 +3478,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  717              		.loc 1 243 3 discriminator 5 view .LVU209
  718 002a 02F59A32 		add	r2, r2, #78848
  719 002e 9342     		cmp	r3, r2
-ARM GAS  C:\Temp\ccfniJxb.s 			page 59
+ARM GAS  C:\Temp\ccmom20W.s 			page 59
 
 
  720 0030 0BD0     		beq	.L50
@@ -3538,7 +3538,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  762              	.LVL37:
  263:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
  763              		.loc 1 263 3 discriminator 5 view .LVU222
-ARM GAS  C:\Temp\ccfniJxb.s 			page 60
+ARM GAS  C:\Temp\ccmom20W.s 			page 60
 
 
  263:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
@@ -3598,7 +3598,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  806              		.cfi_startproc
  807              		@ args = 0, pretend = 0, frame = 0
  808              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Temp\ccfniJxb.s 			page 61
+ARM GAS  C:\Temp\ccmom20W.s 			page 61
 
 
  316:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   uint32_t tmpsmcr;
@@ -3658,7 +3658,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  850 0032 9342     		cmp	r3, r2
  851 0034 0CD0     		beq	.L56
  324:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
-ARM GAS  C:\Temp\ccfniJxb.s 			page 62
+ARM GAS  C:\Temp\ccmom20W.s 			page 62
 
 
  852              		.loc 1 324 3 discriminator 3 view .LVU250
@@ -3718,7 +3718,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  893              		.loc 1 338 3 view .LVU263
  894 0070 84F84230 		strb	r3, [r4, #66]
  339:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
-ARM GAS  C:\Temp\ccfniJxb.s 			page 63
+ARM GAS  C:\Temp\ccmom20W.s 			page 63
 
 
  895              		.loc 1 339 3 view .LVU264
@@ -3778,7 +3778,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  937 00ba 0BE0     		b	.L57
  938              	.LVL50:
  939              	.L58:
-ARM GAS  C:\Temp\ccfniJxb.s 			page 64
+ARM GAS  C:\Temp\ccmom20W.s 			page 64
 
 
  349:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     if (!IS_TIM_SLAVEMODE_TRIGGER_ENABLED(tmpsmcr))
@@ -3838,7 +3838,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  980 00de 0025     		movs	r5, #0
  981              	.LVL59:
  361:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** }
-ARM GAS  C:\Temp\ccfniJxb.s 			page 65
+ARM GAS  C:\Temp\ccmom20W.s 			page 65
 
 
  982              		.loc 1 361 10 view .LVU291
@@ -3898,7 +3898,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  1031 0028 04D0     		beq	.L69
  372:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
  1032              		.loc 1 372 3 discriminator 5 view .LVU299
-ARM GAS  C:\Temp\ccfniJxb.s 			page 66
+ARM GAS  C:\Temp\ccmom20W.s 			page 66
 
 
  1033 002a 4FF4BA71 		mov	r1, #372
@@ -3958,7 +3958,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  1074              		.loc 1 390 1 is_stmt 0 discriminator 5 view .LVU312
  1075 006e 0020     		movs	r0, #0
  1076 0070 10BD     		pop	{r4, pc}
-ARM GAS  C:\Temp\ccfniJxb.s 			page 67
+ARM GAS  C:\Temp\ccmom20W.s 			page 67
 
 
  1077              	.LVL64:
@@ -4018,7 +4018,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  1123              		.loc 1 402 31 is_stmt 0 view .LVU322
  1124 0012 90F84230 		ldrb	r3, [r0, #66]	@ zero_extendqisi2
  1125 0016 5FFA83F8 		uxtb	r8, r3
-ARM GAS  C:\Temp\ccfniJxb.s 			page 68
+ARM GAS  C:\Temp\ccmom20W.s 			page 68
 
 
  1126              	.LVL68:
@@ -4078,7 +4078,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  1167              		.loc 1 411 7 view .LVU335
  1168 0058 B8F1010F 		cmp	r8, #1
  1169 005c 42D1     		bne	.L80
-ARM GAS  C:\Temp\ccfniJxb.s 			page 69
+ARM GAS  C:\Temp\ccmom20W.s 			page 69
 
 
  412:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   {
@@ -4138,7 +4138,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  1210              		.loc 1 432 7 discriminator 2 view .LVU349
  1211 009a A2F57C42 		sub	r2, r2, #64512
  1212 009e 9342     		cmp	r3, r2
-ARM GAS  C:\Temp\ccfniJxb.s 			page 70
+ARM GAS  C:\Temp\ccmom20W.s 			page 70
 
 
  1213 00a0 11D0     		beq	.L77
@@ -4198,7 +4198,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  1253              		.loc 1 446 10 view .LVU363
  1254 00d8 0025     		movs	r5, #0
  1255              	.LVL79:
-ARM GAS  C:\Temp\ccfniJxb.s 			page 71
+ARM GAS  C:\Temp\ccmom20W.s 			page 71
 
 
  446:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** }
@@ -4258,7 +4258,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  1303              		.loc 1 455 1 is_stmt 0 view .LVU372
  1304 0000 10B5     		push	{r4, lr}
  1305              		.cfi_def_cfa_offset 8
-ARM GAS  C:\Temp\ccfniJxb.s 			page 72
+ARM GAS  C:\Temp\ccmom20W.s 			page 72
 
 
  1306              		.cfi_offset 4, -8
@@ -4318,7 +4318,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  1349              		.loc 1 468 3 view .LVU383
  1350 0048 2368     		ldr	r3, [r4]
  1351 004a 196A     		ldr	r1, [r3, #32]
-ARM GAS  C:\Temp\ccfniJxb.s 			page 73
+ARM GAS  C:\Temp\ccmom20W.s 			page 73
 
 
  1352 004c 41F21112 		movw	r2, #4369
@@ -4378,7 +4378,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  1398              	.LFB142:
  488:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   uint32_t tmpsmcr;
  1399              		.loc 1 488 1 is_stmt 1 view -0
-ARM GAS  C:\Temp\ccfniJxb.s 			page 74
+ARM GAS  C:\Temp\ccmom20W.s 			page 74
 
 
  1400              		.cfi_startproc
@@ -4438,7 +4438,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  1443 0032 08D0     		beq	.L94
  494:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
  1444              		.loc 1 494 3 discriminator 4 view .LVU406
-ARM GAS  C:\Temp\ccfniJxb.s 			page 75
+ARM GAS  C:\Temp\ccmom20W.s 			page 75
 
 
  1445 0034 03F58063 		add	r3, r3, #1024
@@ -4498,7 +4498,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  1485 0064 0223     		movs	r3, #2
  1486 0066 84F83E30 		strb	r3, [r4, #62]
  512:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     }
-ARM GAS  C:\Temp\ccfniJxb.s 			page 76
+ARM GAS  C:\Temp\ccmom20W.s 			page 76
 
 
  1487              		.loc 1 512 7 view .LVU421
@@ -4558,7 +4558,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  1526              		.loc 1 532 6 view .LVU436
  1527 009a 90BB     		cbnz	r0, .L102
  538:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
-ARM GAS  C:\Temp\ccfniJxb.s 			page 77
+ARM GAS  C:\Temp\ccmom20W.s 			page 77
 
 
  1528              		.loc 1 538 3 is_stmt 1 view .LVU437
@@ -4618,7 +4618,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  1570              	.LVL102:
  544:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     {
  1571              		.loc 1 544 5 is_stmt 1 view .LVU450
-ARM GAS  C:\Temp\ccfniJxb.s 			page 78
+ARM GAS  C:\Temp\ccmom20W.s 			page 78
 
 
  544:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     {
@@ -4678,7 +4678,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  1616 0118 00000000 		.word	TIM_DMAError
  1617              		.cfi_endproc
  1618              	.LFE142:
-ARM GAS  C:\Temp\ccfniJxb.s 			page 79
+ARM GAS  C:\Temp\ccmom20W.s 			page 79
 
 
  1620              		.section	.text.HAL_TIMEx_HallSensor_Stop_DMA,"ax",%progbits
@@ -4738,7 +4738,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  1666              	.LVL112:
  1667              	.L108:
  571:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
-ARM GAS  C:\Temp\ccfniJxb.s 			page 80
+ARM GAS  C:\Temp\ccmom20W.s 			page 80
 
 
  1668              		.loc 1 571 3 is_stmt 1 view .LVU470
@@ -4798,7 +4798,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  1710 0078 10BD     		pop	{r4, pc}
  1711              	.LVL115:
  1712              	.L112:
-ARM GAS  C:\Temp\ccfniJxb.s 			page 81
+ARM GAS  C:\Temp\ccmom20W.s 			page 81
 
 
  588:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
@@ -4858,7 +4858,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  1760              		.loc 1 633 3 is_stmt 1 discriminator 5 view .LVU491
  633:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   {
  1761              		.loc 1 633 46 is_stmt 0 discriminator 5 view .LVU492
-ARM GAS  C:\Temp\ccfniJxb.s 			page 82
+ARM GAS  C:\Temp\ccmom20W.s 			page 82
 
 
  1762 0018 002D     		cmp	r5, #0
@@ -4918,7 +4918,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  1804              		.loc 1 648 7 discriminator 2 view .LVU504
  1805 0058 A2F57C42 		sub	r2, r2, #64512
  1806 005c 9342     		cmp	r3, r2
-ARM GAS  C:\Temp\ccfniJxb.s 			page 83
+ARM GAS  C:\Temp\ccmom20W.s 			page 83
 
 
  1807 005e 40D0     		beq	.L125
@@ -4978,7 +4978,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  1849              		.loc 1 633 46 discriminator 8 view .LVU516
  1850 009e 013B     		subs	r3, r3, #1
  1851 00a0 18BF     		it	ne
-ARM GAS  C:\Temp\ccfniJxb.s 			page 84
+ARM GAS  C:\Temp\ccmom20W.s 			page 84
 
 
  1852 00a2 0123     		movne	r3, #1
@@ -5038,7 +5038,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  1895              		.loc 1 650 29 is_stmt 0 view .LVU527
  1896 00e2 9A68     		ldr	r2, [r3, #8]
  650:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     if (!IS_TIM_SLAVEMODE_TRIGGER_ENABLED(tmpsmcr))
-ARM GAS  C:\Temp\ccfniJxb.s 			page 85
+ARM GAS  C:\Temp\ccmom20W.s 			page 85
 
 
  1897              		.loc 1 650 13 view .LVU528
@@ -5098,7 +5098,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  1944              		.loc 1 677 1 is_stmt 1 view -0
  1945              		.cfi_startproc
  1946              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  C:\Temp\ccfniJxb.s 			page 86
+ARM GAS  C:\Temp\ccmom20W.s 			page 86
 
 
  1947              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -5158,7 +5158,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  1991              		.loc 1 685 3 discriminator 3 view .LVU547
  1992 0038 5A6C     		ldr	r2, [r3, #68]
  1993 003a 22F40042 		bic	r2, r2, #32768
-ARM GAS  C:\Temp\ccfniJxb.s 			page 87
+ARM GAS  C:\Temp\ccmom20W.s 			page 87
 
 
  1994 003e 5A64     		str	r2, [r3, #68]
@@ -5218,7 +5218,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  691:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
  2037              		.loc 1 691 3 discriminator 2 view .LVU559
  2038 007c 042D     		cmp	r5, #4
-ARM GAS  C:\Temp\ccfniJxb.s 			page 88
+ARM GAS  C:\Temp\ccmom20W.s 			page 88
 
 
  2039 007e 05D0     		beq	.L148
@@ -5278,7 +5278,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  2088              		.loc 1 710 3 is_stmt 1 view .LVU566
  2089              	.LVL136:
  711:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
-ARM GAS  C:\Temp\ccfniJxb.s 			page 89
+ARM GAS  C:\Temp\ccmom20W.s 			page 89
 
 
  2090              		.loc 1 711 3 view .LVU567
@@ -5338,7 +5338,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  2132 003c 43F00203 		orr	r3, r3, #2
  2133 0040 D360     		str	r3, [r2, #12]
  731:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     }
-ARM GAS  C:\Temp\ccfniJxb.s 			page 90
+ARM GAS  C:\Temp\ccmom20W.s 			page 90
 
 
  2134              		.loc 1 731 7 view .LVU580
@@ -5398,7 +5398,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  2176 0086 02F59A32 		add	r2, r2, #78848
  2177 008a 9342     		cmp	r3, r2
  2178 008c 45D0     		beq	.L167
-ARM GAS  C:\Temp\ccfniJxb.s 			page 91
+ARM GAS  C:\Temp\ccmom20W.s 			page 91
 
 
  776:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     }
@@ -5458,7 +5458,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  2222              		.loc 1 717 7 discriminator 7 view .LVU603
  2223 00ca 94F84430 		ldrb	r3, [r4, #68]	@ zero_extendqisi2
  2224 00ce DBB2     		uxtb	r3, r3
-ARM GAS  C:\Temp\ccfniJxb.s 			page 92
+ARM GAS  C:\Temp\ccmom20W.s 			page 92
 
 
  717:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   {
@@ -5518,7 +5518,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  2267 010a 84F84430 		strb	r3, [r4, #68]
  725:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   {
  2268              		.loc 1 725 3 is_stmt 1 view .LVU616
-ARM GAS  C:\Temp\ccfniJxb.s 			page 93
+ARM GAS  C:\Temp\ccmom20W.s 			page 93
 
 
  2269              	.L165:
@@ -5578,7 +5578,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  2310              	.L179:
  2311              		.align	2
  2312              	.L178:
-ARM GAS  C:\Temp\ccfniJxb.s 			page 94
+ARM GAS  C:\Temp\ccmom20W.s 			page 94
 
 
  2313 0138 00000140 		.word	1073807360
@@ -5638,7 +5638,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  2360 0018 042D     		cmp	r5, #4
  2361 001a 47D0     		beq	.L183
  803:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   {
-ARM GAS  C:\Temp\ccfniJxb.s 			page 95
+ARM GAS  C:\Temp\ccmom20W.s 			page 95
 
 
  2362              		.loc 1 803 3 is_stmt 0 view .LVU639
@@ -5698,7 +5698,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  2404 004a 2068     		ldr	r0, [r4]
  2405 004c FFF7FEFF 		bl	TIM_CCxNChannelCmd
  2406              	.LVL156:
-ARM GAS  C:\Temp\ccfniJxb.s 			page 96
+ARM GAS  C:\Temp\ccmom20W.s 			page 96
 
 
  837:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     if ((tmpccer & TIM_CCER_CCxNE_MASK) == (uint32_t)RESET)
@@ -5758,7 +5758,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  2447 0086 41F21112 		movw	r2, #4369
  2448 008a 1142     		tst	r1, r2
  2449 008c 08D1     		bne	.L189
-ARM GAS  C:\Temp\ccfniJxb.s 			page 97
+ARM GAS  C:\Temp\ccmom20W.s 			page 97
 
 
  847:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
@@ -5818,7 +5818,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  2492              		.loc 1 850 5 discriminator 3 view .LVU677
  2493 00ca 0123     		movs	r3, #1
  2494 00cc 84F84330 		strb	r3, [r4, #67]
-ARM GAS  C:\Temp\ccfniJxb.s 			page 98
+ARM GAS  C:\Temp\ccmom20W.s 			page 98
 
 
  2495 00d0 0020     		movs	r0, #0
@@ -5878,7 +5878,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  2544              		.loc 1 877 3 is_stmt 0 view .LVU684
  2545 000c 874B     		ldr	r3, .L238
  2546              	.LVL164:
-ARM GAS  C:\Temp\ccfniJxb.s 			page 99
+ARM GAS  C:\Temp\ccmom20W.s 			page 99
 
 
  877:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
@@ -5938,7 +5938,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  2588 0044 0123     		moveq	r3, #1
  2589              	.L209:
  884:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   {
-ARM GAS  C:\Temp\ccfniJxb.s 			page 100
+ARM GAS  C:\Temp\ccmom20W.s 			page 100
 
 
  2590              		.loc 1 884 11 discriminator 12 view .LVU698
@@ -5998,7 +5998,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  912:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****                            Length) != HAL_OK)
  2628              		.loc 1 912 11 view .LVU715
  2629 0078 3B46     		mov	r3, r7
-ARM GAS  C:\Temp\ccfniJxb.s 			page 101
+ARM GAS  C:\Temp\ccmom20W.s 			page 101
 
 
  2630 007a 3432     		adds	r2, r2, #52
@@ -6058,7 +6058,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  2672 00c4 02F58062 		add	r2, r2, #1024
  2673 00c8 9342     		cmp	r3, r2
  2674 00ca 00F09380 		beq	.L219
-ARM GAS  C:\Temp\ccfniJxb.s 			page 102
+ARM GAS  C:\Temp\ccmom20W.s 			page 102
 
 
  979:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     {
@@ -6118,7 +6118,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  2718              		.loc 1 880 7 discriminator 4 view .LVU738
  2719 0112 94F84300 		ldrb	r0, [r4, #67]	@ zero_extendqisi2
  2720 0116 C0B2     		uxtb	r0, r0
-ARM GAS  C:\Temp\ccfniJxb.s 			page 103
+ARM GAS  C:\Temp\ccmom20W.s 			page 103
 
 
  880:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   {
@@ -6178,7 +6178,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  2765 015a 94F84430 		ldrb	r3, [r4, #68]	@ zero_extendqisi2
  2766 015e DBB2     		uxtb	r3, r3
  884:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   {
-ARM GAS  C:\Temp\ccfniJxb.s 			page 104
+ARM GAS  C:\Temp\ccmom20W.s 			page 104
 
 
  2767              		.loc 1 884 51 discriminator 7 view .LVU749
@@ -6238,7 +6238,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  2808              		.loc 1 927 56 view .LVU762
  2809 0198 274A     		ldr	r2, .L238+12
  2810 019a 1A64     		str	r2, [r3, #64]
-ARM GAS  C:\Temp\ccfniJxb.s 			page 105
+ARM GAS  C:\Temp\ccmom20W.s 			page 105
 
 
  930:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
@@ -6298,7 +6298,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  948:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
  2850              		.loc 1 948 7 is_stmt 1 view .LVU778
  948:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
-ARM GAS  C:\Temp\ccfniJxb.s 			page 106
+ARM GAS  C:\Temp\ccmom20W.s 			page 106
 
 
  2851              		.loc 1 948 17 is_stmt 0 view .LVU779
@@ -6358,7 +6358,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  982:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****       {
  2890              		.loc 1 982 10 is_stmt 0 view .LVU795
  2891 01fa 062A     		cmp	r2, #6
-ARM GAS  C:\Temp\ccfniJxb.s 			page 107
+ARM GAS  C:\Temp\ccmom20W.s 			page 107
 
 
  2892 01fc 13D0     		beq	.L229
@@ -6418,7 +6418,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  2936 0226 0020     		movs	r0, #0
  2937 0228 F2E7     		b	.L207
  2938              	.L239:
-ARM GAS  C:\Temp\ccfniJxb.s 			page 108
+ARM GAS  C:\Temp\ccmom20W.s 			page 108
 
 
  2939 022a 00BF     		.align	2
@@ -6478,7 +6478,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  2988              	.LVL184:
 1015:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   {
  2989              		.loc 1 1015 3 is_stmt 1 discriminator 5 view .LVU813
-ARM GAS  C:\Temp\ccfniJxb.s 			page 109
+ARM GAS  C:\Temp\ccmom20W.s 			page 109
 
 
  2990 0018 042D     		cmp	r5, #4
@@ -6538,7 +6538,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  3032 004a D360     		str	r3, [r2, #12]
 1021:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****       break;
  3033              		.loc 1 1021 7 view .LVU826
-ARM GAS  C:\Temp\ccfniJxb.s 			page 110
+ARM GAS  C:\Temp\ccmom20W.s 			page 110
 
 
 1021:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****       break;
@@ -6598,7 +6598,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  3076 008e 03D1     		bne	.L248
 1055:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
  3077              		.loc 1 1055 5 discriminator 3 view .LVU839
-ARM GAS  C:\Temp\ccfniJxb.s 			page 111
+ARM GAS  C:\Temp\ccmom20W.s 			page 111
 
 
  3078 0090 1A68     		ldr	r2, [r3]
@@ -6658,7 +6658,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  3120 00ce 0020     		movs	r0, #0
  3121 00d0 A8E7     		b	.L245
  3122              	.L256:
-ARM GAS  C:\Temp\ccfniJxb.s 			page 112
+ARM GAS  C:\Temp\ccmom20W.s 			page 112
 
 
 1058:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   }
@@ -6718,7 +6718,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1103:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
  3172              		.loc 1 1103 3 discriminator 5 view .LVU859
  3173 0014 FFF7FEFF 		bl	assert_failed
-ARM GAS  C:\Temp\ccfniJxb.s 			page 113
+ARM GAS  C:\Temp\ccmom20W.s 			page 113
 
 
  3174              	.LVL195:
@@ -6778,7 +6778,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1121:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   {
  3216              		.loc 1 1121 7 discriminator 1 view .LVU872
  3217 0052 B3F1804F 		cmp	r3, #1073741824
-ARM GAS  C:\Temp\ccfniJxb.s 			page 114
+ARM GAS  C:\Temp\ccmom20W.s 			page 114
 
 
  3218 0056 44D0     		beq	.L271
@@ -6838,7 +6838,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1106:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   {
  3261              		.loc 1 1106 7 discriminator 8 view .LVU884
  3262 0098 94F84530 		ldrb	r3, [r4, #69]	@ zero_extendqisi2
-ARM GAS  C:\Temp\ccfniJxb.s 			page 115
+ARM GAS  C:\Temp\ccmom20W.s 			page 115
 
 
  3263 009c DBB2     		uxtb	r3, r3
@@ -6898,7 +6898,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  3307 00e0 A9E7     		b	.L268
  3308              	.L271:
 1123:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     if (!IS_TIM_SLAVEMODE_TRIGGER_ENABLED(tmpsmcr))
-ARM GAS  C:\Temp\ccfniJxb.s 			page 116
+ARM GAS  C:\Temp\ccmom20W.s 			page 116
 
 
  3309              		.loc 1 1123 5 is_stmt 1 view .LVU895
@@ -6958,7 +6958,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  3354              		.thumb_func
  3356              	HAL_TIMEx_PWMN_Stop:
  3357              	.LVL204:
-ARM GAS  C:\Temp\ccfniJxb.s 			page 117
+ARM GAS  C:\Temp\ccmom20W.s 			page 117
 
 
  3358              	.LFB151:
@@ -7018,7 +7018,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  3402 002e 196A     		ldr	r1, [r3, #32]
  3403 0030 40F24442 		movw	r2, #1092
  3404 0034 1142     		tst	r1, r2
-ARM GAS  C:\Temp\ccfniJxb.s 			page 118
+ARM GAS  C:\Temp\ccmom20W.s 			page 118
 
 
  3405 0036 03D1     		bne	.L286
@@ -7078,7 +7078,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  3447 0074 13F0010F 		tst	r3, #1
  3448 0078 C9D0     		beq	.L284
  3449 007a CDE7     		b	.L285
-ARM GAS  C:\Temp\ccfniJxb.s 			page 119
+ARM GAS  C:\Temp\ccmom20W.s 			page 119
 
 
  3450              	.LVL210:
@@ -7138,7 +7138,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  3499              		.cfi_offset 5, -8
  3500              		.cfi_offset 14, -4
  3501 0002 0446     		mov	r4, r0
-ARM GAS  C:\Temp\ccfniJxb.s 			page 120
+ARM GAS  C:\Temp\ccmom20W.s 			page 120
 
 
  3502 0004 0D46     		mov	r5, r1
@@ -7198,7 +7198,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  3543              	.L307:
 1202:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****       break;
  3544              		.loc 1 1202 7 view .LVU948
-ARM GAS  C:\Temp\ccfniJxb.s 			page 121
+ARM GAS  C:\Temp\ccmom20W.s 			page 121
 
 
  3545 0038 2268     		ldr	r2, [r4]
@@ -7258,7 +7258,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  3587 007e 02F58062 		add	r2, r2, #1024
  3588 0082 9342     		cmp	r3, r2
  3589 0084 49D0     		beq	.L313
-ARM GAS  C:\Temp\ccfniJxb.s 			page 122
+ARM GAS  C:\Temp\ccmom20W.s 			page 122
 
 
 1237:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     {
@@ -7318,7 +7318,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  3633 00c4 18BF     		it	ne
  3634 00c6 0123     		movne	r3, #1
  3635 00c8 AEE7     		b	.L302
-ARM GAS  C:\Temp\ccfniJxb.s 			page 123
+ARM GAS  C:\Temp\ccmom20W.s 			page 123
 
 
  3636              	.L321:
@@ -7378,7 +7378,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  3678 0106 9CE7     		b	.L312
  3679              	.L323:
 1195:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
-ARM GAS  C:\Temp\ccfniJxb.s 			page 124
+ARM GAS  C:\Temp\ccmom20W.s 			page 124
 
 
  3680              		.loc 1 1195 3 is_stmt 0 view .LVU984
@@ -7438,7 +7438,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  3721              	.L317:
 1191:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   }
  3722              		.loc 1 1191 12 view .LVU998
-ARM GAS  C:\Temp\ccfniJxb.s 			page 125
+ARM GAS  C:\Temp\ccmom20W.s 			page 125
 
 
  3723 0134 0020     		movs	r0, #0
@@ -7498,7 +7498,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  3771              		.loc 1 1272 3 discriminator 5 view .LVU1006
  3772 0014 FFF7FEFF 		bl	assert_failed
  3773              	.LVL228:
-ARM GAS  C:\Temp\ccfniJxb.s 			page 126
+ARM GAS  C:\Temp\ccmom20W.s 			page 126
 
 
 1274:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   {
@@ -7558,7 +7558,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  3815              	.L332:
 1305:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
  3816              		.loc 1 1305 5 view .LVU1020
-ARM GAS  C:\Temp\ccfniJxb.s 			page 127
+ARM GAS  C:\Temp\ccmom20W.s 			page 127
 
 
  3817 0046 0022     		movs	r2, #0
@@ -7618,7 +7618,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  3858              		.loc 1 1318 5 discriminator 5 view .LVU1033
 1318:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
  3859              		.loc 1 1318 5 discriminator 5 view .LVU1034
-ARM GAS  C:\Temp\ccfniJxb.s 			page 128
+ARM GAS  C:\Temp\ccmom20W.s 			page 128
 
 
  3860 0082 2368     		ldr	r3, [r4]
@@ -7678,7 +7678,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  3903 00c2 84F84530 		strb	r3, [r4, #69]
  3904 00c6 0020     		movs	r0, #0
  3905 00c8 ACE7     		b	.L331
-ARM GAS  C:\Temp\ccfniJxb.s 			page 129
+ARM GAS  C:\Temp\ccmom20W.s 			page 129
 
 
  3906              	.L342:
@@ -7738,7 +7738,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1348:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
  3956              		.loc 1 1348 3 view .LVU1052
  3957 000a 0268     		ldr	r2, [r0]
-ARM GAS  C:\Temp\ccfniJxb.s 			page 130
+ARM GAS  C:\Temp\ccmom20W.s 			page 130
 
 
  3958              	.LVL239:
@@ -7798,7 +7798,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1355:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   {
  3999              		.loc 1 1355 51 discriminator 1 view .LVU1066
  4000 003e 012B     		cmp	r3, #1
-ARM GAS  C:\Temp\ccfniJxb.s 			page 131
+ARM GAS  C:\Temp\ccmom20W.s 			page 131
 
 
  4001 0040 14BF     		ite	ne
@@ -7858,7 +7858,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1383:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****                            Length) != HAL_OK)
  4040              		.loc 1 1383 7 is_stmt 1 view .LVU1082
 1383:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****                            Length) != HAL_OK)
-ARM GAS  C:\Temp\ccfniJxb.s 			page 132
+ARM GAS  C:\Temp\ccmom20W.s 			page 132
 
 
  4041              		.loc 1 1383 88 is_stmt 0 view .LVU1083
@@ -7918,7 +7918,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  4083 00ba A2F57C42 		sub	r2, r2, #64512
  4084 00be 9342     		cmp	r3, r2
  4085 00c0 00F09880 		beq	.L365
-ARM GAS  C:\Temp\ccfniJxb.s 			page 133
+ARM GAS  C:\Temp\ccmom20W.s 			page 133
 
 
 1450:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     {
@@ -7978,7 +7978,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  4129 010c 0020     		movne	r0, #0
  4130 010e 0120     		moveq	r0, #1
  4131 0110 8DE7     		b	.L350
-ARM GAS  C:\Temp\ccfniJxb.s 			page 134
+ARM GAS  C:\Temp\ccmom20W.s 			page 134
 
 
  4132              	.L378:
@@ -8038,7 +8038,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  4176 0156 0123     		moveq	r3, #1
  4177 0158 75E7     		b	.L355
  4178              	.L381:
-ARM GAS  C:\Temp\ccfniJxb.s 			page 135
+ARM GAS  C:\Temp\ccmom20W.s 			page 135
 
 
 1355:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   {
@@ -8098,7 +8098,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  4220              		.loc 1 1398 7 is_stmt 1 view .LVU1129
 1398:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
  4221              		.loc 1 1398 17 is_stmt 0 view .LVU1130
-ARM GAS  C:\Temp\ccfniJxb.s 			page 136
+ARM GAS  C:\Temp\ccmom20W.s 			page 136
 
 
  4222 0196 A36A     		ldr	r3, [r4, #40]
@@ -8158,7 +8158,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  4261 01c6 E36A     		ldr	r3, [r4, #44]
 1418:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****       htim->hdma[TIM_DMA_ID_CC3]->XferHalfCpltCallback = TIM_DMADelayPulseHalfCplt;
  4262              		.loc 1 1418 52 view .LVU1146
-ARM GAS  C:\Temp\ccfniJxb.s 			page 137
+ARM GAS  C:\Temp\ccmom20W.s 			page 137
 
 
  4263 01c8 1A4A     		ldr	r2, .L384+8
@@ -8218,7 +8218,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  4301              		.loc 1 1452 15 view .LVU1162
  4302 01f6 02F00702 		and	r2, r2, #7
  4303              	.LVL250:
-ARM GAS  C:\Temp\ccfniJxb.s 			page 138
+ARM GAS  C:\Temp\ccmom20W.s 			page 138
 
 
 1453:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****       {
@@ -8278,7 +8278,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  4347 0224 F4E7     		b	.L353
  4348              	.LVL255:
  4349              	.L375:
-ARM GAS  C:\Temp\ccfniJxb.s 			page 139
+ARM GAS  C:\Temp\ccmom20W.s 			page 139
 
 
 1429:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****       }
@@ -8338,7 +8338,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  4399 0012 3348     		ldr	r0, .L403+4
  4400              	.LVL259:
 1484:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
-ARM GAS  C:\Temp\ccfniJxb.s 			page 140
+ARM GAS  C:\Temp\ccmom20W.s 			page 140
 
 
  4401              		.loc 1 1484 3 discriminator 5 view .LVU1181
@@ -8398,7 +8398,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1491:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****       (void)HAL_DMA_Abort_IT(htim->hdma[TIM_DMA_ID_CC1]);
  4443              		.loc 1 1491 7 view .LVU1194
  4444 0042 2268     		ldr	r2, [r4]
-ARM GAS  C:\Temp\ccfniJxb.s 			page 141
+ARM GAS  C:\Temp\ccmom20W.s 			page 141
 
 
  4445 0044 D368     		ldr	r3, [r2, #12]
@@ -8458,7 +8458,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1526:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
  4487              		.loc 1 1526 5 discriminator 1 view .LVU1207
  4488 0086 196A     		ldr	r1, [r3, #32]
-ARM GAS  C:\Temp\ccfniJxb.s 			page 142
+ARM GAS  C:\Temp\ccmom20W.s 			page 142
 
 
  4489 0088 40F24442 		movw	r2, #1092
@@ -8518,7 +8518,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  4531              	.L401:
 1529:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   }
  4532              		.loc 1 1529 5 discriminator 3 view .LVU1220
-ARM GAS  C:\Temp\ccfniJxb.s 			page 143
+ARM GAS  C:\Temp\ccmom20W.s 			page 143
 
 
  4533 00c8 0123     		movs	r3, #1
@@ -8578,7 +8578,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1573:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   HAL_TIM_ChannelStateTypeDef channel_2_state = TIM_CHANNEL_STATE_GET(htim, TIM_CHANNEL_2);
  4584              		.loc 1 1573 3 is_stmt 1 discriminator 4 view .LVU1226
 1573:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   HAL_TIM_ChannelStateTypeDef channel_2_state = TIM_CHANNEL_STATE_GET(htim, TIM_CHANNEL_2);
-ARM GAS  C:\Temp\ccfniJxb.s 			page 144
+ARM GAS  C:\Temp\ccmom20W.s 			page 144
 
 
  4585              		.loc 1 1573 31 is_stmt 0 discriminator 4 view .LVU1227
@@ -8638,7 +8638,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  4626 0040 2FD1     		bne	.L409
 1584:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****       || (complementary_channel_2_state != HAL_TIM_CHANNEL_STATE_READY))
  4627              		.loc 1 1584 7 view .LVU1241
-ARM GAS  C:\Temp\ccfniJxb.s 			page 145
+ARM GAS  C:\Temp\ccmom20W.s 			page 145
 
 
  4628 0042 012F     		cmp	r7, #1
@@ -8698,7 +8698,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  4671 0088 0122     		movs	r2, #1
  4672 008a 5146     		mov	r1, r10
  4673 008c 2068     		ldr	r0, [r4]
-ARM GAS  C:\Temp\ccfniJxb.s 			page 146
+ARM GAS  C:\Temp\ccmom20W.s 			page 146
 
 
  4674 008e FFF7FEFF 		bl	TIM_CCxChannelCmd
@@ -8758,7 +8758,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  4721              		.loc 1 1620 1 is_stmt 1 view -0
  4722              		.cfi_startproc
  4723              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  C:\Temp\ccfniJxb.s 			page 147
+ARM GAS  C:\Temp\ccmom20W.s 			page 147
 
 
  4724              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -8818,7 +8818,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1631:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
  4769              		.loc 1 1631 3 view .LVU1271
 1631:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
-ARM GAS  C:\Temp\ccfniJxb.s 			page 148
+ARM GAS  C:\Temp\ccmom20W.s 			page 148
 
 
  4770              		.loc 1 1631 3 view .LVU1272
@@ -8878,7 +8878,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  4812              		.loc 1 1640 3 discriminator 5 view .LVU1284
  4813 007c 84F84330 		strb	r3, [r4, #67]
 1643:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** }
-ARM GAS  C:\Temp\ccfniJxb.s 			page 149
+ARM GAS  C:\Temp\ccmom20W.s 			page 149
 
 
  4814              		.loc 1 1643 3 discriminator 5 view .LVU1285
@@ -8938,7 +8938,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  4865              		.cfi_offset 14, -4
  4866 0004 0446     		mov	r4, r0
 1660:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   HAL_TIM_ChannelStateTypeDef channel_1_state = TIM_CHANNEL_STATE_GET(htim, TIM_CHANNEL_1);
-ARM GAS  C:\Temp\ccfniJxb.s 			page 150
+ARM GAS  C:\Temp\ccmom20W.s 			page 150
 
 
  4867              		.loc 1 1660 3 is_stmt 1 view .LVU1291
@@ -8998,7 +8998,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  4908              	.LVL305:
  4909              	.L433:
 1670:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****       || (channel_2_state != HAL_TIM_CHANNEL_STATE_READY)
-ARM GAS  C:\Temp\ccfniJxb.s 			page 151
+ARM GAS  C:\Temp\ccmom20W.s 			page 151
 
 
  4910              		.loc 1 1670 3 is_stmt 1 view .LVU1305
@@ -9058,7 +9058,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  4952              		.loc 1 1682 3 view .LVU1317
  4953 007a 84F84330 		strb	r3, [r4, #67]
 1685:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
-ARM GAS  C:\Temp\ccfniJxb.s 			page 152
+ARM GAS  C:\Temp\ccmom20W.s 			page 152
 
 
  4954              		.loc 1 1685 3 view .LVU1318
@@ -9118,7 +9118,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  4998              		.loc 1 1675 12 view .LVU1328
  4999 00bc 3546     		mov	r5, r6
  5000              	.LVL316:
-ARM GAS  C:\Temp\ccfniJxb.s 			page 153
+ARM GAS  C:\Temp\ccmom20W.s 			page 153
 
 
 1675:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   }
@@ -9178,7 +9178,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1718:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
  5050              		.loc 1 1718 3 discriminator 5 view .LVU1336
  5051 0018 2648     		ldr	r0, .L453+4
-ARM GAS  C:\Temp\ccfniJxb.s 			page 154
+ARM GAS  C:\Temp\ccmom20W.s 			page 154
 
 
  5052              	.LVL320:
@@ -9238,7 +9238,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  5096              		.loc 1 1731 3 discriminator 5 view .LVU1346
 1734:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
  5097              		.loc 1 1734 3 discriminator 5 view .LVU1347
-ARM GAS  C:\Temp\ccfniJxb.s 			page 155
+ARM GAS  C:\Temp\ccmom20W.s 			page 155
 
 
 1734:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
@@ -9298,7 +9298,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  5140 00a6 13F0010F 		tst	r3, #1
  5141 00aa B3D0     		beq	.L446
  5142 00ac B7E7     		b	.L447
-ARM GAS  C:\Temp\ccfniJxb.s 			page 156
+ARM GAS  C:\Temp\ccmom20W.s 			page 156
 
 
  5143              	.L454:
@@ -9358,7 +9358,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1797:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
  5192              		.loc 1 1797 3 is_stmt 1 view .LVU1367
  5193 001a 4DB1     		cbz	r5, .L457
-ARM GAS  C:\Temp\ccfniJxb.s 			page 157
+ARM GAS  C:\Temp\ccmom20W.s 			page 157
 
 
 1797:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
@@ -9418,7 +9418,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1805:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     htim->Instance->SMCR |= InputTrigger;
  5233              		.loc 1 1805 19 view .LVU1383
  5234 004e 9368     		ldr	r3, [r2, #8]
-ARM GAS  C:\Temp\ccfniJxb.s 			page 158
+ARM GAS  C:\Temp\ccmom20W.s 			page 158
 
 
 1805:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     htim->Instance->SMCR |= InputTrigger;
@@ -9478,7 +9478,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  5271              		.loc 1 1816 3 is_stmt 1 view .LVU1401
  5272 007a 2268     		ldr	r2, [r4]
  5273 007c D368     		ldr	r3, [r2, #12]
-ARM GAS  C:\Temp\ccfniJxb.s 			page 159
+ARM GAS  C:\Temp\ccmom20W.s 			page 159
 
 
  5274 007e 23F02003 		bic	r3, r3, #32
@@ -9538,7 +9538,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  5321              		.cfi_startproc
  5322              		@ args = 0, pretend = 0, frame = 0
  5323              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Temp\ccfniJxb.s 			page 160
+ARM GAS  C:\Temp\ccmom20W.s 			page 160
 
 
 1850:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   /* Check the parameters */
@@ -9598,7 +9598,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1855:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
  5367              		.loc 1 1855 3 is_stmt 1 view .LVU1422
 1855:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
-ARM GAS  C:\Temp\ccfniJxb.s 			page 161
+ARM GAS  C:\Temp\ccmom20W.s 			page 161
 
 
  5368              		.loc 1 1855 3 view .LVU1423
@@ -9658,7 +9658,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  5406              		.loc 1 1866 3 is_stmt 1 view .LVU1439
 1866:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   /* Select the Commutation event source */
  5407              		.loc 1 1866 7 is_stmt 0 view .LVU1440
-ARM GAS  C:\Temp\ccfniJxb.s 			page 162
+ARM GAS  C:\Temp\ccmom20W.s 			page 162
 
 
  5408 005e 2268     		ldr	r2, [r4]
@@ -9718,7 +9718,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  5446              	.L469:
 1880:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
  5447              		.loc 1 1880 1 is_stmt 0 view .LVU1457
-ARM GAS  C:\Temp\ccfniJxb.s 			page 163
+ARM GAS  C:\Temp\ccmom20W.s 			page 163
 
 
  5448 0094 70BD     		pop	{r4, r5, r6, pc}
@@ -9778,7 +9778,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  5498 000c 9A42     		cmp	r2, r3
  5499 000e 04D0     		beq	.L478
 1909:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   assert_param(IS_TIM_INTERNAL_TRIGGEREVENT_SELECTION(InputTrigger));
-ARM GAS  C:\Temp\ccfniJxb.s 			page 164
+ARM GAS  C:\Temp\ccmom20W.s 			page 164
 
 
  5500              		.loc 1 1909 3 discriminator 1 view .LVU1464
@@ -9838,7 +9838,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  5540 0042 03D0     		beq	.L481
 1914:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****       (InputTrigger == TIM_TS_ITR2) || (InputTrigger == TIM_TS_ITR3))
  5541              		.loc 1 1914 70 discriminator 2 view .LVU1479
-ARM GAS  C:\Temp\ccfniJxb.s 			page 165
+ARM GAS  C:\Temp\ccmom20W.s 			page 165
 
 
  5542 0044 202D     		cmp	r5, #32
@@ -9898,7 +9898,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  5579 006c 23F00403 		bic	r3, r3, #4
  5580 0070 5360     		str	r3, [r2, #4]
 1926:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
-ARM GAS  C:\Temp\ccfniJxb.s 			page 166
+ARM GAS  C:\Temp\ccmom20W.s 			page 166
 
 
  5581              		.loc 1 1926 3 is_stmt 1 view .LVU1497
@@ -9958,7 +9958,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  5619 00a0 0020     		movs	r0, #0
  5620 00a2 84F83C00 		strb	r0, [r4, #60]
 1941:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
-ARM GAS  C:\Temp\ccfniJxb.s 			page 167
+ARM GAS  C:\Temp\ccmom20W.s 			page 167
 
 
  5621              		.loc 1 1941 3 view .LVU1514
@@ -10018,7 +10018,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  5671 0004 0D46     		mov	r5, r1
 1957:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   uint32_t tmpsmcr;
  5672              		.loc 1 1957 3 is_stmt 1 view .LVU1521
-ARM GAS  C:\Temp\ccfniJxb.s 			page 168
+ARM GAS  C:\Temp\ccmom20W.s 			page 168
 
 
 1958:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
@@ -10078,7 +10078,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
 1962:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   assert_param(IS_TIM_MSM_STATE(sMasterConfig->MasterSlaveMode));
  5717              		.loc 1 1962 3 is_stmt 0 discriminator 8 view .LVU1532
  5718 004c 40F2AA71 		movw	r1, #1962
-ARM GAS  C:\Temp\ccfniJxb.s 			page 169
+ARM GAS  C:\Temp\ccmom20W.s 			page 169
 
 
  5719 0050 2648     		ldr	r0, .L500+4
@@ -10138,7 +10138,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  5760              	.LVL353:
 1978:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   /* Select the TRGO source */
  5761              		.loc 1 1978 3 is_stmt 1 discriminator 2 view .LVU1546
-ARM GAS  C:\Temp\ccfniJxb.s 			page 170
+ARM GAS  C:\Temp\ccmom20W.s 			page 170
 
 
 1978:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   /* Select the TRGO source */
@@ -10198,7 +10198,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  5801 00bc 04D1     		bne	.L496
  5802              	.L495:
 1988:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****     /* Set master mode */
-ARM GAS  C:\Temp\ccfniJxb.s 			page 171
+ARM GAS  C:\Temp\ccmom20W.s 			page 171
 
 
  5803              		.loc 1 1988 5 is_stmt 1 view .LVU1562
@@ -10258,7 +10258,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  5842 00e2 0220     		movs	r0, #2
  5843 00e4 F6E7     		b	.L494
  5844              	.L501:
-ARM GAS  C:\Temp\ccfniJxb.s 			page 172
+ARM GAS  C:\Temp\ccmom20W.s 			page 172
 
 
  5845 00e6 00BF     		.align	2
@@ -10318,7 +10318,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  5893 0018 2B68     		ldr	r3, [r5]
  5894 001a B3F5006F 		cmp	r3, #2048
  5895 001e 01D0     		beq	.L504
-ARM GAS  C:\Temp\ccfniJxb.s 			page 173
+ARM GAS  C:\Temp\ccmom20W.s 			page 173
 
 
 2023:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   assert_param(IS_TIM_OSSI_STATE(sBreakDeadTimeConfig->OffStateIDLEMode));
@@ -10378,7 +10378,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  5938 005c B3F5005F 		cmp	r3, #8192
  5939 0060 49D1     		bne	.L519
  5940              	.L509:
-ARM GAS  C:\Temp\ccfniJxb.s 			page 174
+ARM GAS  C:\Temp\ccmom20W.s 			page 174
 
 
 2029:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
@@ -10438,7 +10438,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  5981 0092 2A68     		ldr	r2, [r5]
  5982              	.LVL375:
 2041:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   MODIFY_REG(tmpbdtr, TIM_BDTR_BKE, sBreakDeadTimeConfig->BreakState);
-ARM GAS  C:\Temp\ccfniJxb.s 			page 175
+ARM GAS  C:\Temp\ccmom20W.s 			page 175
 
 
  5983              		.loc 1 2041 3 discriminator 2 view .LVU1612
@@ -10498,7 +10498,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  6022              		.loc 1 2050 3 discriminator 2 view .LVU1627
 2052:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** }
  6023              		.loc 1 2052 3 discriminator 2 view .LVU1628
-ARM GAS  C:\Temp\ccfniJxb.s 			page 176
+ARM GAS  C:\Temp\ccmom20W.s 			page 176
 
 
  6024              	.LVL386:
@@ -10558,7 +10558,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  6071              	.L520:
 2029:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
  6072              		.loc 1 2029 3 discriminator 2 view .LVU1636
-ARM GAS  C:\Temp\ccfniJxb.s 			page 177
+ARM GAS  C:\Temp\ccmom20W.s 			page 177
 
 
  6073 0102 40F2ED71 		movw	r1, #2029
@@ -10618,7 +10618,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  6123              		.loc 1 2094 3 discriminator 11 view .LVU1642
  6124 0014 184A     		ldr	r2, .L534+4
  6125 0016 9342     		cmp	r3, r2
-ARM GAS  C:\Temp\ccfniJxb.s 			page 178
+ARM GAS  C:\Temp\ccmom20W.s 			page 178
 
 
  6126 0018 24D0     		beq	.L533
@@ -10678,7 +10678,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  6165 0044 B1F5006F 		cmp	r1, #2048
  6166 0048 ECD0     		beq	.L525
 2094:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
-ARM GAS  C:\Temp\ccfniJxb.s 			page 179
+ARM GAS  C:\Temp\ccmom20W.s 			page 179
 
 
  6167              		.loc 1 2094 3 discriminator 4 view .LVU1658
@@ -10738,7 +10738,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  6216              	.LFB166:
 2148:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c ****   /* Prevent unused argument(s) compilation warning */
  6217              		.loc 1 2148 1 is_stmt 1 view -0
-ARM GAS  C:\Temp\ccfniJxb.s 			page 180
+ARM GAS  C:\Temp\ccmom20W.s 			page 180
 
 
  6218              		.cfi_startproc
@@ -10798,7 +10798,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  6265              		.weak	HAL_TIMEx_CommutHalfCpltCallback
  6266              		.syntax unified
  6267              		.thumb
-ARM GAS  C:\Temp\ccfniJxb.s 			page 181
+ARM GAS  C:\Temp\ccmom20W.s 			page 181
 
 
  6268              		.thumb_func
@@ -10858,7 +10858,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  6314              		.loc 1 2284 1 is_stmt 0 view .LVU1687
  6315 000e 08BD     		pop	{r3, pc}
  6316              		.cfi_endproc
-ARM GAS  C:\Temp\ccfniJxb.s 			page 182
+ARM GAS  C:\Temp\ccmom20W.s 			page 182
 
 
  6317              	.LFE172:
@@ -10918,7 +10918,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  6369              		.thumb_func
  6371              	HAL_TIMEx_GetChannelNState:
  6372              	.LVL412:
-ARM GAS  C:\Temp\ccfniJxb.s 			page 183
+ARM GAS  C:\Temp\ccmom20W.s 			page 183
 
 
  6373              	.LFB170:
@@ -10978,7 +10978,7 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  6415              	.LVL417:
  6416              	.L552:
 2229:Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c **** 
-ARM GAS  C:\Temp\ccfniJxb.s 			page 184
+ARM GAS  C:\Temp\ccmom20W.s 			page 184
 
 
  6417              		.loc 1 2229 3 discriminator 2 view .LVU1707
@@ -11037,133 +11037,133 @@ ARM GAS  C:\Temp\ccfniJxb.s 			page 1
  6464              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h"
  6465              		.file 9 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h"
  6466              		.file 10 "Core/Inc/stm32f4xx_hal_conf.h"
-ARM GAS  C:\Temp\ccfniJxb.s 			page 185
+ARM GAS  C:\Temp\ccmom20W.s 			page 185
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_hal_tim_ex.c
-  C:\Temp\ccfniJxb.s:21     .text.TIM_CCxNChannelCmd:00000000 $t
-  C:\Temp\ccfniJxb.s:26     .text.TIM_CCxNChannelCmd:00000000 TIM_CCxNChannelCmd
-  C:\Temp\ccfniJxb.s:64     .text.TIM_DMAErrorCCxN:00000000 $t
-  C:\Temp\ccfniJxb.s:69     .text.TIM_DMAErrorCCxN:00000000 TIM_DMAErrorCCxN
-  C:\Temp\ccfniJxb.s:148    .text.TIM_DMADelayPulseNCplt:00000000 $t
-  C:\Temp\ccfniJxb.s:153    .text.TIM_DMADelayPulseNCplt:00000000 TIM_DMADelayPulseNCplt
-  C:\Temp\ccfniJxb.s:251    .text.HAL_TIMEx_HallSensor_MspInit:00000000 $t
-  C:\Temp\ccfniJxb.s:257    .text.HAL_TIMEx_HallSensor_MspInit:00000000 HAL_TIMEx_HallSensor_MspInit
-  C:\Temp\ccfniJxb.s:272    .rodata.HAL_TIMEx_HallSensor_Init.str1.4:00000000 $d
-  C:\Temp\ccfniJxb.s:277    .text.HAL_TIMEx_HallSensor_Init:00000000 $t
-  C:\Temp\ccfniJxb.s:283    .text.HAL_TIMEx_HallSensor_Init:00000000 HAL_TIMEx_HallSensor_Init
-  C:\Temp\ccfniJxb.s:650    .text.HAL_TIMEx_HallSensor_Init:000001cc $d
-  C:\Temp\ccfniJxb.s:657    .text.HAL_TIMEx_HallSensor_MspDeInit:00000000 $t
-  C:\Temp\ccfniJxb.s:663    .text.HAL_TIMEx_HallSensor_MspDeInit:00000000 HAL_TIMEx_HallSensor_MspDeInit
-  C:\Temp\ccfniJxb.s:678    .text.HAL_TIMEx_HallSensor_DeInit:00000000 $t
-  C:\Temp\ccfniJxb.s:684    .text.HAL_TIMEx_HallSensor_DeInit:00000000 HAL_TIMEx_HallSensor_DeInit
-  C:\Temp\ccfniJxb.s:790    .text.HAL_TIMEx_HallSensor_DeInit:00000094 $d
-  C:\Temp\ccfniJxb.s:796    .text.HAL_TIMEx_HallSensor_Start:00000000 $t
-  C:\Temp\ccfniJxb.s:802    .text.HAL_TIMEx_HallSensor_Start:00000000 HAL_TIMEx_HallSensor_Start
-  C:\Temp\ccfniJxb.s:987    .text.HAL_TIMEx_HallSensor_Start:000000e4 $d
-  C:\Temp\ccfniJxb.s:993    .text.HAL_TIMEx_HallSensor_Stop:00000000 $t
-  C:\Temp\ccfniJxb.s:999    .text.HAL_TIMEx_HallSensor_Stop:00000000 HAL_TIMEx_HallSensor_Stop
-  C:\Temp\ccfniJxb.s:1082   .text.HAL_TIMEx_HallSensor_Stop:00000074 $d
-  C:\Temp\ccfniJxb.s:1088   .text.HAL_TIMEx_HallSensor_Start_IT:00000000 $t
-  C:\Temp\ccfniJxb.s:1094   .text.HAL_TIMEx_HallSensor_Start_IT:00000000 HAL_TIMEx_HallSensor_Start_IT
-  C:\Temp\ccfniJxb.s:1284   .text.HAL_TIMEx_HallSensor_Start_IT:000000ec $d
-  C:\Temp\ccfniJxb.s:1290   .text.HAL_TIMEx_HallSensor_Stop_IT:00000000 $t
-  C:\Temp\ccfniJxb.s:1296   .text.HAL_TIMEx_HallSensor_Stop_IT:00000000 HAL_TIMEx_HallSensor_Stop_IT
-  C:\Temp\ccfniJxb.s:1384   .text.HAL_TIMEx_HallSensor_Stop_IT:0000007c $d
-  C:\Temp\ccfniJxb.s:1390   .text.HAL_TIMEx_HallSensor_Start_DMA:00000000 $t
-  C:\Temp\ccfniJxb.s:1396   .text.HAL_TIMEx_HallSensor_Start_DMA:00000000 HAL_TIMEx_HallSensor_Start_DMA
-  C:\Temp\ccfniJxb.s:1612   .text.HAL_TIMEx_HallSensor_Start_DMA:00000108 $d
-  C:\Temp\ccfniJxb.s:1621   .text.HAL_TIMEx_HallSensor_Stop_DMA:00000000 $t
-  C:\Temp\ccfniJxb.s:1627   .text.HAL_TIMEx_HallSensor_Stop_DMA:00000000 HAL_TIMEx_HallSensor_Stop_DMA
-  C:\Temp\ccfniJxb.s:1716   .text.HAL_TIMEx_HallSensor_Stop_DMA:0000007c $d
-  C:\Temp\ccfniJxb.s:1722   .text.HAL_TIMEx_OCN_Start:00000000 $t
-  C:\Temp\ccfniJxb.s:1728   .text.HAL_TIMEx_OCN_Start:00000000 HAL_TIMEx_OCN_Start
-  C:\Temp\ccfniJxb.s:1929   .text.HAL_TIMEx_OCN_Start:00000100 $d
-  C:\Temp\ccfniJxb.s:1935   .text.HAL_TIMEx_OCN_Stop:00000000 $t
-  C:\Temp\ccfniJxb.s:1941   .text.HAL_TIMEx_OCN_Stop:00000000 HAL_TIMEx_OCN_Stop
-  C:\Temp\ccfniJxb.s:2060   .text.HAL_TIMEx_OCN_Stop:0000009c $d
-  C:\Temp\ccfniJxb.s:2066   .text.HAL_TIMEx_OCN_Start_IT:00000000 $t
-  C:\Temp\ccfniJxb.s:2072   .text.HAL_TIMEx_OCN_Start_IT:00000000 HAL_TIMEx_OCN_Start_IT
-  C:\Temp\ccfniJxb.s:2313   .text.HAL_TIMEx_OCN_Start_IT:00000138 $d
-  C:\Temp\ccfniJxb.s:2319   .text.HAL_TIMEx_OCN_Stop_IT:00000000 $t
-  C:\Temp\ccfniJxb.s:2325   .text.HAL_TIMEx_OCN_Stop_IT:00000000 HAL_TIMEx_OCN_Stop_IT
-  C:\Temp\ccfniJxb.s:2506   .text.HAL_TIMEx_OCN_Stop_IT:000000e0 $d
-  C:\Temp\ccfniJxb.s:2512   .text.HAL_TIMEx_OCN_Start_DMA:00000000 $t
-  C:\Temp\ccfniJxb.s:2518   .text.HAL_TIMEx_OCN_Start_DMA:00000000 HAL_TIMEx_OCN_Start_DMA
-  C:\Temp\ccfniJxb.s:2941   .text.HAL_TIMEx_OCN_Start_DMA:0000022c $d
-  C:\Temp\ccfniJxb.s:2950   .text.HAL_TIMEx_OCN_Stop_DMA:00000000 $t
-  C:\Temp\ccfniJxb.s:2956   .text.HAL_TIMEx_OCN_Stop_DMA:00000000 HAL_TIMEx_OCN_Stop_DMA
-  C:\Temp\ccfniJxb.s:3131   .text.HAL_TIMEx_OCN_Stop_DMA:000000dc $d
-  C:\Temp\ccfniJxb.s:3137   .text.HAL_TIMEx_PWMN_Start:00000000 $t
-  C:\Temp\ccfniJxb.s:3143   .text.HAL_TIMEx_PWMN_Start:00000000 HAL_TIMEx_PWMN_Start
-ARM GAS  C:\Temp\ccfniJxb.s 			page 186
+  C:\Temp\ccmom20W.s:21     .text.TIM_CCxNChannelCmd:00000000 $t
+  C:\Temp\ccmom20W.s:26     .text.TIM_CCxNChannelCmd:00000000 TIM_CCxNChannelCmd
+  C:\Temp\ccmom20W.s:64     .text.TIM_DMAErrorCCxN:00000000 $t
+  C:\Temp\ccmom20W.s:69     .text.TIM_DMAErrorCCxN:00000000 TIM_DMAErrorCCxN
+  C:\Temp\ccmom20W.s:148    .text.TIM_DMADelayPulseNCplt:00000000 $t
+  C:\Temp\ccmom20W.s:153    .text.TIM_DMADelayPulseNCplt:00000000 TIM_DMADelayPulseNCplt
+  C:\Temp\ccmom20W.s:251    .text.HAL_TIMEx_HallSensor_MspInit:00000000 $t
+  C:\Temp\ccmom20W.s:257    .text.HAL_TIMEx_HallSensor_MspInit:00000000 HAL_TIMEx_HallSensor_MspInit
+  C:\Temp\ccmom20W.s:272    .rodata.HAL_TIMEx_HallSensor_Init.str1.4:00000000 $d
+  C:\Temp\ccmom20W.s:277    .text.HAL_TIMEx_HallSensor_Init:00000000 $t
+  C:\Temp\ccmom20W.s:283    .text.HAL_TIMEx_HallSensor_Init:00000000 HAL_TIMEx_HallSensor_Init
+  C:\Temp\ccmom20W.s:650    .text.HAL_TIMEx_HallSensor_Init:000001cc $d
+  C:\Temp\ccmom20W.s:657    .text.HAL_TIMEx_HallSensor_MspDeInit:00000000 $t
+  C:\Temp\ccmom20W.s:663    .text.HAL_TIMEx_HallSensor_MspDeInit:00000000 HAL_TIMEx_HallSensor_MspDeInit
+  C:\Temp\ccmom20W.s:678    .text.HAL_TIMEx_HallSensor_DeInit:00000000 $t
+  C:\Temp\ccmom20W.s:684    .text.HAL_TIMEx_HallSensor_DeInit:00000000 HAL_TIMEx_HallSensor_DeInit
+  C:\Temp\ccmom20W.s:790    .text.HAL_TIMEx_HallSensor_DeInit:00000094 $d
+  C:\Temp\ccmom20W.s:796    .text.HAL_TIMEx_HallSensor_Start:00000000 $t
+  C:\Temp\ccmom20W.s:802    .text.HAL_TIMEx_HallSensor_Start:00000000 HAL_TIMEx_HallSensor_Start
+  C:\Temp\ccmom20W.s:987    .text.HAL_TIMEx_HallSensor_Start:000000e4 $d
+  C:\Temp\ccmom20W.s:993    .text.HAL_TIMEx_HallSensor_Stop:00000000 $t
+  C:\Temp\ccmom20W.s:999    .text.HAL_TIMEx_HallSensor_Stop:00000000 HAL_TIMEx_HallSensor_Stop
+  C:\Temp\ccmom20W.s:1082   .text.HAL_TIMEx_HallSensor_Stop:00000074 $d
+  C:\Temp\ccmom20W.s:1088   .text.HAL_TIMEx_HallSensor_Start_IT:00000000 $t
+  C:\Temp\ccmom20W.s:1094   .text.HAL_TIMEx_HallSensor_Start_IT:00000000 HAL_TIMEx_HallSensor_Start_IT
+  C:\Temp\ccmom20W.s:1284   .text.HAL_TIMEx_HallSensor_Start_IT:000000ec $d
+  C:\Temp\ccmom20W.s:1290   .text.HAL_TIMEx_HallSensor_Stop_IT:00000000 $t
+  C:\Temp\ccmom20W.s:1296   .text.HAL_TIMEx_HallSensor_Stop_IT:00000000 HAL_TIMEx_HallSensor_Stop_IT
+  C:\Temp\ccmom20W.s:1384   .text.HAL_TIMEx_HallSensor_Stop_IT:0000007c $d
+  C:\Temp\ccmom20W.s:1390   .text.HAL_TIMEx_HallSensor_Start_DMA:00000000 $t
+  C:\Temp\ccmom20W.s:1396   .text.HAL_TIMEx_HallSensor_Start_DMA:00000000 HAL_TIMEx_HallSensor_Start_DMA
+  C:\Temp\ccmom20W.s:1612   .text.HAL_TIMEx_HallSensor_Start_DMA:00000108 $d
+  C:\Temp\ccmom20W.s:1621   .text.HAL_TIMEx_HallSensor_Stop_DMA:00000000 $t
+  C:\Temp\ccmom20W.s:1627   .text.HAL_TIMEx_HallSensor_Stop_DMA:00000000 HAL_TIMEx_HallSensor_Stop_DMA
+  C:\Temp\ccmom20W.s:1716   .text.HAL_TIMEx_HallSensor_Stop_DMA:0000007c $d
+  C:\Temp\ccmom20W.s:1722   .text.HAL_TIMEx_OCN_Start:00000000 $t
+  C:\Temp\ccmom20W.s:1728   .text.HAL_TIMEx_OCN_Start:00000000 HAL_TIMEx_OCN_Start
+  C:\Temp\ccmom20W.s:1929   .text.HAL_TIMEx_OCN_Start:00000100 $d
+  C:\Temp\ccmom20W.s:1935   .text.HAL_TIMEx_OCN_Stop:00000000 $t
+  C:\Temp\ccmom20W.s:1941   .text.HAL_TIMEx_OCN_Stop:00000000 HAL_TIMEx_OCN_Stop
+  C:\Temp\ccmom20W.s:2060   .text.HAL_TIMEx_OCN_Stop:0000009c $d
+  C:\Temp\ccmom20W.s:2066   .text.HAL_TIMEx_OCN_Start_IT:00000000 $t
+  C:\Temp\ccmom20W.s:2072   .text.HAL_TIMEx_OCN_Start_IT:00000000 HAL_TIMEx_OCN_Start_IT
+  C:\Temp\ccmom20W.s:2313   .text.HAL_TIMEx_OCN_Start_IT:00000138 $d
+  C:\Temp\ccmom20W.s:2319   .text.HAL_TIMEx_OCN_Stop_IT:00000000 $t
+  C:\Temp\ccmom20W.s:2325   .text.HAL_TIMEx_OCN_Stop_IT:00000000 HAL_TIMEx_OCN_Stop_IT
+  C:\Temp\ccmom20W.s:2506   .text.HAL_TIMEx_OCN_Stop_IT:000000e0 $d
+  C:\Temp\ccmom20W.s:2512   .text.HAL_TIMEx_OCN_Start_DMA:00000000 $t
+  C:\Temp\ccmom20W.s:2518   .text.HAL_TIMEx_OCN_Start_DMA:00000000 HAL_TIMEx_OCN_Start_DMA
+  C:\Temp\ccmom20W.s:2941   .text.HAL_TIMEx_OCN_Start_DMA:0000022c $d
+  C:\Temp\ccmom20W.s:2950   .text.HAL_TIMEx_OCN_Stop_DMA:00000000 $t
+  C:\Temp\ccmom20W.s:2956   .text.HAL_TIMEx_OCN_Stop_DMA:00000000 HAL_TIMEx_OCN_Stop_DMA
+  C:\Temp\ccmom20W.s:3131   .text.HAL_TIMEx_OCN_Stop_DMA:000000dc $d
+  C:\Temp\ccmom20W.s:3137   .text.HAL_TIMEx_PWMN_Start:00000000 $t
+  C:\Temp\ccmom20W.s:3143   .text.HAL_TIMEx_PWMN_Start:00000000 HAL_TIMEx_PWMN_Start
+ARM GAS  C:\Temp\ccmom20W.s 			page 186
 
 
-  C:\Temp\ccfniJxb.s:3344   .text.HAL_TIMEx_PWMN_Start:00000100 $d
-  C:\Temp\ccfniJxb.s:3350   .text.HAL_TIMEx_PWMN_Stop:00000000 $t
-  C:\Temp\ccfniJxb.s:3356   .text.HAL_TIMEx_PWMN_Stop:00000000 HAL_TIMEx_PWMN_Stop
-  C:\Temp\ccfniJxb.s:3475   .text.HAL_TIMEx_PWMN_Stop:0000009c $d
-  C:\Temp\ccfniJxb.s:3481   .text.HAL_TIMEx_PWMN_Start_IT:00000000 $t
-  C:\Temp\ccfniJxb.s:3487   .text.HAL_TIMEx_PWMN_Start_IT:00000000 HAL_TIMEx_PWMN_Start_IT
-  C:\Temp\ccfniJxb.s:3728   .text.HAL_TIMEx_PWMN_Start_IT:00000138 $d
-  C:\Temp\ccfniJxb.s:3734   .text.HAL_TIMEx_PWMN_Stop_IT:00000000 $t
-  C:\Temp\ccfniJxb.s:3740   .text.HAL_TIMEx_PWMN_Stop_IT:00000000 HAL_TIMEx_PWMN_Stop_IT
-  C:\Temp\ccfniJxb.s:3921   .text.HAL_TIMEx_PWMN_Stop_IT:000000e0 $d
-  C:\Temp\ccfniJxb.s:3927   .text.HAL_TIMEx_PWMN_Start_DMA:00000000 $t
-  C:\Temp\ccfniJxb.s:3933   .text.HAL_TIMEx_PWMN_Start_DMA:00000000 HAL_TIMEx_PWMN_Start_DMA
-  C:\Temp\ccfniJxb.s:4356   .text.HAL_TIMEx_PWMN_Start_DMA:0000022c $d
-  C:\Temp\ccfniJxb.s:4365   .text.HAL_TIMEx_PWMN_Stop_DMA:00000000 $t
-  C:\Temp\ccfniJxb.s:4371   .text.HAL_TIMEx_PWMN_Stop_DMA:00000000 HAL_TIMEx_PWMN_Stop_DMA
-  C:\Temp\ccfniJxb.s:4546   .text.HAL_TIMEx_PWMN_Stop_DMA:000000dc $d
-  C:\Temp\ccfniJxb.s:4552   .text.HAL_TIMEx_OnePulseN_Start:00000000 $t
-  C:\Temp\ccfniJxb.s:4558   .text.HAL_TIMEx_OnePulseN_Start:00000000 HAL_TIMEx_OnePulseN_Start
-  C:\Temp\ccfniJxb.s:4706   .text.HAL_TIMEx_OnePulseN_Start:000000ac $d
-  C:\Temp\ccfniJxb.s:4712   .text.HAL_TIMEx_OnePulseN_Stop:00000000 $t
-  C:\Temp\ccfniJxb.s:4718   .text.HAL_TIMEx_OnePulseN_Stop:00000000 HAL_TIMEx_OnePulseN_Stop
-  C:\Temp\ccfniJxb.s:4836   .text.HAL_TIMEx_OnePulseN_Stop:0000009c $d
-  C:\Temp\ccfniJxb.s:4842   .text.HAL_TIMEx_OnePulseN_Start_IT:00000000 $t
-  C:\Temp\ccfniJxb.s:4848   .text.HAL_TIMEx_OnePulseN_Start_IT:00000000 HAL_TIMEx_OnePulseN_Start_IT
-  C:\Temp\ccfniJxb.s:5006   .text.HAL_TIMEx_OnePulseN_Start_IT:000000c0 $d
-  C:\Temp\ccfniJxb.s:5012   .text.HAL_TIMEx_OnePulseN_Stop_IT:00000000 $t
-  C:\Temp\ccfniJxb.s:5018   .text.HAL_TIMEx_OnePulseN_Stop_IT:00000000 HAL_TIMEx_OnePulseN_Stop_IT
-  C:\Temp\ccfniJxb.s:5146   .text.HAL_TIMEx_OnePulseN_Stop_IT:000000b0 $d
-  C:\Temp\ccfniJxb.s:5152   .text.HAL_TIMEx_ConfigCommutEvent:00000000 $t
-  C:\Temp\ccfniJxb.s:5158   .text.HAL_TIMEx_ConfigCommutEvent:00000000 HAL_TIMEx_ConfigCommutEvent
-  C:\Temp\ccfniJxb.s:5305   .text.HAL_TIMEx_ConfigCommutEvent:000000a8 $d
-  C:\Temp\ccfniJxb.s:5311   .text.HAL_TIMEx_ConfigCommutEvent_IT:00000000 $t
-  C:\Temp\ccfniJxb.s:5317   .text.HAL_TIMEx_ConfigCommutEvent_IT:00000000 HAL_TIMEx_ConfigCommutEvent_IT
-  C:\Temp\ccfniJxb.s:5464   .text.HAL_TIMEx_ConfigCommutEvent_IT:000000a8 $d
-  C:\Temp\ccfniJxb.s:5470   .text.HAL_TIMEx_ConfigCommutEvent_DMA:00000000 $t
-  C:\Temp\ccfniJxb.s:5476   .text.HAL_TIMEx_ConfigCommutEvent_DMA:00000000 HAL_TIMEx_ConfigCommutEvent_DMA
-  C:\Temp\ccfniJxb.s:5641   .text.HAL_TIMEx_ConfigCommutEvent_DMA:000000b8 $d
-  C:\Temp\ccfniJxb.s:6235   .text.TIMEx_DMACommutationCplt:00000000 TIMEx_DMACommutationCplt
-  C:\Temp\ccfniJxb.s:6291   .text.TIMEx_DMACommutationHalfCplt:00000000 TIMEx_DMACommutationHalfCplt
-  C:\Temp\ccfniJxb.s:5650   .text.HAL_TIMEx_MasterConfigSynchronization:00000000 $t
-  C:\Temp\ccfniJxb.s:5656   .text.HAL_TIMEx_MasterConfigSynchronization:00000000 HAL_TIMEx_MasterConfigSynchronization
-  C:\Temp\ccfniJxb.s:5847   .text.HAL_TIMEx_MasterConfigSynchronization:000000e8 $d
-  C:\Temp\ccfniJxb.s:5853   .text.HAL_TIMEx_ConfigBreakDeadTime:00000000 $t
-  C:\Temp\ccfniJxb.s:5859   .text.HAL_TIMEx_ConfigBreakDeadTime:00000000 HAL_TIMEx_ConfigBreakDeadTime
-  C:\Temp\ccfniJxb.s:6085   .text.HAL_TIMEx_ConfigBreakDeadTime:00000114 $d
-  C:\Temp\ccfniJxb.s:6091   .text.HAL_TIMEx_RemapConfig:00000000 $t
-  C:\Temp\ccfniJxb.s:6097   .text.HAL_TIMEx_RemapConfig:00000000 HAL_TIMEx_RemapConfig
-  C:\Temp\ccfniJxb.s:6201   .text.HAL_TIMEx_RemapConfig:00000074 $d
-  C:\Temp\ccfniJxb.s:6208   .text.HAL_TIMEx_CommutCallback:00000000 $t
-  C:\Temp\ccfniJxb.s:6214   .text.HAL_TIMEx_CommutCallback:00000000 HAL_TIMEx_CommutCallback
-  C:\Temp\ccfniJxb.s:6229   .text.TIMEx_DMACommutationCplt:00000000 $t
-  C:\Temp\ccfniJxb.s:6264   .text.HAL_TIMEx_CommutHalfCpltCallback:00000000 $t
-  C:\Temp\ccfniJxb.s:6270   .text.HAL_TIMEx_CommutHalfCpltCallback:00000000 HAL_TIMEx_CommutHalfCpltCallback
-  C:\Temp\ccfniJxb.s:6285   .text.TIMEx_DMACommutationHalfCplt:00000000 $t
-  C:\Temp\ccfniJxb.s:6320   .text.HAL_TIMEx_BreakCallback:00000000 $t
-  C:\Temp\ccfniJxb.s:6326   .text.HAL_TIMEx_BreakCallback:00000000 HAL_TIMEx_BreakCallback
-  C:\Temp\ccfniJxb.s:6341   .text.HAL_TIMEx_HallSensor_GetState:00000000 $t
-ARM GAS  C:\Temp\ccfniJxb.s 			page 187
+  C:\Temp\ccmom20W.s:3344   .text.HAL_TIMEx_PWMN_Start:00000100 $d
+  C:\Temp\ccmom20W.s:3350   .text.HAL_TIMEx_PWMN_Stop:00000000 $t
+  C:\Temp\ccmom20W.s:3356   .text.HAL_TIMEx_PWMN_Stop:00000000 HAL_TIMEx_PWMN_Stop
+  C:\Temp\ccmom20W.s:3475   .text.HAL_TIMEx_PWMN_Stop:0000009c $d
+  C:\Temp\ccmom20W.s:3481   .text.HAL_TIMEx_PWMN_Start_IT:00000000 $t
+  C:\Temp\ccmom20W.s:3487   .text.HAL_TIMEx_PWMN_Start_IT:00000000 HAL_TIMEx_PWMN_Start_IT
+  C:\Temp\ccmom20W.s:3728   .text.HAL_TIMEx_PWMN_Start_IT:00000138 $d
+  C:\Temp\ccmom20W.s:3734   .text.HAL_TIMEx_PWMN_Stop_IT:00000000 $t
+  C:\Temp\ccmom20W.s:3740   .text.HAL_TIMEx_PWMN_Stop_IT:00000000 HAL_TIMEx_PWMN_Stop_IT
+  C:\Temp\ccmom20W.s:3921   .text.HAL_TIMEx_PWMN_Stop_IT:000000e0 $d
+  C:\Temp\ccmom20W.s:3927   .text.HAL_TIMEx_PWMN_Start_DMA:00000000 $t
+  C:\Temp\ccmom20W.s:3933   .text.HAL_TIMEx_PWMN_Start_DMA:00000000 HAL_TIMEx_PWMN_Start_DMA
+  C:\Temp\ccmom20W.s:4356   .text.HAL_TIMEx_PWMN_Start_DMA:0000022c $d
+  C:\Temp\ccmom20W.s:4365   .text.HAL_TIMEx_PWMN_Stop_DMA:00000000 $t
+  C:\Temp\ccmom20W.s:4371   .text.HAL_TIMEx_PWMN_Stop_DMA:00000000 HAL_TIMEx_PWMN_Stop_DMA
+  C:\Temp\ccmom20W.s:4546   .text.HAL_TIMEx_PWMN_Stop_DMA:000000dc $d
+  C:\Temp\ccmom20W.s:4552   .text.HAL_TIMEx_OnePulseN_Start:00000000 $t
+  C:\Temp\ccmom20W.s:4558   .text.HAL_TIMEx_OnePulseN_Start:00000000 HAL_TIMEx_OnePulseN_Start
+  C:\Temp\ccmom20W.s:4706   .text.HAL_TIMEx_OnePulseN_Start:000000ac $d
+  C:\Temp\ccmom20W.s:4712   .text.HAL_TIMEx_OnePulseN_Stop:00000000 $t
+  C:\Temp\ccmom20W.s:4718   .text.HAL_TIMEx_OnePulseN_Stop:00000000 HAL_TIMEx_OnePulseN_Stop
+  C:\Temp\ccmom20W.s:4836   .text.HAL_TIMEx_OnePulseN_Stop:0000009c $d
+  C:\Temp\ccmom20W.s:4842   .text.HAL_TIMEx_OnePulseN_Start_IT:00000000 $t
+  C:\Temp\ccmom20W.s:4848   .text.HAL_TIMEx_OnePulseN_Start_IT:00000000 HAL_TIMEx_OnePulseN_Start_IT
+  C:\Temp\ccmom20W.s:5006   .text.HAL_TIMEx_OnePulseN_Start_IT:000000c0 $d
+  C:\Temp\ccmom20W.s:5012   .text.HAL_TIMEx_OnePulseN_Stop_IT:00000000 $t
+  C:\Temp\ccmom20W.s:5018   .text.HAL_TIMEx_OnePulseN_Stop_IT:00000000 HAL_TIMEx_OnePulseN_Stop_IT
+  C:\Temp\ccmom20W.s:5146   .text.HAL_TIMEx_OnePulseN_Stop_IT:000000b0 $d
+  C:\Temp\ccmom20W.s:5152   .text.HAL_TIMEx_ConfigCommutEvent:00000000 $t
+  C:\Temp\ccmom20W.s:5158   .text.HAL_TIMEx_ConfigCommutEvent:00000000 HAL_TIMEx_ConfigCommutEvent
+  C:\Temp\ccmom20W.s:5305   .text.HAL_TIMEx_ConfigCommutEvent:000000a8 $d
+  C:\Temp\ccmom20W.s:5311   .text.HAL_TIMEx_ConfigCommutEvent_IT:00000000 $t
+  C:\Temp\ccmom20W.s:5317   .text.HAL_TIMEx_ConfigCommutEvent_IT:00000000 HAL_TIMEx_ConfigCommutEvent_IT
+  C:\Temp\ccmom20W.s:5464   .text.HAL_TIMEx_ConfigCommutEvent_IT:000000a8 $d
+  C:\Temp\ccmom20W.s:5470   .text.HAL_TIMEx_ConfigCommutEvent_DMA:00000000 $t
+  C:\Temp\ccmom20W.s:5476   .text.HAL_TIMEx_ConfigCommutEvent_DMA:00000000 HAL_TIMEx_ConfigCommutEvent_DMA
+  C:\Temp\ccmom20W.s:5641   .text.HAL_TIMEx_ConfigCommutEvent_DMA:000000b8 $d
+  C:\Temp\ccmom20W.s:6235   .text.TIMEx_DMACommutationCplt:00000000 TIMEx_DMACommutationCplt
+  C:\Temp\ccmom20W.s:6291   .text.TIMEx_DMACommutationHalfCplt:00000000 TIMEx_DMACommutationHalfCplt
+  C:\Temp\ccmom20W.s:5650   .text.HAL_TIMEx_MasterConfigSynchronization:00000000 $t
+  C:\Temp\ccmom20W.s:5656   .text.HAL_TIMEx_MasterConfigSynchronization:00000000 HAL_TIMEx_MasterConfigSynchronization
+  C:\Temp\ccmom20W.s:5847   .text.HAL_TIMEx_MasterConfigSynchronization:000000e8 $d
+  C:\Temp\ccmom20W.s:5853   .text.HAL_TIMEx_ConfigBreakDeadTime:00000000 $t
+  C:\Temp\ccmom20W.s:5859   .text.HAL_TIMEx_ConfigBreakDeadTime:00000000 HAL_TIMEx_ConfigBreakDeadTime
+  C:\Temp\ccmom20W.s:6085   .text.HAL_TIMEx_ConfigBreakDeadTime:00000114 $d
+  C:\Temp\ccmom20W.s:6091   .text.HAL_TIMEx_RemapConfig:00000000 $t
+  C:\Temp\ccmom20W.s:6097   .text.HAL_TIMEx_RemapConfig:00000000 HAL_TIMEx_RemapConfig
+  C:\Temp\ccmom20W.s:6201   .text.HAL_TIMEx_RemapConfig:00000074 $d
+  C:\Temp\ccmom20W.s:6208   .text.HAL_TIMEx_CommutCallback:00000000 $t
+  C:\Temp\ccmom20W.s:6214   .text.HAL_TIMEx_CommutCallback:00000000 HAL_TIMEx_CommutCallback
+  C:\Temp\ccmom20W.s:6229   .text.TIMEx_DMACommutationCplt:00000000 $t
+  C:\Temp\ccmom20W.s:6264   .text.HAL_TIMEx_CommutHalfCpltCallback:00000000 $t
+  C:\Temp\ccmom20W.s:6270   .text.HAL_TIMEx_CommutHalfCpltCallback:00000000 HAL_TIMEx_CommutHalfCpltCallback
+  C:\Temp\ccmom20W.s:6285   .text.TIMEx_DMACommutationHalfCplt:00000000 $t
+  C:\Temp\ccmom20W.s:6320   .text.HAL_TIMEx_BreakCallback:00000000 $t
+  C:\Temp\ccmom20W.s:6326   .text.HAL_TIMEx_BreakCallback:00000000 HAL_TIMEx_BreakCallback
+  C:\Temp\ccmom20W.s:6341   .text.HAL_TIMEx_HallSensor_GetState:00000000 $t
+ARM GAS  C:\Temp\ccmom20W.s 			page 187
 
 
-  C:\Temp\ccfniJxb.s:6347   .text.HAL_TIMEx_HallSensor_GetState:00000000 HAL_TIMEx_HallSensor_GetState
-  C:\Temp\ccfniJxb.s:6365   .text.HAL_TIMEx_GetChannelNState:00000000 $t
-  C:\Temp\ccfniJxb.s:6371   .text.HAL_TIMEx_GetChannelNState:00000000 HAL_TIMEx_GetChannelNState
-  C:\Temp\ccfniJxb.s:6451   .text.HAL_TIMEx_GetChannelNState:00000050 $d
+  C:\Temp\ccmom20W.s:6347   .text.HAL_TIMEx_HallSensor_GetState:00000000 HAL_TIMEx_HallSensor_GetState
+  C:\Temp\ccmom20W.s:6365   .text.HAL_TIMEx_GetChannelNState:00000000 $t
+  C:\Temp\ccmom20W.s:6371   .text.HAL_TIMEx_GetChannelNState:00000000 HAL_TIMEx_GetChannelNState
+  C:\Temp\ccmom20W.s:6451   .text.HAL_TIMEx_GetChannelNState:00000050 $d
 
 UNDEFINED SYMBOLS
 HAL_TIM_ErrorCallback

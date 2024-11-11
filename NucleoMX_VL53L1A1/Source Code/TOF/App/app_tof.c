@@ -41,11 +41,6 @@ static int32_t status = 0;
 static uint8_t ToF_Present[RANGING_SENSOR_INSTANCES_NBR] = {0};
 volatile uint8_t ToF_EventDetected = 0;
 
-extern RANGING_SENSOR_Result_t TOF_left;
-extern RANGING_SENSOR_Result_t TOF_centre;
-extern RANGING_SENSOR_Result_t TOF_right;
-
-
 static const char *TofDevStr[] =
 {
   [VL53L1A2_DEV_LEFT] = "LEFT",
