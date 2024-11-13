@@ -104,7 +104,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
   // BSP_LED_Init(LED2);
-  BSP_LED_On(LED2);
+  // BSP_LED_On(LED2);
   // BSP_COM_Init(COM1);
   /* USER CODE END 2 */
 
@@ -122,6 +122,7 @@ int main(void)
         bigBuffer[numberOfSimulinkBytes+3+2] == expectedTerminator[2]){
           if (calibrated == 0){
             receivedFromSimulink(&bigBuffer);
+            BSP_LED_On(LED2);
             calibrated = 1;
           }
     }
