@@ -1,4 +1,4 @@
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
   29:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****  * @{
   30:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****  */
   31:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** 
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 2
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 2
 
 
   32:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** /** @defgroup STM32F4XX_NUCLEO_LOW_LEVEL STM32F4XX_NUCLEO LOW LEVEL
@@ -118,7 +118,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
   86:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** #if (USE_BSP_COM_FEATURE > 0)
   87:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** static void USART2_MspInit(UART_HandleTypeDef *huart);
   88:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** static void USART2_MspDeInit(UART_HandleTypeDef *huart);
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 3
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 3
 
 
   89:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** #endif
@@ -178,7 +178,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  143:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****  */
  144:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** int32_t BSP_LED_On(Led_TypeDef Led)
  145:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** {
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 4
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 4
 
 
  146:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****   HAL_GPIO_WritePin(LED_PORT [Led], LED_PIN [Led], GPIO_PIN_SET);
@@ -238,7 +238,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  200:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****   * @brief
  201:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****   * @retval None
  202:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****   */
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 5
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 5
 
 
  203:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** static void LED_USER_GPIO_Init(void) {
@@ -298,7 +298,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
   73 0030 1B6B     		ldr	r3, [r3, #48]
   74 0032 03F00103 		and	r3, r3, #1
   75 0036 0293     		str	r3, [sp, #8]
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 6
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 6
 
 
   76              		.loc 1 211 3 view .LVU13
@@ -358,7 +358,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  119              		.section	.text.BUTTON_USER_GPIO_Init,"ax",%progbits
  120              		.align	1
  121              		.syntax unified
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 7
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 7
 
 
  122              		.thumb
@@ -418,7 +418,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  274:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****  * @note PB DeInit does not disable the GPIO clock
  275:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****  * @retval BSP status
  276:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****  */
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 8
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 8
 
 
  277:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** int32_t BSP_PB_DeInit(Button_TypeDef Button)
@@ -478,7 +478,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  331:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** 
  332:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** /**
  333:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****   * @brief
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 9
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 9
 
 
  334:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****   * @retval None
@@ -538,7 +538,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  170 0030 136B     		ldr	r3, [r2, #48]
  171 0032 03F00403 		and	r3, r3, #4
  172 0036 0293     		str	r3, [sp, #8]
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 10
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 10
 
 
  173              		.loc 1 344 3 view .LVU39
@@ -598,7 +598,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  361:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****  * @retval BSP error code
  362:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****  */
  363:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** int32_t BSP_COM_Init(COM_TypeDef COM)
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 11
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 11
 
 
  364:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** {
@@ -658,7 +658,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  418:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****     if(HAL_UART_DeInit(&hcom_uart[COM]) != HAL_OK)
  419:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****     {
  420:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****       ret = BSP_ERROR_PERIPH_FAILURE;
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 12
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 12
 
 
  421:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****     }
@@ -718,7 +718,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  475:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****     __HAL_UART_RESET_HANDLE_STATE(&hcom_uart[COM]);
  476:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** 
  477:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****     /* Register default MspInit/MspDeInit Callback */
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 13
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 13
 
 
  478:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****     if(HAL_UART_RegisterCallback(&hcom_uart[COM], HAL_UART_MSPINIT_CB_ID, USART2_MspInit) != HAL_OK
@@ -778,7 +778,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  532:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** 
  533:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** #if (USE_COM_LOG > 0)
  534:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** /**
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 14
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 14
 
 
  535:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****  * @brief  Select the active COM port.
@@ -838,7 +838,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  589:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****   return ch;
  590:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** }
  591:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** #endif /* For IAR */
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 15
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 15
 
 
  592:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** #endif /* USE_COM_LOG */
@@ -898,7 +898,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  249              	.LBB7:
  250              		.loc 1 609 5 view .LVU58
  251 0020 0295     		str	r5, [sp, #8]
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 16
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 16
 
 
  252              		.loc 1 609 5 view .LVU59
@@ -958,7 +958,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  622:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
  294              		.loc 1 622 5 is_stmt 1 view .LVU77
  295              		.loc 1 622 26 is_stmt 0 view .LVU78
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 17
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 17
 
 
  296 0056 CDF81080 		str	r8, [sp, #16]
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  637:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****     hdma_usart2_rx.Init.Mode = DMA_CIRCULAR;
  336              		.loc 1 637 5 is_stmt 1 view .LVU100
  337              		.loc 1 637 30 is_stmt 0 view .LVU101
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 18
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 18
 
 
  338 0082 4FF48073 		mov	r3, #256
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  650:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** {
  382              		.loc 1 650 1 is_stmt 1 view -0
  383              		.cfi_startproc
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 19
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 19
 
 
  384              		@ args = 0, pretend = 0, frame = 0
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  418              	.LVL14:
  419              	.L16:
  420              		.loc 1 670 1 view .LVU121
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 20
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 20
 
 
  421              		.align	2
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  110:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** }
  472              		.loc 1 110 3 view .LVU129
  111:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** 
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 21
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 21
 
 
  473              		.loc 1 111 1 is_stmt 0 view .LVU130
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  519              		.loc 1 132 1 is_stmt 0 view .LVU140
  520 001a 0020     		movs	r0, #0
  521 001c 06B0     		add	sp, sp, #24
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 22
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 22
 
 
  522              		.cfi_def_cfa_offset 8
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  573              		.syntax unified
  574              		.thumb
  575              		.thumb_func
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 23
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 23
 
 
  577              	BSP_LED_Off:
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  625              		.cfi_offset 3, -8
  626              		.cfi_offset 14, -4
  180:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** 
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 24
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 24
 
 
  627              		.loc 1 180 3 is_stmt 1 view .LVU155
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  674 000e 4009     		lsrs	r0, r0, #5
  675 0010 08BD     		pop	{r3, pc}
  676              	.L39:
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 25
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 25
 
 
  677 0012 00BF     		.align	2
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  722              	.L40:
  267:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** 
  723              		.loc 1 267 1 view .LVU176
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 26
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 26
 
 
  724 0010 38BD     		pop	{r3, r4, r5, pc}
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  266:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** }
  767              		.loc 1 266 3 is_stmt 1 view .LVU188
  266:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** }
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 27
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 27
 
 
  768              		.loc 1 266 10 is_stmt 0 view .LVU189
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  285:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** }
  816              		.loc 1 285 3 view .LVU198
  286:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** 
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 28
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 28
 
 
  817              		.loc 1 286 1 is_stmt 0 view .LVU199
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  868              		.section	.text.BSP_PB_IRQHandler,"ax",%progbits
  869              		.align	1
  870              		.global	BSP_PB_IRQHandler
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 29
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 29
 
 
  871              		.syntax unified
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  920 0000 7047     		bx	lr
  921              		.cfi_endproc
  922              	.LFE146:
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 30
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 30
 
 
  924              		.section	.text.BUTTON_USER_EXTI_Callback,"ax",%progbits
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  412:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** 
  973              		.loc 1 412 5 is_stmt 1 view .LVU222
  412:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** 
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 31
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 31
 
 
  974              		.loc 1 412 40 is_stmt 0 view .LVU223
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  424:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** }
  1017              		.loc 1 424 10 is_stmt 0 view .LVU235
  1018 0034 F8E7     		b	.L64
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 32
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 32
 
 
  1019              	.L73:
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  1063              		.loc 1 446 3 is_stmt 1 view .LVU247
  446:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****   huart->Init.Mode = UART_MODE_TX_RX;
  1064              		.loc 1 446 22 is_stmt 0 view .LVU248
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 33
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 33
 
 
  1065 0010 0261     		str	r2, [r0, #16]
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  1108              		.cfi_startproc
  1109              		@ args = 0, pretend = 0, frame = 0
  1110              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 34
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 34
 
 
  365:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** 
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  369:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****   }
  1152              		.loc 1 369 9 view .LVU275
  1153 002a 6FF00100 		mvn	r0, #1
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 35
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 35
 
 
  1154              	.LVL73:
@@ -2098,7 +2098,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  1200 000a 1870     		strb	r0, [r3]
  1201              	.L91:
  546:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c **** }
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 36
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 36
 
 
  1202              		.loc 1 546 3 is_stmt 1 view .LVU286
@@ -2158,7 +2158,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  588:Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c ****   return ch;
  1250              		.loc 1 588 9 view .LVU295
  1251 0018 044C     		ldr	r4, .L96+4
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 37
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 37
 
 
  1252 001a 2044     		add	r0, r0, r4
@@ -2218,7 +2218,7 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  1307              		.file 3 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
  1308              		.file 4 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
  1309              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 38
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 38
 
 
  1310              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
@@ -2227,86 +2227,86 @@ ARM GAS  C:\Temp\ccu5jQ7d.s 			page 1
  1313              		.file 9 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h"
  1314              		.file 10 "Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.h"
  1315              		.file 11 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h"
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 39
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 39
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_nucleo.c
-  C:\Temp\ccu5jQ7d.s:21     .text.LED_USER_GPIO_Init:00000000 $t
-  C:\Temp\ccu5jQ7d.s:26     .text.LED_USER_GPIO_Init:00000000 LED_USER_GPIO_Init
-  C:\Temp\ccu5jQ7d.s:114    .text.LED_USER_GPIO_Init:00000060 $d
-  C:\Temp\ccu5jQ7d.s:120    .text.BUTTON_USER_GPIO_Init:00000000 $t
-  C:\Temp\ccu5jQ7d.s:125    .text.BUTTON_USER_GPIO_Init:00000000 BUTTON_USER_GPIO_Init
-  C:\Temp\ccu5jQ7d.s:199    .text.BUTTON_USER_GPIO_Init:00000054 $d
-  C:\Temp\ccu5jQ7d.s:205    .text.USART2_MspInit:00000000 $t
-  C:\Temp\ccu5jQ7d.s:210    .text.USART2_MspInit:00000000 USART2_MspInit
-  C:\Temp\ccu5jQ7d.s:366    .text.USART2_MspInit:0000009c $d
-  C:\Temp\ccu5jQ7d.s:1275   .bss.hdma_usart2_rx:00000000 hdma_usart2_rx
-  C:\Temp\ccu5jQ7d.s:374    .text.USART2_MspDeInit:00000000 $t
-  C:\Temp\ccu5jQ7d.s:379    .text.USART2_MspDeInit:00000000 USART2_MspDeInit
-  C:\Temp\ccu5jQ7d.s:423    .text.USART2_MspDeInit:00000028 $d
-  C:\Temp\ccu5jQ7d.s:429    .text.BSP_GetVersion:00000000 $t
-  C:\Temp\ccu5jQ7d.s:435    .text.BSP_GetVersion:00000000 BSP_GetVersion
-  C:\Temp\ccu5jQ7d.s:450    .text.BSP_LED_Init:00000000 $t
-  C:\Temp\ccu5jQ7d.s:456    .text.BSP_LED_Init:00000000 BSP_LED_Init
-  C:\Temp\ccu5jQ7d.s:480    .text.BSP_LED_DeInit:00000000 $t
-  C:\Temp\ccu5jQ7d.s:486    .text.BSP_LED_DeInit:00000000 BSP_LED_DeInit
-  C:\Temp\ccu5jQ7d.s:528    .text.BSP_LED_DeInit:00000020 $d
-  C:\Temp\ccu5jQ7d.s:533    .text.BSP_LED_On:00000000 $t
-  C:\Temp\ccu5jQ7d.s:539    .text.BSP_LED_On:00000000 BSP_LED_On
-  C:\Temp\ccu5jQ7d.s:566    .text.BSP_LED_On:00000010 $d
-  C:\Temp\ccu5jQ7d.s:571    .text.BSP_LED_Off:00000000 $t
-  C:\Temp\ccu5jQ7d.s:577    .text.BSP_LED_Off:00000000 BSP_LED_Off
-  C:\Temp\ccu5jQ7d.s:604    .text.BSP_LED_Off:00000010 $d
-  C:\Temp\ccu5jQ7d.s:609    .text.BSP_LED_Toggle:00000000 $t
-  C:\Temp\ccu5jQ7d.s:615    .text.BSP_LED_Toggle:00000000 BSP_LED_Toggle
-  C:\Temp\ccu5jQ7d.s:641    .text.BSP_LED_Toggle:00000010 $d
-  C:\Temp\ccu5jQ7d.s:646    .text.BSP_LED_GetState:00000000 $t
-  C:\Temp\ccu5jQ7d.s:652    .text.BSP_LED_GetState:00000000 BSP_LED_GetState
-  C:\Temp\ccu5jQ7d.s:679    .text.BSP_LED_GetState:00000014 $d
-  C:\Temp\ccu5jQ7d.s:684    .text.BSP_PB_Init:00000000 $t
-  C:\Temp\ccu5jQ7d.s:690    .text.BSP_PB_Init:00000000 BSP_PB_Init
-  C:\Temp\ccu5jQ7d.s:773    .text.BSP_PB_Init:00000050 $d
-  C:\Temp\ccu5jQ7d.s:1301   .data.hpb_exti:00000000 hpb_exti
-  C:\Temp\ccu5jQ7d.s:930    .text.BUTTON_USER_EXTI_Callback:00000000 BUTTON_USER_EXTI_Callback
-  C:\Temp\ccu5jQ7d.s:780    .text.BSP_PB_DeInit:00000000 $t
-  C:\Temp\ccu5jQ7d.s:786    .text.BSP_PB_DeInit:00000000 BSP_PB_DeInit
-  C:\Temp\ccu5jQ7d.s:826    .text.BSP_PB_DeInit:00000020 $d
-  C:\Temp\ccu5jQ7d.s:831    .text.BSP_PB_GetState:00000000 $t
-  C:\Temp\ccu5jQ7d.s:837    .text.BSP_PB_GetState:00000000 BSP_PB_GetState
-  C:\Temp\ccu5jQ7d.s:864    .text.BSP_PB_GetState:00000014 $d
-  C:\Temp\ccu5jQ7d.s:869    .text.BSP_PB_IRQHandler:00000000 $t
-  C:\Temp\ccu5jQ7d.s:875    .text.BSP_PB_IRQHandler:00000000 BSP_PB_IRQHandler
-  C:\Temp\ccu5jQ7d.s:899    .text.BSP_PB_IRQHandler:00000010 $d
-  C:\Temp\ccu5jQ7d.s:904    .text.BSP_PB_Callback:00000000 $t
-  C:\Temp\ccu5jQ7d.s:910    .text.BSP_PB_Callback:00000000 BSP_PB_Callback
-  C:\Temp\ccu5jQ7d.s:925    .text.BUTTON_USER_EXTI_Callback:00000000 $t
-  C:\Temp\ccu5jQ7d.s:950    .text.BSP_COM_DeInit:00000000 $t
-  C:\Temp\ccu5jQ7d.s:956    .text.BSP_COM_DeInit:00000000 BSP_COM_DeInit
-  C:\Temp\ccu5jQ7d.s:1022   .text.BSP_COM_DeInit:00000038 $d
-  C:\Temp\ccu5jQ7d.s:1294   .data.COM_USART:00000000 COM_USART
-  C:\Temp\ccu5jQ7d.s:1287   .bss.hcom_uart:00000000 hcom_uart
-  C:\Temp\ccu5jQ7d.s:1028   .text.MX_USART2_UART_Init:00000000 $t
-ARM GAS  C:\Temp\ccu5jQ7d.s 			page 40
+  C:\Temp\ccPfBcqY.s:21     .text.LED_USER_GPIO_Init:00000000 $t
+  C:\Temp\ccPfBcqY.s:26     .text.LED_USER_GPIO_Init:00000000 LED_USER_GPIO_Init
+  C:\Temp\ccPfBcqY.s:114    .text.LED_USER_GPIO_Init:00000060 $d
+  C:\Temp\ccPfBcqY.s:120    .text.BUTTON_USER_GPIO_Init:00000000 $t
+  C:\Temp\ccPfBcqY.s:125    .text.BUTTON_USER_GPIO_Init:00000000 BUTTON_USER_GPIO_Init
+  C:\Temp\ccPfBcqY.s:199    .text.BUTTON_USER_GPIO_Init:00000054 $d
+  C:\Temp\ccPfBcqY.s:205    .text.USART2_MspInit:00000000 $t
+  C:\Temp\ccPfBcqY.s:210    .text.USART2_MspInit:00000000 USART2_MspInit
+  C:\Temp\ccPfBcqY.s:366    .text.USART2_MspInit:0000009c $d
+  C:\Temp\ccPfBcqY.s:1275   .bss.hdma_usart2_rx:00000000 hdma_usart2_rx
+  C:\Temp\ccPfBcqY.s:374    .text.USART2_MspDeInit:00000000 $t
+  C:\Temp\ccPfBcqY.s:379    .text.USART2_MspDeInit:00000000 USART2_MspDeInit
+  C:\Temp\ccPfBcqY.s:423    .text.USART2_MspDeInit:00000028 $d
+  C:\Temp\ccPfBcqY.s:429    .text.BSP_GetVersion:00000000 $t
+  C:\Temp\ccPfBcqY.s:435    .text.BSP_GetVersion:00000000 BSP_GetVersion
+  C:\Temp\ccPfBcqY.s:450    .text.BSP_LED_Init:00000000 $t
+  C:\Temp\ccPfBcqY.s:456    .text.BSP_LED_Init:00000000 BSP_LED_Init
+  C:\Temp\ccPfBcqY.s:480    .text.BSP_LED_DeInit:00000000 $t
+  C:\Temp\ccPfBcqY.s:486    .text.BSP_LED_DeInit:00000000 BSP_LED_DeInit
+  C:\Temp\ccPfBcqY.s:528    .text.BSP_LED_DeInit:00000020 $d
+  C:\Temp\ccPfBcqY.s:533    .text.BSP_LED_On:00000000 $t
+  C:\Temp\ccPfBcqY.s:539    .text.BSP_LED_On:00000000 BSP_LED_On
+  C:\Temp\ccPfBcqY.s:566    .text.BSP_LED_On:00000010 $d
+  C:\Temp\ccPfBcqY.s:571    .text.BSP_LED_Off:00000000 $t
+  C:\Temp\ccPfBcqY.s:577    .text.BSP_LED_Off:00000000 BSP_LED_Off
+  C:\Temp\ccPfBcqY.s:604    .text.BSP_LED_Off:00000010 $d
+  C:\Temp\ccPfBcqY.s:609    .text.BSP_LED_Toggle:00000000 $t
+  C:\Temp\ccPfBcqY.s:615    .text.BSP_LED_Toggle:00000000 BSP_LED_Toggle
+  C:\Temp\ccPfBcqY.s:641    .text.BSP_LED_Toggle:00000010 $d
+  C:\Temp\ccPfBcqY.s:646    .text.BSP_LED_GetState:00000000 $t
+  C:\Temp\ccPfBcqY.s:652    .text.BSP_LED_GetState:00000000 BSP_LED_GetState
+  C:\Temp\ccPfBcqY.s:679    .text.BSP_LED_GetState:00000014 $d
+  C:\Temp\ccPfBcqY.s:684    .text.BSP_PB_Init:00000000 $t
+  C:\Temp\ccPfBcqY.s:690    .text.BSP_PB_Init:00000000 BSP_PB_Init
+  C:\Temp\ccPfBcqY.s:773    .text.BSP_PB_Init:00000050 $d
+  C:\Temp\ccPfBcqY.s:1301   .data.hpb_exti:00000000 hpb_exti
+  C:\Temp\ccPfBcqY.s:930    .text.BUTTON_USER_EXTI_Callback:00000000 BUTTON_USER_EXTI_Callback
+  C:\Temp\ccPfBcqY.s:780    .text.BSP_PB_DeInit:00000000 $t
+  C:\Temp\ccPfBcqY.s:786    .text.BSP_PB_DeInit:00000000 BSP_PB_DeInit
+  C:\Temp\ccPfBcqY.s:826    .text.BSP_PB_DeInit:00000020 $d
+  C:\Temp\ccPfBcqY.s:831    .text.BSP_PB_GetState:00000000 $t
+  C:\Temp\ccPfBcqY.s:837    .text.BSP_PB_GetState:00000000 BSP_PB_GetState
+  C:\Temp\ccPfBcqY.s:864    .text.BSP_PB_GetState:00000014 $d
+  C:\Temp\ccPfBcqY.s:869    .text.BSP_PB_IRQHandler:00000000 $t
+  C:\Temp\ccPfBcqY.s:875    .text.BSP_PB_IRQHandler:00000000 BSP_PB_IRQHandler
+  C:\Temp\ccPfBcqY.s:899    .text.BSP_PB_IRQHandler:00000010 $d
+  C:\Temp\ccPfBcqY.s:904    .text.BSP_PB_Callback:00000000 $t
+  C:\Temp\ccPfBcqY.s:910    .text.BSP_PB_Callback:00000000 BSP_PB_Callback
+  C:\Temp\ccPfBcqY.s:925    .text.BUTTON_USER_EXTI_Callback:00000000 $t
+  C:\Temp\ccPfBcqY.s:950    .text.BSP_COM_DeInit:00000000 $t
+  C:\Temp\ccPfBcqY.s:956    .text.BSP_COM_DeInit:00000000 BSP_COM_DeInit
+  C:\Temp\ccPfBcqY.s:1022   .text.BSP_COM_DeInit:00000038 $d
+  C:\Temp\ccPfBcqY.s:1294   .data.COM_USART:00000000 COM_USART
+  C:\Temp\ccPfBcqY.s:1287   .bss.hcom_uart:00000000 hcom_uart
+  C:\Temp\ccPfBcqY.s:1028   .text.MX_USART2_UART_Init:00000000 $t
+ARM GAS  C:\Temp\ccPfBcqY.s 			page 40
 
 
-  C:\Temp\ccu5jQ7d.s:1034   .text.MX_USART2_UART_Init:00000000 MX_USART2_UART_Init
-  C:\Temp\ccu5jQ7d.s:1092   .text.MX_USART2_UART_Init:00000024 $d
-  C:\Temp\ccu5jQ7d.s:1098   .text.BSP_COM_Init:00000000 $t
-  C:\Temp\ccu5jQ7d.s:1104   .text.BSP_COM_Init:00000000 BSP_COM_Init
-  C:\Temp\ccu5jQ7d.s:1170   .text.BSP_COM_Init:00000038 $d
-  C:\Temp\ccu5jQ7d.s:1176   .text.BSP_COM_SelectLogPort:00000000 $t
-  C:\Temp\ccu5jQ7d.s:1182   .text.BSP_COM_SelectLogPort:00000000 BSP_COM_SelectLogPort
-  C:\Temp\ccu5jQ7d.s:1211   .text.BSP_COM_SelectLogPort:00000010 $d
-  C:\Temp\ccu5jQ7d.s:1280   .bss.COM_ActiveLogPort:00000000 COM_ActiveLogPort
-  C:\Temp\ccu5jQ7d.s:1216   .text.__io_putchar:00000000 $t
-  C:\Temp\ccu5jQ7d.s:1222   .text.__io_putchar:00000000 __io_putchar
-  C:\Temp\ccu5jQ7d.s:1265   .text.__io_putchar:00000028 $d
-  C:\Temp\ccu5jQ7d.s:1272   .bss.hdma_usart2_rx:00000000 $d
-  C:\Temp\ccu5jQ7d.s:1281   .bss.COM_ActiveLogPort:00000000 $d
-  C:\Temp\ccu5jQ7d.s:1284   .bss.hcom_uart:00000000 $d
-  C:\Temp\ccu5jQ7d.s:1291   .data.COM_USART:00000000 $d
-  C:\Temp\ccu5jQ7d.s:1298   .data.hpb_exti:00000000 $d
+  C:\Temp\ccPfBcqY.s:1034   .text.MX_USART2_UART_Init:00000000 MX_USART2_UART_Init
+  C:\Temp\ccPfBcqY.s:1092   .text.MX_USART2_UART_Init:00000024 $d
+  C:\Temp\ccPfBcqY.s:1098   .text.BSP_COM_Init:00000000 $t
+  C:\Temp\ccPfBcqY.s:1104   .text.BSP_COM_Init:00000000 BSP_COM_Init
+  C:\Temp\ccPfBcqY.s:1170   .text.BSP_COM_Init:00000038 $d
+  C:\Temp\ccPfBcqY.s:1176   .text.BSP_COM_SelectLogPort:00000000 $t
+  C:\Temp\ccPfBcqY.s:1182   .text.BSP_COM_SelectLogPort:00000000 BSP_COM_SelectLogPort
+  C:\Temp\ccPfBcqY.s:1211   .text.BSP_COM_SelectLogPort:00000010 $d
+  C:\Temp\ccPfBcqY.s:1280   .bss.COM_ActiveLogPort:00000000 COM_ActiveLogPort
+  C:\Temp\ccPfBcqY.s:1216   .text.__io_putchar:00000000 $t
+  C:\Temp\ccPfBcqY.s:1222   .text.__io_putchar:00000000 __io_putchar
+  C:\Temp\ccPfBcqY.s:1265   .text.__io_putchar:00000028 $d
+  C:\Temp\ccPfBcqY.s:1272   .bss.hdma_usart2_rx:00000000 $d
+  C:\Temp\ccPfBcqY.s:1281   .bss.COM_ActiveLogPort:00000000 $d
+  C:\Temp\ccPfBcqY.s:1284   .bss.hcom_uart:00000000 $d
+  C:\Temp\ccPfBcqY.s:1291   .data.COM_USART:00000000 $d
+  C:\Temp\ccPfBcqY.s:1298   .data.hpb_exti:00000000 $d
 
 UNDEFINED SYMBOLS
 HAL_GPIO_WritePin

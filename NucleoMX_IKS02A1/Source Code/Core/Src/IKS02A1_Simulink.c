@@ -137,7 +137,7 @@ void sendToSimulink(){
 }
 
 void blueButtonPressed(){
-    calibrate_IKS02A1();
+
 }
 
 

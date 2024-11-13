@@ -102,12 +102,17 @@ int main(void)
   MX_TIM2_Init();
   MX_MEMS_Init();
   /* USER CODE BEGIN 2 */
+  HAL_TIM_Base_Start_IT(&htim2);
+  // BSP_LED_Init(LED2);
+  BSP_LED_On(LED2);
+  // BSP_COM_Init(COM1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-  while(calibrated == 0){
+  while (1)
+  {
     HAL_UART_Receive_DMA(&hcom_uart,(uint8_t *) &bigBuffer, (size_t) (numberOfSimulinkBytes+3+3));
     if (bigBuffer[0] == expectedHeader[0] &&
         bigBuffer[1] == expectedHeader[1] &&
@@ -115,21 +120,17 @@ int main(void)
         bigBuffer[numberOfSimulinkBytes+3+0] == expectedTerminator[0] &&
         bigBuffer[numberOfSimulinkBytes+3+1] == expectedTerminator[1] &&
         bigBuffer[numberOfSimulinkBytes+3+2] == expectedTerminator[2]){
-      receivedFromSimulink(&bigBuffer);
-      calibrated = 1;
+          if (calibrated == 0){
+            receivedFromSimulink(&bigBuffer);
+            calibrated = 1;
+          }
     }
-  }
-
-  HAL_TIM_Base_Start_IT(&htim2);
-  HAL_GPIO_WritePin(LED2_GPIO_PORT,LED2_PIN,1);
-
-  while (1)
-  {
     if (clearToSend == 1){
-    getIKS02A1();
-    sendToSimulink();
-    clearToSend = 0;
+      getIKS02A1();
+      sendToSimulink();
+      clearToSend = 0;
     }
+    
     
     /* USER CODE END WHILE */
 
