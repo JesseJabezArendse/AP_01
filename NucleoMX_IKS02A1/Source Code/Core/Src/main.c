@@ -44,6 +44,9 @@
 /* Private variables ---------------------------------------------------------*/
 TIM_HandleTypeDef htim2;
 
+UART_HandleTypeDef huart2;
+DMA_HandleTypeDef hdma_usart2_rx;
+
 /* USER CODE BEGIN PV */
 IKS02A1_MOTION_SENSOR_Axes_t accel1_axis;
 IKS02A1_MOTION_SENSOR_Axes_t gyro_axis;
@@ -54,6 +57,7 @@ IKS02A1_MOTION_SENSOR_Axes_t mag_axis;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_TIM2_Init(void);
+static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
 // #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
 /* USER CODE END PFP */
@@ -66,7 +70,7 @@ const int numberOfSimulinkBytes = 4*(2+2+2+1);
 uint8_t bigBuffer[28+3+3] = {0};
 uint8_t clearToSend = 0;
 uint8_t calibrated = 0;
-
+int32_t counter = 0;
 /* USER CODE END 0 */
 
 /**
@@ -93,19 +97,17 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-  HAL_GPIO_WritePin(LED2_GPIO_PORT,LED2_PIN,0);
+  HAL_GPIO_WritePin(GREEN_LED_GPIO_Port,GREEN_LED_Pin,0);
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_TIM2_Init();
+  MX_USART2_UART_Init();
   MX_MEMS_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
-  // BSP_LED_Init(LED2);
-  // BSP_LED_On(LED2);
-  // BSP_COM_Init(COM1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -113,21 +115,23 @@ int main(void)
 
   while (1)
   {
-    HAL_UART_Receive_DMA(&hcom_uart,(uint8_t *) &bigBuffer, (size_t) (numberOfSimulinkBytes+3+3));
-    if (bigBuffer[0] == expectedHeader[0] &&
-        bigBuffer[1] == expectedHeader[1] &&
-        bigBuffer[2] == expectedHeader[2] &&
-        bigBuffer[numberOfSimulinkBytes+3+0] == expectedTerminator[0] &&
-        bigBuffer[numberOfSimulinkBytes+3+1] == expectedTerminator[1] &&
-        bigBuffer[numberOfSimulinkBytes+3+2] == expectedTerminator[2]){
-          if (calibrated == 0){
-            receivedFromSimulink(&bigBuffer);
-            BSP_LED_On(LED2);
-            calibrated = 1;
-          }
-    }
+    // HAL_UART_Receive_DMA(&hcom_uart,(uint8_t *) &bigBuffer, (size_t) (numberOfSimulinkBytes+3+3));
+    // if (bigBuffer[0] == expectedHeader[0] &&
+    //     bigBuffer[1] == expectedHeader[1] &&
+    //     bigBuffer[2] == expectedHeader[2] &&
+    //     bigBuffer[numberOfSimulinkBytes+3+0] == expectedTerminator[0] &&
+    //     bigBuffer[numberOfSimulinkBytes+3+1] == expectedTerminator[1] &&
+    //     bigBuffer[numberOfSimulinkBytes+3+2] == expectedTerminator[2]){
+    //       if (calibrated == 0){
+    //         receivedFromSimulink(&bigBuffer);
+    //         HAL_GPIO_WritePin(GREEN_LED_GPIO_Port,GREEN_LED_Pin,1);
+    //         calibrated = 1;
+    //       }
+    // }
     if (clearToSend == 1){
+      counter++;
       getIKS02A1();
+      HAL_GPIO_TogglePin(GREEN_LED_GPIO_Port,GREEN_LED_Pin);
       sendToSimulink();
       clearToSend = 0;
     }
@@ -206,9 +210,9 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 1000-1;
+  htim2.Init.Prescaler = 200-1;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 1000-1;
+  htim2.Init.Period = 5000-1;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
@@ -229,6 +233,39 @@ static void MX_TIM2_Init(void)
   /* USER CODE BEGIN TIM2_Init 2 */
 
   /* USER CODE END TIM2_Init 2 */
+
+}
+
+/**
+  * @brief USART2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART2_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART2_Init 0 */
+
+  /* USER CODE END USART2_Init 0 */
+
+  /* USER CODE BEGIN USART2_Init 1 */
+
+  /* USER CODE END USART2_Init 1 */
+  huart2.Instance = USART2;
+  huart2.Init.BaudRate = 115200;
+  huart2.Init.WordLength = UART_WORDLENGTH_8B;
+  huart2.Init.StopBits = UART_STOPBITS_1;
+  huart2.Init.Parity = UART_PARITY_NONE;
+  huart2.Init.Mode = UART_MODE_TX_RX;
+  huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart2.Init.OverSampling = UART_OVERSAMPLING_16;
+  if (HAL_UART_Init(&huart2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART2_Init 2 */
+
+  /* USER CODE END USART2_Init 2 */
 
 }
 
@@ -266,6 +303,9 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GREEN_LED_GPIO_Port, GREEN_LED_Pin, GPIO_PIN_RESET);
+
   /*Configure GPIO pins : PC0 PC1 PC2 PC3
                            PC4 PC5 PC6 PC7
                            PC8 PC9 PC10 PC11
@@ -287,6 +327,13 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : GREEN_LED_Pin */
+  GPIO_InitStruct.Pin = GREEN_LED_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GREEN_LED_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PB0 PB1 PB2 PB10
                            PB12 PB13 PB14 PB15

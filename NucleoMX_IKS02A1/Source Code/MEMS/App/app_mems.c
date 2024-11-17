@@ -99,7 +99,7 @@ void MX_IKS02A1_DataLogTerminal_Init(void)
   int i;
 
   /* Initialize LED */
-  BSP_LED_Init(LED2);
+  // BSP_LED_Init(LED2);
 
   /* Initialize button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
@@ -108,7 +108,7 @@ void MX_IKS02A1_DataLogTerminal_Init(void)
   PushButtonState = (BSP_PB_GetState(BUTTON_KEY)) ?  0 : 1;
 
   /* Initialize Virtual COM Port */
-  BSP_COM_Init(COM1);
+  // BSP_COM_Init(COM1);
 
   IKS02A1_MOTION_SENSOR_Init(IKS02A1_ISM330DHCX_0, MOTION_ACCELERO | MOTION_GYRO);
 

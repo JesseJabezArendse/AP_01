@@ -62,10 +62,9 @@ static void MX_USART2_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
-
 uint8_t clearToSend = 0;
 uint8_t calibrated = 0;
+uint32_t counter = 0;
 
 /* USER CODE END 0 */
 
@@ -109,15 +108,16 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 
   HAL_TIM_Base_Start_IT(&htim2);
-  HAL_GPIO_WritePin(GREEN_LED_GPIO_Port,GREEN_LED_Pin,1);
 
   initVL53L8A1();
   while (1)
   {
-    if (clearToSend == 1){
     getVL53L8A1();
-    sendToSimulink();
-    clearToSend = 0;
+    if (clearToSend == 1){
+      counter++;
+      HAL_GPIO_TogglePin(GREEN_LED_GPIO_Port,GREEN_LED_Pin);
+      sendToSimulink();
+      clearToSend = 0;
     }
     /* USER CODE END WHILE */
 
@@ -193,7 +193,7 @@ static void MX_TIM2_Init(void)
   htim2.Instance = TIM2;
   htim2.Init.Prescaler = 1000-1;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 1000-1;
+  htim2.Init.Period = 5000-1;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
@@ -233,7 +233,7 @@ static void MX_USART2_UART_Init(void)
 
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 2000000;
+  huart2.Init.BaudRate = 115200;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;

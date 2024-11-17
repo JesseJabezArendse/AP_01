@@ -55,12 +55,12 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-extern DMA_HandleTypeDef hdma_usart2_rx;
 extern TIM_HandleTypeDef htim2;
+extern DMA_HandleTypeDef hdma_usart2_rx;
 extern TIM_HandleTypeDef htim1;
-extern uint8_t clearToSend;
-/* USER CODE BEGIN EV */
 
+/* USER CODE BEGIN EV */
+extern uint8_t clearToSend;
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -87,7 +87,7 @@ void NMI_Handler(void)
 void HardFault_Handler(void)
 {
   /* USER CODE BEGIN HardFault_IRQn 0 */
-  HAL_GPIO_WritePin(LED2_GPIO_PORT,LED2_PIN,0);
+  HAL_GPIO_WritePin(GREEN_LED_GPIO_Port,GREEN_LED_Pin,0);
   GPIOA->ODR = 0;
   NVIC_SystemReset();
   /* USER CODE END HardFault_IRQn 0 */

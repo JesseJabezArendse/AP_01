@@ -37,7 +37,7 @@ const uint8_t* terminator = 'J_A';
 extern RANGING_SENSOR_Result_t TOF_left;
 extern RANGING_SENSOR_Result_t TOF_centre;
 extern RANGING_SENSOR_Result_t TOF_right;
-
+extern uint32_t counter;
 
 // mask options from BSP/Components/<IC_reg.h>
 
@@ -102,6 +102,7 @@ void sendToSimulink(){
     HAL_UART_Transmit(&hcom_uart[0], (uint32_t *) &((TOF_right  .ZoneResult[0]) .Distance  [0])  , 4 , HAL_MAX_DELAY);
     HAL_UART_Transmit(&hcom_uart[0], (float_t *)  &((TOF_right  .ZoneResult[0]) .Ambient   [0])  , 4 , HAL_MAX_DELAY);
     HAL_UART_Transmit(&hcom_uart[0], (float_t *)  &((TOF_right  .ZoneResult[0]) .Signal    [0])  , 4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&hcom_uart[0], (uint32_t *) &counter          ,4 , HAL_MAX_DELAY);
     HAL_UART_Transmit(&hcom_uart[0], (uint8_t *) &terminator       ,3 , HAL_MAX_DELAY);
 }
 

@@ -1,4 +1,4 @@
-ARM GAS  C:\Temp\ccTabfAI.s 			page 1
+ARM GAS  C:\Temp\ccrXSEHE.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Temp\ccTabfAI.s 			page 1
   27:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	_LOG_FUNCTION_START(VL53L1_TRACE_MODULE_PROTECTED, fmt, ##__VA_ARGS__)
   28:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** #define LOG_FUNCTION_END(status, ...) \
   29:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	_LOG_FUNCTION_END(VL53L1_TRACE_MODULE_PROTECTED, status, ##__VA_ARGS__)
-ARM GAS  C:\Temp\ccTabfAI.s 			page 2
+ARM GAS  C:\Temp\ccrXSEHE.s 			page 2
 
 
   30:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** #define LOG_FUNCTION_END_FMT(status, fmt, ...) \
@@ -118,7 +118,7 @@ ARM GAS  C:\Temp\ccTabfAI.s 			page 1
   84:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
   85:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
   86:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		periods_elapsed = pbins->total_periods_elapsed + 1;
-ARM GAS  C:\Temp\ccTabfAI.s 			page 3
+ARM GAS  C:\Temp\ccrXSEHE.s 			page 3
 
 
   87:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
@@ -178,7 +178,7 @@ ARM GAS  C:\Temp\ccTabfAI.s 			page 1
  141:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64 *= (1000 * 256);
  142:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp32  = pcal->ref__actual_effective_spads/2;
  143:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64 += (uint64_t)tmp32;
-ARM GAS  C:\Temp\ccTabfAI.s 			page 4
+ARM GAS  C:\Temp\ccrXSEHE.s 			page 4
 
 
  144:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  = do_division_u(tmp64,
@@ -238,7 +238,7 @@ ARM GAS  C:\Temp\ccTabfAI.s 			page 1
  198:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
  199:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		if (pdata->VL53L1_p_004 <
  200:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			(uint32_t)pcfg->min_ambient_thresh_events) {
-ARM GAS  C:\Temp\ccTabfAI.s 			page 5
+ARM GAS  C:\Temp\ccrXSEHE.s 			page 5
 
 
  201:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
@@ -298,7 +298,7 @@ ARM GAS  C:\Temp\ccTabfAI.s 			page 1
  255:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	uint32_t     ref_signal_events,
  256:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	uint32_t	 ref_distance_mm,
  257:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	uint32_t     signal_thresh_sigma)
-ARM GAS  C:\Temp\ccTabfAI.s 			page 6
+ARM GAS  C:\Temp\ccrXSEHE.s 			page 6
 
 
  258:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** {
@@ -358,7 +358,7 @@ ARM GAS  C:\Temp\ccTabfAI.s 			page 1
  279:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	range_mm =
   63              		.loc 1 279 2 is_stmt 1 view .LVU12
  280:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		(uint32_t)VL53L1_isqrt(ref_signal_events << 4);
-ARM GAS  C:\Temp\ccTabfAI.s 			page 7
+ARM GAS  C:\Temp\ccrXSEHE.s 			page 7
 
 
   64              		.loc 1 280 13 is_stmt 0 view .LVU13
@@ -418,7 +418,7 @@ ARM GAS  C:\Temp\ccTabfAI.s 			page 1
   46:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
  109              		.loc 1 46 1 is_stmt 0 view .LVU27
  110 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
-ARM GAS  C:\Temp\ccTabfAI.s 			page 8
+ARM GAS  C:\Temp\ccrXSEHE.s 			page 8
 
 
  111              		.cfi_def_cfa_offset 36
@@ -478,7 +478,7 @@ ARM GAS  C:\Temp\ccTabfAI.s 			page 1
  149              		.loc 1 67 25 is_stmt 0 view .LVU43
  150 0018 2361     		str	r3, [r4, #16]
   68:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	pdata->VL53L1_p_034 = 0x0000;
-ARM GAS  C:\Temp\ccTabfAI.s 			page 9
+ARM GAS  C:\Temp\ccrXSEHE.s 			page 9
 
 
  151              		.loc 1 68 2 is_stmt 1 view .LVU44
@@ -538,7 +538,7 @@ ARM GAS  C:\Temp\ccTabfAI.s 			page 1
  187 003a 00F0BD80 		beq	.L6
  134:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		(pcal->ref_reflectance_pc          != 0) &&
  188              		.loc 1 134 9 discriminator 1 view .LVU63
-ARM GAS  C:\Temp\ccTabfAI.s 			page 10
+ARM GAS  C:\Temp\ccrXSEHE.s 			page 10
 
 
  189 003e B5F88630 		ldrh	r3, [r5, #134]
@@ -598,7 +598,7 @@ ARM GAS  C:\Temp\ccTabfAI.s 			page 1
  229              		.loc 1 144 3 is_stmt 1 view .LVU77
  144:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			(uint64_t)pcal->ref__actual_effective_spads);
  230              		.loc 1 144 10 is_stmt 0 view .LVU78
-ARM GAS  C:\Temp\ccTabfAI.s 			page 11
+ARM GAS  C:\Temp\ccrXSEHE.s 			page 11
 
 
  231 007e 4FF00003 		mov	r3, #0
@@ -658,7 +658,7 @@ ARM GAS  C:\Temp\ccTabfAI.s 			page 1
  268              	.LVL27:
  155:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64 >>= (11+8);
  269              		.loc 1 155 10 view .LVU96
-ARM GAS  C:\Temp\ccTabfAI.s 			page 12
+ARM GAS  C:\Temp\ccrXSEHE.s 			page 12
 
 
  270 00b2 43F10003 		adc	r3, r3, #0
@@ -718,7 +718,7 @@ ARM GAS  C:\Temp\ccTabfAI.s 			page 1
  164:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
  311              		.loc 1 164 3 is_stmt 1 view .LVU110
  164:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
-ARM GAS  C:\Temp\ccTabfAI.s 			page 13
+ARM GAS  C:\Temp\ccrXSEHE.s 			page 13
 
 
  312              		.loc 1 164 25 is_stmt 0 view .LVU111
@@ -778,7 +778,7 @@ ARM GAS  C:\Temp\ccTabfAI.s 			page 1
  350 0112 A1FB0331 		umull	r3, r1, r1, r3
  176:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				   (uint64_t)pcal->coverglass_transmission);
  351              		.loc 1 176 10 view .LVU128
-ARM GAS  C:\Temp\ccTabfAI.s 			page 14
+ARM GAS  C:\Temp\ccrXSEHE.s 			page 14
 
 
  352 0116 A3FB0221 		umull	r2, r1, r3, r2
@@ -838,7 +838,7 @@ ARM GAS  C:\Temp\ccTabfAI.s 			page 1
  392 0154 73EB0A03 		sbcs	r3, r3, r10
  393 0158 01D2     		bcs	.L8
  188:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
-ARM GAS  C:\Temp\ccTabfAI.s 			page 15
+ARM GAS  C:\Temp\ccrXSEHE.s 			page 15
 
 
  394              		.loc 1 188 10 view .LVU143
@@ -898,7 +898,7 @@ ARM GAS  C:\Temp\ccTabfAI.s 			page 1
  430              		.loc 1 209 7 is_stmt 0 view .LVU161
  431 017a B0EB032F 		cmp	r0, r3, lsl #8
  432 017e 00D2     		bcs	.L9
-ARM GAS  C:\Temp\ccTabfAI.s 			page 16
+ARM GAS  C:\Temp\ccrXSEHE.s 			page 16
 
 
  210:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		}
@@ -958,7 +958,7 @@ ARM GAS  C:\Temp\ccTabfAI.s 			page 1
  471 01a4 FFF7FEFF 		bl	VL53L1_f_002
  472              	.LVL62:
  230:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				256 * (uint32_t)pcfg->signal_total_events_limit,
-ARM GAS  C:\Temp\ccTabfAI.s 			page 17
+ARM GAS  C:\Temp\ccrXSEHE.s 			page 17
 
 
  473              		.loc 1 230 4 view .LVU178
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Temp\ccTabfAI.s 			page 1
  512              	.LVL67:
   91:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				pll_period_us,
  513              		.loc 1 91 4 view .LVU194
-ARM GAS  C:\Temp\ccTabfAI.s 			page 18
+ARM GAS  C:\Temp\ccrXSEHE.s 			page 18
 
 
  514 01ca 4FF40062 		mov	r2, #2048
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Temp\ccTabfAI.s 			page 1
  118:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			tmp64  *= 1000;
  552              		.loc 1 118 18 is_stmt 0 view .LVU211
  553 0200 388B     		ldrh	r0, [r7, #24]
-ARM GAS  C:\Temp\ccTabfAI.s 			page 19
+ARM GAS  C:\Temp\ccrXSEHE.s 			page 19
 
 
  554              	.LVL71:
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Temp\ccTabfAI.s 			page 1
  594              		.loc 1 126 30 is_stmt 0 view .LVU225
  595 0238 FB8A     		ldrh	r3, [r7, #22]
  126:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				pdata->VL53L1_p_006 = (uint16_t)tmp64;
-ARM GAS  C:\Temp\ccTabfAI.s 			page 20
+ARM GAS  C:\Temp\ccrXSEHE.s 			page 20
 
 
  596              		.loc 1 126 7 view .LVU226
@@ -1175,15 +1175,15 @@ ARM GAS  C:\Temp\ccTabfAI.s 			page 1
  623              		.file 7 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_codes.h"
  624              		.file 8 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax_private_structs.h"
  625              		.file 9 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_core_support.h"
-ARM GAS  C:\Temp\ccTabfAI.s 			page 21
+ARM GAS  C:\Temp\ccrXSEHE.s 			page 21
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 vl53l1_dmax.c
-  C:\Temp\ccTabfAI.s:21     .text.VL53L1_f_002:00000000 $t
-  C:\Temp\ccTabfAI.s:27     .text.VL53L1_f_002:00000000 VL53L1_f_002
-  C:\Temp\ccTabfAI.s:96     .text.VL53L1_f_001:00000000 $t
-  C:\Temp\ccTabfAI.s:102    .text.VL53L1_f_001:00000000 VL53L1_f_001
+  C:\Temp\ccrXSEHE.s:21     .text.VL53L1_f_002:00000000 $t
+  C:\Temp\ccrXSEHE.s:27     .text.VL53L1_f_002:00000000 VL53L1_f_002
+  C:\Temp\ccrXSEHE.s:96     .text.VL53L1_f_001:00000000 $t
+  C:\Temp\ccrXSEHE.s:102    .text.VL53L1_f_001:00000000 VL53L1_f_001
 
 UNDEFINED SYMBOLS
 VL53L1_isqrt

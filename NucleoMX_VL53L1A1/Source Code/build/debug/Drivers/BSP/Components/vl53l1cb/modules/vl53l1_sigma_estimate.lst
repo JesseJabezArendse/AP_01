@@ -1,4 +1,4 @@
-ARM GAS  C:\Temp\cchqAD9g.s 			page 1
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
   26:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** #define LOG_FUNCTION_START(fmt, ...) \
   27:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 	_LOG_FUNCTION_START(VL53L1_TRACE_MODULE_PROTECTED, fmt, ##__VA_ARGS__)
   28:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** #define LOG_FUNCTION_END(status, ...) \
-ARM GAS  C:\Temp\cchqAD9g.s 			page 2
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 2
 
 
   29:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 	_LOG_FUNCTION_END(VL53L1_TRACE_MODULE_PROTECTED, status, ##__VA_ARGS__)
@@ -118,7 +118,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
   83:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 
   84:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 		sigma_est__rtn_array =
   85:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 			((VL53L1_SPEED_OF_LIGHT_IN_AIR + 1000) / 2000) *
-ARM GAS  C:\Temp\cchqAD9g.s 			page 3
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 3
 
 
   86:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 			sigma_est__rtn_array;
@@ -178,7 +178,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
   42              		.cfi_offset 7, -8
   43              		.cfi_offset 14, -4
   44 0002 1646     		mov	r6, r2
-ARM GAS  C:\Temp\cchqAD9g.s 			page 4
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 4
 
 
   45 0004 1D46     		mov	r5, r3
@@ -238,7 +238,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  152:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 		tmp0 = ((uint64_t)sigma_estimator__effective_pulse_width_ns)
   75              		.loc 1 152 3 is_stmt 1 view .LVU18
   76              		.loc 1 152 8 is_stmt 0 view .LVU19
-ARM GAS  C:\Temp\cchqAD9g.s 			page 5
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 5
 
 
   77 001a 0402     		lsls	r4, r0, #8
@@ -298,7 +298,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  167:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 		tmp1 = do_division_u(tmp1, (15625 * 15625));
  117              		.loc 1 167 3 is_stmt 1 view .LVU35
  118              		.loc 1 167 8 is_stmt 0 view .LVU36
-ARM GAS  C:\Temp\cchqAD9g.s 			page 6
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 6
 
 
  119 004a 0BA3     		adr	r3, .L6
@@ -358,7 +358,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  150 0068 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
  151              	.LVL21:
  152              	.L3:
-ARM GAS  C:\Temp\cchqAD9g.s 			page 7
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 7
 
 
  131:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 
@@ -418,7 +418,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  188              		.loc 1 207 1 is_stmt 0 view .LVU56
  189 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
  190              		.cfi_def_cfa_offset 36
-ARM GAS  C:\Temp\cchqAD9g.s 			page 8
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 8
 
 
  191              		.cfi_offset 4, -36
@@ -478,7 +478,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  225:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 
  226:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 
  227:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 
-ARM GAS  C:\Temp\cchqAD9g.s 			page 9
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 9
 
 
  228:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 		pll_period_mm = VL53L1_calc_pll_period_mm(fast_osc_frequency);
@@ -538,7 +538,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  248:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 			VL53L1_p_041 =  (uint64_t)VL53L1_p_001 -
  249:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 			(uint64_t)VL53L1_p_003;
  250:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 
-ARM GAS  C:\Temp\cchqAD9g.s 			page 10
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 10
 
 
  251:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 
@@ -598,7 +598,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  301 0088 4FEA570B 		lsr	fp, r7, #1
  302 008c 2818     		adds	r0, r5, r0
  303              	.LVL38:
-ARM GAS  C:\Temp\cchqAD9g.s 			page 11
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 11
 
 
  304              		.loc 1 264 9 view .LVU98
@@ -658,7 +658,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  348              	.LVL49:
  349              		.loc 1 274 9 view .LVU110
  350 00ce 1944     		add	r1, r1, r3
-ARM GAS  C:\Temp\cchqAD9g.s 			page 12
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 12
 
 
  351              	.LVL50:
@@ -718,7 +718,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  394              		.loc 1 285 9 is_stmt 0 view .LVU125
  395 010e 049B     		ldr	r3, [sp, #16]
  396 0110 1818     		adds	r0, r3, r0
-ARM GAS  C:\Temp\cchqAD9g.s 			page 13
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 13
 
 
  397              	.LVL58:
@@ -778,7 +778,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  296:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 
  297:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 
  298:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 			if (tmp0 > 0xFFFFFFFF)
-ARM GAS  C:\Temp\cchqAD9g.s 			page 14
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 14
 
 
  441              		.loc 1 298 4 is_stmt 1 view .LVU142
@@ -838,7 +838,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  476              		@ sp needed
  477 0166 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
  478              	.LVL73:
-ARM GAS  C:\Temp\cchqAD9g.s 			page 15
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 15
 
 
  479              	.L10:
@@ -898,7 +898,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  520 0192 E7E7     		b	.L9
  521              		.cfi_endproc
  522              	.LFE5:
-ARM GAS  C:\Temp\cchqAD9g.s 			page 16
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 16
 
 
  524              		.section	.text.VL53L1_f_014,"ax",%progbits
@@ -958,7 +958,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  558              		.loc 1 338 2 view .LVU172
  339:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 
  340:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 	uint32_t pll_period_mm  = 0;
-ARM GAS  C:\Temp\cchqAD9g.s 			page 17
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 17
 
 
  559              		.loc 1 340 2 view .LVU173
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  593              	.LVL87:
  594              	.L23:
  361:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 			(uint64_t)VL53L1_p_018;
-ARM GAS  C:\Temp\cchqAD9g.s 			page 18
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 18
 
 
  362:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 		else
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  626              		.loc 1 384 7 is_stmt 0 view .LVU204
  627 005c B4F1807F 		cmp	r4, #16777216
  628 0060 78F10002 		sbcs	r2, r8, #0
-ARM GAS  C:\Temp\cchqAD9g.s 			page 19
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 19
 
 
  629 0064 03D3     		bcc	.L26
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  670 0098 5A46     		mov	r2, fp
  671 009a 5346     		mov	r3, r10
  672 009c FFF7FEFF 		bl	__aeabi_uldivmod
-ARM GAS  C:\Temp\cchqAD9g.s 			page 20
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 20
 
 
  673              	.LVL101:
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  716 00d0 0E9A     		ldr	r2, [sp, #56]
  717              		.loc 1 408 26 view .LVU235
  718 00d2 9B18     		adds	r3, r3, r2
-ARM GAS  C:\Temp\cchqAD9g.s 			page 21
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 21
 
 
  719 00d4 4941     		adcs	r1, r1, r1
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  422:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 
  423:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 
  424:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 
-ARM GAS  C:\Temp\cchqAD9g.s 			page 22
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 22
 
 
  425:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  372:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 			(uint64_t)VL53L1_p_003;
  800              		.loc 1 372 17 view .LVU265
  801 013a 81E7     		b	.L25
-ARM GAS  C:\Temp\cchqAD9g.s 			page 23
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 23
 
 
  802              	.LVL124:
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  444:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 				tmp0 = tmp0 * pll_period_mm;
  445:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 			} else {
  446:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 				tmp0 = tmp0 * pll_period_mm;
-ARM GAS  C:\Temp\cchqAD9g.s 			page 24
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 24
 
 
  838              		.loc 1 446 5 is_stmt 1 view .LVU277
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  443:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 				tmp0 = tmp0 * pll_period_mm;
  880              		.loc 1 443 10 view .LVU292
  881 0194 40EA8170 		orr	r0, r0, r1, lsl #30
-ARM GAS  C:\Temp\cchqAD9g.s 			page 25
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 25
 
 
  882 0198 8908     		lsrs	r1, r1, #2
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  465:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 			tmp0 = tmp0 + tmp1;
  921              		.loc 1 465 4 is_stmt 1 view .LVU307
  922              		.loc 1 465 9 is_stmt 0 view .LVU308
-ARM GAS  C:\Temp\cchqAD9g.s 			page 26
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 26
 
 
  923 01c2 8019     		adds	r0, r0, r6
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  959 01e8 4FF0FF30 		mov	r0, #-1
  960              	.LVL156:
  460:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 
-ARM GAS  C:\Temp\cchqAD9g.s 			page 27
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 27
 
 
  961              		.loc 1 460 10 view .LVU322
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  1006 0002 0446     		mov	r4, r0
  489:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 
  490:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 
-ARM GAS  C:\Temp\cchqAD9g.s 			page 28
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 28
 
 
  491:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 	uint64_t next;
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  512:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 			next = lower;
  513:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 		}
  514:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 
-ARM GAS  C:\Temp\cchqAD9g.s 			page 29
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 29
 
 
  515:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 		stepsize = stepsize / 2;
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  1080              		.loc 1 508 6 view .LVU363
  1081 004a DEE7     		b	.L57
  1082              	.LVL175:
-ARM GAS  C:\Temp\cchqAD9g.s 			page 30
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 30
 
 
  1083              	.L56:
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  1116              		.loc 1 539 2 is_stmt 1 view .LVU373
  540:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** }
  1117              		.loc 1 540 1 is_stmt 0 view .LVU374
-ARM GAS  C:\Temp\cchqAD9g.s 			page 31
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 31
 
 
  1118 0010 7047     		bx	lr
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  1165              		.loc 1 44 1 is_stmt 0 view .LVU384
  1166 0000 70B5     		push	{r4, r5, r6, lr}
  1167              		.cfi_def_cfa_offset 16
-ARM GAS  C:\Temp\cchqAD9g.s 			page 32
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 32
 
 
  1168              		.cfi_offset 4, -16
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  1204 0016 5A08     		lsrs	r2, r3, #1
   73:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 			(uint32_t)pdata->peak_signal_count_rate_mcps/2) /
  1205              		.loc 1 73 17 view .LVU403
-ARM GAS  C:\Temp\cchqAD9g.s 			page 33
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 33
 
 
  1206 0018 06FB0121 		mla	r1, r6, r1, r2
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  100:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 				100 * (uint32_t)sigma_estimator__sigma_ref_mm;
  1245              		.loc 1 100 4 is_stmt 1 view .LVU419
  103:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c **** 				(uint16_t)VL53L1_f_043(
-ARM GAS  C:\Temp\cchqAD9g.s 			page 34
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 34
 
 
  1246              		.loc 1 103 4 view .LVU420
@@ -2038,31 +2038,31 @@ ARM GAS  C:\Temp\cchqAD9g.s 			page 1
  1287              		.text
  1288              	.Letext0:
  1289              		.file 2 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
-ARM GAS  C:\Temp\cchqAD9g.s 			page 35
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 35
 
 
  1290              		.file 3 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
  1291              		.file 4 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_codes.h"
  1292              		.file 5 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_ll_def.h"
  1293              		.file 6 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_core_support.h"
-ARM GAS  C:\Temp\cchqAD9g.s 			page 36
+ARM GAS  C:\Temp\ccKqr3fi.s 			page 36
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 vl53l1_sigma_estimate.c
-  C:\Temp\cchqAD9g.s:22     .text.VL53L1_f_044:00000000 $t
-  C:\Temp\cchqAD9g.s:28     .text.VL53L1_f_044:00000000 VL53L1_f_044
-  C:\Temp\cchqAD9g.s:168    .text.VL53L1_f_044:00000078 $d
-  C:\Temp\cchqAD9g.s:175    .text.VL53L1_f_045:00000000 $t
-  C:\Temp\cchqAD9g.s:181    .text.VL53L1_f_045:00000000 VL53L1_f_045
-  C:\Temp\cchqAD9g.s:525    .text.VL53L1_f_014:00000000 $t
-  C:\Temp\cchqAD9g.s:531    .text.VL53L1_f_014:00000000 VL53L1_f_014
-  C:\Temp\cchqAD9g.s:988    .text.VL53L1_f_046:00000000 $t
-  C:\Temp\cchqAD9g.s:994    .text.VL53L1_f_046:00000000 VL53L1_f_046
-  C:\Temp\cchqAD9g.s:1092   .text.VL53L1_f_043:00000000 $t
-  C:\Temp\cchqAD9g.s:1098   .text.VL53L1_f_043:00000000 VL53L1_f_043
-  C:\Temp\cchqAD9g.s:1152   .text.VL53L1_f_042:00000000 $t
-  C:\Temp\cchqAD9g.s:1158   .text.VL53L1_f_042:00000000 VL53L1_f_042
+  C:\Temp\ccKqr3fi.s:22     .text.VL53L1_f_044:00000000 $t
+  C:\Temp\ccKqr3fi.s:28     .text.VL53L1_f_044:00000000 VL53L1_f_044
+  C:\Temp\ccKqr3fi.s:168    .text.VL53L1_f_044:00000078 $d
+  C:\Temp\ccKqr3fi.s:175    .text.VL53L1_f_045:00000000 $t
+  C:\Temp\ccKqr3fi.s:181    .text.VL53L1_f_045:00000000 VL53L1_f_045
+  C:\Temp\ccKqr3fi.s:525    .text.VL53L1_f_014:00000000 $t
+  C:\Temp\ccKqr3fi.s:531    .text.VL53L1_f_014:00000000 VL53L1_f_014
+  C:\Temp\ccKqr3fi.s:988    .text.VL53L1_f_046:00000000 $t
+  C:\Temp\ccKqr3fi.s:994    .text.VL53L1_f_046:00000000 VL53L1_f_046
+  C:\Temp\ccKqr3fi.s:1092   .text.VL53L1_f_043:00000000 $t
+  C:\Temp\ccKqr3fi.s:1098   .text.VL53L1_f_043:00000000 VL53L1_f_043
+  C:\Temp\ccKqr3fi.s:1152   .text.VL53L1_f_042:00000000 $t
+  C:\Temp\ccKqr3fi.s:1158   .text.VL53L1_f_042:00000000 VL53L1_f_042
 
 UNDEFINED SYMBOLS
 __aeabi_uldivmod

@@ -32,6 +32,8 @@ const uint8_t* header = 'A_J';
 const uint8_t* terminator = 'J_A';
 
 extern UART_HandleTypeDef huart2;
+extern uint32_t counter;
+
 // Project Specific Variables /////////////////////////////
 #define INSTANCE_TOF_CENTRE  VL53L8A1_DEV_CENTER
 
@@ -129,7 +131,7 @@ void sendToSimulink(){
         HAL_UART_Transmit(&huart2, (float_t *)  &((TOF_centre .ZoneResult[i]) .Ambient   [0])  , 4 , HAL_MAX_DELAY);
         HAL_UART_Transmit(&huart2, (float_t *)  &((TOF_centre .ZoneResult[i]) .Signal    [0])  , 4 , HAL_MAX_DELAY);
     }
-
+    HAL_UART_Transmit(&huart2, (uint32_t *) &counter          ,4 , HAL_MAX_DELAY);
     HAL_UART_Transmit(&huart2, (uint8_t *) &terminator       ,3 , HAL_MAX_DELAY);
 }
 

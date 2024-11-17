@@ -63,6 +63,7 @@ static void MX_TIM2_Init(void);
 /* USER CODE BEGIN 0 */
 uint8_t clearToSend = 0;
 uint8_t calibrated = 0;
+uint32_t counter = 0;
 /* USER CODE END 0 */
 
 /**
@@ -103,12 +104,14 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  // BSP_COM_Init(COM1);
   HAL_TIM_Base_Start_IT(&htim2);
-  HAL_GPIO_WritePin(GREEN_LED_GPIO_Port,GREEN_LED_Pin,1);
   while (1)
   {
     getVL53L1A1();
     if (clearToSend == 1){
+      counter++;
+      HAL_GPIO_TogglePin(GREEN_LED_GPIO_Port,GREEN_LED_Pin);
       sendToSimulink();
       clearToSend = 0;
     }
@@ -187,9 +190,9 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 1000-1;
+  htim2.Init.Prescaler = 200-1;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 1000-1;
+  htim2.Init.Period = 5000-1;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)

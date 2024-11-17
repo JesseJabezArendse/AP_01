@@ -35,10 +35,12 @@ uint32_t tim2_arr;
 #define INSTANCE_IIS2DLPC   IKS02A1_IIS2DLPC_0
 #define INSTANCE_IIS2MDC    IKS02A1_IIS2MDC_0
 
+extern UART_HandleTypeDef huart2;
 extern IKS02A1_MOTION_SENSOR_Axes_t accel1_axis;
 extern IKS02A1_MOTION_SENSOR_Axes_t gyro_axis;
 extern IKS02A1_MOTION_SENSOR_Axes_t accel2_axis;
 extern IKS02A1_MOTION_SENSOR_Axes_t mag_axis;
+extern int32_t counter;
 
 // mask options from BSP/Components/<IC_reg.h>
 int32_t accel1_fsr;
@@ -76,7 +78,7 @@ int32_t bytesToInt32(uint8_t byte1 , uint8_t byte2 , uint8_t byte3 , uint8_t byt
 void initIKS02A1(){
 
      /* Initialize LED */
-  BSP_LED_Init(LED2);
+//   BSP_LED_Init(LED2);
 
   /* Initialize button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
@@ -86,7 +88,7 @@ void initIKS02A1(){
   PushButtonState = (BSP_PB_GetState(BUTTON_KEY)) ?  0 : 1;
 
   /* Initialize Virtual COM Port */
-  BSP_COM_Init(COM1);
+//   BSP_COM_Init(COM1);
 
   IKS02A1_MOTION_SENSOR_Init(IKS02A1_ISM330DHCX_0, MOTION_ACCELERO | MOTION_GYRO);
 
@@ -120,20 +122,21 @@ void receivedFromSimulink(uint8_t* bigBuffer){
 
 void sendToSimulink(){
 
-    HAL_UART_Transmit(&hcom_uart, (uint8_t *) &header           ,3 , HAL_MAX_DELAY);
-    HAL_UART_Transmit(&hcom_uart, (int32_t *) &(accel1_axis.x)  ,4 , HAL_MAX_DELAY);
-    HAL_UART_Transmit(&hcom_uart, (int32_t *) &accel1_axis.y    ,4 , HAL_MAX_DELAY);
-    HAL_UART_Transmit(&hcom_uart, (int32_t *) &accel1_axis.z    ,4 , HAL_MAX_DELAY);
-    HAL_UART_Transmit(&hcom_uart, (int32_t *) &gyro_axis.x      ,4 , HAL_MAX_DELAY);
-    HAL_UART_Transmit(&hcom_uart, (int32_t *) &gyro_axis.y      ,4 , HAL_MAX_DELAY);
-    HAL_UART_Transmit(&hcom_uart, (int32_t *) &gyro_axis.z      ,4 , HAL_MAX_DELAY);
-    HAL_UART_Transmit(&hcom_uart, (int32_t *) &accel2_axis.x    ,4 , HAL_MAX_DELAY);
-    HAL_UART_Transmit(&hcom_uart, (int32_t *) &accel2_axis.y    ,4 , HAL_MAX_DELAY);
-    HAL_UART_Transmit(&hcom_uart, (int32_t *) &accel2_axis.z    ,4 , HAL_MAX_DELAY);
-    HAL_UART_Transmit(&hcom_uart, (int32_t *) &mag_axis.x       ,4 , HAL_MAX_DELAY);
-    HAL_UART_Transmit(&hcom_uart, (int32_t *) &mag_axis.y       ,4 , HAL_MAX_DELAY);
-    HAL_UART_Transmit(&hcom_uart, (int32_t *) &mag_axis.z       ,4 , HAL_MAX_DELAY);
-    HAL_UART_Transmit(&hcom_uart, (uint8_t *) &terminator       ,3 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2, (uint8_t *) &header           ,3 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2, (int32_t *) &(accel1_axis.x)  ,4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2, (int32_t *) &accel1_axis.y    ,4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2, (int32_t *) &accel1_axis.z    ,4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2, (int32_t *) &gyro_axis.x      ,4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2, (int32_t *) &gyro_axis.y      ,4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2, (int32_t *) &gyro_axis.z      ,4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2, (int32_t *) &accel2_axis.x    ,4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2, (int32_t *) &accel2_axis.y    ,4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2, (int32_t *) &accel2_axis.z    ,4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2, (int32_t *) &mag_axis.x       ,4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2, (int32_t *) &mag_axis.y       ,4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2, (int32_t *) &mag_axis.z       ,4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2, (int32_t *) &counter          ,4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2, (uint8_t *) &terminator       ,3 , HAL_MAX_DELAY);
 }
 
 void blueButtonPressed(){

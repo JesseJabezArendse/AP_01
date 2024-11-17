@@ -61,6 +61,8 @@ void MX_DMA_Init(void);
 
 /* Private defines -----------------------------------------------------------*/
 #define BSP_BUTTON_EXTI_IRQn EXTI15_10_IRQn
+#define GREEN_LED_Pin GPIO_PIN_5
+#define GREEN_LED_GPIO_Port GPIOA
 #define TMS_Pin GPIO_PIN_13
 #define TMS_GPIO_Port GPIOA
 #define TCK_Pin GPIO_PIN_14
