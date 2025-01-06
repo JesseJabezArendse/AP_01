@@ -1,13 +1,28 @@
-# Sensor Board Usage Guide
+# UCL Sensor Board Repository
 
-To set up and run the Sensor Board, follow these steps:
+This repository contains all moddels and source code and guides for the UCL Sensor Board Teaching Tool.
 
-1. **Program the Sensor Board:**
-   - Copy the respective `.bin` file to the `NOD_F411` drive. This will program the board with the necessary firmware.
+Microcontroller: STM32 Nucleo F411RE
 
-2. **Set Up the Simulink Model:**
-   - Open the `.slx` file in Simulink.
-   - Verify that the correct **COM Port** is selected for both communication blocks to ensure proper data exchange.
+Supported expansion boards: IKS02A1, VL53L1, VL53L8
 
-3. **Run the Simulation:**
-   - Once the setup is complete, run the `.slx` file as a simulation to initiate data flow with the Sensor Board.
+---
+
+### [Device Drivers/](https://github.com/JesseJabezArendse/AP_01/tree/main/driver%20installation)
+This directory contains the installers for the drivers needed to use the STLink, onboard the Nucleo Board. Ensure this is installed first.
+
+### [Source Code/](https://github.com/JesseJabezArendse/AP_01/tree/main/src)
+This directory contains C Code for each sensor board that does the data aquisition and porting to Simulink. Not necessary unless you're curious and want to make custom changes.
+
+### [Binaries/](https://github.com/JesseJabezArendse/AP_01/tree/main/binaries)
+This directory contains the precompiled binaries of the source code folders, which is needed by Simulink.
+
+## How to use the Simulink Models
+
+For Windows:
+   It's plug and play :)
+
+For Linux and Mac: (plug and play funtionality pending)
+   - Copy the .bin file of the model you are wanting to run into the F411 mass storage drive
+   - Create a variable called STLINK_COMPORT that is the string of the comport of the Nucleo Board
+   - Run the model
