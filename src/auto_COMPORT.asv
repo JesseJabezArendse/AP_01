@@ -55,17 +55,14 @@ function STLINK_COMPORT = auto_COMPORT()
     if size(devs,1) == 1 % only nucleo plugged in
         STLINK_COMPORT = devs{1,2};
     else
-        for i = size(devs,1) % checks for nucleo specific comport (needs drivers)
+        for i = size(devs,1) % checks for nucleo specific
             if devs{i,1} == 'STMicroelectronics STLink Virtual COM Port';
                 STLINK_COMPORT = devs{i,2};
             end
         end
-        if STLINK_COMPORT == "NULL";
-            for i = size(devs,1) % checks for generic comport (assumes others are specifc)
-                if devs{i,1} == 'USB Serial Device';
-                    STLINK_COMPORT = devs{i,2};
-                end
+            if devs{i,1} == 'STMicroelectronics STLink Virtual COM Port';
+                STLINK_COMPORT = devs{i,2};
             end
-        end
+
     end
 end
