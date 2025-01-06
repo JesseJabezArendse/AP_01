@@ -1,7 +1,9 @@
 # UCL Sensor Board Repository
 
 This repository contains all moddels and source code and guides for the UCL Sensor Board Teaching Tool.
+
 Microcontroller: STM32 Nucleo F411RE
+
 Supported expansion boards: IKS02A1, VL53L1, VL53L8
 
 ---
