@@ -56,4 +56,7 @@ function STLINK_COMPORT = auto_COMPORT()
             STLINK_COMPORT = devs{i,2};
         end
     end
+    if i == 1
+        STLINK_COMPORT = devs{i,2};
+    end
 end
