@@ -17,12 +17,22 @@ This directory contains C Code for each sensor board that does the data aquisiti
 ### [Binaries/](https://github.com/JesseJabezArendse/AP_01/tree/main/binaries)
 This directory contains the precompiled binaries of the source code folders, which is needed by Simulink.
 
+---
+
 ## How to use the Simulink Models
 
-For Windows:
+First, clone this repository on your own machine, in your own working directory using the following command line:
+
+$ git clone https://github.com/JesseJabezArendse/AP_01.git
+
+or download the repo as a .zip
+
+
+
+### For Windows:
    It's plug and play :)
 
-For Linux and Mac: (plug and play funtionality pending)
+### For Linux and Mac: (plug and play funtionality pending)
    - Copy the .bin file of the model you are wanting to run into the F411 mass storage drive
    - Create a variable called STLINK_COMPORT that is the string of the comport of the Nucleo Board
    - Run the model
