@@ -1,0 +1,1097 @@
+ARM GAS  C:\Temp\cceIDUjn.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"VL53L1A1_Simulink.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Core/Src/VL53L1A1_Simulink.c"
+  20              		.section	.text.initVL53L1A1,"ax",%progbits
+  21              		.align	1
+  22              		.global	initVL53L1A1
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	initVL53L1A1:
+  28              	.LFB137:
+   1:Core/Src/VL53L1A1_Simulink.c **** ///////////////////////////////////////////////////////////
+   2:Core/Src/VL53L1A1_Simulink.c **** // Project : STM32 Nucleo + VL53L1A1
+   3:Core/Src/VL53L1A1_Simulink.c **** // Abbreviation : AP_01
+   4:Core/Src/VL53L1A1_Simulink.c **** // Microcontroller: STM32 Nucleo F411RE
+   5:Core/Src/VL53L1A1_Simulink.c **** // Made For : Dr. Amir Patel
+   6:Core/Src/VL53L1A1_Simulink.c **** // @author: Jesse Jabez Arendse
+   7:Core/Src/VL53L1A1_Simulink.c **** // @modified: 24/08/2024
+   8:Core/Src/VL53L1A1_Simulink.c **** ///////////////////////////////////////////////////////////
+   9:Core/Src/VL53L1A1_Simulink.c **** 
+  10:Core/Src/VL53L1A1_Simulink.c **** 
+  11:Core/Src/VL53L1A1_Simulink.c **** // Includes ///////////////////////////////////////////////
+  12:Core/Src/VL53L1A1_Simulink.c **** #include "53l1a2_ranging_sensor.h"
+  13:Core/Src/VL53L1A1_Simulink.c **** #include "53l1a2_conf.h"
+  14:Core/Src/VL53L1A1_Simulink.c **** // #include "stm32f4xx_nucleo.h"
+  15:Core/Src/VL53L1A1_Simulink.c **** #include "main.h"
+  16:Core/Src/VL53L1A1_Simulink.c **** 
+  17:Core/Src/VL53L1A1_Simulink.c **** #include "stdio.h"
+  18:Core/Src/VL53L1A1_Simulink.c **** #include <stdint.h>
+  19:Core/Src/VL53L1A1_Simulink.c **** #include <string.h>  // For memcpy
+  20:Core/Src/VL53L1A1_Simulink.c **** #include <stdio.h>
+  21:Core/Src/VL53L1A1_Simulink.c **** 
+  22:Core/Src/VL53L1A1_Simulink.c **** 
+  23:Core/Src/VL53L1A1_Simulink.c **** // Project Specific Variables /////////////////////////////
+  24:Core/Src/VL53L1A1_Simulink.c **** #define INSTANCE_TOF_LEFT    0 
+  25:Core/Src/VL53L1A1_Simulink.c **** #define INSTANCE_TOF_CENTRE  1 
+  26:Core/Src/VL53L1A1_Simulink.c **** #define INSTANCE_TOF_RIGHT   2 
+  27:Core/Src/VL53L1A1_Simulink.c **** 
+  28:Core/Src/VL53L1A1_Simulink.c **** #define TIMING_BUDGET (30U) /* 16 ms < TimingBudget < 500 ms */
+  29:Core/Src/VL53L1A1_Simulink.c **** #define POLLING_PERIOD (250U) /* refresh rate for polling mode (ms, shall be consistent with Timing
+  30:Core/Src/VL53L1A1_Simulink.c **** 
+ARM GAS  C:\Temp\cceIDUjn.s 			page 2
+
+
+  31:Core/Src/VL53L1A1_Simulink.c **** int32_t tof_fsr;
+  32:Core/Src/VL53L1A1_Simulink.c **** float tof_odr;
+  33:Core/Src/VL53L1A1_Simulink.c **** 
+  34:Core/Src/VL53L1A1_Simulink.c **** extern RANGING_SENSOR_Result_t TOF_left;
+  35:Core/Src/VL53L1A1_Simulink.c **** extern RANGING_SENSOR_Result_t TOF_centre;
+  36:Core/Src/VL53L1A1_Simulink.c **** extern RANGING_SENSOR_Result_t TOF_right;
+  37:Core/Src/VL53L1A1_Simulink.c **** extern RANGING_SENSOR_ProfileConfig_t Profile;
+  38:Core/Src/VL53L1A1_Simulink.c **** RANGING_SENSOR_ROIConfig_t ROI;
+  39:Core/Src/VL53L1A1_Simulink.c **** 
+  40:Core/Src/VL53L1A1_Simulink.c **** extern uint32_t counter;
+  41:Core/Src/VL53L1A1_Simulink.c **** extern UART_HandleTypeDef huart2;
+  42:Core/Src/VL53L1A1_Simulink.c **** 
+  43:Core/Src/VL53L1A1_Simulink.c **** static int32_t status = 0;
+  44:Core/Src/VL53L1A1_Simulink.c **** static uint8_t ToF_Present[RANGING_SENSOR_INSTANCES_NBR] = {0};
+  45:Core/Src/VL53L1A1_Simulink.c **** volatile uint8_t ToF_EventDetected = 0;
+  46:Core/Src/VL53L1A1_Simulink.c **** 
+  47:Core/Src/VL53L1A1_Simulink.c **** const uint8_t L1_BUFFER_SIZE = 60;
+  48:Core/Src/VL53L1A1_Simulink.c **** RANGING_SENSOR_Result_t TOF_left_array[60];
+  49:Core/Src/VL53L1A1_Simulink.c **** RANGING_SENSOR_Result_t TOF_centre_array[60];
+  50:Core/Src/VL53L1A1_Simulink.c **** RANGING_SENSOR_Result_t TOF_right_array[60];
+  51:Core/Src/VL53L1A1_Simulink.c **** // mask options from BSP/Components/<IC_reg.h>
+  52:Core/Src/VL53L1A1_Simulink.c **** 
+  53:Core/Src/VL53L1A1_Simulink.c **** // Functions /////////////////////////////////////////////
+  54:Core/Src/VL53L1A1_Simulink.c **** 
+  55:Core/Src/VL53L1A1_Simulink.c **** void initVL53L1A1(){
+  29              		.loc 1 55 20 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 8
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  34              		.cfi_def_cfa_offset 20
+  35              		.cfi_offset 4, -20
+  36              		.cfi_offset 5, -16
+  37              		.cfi_offset 6, -12
+  38              		.cfi_offset 7, -8
+  39              		.cfi_offset 14, -4
+  40 0002 83B0     		sub	sp, sp, #12
+  41              		.cfi_def_cfa_offset 32
+  56:Core/Src/VL53L1A1_Simulink.c ****     uint8_t device;
+  42              		.loc 1 56 5 view .LVU1
+  57:Core/Src/VL53L1A1_Simulink.c ****     uint16_t i2c_addr;
+  43              		.loc 1 57 5 view .LVU2
+  58:Core/Src/VL53L1A1_Simulink.c ****     uint32_t id;
+  44              		.loc 1 58 5 view .LVU3
+  59:Core/Src/VL53L1A1_Simulink.c **** 
+  60:Core/Src/VL53L1A1_Simulink.c ****     /* put all the devices in shutdown mode */
+  61:Core/Src/VL53L1A1_Simulink.c ****     for (device = 0; device < RANGING_SENSOR_INSTANCES_NBR; device++)
+  45              		.loc 1 61 5 view .LVU4
+  46              	.LVL0:
+  47              		.loc 1 61 17 is_stmt 0 view .LVU5
+  48 0004 0024     		movs	r4, #0
+  49              		.loc 1 61 5 view .LVU6
+  50 0006 05E0     		b	.L2
+  51              	.LVL1:
+  52              	.L3:
+  62:Core/Src/VL53L1A1_Simulink.c ****     {
+  63:Core/Src/VL53L1A1_Simulink.c ****         VL53L1A2_RANGING_SENSOR_SetPowerMode(device, RANGING_SENSOR_POWERMODE_OFF);
+ARM GAS  C:\Temp\cceIDUjn.s 			page 3
+
+
+  53              		.loc 1 63 9 is_stmt 1 discriminator 3 view .LVU7
+  54 0008 0121     		movs	r1, #1
+  55 000a 2046     		mov	r0, r4
+  56 000c FFF7FEFF 		bl	VL53L1A2_RANGING_SENSOR_SetPowerMode
+  57              	.LVL2:
+  61:Core/Src/VL53L1A1_Simulink.c ****     {
+  58              		.loc 1 61 67 discriminator 3 view .LVU8
+  59 0010 0134     		adds	r4, r4, #1
+  60              	.LVL3:
+  61:Core/Src/VL53L1A1_Simulink.c ****     {
+  61              		.loc 1 61 67 is_stmt 0 discriminator 3 view .LVU9
+  62 0012 E4B2     		uxtb	r4, r4
+  63              	.LVL4:
+  64              	.L2:
+  61:Core/Src/VL53L1A1_Simulink.c ****     {
+  65              		.loc 1 61 29 is_stmt 1 discriminator 1 view .LVU10
+  66 0014 022C     		cmp	r4, #2
+  67 0016 F7D9     		bls	.L3
+  64:Core/Src/VL53L1A1_Simulink.c ****     }
+  65:Core/Src/VL53L1A1_Simulink.c **** 
+  66:Core/Src/VL53L1A1_Simulink.c ****     /* power on the devices one at a time, initialize them and change their address.
+  67:Core/Src/VL53L1A1_Simulink.c ****    * once the address is updated, the communication with the devices is checked
+  68:Core/Src/VL53L1A1_Simulink.c ****    * reading its ID.
+  69:Core/Src/VL53L1A1_Simulink.c ****    */
+  70:Core/Src/VL53L1A1_Simulink.c ****     for (device = 0; device < RANGING_SENSOR_INSTANCES_NBR; device++)
+  68              		.loc 1 70 17 is_stmt 0 view .LVU11
+  69 0018 0024     		movs	r4, #0
+  70              	.LVL5:
+  71              		.loc 1 70 17 view .LVU12
+  72 001a 01E0     		b	.L4
+  73              	.LVL6:
+  74              	.L5:
+  75              		.loc 1 70 67 is_stmt 1 discriminator 2 view .LVU13
+  76 001c 0134     		adds	r4, r4, #1
+  77              	.LVL7:
+  78              		.loc 1 70 67 is_stmt 0 discriminator 2 view .LVU14
+  79 001e E4B2     		uxtb	r4, r4
+  80              	.LVL8:
+  81              	.L4:
+  82              		.loc 1 70 29 is_stmt 1 discriminator 1 view .LVU15
+  83 0020 022C     		cmp	r4, #2
+  84 0022 1BD8     		bhi	.L8
+  71:Core/Src/VL53L1A1_Simulink.c ****     {
+  72:Core/Src/VL53L1A1_Simulink.c ****         VL53L1A2_RANGING_SENSOR_SetPowerMode(device, RANGING_SENSOR_POWERMODE_ON);
+  85              		.loc 1 72 9 view .LVU16
+  86 0024 0021     		movs	r1, #0
+  87 0026 2046     		mov	r0, r4
+  88 0028 FFF7FEFF 		bl	VL53L1A2_RANGING_SENSOR_SetPowerMode
+  89              	.LVL9:
+  73:Core/Src/VL53L1A1_Simulink.c ****         status = VL53L1A2_RANGING_SENSOR_Init(device);
+  90              		.loc 1 73 9 view .LVU17
+  91              		.loc 1 73 18 is_stmt 0 view .LVU18
+  92 002c 2046     		mov	r0, r4
+  93 002e FFF7FEFF 		bl	VL53L1A2_RANGING_SENSOR_Init
+  94              	.LVL10:
+  95              		.loc 1 73 16 view .LVU19
+  96 0032 294B     		ldr	r3, .L9
+ARM GAS  C:\Temp\cceIDUjn.s 			page 4
+
+
+  97 0034 1860     		str	r0, [r3]
+  74:Core/Src/VL53L1A1_Simulink.c **** 
+  75:Core/Src/VL53L1A1_Simulink.c ****         /* 0: not detected, 1: detected */
+  76:Core/Src/VL53L1A1_Simulink.c ****         ToF_Present[device] = (status != BSP_ERROR_NONE) ? 0 : 1;
+  98              		.loc 1 76 9 is_stmt 1 view .LVU20
+  99              		.loc 1 76 62 is_stmt 0 view .LVU21
+ 100 0036 B0FA80F0 		clz	r0, r0
+ 101 003a 4009     		lsrs	r0, r0, #5
+ 102              		.loc 1 76 29 view .LVU22
+ 103 003c 274B     		ldr	r3, .L9+4
+ 104 003e 1855     		strb	r0, [r3, r4]
+  77:Core/Src/VL53L1A1_Simulink.c **** 
+  78:Core/Src/VL53L1A1_Simulink.c ****         /* skip this device if init not successful */
+  79:Core/Src/VL53L1A1_Simulink.c ****         if (ToF_Present[device] == 0) { continue; }
+ 105              		.loc 1 79 9 is_stmt 1 view .LVU23
+ 106              		.loc 1 79 12 is_stmt 0 view .LVU24
+ 107 0040 0028     		cmp	r0, #0
+ 108 0042 EBD0     		beq	.L5
+  80:Core/Src/VL53L1A1_Simulink.c **** 
+  81:Core/Src/VL53L1A1_Simulink.c ****         /* left: 0x54, center: 0x56, right: 0x58 */
+  82:Core/Src/VL53L1A1_Simulink.c ****         i2c_addr = (RANGING_SENSOR_VL53L1CB_ADDRESS + (device + 1) * 2);
+ 109              		.loc 1 82 9 is_stmt 1 view .LVU25
+ 110              		.loc 1 82 53 is_stmt 0 view .LVU26
+ 111 0044 04F12A01 		add	r1, r4, #42
+ 112              		.loc 1 82 18 view .LVU27
+ 113 0048 4900     		lsls	r1, r1, #1
+ 114 004a 89B2     		uxth	r1, r1
+ 115              	.LVL11:
+  83:Core/Src/VL53L1A1_Simulink.c ****         VL53L1A2_RANGING_SENSOR_SetAddress(device, i2c_addr);
+ 116              		.loc 1 83 9 is_stmt 1 view .LVU28
+ 117 004c 2046     		mov	r0, r4
+ 118 004e FFF7FEFF 		bl	VL53L1A2_RANGING_SENSOR_SetAddress
+ 119              	.LVL12:
+  84:Core/Src/VL53L1A1_Simulink.c **** 
+  85:Core/Src/VL53L1A1_Simulink.c ****         /* check the communication with the device reading the ID */
+  86:Core/Src/VL53L1A1_Simulink.c ****         VL53L1A2_RANGING_SENSOR_ReadID(device, &id);
+ 120              		.loc 1 86 9 view .LVU29
+ 121 0052 01A9     		add	r1, sp, #4
+ 122 0054 2046     		mov	r0, r4
+ 123 0056 FFF7FEFF 		bl	VL53L1A2_RANGING_SENSOR_ReadID
+ 124              	.LVL13:
+ 125 005a DFE7     		b	.L5
+ 126              	.LVL14:
+ 127              	.L8:
+  87:Core/Src/VL53L1A1_Simulink.c ****     }
+  88:Core/Src/VL53L1A1_Simulink.c **** 
+  89:Core/Src/VL53L1A1_Simulink.c ****     
+  90:Core/Src/VL53L1A1_Simulink.c ****     Profile.TimingBudget = 1000/tof_odr;
+ 128              		.loc 1 90 5 view .LVU30
+ 129              		.loc 1 90 32 is_stmt 0 view .LVU31
+ 130 005c 204B     		ldr	r3, .L9+8
+ 131 005e 93ED007A 		vldr.32	s14, [r3]
+ 132 0062 DFED206A 		vldr.32	s13, .L9+12
+ 133 0066 C6EE877A 		vdiv.f32	s15, s13, s14
+ 134              		.loc 1 90 26 view .LVU32
+ 135 006a 1F4D     		ldr	r5, .L9+16
+ 136 006c FCEEE77A 		vcvt.u32.f32	s15, s15
+ARM GAS  C:\Temp\cceIDUjn.s 			page 5
+
+
+ 137 0070 C5ED017A 		vstr.32	s15, [r5, #4]	@ int
+  91:Core/Src/VL53L1A1_Simulink.c ****     Profile.Frequency = 0;
+ 138              		.loc 1 91 5 is_stmt 1 view .LVU33
+ 139              		.loc 1 91 23 is_stmt 0 view .LVU34
+ 140 0074 0027     		movs	r7, #0
+ 141 0076 AF60     		str	r7, [r5, #8]
+  92:Core/Src/VL53L1A1_Simulink.c ****     Profile.EnableAmbient = 1; /* Enable: 1, Disable: 0 */
+ 142              		.loc 1 92 5 is_stmt 1 view .LVU35
+ 143              		.loc 1 92 27 is_stmt 0 view .LVU36
+ 144 0078 0126     		movs	r6, #1
+ 145 007a EE60     		str	r6, [r5, #12]
+  93:Core/Src/VL53L1A1_Simulink.c ****     Profile.EnableSignal = 1; /* Enable: 1, Disable: 0 */
+ 146              		.loc 1 93 5 is_stmt 1 view .LVU37
+ 147              		.loc 1 93 26 is_stmt 0 view .LVU38
+ 148 007c 2E61     		str	r6, [r5, #16]
+  94:Core/Src/VL53L1A1_Simulink.c **** 
+  95:Core/Src/VL53L1A1_Simulink.c ****     ROI.TopLeftX  = 8; 
+ 149              		.loc 1 95 5 is_stmt 1 view .LVU39
+ 150              		.loc 1 95 19 is_stmt 0 view .LVU40
+ 151 007e 1B4C     		ldr	r4, .L9+20
+ 152              	.LVL15:
+ 153              		.loc 1 95 19 view .LVU41
+ 154 0080 0823     		movs	r3, #8
+ 155 0082 2370     		strb	r3, [r4]
+  96:Core/Src/VL53L1A1_Simulink.c ****     ROI.TopLeftY  = 12; 
+ 156              		.loc 1 96 5 is_stmt 1 view .LVU42
+ 157              		.loc 1 96 19 is_stmt 0 view .LVU43
+ 158 0084 0C22     		movs	r2, #12
+ 159 0086 6270     		strb	r2, [r4, #1]
+  97:Core/Src/VL53L1A1_Simulink.c ****     ROI.BotRightX = 12;
+ 160              		.loc 1 97 5 is_stmt 1 view .LVU44
+ 161              		.loc 1 97 19 is_stmt 0 view .LVU45
+ 162 0088 A270     		strb	r2, [r4, #2]
+  98:Core/Src/VL53L1A1_Simulink.c ****     ROI.BotRightY = 8;
+ 163              		.loc 1 98 5 is_stmt 1 view .LVU46
+ 164              		.loc 1 98 19 is_stmt 0 view .LVU47
+ 165 008a E370     		strb	r3, [r4, #3]
+  99:Core/Src/VL53L1A1_Simulink.c **** 
+ 100:Core/Src/VL53L1A1_Simulink.c ****     VL53L1A2_RANGING_SENSOR_ConfigProfile(INSTANCE_TOF_LEFT   , &Profile);
+ 166              		.loc 1 100 5 is_stmt 1 view .LVU48
+ 167 008c 2946     		mov	r1, r5
+ 168 008e 3846     		mov	r0, r7
+ 169 0090 FFF7FEFF 		bl	VL53L1A2_RANGING_SENSOR_ConfigProfile
+ 170              	.LVL16:
+ 101:Core/Src/VL53L1A1_Simulink.c ****     VL53L1A2_RANGING_SENSOR_ConfigProfile(INSTANCE_TOF_CENTRE , &Profile);
+ 171              		.loc 1 101 5 view .LVU49
+ 172 0094 2946     		mov	r1, r5
+ 173 0096 3046     		mov	r0, r6
+ 174 0098 FFF7FEFF 		bl	VL53L1A2_RANGING_SENSOR_ConfigProfile
+ 175              	.LVL17:
+ 102:Core/Src/VL53L1A1_Simulink.c ****     VL53L1A2_RANGING_SENSOR_ConfigProfile(INSTANCE_TOF_RIGHT  , &Profile);
+ 176              		.loc 1 102 5 view .LVU50
+ 177 009c 2946     		mov	r1, r5
+ 178 009e 0220     		movs	r0, #2
+ 179 00a0 FFF7FEFF 		bl	VL53L1A2_RANGING_SENSOR_ConfigProfile
+ 180              	.LVL18:
+ 103:Core/Src/VL53L1A1_Simulink.c **** 
+ARM GAS  C:\Temp\cceIDUjn.s 			page 6
+
+
+ 104:Core/Src/VL53L1A1_Simulink.c ****     VL53L1A2_RANGING_SENSOR_ConfigROI(INSTANCE_TOF_LEFT   , &ROI);
+ 181              		.loc 1 104 5 view .LVU51
+ 182 00a4 2146     		mov	r1, r4
+ 183 00a6 3846     		mov	r0, r7
+ 184 00a8 FFF7FEFF 		bl	VL53L1A2_RANGING_SENSOR_ConfigROI
+ 185              	.LVL19:
+ 105:Core/Src/VL53L1A1_Simulink.c ****     VL53L1A2_RANGING_SENSOR_ConfigROI(INSTANCE_TOF_CENTRE , &ROI);
+ 186              		.loc 1 105 5 view .LVU52
+ 187 00ac 2146     		mov	r1, r4
+ 188 00ae 3046     		mov	r0, r6
+ 189 00b0 FFF7FEFF 		bl	VL53L1A2_RANGING_SENSOR_ConfigROI
+ 190              	.LVL20:
+ 106:Core/Src/VL53L1A1_Simulink.c ****     VL53L1A2_RANGING_SENSOR_ConfigROI(INSTANCE_TOF_RIGHT  , &ROI);
+ 191              		.loc 1 106 5 view .LVU53
+ 192 00b4 2146     		mov	r1, r4
+ 193 00b6 0220     		movs	r0, #2
+ 194 00b8 FFF7FEFF 		bl	VL53L1A2_RANGING_SENSOR_ConfigROI
+ 195              	.LVL21:
+ 107:Core/Src/VL53L1A1_Simulink.c **** 
+ 108:Core/Src/VL53L1A1_Simulink.c ****     VL53L1A2_RANGING_SENSOR_Start(INSTANCE_TOF_LEFT   , RS_MODE_ASYNC_CONTINUOUS);
+ 196              		.loc 1 108 5 view .LVU54
+ 197 00bc 0321     		movs	r1, #3
+ 198 00be 3846     		mov	r0, r7
+ 199 00c0 FFF7FEFF 		bl	VL53L1A2_RANGING_SENSOR_Start
+ 200              	.LVL22:
+ 109:Core/Src/VL53L1A1_Simulink.c ****     VL53L1A2_RANGING_SENSOR_Start(INSTANCE_TOF_CENTRE , RS_MODE_ASYNC_CONTINUOUS);
+ 201              		.loc 1 109 5 view .LVU55
+ 202 00c4 0321     		movs	r1, #3
+ 203 00c6 3046     		mov	r0, r6
+ 204 00c8 FFF7FEFF 		bl	VL53L1A2_RANGING_SENSOR_Start
+ 205              	.LVL23:
+ 110:Core/Src/VL53L1A1_Simulink.c ****     VL53L1A2_RANGING_SENSOR_Start(INSTANCE_TOF_RIGHT  , RS_MODE_ASYNC_CONTINUOUS);
+ 206              		.loc 1 110 5 view .LVU56
+ 207 00cc 0321     		movs	r1, #3
+ 208 00ce 0220     		movs	r0, #2
+ 209 00d0 FFF7FEFF 		bl	VL53L1A2_RANGING_SENSOR_Start
+ 210              	.LVL24:
+ 111:Core/Src/VL53L1A1_Simulink.c **** }
+ 211              		.loc 1 111 1 is_stmt 0 view .LVU57
+ 212 00d4 03B0     		add	sp, sp, #12
+ 213              		.cfi_def_cfa_offset 20
+ 214              		@ sp needed
+ 215 00d6 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 216              	.L10:
+ 217              		.align	2
+ 218              	.L9:
+ 219 00d8 00000000 		.word	status
+ 220 00dc 00000000 		.word	ToF_Present
+ 221 00e0 00000000 		.word	tof_odr
+ 222 00e4 00007A44 		.word	1148846080
+ 223 00e8 00000000 		.word	Profile
+ 224 00ec 00000000 		.word	ROI
+ 225              		.cfi_endproc
+ 226              	.LFE137:
+ 228              		.section	.text.selectBestTOF,"ax",%progbits
+ 229              		.align	1
+ 230              		.global	selectBestTOF
+ARM GAS  C:\Temp\cceIDUjn.s 			page 7
+
+
+ 231              		.syntax unified
+ 232              		.thumb
+ 233              		.thumb_func
+ 235              	selectBestTOF:
+ 236              	.LVL25:
+ 237              	.LFB138:
+ 112:Core/Src/VL53L1A1_Simulink.c **** 
+ 113:Core/Src/VL53L1A1_Simulink.c **** void selectBestTOF(RANGING_SENSOR_Result_t *array) {
+ 238              		.loc 1 113 52 is_stmt 1 view -0
+ 239              		.cfi_startproc
+ 240              		@ args = 0, pretend = 0, frame = 0
+ 241              		@ frame_needed = 0, uses_anonymous_args = 0
+ 242              		.loc 1 113 52 is_stmt 0 view .LVU59
+ 243 0000 10B5     		push	{r4, lr}
+ 244              		.cfi_def_cfa_offset 8
+ 245              		.cfi_offset 4, -8
+ 246              		.cfi_offset 14, -4
+ 114:Core/Src/VL53L1A1_Simulink.c ****     uint8_t bestIndex = 0;
+ 247              		.loc 1 114 5 is_stmt 1 view .LVU60
+ 248              	.LVL26:
+ 115:Core/Src/VL53L1A1_Simulink.c ****     uint8_t bestSubIndex = 0;
+ 249              		.loc 1 115 5 view .LVU61
+ 116:Core/Src/VL53L1A1_Simulink.c ****     float_t bestRatio = 0.0f;
+ 250              		.loc 1 116 5 view .LVU62
+ 117:Core/Src/VL53L1A1_Simulink.c **** 
+ 118:Core/Src/VL53L1A1_Simulink.c ****     for (uint8_t i = 0; i < 60; i++) {
+ 251              		.loc 1 118 5 view .LVU63
+ 252              	.LBB2:
+ 253              		.loc 1 118 10 view .LVU64
+ 254              		.loc 1 118 18 is_stmt 0 view .LVU65
+ 255 0002 4FF0000C 		mov	ip, #0
+ 256              	.LBE2:
+ 116:Core/Src/VL53L1A1_Simulink.c ****     float_t bestRatio = 0.0f;
+ 257              		.loc 1 116 13 view .LVU66
+ 258 0006 DFED246A 		vldr.32	s13, .L23
+ 115:Core/Src/VL53L1A1_Simulink.c ****     float_t bestRatio = 0.0f;
+ 259              		.loc 1 115 13 view .LVU67
+ 260 000a 6446     		mov	r4, ip
+ 114:Core/Src/VL53L1A1_Simulink.c ****     uint8_t bestSubIndex = 0;
+ 261              		.loc 1 114 13 view .LVU68
+ 262 000c E646     		mov	lr, ip
+ 263              	.LBB7:
+ 264              		.loc 1 118 5 view .LVU69
+ 265 000e 2BE0     		b	.L12
+ 266              	.LVL27:
+ 267              	.L17:
+ 268              	.LBB3:
+ 269              	.LBB4:
+ 119:Core/Src/VL53L1A1_Simulink.c ****         for (uint8_t j = 0; j < 4; j++) { 
+ 120:Core/Src/VL53L1A1_Simulink.c ****             float_t ratio = 0; 
+ 270              		.loc 1 120 21 view .LVU70
+ 271 0010 DFED217A 		vldr.32	s15, .L23
+ 272 0014 1AE0     		b	.L13
+ 273              	.LVL28:
+ 274              	.L14:
+ 275              		.loc 1 120 21 view .LVU71
+ 276              	.LBE4:
+ARM GAS  C:\Temp\cceIDUjn.s 			page 8
+
+
+ 119:Core/Src/VL53L1A1_Simulink.c ****         for (uint8_t j = 0; j < 4; j++) { 
+ 277              		.loc 1 119 37 is_stmt 1 discriminator 2 view .LVU72
+ 278 0016 0133     		adds	r3, r3, #1
+ 279              	.LVL29:
+ 119:Core/Src/VL53L1A1_Simulink.c ****         for (uint8_t j = 0; j < 4; j++) { 
+ 280              		.loc 1 119 37 is_stmt 0 discriminator 2 view .LVU73
+ 281 0018 DBB2     		uxtb	r3, r3
+ 282              	.LVL30:
+ 283              	.L16:
+ 119:Core/Src/VL53L1A1_Simulink.c ****         for (uint8_t j = 0; j < 4; j++) { 
+ 284              		.loc 1 119 31 is_stmt 1 discriminator 1 view .LVU74
+ 285 001a 032B     		cmp	r3, #3
+ 286 001c 20D8     		bhi	.L21
+ 287              	.LBB5:
+ 288              		.loc 1 120 13 view .LVU75
+ 289              	.LVL31:
+ 121:Core/Src/VL53L1A1_Simulink.c ****             if (array[i].ZoneResult[j].Signal[j] != 0 ) {ratio =  array[i].ZoneResult[j].Signal[j] 
+ 290              		.loc 1 121 13 view .LVU76
+ 291              		.loc 1 121 22 is_stmt 0 view .LVU77
+ 292 001e 0CEBCC02 		add	r2, ip, ip, lsl #3
+ 293 0022 00EBC202 		add	r2, r0, r2, lsl #3
+ 294              		.loc 1 121 46 view .LVU78
+ 295 0026 03EBC301 		add	r1, r3, r3, lsl #3
+ 296 002a 02EBC101 		add	r1, r2, r1, lsl #3
+ 297 002e 91ED0E7A 		vldr.32	s14, [r1, #56]
+ 298              		.loc 1 121 16 view .LVU79
+ 299 0032 B5EE407A 		vcmp.f32	s14, #0
+ 300 0036 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 301 003a E9D0     		beq	.L17
+ 302              		.loc 1 121 58 is_stmt 1 discriminator 1 view .LVU80
+ 303              		.loc 1 121 132 is_stmt 0 discriminator 1 view .LVU81
+ 304 003c 03EBC301 		add	r1, r3, r3, lsl #3
+ 305 0040 02EBC102 		add	r2, r2, r1, lsl #3
+ 306 0044 92ED0A6A 		vldr.32	s12, [r2, #40]
+ 307              		.loc 1 121 64 discriminator 1 view .LVU82
+ 308 0048 C7EE067A 		vdiv.f32	s15, s14, s12
+ 309              	.LVL32:
+ 310              	.L13:
+ 122:Core/Src/VL53L1A1_Simulink.c ****             if (ratio > bestRatio) {
+ 311              		.loc 1 122 13 is_stmt 1 view .LVU83
+ 312              		.loc 1 122 16 is_stmt 0 view .LVU84
+ 313 004c F4EEE76A 		vcmpe.f32	s13, s15
+ 314 0050 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 315 0054 DFD5     		bpl	.L14
+ 123:Core/Src/VL53L1A1_Simulink.c ****                 bestRatio = ratio;
+ 316              		.loc 1 123 27 view .LVU85
+ 317 0056 F0EE676A 		vmov.f32	s13, s15
+ 318              	.LVL33:
+ 124:Core/Src/VL53L1A1_Simulink.c ****                 bestIndex = i;
+ 125:Core/Src/VL53L1A1_Simulink.c ****                 bestSubIndex = j;
+ 319              		.loc 1 125 30 view .LVU86
+ 320 005a 1C46     		mov	r4, r3
+ 321              	.LVL34:
+ 124:Core/Src/VL53L1A1_Simulink.c ****                 bestIndex = i;
+ 322              		.loc 1 124 27 view .LVU87
+ 323 005c E646     		mov	lr, ip
+ 324              	.LVL35:
+ARM GAS  C:\Temp\cceIDUjn.s 			page 9
+
+
+ 124:Core/Src/VL53L1A1_Simulink.c ****                 bestIndex = i;
+ 325              		.loc 1 124 27 view .LVU88
+ 326 005e DAE7     		b	.L14
+ 327              	.LVL36:
+ 328              	.L21:
+ 124:Core/Src/VL53L1A1_Simulink.c ****                 bestIndex = i;
+ 329              		.loc 1 124 27 view .LVU89
+ 330              	.LBE5:
+ 331              	.LBE3:
+ 118:Core/Src/VL53L1A1_Simulink.c ****         for (uint8_t j = 0; j < 4; j++) { 
+ 332              		.loc 1 118 34 is_stmt 1 discriminator 2 view .LVU90
+ 333 0060 0CF1010C 		add	ip, ip, #1
+ 334              	.LVL37:
+ 118:Core/Src/VL53L1A1_Simulink.c ****         for (uint8_t j = 0; j < 4; j++) { 
+ 335              		.loc 1 118 34 is_stmt 0 discriminator 2 view .LVU91
+ 336 0064 5FFA8CFC 		uxtb	ip, ip
+ 337              	.LVL38:
+ 338              	.L12:
+ 118:Core/Src/VL53L1A1_Simulink.c ****         for (uint8_t j = 0; j < 4; j++) { 
+ 339              		.loc 1 118 27 is_stmt 1 discriminator 1 view .LVU92
+ 340 0068 BCF13B0F 		cmp	ip, #59
+ 341 006c 01D8     		bhi	.L22
+ 342              	.LBB6:
+ 119:Core/Src/VL53L1A1_Simulink.c ****             float_t ratio = 0; 
+ 343              		.loc 1 119 22 is_stmt 0 view .LVU93
+ 344 006e 0023     		movs	r3, #0
+ 345 0070 D3E7     		b	.L16
+ 346              	.L22:
+ 347              	.LBE6:
+ 348              	.LBE7:
+ 126:Core/Src/VL53L1A1_Simulink.c ****             }
+ 127:Core/Src/VL53L1A1_Simulink.c ****         }
+ 128:Core/Src/VL53L1A1_Simulink.c ****     }
+ 129:Core/Src/VL53L1A1_Simulink.c ****     array[0].ZoneResult[0].Ambient[0]  = array[bestIndex].ZoneResult[bestSubIndex].Ambient[bestSubI
+ 349              		.loc 1 129 5 is_stmt 1 view .LVU94
+ 350              		.loc 1 129 47 is_stmt 0 view .LVU95
+ 351 0072 0EEBCE0E 		add	lr, lr, lr, lsl #3
+ 352              	.LVL39:
+ 353              		.loc 1 129 47 view .LVU96
+ 354 0076 00EBCE03 		add	r3, r0, lr, lsl #3
+ 355              		.loc 1 129 91 view .LVU97
+ 356 007a 04EBC402 		add	r2, r4, r4, lsl #3
+ 357 007e 03EBC202 		add	r2, r3, r2, lsl #3
+ 358 0082 916A     		ldr	r1, [r2, #40]	@ float
+ 359              		.loc 1 129 40 view .LVU98
+ 360 0084 8162     		str	r1, [r0, #40]	@ float
+ 130:Core/Src/VL53L1A1_Simulink.c ****     array[0].ZoneResult[0].Distance[0] = array[bestIndex].ZoneResult[bestSubIndex].Distance[bestSub
+ 361              		.loc 1 130 5 is_stmt 1 view .LVU99
+ 362              		.loc 1 130 92 is_stmt 0 view .LVU100
+ 363 0086 9268     		ldr	r2, [r2, #8]
+ 364              		.loc 1 130 40 view .LVU101
+ 365 0088 8260     		str	r2, [r0, #8]
+ 131:Core/Src/VL53L1A1_Simulink.c ****     array[0].ZoneResult[0].Signal[0]   = array[bestIndex].ZoneResult[bestSubIndex].Signal[bestSubIn
+ 366              		.loc 1 131 5 is_stmt 1 view .LVU102
+ 367              		.loc 1 131 90 is_stmt 0 view .LVU103
+ 368 008a 04EBC404 		add	r4, r4, r4, lsl #3
+ 369              	.LVL40:
+ARM GAS  C:\Temp\cceIDUjn.s 			page 10
+
+
+ 370              		.loc 1 131 90 view .LVU104
+ 371 008e 03EBC403 		add	r3, r3, r4, lsl #3
+ 372 0092 9B6B     		ldr	r3, [r3, #56]	@ float
+ 373              		.loc 1 131 40 view .LVU105
+ 374 0094 8363     		str	r3, [r0, #56]	@ float
+ 132:Core/Src/VL53L1A1_Simulink.c ****     
+ 133:Core/Src/VL53L1A1_Simulink.c **** }
+ 375              		.loc 1 133 1 view .LVU106
+ 376 0096 10BD     		pop	{r4, pc}
+ 377              	.L24:
+ 378              		.align	2
+ 379              	.L23:
+ 380 0098 00000000 		.word	0
+ 381              		.cfi_endproc
+ 382              	.LFE138:
+ 384              		.section	.text.isItWorthy,"ax",%progbits
+ 385              		.align	1
+ 386              		.global	isItWorthy
+ 387              		.syntax unified
+ 388              		.thumb
+ 389              		.thumb_func
+ 391              	isItWorthy:
+ 392              	.LVL41:
+ 393              	.LFB139:
+ 134:Core/Src/VL53L1A1_Simulink.c **** 
+ 135:Core/Src/VL53L1A1_Simulink.c **** RANGING_SENSOR_Result_t sub_TOF_left;
+ 136:Core/Src/VL53L1A1_Simulink.c **** RANGING_SENSOR_Result_t sub_TOF_centre;
+ 137:Core/Src/VL53L1A1_Simulink.c **** RANGING_SENSOR_Result_t sub_TOF_right;
+ 138:Core/Src/VL53L1A1_Simulink.c **** RANGING_SENSOR_Result_t temp_TOF_left;
+ 139:Core/Src/VL53L1A1_Simulink.c **** RANGING_SENSOR_Result_t temp_TOF_centre;
+ 140:Core/Src/VL53L1A1_Simulink.c **** RANGING_SENSOR_Result_t temp_TOF_right;
+ 141:Core/Src/VL53L1A1_Simulink.c **** 
+ 142:Core/Src/VL53L1A1_Simulink.c **** 
+ 143:Core/Src/VL53L1A1_Simulink.c **** uint8_t buff_counter = 0;
+ 144:Core/Src/VL53L1A1_Simulink.c **** 
+ 145:Core/Src/VL53L1A1_Simulink.c **** uint8_t isItWorthy(RANGING_SENSOR_Result_t *sub_TOF){
+ 394              		.loc 1 145 53 is_stmt 1 view -0
+ 395              		.cfi_startproc
+ 396              		@ args = 0, pretend = 0, frame = 0
+ 397              		@ frame_needed = 0, uses_anonymous_args = 0
+ 398              		@ link register save eliminated.
+ 146:Core/Src/VL53L1A1_Simulink.c ****     if (sub_TOF->ZoneResult[0].Status[sub_TOF->ZoneResult->NumberOfTargets-1] == 0){
+ 399              		.loc 1 146 5 view .LVU108
+ 400              		.loc 1 146 58 is_stmt 0 view .LVU109
+ 401 0000 4368     		ldr	r3, [r0, #4]
+ 402              		.loc 1 146 38 view .LVU110
+ 403 0002 0333     		adds	r3, r3, #3
+ 404 0004 00EB8300 		add	r0, r0, r3, lsl #2
+ 405              	.LVL42:
+ 406              		.loc 1 146 38 view .LVU111
+ 407 0008 8368     		ldr	r3, [r0, #8]
+ 408              		.loc 1 146 8 view .LVU112
+ 409 000a 0BB9     		cbnz	r3, .L27
+ 147:Core/Src/VL53L1A1_Simulink.c ****         return 1;
+ 410              		.loc 1 147 16 view .LVU113
+ 411 000c 0120     		movs	r0, #1
+ 412 000e 7047     		bx	lr
+ARM GAS  C:\Temp\cceIDUjn.s 			page 11
+
+
+ 413              	.L27:
+ 148:Core/Src/VL53L1A1_Simulink.c ****     }
+ 149:Core/Src/VL53L1A1_Simulink.c ****     else{
+ 150:Core/Src/VL53L1A1_Simulink.c ****         return 0;
+ 414              		.loc 1 150 16 view .LVU114
+ 415 0010 0020     		movs	r0, #0
+ 151:Core/Src/VL53L1A1_Simulink.c ****     }
+ 152:Core/Src/VL53L1A1_Simulink.c **** }
+ 416              		.loc 1 152 1 view .LVU115
+ 417 0012 7047     		bx	lr
+ 418              		.cfi_endproc
+ 419              	.LFE139:
+ 421              		.section	.text.getVL53L1A1,"ax",%progbits
+ 422              		.align	1
+ 423              		.global	getVL53L1A1
+ 424              		.syntax unified
+ 425              		.thumb
+ 426              		.thumb_func
+ 428              	getVL53L1A1:
+ 429              	.LFB140:
+ 153:Core/Src/VL53L1A1_Simulink.c **** 
+ 154:Core/Src/VL53L1A1_Simulink.c **** void getVL53L1A1(){
+ 430              		.loc 1 154 19 is_stmt 1 view -0
+ 431              		.cfi_startproc
+ 432              		@ args = 0, pretend = 0, frame = 0
+ 433              		@ frame_needed = 0, uses_anonymous_args = 0
+ 434 0000 10B5     		push	{r4, lr}
+ 435              		.cfi_def_cfa_offset 8
+ 436              		.cfi_offset 4, -8
+ 437              		.cfi_offset 14, -4
+ 155:Core/Src/VL53L1A1_Simulink.c ****     VL53L1A2_RANGING_SENSOR_GetDistance(INSTANCE_TOF_LEFT   , &sub_TOF_left   );
+ 438              		.loc 1 155 5 view .LVU117
+ 439 0002 2B4C     		ldr	r4, .L37
+ 440 0004 2146     		mov	r1, r4
+ 441 0006 0020     		movs	r0, #0
+ 442 0008 FFF7FEFF 		bl	VL53L1A2_RANGING_SENSOR_GetDistance
+ 443              	.LVL43:
+ 156:Core/Src/VL53L1A1_Simulink.c ****     VL53L1A2_RANGING_SENSOR_GetDistance(INSTANCE_TOF_CENTRE , &sub_TOF_centre );
+ 444              		.loc 1 156 5 view .LVU118
+ 445 000c 2949     		ldr	r1, .L37+4
+ 446 000e 0120     		movs	r0, #1
+ 447 0010 FFF7FEFF 		bl	VL53L1A2_RANGING_SENSOR_GetDistance
+ 448              	.LVL44:
+ 157:Core/Src/VL53L1A1_Simulink.c ****     VL53L1A2_RANGING_SENSOR_GetDistance(INSTANCE_TOF_RIGHT  , &sub_TOF_right  );
+ 449              		.loc 1 157 5 view .LVU119
+ 450 0014 2849     		ldr	r1, .L37+8
+ 451 0016 0220     		movs	r0, #2
+ 452 0018 FFF7FEFF 		bl	VL53L1A2_RANGING_SENSOR_GetDistance
+ 453              	.LVL45:
+ 158:Core/Src/VL53L1A1_Simulink.c **** 
+ 159:Core/Src/VL53L1A1_Simulink.c ****     if (isItWorthy(&sub_TOF_left) == 1){
+ 454              		.loc 1 159 5 view .LVU120
+ 455              		.loc 1 159 9 is_stmt 0 view .LVU121
+ 456 001c 2046     		mov	r0, r4
+ 457 001e FFF7FEFF 		bl	isItWorthy
+ 458              	.LVL46:
+ 459              		.loc 1 159 8 view .LVU122
+ARM GAS  C:\Temp\cceIDUjn.s 			page 12
+
+
+ 460 0022 0128     		cmp	r0, #1
+ 461 0024 32D0     		beq	.L34
+ 462              	.L29:
+ 160:Core/Src/VL53L1A1_Simulink.c ****         temp_TOF_left = sub_TOF_left;
+ 161:Core/Src/VL53L1A1_Simulink.c ****     }
+ 162:Core/Src/VL53L1A1_Simulink.c ****     if (isItWorthy(&sub_TOF_centre) == 1){
+ 463              		.loc 1 162 5 is_stmt 1 view .LVU123
+ 464              		.loc 1 162 9 is_stmt 0 view .LVU124
+ 465 0026 2348     		ldr	r0, .L37+4
+ 466 0028 FFF7FEFF 		bl	isItWorthy
+ 467              	.LVL47:
+ 468              		.loc 1 162 8 view .LVU125
+ 469 002c 0128     		cmp	r0, #1
+ 470 002e 33D0     		beq	.L35
+ 471              	.L30:
+ 163:Core/Src/VL53L1A1_Simulink.c ****         temp_TOF_centre = sub_TOF_centre;
+ 164:Core/Src/VL53L1A1_Simulink.c ****     }
+ 165:Core/Src/VL53L1A1_Simulink.c ****     if (isItWorthy(&sub_TOF_right) == 1){
+ 472              		.loc 1 165 5 is_stmt 1 view .LVU126
+ 473              		.loc 1 165 9 is_stmt 0 view .LVU127
+ 474 0030 2148     		ldr	r0, .L37+8
+ 475 0032 FFF7FEFF 		bl	isItWorthy
+ 476              	.LVL48:
+ 477              		.loc 1 165 8 view .LVU128
+ 478 0036 0128     		cmp	r0, #1
+ 479 0038 34D0     		beq	.L36
+ 480              	.L31:
+ 166:Core/Src/VL53L1A1_Simulink.c ****         temp_TOF_right = sub_TOF_right;
+ 167:Core/Src/VL53L1A1_Simulink.c ****     }
+ 168:Core/Src/VL53L1A1_Simulink.c ****     buff_counter++;
+ 481              		.loc 1 168 5 is_stmt 1 view .LVU129
+ 482              		.loc 1 168 17 is_stmt 0 view .LVU130
+ 483 003a 204A     		ldr	r2, .L37+12
+ 484 003c 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 485 003e 0133     		adds	r3, r3, #1
+ 486 0040 DBB2     		uxtb	r3, r3
+ 487 0042 1370     		strb	r3, [r2]
+ 169:Core/Src/VL53L1A1_Simulink.c **** 
+ 170:Core/Src/VL53L1A1_Simulink.c ****     if (buff_counter == 60/tof_odr){
+ 488              		.loc 1 170 5 is_stmt 1 view .LVU131
+ 489              		.loc 1 170 22 is_stmt 0 view .LVU132
+ 490 0044 07EE903A 		vmov	s15, r3	@ int
+ 491 0048 F8EEE77A 		vcvt.f32.s32	s15, s15
+ 492              		.loc 1 170 27 view .LVU133
+ 493 004c 1C4B     		ldr	r3, .L37+16
+ 494 004e D3ED006A 		vldr.32	s13, [r3]
+ 495 0052 9FED1C6A 		vldr.32	s12, .L37+20
+ 496 0056 86EE267A 		vdiv.f32	s14, s12, s13
+ 497              		.loc 1 170 8 view .LVU134
+ 498 005a F4EE477A 		vcmp.f32	s15, s14
+ 499 005e F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 500 0062 12D1     		bne	.L28
+ 171:Core/Src/VL53L1A1_Simulink.c ****         TOF_left = temp_TOF_left;
+ 501              		.loc 1 171 9 is_stmt 1 view .LVU135
+ 502              		.loc 1 171 18 is_stmt 0 view .LVU136
+ 503 0064 4824     		movs	r4, #72
+ 504 0066 2246     		mov	r2, r4
+ARM GAS  C:\Temp\cceIDUjn.s 			page 13
+
+
+ 505 0068 1749     		ldr	r1, .L37+24
+ 506 006a 1848     		ldr	r0, .L37+28
+ 507 006c FFF7FEFF 		bl	memcpy
+ 508              	.LVL49:
+ 172:Core/Src/VL53L1A1_Simulink.c ****         TOF_centre = temp_TOF_centre;
+ 509              		.loc 1 172 9 is_stmt 1 view .LVU137
+ 510              		.loc 1 172 20 is_stmt 0 view .LVU138
+ 511 0070 2246     		mov	r2, r4
+ 512 0072 1749     		ldr	r1, .L37+32
+ 513 0074 1748     		ldr	r0, .L37+36
+ 514 0076 FFF7FEFF 		bl	memcpy
+ 515              	.LVL50:
+ 173:Core/Src/VL53L1A1_Simulink.c ****         TOF_right = temp_TOF_right;
+ 516              		.loc 1 173 9 is_stmt 1 view .LVU139
+ 517              		.loc 1 173 19 is_stmt 0 view .LVU140
+ 518 007a 2246     		mov	r2, r4
+ 519 007c 1649     		ldr	r1, .L37+40
+ 520 007e 1748     		ldr	r0, .L37+44
+ 521 0080 FFF7FEFF 		bl	memcpy
+ 522              	.LVL51:
+ 174:Core/Src/VL53L1A1_Simulink.c ****         buff_counter = 0;
+ 523              		.loc 1 174 9 is_stmt 1 view .LVU141
+ 524              		.loc 1 174 22 is_stmt 0 view .LVU142
+ 525 0084 0D4B     		ldr	r3, .L37+12
+ 526 0086 0022     		movs	r2, #0
+ 527 0088 1A70     		strb	r2, [r3]
+ 528              	.L28:
+ 175:Core/Src/VL53L1A1_Simulink.c ****     }
+ 176:Core/Src/VL53L1A1_Simulink.c **** }
+ 529              		.loc 1 176 1 view .LVU143
+ 530 008a 10BD     		pop	{r4, pc}
+ 531              	.L34:
+ 160:Core/Src/VL53L1A1_Simulink.c ****     }
+ 532              		.loc 1 160 9 is_stmt 1 view .LVU144
+ 160:Core/Src/VL53L1A1_Simulink.c ****     }
+ 533              		.loc 1 160 23 is_stmt 0 view .LVU145
+ 534 008c 4822     		movs	r2, #72
+ 535 008e 2146     		mov	r1, r4
+ 536 0090 0D48     		ldr	r0, .L37+24
+ 537 0092 FFF7FEFF 		bl	memcpy
+ 538              	.LVL52:
+ 539 0096 C6E7     		b	.L29
+ 540              	.L35:
+ 163:Core/Src/VL53L1A1_Simulink.c ****     }
+ 541              		.loc 1 163 9 is_stmt 1 view .LVU146
+ 163:Core/Src/VL53L1A1_Simulink.c ****     }
+ 542              		.loc 1 163 25 is_stmt 0 view .LVU147
+ 543 0098 4822     		movs	r2, #72
+ 544 009a 0649     		ldr	r1, .L37+4
+ 545 009c 0C48     		ldr	r0, .L37+32
+ 546 009e FFF7FEFF 		bl	memcpy
+ 547              	.LVL53:
+ 548 00a2 C5E7     		b	.L30
+ 549              	.L36:
+ 166:Core/Src/VL53L1A1_Simulink.c ****     }
+ 550              		.loc 1 166 9 is_stmt 1 view .LVU148
+ 166:Core/Src/VL53L1A1_Simulink.c ****     }
+ARM GAS  C:\Temp\cceIDUjn.s 			page 14
+
+
+ 551              		.loc 1 166 24 is_stmt 0 view .LVU149
+ 552 00a4 4822     		movs	r2, #72
+ 553 00a6 0449     		ldr	r1, .L37+8
+ 554 00a8 0B48     		ldr	r0, .L37+40
+ 555 00aa FFF7FEFF 		bl	memcpy
+ 556              	.LVL54:
+ 557 00ae C4E7     		b	.L31
+ 558              	.L38:
+ 559              		.align	2
+ 560              	.L37:
+ 561 00b0 00000000 		.word	sub_TOF_left
+ 562 00b4 00000000 		.word	sub_TOF_centre
+ 563 00b8 00000000 		.word	sub_TOF_right
+ 564 00bc 00000000 		.word	buff_counter
+ 565 00c0 00000000 		.word	tof_odr
+ 566 00c4 00007042 		.word	1114636288
+ 567 00c8 00000000 		.word	temp_TOF_left
+ 568 00cc 00000000 		.word	TOF_left
+ 569 00d0 00000000 		.word	temp_TOF_centre
+ 570 00d4 00000000 		.word	TOF_centre
+ 571 00d8 00000000 		.word	temp_TOF_right
+ 572 00dc 00000000 		.word	TOF_right
+ 573              		.cfi_endproc
+ 574              	.LFE140:
+ 576              		.section	.text.calibrate_VL53L1A1,"ax",%progbits
+ 577              		.align	1
+ 578              		.global	calibrate_VL53L1A1
+ 579              		.syntax unified
+ 580              		.thumb
+ 581              		.thumb_func
+ 583              	calibrate_VL53L1A1:
+ 584              	.LFB141:
+ 177:Core/Src/VL53L1A1_Simulink.c **** 
+ 178:Core/Src/VL53L1A1_Simulink.c **** 
+ 179:Core/Src/VL53L1A1_Simulink.c **** // functions from BSP/<boards>
+ 180:Core/Src/VL53L1A1_Simulink.c **** // parameters from BSP/<boards>
+ 181:Core/Src/VL53L1A1_Simulink.c **** void calibrate_VL53L1A1(){
+ 585              		.loc 1 181 26 is_stmt 1 view -0
+ 586              		.cfi_startproc
+ 587              		@ args = 0, pretend = 0, frame = 0
+ 588              		@ frame_needed = 0, uses_anonymous_args = 0
+ 589              		@ link register save eliminated.
+ 182:Core/Src/VL53L1A1_Simulink.c **** 
+ 183:Core/Src/VL53L1A1_Simulink.c ****     if (tof_fsr == 1){
+ 590              		.loc 1 183 5 view .LVU151
+ 591              		.loc 1 183 17 is_stmt 0 view .LVU152
+ 592 0000 0A4B     		ldr	r3, .L46
+ 593 0002 1B68     		ldr	r3, [r3]
+ 594              		.loc 1 183 8 view .LVU153
+ 595 0004 012B     		cmp	r3, #1
+ 596 0006 04D0     		beq	.L43
+ 597              	.L40:
+ 184:Core/Src/VL53L1A1_Simulink.c ****         Profile.RangingProfile = RS_MULTI_TARGET_SHORT_RANGE;
+ 185:Core/Src/VL53L1A1_Simulink.c ****     }
+ 186:Core/Src/VL53L1A1_Simulink.c ****     if (tof_fsr == 2){
+ 598              		.loc 1 186 5 is_stmt 1 view .LVU154
+ 599              		.loc 1 186 8 is_stmt 0 view .LVU155
+ARM GAS  C:\Temp\cceIDUjn.s 			page 15
+
+
+ 600 0008 022B     		cmp	r3, #2
+ 601 000a 06D0     		beq	.L44
+ 602              	.L41:
+ 187:Core/Src/VL53L1A1_Simulink.c ****         Profile.RangingProfile = RS_MULTI_TARGET_MEDIUM_RANGE;
+ 188:Core/Src/VL53L1A1_Simulink.c ****     }
+ 189:Core/Src/VL53L1A1_Simulink.c ****     if (tof_fsr == 3){
+ 603              		.loc 1 189 5 is_stmt 1 view .LVU156
+ 604              		.loc 1 189 8 is_stmt 0 view .LVU157
+ 605 000c 032B     		cmp	r3, #3
+ 606 000e 08D0     		beq	.L45
+ 607              	.L39:
+ 190:Core/Src/VL53L1A1_Simulink.c ****         Profile.RangingProfile = RS_MULTI_TARGET_LONG_RANGE;
+ 191:Core/Src/VL53L1A1_Simulink.c ****     }
+ 192:Core/Src/VL53L1A1_Simulink.c **** }...
+ 608              		.loc 1 192 1 view .LVU158
+ 609 0010 7047     		bx	lr
+ 610              	.L43:
+ 184:Core/Src/VL53L1A1_Simulink.c ****         Profile.RangingProfile = RS_MULTI_TARGET_SHORT_RANGE;
+ 611              		.loc 1 184 9 is_stmt 1 view .LVU159
+ 184:Core/Src/VL53L1A1_Simulink.c ****         Profile.RangingProfile = RS_MULTI_TARGET_SHORT_RANGE;
+ 612              		.loc 1 184 32 is_stmt 0 view .LVU160
+ 613 0012 074A     		ldr	r2, .L46+4
+ 614 0014 0121     		movs	r1, #1
+ 615 0016 1160     		str	r1, [r2]
+ 616 0018 F6E7     		b	.L40
+ 617              	.L44:
+ 187:Core/Src/VL53L1A1_Simulink.c ****         Profile.RangingProfile = RS_MULTI_TARGET_MEDIUM_RANGE;
+ 618              		.loc 1 187 9 is_stmt 1 view .LVU161
+ 187:Core/Src/VL53L1A1_Simulink.c ****         Profile.RangingProfile = RS_MULTI_TARGET_MEDIUM_RANGE;
+ 619              		.loc 1 187 32 is_stmt 0 view .LVU162
+ 620 001a 054A     		ldr	r2, .L46+4
+ 621 001c 0221     		movs	r1, #2
+ 622 001e 1160     		str	r1, [r2]
+ 623 0020 F4E7     		b	.L41
+ 624              	.L45:
+ 190:Core/Src/VL53L1A1_Simulink.c ****         Profile.RangingProfile = RS_MULTI_TARGET_LONG_RANGE;
+ 625              		.loc 1 190 9 is_stmt 1 view .LVU163
+ 190:Core/Src/VL53L1A1_Simulink.c ****         Profile.RangingProfile = RS_MULTI_TARGET_LONG_RANGE;
+ 626              		.loc 1 190 32 is_stmt 0 view .LVU164
+ 627 0022 034B     		ldr	r3, .L46+4
+ 628 0024 0322     		movs	r2, #3
+ 629 0026 1A60     		str	r2, [r3]
+ 630              		.loc 1 192 1 view .LVU165
+ 631 0028 F2E7     		b	.L39
+ 632              	.L47:
+ 633 002a 00BF     		.align	2
+ 634              	.L46:
+ 635 002c 00000000 		.word	tof_fsr
+ 636 0030 00000000 		.word	Profile
+ 637              		.cfi_endproc
+ 638              	.LFE141:
+ 640              		.global	buff_counter
+ 641              		.section	.bss.buff_counter,"aw",%nobits
+ 644              	buff_counter:
+ 645 0000 00       		.space	1
+ 646              		.global	temp_TOF_right
+ 647              		.section	.bss.temp_TOF_right,"aw",%nobits
+ARM GAS  C:\Temp\cceIDUjn.s 			page 16
+
+
+ 648              		.align	2
+ 651              	temp_TOF_right:
+ 652 0000 00000000 		.space	72
+ 652      00000000 
+ 652      00000000 
+ 652      00000000 
+ 652      00000000 
+ 653              		.global	temp_TOF_centre
+ 654              		.section	.bss.temp_TOF_centre,"aw",%nobits
+ 655              		.align	2
+ 658              	temp_TOF_centre:
+ 659 0000 00000000 		.space	72
+ 659      00000000 
+ 659      00000000 
+ 659      00000000 
+ 659      00000000 
+ 660              		.global	temp_TOF_left
+ 661              		.section	.bss.temp_TOF_left,"aw",%nobits
+ 662              		.align	2
+ 665              	temp_TOF_left:
+ 666 0000 00000000 		.space	72
+ 666      00000000 
+ 666      00000000 
+ 666      00000000 
+ 666      00000000 
+ 667              		.global	sub_TOF_right
+ 668              		.section	.bss.sub_TOF_right,"aw",%nobits
+ 669              		.align	2
+ 672              	sub_TOF_right:
+ 673 0000 00000000 		.space	72
+ 673      00000000 
+ 673      00000000 
+ 673      00000000 
+ 673      00000000 
+ 674              		.global	sub_TOF_centre
+ 675              		.section	.bss.sub_TOF_centre,"aw",%nobits
+ 676              		.align	2
+ 679              	sub_TOF_centre:
+ 680 0000 00000000 		.space	72
+ 680      00000000 
+ 680      00000000 
+ 680      00000000 
+ 680      00000000 
+ 681              		.global	sub_TOF_left
+ 682              		.section	.bss.sub_TOF_left,"aw",%nobits
+ 683              		.align	2
+ 686              	sub_TOF_left:
+ 687 0000 00000000 		.space	72
+ 687      00000000 
+ 687      00000000 
+ 687      00000000 
+ 687      00000000 
+ 688              		.global	TOF_right_array
+ 689              		.section	.bss.TOF_right_array,"aw",%nobits
+ 690              		.align	2
+ 693              	TOF_right_array:
+ 694 0000 00000000 		.space	4320
+ARM GAS  C:\Temp\cceIDUjn.s 			page 17
+
+
+ 694      00000000 
+ 694      00000000 
+ 694      00000000 
+ 694      00000000 
+ 695              		.global	TOF_centre_array
+ 696              		.section	.bss.TOF_centre_array,"aw",%nobits
+ 697              		.align	2
+ 700              	TOF_centre_array:
+ 701 0000 00000000 		.space	4320
+ 701      00000000 
+ 701      00000000 
+ 701      00000000 
+ 701      00000000 
+ 702              		.global	TOF_left_array
+ 703              		.section	.bss.TOF_left_array,"aw",%nobits
+ 704              		.align	2
+ 707              	TOF_left_array:
+ 708 0000 00000000 		.space	4320
+ 708      00000000 
+ 708      00000000 
+ 708      00000000 
+ 708      00000000 
+ 709              		.global	L1_BUFFER_SIZE
+ 710              		.section	.rodata.L1_BUFFER_SIZE,"a"
+ 713              	L1_BUFFER_SIZE:
+ 714 0000 3C       		.byte	60
+ 715              		.global	ToF_EventDetected
+ 716              		.section	.bss.ToF_EventDetected,"aw",%nobits
+ 719              	ToF_EventDetected:
+ 720 0000 00       		.space	1
+ 721              		.section	.bss.ToF_Present,"aw",%nobits
+ 722              		.align	2
+ 725              	ToF_Present:
+ 726 0000 000000   		.space	3
+ 727              		.section	.bss.status,"aw",%nobits
+ 728              		.align	2
+ 731              	status:
+ 732 0000 00000000 		.space	4
+ 733              		.global	ROI
+ 734              		.section	.bss.ROI,"aw",%nobits
+ 735              		.align	2
+ 738              	ROI:
+ 739 0000 00000000 		.space	4
+ 740              		.global	tof_odr
+ 741              		.section	.bss.tof_odr,"aw",%nobits
+ 742              		.align	2
+ 745              	tof_odr:
+ 746 0000 00000000 		.space	4
+ 747              		.global	tof_fsr
+ 748              		.section	.bss.tof_fsr,"aw",%nobits
+ 749              		.align	2
+ 752              	tof_fsr:
+ 753 0000 00000000 		.space	4
+ 754              		.text
+ 755              	.Letext0:
+ 756              		.file 2 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 757              		.file 3 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ARM GAS  C:\Temp\cceIDUjn.s 			page 18
+
+
+ 758              		.file 4 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 759              		.file 5 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_def.h"
+ 760              		.file 6 "Drivers/BSP/53L1A2/53l1a2_ranging_sensor.h"
+ 761              		.file 7 "<built-in>"
+ARM GAS  C:\Temp\cceIDUjn.s 			page 19
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 VL53L1A1_Simulink.c
+  C:\Temp\cceIDUjn.s:21     .text.initVL53L1A1:00000000 $t
+  C:\Temp\cceIDUjn.s:27     .text.initVL53L1A1:00000000 initVL53L1A1
+  C:\Temp\cceIDUjn.s:219    .text.initVL53L1A1:000000d8 $d
+  C:\Temp\cceIDUjn.s:731    .bss.status:00000000 status
+  C:\Temp\cceIDUjn.s:725    .bss.ToF_Present:00000000 ToF_Present
+  C:\Temp\cceIDUjn.s:745    .bss.tof_odr:00000000 tof_odr
+  C:\Temp\cceIDUjn.s:738    .bss.ROI:00000000 ROI
+  C:\Temp\cceIDUjn.s:229    .text.selectBestTOF:00000000 $t
+  C:\Temp\cceIDUjn.s:235    .text.selectBestTOF:00000000 selectBestTOF
+  C:\Temp\cceIDUjn.s:380    .text.selectBestTOF:00000098 $d
+  C:\Temp\cceIDUjn.s:385    .text.isItWorthy:00000000 $t
+  C:\Temp\cceIDUjn.s:391    .text.isItWorthy:00000000 isItWorthy
+  C:\Temp\cceIDUjn.s:422    .text.getVL53L1A1:00000000 $t
+  C:\Temp\cceIDUjn.s:428    .text.getVL53L1A1:00000000 getVL53L1A1
+  C:\Temp\cceIDUjn.s:561    .text.getVL53L1A1:000000b0 $d
+  C:\Temp\cceIDUjn.s:686    .bss.sub_TOF_left:00000000 sub_TOF_left
+  C:\Temp\cceIDUjn.s:679    .bss.sub_TOF_centre:00000000 sub_TOF_centre
+  C:\Temp\cceIDUjn.s:672    .bss.sub_TOF_right:00000000 sub_TOF_right
+  C:\Temp\cceIDUjn.s:644    .bss.buff_counter:00000000 buff_counter
+  C:\Temp\cceIDUjn.s:665    .bss.temp_TOF_left:00000000 temp_TOF_left
+  C:\Temp\cceIDUjn.s:658    .bss.temp_TOF_centre:00000000 temp_TOF_centre
+  C:\Temp\cceIDUjn.s:651    .bss.temp_TOF_right:00000000 temp_TOF_right
+  C:\Temp\cceIDUjn.s:577    .text.calibrate_VL53L1A1:00000000 $t
+  C:\Temp\cceIDUjn.s:583    .text.calibrate_VL53L1A1:00000000 calibrate_VL53L1A1
+  C:\Temp\cceIDUjn.s:635    .text.calibrate_VL53L1A1:0000002c $d
+  C:\Temp\cceIDUjn.s:752    .bss.tof_fsr:00000000 tof_fsr
+  C:\Temp\cceIDUjn.s:645    .bss.buff_counter:00000000 $d
+  C:\Temp\cceIDUjn.s:648    .bss.temp_TOF_right:00000000 $d
+  C:\Temp\cceIDUjn.s:655    .bss.temp_TOF_centre:00000000 $d
+  C:\Temp\cceIDUjn.s:662    .bss.temp_TOF_left:00000000 $d
+  C:\Temp\cceIDUjn.s:669    .bss.sub_TOF_right:00000000 $d
+  C:\Temp\cceIDUjn.s:676    .bss.sub_TOF_centre:00000000 $d
+  C:\Temp\cceIDUjn.s:683    .bss.sub_TOF_left:00000000 $d
+  C:\Temp\cceIDUjn.s:693    .bss.TOF_right_array:00000000 TOF_right_array
+  C:\Temp\cceIDUjn.s:690    .bss.TOF_right_array:00000000 $d
+  C:\Temp\cceIDUjn.s:700    .bss.TOF_centre_array:00000000 TOF_centre_array
+  C:\Temp\cceIDUjn.s:697    .bss.TOF_centre_array:00000000 $d
+  C:\Temp\cceIDUjn.s:707    .bss.TOF_left_array:00000000 TOF_left_array
+  C:\Temp\cceIDUjn.s:704    .bss.TOF_left_array:00000000 $d
+  C:\Temp\cceIDUjn.s:713    .rodata.L1_BUFFER_SIZE:00000000 L1_BUFFER_SIZE
+  C:\Temp\cceIDUjn.s:719    .bss.ToF_EventDetected:00000000 ToF_EventDetected
+  C:\Temp\cceIDUjn.s:720    .bss.ToF_EventDetected:00000000 $d
+  C:\Temp\cceIDUjn.s:722    .bss.ToF_Present:00000000 $d
+  C:\Temp\cceIDUjn.s:728    .bss.status:00000000 $d
+  C:\Temp\cceIDUjn.s:735    .bss.ROI:00000000 $d
+  C:\Temp\cceIDUjn.s:742    .bss.tof_odr:00000000 $d
+  C:\Temp\cceIDUjn.s:749    .bss.tof_fsr:00000000 $d
+
+UNDEFINED SYMBOLS
+VL53L1A2_RANGING_SENSOR_SetPowerMode
+VL53L1A2_RANGING_SENSOR_Init
+VL53L1A2_RANGING_SENSOR_SetAddress
+VL53L1A2_RANGING_SENSOR_ReadID
+VL53L1A2_RANGING_SENSOR_ConfigProfile
+VL53L1A2_RANGING_SENSOR_ConfigROI
+ARM GAS  C:\Temp\cceIDUjn.s 			page 20
+
+
+VL53L1A2_RANGING_SENSOR_Start
+Profile
+VL53L1A2_RANGING_SENSOR_GetDistance
+memcpy
+TOF_left
+TOF_centre
+TOF_right

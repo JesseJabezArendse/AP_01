@@ -1,0 +1,1938 @@
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"vl53l1_hist_core.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c"
+  20              		.section	.text.VL53L1_f_013,"ax",%progbits
+  21              		.align	1
+  22              		.global	VL53L1_f_013
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	VL53L1_f_013:
+  28              	.LVL0:
+  29              	.LFB3:
+   1:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** /**
+   2:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c ****  ******************************************************************************
+   3:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c ****  * Copyright (c) 2020, STMicroelectronics - All Rights Reserved
+   4:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+   5:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c ****  This file is part of VL53L1 Protected and is licensed 
+   6:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c ****  'STMicroelectronics Proprietary license'
+   7:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+   8:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c ****  License terms: STMicroelectronics Proprietary in accordance with licensing
+   9:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c ****  terms at www.st.com/sla0081
+  10:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  11:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c ****  ******************************************************************************
+  12:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c ****  */
+  13:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  14:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  15:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  16:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  17:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** #include "vl53l1_platform_log.h"
+  18:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  19:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** #include "vl53l1_core_support.h"
+  20:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** #include "vl53l1_hist_structs.h"
+  21:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  22:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** #include "vl53l1_xtalk.h"
+  23:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** #include "vl53l1_sigma_estimate.h"
+  24:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  25:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** #include "vl53l1_hist_core.h"
+  26:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  27:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  28:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  29:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** #define LOG_FUNCTION_START(fmt, ...) \
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 2
+
+
+  30:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	_LOG_FUNCTION_START(VL53L1_TRACE_MODULE_HISTOGRAM, fmt, ##__VA_ARGS__)
+  31:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** #define LOG_FUNCTION_END(status, ...) \
+  32:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	_LOG_FUNCTION_END(VL53L1_TRACE_MODULE_HISTOGRAM, status, ##__VA_ARGS__)
+  33:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** #define LOG_FUNCTION_END_FMT(status, fmt, ...) \
+  34:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	_LOG_FUNCTION_END_FMT(VL53L1_TRACE_MODULE_HISTOGRAM, \
+  35:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	status, fmt, ##__VA_ARGS__)
+  36:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  37:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** #define trace_print(level, ...) \
+  38:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	_LOG_TRACE_PRINT(VL53L1_TRACE_MODULE_HISTOGRAM, \
+  39:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	level, VL53L1_TRACE_FUNCTION_NONE, ##__VA_ARGS__)
+  40:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  41:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  42:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** void VL53L1_f_013(
+  43:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	uint8_t                         VL53L1_p_018,
+  44:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	uint8_t                         filter_woi,
+  45:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	VL53L1_histogram_bin_data_t    *pbins,
+  46:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	int32_t                        *pa,
+  47:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	int32_t                        *pb,
+  48:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	int32_t                        *pc)
+  49:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** {
+  30              		.loc 1 49 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 8, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 49 1 is_stmt 0 view .LVU1
+  35 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  36              		.cfi_def_cfa_offset 20
+  37              		.cfi_offset 4, -20
+  38              		.cfi_offset 5, -16
+  39              		.cfi_offset 6, -12
+  40              		.cfi_offset 7, -8
+  41              		.cfi_offset 14, -4
+  42 0002 069C     		ldr	r4, [sp, #24]
+  50:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  51:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  52:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	uint8_t w = 0;
+  43              		.loc 1 52 2 is_stmt 1 view .LVU2
+  44              	.LVL1:
+  53:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	uint8_t j = 0;
+  45              		.loc 1 53 2 view .LVU3
+  54:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  55:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	*pa = 0;
+  46              		.loc 1 55 2 view .LVU4
+  47              		.loc 1 55 6 is_stmt 0 view .LVU5
+  48 0004 0025     		movs	r5, #0
+  49 0006 1D60     		str	r5, [r3]
+  56:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	*pb = pbins->bin_data[VL53L1_p_018];
+  50              		.loc 1 56 2 is_stmt 1 view .LVU6
+  51              		.loc 1 56 23 is_stmt 0 view .LVU7
+  52 0008 861D     		adds	r6, r0, #6
+  53 000a 52F82670 		ldr	r7, [r2, r6, lsl #2]
+  54              		.loc 1 56 6 view .LVU8
+  55 000e 059E     		ldr	r6, [sp, #20]
+  56 0010 3760     		str	r7, [r6]
+  57:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	*pc = 0;
+  57              		.loc 1 57 2 is_stmt 1 view .LVU9
+  58              		.loc 1 57 6 is_stmt 0 view .LVU10
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 3
+
+
+  59 0012 2560     		str	r5, [r4]
+  58:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  59:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	for (w = 0 ; w < ((filter_woi << 1)+1) ; w++) {
+  60              		.loc 1 59 2 is_stmt 1 view .LVU11
+  61              		.loc 1 59 9 is_stmt 0 view .LVU12
+  62 0014 AE46     		mov	lr, r5
+  63              		.loc 1 59 2 view .LVU13
+  64 0016 0EE0     		b	.L2
+  65              	.LVL2:
+  66              	.L3:
+  60:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  61:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  62:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		j = ((VL53L1_p_018 + w + pbins->VL53L1_p_024) -
+  63:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			filter_woi) % pbins->VL53L1_p_024;
+  64:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  65:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  66:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		if (w < filter_woi)
+  67:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			*pa += pbins->bin_data[j];
+  68:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		else if (w > filter_woi)
+  67              		.loc 1 68 8 is_stmt 1 view .LVU14
+  68              		.loc 1 68 11 is_stmt 0 view .LVU15
+  69 0018 8E45     		cmp	lr, r1
+  70 001a 08D9     		bls	.L4
+  69:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			*pc += pbins->bin_data[j];
+  71              		.loc 1 69 4 is_stmt 1 view .LVU16
+  72              		.loc 1 69 26 is_stmt 0 view .LVU17
+  73 001c 5FFA8CFC 		uxtb	ip, ip
+  74              		.loc 1 69 26 view .LVU18
+  75 0020 0CF1060C 		add	ip, ip, #6
+  76              	.LVL3:
+  77              		.loc 1 69 26 view .LVU19
+  78 0024 52F82C50 		ldr	r5, [r2, ip, lsl #2]
+  79              		.loc 1 69 8 view .LVU20
+  80 0028 2668     		ldr	r6, [r4]
+  81 002a 3544     		add	r5, r5, r6
+  82 002c 2560     		str	r5, [r4]
+  83              	.LVL4:
+  84              	.L4:
+  59:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  85              		.loc 1 59 44 is_stmt 1 discriminator 2 view .LVU21
+  86 002e 0EF1010E 		add	lr, lr, #1
+  87              	.LVL5:
+  59:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  88              		.loc 1 59 44 is_stmt 0 discriminator 2 view .LVU22
+  89 0032 5FFA8EFE 		uxtb	lr, lr
+  90              	.LVL6:
+  91              	.L2:
+  59:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  92              		.loc 1 59 17 is_stmt 1 discriminator 1 view .LVU23
+  93 0036 BEEB410F 		cmp	lr, r1, lsl #1
+  94 003a 15DC     		bgt	.L7
+  62:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			filter_woi) % pbins->VL53L1_p_024;
+  95              		.loc 1 62 3 view .LVU24
+  62:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			filter_woi) % pbins->VL53L1_p_024;
+  96              		.loc 1 62 22 is_stmt 0 view .LVU25
+  97 003c 00EB0E0C 		add	ip, r0, lr
+  62:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			filter_woi) % pbins->VL53L1_p_024;
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 4
+
+
+  98              		.loc 1 62 33 view .LVU26
+  99 0040 957A     		ldrb	r5, [r2, #10]	@ zero_extendqisi2
+  62:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			filter_woi) % pbins->VL53L1_p_024;
+ 100              		.loc 1 62 26 view .LVU27
+ 101 0042 AC44     		add	ip, ip, r5
+  62:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			filter_woi) % pbins->VL53L1_p_024;
+ 102              		.loc 1 62 49 view .LVU28
+ 103 0044 ACEB010C 		sub	ip, ip, r1
+  63:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 104              		.loc 1 63 16 view .LVU29
+ 105 0048 9CFBF5F6 		sdiv	r6, ip, r5
+ 106 004c 05FB16CC 		mls	ip, r5, r6, ip
+ 107              	.LVL7:
+  66:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			*pa += pbins->bin_data[j];
+ 108              		.loc 1 66 3 is_stmt 1 view .LVU30
+  66:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			*pa += pbins->bin_data[j];
+ 109              		.loc 1 66 6 is_stmt 0 view .LVU31
+ 110 0050 8E45     		cmp	lr, r1
+ 111 0052 E1D2     		bcs	.L3
+  67:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		else if (w > filter_woi)
+ 112              		.loc 1 67 4 is_stmt 1 view .LVU32
+  67:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		else if (w > filter_woi)
+ 113              		.loc 1 67 26 is_stmt 0 view .LVU33
+ 114 0054 5FFA8CFC 		uxtb	ip, ip
+  67:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		else if (w > filter_woi)
+ 115              		.loc 1 67 26 view .LVU34
+ 116 0058 0CF1060C 		add	ip, ip, #6
+ 117              	.LVL8:
+  67:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		else if (w > filter_woi)
+ 118              		.loc 1 67 26 view .LVU35
+ 119 005c 52F82C50 		ldr	r5, [r2, ip, lsl #2]
+  67:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		else if (w > filter_woi)
+ 120              		.loc 1 67 8 view .LVU36
+ 121 0060 1E68     		ldr	r6, [r3]
+ 122 0062 3544     		add	r5, r5, r6
+ 123 0064 1D60     		str	r5, [r3]
+ 124 0066 E2E7     		b	.L4
+ 125              	.LVL9:
+ 126              	.L7:
+  70:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	}
+  71:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** }
+ 127              		.loc 1 71 1 view .LVU37
+ 128 0068 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 129              		.loc 1 71 1 view .LVU38
+ 130              		.cfi_endproc
+ 131              	.LFE3:
+ 133              		.section	.text.VL53L1_f_011,"ax",%progbits
+ 134              		.align	1
+ 135              		.global	VL53L1_f_011
+ 136              		.syntax unified
+ 137              		.thumb
+ 138              		.thumb_func
+ 140              	VL53L1_f_011:
+ 141              	.LVL10:
+ 142              	.LFB4:
+  72:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  73:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 5
+
+
+  74:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** VL53L1_Error VL53L1_f_011(
+  75:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	uint16_t           vcsel_width,
+  76:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	uint16_t           fast_osc_frequency,
+  77:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	uint32_t           total_periods_elapsed,
+  78:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	uint16_t           VL53L1_p_006,
+  79:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	VL53L1_range_data_t  *pdata,
+  80:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	uint8_t histo_merge_nb)
+  81:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** {
+ 143              		.loc 1 81 1 is_stmt 1 view -0
+ 144              		.cfi_startproc
+ 145              		@ args = 8, pretend = 0, frame = 0
+ 146              		@ frame_needed = 0, uses_anonymous_args = 0
+ 147              		.loc 1 81 1 is_stmt 0 view .LVU40
+ 148 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 149              		.cfi_def_cfa_offset 24
+ 150              		.cfi_offset 4, -24
+ 151              		.cfi_offset 5, -20
+ 152              		.cfi_offset 6, -16
+ 153              		.cfi_offset 7, -12
+ 154              		.cfi_offset 8, -8
+ 155              		.cfi_offset 14, -4
+ 156 0004 069C     		ldr	r4, [sp, #24]
+ 157 0006 9DF81C60 		ldrb	r6, [sp, #28]	@ zero_extendqisi2
+  82:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	VL53L1_Error     status = VL53L1_ERROR_NONE;
+ 158              		.loc 1 82 2 is_stmt 1 view .LVU41
+ 159              	.LVL11:
+  83:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  84:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	uint32_t    pll_period_us       = 0;
+ 160              		.loc 1 84 2 view .LVU42
+  85:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	uint32_t    periods_elapsed     = 0;
+ 161              		.loc 1 85 2 view .LVU43
+  86:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	uint32_t    count_rate_total    = 0;
+ 162              		.loc 1 86 2 view .LVU44
+  87:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  88:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	LOG_FUNCTION_START("");
+ 163              		.loc 1 88 24 view .LVU45
+  89:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  90:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  91:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  92:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	pdata->width                  = vcsel_width;
+ 164              		.loc 1 92 2 view .LVU46
+ 165              		.loc 1 92 32 is_stmt 0 view .LVU47
+ 166 000a E081     		strh	r0, [r4, #14]	@ movhi
+  93:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	pdata->fast_osc_frequency     = fast_osc_frequency;
+ 167              		.loc 1 93 2 is_stmt 1 view .LVU48
+ 168              		.loc 1 93 32 is_stmt 0 view .LVU49
+ 169 000c 6182     		strh	r1, [r4, #18]	@ movhi
+  94:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	pdata->total_periods_elapsed  = total_periods_elapsed;
+ 170              		.loc 1 94 2 is_stmt 1 view .LVU50
+ 171              		.loc 1 94 32 is_stmt 0 view .LVU51
+ 172 000e A261     		str	r2, [r4, #24]
+  95:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	pdata->VL53L1_p_006 = VL53L1_p_006;
+ 173              		.loc 1 95 2 is_stmt 1 view .LVU52
+ 174              		.loc 1 95 22 is_stmt 0 view .LVU53
+ 175 0010 E382     		strh	r3, [r4, #22]	@ movhi
+  96:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  97:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 6
+
+
+  98:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+  99:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	if (pdata->fast_osc_frequency == 0)
+ 176              		.loc 1 99 2 is_stmt 1 view .LVU54
+ 177              		.loc 1 99 5 is_stmt 0 view .LVU55
+ 178 0012 31B1     		cbz	r1, .L12
+  82:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 179              		.loc 1 82 19 view .LVU56
+ 180 0014 0025     		movs	r5, #0
+ 181              	.L9:
+ 182              	.LVL12:
+ 100:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		status = VL53L1_ERROR_DIVISION_BY_ZERO;
+ 101:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 102:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	if (pdata->total_periods_elapsed == 0)
+ 183              		.loc 1 102 2 is_stmt 1 view .LVU57
+ 184              		.loc 1 102 5 is_stmt 0 view .LVU58
+ 185 0016 002A     		cmp	r2, #0
+ 186 0018 3FD0     		beq	.L13
+ 103:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		status = VL53L1_ERROR_DIVISION_BY_ZERO;
+ 104:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 105:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	if (status == VL53L1_ERROR_NONE) {
+ 187              		.loc 1 105 2 is_stmt 1 view .LVU59
+ 188              		.loc 1 105 5 is_stmt 0 view .LVU60
+ 189 001a 2DB1     		cbz	r5, .L15
+ 190              	.LVL13:
+ 191              	.L10:
+ 106:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 107:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 108:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 109:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pll_period_us =
+ 110:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			VL53L1_calc_pll_period_us(pdata->fast_osc_frequency);
+ 111:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 112:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 113:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 114:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		periods_elapsed      = pdata->total_periods_elapsed + 1;
+ 115:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 116:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 117:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 118:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pdata->peak_duration_us    = VL53L1_duration_maths(
+ 119:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pll_period_us,
+ 120:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			(uint32_t)pdata->width,
+ 121:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			VL53L1_RANGING_WINDOW_VCSEL_PERIODS,
+ 122:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			periods_elapsed);
+ 123:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 124:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pdata->woi_duration_us     = VL53L1_duration_maths(
+ 125:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pll_period_us,
+ 126:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			((uint32_t)pdata->VL53L1_p_030) << 4,
+ 127:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			VL53L1_RANGING_WINDOW_VCSEL_PERIODS,
+ 128:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			periods_elapsed);
+ 129:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 130:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 131:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 132:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pdata->peak_signal_count_rate_mcps = VL53L1_rate_maths(
+ 133:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			(int32_t)pdata->VL53L1_p_013,
+ 134:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pdata->peak_duration_us);
+ 135:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 136:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pdata->avg_signal_count_rate_mcps = VL53L1_rate_maths(
+ 137:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			(int32_t)pdata->VL53L1_p_013,
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 7
+
+
+ 138:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pdata->woi_duration_us);
+ 139:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 140:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pdata->ambient_count_rate_mcps    = VL53L1_rate_maths(
+ 141:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			(int32_t)pdata->VL53L1_p_020,
+ 142:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pdata->woi_duration_us);
+ 143:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 144:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 145:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 146:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		count_rate_total =
+ 147:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			(uint32_t)pdata->peak_signal_count_rate_mcps +
+ 148:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			(uint32_t)pdata->ambient_count_rate_mcps;
+ 149:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 150:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		if (histo_merge_nb > 1)
+ 151:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			count_rate_total /= histo_merge_nb;
+ 152:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 153:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pdata->total_rate_per_spad_mcps   =
+ 154:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			VL53L1_rate_per_spad_maths(
+ 155:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 					 0x06,
+ 156:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 					 count_rate_total,
+ 157:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 					 pdata->VL53L1_p_006,
+ 158:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 					 0xFFFF);
+ 159:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 160:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 161:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 162:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pdata->VL53L1_p_012   =
+ 163:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			VL53L1_events_per_spad_maths(
+ 164:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				pdata->VL53L1_p_013,
+ 165:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				pdata->VL53L1_p_006,
+ 166:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				pdata->peak_duration_us);
+ 167:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 168:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 169:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 170:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 171:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		trace_print(
+ 172:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			VL53L1_TRACE_LEVEL_DEBUG,
+ 173:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			"    %d:%-46s : %10d\n",
+ 174:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pdata->range_id, "peak_duration_us",
+ 175:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pdata->peak_duration_us);
+ 192              		.loc 1 175 28 is_stmt 1 view .LVU61
+ 176:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		trace_print(
+ 177:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			VL53L1_TRACE_LEVEL_DEBUG,
+ 178:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			"    %d:%-46s : %10d\n",
+ 179:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pdata->range_id, "woi_duration_us",
+ 180:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pdata->woi_duration_us);
+ 193              		.loc 1 180 27 view .LVU62
+ 181:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		trace_print(
+ 182:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			VL53L1_TRACE_LEVEL_DEBUG,
+ 183:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			"    %d:%-46s : %10u\n",
+ 184:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pdata->range_id, "peak_signal_count_rate_mcps",
+ 185:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pdata->peak_signal_count_rate_mcps);
+ 194              		.loc 1 185 39 view .LVU63
+ 186:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		trace_print(
+ 187:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			VL53L1_TRACE_LEVEL_DEBUG,
+ 188:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			"    %d:%-46s : %10u\n",
+ 189:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pdata->range_id, "ambient_count_rate_mcps",
+ 190:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pdata->ambient_count_rate_mcps);
+ 195              		.loc 1 190 35 view .LVU64
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 8
+
+
+ 191:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		trace_print(
+ 192:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			VL53L1_TRACE_LEVEL_DEBUG,
+ 193:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			"    %d:%-46s : %10u\n",
+ 194:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pdata->range_id, "total_rate_per_spad_mcps",
+ 195:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pdata->total_rate_per_spad_mcps);
+ 196              		.loc 1 195 36 view .LVU65
+ 196:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		trace_print(
+ 197:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			VL53L1_TRACE_LEVEL_DEBUG,
+ 198:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			"    %d:%-46s : %10u\n",
+ 199:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pdata->range_id, "VL53L1_p_012",
+ 200:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pdata->VL53L1_p_012);
+ 197              		.loc 1 200 24 view .LVU66
+ 201:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 202:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	}
+ 203:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 204:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	LOG_FUNCTION_END(status);
+ 198              		.loc 1 204 26 view .LVU67
+ 205:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 206:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	return status;
+ 199              		.loc 1 206 2 view .LVU68
+ 207:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** }
+ 200              		.loc 1 207 1 is_stmt 0 view .LVU69
+ 201 001c 2846     		mov	r0, r5
+ 202 001e BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 203              	.LVL14:
+ 204              	.L12:
+ 100:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 205              		.loc 1 100 10 view .LVU70
+ 206 0022 6FF00E05 		mvn	r5, #14
+ 207 0026 F6E7     		b	.L9
+ 208              	.LVL15:
+ 209              	.L15:
+ 109:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			VL53L1_calc_pll_period_us(pdata->fast_osc_frequency);
+ 210              		.loc 1 109 3 is_stmt 1 view .LVU71
+ 110:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 211              		.loc 1 110 4 is_stmt 0 view .LVU72
+ 212 0028 0846     		mov	r0, r1
+ 213              	.LVL16:
+ 110:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 214              		.loc 1 110 4 view .LVU73
+ 215 002a FFF7FEFF 		bl	VL53L1_calc_pll_period_us
+ 216              	.LVL17:
+ 110:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 217              		.loc 1 110 4 view .LVU74
+ 218 002e 8046     		mov	r8, r0
+ 219              	.LVL18:
+ 114:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 220              		.loc 1 114 3 is_stmt 1 view .LVU75
+ 114:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 221              		.loc 1 114 31 is_stmt 0 view .LVU76
+ 222 0030 A769     		ldr	r7, [r4, #24]
+ 114:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 223              		.loc 1 114 24 view .LVU77
+ 224 0032 0137     		adds	r7, r7, #1
+ 225              	.LVL19:
+ 118:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pll_period_us,
+ 226              		.loc 1 118 3 is_stmt 1 view .LVU78
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 9
+
+
+ 118:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pll_period_us,
+ 227              		.loc 1 118 32 is_stmt 0 view .LVU79
+ 228 0034 3B46     		mov	r3, r7
+ 229 0036 4FF40062 		mov	r2, #2048
+ 230 003a E189     		ldrh	r1, [r4, #14]
+ 231 003c FFF7FEFF 		bl	VL53L1_duration_maths
+ 232              	.LVL20:
+ 118:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pll_period_us,
+ 233              		.loc 1 118 30 view .LVU80
+ 234 0040 E061     		str	r0, [r4, #28]
+ 124:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pll_period_us,
+ 235              		.loc 1 124 3 is_stmt 1 view .LVU81
+ 126:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			VL53L1_RANGING_WINDOW_VCSEL_PERIODS,
+ 236              		.loc 1 126 20 is_stmt 0 view .LVU82
+ 237 0042 217C     		ldrb	r1, [r4, #16]	@ zero_extendqisi2
+ 124:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pll_period_us,
+ 238              		.loc 1 124 32 view .LVU83
+ 239 0044 3B46     		mov	r3, r7
+ 240 0046 4FF40062 		mov	r2, #2048
+ 241 004a 0901     		lsls	r1, r1, #4
+ 242 004c 4046     		mov	r0, r8
+ 243 004e FFF7FEFF 		bl	VL53L1_duration_maths
+ 244              	.LVL21:
+ 124:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pll_period_us,
+ 245              		.loc 1 124 30 view .LVU84
+ 246 0052 2062     		str	r0, [r4, #32]
+ 132:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			(int32_t)pdata->VL53L1_p_013,
+ 247              		.loc 1 132 3 is_stmt 1 view .LVU85
+ 132:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			(int32_t)pdata->VL53L1_p_013,
+ 248              		.loc 1 132 40 is_stmt 0 view .LVU86
+ 249 0054 E169     		ldr	r1, [r4, #28]
+ 250 0056 E06A     		ldr	r0, [r4, #44]
+ 251 0058 FFF7FEFF 		bl	VL53L1_rate_maths
+ 252              	.LVL22:
+ 132:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			(int32_t)pdata->VL53L1_p_013,
+ 253              		.loc 1 132 38 view .LVU87
+ 254 005c 2086     		strh	r0, [r4, #48]	@ movhi
+ 136:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			(int32_t)pdata->VL53L1_p_013,
+ 255              		.loc 1 136 3 is_stmt 1 view .LVU88
+ 136:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			(int32_t)pdata->VL53L1_p_013,
+ 256              		.loc 1 136 39 is_stmt 0 view .LVU89
+ 257 005e 216A     		ldr	r1, [r4, #32]
+ 258 0060 E06A     		ldr	r0, [r4, #44]
+ 259 0062 FFF7FEFF 		bl	VL53L1_rate_maths
+ 260              	.LVL23:
+ 136:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			(int32_t)pdata->VL53L1_p_013,
+ 261              		.loc 1 136 37 view .LVU90
+ 262 0066 6086     		strh	r0, [r4, #50]	@ movhi
+ 140:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			(int32_t)pdata->VL53L1_p_020,
+ 263              		.loc 1 140 3 is_stmt 1 view .LVU91
+ 140:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			(int32_t)pdata->VL53L1_p_020,
+ 264              		.loc 1 140 39 is_stmt 0 view .LVU92
+ 265 0068 216A     		ldr	r1, [r4, #32]
+ 266 006a 606A     		ldr	r0, [r4, #36]
+ 267 006c FFF7FEFF 		bl	VL53L1_rate_maths
+ 268              	.LVL24:
+ 140:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			(int32_t)pdata->VL53L1_p_020,
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 10
+
+
+ 269              		.loc 1 140 37 view .LVU93
+ 270 0070 A086     		strh	r0, [r4, #52]	@ movhi
+ 146:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			(uint32_t)pdata->peak_signal_count_rate_mcps +
+ 271              		.loc 1 146 3 is_stmt 1 view .LVU94
+ 147:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			(uint32_t)pdata->ambient_count_rate_mcps;
+ 272              		.loc 1 147 19 is_stmt 0 view .LVU95
+ 273 0072 218E     		ldrh	r1, [r4, #48]
+ 146:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			(uint32_t)pdata->peak_signal_count_rate_mcps +
+ 274              		.loc 1 146 20 view .LVU96
+ 275 0074 0144     		add	r1, r1, r0
+ 276              	.LVL25:
+ 150:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			count_rate_total /= histo_merge_nb;
+ 277              		.loc 1 150 3 is_stmt 1 view .LVU97
+ 150:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			count_rate_total /= histo_merge_nb;
+ 278              		.loc 1 150 6 is_stmt 0 view .LVU98
+ 279 0076 012E     		cmp	r6, #1
+ 280 0078 01D9     		bls	.L11
+ 151:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 281              		.loc 1 151 4 is_stmt 1 view .LVU99
+ 151:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 282              		.loc 1 151 21 is_stmt 0 view .LVU100
+ 283 007a B1FBF6F1 		udiv	r1, r1, r6
+ 284              	.LVL26:
+ 285              	.L11:
+ 153:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			VL53L1_rate_per_spad_maths(
+ 286              		.loc 1 153 3 is_stmt 1 view .LVU101
+ 154:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 					 0x06,
+ 287              		.loc 1 154 4 is_stmt 0 view .LVU102
+ 288 007e 4FF6FF73 		movw	r3, #65535
+ 289 0082 E28A     		ldrh	r2, [r4, #22]
+ 290 0084 0620     		movs	r0, #6
+ 291 0086 FFF7FEFF 		bl	VL53L1_rate_per_spad_maths
+ 292              	.LVL27:
+ 153:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			VL53L1_rate_per_spad_maths(
+ 293              		.loc 1 153 37 view .LVU103
+ 294 008a E086     		strh	r0, [r4, #54]	@ movhi
+ 162:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			VL53L1_events_per_spad_maths(
+ 295              		.loc 1 162 3 is_stmt 1 view .LVU104
+ 163:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				pdata->VL53L1_p_013,
+ 296              		.loc 1 163 4 is_stmt 0 view .LVU105
+ 297 008c E269     		ldr	r2, [r4, #28]
+ 298 008e E18A     		ldrh	r1, [r4, #22]
+ 299 0090 E06A     		ldr	r0, [r4, #44]
+ 300 0092 FFF7FEFF 		bl	VL53L1_events_per_spad_maths
+ 301              	.LVL28:
+ 162:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			VL53L1_events_per_spad_maths(
+ 302              		.loc 1 162 25 view .LVU106
+ 303 0096 A063     		str	r0, [r4, #56]
+ 304 0098 C0E7     		b	.L10
+ 305              	.LVL29:
+ 306              	.L13:
+ 103:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 307              		.loc 1 103 10 view .LVU107
+ 308 009a 6FF00E05 		mvn	r5, #14
+ 309              	.LVL30:
+ 103:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 310              		.loc 1 103 10 view .LVU108
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 11
+
+
+ 311 009e BDE7     		b	.L10
+ 312              		.cfi_endproc
+ 313              	.LFE4:
+ 315              		.section	.text.VL53L1_f_012,"ax",%progbits
+ 316              		.align	1
+ 317              		.global	VL53L1_f_012
+ 318              		.syntax unified
+ 319              		.thumb
+ 320              		.thumb_func
+ 322              	VL53L1_f_012:
+ 323              	.LVL31:
+ 324              	.LFB5:
+ 208:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 209:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 210:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** void VL53L1_f_012(
+ 211:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	uint16_t             gain_factor,
+ 212:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	int16_t              range_offset_mm,
+ 213:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	VL53L1_range_data_t *pdata)
+ 214:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** {
+ 325              		.loc 1 214 1 is_stmt 1 view -0
+ 326              		.cfi_startproc
+ 327              		@ args = 0, pretend = 0, frame = 0
+ 328              		@ frame_needed = 0, uses_anonymous_args = 0
+ 329              		.loc 1 214 1 is_stmt 0 view .LVU110
+ 330 0000 70B5     		push	{r4, r5, r6, lr}
+ 331              		.cfi_def_cfa_offset 16
+ 332              		.cfi_offset 4, -16
+ 333              		.cfi_offset 5, -12
+ 334              		.cfi_offset 6, -8
+ 335              		.cfi_offset 14, -4
+ 336 0002 82B0     		sub	sp, sp, #8
+ 337              		.cfi_def_cfa_offset 24
+ 338 0004 0546     		mov	r5, r0
+ 339 0006 0E46     		mov	r6, r1
+ 340 0008 1446     		mov	r4, r2
+ 215:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 216:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 217:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	LOG_FUNCTION_START("");
+ 341              		.loc 1 217 24 is_stmt 1 view .LVU111
+ 218:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 219:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 220:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 221:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	pdata->min_range_mm =
+ 342              		.loc 1 221 2 view .LVU112
+ 222:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		(int16_t)VL53L1_range_maths(
+ 343              		.loc 1 222 12 is_stmt 0 view .LVU113
+ 344 000a 0191     		str	r1, [sp, #4]
+ 345 000c 0090     		str	r0, [sp]
+ 346 000e 0023     		movs	r3, #0
+ 347 0010 928A     		ldrh	r2, [r2, #20]
+ 348              	.LVL32:
+ 349              		.loc 1 222 12 view .LVU114
+ 350 0012 E18F     		ldrh	r1, [r4, #62]
+ 351              	.LVL33:
+ 352              		.loc 1 222 12 view .LVU115
+ 353 0014 608A     		ldrh	r0, [r4, #18]
+ 354              	.LVL34:
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 12
+
+
+ 355              		.loc 1 222 12 view .LVU116
+ 356 0016 FFF7FEFF 		bl	VL53L1_range_maths
+ 357              	.LVL35:
+ 221:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		(int16_t)VL53L1_range_maths(
+ 358              		.loc 1 221 22 view .LVU117
+ 359 001a A4F84400 		strh	r0, [r4, #68]	@ movhi
+ 223:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				pdata->fast_osc_frequency,
+ 224:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				pdata->VL53L1_p_028,
+ 225:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				pdata->zero_distance_phase,
+ 226:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				0,
+ 227:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				(int32_t)gain_factor,
+ 228:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				(int32_t)range_offset_mm);
+ 229:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 230:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	pdata->median_range_mm =
+ 360              		.loc 1 230 2 is_stmt 1 view .LVU118
+ 231:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		(int16_t)VL53L1_range_maths(
+ 361              		.loc 1 231 12 is_stmt 0 view .LVU119
+ 362 001e 0196     		str	r6, [sp, #4]
+ 363 0020 0095     		str	r5, [sp]
+ 364 0022 0023     		movs	r3, #0
+ 365 0024 A28A     		ldrh	r2, [r4, #20]
+ 366 0026 B4F84010 		ldrh	r1, [r4, #64]
+ 367 002a 608A     		ldrh	r0, [r4, #18]
+ 368 002c FFF7FEFF 		bl	VL53L1_range_maths
+ 369              	.LVL36:
+ 230:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		(int16_t)VL53L1_range_maths(
+ 370              		.loc 1 230 25 view .LVU120
+ 371 0030 A4F84600 		strh	r0, [r4, #70]	@ movhi
+ 232:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				pdata->fast_osc_frequency,
+ 233:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				pdata->VL53L1_p_014,
+ 234:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				pdata->zero_distance_phase,
+ 235:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				0,
+ 236:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				(int32_t)gain_factor,
+ 237:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				(int32_t)range_offset_mm);
+ 238:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 239:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	pdata->max_range_mm =
+ 372              		.loc 1 239 2 is_stmt 1 view .LVU121
+ 240:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		(int16_t)VL53L1_range_maths(
+ 373              		.loc 1 240 12 is_stmt 0 view .LVU122
+ 374 0034 0196     		str	r6, [sp, #4]
+ 375 0036 0095     		str	r5, [sp]
+ 376 0038 0023     		movs	r3, #0
+ 377 003a A28A     		ldrh	r2, [r4, #20]
+ 378 003c B4F84210 		ldrh	r1, [r4, #66]
+ 379 0040 608A     		ldrh	r0, [r4, #18]
+ 380 0042 FFF7FEFF 		bl	VL53L1_range_maths
+ 381              	.LVL37:
+ 239:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		(int16_t)VL53L1_range_maths(
+ 382              		.loc 1 239 22 view .LVU123
+ 383 0046 A4F84800 		strh	r0, [r4, #72]	@ movhi
+ 241:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				pdata->fast_osc_frequency,
+ 242:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				pdata->VL53L1_p_029,
+ 243:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				pdata->zero_distance_phase,
+ 244:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				0,
+ 245:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				(int32_t)gain_factor,
+ 246:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				(int32_t)range_offset_mm);
+ 247:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 13
+
+
+ 248:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 249:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 250:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 251:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 252:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	LOG_FUNCTION_END(0);
+ 384              		.loc 1 252 21 is_stmt 1 view .LVU124
+ 253:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** }
+ 385              		.loc 1 253 1 is_stmt 0 view .LVU125
+ 386 004a 02B0     		add	sp, sp, #8
+ 387              		.cfi_def_cfa_offset 16
+ 388              		@ sp needed
+ 389 004c 70BD     		pop	{r4, r5, r6, pc}
+ 390              		.loc 1 253 1 view .LVU126
+ 391              		.cfi_endproc
+ 392              	.LFE5:
+ 394              		.section	.text.VL53L1_f_037,"ax",%progbits
+ 395              		.align	1
+ 396              		.global	VL53L1_f_037
+ 397              		.syntax unified
+ 398              		.thumb
+ 399              		.thumb_func
+ 401              	VL53L1_f_037:
+ 402              	.LVL38:
+ 403              	.LFB6:
+ 254:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 255:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 256:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** void  VL53L1_f_037(
+ 257:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	VL53L1_histogram_bin_data_t   *pdata,
+ 258:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	int32_t                        ambient_estimate_counts_per_bin)
+ 259:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** {
+ 404              		.loc 1 259 1 is_stmt 1 view -0
+ 405              		.cfi_startproc
+ 406              		@ args = 0, pretend = 0, frame = 0
+ 407              		@ frame_needed = 0, uses_anonymous_args = 0
+ 408              		@ link register save eliminated.
+ 260:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 261:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 262:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	uint8_t i = 0;
+ 409              		.loc 1 262 2 view .LVU128
+ 263:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 264:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	for (i = 0 ; i <  pdata->VL53L1_p_024 ; i++)
+ 410              		.loc 1 264 2 view .LVU129
+ 411              		.loc 1 264 9 is_stmt 0 view .LVU130
+ 412 0000 0023     		movs	r3, #0
+ 413              		.loc 1 264 2 view .LVU131
+ 414 0002 08E0     		b	.L19
+ 415              	.LVL39:
+ 416              	.L20:
+ 265:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pdata->bin_data[i] = pdata->bin_data[i] -
+ 417              		.loc 1 265 3 is_stmt 1 discriminator 3 view .LVU132
+ 418              		.loc 1 265 39 is_stmt 0 discriminator 3 view .LVU133
+ 419 0004 03F1060C 		add	ip, r3, #6
+ 420 0008 50F82C20 		ldr	r2, [r0, ip, lsl #2]
+ 421              		.loc 1 265 43 discriminator 3 view .LVU134
+ 422 000c 521A     		subs	r2, r2, r1
+ 423              		.loc 1 265 22 discriminator 3 view .LVU135
+ 424 000e 40F82C20 		str	r2, [r0, ip, lsl #2]
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 14
+
+
+ 264:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pdata->bin_data[i] = pdata->bin_data[i] -
+ 425              		.loc 1 264 43 is_stmt 1 discriminator 3 view .LVU136
+ 426 0012 0133     		adds	r3, r3, #1
+ 427              	.LVL40:
+ 264:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pdata->bin_data[i] = pdata->bin_data[i] -
+ 428              		.loc 1 264 43 is_stmt 0 discriminator 3 view .LVU137
+ 429 0014 DBB2     		uxtb	r3, r3
+ 430              	.LVL41:
+ 431              	.L19:
+ 264:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pdata->bin_data[i] = pdata->bin_data[i] -
+ 432              		.loc 1 264 17 is_stmt 1 discriminator 1 view .LVU138
+ 264:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pdata->bin_data[i] = pdata->bin_data[i] -
+ 433              		.loc 1 264 25 is_stmt 0 discriminator 1 view .LVU139
+ 434 0016 827A     		ldrb	r2, [r0, #10]	@ zero_extendqisi2
+ 264:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pdata->bin_data[i] = pdata->bin_data[i] -
+ 435              		.loc 1 264 17 discriminator 1 view .LVU140
+ 436 0018 9A42     		cmp	r2, r3
+ 437 001a F3D8     		bhi	.L20
+ 266:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			ambient_estimate_counts_per_bin;
+ 267:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** }
+ 438              		.loc 1 267 1 view .LVU141
+ 439 001c 7047     		bx	lr
+ 440              		.cfi_endproc
+ 441              	.LFE6:
+ 443              		.section	.text.VL53L1_f_038,"ax",%progbits
+ 444              		.align	1
+ 445              		.global	VL53L1_f_038
+ 446              		.syntax unified
+ 447              		.thumb
+ 448              		.thumb_func
+ 450              	VL53L1_f_038:
+ 451              	.LVL42:
+ 452              	.LFB8:
+ 268:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 269:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 270:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** void  VL53L1_f_004(
+ 271:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	VL53L1_histogram_bin_data_t   *pxtalk,
+ 272:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	VL53L1_histogram_bin_data_t   *pbins,
+ 273:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	VL53L1_histogram_bin_data_t   *pxtalk_realigned)
+ 274:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** {
+ 275:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 276:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 277:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	uint8_t i          = 0;
+ 278:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	uint8_t min_bins   = 0;
+ 279:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	int8_t  bin_offset = 0;
+ 280:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	int8_t  bin_access = 0;
+ 281:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 282:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	LOG_FUNCTION_START("");
+ 283:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 284:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 285:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 286:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 287:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 288:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	memcpy(
+ 289:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pxtalk_realigned,
+ 290:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pbins,
+ 291:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		sizeof(VL53L1_histogram_bin_data_t));
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 15
+
+
+ 292:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 293:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	for (i = 0 ; i < pxtalk_realigned->VL53L1_p_023 ; i++)
+ 294:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pxtalk_realigned->bin_data[i] = 0;
+ 295:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 296:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 297:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 298:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	bin_offset =  VL53L1_f_038(
+ 299:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 						pbins,
+ 300:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 						pxtalk);
+ 301:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 302:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 303:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 304:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	if (pxtalk->VL53L1_p_024 < pbins->VL53L1_p_024)
+ 305:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		min_bins = pxtalk->VL53L1_p_024;
+ 306:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	else
+ 307:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		min_bins = pbins->VL53L1_p_024;
+ 308:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 309:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 310:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	for (i = 0 ; i <  min_bins ; i++) {
+ 311:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 312:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 313:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 314:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		if (bin_offset >= 0)
+ 315:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			bin_access = ((int8_t)i + (int8_t)bin_offset)
+ 316:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				% (int8_t)pbins->VL53L1_p_024;
+ 317:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		else
+ 318:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			bin_access = ((int8_t)pbins->VL53L1_p_024 +
+ 319:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				((int8_t)i + (int8_t)bin_offset))
+ 320:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 					% (int8_t)pbins->VL53L1_p_024;
+ 321:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 322:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		trace_print(
+ 323:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			VL53L1_TRACE_LEVEL_DEBUG,
+ 324:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			"Subtract:     %8d : %8d : %8d : %8d : %8d : %8d\n",
+ 325:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			i, bin_access, bin_offset, pbins->VL53L1_p_024,
+ 326:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pbins->bin_data[(uint8_t)bin_access],
+ 327:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pxtalk->bin_data[i]);
+ 328:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 329:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 330:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 331:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		if (pbins->bin_data[(uint8_t)bin_access] >
+ 332:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pxtalk->bin_data[i]) {
+ 333:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 334:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pbins->bin_data[(uint8_t)bin_access] =
+ 335:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				pbins->bin_data[(uint8_t)bin_access]
+ 336:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				- pxtalk->bin_data[i];
+ 337:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 338:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		} else {
+ 339:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pbins->bin_data[(uint8_t)bin_access] = 0;
+ 340:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		}
+ 341:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 342:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 343:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 344:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 345:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pxtalk_realigned->bin_data[(uint8_t)bin_access] =
+ 346:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pxtalk->bin_data[i];
+ 347:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 348:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 16
+
+
+ 349:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 350:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	}
+ 351:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 352:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 353:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 354:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	LOG_FUNCTION_END(0);
+ 355:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** }
+ 356:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 357:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 358:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** int8_t  VL53L1_f_038(
+ 359:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	VL53L1_histogram_bin_data_t   *pdata1,
+ 360:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	VL53L1_histogram_bin_data_t   *pdata2)
+ 361:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** {
+ 453              		.loc 1 361 1 is_stmt 1 view -0
+ 454              		.cfi_startproc
+ 455              		@ args = 0, pretend = 0, frame = 0
+ 456              		@ frame_needed = 0, uses_anonymous_args = 0
+ 457              		.loc 1 361 1 is_stmt 0 view .LVU143
+ 458 0000 38B5     		push	{r3, r4, r5, lr}
+ 459              		.cfi_def_cfa_offset 16
+ 460              		.cfi_offset 3, -16
+ 461              		.cfi_offset 4, -12
+ 462              		.cfi_offset 5, -8
+ 463              		.cfi_offset 14, -4
+ 464 0002 0446     		mov	r4, r0
+ 465 0004 0D46     		mov	r5, r1
+ 362:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 363:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 364:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	int32_t  phase_delta      = 0;
+ 466              		.loc 1 364 2 is_stmt 1 view .LVU144
+ 467              	.LVL43:
+ 365:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	int8_t   bin_offset       = 0;
+ 468              		.loc 1 365 2 view .LVU145
+ 366:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	uint32_t period           = 0;
+ 469              		.loc 1 366 2 view .LVU146
+ 367:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	uint32_t remapped_phase   = 0;
+ 470              		.loc 1 367 2 view .LVU147
+ 368:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 369:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	LOG_FUNCTION_START("");
+ 471              		.loc 1 369 24 view .LVU148
+ 370:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 371:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 372:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 373:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	period = 2048 *
+ 472              		.loc 1 373 2 view .LVU149
+ 374:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		(uint32_t)VL53L1_decode_vcsel_period(pdata1->VL53L1_p_009);
+ 473              		.loc 1 374 13 is_stmt 0 view .LVU150
+ 474 0006 90F88400 		ldrb	r0, [r0, #132]	@ zero_extendqisi2
+ 475              	.LVL44:
+ 476              		.loc 1 374 13 view .LVU151
+ 477 000a FFF7FEFF 		bl	VL53L1_decode_vcsel_period
+ 478              	.LVL45:
+ 375:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 376:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	if (period != 0)
+ 479              		.loc 1 376 2 is_stmt 1 view .LVU152
+ 480              		.loc 1 376 5 is_stmt 0 view .LVU153
+ 481 000e C302     		lsls	r3, r0, #11
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 17
+
+
+ 482              	.LVL46:
+ 483              		.loc 1 376 5 view .LVU154
+ 484 0010 05D0     		beq	.L22
+ 377:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		remapped_phase =
+ 485              		.loc 1 377 3 is_stmt 1 view .LVU155
+ 378:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		(uint32_t)pdata2->zero_distance_phase % period;
+ 486              		.loc 1 378 19 is_stmt 0 view .LVU156
+ 487 0012 B5F89C20 		ldrh	r2, [r5, #156]
+ 377:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		remapped_phase =
+ 488              		.loc 1 377 18 view .LVU157
+ 489 0016 B2FBF3F1 		udiv	r1, r2, r3
+ 490 001a 03FB1123 		mls	r3, r3, r1, r2
+ 491              	.LVL47:
+ 492              	.L22:
+ 379:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 380:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 381:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	phase_delta = (int32_t)pdata1->zero_distance_phase
+ 493              		.loc 1 381 2 is_stmt 1 view .LVU158
+ 494              		.loc 1 381 31 is_stmt 0 view .LVU159
+ 495 001e B4F89C00 		ldrh	r0, [r4, #156]
+ 496              	.LVL48:
+ 497              		.loc 1 381 14 view .LVU160
+ 498 0022 C01A     		subs	r0, r0, r3
+ 499              	.LVL49:
+ 382:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				- (int32_t)remapped_phase;
+ 383:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 384:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 385:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 386:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	if (phase_delta > 0)
+ 500              		.loc 1 386 2 is_stmt 1 view .LVU161
+ 501              		.loc 1 386 5 is_stmt 0 view .LVU162
+ 502 0024 0028     		cmp	r0, #0
+ 503 0026 08DD     		ble	.L23
+ 387:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		bin_offset = (int8_t)((phase_delta + 1024) / 2048);
+ 504              		.loc 1 387 3 is_stmt 1 view .LVU163
+ 505              		.loc 1 387 46 is_stmt 0 view .LVU164
+ 506 0028 10F58060 		adds	r0, r0, #1024
+ 507              	.LVL50:
+ 508              		.loc 1 387 46 view .LVU165
+ 509 002c 02D4     		bmi	.L28
+ 510              	.LVL51:
+ 511              	.L24:
+ 512              		.loc 1 387 14 view .LVU166
+ 513 002e 40F3C720 		sbfx	r0, r0, #11, #8
+ 514              	.LVL52:
+ 515              	.L25:
+ 388:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	else
+ 389:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		bin_offset = (int8_t)((phase_delta - 1024) / 2048);
+ 390:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 391:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	LOG_FUNCTION_END(0);
+ 516              		.loc 1 391 21 is_stmt 1 view .LVU167
+ 392:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 393:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	return bin_offset;
+ 517              		.loc 1 393 2 view .LVU168
+ 394:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** }
+ 518              		.loc 1 394 1 is_stmt 0 view .LVU169
+ 519 0032 38BD     		pop	{r3, r4, r5, pc}
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 18
+
+
+ 520              	.LVL53:
+ 521              	.L28:
+ 387:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	else
+ 522              		.loc 1 387 46 view .LVU170
+ 523 0034 00F2FF70 		addw	r0, r0, #2047
+ 524              	.LVL54:
+ 387:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	else
+ 525              		.loc 1 387 46 view .LVU171
+ 526 0038 F9E7     		b	.L24
+ 527              	.LVL55:
+ 528              	.L23:
+ 389:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 529              		.loc 1 389 3 is_stmt 1 view .LVU172
+ 389:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 530              		.loc 1 389 46 is_stmt 0 view .LVU173
+ 531 003a B0F58060 		subs	r0, r0, #1024
+ 532              	.LVL56:
+ 389:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 533              		.loc 1 389 46 view .LVU174
+ 534 003e 02D4     		bmi	.L29
+ 535              	.LVL57:
+ 536              	.L26:
+ 389:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 537              		.loc 1 389 14 view .LVU175
+ 538 0040 40F3C720 		sbfx	r0, r0, #11, #8
+ 539              	.LVL58:
+ 389:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 540              		.loc 1 389 14 view .LVU176
+ 541 0044 F5E7     		b	.L25
+ 542              	.LVL59:
+ 543              	.L29:
+ 389:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 544              		.loc 1 389 46 view .LVU177
+ 545 0046 00F2FF70 		addw	r0, r0, #2047
+ 546 004a F9E7     		b	.L26
+ 547              		.cfi_endproc
+ 548              	.LFE8:
+ 550              		.section	.text.VL53L1_f_004,"ax",%progbits
+ 551              		.align	1
+ 552              		.global	VL53L1_f_004
+ 553              		.syntax unified
+ 554              		.thumb
+ 555              		.thumb_func
+ 557              	VL53L1_f_004:
+ 558              	.LVL60:
+ 559              	.LFB7:
+ 274:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 560              		.loc 1 274 1 is_stmt 1 view -0
+ 561              		.cfi_startproc
+ 562              		@ args = 0, pretend = 0, frame = 0
+ 563              		@ frame_needed = 0, uses_anonymous_args = 0
+ 274:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 564              		.loc 1 274 1 is_stmt 0 view .LVU179
+ 565 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 566              		.cfi_def_cfa_offset 24
+ 567              		.cfi_offset 3, -24
+ 568              		.cfi_offset 4, -20
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 19
+
+
+ 569              		.cfi_offset 5, -16
+ 570              		.cfi_offset 6, -12
+ 571              		.cfi_offset 7, -8
+ 572              		.cfi_offset 14, -4
+ 573 0002 0646     		mov	r6, r0
+ 574 0004 0D46     		mov	r5, r1
+ 575 0006 1446     		mov	r4, r2
+ 277:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	uint8_t min_bins   = 0;
+ 576              		.loc 1 277 2 is_stmt 1 view .LVU180
+ 577              	.LVL61:
+ 278:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	int8_t  bin_offset = 0;
+ 578              		.loc 1 278 2 view .LVU181
+ 279:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	int8_t  bin_access = 0;
+ 579              		.loc 1 279 2 view .LVU182
+ 280:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 580              		.loc 1 280 2 view .LVU183
+ 282:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 581              		.loc 1 282 24 view .LVU184
+ 288:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pxtalk_realigned,
+ 582              		.loc 1 288 2 view .LVU185
+ 583 0008 AC22     		movs	r2, #172
+ 584              	.LVL62:
+ 288:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pxtalk_realigned,
+ 585              		.loc 1 288 2 is_stmt 0 view .LVU186
+ 586 000a 2046     		mov	r0, r4
+ 587              	.LVL63:
+ 288:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pxtalk_realigned,
+ 588              		.loc 1 288 2 view .LVU187
+ 589 000c FFF7FEFF 		bl	memcpy
+ 590              	.LVL64:
+ 293:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pxtalk_realigned->bin_data[i] = 0;
+ 591              		.loc 1 293 2 is_stmt 1 view .LVU188
+ 293:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pxtalk_realigned->bin_data[i] = 0;
+ 592              		.loc 1 293 9 is_stmt 0 view .LVU189
+ 593 0010 0023     		movs	r3, #0
+ 293:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pxtalk_realigned->bin_data[i] = 0;
+ 594              		.loc 1 293 2 view .LVU190
+ 595 0012 05E0     		b	.L31
+ 596              	.LVL65:
+ 597              	.L32:
+ 294:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 598              		.loc 1 294 3 is_stmt 1 discriminator 3 view .LVU191
+ 294:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 599              		.loc 1 294 33 is_stmt 0 discriminator 3 view .LVU192
+ 600 0014 9A1D     		adds	r2, r3, #6
+ 601 0016 0021     		movs	r1, #0
+ 602 0018 44F82210 		str	r1, [r4, r2, lsl #2]
+ 293:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pxtalk_realigned->bin_data[i] = 0;
+ 603              		.loc 1 293 53 is_stmt 1 discriminator 3 view .LVU193
+ 604 001c 0133     		adds	r3, r3, #1
+ 605              	.LVL66:
+ 293:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pxtalk_realigned->bin_data[i] = 0;
+ 606              		.loc 1 293 53 is_stmt 0 discriminator 3 view .LVU194
+ 607 001e DBB2     		uxtb	r3, r3
+ 608              	.LVL67:
+ 609              	.L31:
+ 293:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pxtalk_realigned->bin_data[i] = 0;
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 20
+
+
+ 610              		.loc 1 293 17 is_stmt 1 discriminator 1 view .LVU195
+ 293:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pxtalk_realigned->bin_data[i] = 0;
+ 611              		.loc 1 293 35 is_stmt 0 discriminator 1 view .LVU196
+ 612 0020 627A     		ldrb	r2, [r4, #9]	@ zero_extendqisi2
+ 293:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		pxtalk_realigned->bin_data[i] = 0;
+ 613              		.loc 1 293 17 discriminator 1 view .LVU197
+ 614 0022 9A42     		cmp	r2, r3
+ 615 0024 F6D8     		bhi	.L32
+ 298:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 						pbins,
+ 616              		.loc 1 298 2 is_stmt 1 view .LVU198
+ 298:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 						pbins,
+ 617              		.loc 1 298 16 is_stmt 0 view .LVU199
+ 618 0026 3146     		mov	r1, r6
+ 619 0028 2846     		mov	r0, r5
+ 620 002a FFF7FEFF 		bl	VL53L1_f_038
+ 621              	.LVL68:
+ 304:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		min_bins = pxtalk->VL53L1_p_024;
+ 622              		.loc 1 304 2 is_stmt 1 view .LVU200
+ 304:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		min_bins = pxtalk->VL53L1_p_024;
+ 623              		.loc 1 304 12 is_stmt 0 view .LVU201
+ 624 002e B37A     		ldrb	r3, [r6, #10]	@ zero_extendqisi2
+ 304:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		min_bins = pxtalk->VL53L1_p_024;
+ 625              		.loc 1 304 34 view .LVU202
+ 626 0030 A97A     		ldrb	r1, [r5, #10]	@ zero_extendqisi2
+ 304:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		min_bins = pxtalk->VL53L1_p_024;
+ 627              		.loc 1 304 5 view .LVU203
+ 628 0032 8B42     		cmp	r3, r1
+ 629 0034 00D2     		bcs	.L33
+ 305:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	else
+ 630              		.loc 1 305 12 view .LVU204
+ 631 0036 1946     		mov	r1, r3
+ 632              	.L33:
+ 633              	.LVL69:
+ 310:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 634              		.loc 1 310 2 is_stmt 1 view .LVU205
+ 310:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 635              		.loc 1 310 9 is_stmt 0 view .LVU206
+ 636 0038 0022     		movs	r2, #0
+ 310:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 637              		.loc 1 310 2 view .LVU207
+ 638 003a 18E0     		b	.L34
+ 639              	.LVL70:
+ 640              	.L35:
+ 318:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				((int8_t)i + (int8_t)bin_offset))
+ 641              		.loc 1 318 4 is_stmt 1 view .LVU208
+ 318:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				((int8_t)i + (int8_t)bin_offset))
+ 642              		.loc 1 318 18 is_stmt 0 view .LVU209
+ 643 003c 95F90A70 		ldrsb	r7, [r5, #10]
+ 319:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 					% (int8_t)pbins->VL53L1_p_024;
+ 644              		.loc 1 319 16 view .LVU210
+ 645 0040 40FA82F3 		sxtab	r3, r0, r2
+ 318:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				((int8_t)i + (int8_t)bin_offset))
+ 646              		.loc 1 318 46 view .LVU211
+ 647 0044 3B44     		add	r3, r3, r7
+ 320:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 648              		.loc 1 320 6 view .LVU212
+ 649 0046 93FBF7FC 		sdiv	ip, r3, r7
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 21
+
+
+ 650 004a 07FB1C33 		mls	r3, r7, ip, r3
+ 318:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				((int8_t)i + (int8_t)bin_offset))
+ 651              		.loc 1 318 15 view .LVU213
+ 652 004e 5BB2     		sxtb	r3, r3
+ 653              	.LVL71:
+ 318:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				((int8_t)i + (int8_t)bin_offset))
+ 654              		.loc 1 318 15 view .LVU214
+ 655 0050 1AE0     		b	.L36
+ 656              	.L37:
+ 339:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		}
+ 657              		.loc 1 339 4 is_stmt 1 view .LVU215
+ 339:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		}
+ 658              		.loc 1 339 41 is_stmt 0 view .LVU216
+ 659 0052 9F1D     		adds	r7, r3, #6
+ 660 0054 4FF0000E 		mov	lr, #0
+ 661 0058 45F827E0 		str	lr, [r5, r7, lsl #2]
+ 662              	.L38:
+ 345:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pxtalk->bin_data[i];
+ 663              		.loc 1 345 3 is_stmt 1 discriminator 2 view .LVU217
+ 346:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 664              		.loc 1 346 20 is_stmt 0 discriminator 2 view .LVU218
+ 665 005c 0CF1060C 		add	ip, ip, #6
+ 666 0060 56F82C70 		ldr	r7, [r6, ip, lsl #2]
+ 345:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pxtalk->bin_data[i];
+ 667              		.loc 1 345 51 discriminator 2 view .LVU219
+ 668 0064 0633     		adds	r3, r3, #6
+ 669              	.LVL72:
+ 345:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pxtalk->bin_data[i];
+ 670              		.loc 1 345 51 discriminator 2 view .LVU220
+ 671 0066 44F82370 		str	r7, [r4, r3, lsl #2]
+ 310:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 672              		.loc 1 310 32 is_stmt 1 discriminator 2 view .LVU221
+ 673 006a 0132     		adds	r2, r2, #1
+ 674              	.LVL73:
+ 310:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 675              		.loc 1 310 32 is_stmt 0 discriminator 2 view .LVU222
+ 676 006c D2B2     		uxtb	r2, r2
+ 677              	.LVL74:
+ 678              	.L34:
+ 310:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 679              		.loc 1 310 17 is_stmt 1 discriminator 1 view .LVU223
+ 680 006e 8A42     		cmp	r2, r1
+ 681 0070 1CD2     		bcs	.L41
+ 314:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			bin_access = ((int8_t)i + (int8_t)bin_offset)
+ 682              		.loc 1 314 3 view .LVU224
+ 314:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			bin_access = ((int8_t)i + (int8_t)bin_offset)
+ 683              		.loc 1 314 6 is_stmt 0 view .LVU225
+ 684 0072 0028     		cmp	r0, #0
+ 685 0074 E2DB     		blt	.L35
+ 315:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				% (int8_t)pbins->VL53L1_p_024;
+ 686              		.loc 1 315 4 is_stmt 1 view .LVU226
+ 315:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				% (int8_t)pbins->VL53L1_p_024;
+ 687              		.loc 1 315 28 is_stmt 0 view .LVU227
+ 688 0076 40FA82F3 		sxtab	r3, r0, r2
+ 316:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		else
+ 689              		.loc 1 316 7 view .LVU228
+ 690 007a 95F90A70 		ldrsb	r7, [r5, #10]
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 22
+
+
+ 316:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		else
+ 691              		.loc 1 316 5 view .LVU229
+ 692 007e 93FBF7FC 		sdiv	ip, r3, r7
+ 693 0082 07FB1C33 		mls	r3, r7, ip, r3
+ 315:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				% (int8_t)pbins->VL53L1_p_024;
+ 694              		.loc 1 315 15 view .LVU230
+ 695 0086 5BB2     		sxtb	r3, r3
+ 696              	.LVL75:
+ 697              	.L36:
+ 327:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 698              		.loc 1 327 24 is_stmt 1 view .LVU231
+ 331:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pxtalk->bin_data[i]) {
+ 699              		.loc 1 331 3 view .LVU232
+ 331:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pxtalk->bin_data[i]) {
+ 700              		.loc 1 331 23 is_stmt 0 view .LVU233
+ 701 0088 DBB2     		uxtb	r3, r3
+ 331:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pxtalk->bin_data[i]) {
+ 702              		.loc 1 331 22 view .LVU234
+ 703 008a 9F1D     		adds	r7, r3, #6
+ 704 008c 55F82770 		ldr	r7, [r5, r7, lsl #2]
+ 332:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 705              		.loc 1 332 20 view .LVU235
+ 706 0090 9446     		mov	ip, r2
+ 707 0092 02F1060E 		add	lr, r2, #6
+ 708 0096 56F82EE0 		ldr	lr, [r6, lr, lsl #2]
+ 331:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			pxtalk->bin_data[i]) {
+ 709              		.loc 1 331 6 view .LVU236
+ 710 009a 7745     		cmp	r7, lr
+ 711 009c D9DD     		ble	.L37
+ 334:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				pbins->bin_data[(uint8_t)bin_access]
+ 712              		.loc 1 334 4 is_stmt 1 view .LVU237
+ 336:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 713              		.loc 1 336 5 is_stmt 0 view .LVU238
+ 714 009e A7EB0E07 		sub	r7, r7, lr
+ 334:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				pbins->bin_data[(uint8_t)bin_access]
+ 715              		.loc 1 334 41 view .LVU239
+ 716 00a2 03F1060E 		add	lr, r3, #6
+ 717 00a6 45F82E70 		str	r7, [r5, lr, lsl #2]
+ 718 00aa D7E7     		b	.L38
+ 719              	.LVL76:
+ 720              	.L41:
+ 355:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 721              		.loc 1 355 1 view .LVU240
+ 722 00ac F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 355:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 723              		.loc 1 355 1 view .LVU241
+ 724              		.cfi_endproc
+ 725              	.LFE7:
+ 727              		.section	.text.VL53L1_f_039,"ax",%progbits
+ 728              		.align	1
+ 729              		.global	VL53L1_f_039
+ 730              		.syntax unified
+ 731              		.thumb
+ 732              		.thumb_func
+ 734              	VL53L1_f_039:
+ 735              	.LVL77:
+ 736              	.LFB9:
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 23
+
+
+ 395:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 396:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 397:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** VL53L1_Error  VL53L1_f_039(
+ 398:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	VL53L1_histogram_bin_data_t   *pidata,
+ 399:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	VL53L1_histogram_bin_data_t   *podata)
+ 400:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** {
+ 737              		.loc 1 400 1 is_stmt 1 view -0
+ 738              		.cfi_startproc
+ 739              		@ args = 0, pretend = 0, frame = 32
+ 740              		@ frame_needed = 0, uses_anonymous_args = 0
+ 741              		.loc 1 400 1 is_stmt 0 view .LVU243
+ 742 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 743              		.cfi_def_cfa_offset 20
+ 744              		.cfi_offset 4, -20
+ 745              		.cfi_offset 5, -16
+ 746              		.cfi_offset 6, -12
+ 747              		.cfi_offset 7, -8
+ 748              		.cfi_offset 14, -4
+ 749 0002 89B0     		sub	sp, sp, #36
+ 750              		.cfi_def_cfa_offset 56
+ 751 0004 0546     		mov	r5, r0
+ 752 0006 0C46     		mov	r4, r1
+ 401:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 402:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 403:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	VL53L1_Error status = VL53L1_ERROR_NONE;
+ 753              		.loc 1 403 2 is_stmt 1 view .LVU244
+ 754              	.LVL78:
+ 404:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 405:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	uint8_t  bin_initial_index[VL53L1_MAX_BIN_SEQUENCE_CODE+1];
+ 755              		.loc 1 405 2 view .LVU245
+ 406:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	uint8_t  bin_repeat_count[VL53L1_MAX_BIN_SEQUENCE_CODE+1];
+ 756              		.loc 1 406 2 view .LVU246
+ 407:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 408:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	uint8_t  bin_cfg        = 0;
+ 757              		.loc 1 408 2 view .LVU247
+ 409:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	uint8_t  bin_seq_length = 0;
+ 758              		.loc 1 409 2 view .LVU248
+ 410:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	int32_t  repeat_count   = 0;
+ 759              		.loc 1 410 2 view .LVU249
+ 411:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 412:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	uint8_t  VL53L1_p_018       = 0;
+ 760              		.loc 1 412 2 view .LVU250
+ 413:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	uint8_t  lc       = 0;
+ 761              		.loc 1 413 2 view .LVU251
+ 414:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	uint8_t  i       = 0;
+ 762              		.loc 1 414 2 view .LVU252
+ 415:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 416:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	LOG_FUNCTION_START("");
+ 763              		.loc 1 416 24 view .LVU253
+ 417:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 418:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 419:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 420:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	memcpy(podata, pidata, sizeof(VL53L1_histogram_bin_data_t));
+ 764              		.loc 1 420 2 view .LVU254
+ 765 0008 AC22     		movs	r2, #172
+ 766 000a 0146     		mov	r1, r0
+ 767              	.LVL79:
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 24
+
+
+ 768              		.loc 1 420 2 is_stmt 0 view .LVU255
+ 769 000c 2046     		mov	r0, r4
+ 770              	.LVL80:
+ 771              		.loc 1 420 2 view .LVU256
+ 772 000e FFF7FEFF 		bl	memcpy
+ 773              	.LVL81:
+ 421:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 422:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 423:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	podata->VL53L1_p_024 = 0;
+ 774              		.loc 1 423 2 is_stmt 1 view .LVU257
+ 775              		.loc 1 423 23 is_stmt 0 view .LVU258
+ 776 0012 0023     		movs	r3, #0
+ 777 0014 A372     		strb	r3, [r4, #10]
+ 424:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 425:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	for (lc = 0 ; lc < VL53L1_MAX_BIN_SEQUENCE_LENGTH ; lc++)
+ 778              		.loc 1 425 2 is_stmt 1 view .LVU259
+ 779              		.loc 1 425 2 is_stmt 0 view .LVU260
+ 780 0016 04E0     		b	.L43
+ 781              	.LVL82:
+ 782              	.L44:
+ 426:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		podata->bin_seq[lc] = VL53L1_MAX_BIN_SEQUENCE_CODE+1;
+ 783              		.loc 1 426 3 is_stmt 1 discriminator 3 view .LVU261
+ 784              		.loc 1 426 23 is_stmt 0 discriminator 3 view .LVU262
+ 785 0018 E218     		adds	r2, r4, r3
+ 786 001a 1021     		movs	r1, #16
+ 787 001c 1173     		strb	r1, [r2, #12]
+ 425:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		podata->bin_seq[lc] = VL53L1_MAX_BIN_SEQUENCE_CODE+1;
+ 788              		.loc 1 425 56 is_stmt 1 discriminator 3 view .LVU263
+ 789 001e 0133     		adds	r3, r3, #1
+ 790              	.LVL83:
+ 425:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		podata->bin_seq[lc] = VL53L1_MAX_BIN_SEQUENCE_CODE+1;
+ 791              		.loc 1 425 56 is_stmt 0 discriminator 3 view .LVU264
+ 792 0020 DBB2     		uxtb	r3, r3
+ 793              	.LVL84:
+ 794              	.L43:
+ 425:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		podata->bin_seq[lc] = VL53L1_MAX_BIN_SEQUENCE_CODE+1;
+ 795              		.loc 1 425 19 is_stmt 1 discriminator 1 view .LVU265
+ 796 0022 052B     		cmp	r3, #5
+ 797 0024 F8D9     		bls	.L44
+ 427:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 428:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	for (lc = 0 ; lc < podata->VL53L1_p_023 ; lc++)
+ 798              		.loc 1 428 10 is_stmt 0 view .LVU266
+ 799 0026 0023     		movs	r3, #0
+ 800              	.LVL85:
+ 801              		.loc 1 428 10 view .LVU267
+ 802 0028 05E0     		b	.L45
+ 803              	.LVL86:
+ 804              	.L46:
+ 429:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		podata->bin_data[lc] = 0;
+ 805              		.loc 1 429 3 is_stmt 1 discriminator 3 view .LVU268
+ 806              		.loc 1 429 24 is_stmt 0 discriminator 3 view .LVU269
+ 807 002a 9A1D     		adds	r2, r3, #6
+ 808 002c 0021     		movs	r1, #0
+ 809 002e 44F82210 		str	r1, [r4, r2, lsl #2]
+ 428:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		podata->bin_data[lc] = 0;
+ 810              		.loc 1 428 46 is_stmt 1 discriminator 3 view .LVU270
+ 811 0032 0133     		adds	r3, r3, #1
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 25
+
+
+ 812              	.LVL87:
+ 428:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		podata->bin_data[lc] = 0;
+ 813              		.loc 1 428 46 is_stmt 0 discriminator 3 view .LVU271
+ 814 0034 DBB2     		uxtb	r3, r3
+ 815              	.LVL88:
+ 816              	.L45:
+ 428:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		podata->bin_data[lc] = 0;
+ 817              		.loc 1 428 19 is_stmt 1 discriminator 1 view .LVU272
+ 428:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		podata->bin_data[lc] = 0;
+ 818              		.loc 1 428 27 is_stmt 0 discriminator 1 view .LVU273
+ 819 0036 627A     		ldrb	r2, [r4, #9]	@ zero_extendqisi2
+ 428:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		podata->bin_data[lc] = 0;
+ 820              		.loc 1 428 19 discriminator 1 view .LVU274
+ 821 0038 9A42     		cmp	r2, r3
+ 822 003a F6D8     		bhi	.L46
+ 430:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 431:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 432:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 433:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	for (lc = 0 ; lc <= VL53L1_MAX_BIN_SEQUENCE_CODE ; lc++) {
+ 823              		.loc 1 433 10 view .LVU275
+ 824 003c 0023     		movs	r3, #0
+ 825              	.LVL89:
+ 826              		.loc 1 433 10 view .LVU276
+ 827 003e 09E0     		b	.L47
+ 828              	.LVL90:
+ 829              	.L48:
+ 434:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		bin_initial_index[lc] = 0x00;
+ 830              		.loc 1 434 3 is_stmt 1 discriminator 3 view .LVU277
+ 831              		.loc 1 434 25 is_stmt 0 discriminator 3 view .LVU278
+ 832 0040 03F12002 		add	r2, r3, #32
+ 833 0044 6A44     		add	r2, sp, r2
+ 834 0046 0021     		movs	r1, #0
+ 835 0048 02F8101C 		strb	r1, [r2, #-16]
+ 435:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		bin_repeat_count[lc]  = 0x00;
+ 836              		.loc 1 435 3 is_stmt 1 discriminator 3 view .LVU279
+ 837              		.loc 1 435 25 is_stmt 0 discriminator 3 view .LVU280
+ 838 004c 02F8201C 		strb	r1, [r2, #-32]
+ 433:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		bin_initial_index[lc] = 0x00;
+ 839              		.loc 1 433 55 is_stmt 1 discriminator 3 view .LVU281
+ 840 0050 0133     		adds	r3, r3, #1
+ 841              	.LVL91:
+ 433:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		bin_initial_index[lc] = 0x00;
+ 842              		.loc 1 433 55 is_stmt 0 discriminator 3 view .LVU282
+ 843 0052 DBB2     		uxtb	r3, r3
+ 844              	.LVL92:
+ 845              	.L47:
+ 433:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		bin_initial_index[lc] = 0x00;
+ 846              		.loc 1 433 19 is_stmt 1 discriminator 1 view .LVU283
+ 847 0054 0F2B     		cmp	r3, #15
+ 848 0056 F3D9     		bls	.L48
+ 436:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	}
+ 437:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 438:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 439:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 440:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 441:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	bin_seq_length = 0x00;
+ 442:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 26
+
+
+ 443:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	for (lc = 0 ; lc < VL53L1_MAX_BIN_SEQUENCE_LENGTH ; lc++) {
+ 849              		.loc 1 443 10 is_stmt 0 view .LVU284
+ 850 0058 4FF0000C 		mov	ip, #0
+ 441:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 851              		.loc 1 441 17 view .LVU285
+ 852 005c 6746     		mov	r7, ip
+ 853 005e 14E0     		b	.L49
+ 854              	.LVL93:
+ 855              	.L52:
+ 444:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 445:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		bin_cfg = pidata->bin_seq[lc];
+ 446:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 447:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 448:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 449:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		if (bin_repeat_count[bin_cfg] == 0) {
+ 450:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			bin_initial_index[bin_cfg]      = bin_seq_length * 4;
+ 451:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			podata->bin_seq[bin_seq_length] = bin_cfg;
+ 452:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			bin_seq_length++;
+ 453:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		}
+ 454:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 455:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		bin_repeat_count[bin_cfg]++;
+ 456:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 457:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 458:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 459:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		VL53L1_p_018 = bin_initial_index[bin_cfg];
+ 460:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 461:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		for (i = 0 ; i < 4 ; i++)
+ 462:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			podata->bin_data[VL53L1_p_018+i] +=
+ 856              		.loc 1 462 4 is_stmt 1 discriminator 3 view .LVU286
+ 857              		.loc 1 462 20 is_stmt 0 discriminator 3 view .LVU287
+ 858 0060 0EEB0302 		add	r2, lr, r3
+ 859 0064 0632     		adds	r2, r2, #6
+ 860 0066 54F82210 		ldr	r1, [r4, r2, lsl #2]
+ 463:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				pidata->bin_data[lc*4+i];
+ 861              		.loc 1 463 26 discriminator 3 view .LVU288
+ 862 006a 03EB8600 		add	r0, r3, r6, lsl #2
+ 863              		.loc 1 463 21 discriminator 3 view .LVU289
+ 864 006e 0630     		adds	r0, r0, #6
+ 865 0070 55F82000 		ldr	r0, [r5, r0, lsl #2]
+ 462:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				pidata->bin_data[lc*4+i];
+ 866              		.loc 1 462 37 discriminator 3 view .LVU290
+ 867 0074 0144     		add	r1, r1, r0
+ 868 0076 44F82210 		str	r1, [r4, r2, lsl #2]
+ 461:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			podata->bin_data[VL53L1_p_018+i] +=
+ 869              		.loc 1 461 25 is_stmt 1 discriminator 3 view .LVU291
+ 870 007a 0133     		adds	r3, r3, #1
+ 871              	.LVL94:
+ 461:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			podata->bin_data[VL53L1_p_018+i] +=
+ 872              		.loc 1 461 25 is_stmt 0 discriminator 3 view .LVU292
+ 873 007c DBB2     		uxtb	r3, r3
+ 874              	.LVL95:
+ 875              	.L51:
+ 461:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			podata->bin_data[VL53L1_p_018+i] +=
+ 876              		.loc 1 461 18 is_stmt 1 discriminator 1 view .LVU293
+ 877 007e 032B     		cmp	r3, #3
+ 878 0080 EED9     		bls	.L52
+ 443:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 27
+
+
+ 879              		.loc 1 443 56 discriminator 2 view .LVU294
+ 880 0082 0CF1010C 		add	ip, ip, #1
+ 881              	.LVL96:
+ 443:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 882              		.loc 1 443 56 is_stmt 0 discriminator 2 view .LVU295
+ 883 0086 5FFA8CFC 		uxtb	ip, ip
+ 884              	.LVL97:
+ 885              	.L49:
+ 443:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 886              		.loc 1 443 19 is_stmt 1 discriminator 1 view .LVU296
+ 887 008a BCF1050F 		cmp	ip, #5
+ 888 008e 1CD8     		bhi	.L66
+ 445:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 889              		.loc 1 445 3 view .LVU297
+ 445:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 890              		.loc 1 445 28 is_stmt 0 view .LVU298
+ 891 0090 6646     		mov	r6, ip
+ 445:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 892              		.loc 1 445 11 view .LVU299
+ 893 0092 05EB0C03 		add	r3, r5, ip
+ 894 0096 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
+ 895              	.LVL98:
+ 449:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			bin_initial_index[bin_cfg]      = bin_seq_length * 4;
+ 896              		.loc 1 449 3 is_stmt 1 view .LVU300
+ 449:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			bin_initial_index[bin_cfg]      = bin_seq_length * 4;
+ 897              		.loc 1 449 23 is_stmt 0 view .LVU301
+ 898 0098 03F12002 		add	r2, r3, #32
+ 899 009c 6A44     		add	r2, sp, r2
+ 900 009e 12F8202C 		ldrb	r2, [r2, #-32]	@ zero_extendqisi2
+ 449:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			bin_initial_index[bin_cfg]      = bin_seq_length * 4;
+ 901              		.loc 1 449 6 view .LVU302
+ 902 00a2 4AB9     		cbnz	r2, .L50
+ 450:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			podata->bin_seq[bin_seq_length] = bin_cfg;
+ 903              		.loc 1 450 4 is_stmt 1 view .LVU303
+ 450:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			podata->bin_seq[bin_seq_length] = bin_cfg;
+ 904              		.loc 1 450 36 is_stmt 0 view .LVU304
+ 905 00a4 B800     		lsls	r0, r7, #2
+ 906 00a6 03F12001 		add	r1, r3, #32
+ 907 00aa 6944     		add	r1, sp, r1
+ 908 00ac 01F8100C 		strb	r0, [r1, #-16]
+ 451:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			bin_seq_length++;
+ 909              		.loc 1 451 4 is_stmt 1 view .LVU305
+ 451:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			bin_seq_length++;
+ 910              		.loc 1 451 36 is_stmt 0 view .LVU306
+ 911 00b0 E119     		adds	r1, r4, r7
+ 912 00b2 0B73     		strb	r3, [r1, #12]
+ 452:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		}
+ 913              		.loc 1 452 4 is_stmt 1 view .LVU307
+ 452:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		}
+ 914              		.loc 1 452 18 is_stmt 0 view .LVU308
+ 915 00b4 0137     		adds	r7, r7, #1
+ 916              	.LVL99:
+ 452:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		}
+ 917              		.loc 1 452 18 view .LVU309
+ 918 00b6 FFB2     		uxtb	r7, r7
+ 919              	.LVL100:
+ 920              	.L50:
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 28
+
+
+ 455:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 921              		.loc 1 455 3 is_stmt 1 view .LVU310
+ 455:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 922              		.loc 1 455 28 is_stmt 0 view .LVU311
+ 923 00b8 2033     		adds	r3, r3, #32
+ 924              	.LVL101:
+ 455:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 925              		.loc 1 455 28 view .LVU312
+ 926 00ba 6B44     		add	r3, sp, r3
+ 927              	.LVL102:
+ 455:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 928              		.loc 1 455 28 view .LVU313
+ 929 00bc 0132     		adds	r2, r2, #1
+ 930 00be 03F8202C 		strb	r2, [r3, #-32]
+ 459:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 931              		.loc 1 459 3 is_stmt 1 view .LVU314
+ 459:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 932              		.loc 1 459 16 is_stmt 0 view .LVU315
+ 933 00c2 13F810EC 		ldrb	lr, [r3, #-16]	@ zero_extendqisi2
+ 934              	.LVL103:
+ 461:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			podata->bin_data[VL53L1_p_018+i] +=
+ 935              		.loc 1 461 3 is_stmt 1 view .LVU316
+ 461:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			podata->bin_data[VL53L1_p_018+i] +=
+ 936              		.loc 1 461 10 is_stmt 0 view .LVU317
+ 937 00c6 0023     		movs	r3, #0
+ 461:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			podata->bin_data[VL53L1_p_018+i] +=
+ 938              		.loc 1 461 3 view .LVU318
+ 939 00c8 D9E7     		b	.L51
+ 940              	.LVL104:
+ 941              	.L66:
+ 464:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 465:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	}
+ 466:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 467:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 468:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 469:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	for (lc = 0 ; lc < VL53L1_MAX_BIN_SEQUENCE_LENGTH ; lc++) {
+ 942              		.loc 1 469 10 view .LVU319
+ 943 00ca 0023     		movs	r3, #0
+ 944 00cc 04E0     		b	.L54
+ 945              	.LVL105:
+ 946              	.L55:
+ 470:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 471:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		bin_cfg = podata->bin_seq[lc];
+ 472:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 473:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		if (bin_cfg <= VL53L1_MAX_BIN_SEQUENCE_CODE)
+ 474:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			podata->bin_rep[lc] =
+ 475:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				bin_repeat_count[bin_cfg];
+ 476:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		else
+ 477:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			podata->bin_rep[lc] = 0;
+ 947              		.loc 1 477 4 is_stmt 1 view .LVU320
+ 948              		.loc 1 477 24 is_stmt 0 view .LVU321
+ 949 00ce E218     		adds	r2, r4, r3
+ 950              	.LVL106:
+ 951              		.loc 1 477 24 view .LVU322
+ 952 00d0 0021     		movs	r1, #0
+ 953 00d2 9174     		strb	r1, [r2, #18]
+ 954              	.LVL107:
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 29
+
+
+ 955              	.L56:
+ 469:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 956              		.loc 1 469 56 is_stmt 1 discriminator 2 view .LVU323
+ 957 00d4 0133     		adds	r3, r3, #1
+ 958              	.LVL108:
+ 469:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 959              		.loc 1 469 56 is_stmt 0 discriminator 2 view .LVU324
+ 960 00d6 DBB2     		uxtb	r3, r3
+ 961              	.LVL109:
+ 962              	.L54:
+ 469:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 963              		.loc 1 469 19 is_stmt 1 discriminator 1 view .LVU325
+ 964 00d8 052B     		cmp	r3, #5
+ 965 00da 0AD8     		bhi	.L67
+ 471:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 966              		.loc 1 471 3 view .LVU326
+ 471:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 967              		.loc 1 471 11 is_stmt 0 view .LVU327
+ 968 00dc E218     		adds	r2, r4, r3
+ 969 00de 127B     		ldrb	r2, [r2, #12]	@ zero_extendqisi2
+ 970              	.LVL110:
+ 473:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			podata->bin_rep[lc] =
+ 971              		.loc 1 473 3 is_stmt 1 view .LVU328
+ 473:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			podata->bin_rep[lc] =
+ 972              		.loc 1 473 6 is_stmt 0 view .LVU329
+ 973 00e0 0F2A     		cmp	r2, #15
+ 974 00e2 F4D8     		bhi	.L55
+ 474:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				bin_repeat_count[bin_cfg];
+ 975              		.loc 1 474 4 is_stmt 1 view .LVU330
+ 475:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		else
+ 976              		.loc 1 475 21 is_stmt 0 view .LVU331
+ 977 00e4 2032     		adds	r2, r2, #32
+ 978              	.LVL111:
+ 475:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		else
+ 979              		.loc 1 475 21 view .LVU332
+ 980 00e6 6A44     		add	r2, sp, r2
+ 981              	.LVL112:
+ 475:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		else
+ 982              		.loc 1 475 21 view .LVU333
+ 983 00e8 12F8201C 		ldrb	r1, [r2, #-32]	@ zero_extendqisi2
+ 474:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				bin_repeat_count[bin_cfg];
+ 984              		.loc 1 474 24 view .LVU334
+ 985 00ec E218     		adds	r2, r4, r3
+ 986              	.LVL113:
+ 474:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				bin_repeat_count[bin_cfg];
+ 987              		.loc 1 474 24 view .LVU335
+ 988 00ee 9174     		strb	r1, [r2, #18]
+ 989 00f0 F0E7     		b	.L56
+ 990              	.LVL114:
+ 991              	.L67:
+ 478:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	}
+ 479:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 480:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	podata->VL53L1_p_024 = bin_seq_length * 4;
+ 992              		.loc 1 480 2 is_stmt 1 view .LVU336
+ 993              		.loc 1 480 23 is_stmt 0 view .LVU337
+ 994 00f2 BF00     		lsls	r7, r7, #2
+ 995              	.LVL115:
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 30
+
+
+ 996              		.loc 1 480 23 view .LVU338
+ 997 00f4 A772     		strb	r7, [r4, #10]
+ 481:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 482:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 483:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 484:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 485:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 486:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	for (lc = 0 ; lc <= VL53L1_MAX_BIN_SEQUENCE_CODE ; lc++) {
+ 998              		.loc 1 486 2 is_stmt 1 view .LVU339
+ 999              	.LVL116:
+ 1000              		.loc 1 486 10 is_stmt 0 view .LVU340
+ 1001 00f6 0020     		movs	r0, #0
+ 1002              		.loc 1 486 2 view .LVU341
+ 1003 00f8 11E0     		b	.L58
+ 1004              	.LVL117:
+ 1005              	.L61:
+ 487:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 488:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		repeat_count = (int32_t)bin_repeat_count[lc];
+ 489:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 490:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		if (repeat_count > 0) {
+ 491:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 492:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			VL53L1_p_018 = bin_initial_index[lc];
+ 493:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 494:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			for (i = 0 ; i < 4 ; i++) {
+ 495:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				podata->bin_data[VL53L1_p_018+i] +=
+ 1006              		.loc 1 495 5 is_stmt 1 discriminator 3 view .LVU342
+ 1007              		.loc 1 495 21 is_stmt 0 discriminator 3 view .LVU343
+ 1008 00fa B118     		adds	r1, r6, r2
+ 1009 00fc 0631     		adds	r1, r1, #6
+ 1010 00fe 54F82130 		ldr	r3, [r4, r1, lsl #2]
+ 1011              		.loc 1 495 38 discriminator 3 view .LVU344
+ 1012 0102 03EB5503 		add	r3, r3, r5, lsr #1
+ 1013 0106 44F82130 		str	r3, [r4, r1, lsl #2]
+ 496:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 					(repeat_count/2);
+ 497:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				podata->bin_data[VL53L1_p_018+i] /=
+ 1014              		.loc 1 497 5 is_stmt 1 discriminator 3 view .LVU345
+ 1015              		.loc 1 497 38 is_stmt 0 discriminator 3 view .LVU346
+ 1016 010a 93FBF5F3 		sdiv	r3, r3, r5
+ 1017 010e 44F82130 		str	r3, [r4, r1, lsl #2]
+ 494:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				podata->bin_data[VL53L1_p_018+i] +=
+ 1018              		.loc 1 494 26 is_stmt 1 discriminator 3 view .LVU347
+ 1019 0112 0132     		adds	r2, r2, #1
+ 1020              	.LVL118:
+ 494:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				podata->bin_data[VL53L1_p_018+i] +=
+ 1021              		.loc 1 494 26 is_stmt 0 discriminator 3 view .LVU348
+ 1022 0114 D2B2     		uxtb	r2, r2
+ 1023              	.LVL119:
+ 1024              	.L60:
+ 494:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				podata->bin_data[VL53L1_p_018+i] +=
+ 1025              		.loc 1 494 19 is_stmt 1 discriminator 1 view .LVU349
+ 1026 0116 032A     		cmp	r2, #3
+ 1027 0118 EFD9     		bls	.L61
+ 1028              	.LVL120:
+ 1029              	.L59:
+ 486:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 1030              		.loc 1 486 55 discriminator 2 view .LVU350
+ 1031 011a 0130     		adds	r0, r0, #1
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 31
+
+
+ 1032              	.LVL121:
+ 486:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 1033              		.loc 1 486 55 is_stmt 0 discriminator 2 view .LVU351
+ 1034 011c C0B2     		uxtb	r0, r0
+ 1035              	.LVL122:
+ 1036              	.L58:
+ 486:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 1037              		.loc 1 486 19 is_stmt 1 discriminator 1 view .LVU352
+ 1038 011e 0F28     		cmp	r0, #15
+ 1039 0120 0DD8     		bhi	.L68
+ 488:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 1040              		.loc 1 488 3 view .LVU353
+ 488:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 1041              		.loc 1 488 43 is_stmt 0 view .LVU354
+ 1042 0122 00F12003 		add	r3, r0, #32
+ 1043 0126 6B44     		add	r3, sp, r3
+ 1044 0128 13F8205C 		ldrb	r5, [r3, #-32]	@ zero_extendqisi2
+ 1045              	.LVL123:
+ 490:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 1046              		.loc 1 490 3 is_stmt 1 view .LVU355
+ 490:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 1047              		.loc 1 490 6 is_stmt 0 view .LVU356
+ 1048 012c 002D     		cmp	r5, #0
+ 1049 012e F4D0     		beq	.L59
+ 492:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 1050              		.loc 1 492 4 is_stmt 1 view .LVU357
+ 492:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 1051              		.loc 1 492 17 is_stmt 0 view .LVU358
+ 1052 0130 00F12003 		add	r3, r0, #32
+ 1053 0134 6B44     		add	r3, sp, r3
+ 1054 0136 13F8106C 		ldrb	r6, [r3, #-16]	@ zero_extendqisi2
+ 1055              	.LVL124:
+ 494:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				podata->bin_data[VL53L1_p_018+i] +=
+ 1056              		.loc 1 494 4 is_stmt 1 view .LVU359
+ 494:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				podata->bin_data[VL53L1_p_018+i] +=
+ 1057              		.loc 1 494 11 is_stmt 0 view .LVU360
+ 1058 013a 0022     		movs	r2, #0
+ 494:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 				podata->bin_data[VL53L1_p_018+i] +=
+ 1059              		.loc 1 494 4 view .LVU361
+ 1060 013c EBE7     		b	.L60
+ 1061              	.LVL125:
+ 1062              	.L68:
+ 498:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 					repeat_count;
+ 499:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 			}
+ 500:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		}
+ 501:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	}
+ 502:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 503:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 504:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 505:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	podata->number_of_ambient_bins = 0;
+ 1063              		.loc 1 505 2 is_stmt 1 view .LVU362
+ 1064              		.loc 1 505 33 is_stmt 0 view .LVU363
+ 1065 013e 0023     		movs	r3, #0
+ 1066 0140 E372     		strb	r3, [r4, #11]
+ 506:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	if ((bin_repeat_count[7] > 0) ||
+ 1067              		.loc 1 506 2 is_stmt 1 view .LVU364
+ 1068              		.loc 1 506 23 is_stmt 0 view .LVU365
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 32
+
+
+ 1069 0142 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 1070              		.loc 1 506 5 view .LVU366
+ 1071 0146 13B9     		cbnz	r3, .L63
+ 507:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		(bin_repeat_count[15] > 0))
+ 1072              		.loc 1 507 20 discriminator 1 view .LVU367
+ 1073 0148 9DF80F30 		ldrb	r3, [sp, #15]	@ zero_extendqisi2
+ 506:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	if ((bin_repeat_count[7] > 0) ||
+ 1074              		.loc 1 506 32 discriminator 1 view .LVU368
+ 1075 014c 0BB1     		cbz	r3, .L64
+ 1076              	.L63:
+ 508:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 		podata->number_of_ambient_bins = 4;
+ 1077              		.loc 1 508 3 is_stmt 1 view .LVU369
+ 1078              		.loc 1 508 34 is_stmt 0 view .LVU370
+ 1079 014e 0423     		movs	r3, #4
+ 1080 0150 E372     		strb	r3, [r4, #11]
+ 1081              	.L64:
+ 509:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 510:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	LOG_FUNCTION_END(status);
+ 1082              		.loc 1 510 26 is_stmt 1 view .LVU371
+ 511:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 
+ 512:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** 	return status;
+ 1083              		.loc 1 512 2 view .LVU372
+ 513:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c **** }
+ 1084              		.loc 1 513 1 is_stmt 0 view .LVU373
+ 1085 0152 0020     		movs	r0, #0
+ 1086              	.LVL126:
+ 1087              		.loc 1 513 1 view .LVU374
+ 1088 0154 09B0     		add	sp, sp, #36
+ 1089              		.cfi_def_cfa_offset 20
+ 1090              		@ sp needed
+ 1091 0156 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1092              		.loc 1 513 1 view .LVU375
+ 1093              		.cfi_endproc
+ 1094              	.LFE9:
+ 1096              		.text
+ 1097              	.Letext0:
+ 1098              		.file 2 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 1099              		.file 3 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 1100              		.file 4 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 1101              		.file 5 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_ll_device.h"
+ 1102              		.file 6 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_structs.h"
+ 1103              		.file 7 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_codes.h"
+ 1104              		.file 8 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_ll_def.h"
+ 1105              		.file 9 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_core_support.h"
+ 1106              		.file 10 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for
+ 1107              		.file 11 "<built-in>"
+ARM GAS  C:\Temp\ccy8y9Mg.s 			page 33
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 vl53l1_hist_core.c
+  C:\Temp\ccy8y9Mg.s:21     .text.VL53L1_f_013:00000000 $t
+  C:\Temp\ccy8y9Mg.s:27     .text.VL53L1_f_013:00000000 VL53L1_f_013
+  C:\Temp\ccy8y9Mg.s:134    .text.VL53L1_f_011:00000000 $t
+  C:\Temp\ccy8y9Mg.s:140    .text.VL53L1_f_011:00000000 VL53L1_f_011
+  C:\Temp\ccy8y9Mg.s:316    .text.VL53L1_f_012:00000000 $t
+  C:\Temp\ccy8y9Mg.s:322    .text.VL53L1_f_012:00000000 VL53L1_f_012
+  C:\Temp\ccy8y9Mg.s:395    .text.VL53L1_f_037:00000000 $t
+  C:\Temp\ccy8y9Mg.s:401    .text.VL53L1_f_037:00000000 VL53L1_f_037
+  C:\Temp\ccy8y9Mg.s:444    .text.VL53L1_f_038:00000000 $t
+  C:\Temp\ccy8y9Mg.s:450    .text.VL53L1_f_038:00000000 VL53L1_f_038
+  C:\Temp\ccy8y9Mg.s:551    .text.VL53L1_f_004:00000000 $t
+  C:\Temp\ccy8y9Mg.s:557    .text.VL53L1_f_004:00000000 VL53L1_f_004
+  C:\Temp\ccy8y9Mg.s:728    .text.VL53L1_f_039:00000000 $t
+  C:\Temp\ccy8y9Mg.s:734    .text.VL53L1_f_039:00000000 VL53L1_f_039
+
+UNDEFINED SYMBOLS
+VL53L1_calc_pll_period_us
+VL53L1_duration_maths
+VL53L1_rate_maths
+VL53L1_rate_per_spad_maths
+VL53L1_events_per_spad_maths
+VL53L1_range_maths
+VL53L1_decode_vcsel_period
+memcpy

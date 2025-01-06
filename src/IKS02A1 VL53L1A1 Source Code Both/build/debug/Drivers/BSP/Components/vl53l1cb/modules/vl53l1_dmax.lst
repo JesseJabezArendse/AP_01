@@ -1,0 +1,1194 @@
+ARM GAS  C:\Temp\ccowWx7U.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"vl53l1_dmax.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c"
+  20              		.section	.text.VL53L1_f_002,"ax",%progbits
+  21              		.align	1
+  22              		.global	VL53L1_f_002
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	VL53L1_f_002:
+  28              	.LVL0:
+  29              	.LFB4:
+   1:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** /**
+   2:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c ****  ******************************************************************************
+   3:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c ****  * Copyright (c) 2020, STMicroelectronics - All Rights Reserved
+   4:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+   5:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c ****  This file is part of VL53L1 Protected and is licensed 
+   6:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c ****  'STMicroelectronics Proprietary license'
+   7:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+   8:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c ****  License terms: STMicroelectronics Proprietary in accordance with licensing
+   9:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c ****  terms at www.st.com/sla0081
+  10:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  11:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c ****  ******************************************************************************
+  12:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c ****  */
+  13:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  14:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  15:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  16:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  17:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** #include "vl53l1_types.h"
+  18:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** #include "vl53l1_platform_log.h"
+  19:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** #include "vl53l1_platform_user_defines.h"
+  20:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** #include "vl53l1_core_support.h"
+  21:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** #include "vl53l1_error_codes.h"
+  22:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  23:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** #include "vl53l1_dmax.h"
+  24:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  25:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  26:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** #define LOG_FUNCTION_START(fmt, ...) \
+  27:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	_LOG_FUNCTION_START(VL53L1_TRACE_MODULE_PROTECTED, fmt, ##__VA_ARGS__)
+  28:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** #define LOG_FUNCTION_END(status, ...) \
+  29:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	_LOG_FUNCTION_END(VL53L1_TRACE_MODULE_PROTECTED, status, ##__VA_ARGS__)
+ARM GAS  C:\Temp\ccowWx7U.s 			page 2
+
+
+  30:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** #define LOG_FUNCTION_END_FMT(status, fmt, ...) \
+  31:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	_LOG_FUNCTION_END_FMT(VL53L1_TRACE_MODULE_PROTECTED, \
+  32:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	status, fmt, ##__VA_ARGS__)
+  33:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  34:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** #define trace_print(level, ...) \
+  35:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	_LOG_TRACE_PRINT(VL53L1_TRACE_MODULE_PROTECTED, \
+  36:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	level, VL53L1_TRACE_FUNCTION_NONE, ##__VA_ARGS__)
+  37:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  38:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  39:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** VL53L1_Error VL53L1_f_001(
+  40:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	uint16_t                              target_reflectance,
+  41:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	VL53L1_dmax_calibration_data_t	     *pcal,
+  42:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	VL53L1_hist_gen3_dmax_config_t	     *pcfg,
+  43:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	VL53L1_histogram_bin_data_t          *pbins,
+  44:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	VL53L1_hist_gen3_dmax_private_data_t *pdata,
+  45:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	int16_t                              *pambient_dmax_mm)
+  46:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** {
+  47:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  48:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  49:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  50:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	VL53L1_Error status  = VL53L1_ERROR_NONE;
+  51:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  52:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	uint32_t    pll_period_us       = 0;
+  53:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	uint32_t    periods_elapsed     = 0;
+  54:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  55:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	uint32_t    tmp32               = 0;
+  56:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	uint64_t    tmp64               = 0;
+  57:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  58:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	uint32_t    amb_thres_delta     = 0;
+  59:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  60:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	LOG_FUNCTION_START("");
+  61:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  62:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  63:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  64:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	pdata->VL53L1_p_006     = 0x0000;
+  65:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	pdata->VL53L1_p_033 = 0x0000;
+  66:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	pdata->VL53L1_p_001          = 0x0000;
+  67:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	pdata->VL53L1_p_012    = 0x0000;
+  68:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	pdata->VL53L1_p_004     = 0x0000;
+  69:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	pdata->VL53L1_p_034 = 0x0000;
+  70:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	pdata->VL53L1_p_035             = 0;
+  71:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	pdata->VL53L1_p_007            = 0;
+  72:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  73:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	*pambient_dmax_mm  = 0;
+  74:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  75:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  76:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	if ((pbins->VL53L1_p_019        != 0) &&
+  77:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		(pbins->total_periods_elapsed      != 0)) {
+  78:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  79:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  80:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  81:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		pll_period_us   =
+  82:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			VL53L1_calc_pll_period_us(pbins->VL53L1_p_019);
+  83:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  84:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  85:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  86:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		periods_elapsed = pbins->total_periods_elapsed + 1;
+ARM GAS  C:\Temp\ccowWx7U.s 			page 3
+
+
+  87:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  88:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  89:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  90:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		pdata->VL53L1_p_036  =
+  91:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			VL53L1_duration_maths(
+  92:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				pll_period_us,
+  93:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				1<<4,
+  94:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				VL53L1_RANGING_WINDOW_VCSEL_PERIODS,
+  95:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				periods_elapsed);
+  96:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  97:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+  98:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		pdata->VL53L1_p_001 =
+  99:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			VL53L1_rate_maths(
+ 100:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				pbins->VL53L1_p_004,
+ 101:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				pdata->VL53L1_p_036);
+ 102:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 103:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 104:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 105:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		pdata->VL53L1_p_033   =
+ 106:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			VL53L1_events_per_spad_maths(
+ 107:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				pbins->VL53L1_p_004,
+ 108:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				pbins->result__dss_actual_effective_spads,
+ 109:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				pdata->VL53L1_p_036);
+ 110:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 111:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 112:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 113:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		pdata->VL53L1_p_037 = pcfg->max_effective_spads;
+ 114:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		pdata->VL53L1_p_006  = pcfg->max_effective_spads;
+ 115:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 116:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		if (pdata->VL53L1_p_033 > 0) {
+ 117:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			tmp64   =
+ 118:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			(uint64_t)pcfg->dss_config__target_total_rate_mcps;
+ 119:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			tmp64  *= 1000;
+ 120:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			tmp64 <<= (11+1);
+ 121:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			tmp32 = pdata->VL53L1_p_033/2;
+ 122:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			tmp64  += (uint64_t)tmp32;
+ 123:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			tmp64 = do_division_u(tmp64,
+ 124:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				(uint64_t)pdata->VL53L1_p_033);
+ 125:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 126:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			if (tmp64 < (uint64_t)pcfg->max_effective_spads)
+ 127:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				pdata->VL53L1_p_006 = (uint16_t)tmp64;
+ 128:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		}
+ 129:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	}
+ 130:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 131:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 132:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 133:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	if ((pcal->ref__actual_effective_spads != 0) &&
+ 134:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		(pbins->VL53L1_p_019        != 0) &&
+ 135:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		(pcal->ref_reflectance_pc          != 0) &&
+ 136:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		(pbins->total_periods_elapsed      != 0)) {
+ 137:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 138:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 139:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 140:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  = (uint64_t)pcal->ref__peak_signal_count_rate_mcps;
+ 141:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64 *= (1000 * 256);
+ 142:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp32  = pcal->ref__actual_effective_spads/2;
+ 143:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64 += (uint64_t)tmp32;
+ARM GAS  C:\Temp\ccowWx7U.s 			page 4
+
+
+ 144:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  = do_division_u(tmp64,
+ 145:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			(uint64_t)pcal->ref__actual_effective_spads);
+ 146:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 147:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		pdata->VL53L1_p_012   = (uint32_t)tmp64;
+ 148:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		pdata->VL53L1_p_012 <<= 4;
+ 149:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 150:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 151:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 152:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64   = (uint64_t)pdata->VL53L1_p_036;
+ 153:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  *= (uint64_t)pdata->VL53L1_p_033;
+ 154:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  *= (uint64_t)pdata->VL53L1_p_006;
+ 155:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  += (1<<(11+7));
+ 156:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64 >>= (11+8);
+ 157:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  +=  500;
+ 158:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64   = do_division_u(tmp64, 1000);
+ 159:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 160:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 161:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		if (tmp64 > 0x00FFFFFF)
+ 162:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			tmp64 = 0x00FFFFFF;
+ 163:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 164:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		pdata->VL53L1_p_004 = (uint32_t)tmp64;
+ 165:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 166:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 167:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 168:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64   = (uint64_t)pdata->VL53L1_p_036;
+ 169:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  *= (uint64_t)pdata->VL53L1_p_012;
+ 170:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  *= (uint64_t)pdata->VL53L1_p_006;
+ 171:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  += (1<<(11+7));
+ 172:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64 >>= (11+8);
+ 173:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 174:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 175:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 176:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  *= ((uint64_t)target_reflectance *
+ 177:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				   (uint64_t)pcal->coverglass_transmission);
+ 178:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 179:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  += ((uint64_t)pcal->ref_reflectance_pc * 128);
+ 180:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64 = do_division_u(tmp64,
+ 181:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			((uint64_t)pcal->ref_reflectance_pc * 256));
+ 182:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 183:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  +=  500;
+ 184:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64 = do_division_u(tmp64, 1000);
+ 185:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 186:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 187:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		if (tmp64 > 0x00FFFFFF)
+ 188:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			tmp64 = 0x00FFFFFF;
+ 189:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 190:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		pdata->VL53L1_p_034 = (uint32_t)tmp64;
+ 191:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 192:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 193:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 194:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp32  = VL53L1_isqrt(pdata->VL53L1_p_004 << 8);
+ 195:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp32 *= (uint32_t)pcfg->ambient_thresh_sigma;
+ 196:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 197:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 198:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 199:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		if (pdata->VL53L1_p_004 <
+ 200:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			(uint32_t)pcfg->min_ambient_thresh_events) {
+ARM GAS  C:\Temp\ccowWx7U.s 			page 5
+
+
+ 201:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 202:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			amb_thres_delta =
+ 203:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				pcfg->min_ambient_thresh_events -
+ 204:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				(uint32_t)pdata->VL53L1_p_004;
+ 205:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 206:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 207:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			amb_thres_delta <<= 8;
+ 208:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 209:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			if (tmp32 < amb_thres_delta)
+ 210:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				tmp32 = amb_thres_delta;
+ 211:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		}
+ 212:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 213:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 214:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 215:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		pdata->VL53L1_p_007 =
+ 216:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			(int16_t)VL53L1_f_002(
+ 217:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				tmp32,
+ 218:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				pdata->VL53L1_p_034,
+ 219:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				(uint32_t)pcal->ref__distance_mm,
+ 220:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				(uint32_t)pcfg->signal_thresh_sigma);
+ 221:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 222:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 223:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 224:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp32  = (uint32_t)pdata->VL53L1_p_034;
+ 225:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp32 *= (uint32_t)pbins->vcsel_width;
+ 226:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp32 += (1 << 3);
+ 227:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp32 /= (1 << 4);
+ 228:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 229:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		pdata->VL53L1_p_035 =
+ 230:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			(int16_t)VL53L1_f_002(
+ 231:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				256 * (uint32_t)pcfg->signal_total_events_limit,
+ 232:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				tmp32,
+ 233:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				(uint32_t)pcal->ref__distance_mm,
+ 234:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				(uint32_t)pcfg->signal_thresh_sigma);
+ 235:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 236:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 237:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 238:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 239:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		if (pdata->VL53L1_p_035 < pdata->VL53L1_p_007)
+ 240:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			*pambient_dmax_mm = pdata->VL53L1_p_035;
+ 241:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		else
+ 242:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			*pambient_dmax_mm = pdata->VL53L1_p_007;
+ 243:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 244:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	}
+ 245:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 246:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	LOG_FUNCTION_END(status);
+ 247:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 248:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	return status;
+ 249:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 250:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** }
+ 251:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 252:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 253:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** uint32_t VL53L1_f_002(
+ 254:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	uint32_t     events_threshold,
+ 255:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	uint32_t     ref_signal_events,
+ 256:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	uint32_t	 ref_distance_mm,
+ 257:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	uint32_t     signal_thresh_sigma)
+ARM GAS  C:\Temp\ccowWx7U.s 			page 6
+
+
+ 258:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** {
+  30              		.loc 1 258 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 258 1 is_stmt 0 view .LVU1
+  35 0000 70B5     		push	{r4, r5, r6, lr}
+  36              		.cfi_def_cfa_offset 16
+  37              		.cfi_offset 4, -16
+  38              		.cfi_offset 5, -12
+  39              		.cfi_offset 6, -8
+  40              		.cfi_offset 14, -4
+  41 0002 0E46     		mov	r6, r1
+  42 0004 1546     		mov	r5, r2
+  43 0006 1C46     		mov	r4, r3
+ 259:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 260:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 261:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 262:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	uint32_t    tmp32               = 0;
+  44              		.loc 1 262 2 is_stmt 1 view .LVU2
+  45              	.LVL1:
+ 263:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	uint32_t    range_mm            = 0;
+  46              		.loc 1 263 2 view .LVU3
+ 264:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 265:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	tmp32 = 4 * events_threshold;
+  47              		.loc 1 265 2 view .LVU4
+ 266:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 267:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 268:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 269:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	tmp32 += ((uint32_t)signal_thresh_sigma *
+  48              		.loc 1 269 2 view .LVU5
+  49              		.loc 1 269 42 is_stmt 0 view .LVU6
+  50 0008 03FB03F3 		mul	r3, r3, r3
+  51              	.LVL2:
+ 270:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			  (uint32_t)signal_thresh_sigma);
+ 271:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 272:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 273:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 274:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	tmp32  = VL53L1_isqrt(tmp32);
+  52              		.loc 1 274 2 is_stmt 1 view .LVU7
+  53              		.loc 1 274 11 is_stmt 0 view .LVU8
+  54 000c 03EB8000 		add	r0, r3, r0, lsl #2
+  55              	.LVL3:
+  56              		.loc 1 274 11 view .LVU9
+  57 0010 FFF7FEFF 		bl	VL53L1_isqrt
+  58              	.LVL4:
+ 275:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	tmp32 += (uint32_t)signal_thresh_sigma;
+  59              		.loc 1 275 2 is_stmt 1 view .LVU10
+  60              		.loc 1 275 8 is_stmt 0 view .LVU11
+  61 0014 0444     		add	r4, r4, r0
+  62              	.LVL5:
+ 276:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 277:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 278:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 279:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	range_mm =
+  63              		.loc 1 279 2 is_stmt 1 view .LVU12
+ 280:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		(uint32_t)VL53L1_isqrt(ref_signal_events << 4);
+ARM GAS  C:\Temp\ccowWx7U.s 			page 7
+
+
+  64              		.loc 1 280 13 is_stmt 0 view .LVU13
+  65 0016 3001     		lsls	r0, r6, #4
+  66 0018 FFF7FEFF 		bl	VL53L1_isqrt
+  67              	.LVL6:
+ 281:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	range_mm *= ref_distance_mm;
+  68              		.loc 1 281 2 is_stmt 1 view .LVU14
+  69              		.loc 1 281 11 is_stmt 0 view .LVU15
+  70 001c 05FB00F0 		mul	r0, r5, r0
+  71              	.LVL7:
+ 282:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 283:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	if (tmp32 > 0) {
+  72              		.loc 1 283 2 is_stmt 1 view .LVU16
+  73              		.loc 1 283 5 is_stmt 0 view .LVU17
+  74 0020 1CB1     		cbz	r4, .L1
+ 284:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		range_mm += (tmp32);
+  75              		.loc 1 284 3 is_stmt 1 view .LVU18
+  76              		.loc 1 284 12 is_stmt 0 view .LVU19
+  77 0022 2044     		add	r0, r0, r4
+  78              	.LVL8:
+ 285:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		range_mm /= (2*tmp32);
+  79              		.loc 1 285 3 is_stmt 1 view .LVU20
+  80              		.loc 1 285 17 is_stmt 0 view .LVU21
+  81 0024 6400     		lsls	r4, r4, #1
+  82              	.LVL9:
+  83              		.loc 1 285 12 view .LVU22
+  84 0026 B0FBF4F0 		udiv	r0, r0, r4
+  85              	.LVL10:
+ 286:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	}
+ 287:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 288:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	return range_mm;
+  86              		.loc 1 288 2 is_stmt 1 view .LVU23
+  87              	.L1:
+ 289:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 290:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** }
+  88              		.loc 1 290 1 is_stmt 0 view .LVU24
+  89 002a 70BD     		pop	{r4, r5, r6, pc}
+  90              		.loc 1 290 1 view .LVU25
+  91              		.cfi_endproc
+  92              	.LFE4:
+  94              		.global	__aeabi_uldivmod
+  95              		.section	.text.VL53L1_f_001,"ax",%progbits
+  96              		.align	1
+  97              		.global	VL53L1_f_001
+  98              		.syntax unified
+  99              		.thumb
+ 100              		.thumb_func
+ 102              	VL53L1_f_001:
+ 103              	.LVL11:
+ 104              	.LFB3:
+  46:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 105              		.loc 1 46 1 is_stmt 1 view -0
+ 106              		.cfi_startproc
+ 107              		@ args = 8, pretend = 0, frame = 16
+ 108              		@ frame_needed = 0, uses_anonymous_args = 0
+  46:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 109              		.loc 1 46 1 is_stmt 0 view .LVU27
+ 110 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ARM GAS  C:\Temp\ccowWx7U.s 			page 8
+
+
+ 111              		.cfi_def_cfa_offset 36
+ 112              		.cfi_offset 4, -36
+ 113              		.cfi_offset 5, -32
+ 114              		.cfi_offset 6, -28
+ 115              		.cfi_offset 7, -24
+ 116              		.cfi_offset 8, -20
+ 117              		.cfi_offset 9, -16
+ 118              		.cfi_offset 10, -12
+ 119              		.cfi_offset 11, -8
+ 120              		.cfi_offset 14, -4
+ 121 0004 85B0     		sub	sp, sp, #20
+ 122              		.cfi_def_cfa_offset 56
+ 123 0006 0190     		str	r0, [sp, #4]
+ 124 0008 0E46     		mov	r6, r1
+ 125 000a 1746     		mov	r7, r2
+ 126 000c 1D46     		mov	r5, r3
+ 127 000e 0E9C     		ldr	r4, [sp, #56]
+  50:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 128              		.loc 1 50 2 is_stmt 1 view .LVU28
+ 129              	.LVL12:
+  52:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	uint32_t    periods_elapsed     = 0;
+ 130              		.loc 1 52 2 view .LVU29
+  53:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 131              		.loc 1 53 2 view .LVU30
+  55:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	uint64_t    tmp64               = 0;
+ 132              		.loc 1 55 2 view .LVU31
+  56:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 133              		.loc 1 56 2 view .LVU32
+  58:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 134              		.loc 1 58 2 view .LVU33
+  60:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 135              		.loc 1 60 24 view .LVU34
+  64:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	pdata->VL53L1_p_033 = 0x0000;
+ 136              		.loc 1 64 2 view .LVU35
+  64:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	pdata->VL53L1_p_033 = 0x0000;
+ 137              		.loc 1 64 26 is_stmt 0 view .LVU36
+ 138 0010 0023     		movs	r3, #0
+ 139              	.LVL13:
+  64:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	pdata->VL53L1_p_033 = 0x0000;
+ 140              		.loc 1 64 26 view .LVU37
+ 141 0012 6383     		strh	r3, [r4, #26]	@ movhi
+  65:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	pdata->VL53L1_p_001          = 0x0000;
+ 142              		.loc 1 65 2 is_stmt 1 view .LVU38
+  65:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	pdata->VL53L1_p_001          = 0x0000;
+ 143              		.loc 1 65 22 is_stmt 0 view .LVU39
+ 144 0014 6361     		str	r3, [r4, #20]
+  66:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	pdata->VL53L1_p_012    = 0x0000;
+ 145              		.loc 1 66 2 is_stmt 1 view .LVU40
+  66:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	pdata->VL53L1_p_012    = 0x0000;
+ 146              		.loc 1 66 31 is_stmt 0 view .LVU41
+ 147 0016 2383     		strh	r3, [r4, #24]	@ movhi
+  67:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	pdata->VL53L1_p_004     = 0x0000;
+ 148              		.loc 1 67 2 is_stmt 1 view .LVU42
+  67:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	pdata->VL53L1_p_004     = 0x0000;
+ 149              		.loc 1 67 25 is_stmt 0 view .LVU43
+ 150 0018 2361     		str	r3, [r4, #16]
+  68:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	pdata->VL53L1_p_034 = 0x0000;
+ARM GAS  C:\Temp\ccowWx7U.s 			page 9
+
+
+ 151              		.loc 1 68 2 is_stmt 1 view .LVU44
+  68:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	pdata->VL53L1_p_034 = 0x0000;
+ 152              		.loc 1 68 26 is_stmt 0 view .LVU45
+ 153 001a E361     		str	r3, [r4, #28]
+  69:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	pdata->VL53L1_p_035             = 0;
+ 154              		.loc 1 69 2 is_stmt 1 view .LVU46
+  69:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	pdata->VL53L1_p_035             = 0;
+ 155              		.loc 1 69 22 is_stmt 0 view .LVU47
+ 156 001c 2362     		str	r3, [r4, #32]
+  70:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	pdata->VL53L1_p_007            = 0;
+ 157              		.loc 1 70 2 is_stmt 1 view .LVU48
+  70:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 	pdata->VL53L1_p_007            = 0;
+ 158              		.loc 1 70 34 is_stmt 0 view .LVU49
+ 159 001e A384     		strh	r3, [r4, #36]	@ movhi
+  71:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 160              		.loc 1 71 2 is_stmt 1 view .LVU50
+  71:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 161              		.loc 1 71 33 is_stmt 0 view .LVU51
+ 162 0020 E384     		strh	r3, [r4, #38]	@ movhi
+  73:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 163              		.loc 1 73 2 is_stmt 1 view .LVU52
+  73:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 164              		.loc 1 73 21 is_stmt 0 view .LVU53
+ 165 0022 0F9A     		ldr	r2, [sp, #60]
+ 166              	.LVL14:
+  73:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 167              		.loc 1 73 21 view .LVU54
+ 168 0024 1380     		strh	r3, [r2]	@ movhi
+  76:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		(pbins->total_periods_elapsed      != 0)) {
+ 169              		.loc 1 76 2 is_stmt 1 view .LVU55
+  76:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		(pbins->total_periods_elapsed      != 0)) {
+ 170              		.loc 1 76 12 is_stmt 0 view .LVU56
+ 171 0026 B5F88600 		ldrh	r0, [r5, #134]
+ 172              	.LVL15:
+  76:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		(pbins->total_periods_elapsed      != 0)) {
+ 173              		.loc 1 76 5 view .LVU57
+ 174 002a 20B1     		cbz	r0, .L5
+  77:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 175              		.loc 1 77 9 discriminator 1 view .LVU58
+ 176 002c D5F88830 		ldr	r3, [r5, #136]
+  76:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		(pbins->total_periods_elapsed      != 0)) {
+ 177              		.loc 1 76 40 discriminator 1 view .LVU59
+ 178 0030 002B     		cmp	r3, #0
+ 179 0032 40F0C580 		bne	.L15
+ 180              	.LVL16:
+ 181              	.L5:
+ 133:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		(pbins->VL53L1_p_019        != 0) &&
+ 182              		.loc 1 133 2 is_stmt 1 view .LVU60
+ 133:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		(pbins->VL53L1_p_019        != 0) &&
+ 183              		.loc 1 133 11 is_stmt 0 view .LVU61
+ 184 0036 3288     		ldrh	r2, [r6]
+ 133:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		(pbins->VL53L1_p_019        != 0) &&
+ 185              		.loc 1 133 5 view .LVU62
+ 186 0038 002A     		cmp	r2, #0
+ 187 003a 00F0BD80 		beq	.L6
+ 134:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		(pcal->ref_reflectance_pc          != 0) &&
+ 188              		.loc 1 134 9 discriminator 1 view .LVU63
+ARM GAS  C:\Temp\ccowWx7U.s 			page 10
+
+
+ 189 003e B5F88630 		ldrh	r3, [r5, #134]
+ 133:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		(pbins->VL53L1_p_019        != 0) &&
+ 190              		.loc 1 133 47 discriminator 1 view .LVU64
+ 191 0042 002B     		cmp	r3, #0
+ 192 0044 00F0B880 		beq	.L6
+ 135:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		(pbins->total_periods_elapsed      != 0)) {
+ 193              		.loc 1 135 8 view .LVU65
+ 194 0048 F388     		ldrh	r3, [r6, #6]
+ 134:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		(pcal->ref_reflectance_pc          != 0) &&
+ 195              		.loc 1 134 37 view .LVU66
+ 196 004a 002B     		cmp	r3, #0
+ 197 004c 00F0B480 		beq	.L6
+ 136:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 198              		.loc 1 136 9 view .LVU67
+ 199 0050 D5F88830 		ldr	r3, [r5, #136]
+ 135:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		(pbins->total_periods_elapsed      != 0)) {
+ 200              		.loc 1 135 44 view .LVU68
+ 201 0054 002B     		cmp	r3, #0
+ 202 0056 00F0AF80 		beq	.L6
+ 140:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64 *= (1000 * 256);
+ 203              		.loc 1 140 3 is_stmt 1 view .LVU69
+ 140:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64 *= (1000 * 256);
+ 204              		.loc 1 140 26 is_stmt 0 view .LVU70
+ 205 005a 7088     		ldrh	r0, [r6, #2]
+ 206              	.LVL17:
+ 141:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp32  = pcal->ref__actual_effective_spads/2;
+ 207              		.loc 1 141 3 is_stmt 1 view .LVU71
+ 141:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp32  = pcal->ref__actual_effective_spads/2;
+ 208              		.loc 1 141 9 is_stmt 0 view .LVU72
+ 209 005c 4301     		lsls	r3, r0, #5
+ 210 005e 1B1A     		subs	r3, r3, r0
+ 211 0060 61EB0101 		sbc	r1, r1, r1
+ 212 0064 8900     		lsls	r1, r1, #2
+ 213 0066 41EA9371 		orr	r1, r1, r3, lsr #30
+ 214 006a 9B00     		lsls	r3, r3, #2
+ 215 006c 1B18     		adds	r3, r3, r0
+ 216 006e 41F10001 		adc	r1, r1, #0
+ 217 0072 C902     		lsls	r1, r1, #11
+ 218 0074 41EA5351 		orr	r1, r1, r3, lsr #21
+ 219 0078 DB02     		lsls	r3, r3, #11
+ 220              	.LVL18:
+ 142:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64 += (uint64_t)tmp32;
+ 221              		.loc 1 142 3 is_stmt 1 view .LVU73
+ 142:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64 += (uint64_t)tmp32;
+ 222              		.loc 1 142 45 is_stmt 0 view .LVU74
+ 223 007a 5008     		lsrs	r0, r2, #1
+ 224              	.LVL19:
+ 143:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  = do_division_u(tmp64,
+ 225              		.loc 1 143 3 is_stmt 1 view .LVU75
+ 143:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  = do_division_u(tmp64,
+ 226              		.loc 1 143 9 is_stmt 0 view .LVU76
+ 227 007c C018     		adds	r0, r0, r3
+ 228              	.LVL20:
+ 144:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			(uint64_t)pcal->ref__actual_effective_spads);
+ 229              		.loc 1 144 3 is_stmt 1 view .LVU77
+ 144:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			(uint64_t)pcal->ref__actual_effective_spads);
+ 230              		.loc 1 144 10 is_stmt 0 view .LVU78
+ARM GAS  C:\Temp\ccowWx7U.s 			page 11
+
+
+ 231 007e 4FF00003 		mov	r3, #0
+ 232 0082 41F10001 		adc	r1, r1, #0
+ 233              	.LVL21:
+ 144:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			(uint64_t)pcal->ref__actual_effective_spads);
+ 234              		.loc 1 144 10 view .LVU79
+ 235 0086 FFF7FEFF 		bl	__aeabi_uldivmod
+ 236              	.LVL22:
+ 147:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		pdata->VL53L1_p_012 <<= 4;
+ 237              		.loc 1 147 3 is_stmt 1 view .LVU80
+ 147:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		pdata->VL53L1_p_012 <<= 4;
+ 238              		.loc 1 147 25 is_stmt 0 view .LVU81
+ 239 008a 2061     		str	r0, [r4, #16]
+ 148:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 240              		.loc 1 148 3 is_stmt 1 view .LVU82
+ 148:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 241              		.loc 1 148 23 is_stmt 0 view .LVU83
+ 242 008c 4FEA0018 		lsl	r8, r0, #4
+ 243 0090 C4F81080 		str	r8, [r4, #16]
+ 152:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  *= (uint64_t)pdata->VL53L1_p_033;
+ 244              		.loc 1 152 3 is_stmt 1 view .LVU84
+ 152:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  *= (uint64_t)pdata->VL53L1_p_033;
+ 245              		.loc 1 152 11 is_stmt 0 view .LVU85
+ 246 0094 D4F800A0 		ldr	r10, [r4]
+ 247              	.LVL23:
+ 153:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  *= (uint64_t)pdata->VL53L1_p_006;
+ 248              		.loc 1 153 3 is_stmt 1 view .LVU86
+ 153:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  *= (uint64_t)pdata->VL53L1_p_006;
+ 249              		.loc 1 153 28 is_stmt 0 view .LVU87
+ 250 0098 6369     		ldr	r3, [r4, #20]
+ 153:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  *= (uint64_t)pdata->VL53L1_p_006;
+ 251              		.loc 1 153 10 view .LVU88
+ 252 009a A3FB0A92 		umull	r9, r2, r3, r10
+ 253              	.LVL24:
+ 154:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  += (1<<(11+7));
+ 254              		.loc 1 154 3 is_stmt 1 view .LVU89
+ 154:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  += (1<<(11+7));
+ 255              		.loc 1 154 28 is_stmt 0 view .LVU90
+ 256 009e B4F81AB0 		ldrh	fp, [r4, #26]
+ 154:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  += (1<<(11+7));
+ 257              		.loc 1 154 13 view .LVU91
+ 258 00a2 CDF808B0 		str	fp, [sp, #8]
+ 154:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  += (1<<(11+7));
+ 259              		.loc 1 154 10 view .LVU92
+ 260 00a6 ABFB0993 		umull	r9, r3, fp, r9
+ 261              	.LVL25:
+ 154:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  += (1<<(11+7));
+ 262              		.loc 1 154 10 view .LVU93
+ 263 00aa 0BFB0233 		mla	r3, fp, r2, r3
+ 264              	.LVL26:
+ 155:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64 >>= (11+8);
+ 265              		.loc 1 155 3 is_stmt 1 view .LVU94
+ 155:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64 >>= (11+8);
+ 266              		.loc 1 155 10 is_stmt 0 view .LVU95
+ 267 00ae 19F58029 		adds	r9, r9, #262144
+ 268              	.LVL27:
+ 155:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64 >>= (11+8);
+ 269              		.loc 1 155 10 view .LVU96
+ARM GAS  C:\Temp\ccowWx7U.s 			page 12
+
+
+ 270 00b2 43F10003 		adc	r3, r3, #0
+ 271              	.LVL28:
+ 156:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  +=  500;
+ 272              		.loc 1 156 3 is_stmt 1 view .LVU97
+ 156:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  +=  500;
+ 273              		.loc 1 156 9 is_stmt 0 view .LVU98
+ 274 00b6 4FEAD949 		lsr	r9, r9, #19
+ 275              	.LVL29:
+ 156:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  +=  500;
+ 276              		.loc 1 156 9 view .LVU99
+ 277 00ba 49EA4339 		orr	r9, r9, r3, lsl #13
+ 278 00be DB0C     		lsrs	r3, r3, #19
+ 279              	.LVL30:
+ 157:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64   = do_division_u(tmp64, 1000);
+ 280              		.loc 1 157 3 is_stmt 1 view .LVU100
+ 157:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64   = do_division_u(tmp64, 1000);
+ 281              		.loc 1 157 10 is_stmt 0 view .LVU101
+ 282 00c0 19F5FA79 		adds	r9, r9, #500
+ 283              	.LVL31:
+ 157:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64   = do_division_u(tmp64, 1000);
+ 284              		.loc 1 157 10 view .LVU102
+ 285 00c4 43F10003 		adc	r3, r3, #0
+ 286              	.LVL32:
+ 157:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64   = do_division_u(tmp64, 1000);
+ 287              		.loc 1 157 10 view .LVU103
+ 288 00c8 1946     		mov	r1, r3
+ 289              	.LVL33:
+ 158:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 290              		.loc 1 158 3 is_stmt 1 view .LVU104
+ 158:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 291              		.loc 1 158 11 is_stmt 0 view .LVU105
+ 292 00ca 4FF47A72 		mov	r2, #1000
+ 293 00ce 0023     		movs	r3, #0
+ 294 00d0 4846     		mov	r0, r9
+ 295 00d2 0391     		str	r1, [sp, #12]
+ 296 00d4 FFF7FEFF 		bl	__aeabi_uldivmod
+ 297              	.LVL34:
+ 161:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			tmp64 = 0x00FFFFFF;
+ 298              		.loc 1 161 3 is_stmt 1 view .LVU106
+ 161:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			tmp64 = 0x00FFFFFF;
+ 299              		.loc 1 161 6 is_stmt 0 view .LVU107
+ 300 00d8 6FF0C053 		mvn	r3, #402653184
+ 301 00dc 4B45     		cmp	r3, r9
+ 302 00de 4FF00303 		mov	r3, #3
+ 303 00e2 0399     		ldr	r1, [sp, #12]
+ 304              	.LVL35:
+ 161:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			tmp64 = 0x00FFFFFF;
+ 305              		.loc 1 161 6 view .LVU108
+ 306 00e4 8B41     		sbcs	r3, r3, r1
+ 307 00e6 01D2     		bcs	.L7
+ 162:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 308              		.loc 1 162 10 view .LVU109
+ 309 00e8 6FF07F40 		mvn	r0, #-16777216
+ 310              	.L7:
+ 164:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 311              		.loc 1 164 3 is_stmt 1 view .LVU110
+ 164:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ARM GAS  C:\Temp\ccowWx7U.s 			page 13
+
+
+ 312              		.loc 1 164 25 is_stmt 0 view .LVU111
+ 313 00ec 8146     		mov	r9, r0
+ 164:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 314              		.loc 1 164 23 view .LVU112
+ 315 00ee E061     		str	r0, [r4, #28]
+ 168:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  *= (uint64_t)pdata->VL53L1_p_012;
+ 316              		.loc 1 168 3 is_stmt 1 view .LVU113
+ 317              	.LVL36:
+ 169:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  *= (uint64_t)pdata->VL53L1_p_006;
+ 318              		.loc 1 169 3 view .LVU114
+ 169:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  *= (uint64_t)pdata->VL53L1_p_006;
+ 319              		.loc 1 169 10 is_stmt 0 view .LVU115
+ 320 00f0 A8FB0A8A 		umull	r8, r10, r8, r10
+ 321              	.LVL37:
+ 170:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  += (1<<(11+7));
+ 322              		.loc 1 170 3 is_stmt 1 view .LVU116
+ 170:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  += (1<<(11+7));
+ 323              		.loc 1 170 10 is_stmt 0 view .LVU117
+ 324 00f4 029B     		ldr	r3, [sp, #8]
+ 325 00f6 A3FB0828 		umull	r2, r8, r3, r8
+ 326              	.LVL38:
+ 170:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64  += (1<<(11+7));
+ 327              		.loc 1 170 10 view .LVU118
+ 328 00fa 0BFB0A83 		mla	r3, fp, r10, r8
+ 329              	.LVL39:
+ 171:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64 >>= (11+8);
+ 330              		.loc 1 171 3 is_stmt 1 view .LVU119
+ 171:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64 >>= (11+8);
+ 331              		.loc 1 171 10 is_stmt 0 view .LVU120
+ 332 00fe 12F58022 		adds	r2, r2, #262144
+ 333              	.LVL40:
+ 171:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64 >>= (11+8);
+ 334              		.loc 1 171 10 view .LVU121
+ 335 0102 43F10003 		adc	r3, r3, #0
+ 336              	.LVL41:
+ 172:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 337              		.loc 1 172 3 is_stmt 1 view .LVU122
+ 172:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 338              		.loc 1 172 9 is_stmt 0 view .LVU123
+ 339 0106 D20C     		lsrs	r2, r2, #19
+ 340              	.LVL42:
+ 172:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 341              		.loc 1 172 9 view .LVU124
+ 342 0108 42EA4332 		orr	r2, r2, r3, lsl #13
+ 343 010c D80C     		lsrs	r0, r3, #19
+ 344              	.LVL43:
+ 176:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				   (uint64_t)pcal->coverglass_transmission);
+ 345              		.loc 1 176 3 is_stmt 1 view .LVU125
+ 177:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 346              		.loc 1 177 22 is_stmt 0 view .LVU126
+ 347 010e 3389     		ldrh	r3, [r6, #8]
+ 176:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				   (uint64_t)pcal->coverglass_transmission);
+ 348              		.loc 1 176 43 view .LVU127
+ 349 0110 0199     		ldr	r1, [sp, #4]
+ 350 0112 A1FB0331 		umull	r3, r1, r1, r3
+ 176:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				   (uint64_t)pcal->coverglass_transmission);
+ 351              		.loc 1 176 10 view .LVU128
+ARM GAS  C:\Temp\ccowWx7U.s 			page 14
+
+
+ 352 0116 A3FB0221 		umull	r2, r1, r3, r2
+ 353              	.LVL44:
+ 176:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				   (uint64_t)pcal->coverglass_transmission);
+ 354              		.loc 1 176 10 view .LVU129
+ 355 011a 03FB0011 		mla	r1, r3, r0, r1
+ 356              	.LVL45:
+ 179:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64 = do_division_u(tmp64,
+ 357              		.loc 1 179 3 is_stmt 1 view .LVU130
+ 179:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64 = do_division_u(tmp64,
+ 358              		.loc 1 179 28 is_stmt 0 view .LVU131
+ 359 011e F388     		ldrh	r3, [r6, #6]
+ 179:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64 = do_division_u(tmp64,
+ 360              		.loc 1 179 49 view .LVU132
+ 361 0120 D801     		lsls	r0, r3, #7
+ 179:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64 = do_division_u(tmp64,
+ 362              		.loc 1 179 10 view .LVU133
+ 363 0122 8018     		adds	r0, r0, r2
+ 364              	.LVL46:
+ 180:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			((uint64_t)pcal->ref_reflectance_pc * 256));
+ 365              		.loc 1 180 3 is_stmt 1 view .LVU134
+ 180:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			((uint64_t)pcal->ref_reflectance_pc * 256));
+ 366              		.loc 1 180 9 is_stmt 0 view .LVU135
+ 367 0124 4FEA0322 		lsl	r2, r3, #8
+ 368 0128 4FF00003 		mov	r3, #0
+ 369 012c 41F10001 		adc	r1, r1, #0
+ 370              	.LVL47:
+ 180:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			((uint64_t)pcal->ref_reflectance_pc * 256));
+ 371              		.loc 1 180 9 view .LVU136
+ 372 0130 FFF7FEFF 		bl	__aeabi_uldivmod
+ 373              	.LVL48:
+ 183:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64 = do_division_u(tmp64, 1000);
+ 374              		.loc 1 183 3 is_stmt 1 view .LVU137
+ 183:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp64 = do_division_u(tmp64, 1000);
+ 375              		.loc 1 183 10 is_stmt 0 view .LVU138
+ 376 0134 10F5FA78 		adds	r8, r0, #500
+ 377 0138 41F1000A 		adc	r10, r1, #0
+ 378              	.LVL49:
+ 184:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 379              		.loc 1 184 3 is_stmt 1 view .LVU139
+ 184:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 380              		.loc 1 184 9 is_stmt 0 view .LVU140
+ 381 013c 4FF47A72 		mov	r2, #1000
+ 382 0140 0023     		movs	r3, #0
+ 383 0142 4046     		mov	r0, r8
+ 384 0144 5146     		mov	r1, r10
+ 385 0146 FFF7FEFF 		bl	__aeabi_uldivmod
+ 386              	.LVL50:
+ 187:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			tmp64 = 0x00FFFFFF;
+ 387              		.loc 1 187 3 is_stmt 1 view .LVU141
+ 187:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			tmp64 = 0x00FFFFFF;
+ 388              		.loc 1 187 6 is_stmt 0 view .LVU142
+ 389 014a 6FF0C053 		mvn	r3, #402653184
+ 390 014e 4345     		cmp	r3, r8
+ 391 0150 4FF00303 		mov	r3, #3
+ 392 0154 73EB0A03 		sbcs	r3, r3, r10
+ 393 0158 01D2     		bcs	.L8
+ 188:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ARM GAS  C:\Temp\ccowWx7U.s 			page 15
+
+
+ 394              		.loc 1 188 10 view .LVU143
+ 395 015a 6FF07F40 		mvn	r0, #-16777216
+ 396              	.LVL51:
+ 397              	.L8:
+ 190:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 398              		.loc 1 190 3 is_stmt 1 view .LVU144
+ 190:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 399              		.loc 1 190 23 is_stmt 0 view .LVU145
+ 400 015e 2062     		str	r0, [r4, #32]
+ 194:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp32 *= (uint32_t)pcfg->ambient_thresh_sigma;
+ 401              		.loc 1 194 3 is_stmt 1 view .LVU146
+ 194:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp32 *= (uint32_t)pcfg->ambient_thresh_sigma;
+ 402              		.loc 1 194 12 is_stmt 0 view .LVU147
+ 403 0160 4FEA0920 		lsl	r0, r9, #8
+ 194:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp32 *= (uint32_t)pcfg->ambient_thresh_sigma;
+ 404              		.loc 1 194 12 view .LVU148
+ 405 0164 FFF7FEFF 		bl	VL53L1_isqrt
+ 406              	.LVL52:
+ 195:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 407              		.loc 1 195 3 is_stmt 1 view .LVU149
+ 195:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 408              		.loc 1 195 26 is_stmt 0 view .LVU150
+ 409 0168 7B78     		ldrb	r3, [r7, #1]	@ zero_extendqisi2
+ 195:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 410              		.loc 1 195 9 view .LVU151
+ 411 016a 03FB00F0 		mul	r0, r3, r0
+ 412              	.LVL53:
+ 199:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			(uint32_t)pcfg->min_ambient_thresh_events) {
+ 413              		.loc 1 199 3 is_stmt 1 view .LVU152
+ 199:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			(uint32_t)pcfg->min_ambient_thresh_events) {
+ 414              		.loc 1 199 12 is_stmt 0 view .LVU153
+ 415 016e E269     		ldr	r2, [r4, #28]
+ 200:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 416              		.loc 1 200 18 view .LVU154
+ 417 0170 7B68     		ldr	r3, [r7, #4]
+ 199:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			(uint32_t)pcfg->min_ambient_thresh_events) {
+ 418              		.loc 1 199 6 view .LVU155
+ 419 0172 9A42     		cmp	r2, r3
+ 420 0174 05D2     		bcs	.L9
+ 202:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				pcfg->min_ambient_thresh_events -
+ 421              		.loc 1 202 4 is_stmt 1 view .LVU156
+ 202:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				pcfg->min_ambient_thresh_events -
+ 422              		.loc 1 202 20 is_stmt 0 view .LVU157
+ 423 0176 9B1A     		subs	r3, r3, r2
+ 424              	.LVL54:
+ 207:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 425              		.loc 1 207 4 is_stmt 1 view .LVU158
+ 207:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 426              		.loc 1 207 20 is_stmt 0 view .LVU159
+ 427 0178 1A02     		lsls	r2, r3, #8
+ 428              	.LVL55:
+ 209:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				tmp32 = amb_thres_delta;
+ 429              		.loc 1 209 4 is_stmt 1 view .LVU160
+ 209:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				tmp32 = amb_thres_delta;
+ 430              		.loc 1 209 7 is_stmt 0 view .LVU161
+ 431 017a B0EB032F 		cmp	r0, r3, lsl #8
+ 432 017e 00D2     		bcs	.L9
+ARM GAS  C:\Temp\ccowWx7U.s 			page 16
+
+
+ 210:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		}
+ 433              		.loc 1 210 11 view .LVU162
+ 434 0180 1046     		mov	r0, r2
+ 435              	.LVL56:
+ 436              	.L9:
+ 215:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			(int16_t)VL53L1_f_002(
+ 437              		.loc 1 215 3 is_stmt 1 view .LVU163
+ 216:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				tmp32,
+ 438              		.loc 1 216 13 is_stmt 0 view .LVU164
+ 439 0182 3B78     		ldrb	r3, [r7]	@ zero_extendqisi2
+ 440 0184 B288     		ldrh	r2, [r6, #4]
+ 441 0186 216A     		ldr	r1, [r4, #32]
+ 442 0188 FFF7FEFF 		bl	VL53L1_f_002
+ 443              	.LVL57:
+ 215:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			(int16_t)VL53L1_f_002(
+ 444              		.loc 1 215 23 view .LVU165
+ 445 018c E084     		strh	r0, [r4, #38]	@ movhi
+ 224:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp32 *= (uint32_t)pbins->vcsel_width;
+ 446              		.loc 1 224 3 is_stmt 1 view .LVU166
+ 224:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp32 *= (uint32_t)pbins->vcsel_width;
+ 447              		.loc 1 224 10 is_stmt 0 view .LVU167
+ 448 018e 236A     		ldr	r3, [r4, #32]
+ 449              	.LVL58:
+ 225:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp32 += (1 << 3);
+ 450              		.loc 1 225 3 is_stmt 1 view .LVU168
+ 225:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp32 += (1 << 3);
+ 451              		.loc 1 225 27 is_stmt 0 view .LVU169
+ 452 0190 B5F88210 		ldrh	r1, [r5, #130]
+ 225:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp32 += (1 << 3);
+ 453              		.loc 1 225 9 view .LVU170
+ 454 0194 03FB01F1 		mul	r1, r3, r1
+ 455              	.LVL59:
+ 226:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp32 /= (1 << 4);
+ 456              		.loc 1 226 3 is_stmt 1 view .LVU171
+ 226:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		tmp32 /= (1 << 4);
+ 457              		.loc 1 226 9 is_stmt 0 view .LVU172
+ 458 0198 0831     		adds	r1, r1, #8
+ 459              	.LVL60:
+ 227:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 460              		.loc 1 227 3 is_stmt 1 view .LVU173
+ 229:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			(int16_t)VL53L1_f_002(
+ 461              		.loc 1 229 3 view .LVU174
+ 231:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				tmp32,
+ 462              		.loc 1 231 25 is_stmt 0 view .LVU175
+ 463 019a B868     		ldr	r0, [r7, #8]
+ 230:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				256 * (uint32_t)pcfg->signal_total_events_limit,
+ 464              		.loc 1 230 13 view .LVU176
+ 465 019c 3B78     		ldrb	r3, [r7]	@ zero_extendqisi2
+ 466 019e B288     		ldrh	r2, [r6, #4]
+ 467 01a0 0909     		lsrs	r1, r1, #4
+ 468              	.LVL61:
+ 230:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				256 * (uint32_t)pcfg->signal_total_events_limit,
+ 469              		.loc 1 230 13 view .LVU177
+ 470 01a2 0002     		lsls	r0, r0, #8
+ 471 01a4 FFF7FEFF 		bl	VL53L1_f_002
+ 472              	.LVL62:
+ 230:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				256 * (uint32_t)pcfg->signal_total_events_limit,
+ARM GAS  C:\Temp\ccowWx7U.s 			page 17
+
+
+ 473              		.loc 1 230 4 view .LVU178
+ 474 01a8 00B2     		sxth	r0, r0
+ 229:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			(int16_t)VL53L1_f_002(
+ 475              		.loc 1 229 23 view .LVU179
+ 476 01aa A084     		strh	r0, [r4, #36]	@ movhi
+ 239:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			*pambient_dmax_mm = pdata->VL53L1_p_035;
+ 477              		.loc 1 239 3 is_stmt 1 view .LVU180
+ 239:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			*pambient_dmax_mm = pdata->VL53L1_p_035;
+ 478              		.loc 1 239 34 is_stmt 0 view .LVU181
+ 479 01ac B4F92630 		ldrsh	r3, [r4, #38]
+ 239:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			*pambient_dmax_mm = pdata->VL53L1_p_035;
+ 480              		.loc 1 239 6 view .LVU182
+ 481 01b0 9842     		cmp	r0, r3
+ 482 01b2 49DA     		bge	.L10
+ 240:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		else
+ 483              		.loc 1 240 4 is_stmt 1 view .LVU183
+ 240:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		else
+ 484              		.loc 1 240 22 is_stmt 0 view .LVU184
+ 485 01b4 0F9B     		ldr	r3, [sp, #60]
+ 486 01b6 1880     		strh	r0, [r3]	@ movhi
+ 487              	.LVL63:
+ 488              	.L6:
+ 246:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 489              		.loc 1 246 26 is_stmt 1 view .LVU185
+ 248:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 490              		.loc 1 248 2 view .LVU186
+ 250:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 491              		.loc 1 250 1 is_stmt 0 view .LVU187
+ 492 01b8 0020     		movs	r0, #0
+ 493 01ba 05B0     		add	sp, sp, #20
+ 494              		.cfi_remember_state
+ 495              		.cfi_def_cfa_offset 36
+ 496              		@ sp needed
+ 497 01bc BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 498              	.LVL64:
+ 499              	.L15:
+ 500              		.cfi_restore_state
+  81:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			VL53L1_calc_pll_period_us(pbins->VL53L1_p_019);
+ 501              		.loc 1 81 3 is_stmt 1 view .LVU188
+  82:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 502              		.loc 1 82 4 is_stmt 0 view .LVU189
+ 503 01c0 FFF7FEFF 		bl	VL53L1_calc_pll_period_us
+ 504              	.LVL65:
+  86:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 505              		.loc 1 86 3 is_stmt 1 view .LVU190
+  86:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 506              		.loc 1 86 26 is_stmt 0 view .LVU191
+ 507 01c4 D5F88830 		ldr	r3, [r5, #136]
+ 508              	.LVL66:
+  90:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			VL53L1_duration_maths(
+ 509              		.loc 1 90 3 is_stmt 1 view .LVU192
+  91:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				pll_period_us,
+ 510              		.loc 1 91 4 is_stmt 0 view .LVU193
+ 511 01c8 0133     		adds	r3, r3, #1
+ 512              	.LVL67:
+  91:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				pll_period_us,
+ 513              		.loc 1 91 4 view .LVU194
+ARM GAS  C:\Temp\ccowWx7U.s 			page 18
+
+
+ 514 01ca 4FF40062 		mov	r2, #2048
+ 515 01ce 1021     		movs	r1, #16
+ 516 01d0 FFF7FEFF 		bl	VL53L1_duration_maths
+ 517              	.LVL68:
+  91:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				pll_period_us,
+ 518              		.loc 1 91 4 view .LVU195
+ 519 01d4 0146     		mov	r1, r0
+  90:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			VL53L1_duration_maths(
+ 520              		.loc 1 90 24 view .LVU196
+ 521 01d6 2060     		str	r0, [r4]
+  98:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			VL53L1_rate_maths(
+ 522              		.loc 1 98 3 is_stmt 1 view .LVU197
+  99:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				pbins->VL53L1_p_004,
+ 523              		.loc 1 99 4 is_stmt 0 view .LVU198
+ 524 01d8 D5F8A400 		ldr	r0, [r5, #164]
+ 525 01dc FFF7FEFF 		bl	VL53L1_rate_maths
+ 526              	.LVL69:
+  98:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			VL53L1_rate_maths(
+ 527              		.loc 1 98 23 view .LVU199
+ 528 01e0 2083     		strh	r0, [r4, #24]	@ movhi
+ 105:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			VL53L1_events_per_spad_maths(
+ 529              		.loc 1 105 3 is_stmt 1 view .LVU200
+ 106:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				pbins->VL53L1_p_004,
+ 530              		.loc 1 106 4 is_stmt 0 view .LVU201
+ 531 01e2 2268     		ldr	r2, [r4]
+ 532 01e4 B5F87C10 		ldrh	r1, [r5, #124]
+ 533 01e8 D5F8A400 		ldr	r0, [r5, #164]
+ 534 01ec FFF7FEFF 		bl	VL53L1_events_per_spad_maths
+ 535              	.LVL70:
+ 536 01f0 0246     		mov	r2, r0
+ 105:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			VL53L1_events_per_spad_maths(
+ 537              		.loc 1 105 25 view .LVU202
+ 538 01f2 6061     		str	r0, [r4, #20]
+ 113:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		pdata->VL53L1_p_006  = pcfg->max_effective_spads;
+ 539              		.loc 1 113 3 is_stmt 1 view .LVU203
+ 113:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		pdata->VL53L1_p_006  = pcfg->max_effective_spads;
+ 540              		.loc 1 113 29 is_stmt 0 view .LVU204
+ 541 01f4 FB8A     		ldrh	r3, [r7, #22]
+ 113:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		pdata->VL53L1_p_006  = pcfg->max_effective_spads;
+ 542              		.loc 1 113 23 view .LVU205
+ 543 01f6 A381     		strh	r3, [r4, #12]	@ movhi
+ 114:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 544              		.loc 1 114 3 is_stmt 1 view .LVU206
+ 114:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 545              		.loc 1 114 24 is_stmt 0 view .LVU207
+ 546 01f8 6383     		strh	r3, [r4, #26]	@ movhi
+ 116:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			tmp64   =
+ 547              		.loc 1 116 3 is_stmt 1 view .LVU208
+ 116:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			tmp64   =
+ 548              		.loc 1 116 6 is_stmt 0 view .LVU209
+ 549 01fa 0028     		cmp	r0, #0
+ 550 01fc 3FF41BAF 		beq	.L5
+ 117:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			(uint64_t)pcfg->dss_config__target_total_rate_mcps;
+ 551              		.loc 1 117 4 is_stmt 1 view .LVU210
+ 118:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			tmp64  *= 1000;
+ 552              		.loc 1 118 18 is_stmt 0 view .LVU211
+ 553 0200 388B     		ldrh	r0, [r7, #24]
+ARM GAS  C:\Temp\ccowWx7U.s 			page 19
+
+
+ 554              	.LVL71:
+ 119:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			tmp64 <<= (11+1);
+ 555              		.loc 1 119 4 is_stmt 1 view .LVU212
+ 119:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			tmp64 <<= (11+1);
+ 556              		.loc 1 119 11 is_stmt 0 view .LVU213
+ 557 0202 4301     		lsls	r3, r0, #5
+ 558 0204 1B1A     		subs	r3, r3, r0
+ 559 0206 61EB0101 		sbc	r1, r1, r1
+ 560 020a 8900     		lsls	r1, r1, #2
+ 561 020c 41EA9371 		orr	r1, r1, r3, lsr #30
+ 562 0210 9B00     		lsls	r3, r3, #2
+ 563 0212 1B18     		adds	r3, r3, r0
+ 564 0214 41F10001 		adc	r1, r1, #0
+ 565 0218 C900     		lsls	r1, r1, #3
+ 566 021a 41EA5371 		orr	r1, r1, r3, lsr #29
+ 567 021e DB00     		lsls	r3, r3, #3
+ 568              	.LVL72:
+ 120:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			tmp32 = pdata->VL53L1_p_033/2;
+ 569              		.loc 1 120 4 is_stmt 1 view .LVU214
+ 120:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			tmp32 = pdata->VL53L1_p_033/2;
+ 570              		.loc 1 120 10 is_stmt 0 view .LVU215
+ 571 0220 0903     		lsls	r1, r1, #12
+ 572              	.LVL73:
+ 120:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			tmp32 = pdata->VL53L1_p_033/2;
+ 573              		.loc 1 120 10 view .LVU216
+ 574 0222 41EA1351 		orr	r1, r1, r3, lsr #20
+ 575 0226 1B03     		lsls	r3, r3, #12
+ 576              	.LVL74:
+ 121:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			tmp64  += (uint64_t)tmp32;
+ 577              		.loc 1 121 4 is_stmt 1 view .LVU217
+ 121:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			tmp64  += (uint64_t)tmp32;
+ 578              		.loc 1 121 10 is_stmt 0 view .LVU218
+ 579 0228 5008     		lsrs	r0, r2, #1
+ 580              	.LVL75:
+ 122:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			tmp64 = do_division_u(tmp64,
+ 581              		.loc 1 122 4 is_stmt 1 view .LVU219
+ 122:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 			tmp64 = do_division_u(tmp64,
+ 582              		.loc 1 122 11 is_stmt 0 view .LVU220
+ 583 022a C018     		adds	r0, r0, r3
+ 584              	.LVL76:
+ 123:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				(uint64_t)pdata->VL53L1_p_033);
+ 585              		.loc 1 123 4 is_stmt 1 view .LVU221
+ 123:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				(uint64_t)pdata->VL53L1_p_033);
+ 586              		.loc 1 123 10 is_stmt 0 view .LVU222
+ 587 022c 4FF00003 		mov	r3, #0
+ 588 0230 41F10001 		adc	r1, r1, #0
+ 589              	.LVL77:
+ 123:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				(uint64_t)pdata->VL53L1_p_033);
+ 590              		.loc 1 123 10 view .LVU223
+ 591 0234 FFF7FEFF 		bl	__aeabi_uldivmod
+ 592              	.LVL78:
+ 126:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				pdata->VL53L1_p_006 = (uint16_t)tmp64;
+ 593              		.loc 1 126 4 is_stmt 1 view .LVU224
+ 126:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				pdata->VL53L1_p_006 = (uint16_t)tmp64;
+ 594              		.loc 1 126 30 is_stmt 0 view .LVU225
+ 595 0238 FB8A     		ldrh	r3, [r7, #22]
+ 126:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				pdata->VL53L1_p_006 = (uint16_t)tmp64;
+ARM GAS  C:\Temp\ccowWx7U.s 			page 20
+
+
+ 596              		.loc 1 126 7 view .LVU226
+ 597 023a 9842     		cmp	r0, r3
+ 598 023c 71F10001 		sbcs	r1, r1, #0
+ 599              	.LVL79:
+ 126:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 				pdata->VL53L1_p_006 = (uint16_t)tmp64;
+ 600              		.loc 1 126 7 view .LVU227
+ 601 0240 BFF4F9AE 		bcs	.L5
+ 127:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		}
+ 602              		.loc 1 127 5 is_stmt 1 view .LVU228
+ 127:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 		}
+ 603              		.loc 1 127 25 is_stmt 0 view .LVU229
+ 604 0244 6083     		strh	r0, [r4, #26]	@ movhi
+ 605 0246 F6E6     		b	.L5
+ 606              	.LVL80:
+ 607              	.L10:
+ 242:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 608              		.loc 1 242 4 is_stmt 1 view .LVU230
+ 242:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c **** 
+ 609              		.loc 1 242 22 is_stmt 0 view .LVU231
+ 610 0248 0F9A     		ldr	r2, [sp, #60]
+ 611 024a 1380     		strh	r3, [r2]	@ movhi
+ 612 024c B4E7     		b	.L6
+ 613              		.cfi_endproc
+ 614              	.LFE3:
+ 616              		.text
+ 617              	.Letext0:
+ 618              		.file 2 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 619              		.file 3 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 620              		.file 4 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_ll_device.h"
+ 621              		.file 5 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax_structs.h"
+ 622              		.file 6 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_structs.h"
+ 623              		.file 7 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_codes.h"
+ 624              		.file 8 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax_private_structs.h"
+ 625              		.file 9 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_core_support.h"
+ARM GAS  C:\Temp\ccowWx7U.s 			page 21
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 vl53l1_dmax.c
+  C:\Temp\ccowWx7U.s:21     .text.VL53L1_f_002:00000000 $t
+  C:\Temp\ccowWx7U.s:27     .text.VL53L1_f_002:00000000 VL53L1_f_002
+  C:\Temp\ccowWx7U.s:96     .text.VL53L1_f_001:00000000 $t
+  C:\Temp\ccowWx7U.s:102    .text.VL53L1_f_001:00000000 VL53L1_f_001
+
+UNDEFINED SYMBOLS
+VL53L1_isqrt
+__aeabi_uldivmod
+VL53L1_calc_pll_period_us
+VL53L1_duration_maths
+VL53L1_rate_maths
+VL53L1_events_per_spad_maths

@@ -1,0 +1,428 @@
+ARM GAS  C:\Temp\ccnPkTef.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"IKS02A1_Simulink.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Core/Src/IKS02A1_Simulink.c"
+  20              		.section	.text.bytesToFloat,"ax",%progbits
+  21              		.align	1
+  22              		.global	bytesToFloat
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	bytesToFloat:
+  28              	.LVL0:
+  29              	.LFB137:
+   1:Core/Src/IKS02A1_Simulink.c **** ///////////////////////////////////////////////////////////
+   2:Core/Src/IKS02A1_Simulink.c **** // Project : STM32 Nucleo + IKS02A1
+   3:Core/Src/IKS02A1_Simulink.c **** // Abbreviation : AP_01
+   4:Core/Src/IKS02A1_Simulink.c **** // Microcontroller: STM32 Nucleo F411RE
+   5:Core/Src/IKS02A1_Simulink.c **** // Made For : Dr. Amir Patel
+   6:Core/Src/IKS02A1_Simulink.c **** // @author: Jesse Jabez Arendse
+   7:Core/Src/IKS02A1_Simulink.c **** // @modified: 25/11/2024
+   8:Core/Src/IKS02A1_Simulink.c **** ///////////////////////////////////////////////////////////
+   9:Core/Src/IKS02A1_Simulink.c **** 
+  10:Core/Src/IKS02A1_Simulink.c **** 
+  11:Core/Src/IKS02A1_Simulink.c **** // Includes ///////////////////////////////////////////////
+  12:Core/Src/IKS02A1_Simulink.c **** #include "main.h"
+  13:Core/Src/IKS02A1_Simulink.c **** 
+  14:Core/Src/IKS02A1_Simulink.c **** #include "stdio.h"
+  15:Core/Src/IKS02A1_Simulink.c **** #include <stdint.h>
+  16:Core/Src/IKS02A1_Simulink.c **** #include <string.h>  // For memcpy
+  17:Core/Src/IKS02A1_Simulink.c **** #include <stdio.h>
+  18:Core/Src/IKS02A1_Simulink.c **** 
+  19:Core/Src/IKS02A1_Simulink.c **** #include "IKS02A1_Simulink.h"
+  20:Core/Src/IKS02A1_Simulink.c **** 
+  21:Core/Src/IKS02A1_Simulink.c **** // Project Parent Variables ///////////////////////////////
+  22:Core/Src/IKS02A1_Simulink.c **** const uint8_t* header = 'A_J';
+  23:Core/Src/IKS02A1_Simulink.c **** const uint8_t* terminator = 'J_A';
+  24:Core/Src/IKS02A1_Simulink.c **** 
+  25:Core/Src/IKS02A1_Simulink.c **** // Project Specific Variables /////////////////////////////
+  26:Core/Src/IKS02A1_Simulink.c **** 
+  27:Core/Src/IKS02A1_Simulink.c **** extern UART_HandleTypeDef huart2;
+  28:Core/Src/IKS02A1_Simulink.c **** 
+  29:Core/Src/IKS02A1_Simulink.c **** 
+ARM GAS  C:\Temp\ccnPkTef.s 			page 2
+
+
+  30:Core/Src/IKS02A1_Simulink.c **** extern uint16_t pdm_buffer;
+  31:Core/Src/IKS02A1_Simulink.c **** extern int16_t  pcm_buffer;
+  32:Core/Src/IKS02A1_Simulink.c **** 
+  33:Core/Src/IKS02A1_Simulink.c **** // Functions /////////////////////////////////////////////
+  34:Core/Src/IKS02A1_Simulink.c **** 
+  35:Core/Src/IKS02A1_Simulink.c **** float bytesToFloat(uint8_t byte1 , uint8_t byte2 , uint8_t byte3 , uint8_t byte4) {
+  30              		.loc 1 35 83 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 8
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+  35              		.loc 1 35 83 is_stmt 0 view .LVU1
+  36 0000 82B0     		sub	sp, sp, #8
+  37              		.cfi_def_cfa_offset 8
+  36:Core/Src/IKS02A1_Simulink.c ****     float result;
+  38              		.loc 1 36 5 is_stmt 1 view .LVU2
+  37:Core/Src/IKS02A1_Simulink.c ****     uint8_t bytes[4] = {byte1,byte2,byte3,byte4};
+  39              		.loc 1 37 5 view .LVU3
+  40              		.loc 1 37 13 is_stmt 0 view .LVU4
+  41 0002 8DF80400 		strb	r0, [sp, #4]
+  42 0006 8DF80510 		strb	r1, [sp, #5]
+  43 000a 8DF80620 		strb	r2, [sp, #6]
+  44 000e 8DF80730 		strb	r3, [sp, #7]
+  38:Core/Src/IKS02A1_Simulink.c **** 
+  39:Core/Src/IKS02A1_Simulink.c ****     // Use memcpy to copy the 4 bytes into a float (this preserves the binary representation)
+  40:Core/Src/IKS02A1_Simulink.c ****     memcpy(&result, bytes, sizeof(float));
+  45              		.loc 1 40 5 is_stmt 1 view .LVU5
+  41:Core/Src/IKS02A1_Simulink.c **** 
+  42:Core/Src/IKS02A1_Simulink.c ****     return result;
+  46              		.loc 1 42 5 view .LVU6
+  43:Core/Src/IKS02A1_Simulink.c **** }
+  47              		.loc 1 43 1 is_stmt 0 view .LVU7
+  48 0012 9DED010A 		vldr.32	s0, [sp, #4]
+  49 0016 02B0     		add	sp, sp, #8
+  50              		.cfi_def_cfa_offset 0
+  51              		@ sp needed
+  52 0018 7047     		bx	lr
+  53              		.cfi_endproc
+  54              	.LFE137:
+  56              		.section	.text.bytesToInt32,"ax",%progbits
+  57              		.align	1
+  58              		.global	bytesToInt32
+  59              		.syntax unified
+  60              		.thumb
+  61              		.thumb_func
+  63              	bytesToInt32:
+  64              	.LVL1:
+  65              	.LFB138:
+  44:Core/Src/IKS02A1_Simulink.c **** 
+  45:Core/Src/IKS02A1_Simulink.c **** int32_t bytesToInt32(uint8_t byte1 , uint8_t byte2 , uint8_t byte3 , uint8_t byte4)  {
+  66              		.loc 1 45 86 is_stmt 1 view -0
+  67              		.cfi_startproc
+  68              		@ args = 0, pretend = 0, frame = 8
+  69              		@ frame_needed = 0, uses_anonymous_args = 0
+  70              		@ link register save eliminated.
+  71              		.loc 1 45 86 is_stmt 0 view .LVU9
+  72 0000 82B0     		sub	sp, sp, #8
+ARM GAS  C:\Temp\ccnPkTef.s 			page 3
+
+
+  73              		.cfi_def_cfa_offset 8
+  46:Core/Src/IKS02A1_Simulink.c ****     int32_t result;
+  74              		.loc 1 46 5 is_stmt 1 view .LVU10
+  47:Core/Src/IKS02A1_Simulink.c ****     uint8_t bytes[4] = {byte1,byte2,byte3,byte4};
+  75              		.loc 1 47 5 view .LVU11
+  76              		.loc 1 47 13 is_stmt 0 view .LVU12
+  77 0002 8DF80400 		strb	r0, [sp, #4]
+  78 0006 8DF80510 		strb	r1, [sp, #5]
+  79 000a 8DF80620 		strb	r2, [sp, #6]
+  80 000e 8DF80730 		strb	r3, [sp, #7]
+  48:Core/Src/IKS02A1_Simulink.c **** 
+  49:Core/Src/IKS02A1_Simulink.c ****     // Use memcpy to copy the 4 bytes into a int32_t (this preserves the binary representation)
+  50:Core/Src/IKS02A1_Simulink.c ****     memcpy(&result, bytes, sizeof(int32_t));
+  81              		.loc 1 50 5 is_stmt 1 view .LVU13
+  82              	.LVL2:
+  51:Core/Src/IKS02A1_Simulink.c **** 
+  52:Core/Src/IKS02A1_Simulink.c ****     return result;
+  83              		.loc 1 52 5 view .LVU14
+  53:Core/Src/IKS02A1_Simulink.c **** }
+  84              		.loc 1 53 1 is_stmt 0 view .LVU15
+  85 0012 0198     		ldr	r0, [sp, #4]
+  86              	.LVL3:
+  87              		.loc 1 53 1 view .LVU16
+  88 0014 02B0     		add	sp, sp, #8
+  89              		.cfi_def_cfa_offset 0
+  90              	.LVL4:
+  91              		.loc 1 53 1 view .LVU17
+  92              		@ sp needed
+  93 0016 7047     		bx	lr
+  94              		.cfi_endproc
+  95              	.LFE138:
+  97              		.section	.text.sendToSimulink,"ax",%progbits
+  98              		.align	1
+  99              		.global	sendToSimulink
+ 100              		.syntax unified
+ 101              		.thumb
+ 102              		.thumb_func
+ 104              	sendToSimulink:
+ 105              	.LFB139:
+  54:Core/Src/IKS02A1_Simulink.c **** 
+  55:Core/Src/IKS02A1_Simulink.c **** void sendToSimulink(){
+ 106              		.loc 1 55 22 is_stmt 1 view -0
+ 107              		.cfi_startproc
+ 108              		@ args = 0, pretend = 0, frame = 0
+ 109              		@ frame_needed = 0, uses_anonymous_args = 0
+ 110 0000 10B5     		push	{r4, lr}
+ 111              		.cfi_def_cfa_offset 8
+ 112              		.cfi_offset 4, -8
+ 113              		.cfi_offset 14, -4
+  56:Core/Src/IKS02A1_Simulink.c ****     HAL_UART_Transmit(&huart2, (uint8_t *) &header           ,3 , HAL_MAX_DELAY);
+ 114              		.loc 1 56 5 view .LVU19
+ 115 0002 0C4C     		ldr	r4, .L7
+ 116 0004 4FF0FF33 		mov	r3, #-1
+ 117 0008 0322     		movs	r2, #3
+ 118 000a 0B49     		ldr	r1, .L7+4
+ 119 000c 2046     		mov	r0, r4
+ 120 000e FFF7FEFF 		bl	HAL_UART_Transmit
+ARM GAS  C:\Temp\ccnPkTef.s 			page 4
+
+
+ 121              	.LVL5:
+  57:Core/Src/IKS02A1_Simulink.c ****     HAL_UART_Transmit(&huart2, &pcm_buffer       , PCM_BUFFER_SIZE*2 , HAL_MAX_DELAY);
+ 122              		.loc 1 57 5 view .LVU20
+ 123 0012 4FF0FF33 		mov	r3, #-1
+ 124 0016 4FF47072 		mov	r2, #960
+ 125 001a 0849     		ldr	r1, .L7+8
+ 126 001c 2046     		mov	r0, r4
+ 127 001e FFF7FEFF 		bl	HAL_UART_Transmit
+ 128              	.LVL6:
+  58:Core/Src/IKS02A1_Simulink.c ****     HAL_UART_Transmit(&huart2, (uint8_t *) &terminator       ,3 , HAL_MAX_DELAY);
+ 129              		.loc 1 58 5 view .LVU21
+ 130 0022 4FF0FF33 		mov	r3, #-1
+ 131 0026 0322     		movs	r2, #3
+ 132 0028 0549     		ldr	r1, .L7+12
+ 133 002a 2046     		mov	r0, r4
+ 134 002c FFF7FEFF 		bl	HAL_UART_Transmit
+ 135              	.LVL7:
+  59:Core/Src/IKS02A1_Simulink.c **** }
+ 136              		.loc 1 59 1 is_stmt 0 view .LVU22
+ 137 0030 10BD     		pop	{r4, pc}
+ 138              	.L8:
+ 139 0032 00BF     		.align	2
+ 140              	.L7:
+ 141 0034 00000000 		.word	huart2
+ 142 0038 00000000 		.word	header
+ 143 003c 00000000 		.word	pcm_buffer
+ 144 0040 00000000 		.word	terminator
+ 145              		.cfi_endproc
+ 146              	.LFE139:
+ 148              		.section	.text.startAudioPacket,"ax",%progbits
+ 149              		.align	1
+ 150              		.global	startAudioPacket
+ 151              		.syntax unified
+ 152              		.thumb
+ 153              		.thumb_func
+ 155              	startAudioPacket:
+ 156              	.LFB140:
+  60:Core/Src/IKS02A1_Simulink.c **** 
+  61:Core/Src/IKS02A1_Simulink.c **** void startAudioPacket(){
+ 157              		.loc 1 61 24 is_stmt 1 view -0
+ 158              		.cfi_startproc
+ 159              		@ args = 0, pretend = 0, frame = 0
+ 160              		@ frame_needed = 0, uses_anonymous_args = 0
+ 161 0000 08B5     		push	{r3, lr}
+ 162              		.cfi_def_cfa_offset 8
+ 163              		.cfi_offset 3, -8
+ 164              		.cfi_offset 14, -4
+  62:Core/Src/IKS02A1_Simulink.c ****     HAL_UART_Transmit(&huart2, (uint8_t *) &header           ,3 , HAL_MAX_DELAY);
+ 165              		.loc 1 62 5 view .LVU24
+ 166 0002 4FF0FF33 		mov	r3, #-1
+ 167 0006 0322     		movs	r2, #3
+ 168 0008 0249     		ldr	r1, .L11
+ 169 000a 0348     		ldr	r0, .L11+4
+ 170 000c FFF7FEFF 		bl	HAL_UART_Transmit
+ 171              	.LVL8:
+  63:Core/Src/IKS02A1_Simulink.c **** }
+ 172              		.loc 1 63 1 is_stmt 0 view .LVU25
+ARM GAS  C:\Temp\ccnPkTef.s 			page 5
+
+
+ 173 0010 08BD     		pop	{r3, pc}
+ 174              	.L12:
+ 175 0012 00BF     		.align	2
+ 176              	.L11:
+ 177 0014 00000000 		.word	header
+ 178 0018 00000000 		.word	huart2
+ 179              		.cfi_endproc
+ 180              	.LFE140:
+ 182              		.section	.text.sendAudioChunk,"ax",%progbits
+ 183              		.align	1
+ 184              		.global	sendAudioChunk
+ 185              		.syntax unified
+ 186              		.thumb
+ 187              		.thumb_func
+ 189              	sendAudioChunk:
+ 190              	.LFB141:
+  64:Core/Src/IKS02A1_Simulink.c **** 
+  65:Core/Src/IKS02A1_Simulink.c **** void sendAudioChunk(){
+ 191              		.loc 1 65 22 is_stmt 1 view -0
+ 192              		.cfi_startproc
+ 193              		@ args = 0, pretend = 0, frame = 0
+ 194              		@ frame_needed = 0, uses_anonymous_args = 0
+ 195 0000 08B5     		push	{r3, lr}
+ 196              		.cfi_def_cfa_offset 8
+ 197              		.cfi_offset 3, -8
+ 198              		.cfi_offset 14, -4
+  66:Core/Src/IKS02A1_Simulink.c ****     HAL_UART_Transmit_DMA(&huart2, &pcm_buffer, PDM_BUFFER_SIZE*2);
+ 199              		.loc 1 66 5 view .LVU27
+ 200 0002 4FF47052 		mov	r2, #15360
+ 201 0006 0249     		ldr	r1, .L15
+ 202 0008 0248     		ldr	r0, .L15+4
+ 203 000a FFF7FEFF 		bl	HAL_UART_Transmit_DMA
+ 204              	.LVL9:
+  67:Core/Src/IKS02A1_Simulink.c **** }
+ 205              		.loc 1 67 1 is_stmt 0 view .LVU28
+ 206 000e 08BD     		pop	{r3, pc}
+ 207              	.L16:
+ 208              		.align	2
+ 209              	.L15:
+ 210 0010 00000000 		.word	pcm_buffer
+ 211 0014 00000000 		.word	huart2
+ 212              		.cfi_endproc
+ 213              	.LFE141:
+ 215              		.section	.text.endAudioPacket,"ax",%progbits
+ 216              		.align	1
+ 217              		.global	endAudioPacket
+ 218              		.syntax unified
+ 219              		.thumb
+ 220              		.thumb_func
+ 222              	endAudioPacket:
+ 223              	.LFB142:
+  68:Core/Src/IKS02A1_Simulink.c **** 
+  69:Core/Src/IKS02A1_Simulink.c **** void endAudioPacket(){
+ 224              		.loc 1 69 22 is_stmt 1 view -0
+ 225              		.cfi_startproc
+ 226              		@ args = 0, pretend = 0, frame = 0
+ 227              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Temp\ccnPkTef.s 			page 6
+
+
+ 228 0000 08B5     		push	{r3, lr}
+ 229              		.cfi_def_cfa_offset 8
+ 230              		.cfi_offset 3, -8
+ 231              		.cfi_offset 14, -4
+  70:Core/Src/IKS02A1_Simulink.c ****     HAL_UART_Transmit(&huart2, (uint8_t *) &terminator       ,3 , HAL_MAX_DELAY);
+ 232              		.loc 1 70 5 view .LVU30
+ 233 0002 4FF0FF33 		mov	r3, #-1
+ 234 0006 0322     		movs	r2, #3
+ 235 0008 0249     		ldr	r1, .L19
+ 236 000a 0348     		ldr	r0, .L19+4
+ 237 000c FFF7FEFF 		bl	HAL_UART_Transmit
+ 238              	.LVL10:
+  71:Core/Src/IKS02A1_Simulink.c **** }
+ 239              		.loc 1 71 1 is_stmt 0 view .LVU31
+ 240 0010 08BD     		pop	{r3, pc}
+ 241              	.L20:
+ 242 0012 00BF     		.align	2
+ 243              	.L19:
+ 244 0014 00000000 		.word	terminator
+ 245 0018 00000000 		.word	huart2
+ 246              		.cfi_endproc
+ 247              	.LFE142:
+ 249              		.section	.text.sendEachToSimulink,"ax",%progbits
+ 250              		.align	1
+ 251              		.global	sendEachToSimulink
+ 252              		.syntax unified
+ 253              		.thumb
+ 254              		.thumb_func
+ 256              	sendEachToSimulink:
+ 257              	.LVL11:
+ 258              	.LFB143:
+  72:Core/Src/IKS02A1_Simulink.c **** 
+  73:Core/Src/IKS02A1_Simulink.c **** 
+  74:Core/Src/IKS02A1_Simulink.c **** 
+  75:Core/Src/IKS02A1_Simulink.c **** void sendEachToSimulink(int16_t val){
+ 259              		.loc 1 75 37 is_stmt 1 view -0
+ 260              		.cfi_startproc
+ 261              		@ args = 0, pretend = 0, frame = 8
+ 262              		@ frame_needed = 0, uses_anonymous_args = 0
+ 263              		.loc 1 75 37 is_stmt 0 view .LVU33
+ 264 0000 00B5     		push	{lr}
+ 265              		.cfi_def_cfa_offset 4
+ 266              		.cfi_offset 14, -4
+ 267 0002 83B0     		sub	sp, sp, #12
+ 268              		.cfi_def_cfa_offset 16
+ 269 0004 ADF80600 		strh	r0, [sp, #6]	@ movhi
+  76:Core/Src/IKS02A1_Simulink.c ****     // HAL_UART_Transmit(&huart2, (uint8_t *) &header           ,3 , HAL_MAX_DELAY);
+  77:Core/Src/IKS02A1_Simulink.c ****     HAL_UART_Transmit(&huart2, &val       ,2 , HAL_MAX_DELAY);
+ 270              		.loc 1 77 5 is_stmt 1 view .LVU34
+ 271 0008 4FF0FF33 		mov	r3, #-1
+ 272 000c 0222     		movs	r2, #2
+ 273 000e 0DF10601 		add	r1, sp, #6
+ 274 0012 0348     		ldr	r0, .L23
+ 275              	.LVL12:
+ 276              		.loc 1 77 5 is_stmt 0 view .LVU35
+ 277 0014 FFF7FEFF 		bl	HAL_UART_Transmit
+ 278              	.LVL13:
+ARM GAS  C:\Temp\ccnPkTef.s 			page 7
+
+
+  78:Core/Src/IKS02A1_Simulink.c ****     // HAL_UART_Transmit(&huart2, (uint8_t *) &terminator       ,3 , HAL_MAX_DELAY);
+  79:Core/Src/IKS02A1_Simulink.c **** }...
+ 279              		.loc 1 79 1 view .LVU36
+ 280 0018 03B0     		add	sp, sp, #12
+ 281              		.cfi_def_cfa_offset 4
+ 282              		@ sp needed
+ 283 001a 5DF804FB 		ldr	pc, [sp], #4
+ 284              	.L24:
+ 285 001e 00BF     		.align	2
+ 286              	.L23:
+ 287 0020 00000000 		.word	huart2
+ 288              		.cfi_endproc
+ 289              	.LFE143:
+ 291              		.global	terminator
+ 292              		.section	.data.terminator,"aw"
+ 293              		.align	2
+ 296              	terminator:
+ 297 0000 415F4A00 		.word	4874049
+ 298              		.global	header
+ 299              		.section	.data.header,"aw"
+ 300              		.align	2
+ 303              	header:
+ 304 0000 4A5F4100 		.word	4284234
+ 305              		.text
+ 306              	.Letext0:
+ 307              		.file 2 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 308              		.file 3 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 309              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f411xe.h"
+ 310              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 311              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 312              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h"
+ARM GAS  C:\Temp\ccnPkTef.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 IKS02A1_Simulink.c
+  C:\Temp\ccnPkTef.s:21     .text.bytesToFloat:00000000 $t
+  C:\Temp\ccnPkTef.s:27     .text.bytesToFloat:00000000 bytesToFloat
+  C:\Temp\ccnPkTef.s:57     .text.bytesToInt32:00000000 $t
+  C:\Temp\ccnPkTef.s:63     .text.bytesToInt32:00000000 bytesToInt32
+  C:\Temp\ccnPkTef.s:98     .text.sendToSimulink:00000000 $t
+  C:\Temp\ccnPkTef.s:104    .text.sendToSimulink:00000000 sendToSimulink
+  C:\Temp\ccnPkTef.s:141    .text.sendToSimulink:00000034 $d
+  C:\Temp\ccnPkTef.s:303    .data.header:00000000 header
+  C:\Temp\ccnPkTef.s:296    .data.terminator:00000000 terminator
+  C:\Temp\ccnPkTef.s:149    .text.startAudioPacket:00000000 $t
+  C:\Temp\ccnPkTef.s:155    .text.startAudioPacket:00000000 startAudioPacket
+  C:\Temp\ccnPkTef.s:177    .text.startAudioPacket:00000014 $d
+  C:\Temp\ccnPkTef.s:183    .text.sendAudioChunk:00000000 $t
+  C:\Temp\ccnPkTef.s:189    .text.sendAudioChunk:00000000 sendAudioChunk
+  C:\Temp\ccnPkTef.s:210    .text.sendAudioChunk:00000010 $d
+  C:\Temp\ccnPkTef.s:216    .text.endAudioPacket:00000000 $t
+  C:\Temp\ccnPkTef.s:222    .text.endAudioPacket:00000000 endAudioPacket
+  C:\Temp\ccnPkTef.s:244    .text.endAudioPacket:00000014 $d
+  C:\Temp\ccnPkTef.s:250    .text.sendEachToSimulink:00000000 $t
+  C:\Temp\ccnPkTef.s:256    .text.sendEachToSimulink:00000000 sendEachToSimulink
+  C:\Temp\ccnPkTef.s:287    .text.sendEachToSimulink:00000020 $d
+  C:\Temp\ccnPkTef.s:293    .data.terminator:00000000 $d
+  C:\Temp\ccnPkTef.s:300    .data.header:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_UART_Transmit
+huart2
+pcm_buffer
+HAL_UART_Transmit_DMA

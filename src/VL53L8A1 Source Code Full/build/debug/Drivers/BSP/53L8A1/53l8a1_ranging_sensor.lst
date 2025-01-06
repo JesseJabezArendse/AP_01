@@ -1,0 +1,2156 @@
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"53l8a1_ranging_sensor.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c"
+  20              		.section	.text.VL53L8CX_Probe,"ax",%progbits
+  21              		.align	1
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	VL53L8CX_Probe:
+  27              	.LVL0:
+  28              	.LFB149:
+   1:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /**
+   2:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   ******************************************************************************
+   3:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @file    53l8a1_ranging_sensor.c
+   4:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @author  IMG SW Application Team
+   5:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @brief   This file includes the driver for Ranging Sensor modules mounted on
+   6:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   *          X-NUCLEO 53L8A1 expansion board.
+   7:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   ******************************************************************************
+   8:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @attention
+   9:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   *
+  10:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * Copyright (c) 2022 STMicroelectronics.
+  11:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * All rights reserved.
+  12:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   *
+  13:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * This software is licensed under terms that can be found in the LICENSE file
+  14:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * in the root directory of this software component.
+  15:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * If no LICENSE file comes with this software, it is provided AS-IS.
+  16:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   *
+  17:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   ******************************************************************************
+  18:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   */
+  19:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+  20:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /* File Info: ------------------------------------------------------------------
+  21:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** *                                   User NOTES
+  22:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+  23:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** * Includes ------------------------------------------------------------------ */
+  24:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+  25:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** #include "53l8a1_ranging_sensor.h"
+  26:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+  27:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /** @addtogroup BSP
+  28:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @{
+  29:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   */
+  30:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 2
+
+
+  31:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /** @addtogroup XNUCLEO_53L8A1
+  32:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @{
+  33:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   */
+  34:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+  35:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /** @addtogroup XNUCLEO_53L8A1_RANGING_SENSOR
+  36:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @{
+  37:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   */
+  38:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+  39:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /** @defgroup XNUCLEO_53L8A1_RANGING_SENSOR_Exported_Variables Exported Variables
+  40:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @{
+  41:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   */
+  42:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** void *VL53L8A1_RANGING_SENSOR_CompObj[RANGING_SENSOR_INSTANCES_NBR] = {0};
+  43:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /**
+  44:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @}
+  45:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   */
+  46:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+  47:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /** @defgroup XNUCLEO_53L8A1_RANGING_SENSOR_Private_Variables Private Variables
+  48:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @{
+  49:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   */
+  50:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** static RANGING_SENSOR_Drv_t *VL53L8A1_RANGING_SENSOR_Drv = NULL;
+  51:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** static RANGING_SENSOR_Capabilities_t VL53L8A1_RANGING_SENSOR_Cap;
+  52:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /**
+  53:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @}
+  54:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   */
+  55:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+  56:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /** @defgroup XNUCLEO_53L8A1_RANGING_SENSOR_Private_Functions_Prototypes Private Functions Prototyp
+  57:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @{
+  58:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   */
+  59:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** static int32_t VL53L8CX_Probe(uint32_t Instance);
+  60:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /**
+  61:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @}
+  62:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   */
+  63:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+  64:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /**
+  65:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @brief Initializes the ranging sensor.
+  66:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param Instance    Ranging sensor instance.
+  67:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @retval BSP status
+  68:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   */
+  69:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** int32_t VL53L8A1_RANGING_SENSOR_Init(uint32_t Instance)
+  70:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** {
+  71:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+  72:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+  73:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   if (Instance >= RANGING_SENSOR_INSTANCES_NBR)
+  74:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+  75:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_WRONG_PARAM;
+  76:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+  77:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else
+  78:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+  79:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = VL53L8CX_Probe(Instance);
+  80:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+  81:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+  82:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   return ret;
+  83:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+  84:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+  85:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /**
+  86:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @brief Deinitializes the ranging sensor.
+  87:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param Instance    Ranging sensor instance.
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 3
+
+
+  88:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @retval BSP status
+  89:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   */
+  90:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** int32_t VL53L8A1_RANGING_SENSOR_DeInit(uint32_t Instance)
+  91:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** {
+  92:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+  93:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+  94:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   if (Instance >= RANGING_SENSOR_INSTANCES_NBR)
+  95:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+  96:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_WRONG_PARAM;
+  97:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+  98:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else if (VL53L8A1_RANGING_SENSOR_Drv->DeInit(VL53L8A1_RANGING_SENSOR_CompObj[Instance]) < 0)
+  99:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 100:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_COMPONENT_FAILURE;
+ 101:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 102:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else
+ 103:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 104:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_NONE;
+ 105:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 106:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 107:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   return ret;
+ 108:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 109:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 110:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /**
+ 111:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @brief Read the ranging sensor device ID.
+ 112:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param Instance    Ranging sensor instance.
+ 113:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param pId    Pointer to the device ID.
+ 114:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @retval BSP status
+ 115:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   */
+ 116:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** int32_t VL53L8A1_RANGING_SENSOR_ReadID(uint32_t Instance, uint32_t *pId)
+ 117:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** {
+ 118:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 119:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 120:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   if (Instance >= RANGING_SENSOR_INSTANCES_NBR)
+ 121:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 122:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_WRONG_PARAM;
+ 123:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 124:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else if (VL53L8A1_RANGING_SENSOR_Drv->ReadID(VL53L8A1_RANGING_SENSOR_CompObj[Instance], pId) < 0)
+ 125:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 126:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_COMPONENT_FAILURE;
+ 127:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 128:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else
+ 129:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 130:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_NONE;
+ 131:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 132:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 133:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   return ret;
+ 134:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 135:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 136:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /**
+ 137:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @brief Get the ranging sensor capabilities.
+ 138:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param Instance    Ranging sensor instance.
+ 139:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param pCapabilities    Pointer to the ranging sensor capabilities.
+ 140:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @retval BSP status
+ 141:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   */
+ 142:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** int32_t VL53L8A1_RANGING_SENSOR_GetCapabilities(uint32_t Instance, RANGING_SENSOR_Capabilities_t *p
+ 143:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** {
+ 144:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 4
+
+
+ 145:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 146:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   if (Instance >= RANGING_SENSOR_INSTANCES_NBR)
+ 147:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 148:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_WRONG_PARAM;
+ 149:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 150:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else if (VL53L8A1_RANGING_SENSOR_Drv->GetCapabilities(VL53L8A1_RANGING_SENSOR_CompObj[Instance], 
+ 151:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 152:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_COMPONENT_FAILURE;
+ 153:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 154:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else
+ 155:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 156:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_NONE;
+ 157:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 158:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 159:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   return ret;
+ 160:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 161:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 162:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /**
+ 163:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @brief Set the ranging configuration profile.
+ 164:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param Instance    Ranging sensor instance.
+ 165:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param pConfig    Pointer to the new configuration profile to be applied.
+ 166:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @retval BSP status
+ 167:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   */
+ 168:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** int32_t VL53L8A1_RANGING_SENSOR_ConfigProfile(uint32_t Instance, RANGING_SENSOR_ProfileConfig_t *pC
+ 169:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** {
+ 170:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 171:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 172:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   if (Instance >= RANGING_SENSOR_INSTANCES_NBR)
+ 173:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 174:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_WRONG_PARAM;
+ 175:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 176:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else if (VL53L8A1_RANGING_SENSOR_Drv->ConfigProfile(VL53L8A1_RANGING_SENSOR_CompObj[Instance], pC
+ 177:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 178:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_COMPONENT_FAILURE;
+ 179:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 180:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else
+ 181:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 182:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_NONE;
+ 183:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 184:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 185:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   return ret;
+ 186:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 187:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 188:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /**
+ 189:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @brief Configure the Region of Interest of the ranging sensor.
+ 190:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param Instance    Ranging sensor instance.
+ 191:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param pConfig    Pointer to the ROI configuration struct.
+ 192:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @retval BSP status
+ 193:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   */
+ 194:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** int32_t VL53L8A1_RANGING_SENSOR_ConfigROI(uint32_t Instance, RANGING_SENSOR_ROIConfig_t *pConfig)
+ 195:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** {
+ 196:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 197:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 198:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   if (Instance >= RANGING_SENSOR_INSTANCES_NBR)
+ 199:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 200:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_WRONG_PARAM;
+ 201:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 5
+
+
+ 202:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else if (VL53L8A1_RANGING_SENSOR_Cap.CustomROI == 0U)
+ 203:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 204:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_FEATURE_NOT_SUPPORTED;
+ 205:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 206:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else if (VL53L8A1_RANGING_SENSOR_Drv->ConfigROI(VL53L8A1_RANGING_SENSOR_CompObj[Instance], pConfi
+ 207:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 208:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_COMPONENT_FAILURE;
+ 209:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 210:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else
+ 211:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 212:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_NONE;
+ 213:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 214:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 215:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   return ret;
+ 216:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 217:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 218:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /**
+ 219:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @brief Configure the IT event generation parameters.
+ 220:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param Instance    Ranging sensor instance.
+ 221:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param pConfig    Pointer to the IT configuration struct.
+ 222:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @note The threshold modes can be used only if supported by the device (check the capabilities).
+ 223:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @retval BSP status
+ 224:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   */
+ 225:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** int32_t VL53L8A1_RANGING_SENSOR_ConfigIT(
+ 226:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   uint32_t Instance,
+ 227:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   RANGING_SENSOR_ITConfig_t *pConfig)
+ 228:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** {
+ 229:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 230:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 231:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   if (Instance >= RANGING_SENSOR_INSTANCES_NBR)
+ 232:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 233:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_WRONG_PARAM;
+ 234:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 235:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else if (VL53L8A1_RANGING_SENSOR_Drv->ConfigIT(
+ 236:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****              VL53L8A1_RANGING_SENSOR_CompObj[Instance],
+ 237:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****              pConfig) < 0)
+ 238:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 239:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_COMPONENT_FAILURE;
+ 240:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 241:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else
+ 242:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 243:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_NONE;
+ 244:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 245:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 246:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   return ret;
+ 247:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 248:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 249:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /**
+ 250:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @brief Get the last distance measurement information.
+ 251:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param Instance    Ranging sensor instance.
+ 252:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param pResult    Pointer to the result struct.
+ 253:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @retval BSP status
+ 254:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   */
+ 255:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** int32_t VL53L8A1_RANGING_SENSOR_GetDistance(uint32_t Instance, RANGING_SENSOR_Result_t *pResult)
+ 256:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** {
+ 257:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 258:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 6
+
+
+ 259:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   if (Instance >= RANGING_SENSOR_INSTANCES_NBR)
+ 260:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 261:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_WRONG_PARAM;
+ 262:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 263:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else if (VL53L8A1_RANGING_SENSOR_Drv->GetDistance(VL53L8A1_RANGING_SENSOR_CompObj[Instance], pRes
+ 264:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 265:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_COMPONENT_FAILURE;
+ 266:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 267:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else
+ 268:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 269:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_NONE;
+ 270:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 271:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 272:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   return ret;
+ 273:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 274:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 275:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /**
+ 276:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @brief Start ranging.
+ 277:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param Instance    Ranging sensor instance.
+ 278:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param Mode        The desired ranging mode
+ 279:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @retval BSP status
+ 280:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   */
+ 281:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** int32_t VL53L8A1_RANGING_SENSOR_Start(uint32_t Instance, uint32_t Mode)
+ 282:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** {
+ 283:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 284:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 285:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   if (Instance >= RANGING_SENSOR_INSTANCES_NBR)
+ 286:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 287:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_WRONG_PARAM;
+ 288:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 289:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else if (VL53L8A1_RANGING_SENSOR_Drv->Start(VL53L8A1_RANGING_SENSOR_CompObj[Instance], Mode) < 0)
+ 290:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 291:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_COMPONENT_FAILURE;
+ 292:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 293:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else
+ 294:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 295:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_NONE;
+ 296:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 297:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 298:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   return ret;
+ 299:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 300:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 301:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /**
+ 302:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @brief Stop ranging.
+ 303:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param Instance    Ranging sensor instance.
+ 304:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @retval BSP status
+ 305:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   */
+ 306:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** int32_t VL53L8A1_RANGING_SENSOR_Stop(uint32_t Instance)
+ 307:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** {
+ 308:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 309:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 310:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   if (Instance >= RANGING_SENSOR_INSTANCES_NBR)
+ 311:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 312:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_WRONG_PARAM;
+ 313:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 314:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else if (VL53L8A1_RANGING_SENSOR_Drv->Stop(VL53L8A1_RANGING_SENSOR_CompObj[Instance]) < 0)
+ 315:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 7
+
+
+ 316:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_COMPONENT_FAILURE;
+ 317:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 318:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else
+ 319:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 320:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_NONE;
+ 321:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 322:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 323:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   return ret;
+ 324:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 325:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 326:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /**
+ 327:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @brief Set The I2C address of the device.
+ 328:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param Instance    Ranging sensor instance.
+ 329:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param Address     New I2C address.
+ 330:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @retval BSP status
+ 331:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   */
+ 332:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** int32_t VL53L8A1_RANGING_SENSOR_SetAddress(uint32_t Instance, uint32_t Address)
+ 333:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** {
+ 334:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 335:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 336:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   if (Instance >= RANGING_SENSOR_INSTANCES_NBR)
+ 337:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 338:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_WRONG_PARAM;
+ 339:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 340:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else if (VL53L8A1_RANGING_SENSOR_Drv->SetAddress(VL53L8A1_RANGING_SENSOR_CompObj[Instance], Addre
+ 341:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 342:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_COMPONENT_FAILURE;
+ 343:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 344:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else
+ 345:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 346:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_NONE;
+ 347:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 348:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 349:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   return ret;
+ 350:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 351:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 352:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /**
+ 353:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @brief Get the I2C address of the device.
+ 354:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param Instance    Ranging sensor instance.
+ 355:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param pAddress    Pointer to the current I2C address.
+ 356:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @retval BSP status
+ 357:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   */
+ 358:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** int32_t VL53L8A1_RANGING_SENSOR_GetAddress(uint32_t Instance, uint32_t *pAddress)
+ 359:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** {
+ 360:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 361:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 362:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   if (Instance >= RANGING_SENSOR_INSTANCES_NBR)
+ 363:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 364:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_WRONG_PARAM;
+ 365:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 366:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else if (VL53L8A1_RANGING_SENSOR_Drv->GetAddress(VL53L8A1_RANGING_SENSOR_CompObj[Instance], pAddr
+ 367:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 368:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_COMPONENT_FAILURE;
+ 369:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 370:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else
+ 371:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 372:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_NONE;
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 8
+
+
+ 373:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 374:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 375:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   return ret;
+ 376:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 377:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 378:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /**
+ 379:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @brief Set the power mode.
+ 380:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param Instance    Ranging sensor instance.
+ 381:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param PowerMode    New power mode to be entered.
+ 382:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @retval BSP status
+ 383:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   */
+ 384:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** int32_t VL53L8A1_RANGING_SENSOR_SetPowerMode(uint32_t Instance, uint32_t PowerMode)
+ 385:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** {
+ 386:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 387:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 388:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   if (Instance >= RANGING_SENSOR_INSTANCES_NBR)
+ 389:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 390:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_WRONG_PARAM;
+ 391:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 392:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else if ((PowerMode != RANGING_SENSOR_POWERMODE_SLEEP) &&
+ 393:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****            (PowerMode != RANGING_SENSOR_POWERMODE_WAKEUP))
+ 394:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 395:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_WRONG_PARAM;
+ 396:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 397:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else if (VL53L8A1_RANGING_SENSOR_Drv->SetPowerMode(VL53L8A1_RANGING_SENSOR_CompObj[Instance], (ui
+ 398:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 399:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_COMPONENT_FAILURE;
+ 400:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 401:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else
+ 402:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 403:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_NONE;
+ 404:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 405:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 406:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   return ret;
+ 407:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 408:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 409:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /**
+ 410:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @brief Get the power mode.
+ 411:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param Instance    Ranging sensor instance.
+ 412:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param pPowerMode    Pointer to the current power mode.
+ 413:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @retval BSP status
+ 414:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   */
+ 415:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** int32_t VL53L8A1_RANGING_SENSOR_GetPowerMode(uint32_t Instance, uint32_t *pPowerMode)
+ 416:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** {
+ 417:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 418:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 419:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   if (Instance >= RANGING_SENSOR_INSTANCES_NBR)
+ 420:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 421:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_WRONG_PARAM;
+ 422:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 423:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else if (VL53L8A1_RANGING_SENSOR_Drv->GetPowerMode(VL53L8A1_RANGING_SENSOR_CompObj[Instance], pPo
+ 424:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 425:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_COMPONENT_FAILURE;
+ 426:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 427:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else
+ 428:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 429:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_NONE;
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 9
+
+
+ 430:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 431:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 432:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   return ret;
+ 433:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 434:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 435:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /**
+ 436:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @brief Perform a xtalk calibration.
+ 437:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param Instance    Ranging sensor instance.
+ 438:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param Reflectance    Target reflectance in percent (range: 1 - 99 %).
+ 439:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param Distance    Target distance in mm (range 600 - 3000 mm).
+ 440:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @note The recommended target reflectance value for Xtalk calibration is 3 %.
+ 441:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @retval BSP status
+ 442:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   */
+ 443:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** int32_t VL53L8A1_RANGING_SENSOR_XTalkCalibration(uint32_t Instance, uint16_t Reflectance, uint16_t 
+ 444:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** {
+ 445:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 446:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 447:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   if (Instance >= RANGING_SENSOR_INSTANCES_NBR)
+ 448:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 449:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_WRONG_PARAM;
+ 450:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 451:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else if (VL53L8CX_XTalkCalibration(VL53L8A1_RANGING_SENSOR_CompObj[Instance], Reflectance, Distan
+ 452:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 453:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_COMPONENT_FAILURE;
+ 454:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 455:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else
+ 456:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 457:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_NONE;
+ 458:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 459:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 460:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   return ret;
+ 461:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 462:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 463:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /** @defgroup XNUCLEO_53L8A1_RANGING_SENSOR_Private_Functions Private Functions
+ 464:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @{
+ 465:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   */
+ 466:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 467:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** /**
+ 468:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @brief Register Bus IOs if component ID is OK.
+ 469:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @param Instance    Ranging sensor instance.
+ 470:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   * @retval BSP status
+ 471:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   */
+ 472:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** static int32_t VL53L8CX_Probe(uint32_t Instance)
+ 473:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** {
+  29              		.loc 1 473 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 32
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		.loc 1 473 1 is_stmt 0 view .LVU1
+  34 0000 30B5     		push	{r4, r5, lr}
+  35              		.cfi_def_cfa_offset 12
+  36              		.cfi_offset 4, -12
+  37              		.cfi_offset 5, -8
+  38              		.cfi_offset 14, -4
+  39 0002 89B0     		sub	sp, sp, #36
+  40              		.cfi_def_cfa_offset 48
+  41 0004 0446     		mov	r4, r0
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 10
+
+
+ 474:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+  42              		.loc 1 474 3 is_stmt 1 view .LVU2
+ 475:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   VL53L8CX_IO_t              IOCtx;
+  43              		.loc 1 475 3 view .LVU3
+ 476:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   uint32_t                   id;
+  44              		.loc 1 476 3 view .LVU4
+ 477:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   static VL53L8CX_Object_t   VL53L8CXObj[RANGING_SENSOR_INSTANCES_NBR];
+  45              		.loc 1 477 3 view .LVU5
+ 478:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 479:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   /* Configure the ranging sensor driver */
+ 480:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   IOCtx.Address     = RANGING_SENSOR_VL53L8CX_ADDRESS;
+  46              		.loc 1 480 3 view .LVU6
+  47              		.loc 1 480 21 is_stmt 0 view .LVU7
+  48 0006 5223     		movs	r3, #82
+  49 0008 ADF81030 		strh	r3, [sp, #16]	@ movhi
+ 481:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   IOCtx.Init        = VL53L8A1_I2C_INIT;
+  50              		.loc 1 481 3 is_stmt 1 view .LVU8
+  51              		.loc 1 481 21 is_stmt 0 view .LVU9
+  52 000c 224B     		ldr	r3, .L9
+  53 000e 0293     		str	r3, [sp, #8]
+ 482:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   IOCtx.DeInit      = VL53L8A1_I2C_DEINIT;
+  54              		.loc 1 482 3 is_stmt 1 view .LVU10
+  55              		.loc 1 482 21 is_stmt 0 view .LVU11
+  56 0010 224B     		ldr	r3, .L9+4
+  57 0012 0393     		str	r3, [sp, #12]
+ 483:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   IOCtx.WriteReg    = VL53L8A1_I2C_WRITEREG;
+  58              		.loc 1 483 3 is_stmt 1 view .LVU12
+  59              		.loc 1 483 21 is_stmt 0 view .LVU13
+  60 0014 224B     		ldr	r3, .L9+8
+  61 0016 0593     		str	r3, [sp, #20]
+ 484:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   IOCtx.ReadReg     = VL53L8A1_I2C_READREG;
+  62              		.loc 1 484 3 is_stmt 1 view .LVU14
+  63              		.loc 1 484 21 is_stmt 0 view .LVU15
+  64 0018 224B     		ldr	r3, .L9+12
+  65 001a 0693     		str	r3, [sp, #24]
+ 485:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   IOCtx.GetTick     = VL53L8A1_GETTICK;
+  66              		.loc 1 485 3 is_stmt 1 view .LVU16
+  67              		.loc 1 485 21 is_stmt 0 view .LVU17
+  68 001c 224B     		ldr	r3, .L9+16
+  69 001e 0793     		str	r3, [sp, #28]
+ 486:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 487:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   if (VL53L8CX_RegisterBusIO(&(VL53L8CXObj[Instance]), &IOCtx) != VL53L8CX_OK)
+  70              		.loc 1 487 3 is_stmt 1 view .LVU18
+  71              		.loc 1 487 7 is_stmt 0 view .LVU19
+  72 0020 4FF42E63 		mov	r3, #2784
+  73 0024 214D     		ldr	r5, .L9+20
+  74 0026 03FB0055 		mla	r5, r3, r0, r5
+  75 002a 02A9     		add	r1, sp, #8
+  76 002c 2846     		mov	r0, r5
+  77              	.LVL1:
+  78              		.loc 1 487 7 view .LVU20
+  79 002e FFF7FEFF 		bl	VL53L8CX_RegisterBusIO
+  80              	.LVL2:
+  81              		.loc 1 487 6 view .LVU21
+  82 0032 28BB     		cbnz	r0, .L3
+ 488:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 489:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     ret = BSP_ERROR_COMPONENT_FAILURE;
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 11
+
+
+ 490:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 491:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   else
+ 492:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 493:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     VL53L8A1_RANGING_SENSOR_Drv = (RANGING_SENSOR_Drv_t *) &VL53L8CX_RANGING_SENSOR_Driver;
+  83              		.loc 1 493 5 is_stmt 1 view .LVU22
+  84              		.loc 1 493 33 is_stmt 0 view .LVU23
+  85 0034 1E4B     		ldr	r3, .L9+24
+  86 0036 1F4A     		ldr	r2, .L9+28
+  87 0038 1A60     		str	r2, [r3]
+ 494:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     VL53L8A1_RANGING_SENSOR_CompObj[Instance] = &(VL53L8CXObj[Instance]);
+  88              		.loc 1 494 5 is_stmt 1 view .LVU24
+  89              		.loc 1 494 47 is_stmt 0 view .LVU25
+  90 003a 1F4B     		ldr	r3, .L9+32
+  91 003c 43F82450 		str	r5, [r3, r4, lsl #2]
+ 495:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 496:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     if (VL53L8CX_ReadID(&(VL53L8CXObj[Instance]), &id) != VL53L8CX_OK)
+  92              		.loc 1 496 5 is_stmt 1 view .LVU26
+  93              		.loc 1 496 9 is_stmt 0 view .LVU27
+  94 0040 01A9     		add	r1, sp, #4
+  95 0042 2846     		mov	r0, r5
+  96 0044 FFF7FEFF 		bl	VL53L8CX_ReadID
+  97              	.LVL3:
+  98              		.loc 1 496 8 view .LVU28
+  99 0048 E8B9     		cbnz	r0, .L4
+ 497:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     {
+ 498:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****       ret = BSP_ERROR_COMPONENT_FAILURE;
+ 499:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     }
+ 500:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     else if (id != VL53L8CX_ID)
+ 100              		.loc 1 500 10 is_stmt 1 view .LVU29
+ 101              		.loc 1 500 13 is_stmt 0 view .LVU30
+ 102 004a 019A     		ldr	r2, [sp, #4]
+ 103 004c 4FF20C03 		movw	r3, #61452
+ 104 0050 9A42     		cmp	r2, r3
+ 105 0052 1BD1     		bne	.L5
+ 501:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     {
+ 502:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****       ret = BSP_ERROR_UNKNOWN_COMPONENT;
+ 503:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     }
+ 504:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     else if (VL53L8A1_RANGING_SENSOR_Drv->Init(VL53L8A1_RANGING_SENSOR_CompObj[Instance]) != VL53L8
+ 106              		.loc 1 504 10 is_stmt 1 view .LVU31
+ 107              		.loc 1 504 41 is_stmt 0 view .LVU32
+ 108 0054 164B     		ldr	r3, .L9+24
+ 109 0056 1B68     		ldr	r3, [r3]
+ 110 0058 1B68     		ldr	r3, [r3]
+ 111              		.loc 1 504 14 view .LVU33
+ 112 005a 174A     		ldr	r2, .L9+32
+ 113 005c 52F82400 		ldr	r0, [r2, r4, lsl #2]
+ 114 0060 9847     		blx	r3
+ 115              	.LVL4:
+ 116              		.loc 1 504 13 view .LVU34
+ 117 0062 B0B9     		cbnz	r0, .L6
+ 505:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     {
+ 506:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****       ret = BSP_ERROR_COMPONENT_FAILURE;
+ 507:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     }
+ 508:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     else if (VL53L8A1_RANGING_SENSOR_Drv->GetCapabilities(VL53L8A1_RANGING_SENSOR_CompObj[Instance]
+ 118              		.loc 1 508 10 is_stmt 1 view .LVU35
+ 119              		.loc 1 508 41 is_stmt 0 view .LVU36
+ 120 0064 124B     		ldr	r3, .L9+24
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 12
+
+
+ 121 0066 1B68     		ldr	r3, [r3]
+ 122 0068 DB68     		ldr	r3, [r3, #12]
+ 123              		.loc 1 508 14 view .LVU37
+ 124 006a 1449     		ldr	r1, .L9+36
+ 125 006c 124A     		ldr	r2, .L9+32
+ 126 006e 52F82400 		ldr	r0, [r2, r4, lsl #2]
+ 127 0072 9847     		blx	r3
+ 128              	.LVL5:
+ 129              		.loc 1 508 13 view .LVU38
+ 130 0074 08B9     		cbnz	r0, .L8
+ 131              	.L1:
+ 509:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****                                                           &VL53L8A1_RANGING_SENSOR_Cap) != VL53L8CX
+ 510:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     {
+ 511:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****       ret = BSP_ERROR_COMPONENT_FAILURE;
+ 512:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     }
+ 513:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     else
+ 514:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     {
+ 515:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****       ret = BSP_ERROR_NONE;
+ 516:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     }
+ 517:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 518:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 519:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   return ret;
+ 520:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 132              		.loc 1 520 1 view .LVU39
+ 133 0076 09B0     		add	sp, sp, #36
+ 134              		.cfi_remember_state
+ 135              		.cfi_def_cfa_offset 12
+ 136              		@ sp needed
+ 137 0078 30BD     		pop	{r4, r5, pc}
+ 138              	.LVL6:
+ 139              	.L8:
+ 140              		.cfi_restore_state
+ 511:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     }
+ 141              		.loc 1 511 11 view .LVU40
+ 142 007a 6FF00400 		mvn	r0, #4
+ 143 007e FAE7     		b	.L1
+ 144              	.L3:
+ 489:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 145              		.loc 1 489 9 view .LVU41
+ 146 0080 6FF00400 		mvn	r0, #4
+ 147 0084 F7E7     		b	.L1
+ 148              	.L4:
+ 498:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     }
+ 149              		.loc 1 498 11 view .LVU42
+ 150 0086 6FF00400 		mvn	r0, #4
+ 151 008a F4E7     		b	.L1
+ 152              	.L5:
+ 502:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     }
+ 153              		.loc 1 502 11 view .LVU43
+ 154 008c 6FF00600 		mvn	r0, #6
+ 155 0090 F1E7     		b	.L1
+ 156              	.L6:
+ 506:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****     }
+ 157              		.loc 1 506 11 view .LVU44
+ 158 0092 6FF00400 		mvn	r0, #4
+ 159              	.LVL7:
+ 519:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 13
+
+
+ 160              		.loc 1 519 3 is_stmt 1 view .LVU45
+ 519:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 161              		.loc 1 519 10 is_stmt 0 view .LVU46
+ 162 0096 EEE7     		b	.L1
+ 163              	.L10:
+ 164              		.align	2
+ 165              	.L9:
+ 166 0098 00000000 		.word	BSP_I2C1_Init
+ 167 009c 00000000 		.word	BSP_I2C1_DeInit
+ 168 00a0 00000000 		.word	BSP_I2C1_WriteReg16
+ 169 00a4 00000000 		.word	BSP_I2C1_ReadReg16
+ 170 00a8 00000000 		.word	BSP_GetTick
+ 171 00ac 00000000 		.word	VL53L8CXObj.0
+ 172 00b0 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 173 00b4 00000000 		.word	VL53L8CX_RANGING_SENSOR_Driver
+ 174 00b8 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 175 00bc 00000000 		.word	VL53L8A1_RANGING_SENSOR_Cap
+ 176              		.cfi_endproc
+ 177              	.LFE149:
+ 179              		.section	.text.VL53L8A1_RANGING_SENSOR_Init,"ax",%progbits
+ 180              		.align	1
+ 181              		.global	VL53L8A1_RANGING_SENSOR_Init
+ 182              		.syntax unified
+ 183              		.thumb
+ 184              		.thumb_func
+ 186              	VL53L8A1_RANGING_SENSOR_Init:
+ 187              	.LVL8:
+ 188              	.LFB134:
+  70:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 189              		.loc 1 70 1 is_stmt 1 view -0
+ 190              		.cfi_startproc
+ 191              		@ args = 0, pretend = 0, frame = 0
+ 192              		@ frame_needed = 0, uses_anonymous_args = 0
+  71:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 193              		.loc 1 71 3 view .LVU48
+  73:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 194              		.loc 1 73 3 view .LVU49
+  73:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 195              		.loc 1 73 6 is_stmt 0 view .LVU50
+ 196 0000 0228     		cmp	r0, #2
+ 197 0002 03D8     		bhi	.L13
+  70:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 198              		.loc 1 70 1 view .LVU51
+ 199 0004 08B5     		push	{r3, lr}
+ 200              		.cfi_def_cfa_offset 8
+ 201              		.cfi_offset 3, -8
+ 202              		.cfi_offset 14, -4
+  79:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 203              		.loc 1 79 5 is_stmt 1 view .LVU52
+  79:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 204              		.loc 1 79 11 is_stmt 0 view .LVU53
+ 205 0006 FFF7FEFF 		bl	VL53L8CX_Probe
+ 206              	.LVL9:
+  83:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 207              		.loc 1 83 1 view .LVU54
+ 208 000a 08BD     		pop	{r3, pc}
+ 209              	.LVL10:
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 14
+
+
+ 210              	.L13:
+ 211              		.cfi_def_cfa_offset 0
+ 212              		.cfi_restore 3
+ 213              		.cfi_restore 14
+  75:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 214              		.loc 1 75 9 view .LVU55
+ 215 000c 6FF00100 		mvn	r0, #1
+ 216              	.LVL11:
+  82:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 217              		.loc 1 82 3 is_stmt 1 view .LVU56
+  83:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 218              		.loc 1 83 1 is_stmt 0 view .LVU57
+ 219 0010 7047     		bx	lr
+ 220              		.cfi_endproc
+ 221              	.LFE134:
+ 223              		.section	.text.VL53L8A1_RANGING_SENSOR_DeInit,"ax",%progbits
+ 224              		.align	1
+ 225              		.global	VL53L8A1_RANGING_SENSOR_DeInit
+ 226              		.syntax unified
+ 227              		.thumb
+ 228              		.thumb_func
+ 230              	VL53L8A1_RANGING_SENSOR_DeInit:
+ 231              	.LVL12:
+ 232              	.LFB135:
+  91:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 233              		.loc 1 91 1 is_stmt 1 view -0
+ 234              		.cfi_startproc
+ 235              		@ args = 0, pretend = 0, frame = 0
+ 236              		@ frame_needed = 0, uses_anonymous_args = 0
+  92:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 237              		.loc 1 92 3 view .LVU59
+  94:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 238              		.loc 1 94 3 view .LVU60
+  94:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 239              		.loc 1 94 6 is_stmt 0 view .LVU61
+ 240 0000 0228     		cmp	r0, #2
+ 241 0002 0ED8     		bhi	.L20
+  91:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 242              		.loc 1 91 1 view .LVU62
+ 243 0004 08B5     		push	{r3, lr}
+ 244              		.cfi_def_cfa_offset 8
+ 245              		.cfi_offset 3, -8
+ 246              		.cfi_offset 14, -4
+  98:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 247              		.loc 1 98 8 is_stmt 1 view .LVU63
+  98:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 248              		.loc 1 98 39 is_stmt 0 view .LVU64
+ 249 0006 084B     		ldr	r3, .L27
+ 250 0008 1B68     		ldr	r3, [r3]
+ 251 000a 5B68     		ldr	r3, [r3, #4]
+  98:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 252              		.loc 1 98 12 view .LVU65
+ 253 000c 074A     		ldr	r2, .L27+4
+ 254 000e 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 255              	.LVL13:
+  98:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 256              		.loc 1 98 12 view .LVU66
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 15
+
+
+ 257 0012 9847     		blx	r3
+ 258              	.LVL14:
+  98:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 259              		.loc 1 98 11 view .LVU67
+ 260 0014 0028     		cmp	r0, #0
+ 261 0016 01DB     		blt	.L26
+ 104:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 262              		.loc 1 104 9 view .LVU68
+ 263 0018 0020     		movs	r0, #0
+ 264              	.LVL15:
+ 107:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 265              		.loc 1 107 3 is_stmt 1 view .LVU69
+ 266              	.L18:
+ 108:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 267              		.loc 1 108 1 is_stmt 0 view .LVU70
+ 268 001a 08BD     		pop	{r3, pc}
+ 269              	.L26:
+ 100:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 270              		.loc 1 100 9 view .LVU71
+ 271 001c 6FF00400 		mvn	r0, #4
+ 272 0020 FBE7     		b	.L18
+ 273              	.LVL16:
+ 274              	.L20:
+ 275              		.cfi_def_cfa_offset 0
+ 276              		.cfi_restore 3
+ 277              		.cfi_restore 14
+  96:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 278              		.loc 1 96 9 view .LVU72
+ 279 0022 6FF00100 		mvn	r0, #1
+ 280              	.LVL17:
+ 108:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 281              		.loc 1 108 1 view .LVU73
+ 282 0026 7047     		bx	lr
+ 283              	.L28:
+ 284              		.align	2
+ 285              	.L27:
+ 286 0028 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 287 002c 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 288              		.cfi_endproc
+ 289              	.LFE135:
+ 291              		.section	.text.VL53L8A1_RANGING_SENSOR_ReadID,"ax",%progbits
+ 292              		.align	1
+ 293              		.global	VL53L8A1_RANGING_SENSOR_ReadID
+ 294              		.syntax unified
+ 295              		.thumb
+ 296              		.thumb_func
+ 298              	VL53L8A1_RANGING_SENSOR_ReadID:
+ 299              	.LVL18:
+ 300              	.LFB136:
+ 117:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 301              		.loc 1 117 1 is_stmt 1 view -0
+ 302              		.cfi_startproc
+ 303              		@ args = 0, pretend = 0, frame = 0
+ 304              		@ frame_needed = 0, uses_anonymous_args = 0
+ 118:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 305              		.loc 1 118 3 view .LVU75
+ 120:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 16
+
+
+ 306              		.loc 1 120 3 view .LVU76
+ 120:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 307              		.loc 1 120 6 is_stmt 0 view .LVU77
+ 308 0000 0228     		cmp	r0, #2
+ 309 0002 0ED8     		bhi	.L31
+ 117:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 310              		.loc 1 117 1 view .LVU78
+ 311 0004 08B5     		push	{r3, lr}
+ 312              		.cfi_def_cfa_offset 8
+ 313              		.cfi_offset 3, -8
+ 314              		.cfi_offset 14, -4
+ 124:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 315              		.loc 1 124 8 is_stmt 1 view .LVU79
+ 124:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 316              		.loc 1 124 39 is_stmt 0 view .LVU80
+ 317 0006 084B     		ldr	r3, .L38
+ 318 0008 1B68     		ldr	r3, [r3]
+ 319 000a 9B68     		ldr	r3, [r3, #8]
+ 124:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 320              		.loc 1 124 12 view .LVU81
+ 321 000c 074A     		ldr	r2, .L38+4
+ 322 000e 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 323              	.LVL19:
+ 124:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 324              		.loc 1 124 12 view .LVU82
+ 325 0012 9847     		blx	r3
+ 326              	.LVL20:
+ 124:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 327              		.loc 1 124 11 view .LVU83
+ 328 0014 0028     		cmp	r0, #0
+ 329 0016 01DB     		blt	.L37
+ 130:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 330              		.loc 1 130 9 view .LVU84
+ 331 0018 0020     		movs	r0, #0
+ 332              	.LVL21:
+ 133:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 333              		.loc 1 133 3 is_stmt 1 view .LVU85
+ 334              	.L29:
+ 134:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 335              		.loc 1 134 1 is_stmt 0 view .LVU86
+ 336 001a 08BD     		pop	{r3, pc}
+ 337              	.L37:
+ 126:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 338              		.loc 1 126 9 view .LVU87
+ 339 001c 6FF00400 		mvn	r0, #4
+ 340 0020 FBE7     		b	.L29
+ 341              	.LVL22:
+ 342              	.L31:
+ 343              		.cfi_def_cfa_offset 0
+ 344              		.cfi_restore 3
+ 345              		.cfi_restore 14
+ 122:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 346              		.loc 1 122 9 view .LVU88
+ 347 0022 6FF00100 		mvn	r0, #1
+ 348              	.LVL23:
+ 134:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 349              		.loc 1 134 1 view .LVU89
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 17
+
+
+ 350 0026 7047     		bx	lr
+ 351              	.L39:
+ 352              		.align	2
+ 353              	.L38:
+ 354 0028 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 355 002c 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 356              		.cfi_endproc
+ 357              	.LFE136:
+ 359              		.section	.text.VL53L8A1_RANGING_SENSOR_GetCapabilities,"ax",%progbits
+ 360              		.align	1
+ 361              		.global	VL53L8A1_RANGING_SENSOR_GetCapabilities
+ 362              		.syntax unified
+ 363              		.thumb
+ 364              		.thumb_func
+ 366              	VL53L8A1_RANGING_SENSOR_GetCapabilities:
+ 367              	.LVL24:
+ 368              	.LFB137:
+ 143:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 369              		.loc 1 143 1 is_stmt 1 view -0
+ 370              		.cfi_startproc
+ 371              		@ args = 0, pretend = 0, frame = 0
+ 372              		@ frame_needed = 0, uses_anonymous_args = 0
+ 144:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 373              		.loc 1 144 3 view .LVU91
+ 146:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 374              		.loc 1 146 3 view .LVU92
+ 146:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 375              		.loc 1 146 6 is_stmt 0 view .LVU93
+ 376 0000 0228     		cmp	r0, #2
+ 377 0002 0ED8     		bhi	.L42
+ 143:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 378              		.loc 1 143 1 view .LVU94
+ 379 0004 08B5     		push	{r3, lr}
+ 380              		.cfi_def_cfa_offset 8
+ 381              		.cfi_offset 3, -8
+ 382              		.cfi_offset 14, -4
+ 150:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 383              		.loc 1 150 8 is_stmt 1 view .LVU95
+ 150:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 384              		.loc 1 150 39 is_stmt 0 view .LVU96
+ 385 0006 084B     		ldr	r3, .L49
+ 386 0008 1B68     		ldr	r3, [r3]
+ 387 000a DB68     		ldr	r3, [r3, #12]
+ 150:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 388              		.loc 1 150 12 view .LVU97
+ 389 000c 074A     		ldr	r2, .L49+4
+ 390 000e 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 391              	.LVL25:
+ 150:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 392              		.loc 1 150 12 view .LVU98
+ 393 0012 9847     		blx	r3
+ 394              	.LVL26:
+ 150:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 395              		.loc 1 150 11 view .LVU99
+ 396 0014 0028     		cmp	r0, #0
+ 397 0016 01DB     		blt	.L48
+ 156:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 18
+
+
+ 398              		.loc 1 156 9 view .LVU100
+ 399 0018 0020     		movs	r0, #0
+ 400              	.LVL27:
+ 159:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 401              		.loc 1 159 3 is_stmt 1 view .LVU101
+ 402              	.L40:
+ 160:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 403              		.loc 1 160 1 is_stmt 0 view .LVU102
+ 404 001a 08BD     		pop	{r3, pc}
+ 405              	.L48:
+ 152:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 406              		.loc 1 152 9 view .LVU103
+ 407 001c 6FF00400 		mvn	r0, #4
+ 408 0020 FBE7     		b	.L40
+ 409              	.LVL28:
+ 410              	.L42:
+ 411              		.cfi_def_cfa_offset 0
+ 412              		.cfi_restore 3
+ 413              		.cfi_restore 14
+ 148:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 414              		.loc 1 148 9 view .LVU104
+ 415 0022 6FF00100 		mvn	r0, #1
+ 416              	.LVL29:
+ 160:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 417              		.loc 1 160 1 view .LVU105
+ 418 0026 7047     		bx	lr
+ 419              	.L50:
+ 420              		.align	2
+ 421              	.L49:
+ 422 0028 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 423 002c 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 424              		.cfi_endproc
+ 425              	.LFE137:
+ 427              		.section	.text.VL53L8A1_RANGING_SENSOR_ConfigProfile,"ax",%progbits
+ 428              		.align	1
+ 429              		.global	VL53L8A1_RANGING_SENSOR_ConfigProfile
+ 430              		.syntax unified
+ 431              		.thumb
+ 432              		.thumb_func
+ 434              	VL53L8A1_RANGING_SENSOR_ConfigProfile:
+ 435              	.LVL30:
+ 436              	.LFB138:
+ 169:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 437              		.loc 1 169 1 is_stmt 1 view -0
+ 438              		.cfi_startproc
+ 439              		@ args = 0, pretend = 0, frame = 0
+ 440              		@ frame_needed = 0, uses_anonymous_args = 0
+ 170:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 441              		.loc 1 170 3 view .LVU107
+ 172:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 442              		.loc 1 172 3 view .LVU108
+ 172:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 443              		.loc 1 172 6 is_stmt 0 view .LVU109
+ 444 0000 0228     		cmp	r0, #2
+ 445 0002 0ED8     		bhi	.L53
+ 169:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 446              		.loc 1 169 1 view .LVU110
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 19
+
+
+ 447 0004 08B5     		push	{r3, lr}
+ 448              		.cfi_def_cfa_offset 8
+ 449              		.cfi_offset 3, -8
+ 450              		.cfi_offset 14, -4
+ 176:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 451              		.loc 1 176 8 is_stmt 1 view .LVU111
+ 176:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 452              		.loc 1 176 39 is_stmt 0 view .LVU112
+ 453 0006 084B     		ldr	r3, .L60
+ 454 0008 1B68     		ldr	r3, [r3]
+ 455 000a 1B69     		ldr	r3, [r3, #16]
+ 176:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 456              		.loc 1 176 12 view .LVU113
+ 457 000c 074A     		ldr	r2, .L60+4
+ 458 000e 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 459              	.LVL31:
+ 176:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 460              		.loc 1 176 12 view .LVU114
+ 461 0012 9847     		blx	r3
+ 462              	.LVL32:
+ 176:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 463              		.loc 1 176 11 view .LVU115
+ 464 0014 0028     		cmp	r0, #0
+ 465 0016 01DB     		blt	.L59
+ 182:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 466              		.loc 1 182 9 view .LVU116
+ 467 0018 0020     		movs	r0, #0
+ 468              	.LVL33:
+ 185:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 469              		.loc 1 185 3 is_stmt 1 view .LVU117
+ 470              	.L51:
+ 186:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 471              		.loc 1 186 1 is_stmt 0 view .LVU118
+ 472 001a 08BD     		pop	{r3, pc}
+ 473              	.L59:
+ 178:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 474              		.loc 1 178 9 view .LVU119
+ 475 001c 6FF00400 		mvn	r0, #4
+ 476 0020 FBE7     		b	.L51
+ 477              	.LVL34:
+ 478              	.L53:
+ 479              		.cfi_def_cfa_offset 0
+ 480              		.cfi_restore 3
+ 481              		.cfi_restore 14
+ 174:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 482              		.loc 1 174 9 view .LVU120
+ 483 0022 6FF00100 		mvn	r0, #1
+ 484              	.LVL35:
+ 186:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 485              		.loc 1 186 1 view .LVU121
+ 486 0026 7047     		bx	lr
+ 487              	.L61:
+ 488              		.align	2
+ 489              	.L60:
+ 490 0028 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 491 002c 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 492              		.cfi_endproc
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 20
+
+
+ 493              	.LFE138:
+ 495              		.section	.text.VL53L8A1_RANGING_SENSOR_ConfigROI,"ax",%progbits
+ 496              		.align	1
+ 497              		.global	VL53L8A1_RANGING_SENSOR_ConfigROI
+ 498              		.syntax unified
+ 499              		.thumb
+ 500              		.thumb_func
+ 502              	VL53L8A1_RANGING_SENSOR_ConfigROI:
+ 503              	.LVL36:
+ 504              	.LFB139:
+ 195:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 505              		.loc 1 195 1 is_stmt 1 view -0
+ 506              		.cfi_startproc
+ 507              		@ args = 0, pretend = 0, frame = 0
+ 508              		@ frame_needed = 0, uses_anonymous_args = 0
+ 196:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 509              		.loc 1 196 3 view .LVU123
+ 198:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 510              		.loc 1 198 3 view .LVU124
+ 198:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 511              		.loc 1 198 6 is_stmt 0 view .LVU125
+ 512 0000 0228     		cmp	r0, #2
+ 513 0002 11D8     		bhi	.L64
+ 195:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 514              		.loc 1 195 1 view .LVU126
+ 515 0004 08B5     		push	{r3, lr}
+ 516              		.cfi_def_cfa_offset 8
+ 517              		.cfi_offset 3, -8
+ 518              		.cfi_offset 14, -4
+ 202:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 519              		.loc 1 202 8 is_stmt 1 view .LVU127
+ 202:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 520              		.loc 1 202 39 is_stmt 0 view .LVU128
+ 521 0006 0B4B     		ldr	r3, .L72
+ 522 0008 9B68     		ldr	r3, [r3, #8]
+ 202:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 523              		.loc 1 202 11 view .LVU129
+ 524 000a 83B1     		cbz	r3, .L65
+ 206:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 525              		.loc 1 206 8 is_stmt 1 view .LVU130
+ 206:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 526              		.loc 1 206 39 is_stmt 0 view .LVU131
+ 527 000c 0A4B     		ldr	r3, .L72+4
+ 528 000e 1B68     		ldr	r3, [r3]
+ 529 0010 5B69     		ldr	r3, [r3, #20]
+ 206:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 530              		.loc 1 206 12 view .LVU132
+ 531 0012 0A4A     		ldr	r2, .L72+8
+ 532 0014 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 533              	.LVL37:
+ 206:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 534              		.loc 1 206 12 view .LVU133
+ 535 0018 9847     		blx	r3
+ 536              	.LVL38:
+ 206:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 537              		.loc 1 206 11 view .LVU134
+ 538 001a 0028     		cmp	r0, #0
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 21
+
+
+ 539 001c 01DB     		blt	.L71
+ 212:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 540              		.loc 1 212 9 view .LVU135
+ 541 001e 0020     		movs	r0, #0
+ 542              	.LVL39:
+ 215:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 543              		.loc 1 215 3 is_stmt 1 view .LVU136
+ 544              	.L62:
+ 216:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 545              		.loc 1 216 1 is_stmt 0 view .LVU137
+ 546 0020 08BD     		pop	{r3, pc}
+ 547              	.L71:
+ 208:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 548              		.loc 1 208 9 view .LVU138
+ 549 0022 6FF00400 		mvn	r0, #4
+ 550 0026 FBE7     		b	.L62
+ 551              	.LVL40:
+ 552              	.L64:
+ 553              		.cfi_def_cfa_offset 0
+ 554              		.cfi_restore 3
+ 555              		.cfi_restore 14
+ 200:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 556              		.loc 1 200 9 view .LVU139
+ 557 0028 6FF00100 		mvn	r0, #1
+ 558              	.LVL41:
+ 216:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 559              		.loc 1 216 1 view .LVU140
+ 560 002c 7047     		bx	lr
+ 561              	.LVL42:
+ 562              	.L65:
+ 563              		.cfi_def_cfa_offset 8
+ 564              		.cfi_offset 3, -8
+ 565              		.cfi_offset 14, -4
+ 204:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 566              		.loc 1 204 9 view .LVU141
+ 567 002e 6FF00A00 		mvn	r0, #10
+ 568              	.LVL43:
+ 204:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 569              		.loc 1 204 9 view .LVU142
+ 570 0032 F5E7     		b	.L62
+ 571              	.L73:
+ 572              		.align	2
+ 573              	.L72:
+ 574 0034 00000000 		.word	VL53L8A1_RANGING_SENSOR_Cap
+ 575 0038 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 576 003c 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 577              		.cfi_endproc
+ 578              	.LFE139:
+ 580              		.section	.text.VL53L8A1_RANGING_SENSOR_ConfigIT,"ax",%progbits
+ 581              		.align	1
+ 582              		.global	VL53L8A1_RANGING_SENSOR_ConfigIT
+ 583              		.syntax unified
+ 584              		.thumb
+ 585              		.thumb_func
+ 587              	VL53L8A1_RANGING_SENSOR_ConfigIT:
+ 588              	.LVL44:
+ 589              	.LFB140:
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 22
+
+
+ 228:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 590              		.loc 1 228 1 is_stmt 1 view -0
+ 591              		.cfi_startproc
+ 592              		@ args = 0, pretend = 0, frame = 0
+ 593              		@ frame_needed = 0, uses_anonymous_args = 0
+ 229:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 594              		.loc 1 229 3 view .LVU144
+ 231:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 595              		.loc 1 231 3 view .LVU145
+ 231:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 596              		.loc 1 231 6 is_stmt 0 view .LVU146
+ 597 0000 0228     		cmp	r0, #2
+ 598 0002 0ED8     		bhi	.L76
+ 228:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 599              		.loc 1 228 1 view .LVU147
+ 600 0004 08B5     		push	{r3, lr}
+ 601              		.cfi_def_cfa_offset 8
+ 602              		.cfi_offset 3, -8
+ 603              		.cfi_offset 14, -4
+ 235:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****              VL53L8A1_RANGING_SENSOR_CompObj[Instance],
+ 604              		.loc 1 235 8 is_stmt 1 view .LVU148
+ 235:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****              VL53L8A1_RANGING_SENSOR_CompObj[Instance],
+ 605              		.loc 1 235 39 is_stmt 0 view .LVU149
+ 606 0006 084B     		ldr	r3, .L83
+ 607 0008 1B68     		ldr	r3, [r3]
+ 608 000a 9B69     		ldr	r3, [r3, #24]
+ 235:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****              VL53L8A1_RANGING_SENSOR_CompObj[Instance],
+ 609              		.loc 1 235 12 view .LVU150
+ 610 000c 074A     		ldr	r2, .L83+4
+ 611 000e 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 612              	.LVL45:
+ 235:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****              VL53L8A1_RANGING_SENSOR_CompObj[Instance],
+ 613              		.loc 1 235 12 view .LVU151
+ 614 0012 9847     		blx	r3
+ 615              	.LVL46:
+ 235:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****              VL53L8A1_RANGING_SENSOR_CompObj[Instance],
+ 616              		.loc 1 235 11 view .LVU152
+ 617 0014 0028     		cmp	r0, #0
+ 618 0016 01DB     		blt	.L82
+ 243:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 619              		.loc 1 243 9 view .LVU153
+ 620 0018 0020     		movs	r0, #0
+ 621              	.LVL47:
+ 246:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 622              		.loc 1 246 3 is_stmt 1 view .LVU154
+ 623              	.L74:
+ 247:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 624              		.loc 1 247 1 is_stmt 0 view .LVU155
+ 625 001a 08BD     		pop	{r3, pc}
+ 626              	.L82:
+ 239:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 627              		.loc 1 239 9 view .LVU156
+ 628 001c 6FF00400 		mvn	r0, #4
+ 629 0020 FBE7     		b	.L74
+ 630              	.LVL48:
+ 631              	.L76:
+ 632              		.cfi_def_cfa_offset 0
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 23
+
+
+ 633              		.cfi_restore 3
+ 634              		.cfi_restore 14
+ 233:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 635              		.loc 1 233 9 view .LVU157
+ 636 0022 6FF00100 		mvn	r0, #1
+ 637              	.LVL49:
+ 247:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 638              		.loc 1 247 1 view .LVU158
+ 639 0026 7047     		bx	lr
+ 640              	.L84:
+ 641              		.align	2
+ 642              	.L83:
+ 643 0028 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 644 002c 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 645              		.cfi_endproc
+ 646              	.LFE140:
+ 648              		.section	.text.VL53L8A1_RANGING_SENSOR_GetDistance,"ax",%progbits
+ 649              		.align	1
+ 650              		.global	VL53L8A1_RANGING_SENSOR_GetDistance
+ 651              		.syntax unified
+ 652              		.thumb
+ 653              		.thumb_func
+ 655              	VL53L8A1_RANGING_SENSOR_GetDistance:
+ 656              	.LVL50:
+ 657              	.LFB141:
+ 256:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 658              		.loc 1 256 1 is_stmt 1 view -0
+ 659              		.cfi_startproc
+ 660              		@ args = 0, pretend = 0, frame = 0
+ 661              		@ frame_needed = 0, uses_anonymous_args = 0
+ 257:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 662              		.loc 1 257 3 view .LVU160
+ 259:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 663              		.loc 1 259 3 view .LVU161
+ 259:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 664              		.loc 1 259 6 is_stmt 0 view .LVU162
+ 665 0000 0228     		cmp	r0, #2
+ 666 0002 0ED8     		bhi	.L87
+ 256:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 667              		.loc 1 256 1 view .LVU163
+ 668 0004 08B5     		push	{r3, lr}
+ 669              		.cfi_def_cfa_offset 8
+ 670              		.cfi_offset 3, -8
+ 671              		.cfi_offset 14, -4
+ 263:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 672              		.loc 1 263 8 is_stmt 1 view .LVU164
+ 263:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 673              		.loc 1 263 39 is_stmt 0 view .LVU165
+ 674 0006 084B     		ldr	r3, .L94
+ 675 0008 1B68     		ldr	r3, [r3]
+ 676 000a DB69     		ldr	r3, [r3, #28]
+ 263:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 677              		.loc 1 263 12 view .LVU166
+ 678 000c 074A     		ldr	r2, .L94+4
+ 679 000e 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 680              	.LVL51:
+ 263:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 24
+
+
+ 681              		.loc 1 263 12 view .LVU167
+ 682 0012 9847     		blx	r3
+ 683              	.LVL52:
+ 263:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 684              		.loc 1 263 11 view .LVU168
+ 685 0014 0028     		cmp	r0, #0
+ 686 0016 01DB     		blt	.L93
+ 269:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 687              		.loc 1 269 9 view .LVU169
+ 688 0018 0020     		movs	r0, #0
+ 689              	.LVL53:
+ 272:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 690              		.loc 1 272 3 is_stmt 1 view .LVU170
+ 691              	.L85:
+ 273:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 692              		.loc 1 273 1 is_stmt 0 view .LVU171
+ 693 001a 08BD     		pop	{r3, pc}
+ 694              	.L93:
+ 265:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 695              		.loc 1 265 9 view .LVU172
+ 696 001c 6FF00400 		mvn	r0, #4
+ 697 0020 FBE7     		b	.L85
+ 698              	.LVL54:
+ 699              	.L87:
+ 700              		.cfi_def_cfa_offset 0
+ 701              		.cfi_restore 3
+ 702              		.cfi_restore 14
+ 261:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 703              		.loc 1 261 9 view .LVU173
+ 704 0022 6FF00100 		mvn	r0, #1
+ 705              	.LVL55:
+ 273:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 706              		.loc 1 273 1 view .LVU174
+ 707 0026 7047     		bx	lr
+ 708              	.L95:
+ 709              		.align	2
+ 710              	.L94:
+ 711 0028 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 712 002c 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 713              		.cfi_endproc
+ 714              	.LFE141:
+ 716              		.section	.text.VL53L8A1_RANGING_SENSOR_Start,"ax",%progbits
+ 717              		.align	1
+ 718              		.global	VL53L8A1_RANGING_SENSOR_Start
+ 719              		.syntax unified
+ 720              		.thumb
+ 721              		.thumb_func
+ 723              	VL53L8A1_RANGING_SENSOR_Start:
+ 724              	.LVL56:
+ 725              	.LFB142:
+ 282:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 726              		.loc 1 282 1 is_stmt 1 view -0
+ 727              		.cfi_startproc
+ 728              		@ args = 0, pretend = 0, frame = 0
+ 729              		@ frame_needed = 0, uses_anonymous_args = 0
+ 283:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 730              		.loc 1 283 3 view .LVU176
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 25
+
+
+ 285:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 731              		.loc 1 285 3 view .LVU177
+ 285:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 732              		.loc 1 285 6 is_stmt 0 view .LVU178
+ 733 0000 0228     		cmp	r0, #2
+ 734 0002 0ED8     		bhi	.L98
+ 282:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 735              		.loc 1 282 1 view .LVU179
+ 736 0004 08B5     		push	{r3, lr}
+ 737              		.cfi_def_cfa_offset 8
+ 738              		.cfi_offset 3, -8
+ 739              		.cfi_offset 14, -4
+ 289:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 740              		.loc 1 289 8 is_stmt 1 view .LVU180
+ 289:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 741              		.loc 1 289 39 is_stmt 0 view .LVU181
+ 742 0006 084B     		ldr	r3, .L105
+ 743 0008 1B68     		ldr	r3, [r3]
+ 744 000a 1B6A     		ldr	r3, [r3, #32]
+ 289:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 745              		.loc 1 289 12 view .LVU182
+ 746 000c 074A     		ldr	r2, .L105+4
+ 747 000e 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 748              	.LVL57:
+ 289:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 749              		.loc 1 289 12 view .LVU183
+ 750 0012 9847     		blx	r3
+ 751              	.LVL58:
+ 289:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 752              		.loc 1 289 11 view .LVU184
+ 753 0014 0028     		cmp	r0, #0
+ 754 0016 01DB     		blt	.L104
+ 295:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 755              		.loc 1 295 9 view .LVU185
+ 756 0018 0020     		movs	r0, #0
+ 757              	.LVL59:
+ 298:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 758              		.loc 1 298 3 is_stmt 1 view .LVU186
+ 759              	.L96:
+ 299:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 760              		.loc 1 299 1 is_stmt 0 view .LVU187
+ 761 001a 08BD     		pop	{r3, pc}
+ 762              	.L104:
+ 291:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 763              		.loc 1 291 9 view .LVU188
+ 764 001c 6FF00400 		mvn	r0, #4
+ 765 0020 FBE7     		b	.L96
+ 766              	.LVL60:
+ 767              	.L98:
+ 768              		.cfi_def_cfa_offset 0
+ 769              		.cfi_restore 3
+ 770              		.cfi_restore 14
+ 287:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 771              		.loc 1 287 9 view .LVU189
+ 772 0022 6FF00100 		mvn	r0, #1
+ 773              	.LVL61:
+ 299:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 26
+
+
+ 774              		.loc 1 299 1 view .LVU190
+ 775 0026 7047     		bx	lr
+ 776              	.L106:
+ 777              		.align	2
+ 778              	.L105:
+ 779 0028 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 780 002c 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 781              		.cfi_endproc
+ 782              	.LFE142:
+ 784              		.section	.text.VL53L8A1_RANGING_SENSOR_Stop,"ax",%progbits
+ 785              		.align	1
+ 786              		.global	VL53L8A1_RANGING_SENSOR_Stop
+ 787              		.syntax unified
+ 788              		.thumb
+ 789              		.thumb_func
+ 791              	VL53L8A1_RANGING_SENSOR_Stop:
+ 792              	.LVL62:
+ 793              	.LFB143:
+ 307:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 794              		.loc 1 307 1 is_stmt 1 view -0
+ 795              		.cfi_startproc
+ 796              		@ args = 0, pretend = 0, frame = 0
+ 797              		@ frame_needed = 0, uses_anonymous_args = 0
+ 308:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 798              		.loc 1 308 3 view .LVU192
+ 310:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 799              		.loc 1 310 3 view .LVU193
+ 310:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 800              		.loc 1 310 6 is_stmt 0 view .LVU194
+ 801 0000 0228     		cmp	r0, #2
+ 802 0002 0ED8     		bhi	.L109
+ 307:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 803              		.loc 1 307 1 view .LVU195
+ 804 0004 08B5     		push	{r3, lr}
+ 805              		.cfi_def_cfa_offset 8
+ 806              		.cfi_offset 3, -8
+ 807              		.cfi_offset 14, -4
+ 314:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 808              		.loc 1 314 8 is_stmt 1 view .LVU196
+ 314:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 809              		.loc 1 314 39 is_stmt 0 view .LVU197
+ 810 0006 084B     		ldr	r3, .L116
+ 811 0008 1B68     		ldr	r3, [r3]
+ 812 000a 5B6A     		ldr	r3, [r3, #36]
+ 314:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 813              		.loc 1 314 12 view .LVU198
+ 814 000c 074A     		ldr	r2, .L116+4
+ 815 000e 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 816              	.LVL63:
+ 314:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 817              		.loc 1 314 12 view .LVU199
+ 818 0012 9847     		blx	r3
+ 819              	.LVL64:
+ 314:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 820              		.loc 1 314 11 view .LVU200
+ 821 0014 0028     		cmp	r0, #0
+ 822 0016 01DB     		blt	.L115
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 27
+
+
+ 320:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 823              		.loc 1 320 9 view .LVU201
+ 824 0018 0020     		movs	r0, #0
+ 825              	.LVL65:
+ 323:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 826              		.loc 1 323 3 is_stmt 1 view .LVU202
+ 827              	.L107:
+ 324:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 828              		.loc 1 324 1 is_stmt 0 view .LVU203
+ 829 001a 08BD     		pop	{r3, pc}
+ 830              	.L115:
+ 316:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 831              		.loc 1 316 9 view .LVU204
+ 832 001c 6FF00400 		mvn	r0, #4
+ 833 0020 FBE7     		b	.L107
+ 834              	.LVL66:
+ 835              	.L109:
+ 836              		.cfi_def_cfa_offset 0
+ 837              		.cfi_restore 3
+ 838              		.cfi_restore 14
+ 312:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 839              		.loc 1 312 9 view .LVU205
+ 840 0022 6FF00100 		mvn	r0, #1
+ 841              	.LVL67:
+ 324:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 842              		.loc 1 324 1 view .LVU206
+ 843 0026 7047     		bx	lr
+ 844              	.L117:
+ 845              		.align	2
+ 846              	.L116:
+ 847 0028 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 848 002c 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 849              		.cfi_endproc
+ 850              	.LFE143:
+ 852              		.section	.text.VL53L8A1_RANGING_SENSOR_SetAddress,"ax",%progbits
+ 853              		.align	1
+ 854              		.global	VL53L8A1_RANGING_SENSOR_SetAddress
+ 855              		.syntax unified
+ 856              		.thumb
+ 857              		.thumb_func
+ 859              	VL53L8A1_RANGING_SENSOR_SetAddress:
+ 860              	.LVL68:
+ 861              	.LFB144:
+ 333:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 862              		.loc 1 333 1 is_stmt 1 view -0
+ 863              		.cfi_startproc
+ 864              		@ args = 0, pretend = 0, frame = 0
+ 865              		@ frame_needed = 0, uses_anonymous_args = 0
+ 334:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 866              		.loc 1 334 3 view .LVU208
+ 336:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 867              		.loc 1 336 3 view .LVU209
+ 336:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 868              		.loc 1 336 6 is_stmt 0 view .LVU210
+ 869 0000 0228     		cmp	r0, #2
+ 870 0002 0ED8     		bhi	.L120
+ 333:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 28
+
+
+ 871              		.loc 1 333 1 view .LVU211
+ 872 0004 08B5     		push	{r3, lr}
+ 873              		.cfi_def_cfa_offset 8
+ 874              		.cfi_offset 3, -8
+ 875              		.cfi_offset 14, -4
+ 340:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 876              		.loc 1 340 8 is_stmt 1 view .LVU212
+ 340:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 877              		.loc 1 340 39 is_stmt 0 view .LVU213
+ 878 0006 084B     		ldr	r3, .L127
+ 879 0008 1B68     		ldr	r3, [r3]
+ 880 000a 9B6A     		ldr	r3, [r3, #40]
+ 340:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 881              		.loc 1 340 12 view .LVU214
+ 882 000c 074A     		ldr	r2, .L127+4
+ 883 000e 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 884              	.LVL69:
+ 340:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 885              		.loc 1 340 12 view .LVU215
+ 886 0012 9847     		blx	r3
+ 887              	.LVL70:
+ 340:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 888              		.loc 1 340 11 view .LVU216
+ 889 0014 0028     		cmp	r0, #0
+ 890 0016 01DB     		blt	.L126
+ 346:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 891              		.loc 1 346 9 view .LVU217
+ 892 0018 0020     		movs	r0, #0
+ 893              	.LVL71:
+ 349:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 894              		.loc 1 349 3 is_stmt 1 view .LVU218
+ 895              	.L118:
+ 350:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 896              		.loc 1 350 1 is_stmt 0 view .LVU219
+ 897 001a 08BD     		pop	{r3, pc}
+ 898              	.L126:
+ 342:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 899              		.loc 1 342 9 view .LVU220
+ 900 001c 6FF00400 		mvn	r0, #4
+ 901 0020 FBE7     		b	.L118
+ 902              	.LVL72:
+ 903              	.L120:
+ 904              		.cfi_def_cfa_offset 0
+ 905              		.cfi_restore 3
+ 906              		.cfi_restore 14
+ 338:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 907              		.loc 1 338 9 view .LVU221
+ 908 0022 6FF00100 		mvn	r0, #1
+ 909              	.LVL73:
+ 350:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 910              		.loc 1 350 1 view .LVU222
+ 911 0026 7047     		bx	lr
+ 912              	.L128:
+ 913              		.align	2
+ 914              	.L127:
+ 915 0028 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 916 002c 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 29
+
+
+ 917              		.cfi_endproc
+ 918              	.LFE144:
+ 920              		.section	.text.VL53L8A1_RANGING_SENSOR_GetAddress,"ax",%progbits
+ 921              		.align	1
+ 922              		.global	VL53L8A1_RANGING_SENSOR_GetAddress
+ 923              		.syntax unified
+ 924              		.thumb
+ 925              		.thumb_func
+ 927              	VL53L8A1_RANGING_SENSOR_GetAddress:
+ 928              	.LVL74:
+ 929              	.LFB145:
+ 359:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 930              		.loc 1 359 1 is_stmt 1 view -0
+ 931              		.cfi_startproc
+ 932              		@ args = 0, pretend = 0, frame = 0
+ 933              		@ frame_needed = 0, uses_anonymous_args = 0
+ 360:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 934              		.loc 1 360 3 view .LVU224
+ 362:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 935              		.loc 1 362 3 view .LVU225
+ 362:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 936              		.loc 1 362 6 is_stmt 0 view .LVU226
+ 937 0000 0228     		cmp	r0, #2
+ 938 0002 0ED8     		bhi	.L131
+ 359:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 939              		.loc 1 359 1 view .LVU227
+ 940 0004 08B5     		push	{r3, lr}
+ 941              		.cfi_def_cfa_offset 8
+ 942              		.cfi_offset 3, -8
+ 943              		.cfi_offset 14, -4
+ 366:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 944              		.loc 1 366 8 is_stmt 1 view .LVU228
+ 366:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 945              		.loc 1 366 39 is_stmt 0 view .LVU229
+ 946 0006 084B     		ldr	r3, .L138
+ 947 0008 1B68     		ldr	r3, [r3]
+ 948 000a DB6A     		ldr	r3, [r3, #44]
+ 366:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 949              		.loc 1 366 12 view .LVU230
+ 950 000c 074A     		ldr	r2, .L138+4
+ 951 000e 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 952              	.LVL75:
+ 366:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 953              		.loc 1 366 12 view .LVU231
+ 954 0012 9847     		blx	r3
+ 955              	.LVL76:
+ 366:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 956              		.loc 1 366 11 view .LVU232
+ 957 0014 0028     		cmp	r0, #0
+ 958 0016 01DB     		blt	.L137
+ 372:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 959              		.loc 1 372 9 view .LVU233
+ 960 0018 0020     		movs	r0, #0
+ 961              	.LVL77:
+ 375:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 962              		.loc 1 375 3 is_stmt 1 view .LVU234
+ 963              	.L129:
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 30
+
+
+ 376:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 964              		.loc 1 376 1 is_stmt 0 view .LVU235
+ 965 001a 08BD     		pop	{r3, pc}
+ 966              	.L137:
+ 368:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 967              		.loc 1 368 9 view .LVU236
+ 968 001c 6FF00400 		mvn	r0, #4
+ 969 0020 FBE7     		b	.L129
+ 970              	.LVL78:
+ 971              	.L131:
+ 972              		.cfi_def_cfa_offset 0
+ 973              		.cfi_restore 3
+ 974              		.cfi_restore 14
+ 364:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 975              		.loc 1 364 9 view .LVU237
+ 976 0022 6FF00100 		mvn	r0, #1
+ 977              	.LVL79:
+ 376:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 978              		.loc 1 376 1 view .LVU238
+ 979 0026 7047     		bx	lr
+ 980              	.L139:
+ 981              		.align	2
+ 982              	.L138:
+ 983 0028 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 984 002c 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 985              		.cfi_endproc
+ 986              	.LFE145:
+ 988              		.section	.text.VL53L8A1_RANGING_SENSOR_SetPowerMode,"ax",%progbits
+ 989              		.align	1
+ 990              		.global	VL53L8A1_RANGING_SENSOR_SetPowerMode
+ 991              		.syntax unified
+ 992              		.thumb
+ 993              		.thumb_func
+ 995              	VL53L8A1_RANGING_SENSOR_SetPowerMode:
+ 996              	.LVL80:
+ 997              	.LFB146:
+ 385:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 998              		.loc 1 385 1 is_stmt 1 view -0
+ 999              		.cfi_startproc
+ 1000              		@ args = 0, pretend = 0, frame = 0
+ 1001              		@ frame_needed = 0, uses_anonymous_args = 0
+ 386:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 1002              		.loc 1 386 3 view .LVU240
+ 388:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 1003              		.loc 1 388 3 view .LVU241
+ 388:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 1004              		.loc 1 388 6 is_stmt 0 view .LVU242
+ 1005 0000 0228     		cmp	r0, #2
+ 1006 0002 11D8     		bhi	.L142
+ 392:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****            (PowerMode != RANGING_SENSOR_POWERMODE_WAKEUP))
+ 1007              		.loc 1 392 8 is_stmt 1 view .LVU243
+ 392:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****            (PowerMode != RANGING_SENSOR_POWERMODE_WAKEUP))
+ 1008              		.loc 1 392 11 is_stmt 0 view .LVU244
+ 1009 0004 0129     		cmp	r1, #1
+ 1010 0006 12D8     		bhi	.L143
+ 385:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 1011              		.loc 1 385 1 view .LVU245
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 31
+
+
+ 1012 0008 08B5     		push	{r3, lr}
+ 1013              		.cfi_def_cfa_offset 8
+ 1014              		.cfi_offset 3, -8
+ 1015              		.cfi_offset 14, -4
+ 397:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 1016              		.loc 1 397 8 is_stmt 1 view .LVU246
+ 397:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 1017              		.loc 1 397 39 is_stmt 0 view .LVU247
+ 1018 000a 0A4B     		ldr	r3, .L150
+ 1019 000c 1B68     		ldr	r3, [r3]
+ 1020 000e 1B6B     		ldr	r3, [r3, #48]
+ 397:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 1021              		.loc 1 397 12 view .LVU248
+ 1022 0010 C9B2     		uxtb	r1, r1
+ 1023              	.LVL81:
+ 397:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 1024              		.loc 1 397 12 view .LVU249
+ 1025 0012 094A     		ldr	r2, .L150+4
+ 1026 0014 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 1027              	.LVL82:
+ 397:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 1028              		.loc 1 397 12 view .LVU250
+ 1029 0018 9847     		blx	r3
+ 1030              	.LVL83:
+ 397:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 1031              		.loc 1 397 11 view .LVU251
+ 1032 001a 0028     		cmp	r0, #0
+ 1033 001c 01DB     		blt	.L149
+ 403:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 1034              		.loc 1 403 9 view .LVU252
+ 1035 001e 0020     		movs	r0, #0
+ 1036              	.LVL84:
+ 406:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 1037              		.loc 1 406 3 is_stmt 1 view .LVU253
+ 1038              	.L140:
+ 407:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 1039              		.loc 1 407 1 is_stmt 0 view .LVU254
+ 1040 0020 08BD     		pop	{r3, pc}
+ 1041              	.L149:
+ 399:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 1042              		.loc 1 399 9 view .LVU255
+ 1043 0022 6FF00400 		mvn	r0, #4
+ 1044 0026 FBE7     		b	.L140
+ 1045              	.LVL85:
+ 1046              	.L142:
+ 1047              		.cfi_def_cfa_offset 0
+ 1048              		.cfi_restore 3
+ 1049              		.cfi_restore 14
+ 390:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 1050              		.loc 1 390 9 view .LVU256
+ 1051 0028 6FF00100 		mvn	r0, #1
+ 1052              	.LVL86:
+ 390:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 1053              		.loc 1 390 9 view .LVU257
+ 1054 002c 7047     		bx	lr
+ 1055              	.LVL87:
+ 1056              	.L143:
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 32
+
+
+ 395:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 1057              		.loc 1 395 9 view .LVU258
+ 1058 002e 6FF00100 		mvn	r0, #1
+ 1059              	.LVL88:
+ 407:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 1060              		.loc 1 407 1 view .LVU259
+ 1061 0032 7047     		bx	lr
+ 1062              	.L151:
+ 1063              		.align	2
+ 1064              	.L150:
+ 1065 0034 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 1066 0038 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 1067              		.cfi_endproc
+ 1068              	.LFE146:
+ 1070              		.section	.text.VL53L8A1_RANGING_SENSOR_GetPowerMode,"ax",%progbits
+ 1071              		.align	1
+ 1072              		.global	VL53L8A1_RANGING_SENSOR_GetPowerMode
+ 1073              		.syntax unified
+ 1074              		.thumb
+ 1075              		.thumb_func
+ 1077              	VL53L8A1_RANGING_SENSOR_GetPowerMode:
+ 1078              	.LVL89:
+ 1079              	.LFB147:
+ 416:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 1080              		.loc 1 416 1 is_stmt 1 view -0
+ 1081              		.cfi_startproc
+ 1082              		@ args = 0, pretend = 0, frame = 0
+ 1083              		@ frame_needed = 0, uses_anonymous_args = 0
+ 417:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 1084              		.loc 1 417 3 view .LVU261
+ 419:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 1085              		.loc 1 419 3 view .LVU262
+ 419:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 1086              		.loc 1 419 6 is_stmt 0 view .LVU263
+ 1087 0000 0228     		cmp	r0, #2
+ 1088 0002 0ED8     		bhi	.L154
+ 416:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 1089              		.loc 1 416 1 view .LVU264
+ 1090 0004 08B5     		push	{r3, lr}
+ 1091              		.cfi_def_cfa_offset 8
+ 1092              		.cfi_offset 3, -8
+ 1093              		.cfi_offset 14, -4
+ 423:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 1094              		.loc 1 423 8 is_stmt 1 view .LVU265
+ 423:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 1095              		.loc 1 423 39 is_stmt 0 view .LVU266
+ 1096 0006 084B     		ldr	r3, .L161
+ 1097 0008 1B68     		ldr	r3, [r3]
+ 1098 000a 5B6B     		ldr	r3, [r3, #52]
+ 423:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 1099              		.loc 1 423 12 view .LVU267
+ 1100 000c 074A     		ldr	r2, .L161+4
+ 1101 000e 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 1102              	.LVL90:
+ 423:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 1103              		.loc 1 423 12 view .LVU268
+ 1104 0012 9847     		blx	r3
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 33
+
+
+ 1105              	.LVL91:
+ 423:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 1106              		.loc 1 423 11 view .LVU269
+ 1107 0014 0028     		cmp	r0, #0
+ 1108 0016 01DB     		blt	.L160
+ 429:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 1109              		.loc 1 429 9 view .LVU270
+ 1110 0018 0020     		movs	r0, #0
+ 1111              	.LVL92:
+ 432:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 1112              		.loc 1 432 3 is_stmt 1 view .LVU271
+ 1113              	.L152:
+ 433:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 1114              		.loc 1 433 1 is_stmt 0 view .LVU272
+ 1115 001a 08BD     		pop	{r3, pc}
+ 1116              	.L160:
+ 425:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 1117              		.loc 1 425 9 view .LVU273
+ 1118 001c 6FF00400 		mvn	r0, #4
+ 1119 0020 FBE7     		b	.L152
+ 1120              	.LVL93:
+ 1121              	.L154:
+ 1122              		.cfi_def_cfa_offset 0
+ 1123              		.cfi_restore 3
+ 1124              		.cfi_restore 14
+ 421:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 1125              		.loc 1 421 9 view .LVU274
+ 1126 0022 6FF00100 		mvn	r0, #1
+ 1127              	.LVL94:
+ 433:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 1128              		.loc 1 433 1 view .LVU275
+ 1129 0026 7047     		bx	lr
+ 1130              	.L162:
+ 1131              		.align	2
+ 1132              	.L161:
+ 1133 0028 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 1134 002c 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 1135              		.cfi_endproc
+ 1136              	.LFE147:
+ 1138              		.section	.text.VL53L8A1_RANGING_SENSOR_XTalkCalibration,"ax",%progbits
+ 1139              		.align	1
+ 1140              		.global	VL53L8A1_RANGING_SENSOR_XTalkCalibration
+ 1141              		.syntax unified
+ 1142              		.thumb
+ 1143              		.thumb_func
+ 1145              	VL53L8A1_RANGING_SENSOR_XTalkCalibration:
+ 1146              	.LVL95:
+ 1147              	.LFB148:
+ 444:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 1148              		.loc 1 444 1 is_stmt 1 view -0
+ 1149              		.cfi_startproc
+ 1150              		@ args = 0, pretend = 0, frame = 0
+ 1151              		@ frame_needed = 0, uses_anonymous_args = 0
+ 445:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 1152              		.loc 1 445 3 view .LVU277
+ 447:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 1153              		.loc 1 447 3 view .LVU278
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 34
+
+
+ 447:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 1154              		.loc 1 447 6 is_stmt 0 view .LVU279
+ 1155 0000 0228     		cmp	r0, #2
+ 1156 0002 0CD8     		bhi	.L165
+ 444:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   int32_t ret;
+ 1157              		.loc 1 444 1 view .LVU280
+ 1158 0004 08B5     		push	{r3, lr}
+ 1159              		.cfi_def_cfa_offset 8
+ 1160              		.cfi_offset 3, -8
+ 1161              		.cfi_offset 14, -4
+ 451:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 1162              		.loc 1 451 8 is_stmt 1 view .LVU281
+ 451:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 1163              		.loc 1 451 12 is_stmt 0 view .LVU282
+ 1164 0006 074B     		ldr	r3, .L172
+ 1165 0008 53F82000 		ldr	r0, [r3, r0, lsl #2]
+ 1166              	.LVL96:
+ 451:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 1167              		.loc 1 451 12 view .LVU283
+ 1168 000c FFF7FEFF 		bl	VL53L8CX_XTalkCalibration
+ 1169              	.LVL97:
+ 451:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   {
+ 1170              		.loc 1 451 11 view .LVU284
+ 1171 0010 0028     		cmp	r0, #0
+ 1172 0012 01DB     		blt	.L171
+ 457:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 1173              		.loc 1 457 9 view .LVU285
+ 1174 0014 0020     		movs	r0, #0
+ 1175              	.LVL98:
+ 460:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** }
+ 1176              		.loc 1 460 3 is_stmt 1 view .LVU286
+ 1177              	.L163:
+ 461:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 1178              		.loc 1 461 1 is_stmt 0 view .LVU287
+ 1179 0016 08BD     		pop	{r3, pc}
+ 1180              	.L171:
+ 453:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 1181              		.loc 1 453 9 view .LVU288
+ 1182 0018 6FF00400 		mvn	r0, #4
+ 1183 001c FBE7     		b	.L163
+ 1184              	.LVL99:
+ 1185              	.L165:
+ 1186              		.cfi_def_cfa_offset 0
+ 1187              		.cfi_restore 3
+ 1188              		.cfi_restore 14
+ 449:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c ****   }
+ 1189              		.loc 1 449 9 view .LVU289
+ 1190 001e 6FF00100 		mvn	r0, #1
+ 1191              	.LVL100:
+ 461:Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c **** 
+ 1192              		.loc 1 461 1 view .LVU290
+ 1193 0022 7047     		bx	lr
+ 1194              	.L173:
+ 1195              		.align	2
+ 1196              	.L172:
+ 1197 0024 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 1198              		.cfi_endproc
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 35
+
+
+ 1199              	.LFE148:
+ 1201              		.section	.bss.VL53L8CXObj.0,"aw",%nobits
+ 1202              		.align	2
+ 1205              	VL53L8CXObj.0:
+ 1206 0000 00000000 		.space	8352
+ 1206      00000000 
+ 1206      00000000 
+ 1206      00000000 
+ 1206      00000000 
+ 1207              		.section	.bss.VL53L8A1_RANGING_SENSOR_Cap,"aw",%nobits
+ 1208              		.align	2
+ 1211              	VL53L8A1_RANGING_SENSOR_Cap:
+ 1212 0000 00000000 		.space	16
+ 1212      00000000 
+ 1212      00000000 
+ 1212      00000000 
+ 1213              		.section	.bss.VL53L8A1_RANGING_SENSOR_Drv,"aw",%nobits
+ 1214              		.align	2
+ 1217              	VL53L8A1_RANGING_SENSOR_Drv:
+ 1218 0000 00000000 		.space	4
+ 1219              		.global	VL53L8A1_RANGING_SENSOR_CompObj
+ 1220              		.section	.bss.VL53L8A1_RANGING_SENSOR_CompObj,"aw",%nobits
+ 1221              		.align	2
+ 1224              	VL53L8A1_RANGING_SENSOR_CompObj:
+ 1225 0000 00000000 		.space	12
+ 1225      00000000 
+ 1225      00000000 
+ 1226              		.text
+ 1227              	.Letext0:
+ 1228              		.file 2 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 1229              		.file 3 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 1230              		.file 4 "Drivers/BSP/Components/Common/ranging_sensor.h"
+ 1231              		.file 5 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 1232              		.file 6 "Drivers/BSP/Components/vl53l8cx/porting/platform.h"
+ 1233              		.file 7 "Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_api.h"
+ 1234              		.file 8 "Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.h"
+ 1235              		.file 9 "Drivers/BSP/Components/vl53l8cx/vl53l8cx.h"
+ 1236              		.file 10 "Drivers/BSP/53L8A1/53l8a1_ranging_sensor.h"
+ 1237              		.file 11 "Core/Inc/stm32f4xx_nucleo_bus.h"
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 36
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 53l8a1_ranging_sensor.c
+  C:\Temp\ccYwYt0f.s:21     .text.VL53L8CX_Probe:00000000 $t
+  C:\Temp\ccYwYt0f.s:26     .text.VL53L8CX_Probe:00000000 VL53L8CX_Probe
+  C:\Temp\ccYwYt0f.s:166    .text.VL53L8CX_Probe:00000098 $d
+  C:\Temp\ccYwYt0f.s:1205   .bss.VL53L8CXObj.0:00000000 VL53L8CXObj.0
+  C:\Temp\ccYwYt0f.s:1217   .bss.VL53L8A1_RANGING_SENSOR_Drv:00000000 VL53L8A1_RANGING_SENSOR_Drv
+  C:\Temp\ccYwYt0f.s:1224   .bss.VL53L8A1_RANGING_SENSOR_CompObj:00000000 VL53L8A1_RANGING_SENSOR_CompObj
+  C:\Temp\ccYwYt0f.s:1211   .bss.VL53L8A1_RANGING_SENSOR_Cap:00000000 VL53L8A1_RANGING_SENSOR_Cap
+  C:\Temp\ccYwYt0f.s:180    .text.VL53L8A1_RANGING_SENSOR_Init:00000000 $t
+  C:\Temp\ccYwYt0f.s:186    .text.VL53L8A1_RANGING_SENSOR_Init:00000000 VL53L8A1_RANGING_SENSOR_Init
+  C:\Temp\ccYwYt0f.s:224    .text.VL53L8A1_RANGING_SENSOR_DeInit:00000000 $t
+  C:\Temp\ccYwYt0f.s:230    .text.VL53L8A1_RANGING_SENSOR_DeInit:00000000 VL53L8A1_RANGING_SENSOR_DeInit
+  C:\Temp\ccYwYt0f.s:286    .text.VL53L8A1_RANGING_SENSOR_DeInit:00000028 $d
+  C:\Temp\ccYwYt0f.s:292    .text.VL53L8A1_RANGING_SENSOR_ReadID:00000000 $t
+  C:\Temp\ccYwYt0f.s:298    .text.VL53L8A1_RANGING_SENSOR_ReadID:00000000 VL53L8A1_RANGING_SENSOR_ReadID
+  C:\Temp\ccYwYt0f.s:354    .text.VL53L8A1_RANGING_SENSOR_ReadID:00000028 $d
+  C:\Temp\ccYwYt0f.s:360    .text.VL53L8A1_RANGING_SENSOR_GetCapabilities:00000000 $t
+  C:\Temp\ccYwYt0f.s:366    .text.VL53L8A1_RANGING_SENSOR_GetCapabilities:00000000 VL53L8A1_RANGING_SENSOR_GetCapabilities
+  C:\Temp\ccYwYt0f.s:422    .text.VL53L8A1_RANGING_SENSOR_GetCapabilities:00000028 $d
+  C:\Temp\ccYwYt0f.s:428    .text.VL53L8A1_RANGING_SENSOR_ConfigProfile:00000000 $t
+  C:\Temp\ccYwYt0f.s:434    .text.VL53L8A1_RANGING_SENSOR_ConfigProfile:00000000 VL53L8A1_RANGING_SENSOR_ConfigProfile
+  C:\Temp\ccYwYt0f.s:490    .text.VL53L8A1_RANGING_SENSOR_ConfigProfile:00000028 $d
+  C:\Temp\ccYwYt0f.s:496    .text.VL53L8A1_RANGING_SENSOR_ConfigROI:00000000 $t
+  C:\Temp\ccYwYt0f.s:502    .text.VL53L8A1_RANGING_SENSOR_ConfigROI:00000000 VL53L8A1_RANGING_SENSOR_ConfigROI
+  C:\Temp\ccYwYt0f.s:574    .text.VL53L8A1_RANGING_SENSOR_ConfigROI:00000034 $d
+  C:\Temp\ccYwYt0f.s:581    .text.VL53L8A1_RANGING_SENSOR_ConfigIT:00000000 $t
+  C:\Temp\ccYwYt0f.s:587    .text.VL53L8A1_RANGING_SENSOR_ConfigIT:00000000 VL53L8A1_RANGING_SENSOR_ConfigIT
+  C:\Temp\ccYwYt0f.s:643    .text.VL53L8A1_RANGING_SENSOR_ConfigIT:00000028 $d
+  C:\Temp\ccYwYt0f.s:649    .text.VL53L8A1_RANGING_SENSOR_GetDistance:00000000 $t
+  C:\Temp\ccYwYt0f.s:655    .text.VL53L8A1_RANGING_SENSOR_GetDistance:00000000 VL53L8A1_RANGING_SENSOR_GetDistance
+  C:\Temp\ccYwYt0f.s:711    .text.VL53L8A1_RANGING_SENSOR_GetDistance:00000028 $d
+  C:\Temp\ccYwYt0f.s:717    .text.VL53L8A1_RANGING_SENSOR_Start:00000000 $t
+  C:\Temp\ccYwYt0f.s:723    .text.VL53L8A1_RANGING_SENSOR_Start:00000000 VL53L8A1_RANGING_SENSOR_Start
+  C:\Temp\ccYwYt0f.s:779    .text.VL53L8A1_RANGING_SENSOR_Start:00000028 $d
+  C:\Temp\ccYwYt0f.s:785    .text.VL53L8A1_RANGING_SENSOR_Stop:00000000 $t
+  C:\Temp\ccYwYt0f.s:791    .text.VL53L8A1_RANGING_SENSOR_Stop:00000000 VL53L8A1_RANGING_SENSOR_Stop
+  C:\Temp\ccYwYt0f.s:847    .text.VL53L8A1_RANGING_SENSOR_Stop:00000028 $d
+  C:\Temp\ccYwYt0f.s:853    .text.VL53L8A1_RANGING_SENSOR_SetAddress:00000000 $t
+  C:\Temp\ccYwYt0f.s:859    .text.VL53L8A1_RANGING_SENSOR_SetAddress:00000000 VL53L8A1_RANGING_SENSOR_SetAddress
+  C:\Temp\ccYwYt0f.s:915    .text.VL53L8A1_RANGING_SENSOR_SetAddress:00000028 $d
+  C:\Temp\ccYwYt0f.s:921    .text.VL53L8A1_RANGING_SENSOR_GetAddress:00000000 $t
+  C:\Temp\ccYwYt0f.s:927    .text.VL53L8A1_RANGING_SENSOR_GetAddress:00000000 VL53L8A1_RANGING_SENSOR_GetAddress
+  C:\Temp\ccYwYt0f.s:983    .text.VL53L8A1_RANGING_SENSOR_GetAddress:00000028 $d
+  C:\Temp\ccYwYt0f.s:989    .text.VL53L8A1_RANGING_SENSOR_SetPowerMode:00000000 $t
+  C:\Temp\ccYwYt0f.s:995    .text.VL53L8A1_RANGING_SENSOR_SetPowerMode:00000000 VL53L8A1_RANGING_SENSOR_SetPowerMode
+  C:\Temp\ccYwYt0f.s:1065   .text.VL53L8A1_RANGING_SENSOR_SetPowerMode:00000034 $d
+  C:\Temp\ccYwYt0f.s:1071   .text.VL53L8A1_RANGING_SENSOR_GetPowerMode:00000000 $t
+  C:\Temp\ccYwYt0f.s:1077   .text.VL53L8A1_RANGING_SENSOR_GetPowerMode:00000000 VL53L8A1_RANGING_SENSOR_GetPowerMode
+  C:\Temp\ccYwYt0f.s:1133   .text.VL53L8A1_RANGING_SENSOR_GetPowerMode:00000028 $d
+  C:\Temp\ccYwYt0f.s:1139   .text.VL53L8A1_RANGING_SENSOR_XTalkCalibration:00000000 $t
+  C:\Temp\ccYwYt0f.s:1145   .text.VL53L8A1_RANGING_SENSOR_XTalkCalibration:00000000 VL53L8A1_RANGING_SENSOR_XTalkCalibration
+  C:\Temp\ccYwYt0f.s:1197   .text.VL53L8A1_RANGING_SENSOR_XTalkCalibration:00000024 $d
+  C:\Temp\ccYwYt0f.s:1202   .bss.VL53L8CXObj.0:00000000 $d
+  C:\Temp\ccYwYt0f.s:1208   .bss.VL53L8A1_RANGING_SENSOR_Cap:00000000 $d
+  C:\Temp\ccYwYt0f.s:1214   .bss.VL53L8A1_RANGING_SENSOR_Drv:00000000 $d
+  C:\Temp\ccYwYt0f.s:1221   .bss.VL53L8A1_RANGING_SENSOR_CompObj:00000000 $d
+ARM GAS  C:\Temp\ccYwYt0f.s 			page 37
+
+
+
+UNDEFINED SYMBOLS
+VL53L8CX_RegisterBusIO
+VL53L8CX_ReadID
+BSP_I2C1_Init
+BSP_I2C1_DeInit
+BSP_I2C1_WriteReg16
+BSP_I2C1_ReadReg16
+BSP_GetTick
+VL53L8CX_RANGING_SENSOR_Driver
+VL53L8CX_XTalkCalibration

@@ -1,0 +1,742 @@
+ARM GAS  C:\Temp\cc2NtLvd.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"IKS02A1_Simulink.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Core/Src/IKS02A1_Simulink.c"
+  20              		.section	.text.getTemperature,"ax",%progbits
+  21              		.align	1
+  22              		.global	getTemperature
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	getTemperature:
+  28              	.LFB137:
+   1:Core/Src/IKS02A1_Simulink.c **** ///////////////////////////////////////////////////////////
+   2:Core/Src/IKS02A1_Simulink.c **** // Project : STM32 Nucleo + IKS02A1
+   3:Core/Src/IKS02A1_Simulink.c **** // Abbreviation : AP_01
+   4:Core/Src/IKS02A1_Simulink.c **** // Microcontroller: STM32 Nucleo F411RE
+   5:Core/Src/IKS02A1_Simulink.c **** // Made For : Dr. Amir Patel
+   6:Core/Src/IKS02A1_Simulink.c **** // @author: Jesse Jabez Arendse
+   7:Core/Src/IKS02A1_Simulink.c **** // @modified: 24/08/2024
+   8:Core/Src/IKS02A1_Simulink.c **** ///////////////////////////////////////////////////////////
+   9:Core/Src/IKS02A1_Simulink.c **** 
+  10:Core/Src/IKS02A1_Simulink.c **** 
+  11:Core/Src/IKS02A1_Simulink.c **** // Includes ///////////////////////////////////////////////
+  12:Core/Src/IKS02A1_Simulink.c **** #include "iks02a1_motion_sensors.h"
+  13:Core/Src/IKS02A1_Simulink.c **** // #include "stm32f4xx_nucleo.h"
+  14:Core/Src/IKS02A1_Simulink.c **** #include "iks02a1_conf.h"
+  15:Core/Src/IKS02A1_Simulink.c **** #include "main.h"
+  16:Core/Src/IKS02A1_Simulink.c **** 
+  17:Core/Src/IKS02A1_Simulink.c **** #include "stdio.h"
+  18:Core/Src/IKS02A1_Simulink.c **** #include <stdint.h>
+  19:Core/Src/IKS02A1_Simulink.c **** #include <string.h>  // For memcpy
+  20:Core/Src/IKS02A1_Simulink.c **** #include <stdio.h>
+  21:Core/Src/IKS02A1_Simulink.c **** 
+  22:Core/Src/IKS02A1_Simulink.c **** 
+  23:Core/Src/IKS02A1_Simulink.c **** // Project Parent Variables ///////////////////////////////
+  24:Core/Src/IKS02A1_Simulink.c **** 
+  25:Core/Src/IKS02A1_Simulink.c **** 
+  26:Core/Src/IKS02A1_Simulink.c **** // extern UART_HandleTypeDef hcom_uart[1];   // com port
+  27:Core/Src/IKS02A1_Simulink.c **** 
+  28:Core/Src/IKS02A1_Simulink.c **** uint32_t tim2_psc;
+  29:Core/Src/IKS02A1_Simulink.c **** uint32_t tim2_arr;
+  30:Core/Src/IKS02A1_Simulink.c **** 
+ARM GAS  C:\Temp\cc2NtLvd.s 			page 2
+
+
+  31:Core/Src/IKS02A1_Simulink.c **** // Project Specific Variables /////////////////////////////
+  32:Core/Src/IKS02A1_Simulink.c **** 
+  33:Core/Src/IKS02A1_Simulink.c **** #define INSTANCE_ISM330DHCX IKS02A1_ISM330DHCX_0
+  34:Core/Src/IKS02A1_Simulink.c **** #define INSTANCE_IIS2DLPC   IKS02A1_IIS2DLPC_0
+  35:Core/Src/IKS02A1_Simulink.c **** #define INSTANCE_IIS2MDC    IKS02A1_IIS2MDC_0
+  36:Core/Src/IKS02A1_Simulink.c **** 
+  37:Core/Src/IKS02A1_Simulink.c **** extern UART_HandleTypeDef huart2;
+  38:Core/Src/IKS02A1_Simulink.c **** extern IKS02A1_MOTION_SENSOR_Axes_t accel1_axis;
+  39:Core/Src/IKS02A1_Simulink.c **** extern IKS02A1_MOTION_SENSOR_Axes_t gyro_axis;
+  40:Core/Src/IKS02A1_Simulink.c **** extern IKS02A1_MOTION_SENSOR_Axes_t accel2_axis;
+  41:Core/Src/IKS02A1_Simulink.c **** extern IKS02A1_MOTION_SENSOR_Axes_t mag_axis;
+  42:Core/Src/IKS02A1_Simulink.c **** extern int32_t counter;
+  43:Core/Src/IKS02A1_Simulink.c **** 
+  44:Core/Src/IKS02A1_Simulink.c **** // mask options from BSP/Components/<IC_reg.h>
+  45:Core/Src/IKS02A1_Simulink.c **** int32_t accel1_fsr;
+  46:Core/Src/IKS02A1_Simulink.c **** float accel1_odr;
+  47:Core/Src/IKS02A1_Simulink.c **** int32_t gyro_fsr;
+  48:Core/Src/IKS02A1_Simulink.c **** float gyro_odr;
+  49:Core/Src/IKS02A1_Simulink.c **** 
+  50:Core/Src/IKS02A1_Simulink.c **** int32_t accel2_fsr;
+  51:Core/Src/IKS02A1_Simulink.c **** float accel2_odr;
+  52:Core/Src/IKS02A1_Simulink.c **** 
+  53:Core/Src/IKS02A1_Simulink.c **** float mag_odr;
+  54:Core/Src/IKS02A1_Simulink.c **** 
+  55:Core/Src/IKS02A1_Simulink.c **** float fastestODR;
+  56:Core/Src/IKS02A1_Simulink.c **** 
+  57:Core/Src/IKS02A1_Simulink.c **** uint8_t temperature_raw_l;
+  58:Core/Src/IKS02A1_Simulink.c **** uint8_t temperature_raw_h;
+  59:Core/Src/IKS02A1_Simulink.c **** float_t temperature;
+  60:Core/Src/IKS02A1_Simulink.c **** 
+  61:Core/Src/IKS02A1_Simulink.c **** // Functions /////////////////////////////////////////////
+  62:Core/Src/IKS02A1_Simulink.c **** 
+  63:Core/Src/IKS02A1_Simulink.c **** 
+  64:Core/Src/IKS02A1_Simulink.c **** void getTemperature(){
+  29              		.loc 1 64 22 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  34              		.cfi_def_cfa_offset 20
+  35              		.cfi_offset 4, -20
+  36              		.cfi_offset 5, -16
+  37              		.cfi_offset 6, -12
+  38              		.cfi_offset 7, -8
+  39              		.cfi_offset 14, -4
+  40 0002 85B0     		sub	sp, sp, #20
+  41              		.cfi_def_cfa_offset 40
+  65:Core/Src/IKS02A1_Simulink.c ****     HAL_I2C_Mem_Read(&hi2c1 , IIS2DLPC_I2C_ADD_H , IIS2DLPC_OUT_T_L , 1 , &temperature_raw_l , 1 , 
+  42              		.loc 1 65 5 view .LVU1
+  43 0004 114F     		ldr	r7, .L3
+  44 0006 4FF0FF36 		mov	r6, #-1
+  45 000a 0296     		str	r6, [sp, #8]
+  46 000c 0124     		movs	r4, #1
+  47 000e 0194     		str	r4, [sp, #4]
+  48 0010 0F4D     		ldr	r5, .L3+4
+  49 0012 0095     		str	r5, [sp]
+  50 0014 2346     		mov	r3, r4
+ARM GAS  C:\Temp\cc2NtLvd.s 			page 3
+
+
+  51 0016 0D22     		movs	r2, #13
+  52 0018 3321     		movs	r1, #51
+  53 001a 3846     		mov	r0, r7
+  54 001c FFF7FEFF 		bl	HAL_I2C_Mem_Read
+  55              	.LVL0:
+  66:Core/Src/IKS02A1_Simulink.c ****     HAL_I2C_Mem_Read(&hi2c1 , IIS2DLPC_I2C_ADD_H , IIS2DLPC_OUT_T_H , 1 , &temperature_raw_h , 1 , 
+  56              		.loc 1 66 5 view .LVU2
+  57 0020 0296     		str	r6, [sp, #8]
+  58 0022 0194     		str	r4, [sp, #4]
+  59 0024 0B4E     		ldr	r6, .L3+8
+  60 0026 0096     		str	r6, [sp]
+  61 0028 2346     		mov	r3, r4
+  62 002a 0E22     		movs	r2, #14
+  63 002c 3321     		movs	r1, #51
+  64 002e 3846     		mov	r0, r7
+  65 0030 FFF7FEFF 		bl	HAL_I2C_Mem_Read
+  66              	.LVL1:
+  67:Core/Src/IKS02A1_Simulink.c ****     int16_t rawTemp = (int16_t)((temperature_raw_h << 8) | temperature_raw_l); // Combine low and h
+  67              		.loc 1 67 5 view .LVU3
+  68              		.loc 1 67 52 is_stmt 0 view .LVU4
+  69 0034 3378     		ldrb	r3, [r6]	@ zero_extendqisi2
+  70 0036 1B02     		lsls	r3, r3, #8
+  71              		.loc 1 67 23 view .LVU5
+  72 0038 1BB2     		sxth	r3, r3
+  73 003a 2878     		ldrb	r0, [r5]	@ zero_extendqisi2
+  74              	.LVL2:
+  68:Core/Src/IKS02A1_Simulink.c ****     temperature = iis2dlpc_from_lsb_to_celsius(rawTemp);
+  75              		.loc 1 68 5 is_stmt 1 view .LVU6
+  76              		.loc 1 68 19 is_stmt 0 view .LVU7
+  77 003c 1843     		orrs	r0, r0, r3
+  78              	.LVL3:
+  79              		.loc 1 68 19 view .LVU8
+  80 003e FFF7FEFF 		bl	iis2dlpc_from_lsb_to_celsius
+  81              	.LVL4:
+  82              		.loc 1 68 17 view .LVU9
+  83 0042 054B     		ldr	r3, .L3+12
+  84 0044 83ED000A 		vstr.32	s0, [r3]
+  69:Core/Src/IKS02A1_Simulink.c **** }
+  85              		.loc 1 69 1 view .LVU10
+  86 0048 05B0     		add	sp, sp, #20
+  87              		.cfi_def_cfa_offset 20
+  88              		@ sp needed
+  89 004a F0BD     		pop	{r4, r5, r6, r7, pc}
+  90              	.L4:
+  91              		.align	2
+  92              	.L3:
+  93 004c 00000000 		.word	hi2c1
+  94 0050 00000000 		.word	temperature_raw_l
+  95 0054 00000000 		.word	temperature_raw_h
+  96 0058 00000000 		.word	temperature
+  97              		.cfi_endproc
+  98              	.LFE137:
+ 100              		.section	.text.bytesToFloat,"ax",%progbits
+ 101              		.align	1
+ 102              		.global	bytesToFloat
+ 103              		.syntax unified
+ 104              		.thumb
+ARM GAS  C:\Temp\cc2NtLvd.s 			page 4
+
+
+ 105              		.thumb_func
+ 107              	bytesToFloat:
+ 108              	.LVL5:
+ 109              	.LFB138:
+  70:Core/Src/IKS02A1_Simulink.c **** 
+  71:Core/Src/IKS02A1_Simulink.c **** float bytesToFloat(uint8_t byte1 , uint8_t byte2 , uint8_t byte3 , uint8_t byte4) {
+ 110              		.loc 1 71 83 is_stmt 1 view -0
+ 111              		.cfi_startproc
+ 112              		@ args = 0, pretend = 0, frame = 8
+ 113              		@ frame_needed = 0, uses_anonymous_args = 0
+ 114              		@ link register save eliminated.
+ 115              		.loc 1 71 83 is_stmt 0 view .LVU12
+ 116 0000 82B0     		sub	sp, sp, #8
+ 117              		.cfi_def_cfa_offset 8
+  72:Core/Src/IKS02A1_Simulink.c ****     float result;
+ 118              		.loc 1 72 5 is_stmt 1 view .LVU13
+  73:Core/Src/IKS02A1_Simulink.c ****     uint8_t bytes[4] = {byte1,byte2,byte3,byte4};
+ 119              		.loc 1 73 5 view .LVU14
+ 120              		.loc 1 73 13 is_stmt 0 view .LVU15
+ 121 0002 8DF80400 		strb	r0, [sp, #4]
+ 122 0006 8DF80510 		strb	r1, [sp, #5]
+ 123 000a 8DF80620 		strb	r2, [sp, #6]
+ 124 000e 8DF80730 		strb	r3, [sp, #7]
+  74:Core/Src/IKS02A1_Simulink.c **** 
+  75:Core/Src/IKS02A1_Simulink.c ****     // Use memcpy to copy the 4 bytes into a float (this preserves the binary representation)
+  76:Core/Src/IKS02A1_Simulink.c ****     memcpy(&result, bytes, sizeof(float));
+ 125              		.loc 1 76 5 is_stmt 1 view .LVU16
+  77:Core/Src/IKS02A1_Simulink.c **** 
+  78:Core/Src/IKS02A1_Simulink.c ****     return result;
+ 126              		.loc 1 78 5 view .LVU17
+  79:Core/Src/IKS02A1_Simulink.c **** }
+ 127              		.loc 1 79 1 is_stmt 0 view .LVU18
+ 128 0012 9DED010A 		vldr.32	s0, [sp, #4]
+ 129 0016 02B0     		add	sp, sp, #8
+ 130              		.cfi_def_cfa_offset 0
+ 131              		@ sp needed
+ 132 0018 7047     		bx	lr
+ 133              		.cfi_endproc
+ 134              	.LFE138:
+ 136              		.section	.text.bytesToInt32,"ax",%progbits
+ 137              		.align	1
+ 138              		.global	bytesToInt32
+ 139              		.syntax unified
+ 140              		.thumb
+ 141              		.thumb_func
+ 143              	bytesToInt32:
+ 144              	.LVL6:
+ 145              	.LFB139:
+  80:Core/Src/IKS02A1_Simulink.c **** 
+  81:Core/Src/IKS02A1_Simulink.c **** int32_t bytesToInt32(uint8_t byte1 , uint8_t byte2 , uint8_t byte3 , uint8_t byte4)  {
+ 146              		.loc 1 81 86 is_stmt 1 view -0
+ 147              		.cfi_startproc
+ 148              		@ args = 0, pretend = 0, frame = 8
+ 149              		@ frame_needed = 0, uses_anonymous_args = 0
+ 150              		@ link register save eliminated.
+ 151              		.loc 1 81 86 is_stmt 0 view .LVU20
+ 152 0000 82B0     		sub	sp, sp, #8
+ARM GAS  C:\Temp\cc2NtLvd.s 			page 5
+
+
+ 153              		.cfi_def_cfa_offset 8
+  82:Core/Src/IKS02A1_Simulink.c ****     int32_t result;
+ 154              		.loc 1 82 5 is_stmt 1 view .LVU21
+  83:Core/Src/IKS02A1_Simulink.c ****     uint8_t bytes[4] = {byte1,byte2,byte3,byte4};
+ 155              		.loc 1 83 5 view .LVU22
+ 156              		.loc 1 83 13 is_stmt 0 view .LVU23
+ 157 0002 8DF80400 		strb	r0, [sp, #4]
+ 158 0006 8DF80510 		strb	r1, [sp, #5]
+ 159 000a 8DF80620 		strb	r2, [sp, #6]
+ 160 000e 8DF80730 		strb	r3, [sp, #7]
+  84:Core/Src/IKS02A1_Simulink.c **** 
+  85:Core/Src/IKS02A1_Simulink.c ****     // Use memcpy to copy the 4 bytes into a int32_t (this preserves the binary representation)
+  86:Core/Src/IKS02A1_Simulink.c ****     memcpy(&result, bytes, sizeof(int32_t));
+ 161              		.loc 1 86 5 is_stmt 1 view .LVU24
+ 162              	.LVL7:
+  87:Core/Src/IKS02A1_Simulink.c **** 
+  88:Core/Src/IKS02A1_Simulink.c ****     return result;
+ 163              		.loc 1 88 5 view .LVU25
+  89:Core/Src/IKS02A1_Simulink.c **** }
+ 164              		.loc 1 89 1 is_stmt 0 view .LVU26
+ 165 0012 0198     		ldr	r0, [sp, #4]
+ 166              	.LVL8:
+ 167              		.loc 1 89 1 view .LVU27
+ 168 0014 02B0     		add	sp, sp, #8
+ 169              		.cfi_def_cfa_offset 0
+ 170              	.LVL9:
+ 171              		.loc 1 89 1 view .LVU28
+ 172              		@ sp needed
+ 173 0016 7047     		bx	lr
+ 174              		.cfi_endproc
+ 175              	.LFE139:
+ 177              		.section	.text.initIKS02A1,"ax",%progbits
+ 178              		.align	1
+ 179              		.global	initIKS02A1
+ 180              		.syntax unified
+ 181              		.thumb
+ 182              		.thumb_func
+ 184              	initIKS02A1:
+ 185              	.LFB140:
+  90:Core/Src/IKS02A1_Simulink.c **** 
+  91:Core/Src/IKS02A1_Simulink.c **** void initIKS02A1(){
+ 186              		.loc 1 91 19 is_stmt 1 view -0
+ 187              		.cfi_startproc
+ 188              		@ args = 0, pretend = 0, frame = 0
+ 189              		@ frame_needed = 0, uses_anonymous_args = 0
+ 190 0000 08B5     		push	{r3, lr}
+ 191              		.cfi_def_cfa_offset 8
+ 192              		.cfi_offset 3, -8
+ 193              		.cfi_offset 14, -4
+  92:Core/Src/IKS02A1_Simulink.c **** 
+  93:Core/Src/IKS02A1_Simulink.c ****   IKS02A1_MOTION_SENSOR_Init(IKS02A1_ISM330DHCX_0, MOTION_ACCELERO | MOTION_GYRO);
+ 194              		.loc 1 93 3 view .LVU30
+ 195 0002 0321     		movs	r1, #3
+ 196 0004 0020     		movs	r0, #0
+ 197 0006 FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_Init
+ 198              	.LVL10:
+  94:Core/Src/IKS02A1_Simulink.c **** 
+ARM GAS  C:\Temp\cc2NtLvd.s 			page 6
+
+
+  95:Core/Src/IKS02A1_Simulink.c ****   IKS02A1_MOTION_SENSOR_Init(IKS02A1_IIS2DLPC_0, MOTION_ACCELERO);
+ 199              		.loc 1 95 3 view .LVU31
+ 200 000a 0221     		movs	r1, #2
+ 201 000c 0120     		movs	r0, #1
+ 202 000e FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_Init
+ 203              	.LVL11:
+  96:Core/Src/IKS02A1_Simulink.c **** 
+  97:Core/Src/IKS02A1_Simulink.c ****   IKS02A1_MOTION_SENSOR_Init(IKS02A1_IIS2MDC_0, MOTION_MAGNETO);
+ 204              		.loc 1 97 3 view .LVU32
+ 205 0012 0421     		movs	r1, #4
+ 206 0014 0220     		movs	r0, #2
+ 207 0016 FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_Init
+ 208              	.LVL12:
+  98:Core/Src/IKS02A1_Simulink.c ****   
+  99:Core/Src/IKS02A1_Simulink.c **** }
+ 209              		.loc 1 99 1 is_stmt 0 view .LVU33
+ 210 001a 08BD     		pop	{r3, pc}
+ 211              		.cfi_endproc
+ 212              	.LFE140:
+ 214              		.section	.text.getIKS02A1,"ax",%progbits
+ 215              		.align	1
+ 216              		.global	getIKS02A1
+ 217              		.syntax unified
+ 218              		.thumb
+ 219              		.thumb_func
+ 221              	getIKS02A1:
+ 222              	.LFB141:
+ 100:Core/Src/IKS02A1_Simulink.c **** 
+ 101:Core/Src/IKS02A1_Simulink.c **** void getIKS02A1(){
+ 223              		.loc 1 101 18 is_stmt 1 view -0
+ 224              		.cfi_startproc
+ 225              		@ args = 0, pretend = 0, frame = 0
+ 226              		@ frame_needed = 0, uses_anonymous_args = 0
+ 227 0000 08B5     		push	{r3, lr}
+ 228              		.cfi_def_cfa_offset 8
+ 229              		.cfi_offset 3, -8
+ 230              		.cfi_offset 14, -4
+ 231              	.L12:
+ 102:Core/Src/IKS02A1_Simulink.c ****     while (IKS02A1_MOTION_SENSOR_GetAxes(IKS02A1_ISM330DHCX_0, MOTION_ACCELERO , &accel1_axis) != B
+ 232              		.loc 1 102 115 discriminator 1 view .LVU35
+ 233              		.loc 1 102 96 discriminator 1 view .LVU36
+ 234              		.loc 1 102 12 is_stmt 0 discriminator 1 view .LVU37
+ 235 0002 0F4A     		ldr	r2, .L17
+ 236 0004 0221     		movs	r1, #2
+ 237 0006 0020     		movs	r0, #0
+ 238 0008 FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_GetAxes
+ 239              	.LVL13:
+ 240              		.loc 1 102 96 discriminator 1 view .LVU38
+ 241 000c 0028     		cmp	r0, #0
+ 242 000e F8D1     		bne	.L12
+ 243              	.L13:
+ 103:Core/Src/IKS02A1_Simulink.c ****     while (IKS02A1_MOTION_SENSOR_GetAxes(IKS02A1_ISM330DHCX_0, MOTION_GYRO     , &gyro_axis  ) != B
+ 244              		.loc 1 103 115 is_stmt 1 discriminator 1 view .LVU39
+ 245              		.loc 1 103 96 discriminator 1 view .LVU40
+ 246              		.loc 1 103 12 is_stmt 0 discriminator 1 view .LVU41
+ 247 0010 0C4A     		ldr	r2, .L17+4
+ 248 0012 0121     		movs	r1, #1
+ARM GAS  C:\Temp\cc2NtLvd.s 			page 7
+
+
+ 249 0014 0020     		movs	r0, #0
+ 250 0016 FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_GetAxes
+ 251              	.LVL14:
+ 252              		.loc 1 103 96 discriminator 1 view .LVU42
+ 253 001a 0028     		cmp	r0, #0
+ 254 001c F8D1     		bne	.L13
+ 255              	.L14:
+ 104:Core/Src/IKS02A1_Simulink.c ****     while (IKS02A1_MOTION_SENSOR_GetAxes(IKS02A1_IIS2DLPC_0,   MOTION_ACCELERO , &accel2_axis) != B
+ 256              		.loc 1 104 115 is_stmt 1 discriminator 1 view .LVU43
+ 257              		.loc 1 104 96 discriminator 1 view .LVU44
+ 258              		.loc 1 104 12 is_stmt 0 discriminator 1 view .LVU45
+ 259 001e 0A4A     		ldr	r2, .L17+8
+ 260 0020 0221     		movs	r1, #2
+ 261 0022 0120     		movs	r0, #1
+ 262 0024 FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_GetAxes
+ 263              	.LVL15:
+ 264              		.loc 1 104 96 discriminator 1 view .LVU46
+ 265 0028 0028     		cmp	r0, #0
+ 266 002a F8D1     		bne	.L14
+ 267              	.L15:
+ 105:Core/Src/IKS02A1_Simulink.c ****     while (IKS02A1_MOTION_SENSOR_GetAxes(IKS02A1_IIS2MDC_0,    MOTION_MAGNETO  , &mag_axis   ) != B
+ 268              		.loc 1 105 115 is_stmt 1 discriminator 1 view .LVU47
+ 269              		.loc 1 105 96 discriminator 1 view .LVU48
+ 270              		.loc 1 105 12 is_stmt 0 discriminator 1 view .LVU49
+ 271 002c 074A     		ldr	r2, .L17+12
+ 272 002e 0421     		movs	r1, #4
+ 273 0030 0220     		movs	r0, #2
+ 274 0032 FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_GetAxes
+ 275              	.LVL16:
+ 276              		.loc 1 105 96 discriminator 1 view .LVU50
+ 277 0036 0028     		cmp	r0, #0
+ 278 0038 F8D1     		bne	.L15
+ 106:Core/Src/IKS02A1_Simulink.c ****     getTemperature();
+ 279              		.loc 1 106 5 is_stmt 1 view .LVU51
+ 280 003a FFF7FEFF 		bl	getTemperature
+ 281              	.LVL17:
+ 107:Core/Src/IKS02A1_Simulink.c **** }
+ 282              		.loc 1 107 1 is_stmt 0 view .LVU52
+ 283 003e 08BD     		pop	{r3, pc}
+ 284              	.L18:
+ 285              		.align	2
+ 286              	.L17:
+ 287 0040 00000000 		.word	accel1_axis
+ 288 0044 00000000 		.word	gyro_axis
+ 289 0048 00000000 		.word	accel2_axis
+ 290 004c 00000000 		.word	mag_axis
+ 291              		.cfi_endproc
+ 292              	.LFE141:
+ 294              		.section	.text.initial_calibrate,"ax",%progbits
+ 295              		.align	1
+ 296              		.global	initial_calibrate
+ 297              		.syntax unified
+ 298              		.thumb
+ 299              		.thumb_func
+ 301              	initial_calibrate:
+ 302              	.LFB142:
+ 108:Core/Src/IKS02A1_Simulink.c **** 
+ARM GAS  C:\Temp\cc2NtLvd.s 			page 8
+
+
+ 109:Core/Src/IKS02A1_Simulink.c **** void initial_calibrate(){
+ 303              		.loc 1 109 25 is_stmt 1 view -0
+ 304              		.cfi_startproc
+ 305              		@ args = 0, pretend = 0, frame = 0
+ 306              		@ frame_needed = 0, uses_anonymous_args = 0
+ 307 0000 08B5     		push	{r3, lr}
+ 308              		.cfi_def_cfa_offset 8
+ 309              		.cfi_offset 3, -8
+ 310              		.cfi_offset 14, -4
+ 311 0002 2DED028B 		vpush.64	{d8}
+ 312              		.cfi_def_cfa_offset 16
+ 313              		.cfi_offset 80, -16
+ 314              		.cfi_offset 81, -12
+ 110:Core/Src/IKS02A1_Simulink.c ****     // Accel1
+ 111:Core/Src/IKS02A1_Simulink.c ****     // IKS02A1_MOTION_SENSOR_SetFullScale      (INSTANCE_ISM330DHCX,MOTION_ACCELERO,accel1_fsr);
+ 112:Core/Src/IKS02A1_Simulink.c ****     IKS02A1_MOTION_SENSOR_SetOutputDataRate (INSTANCE_ISM330DHCX,MOTION_ACCELERO,208.0f);
+ 315              		.loc 1 112 5 view .LVU54
+ 316 0006 9FED0F8A 		vldr.32	s16, .L21
+ 317 000a B0EE480A 		vmov.f32	s0, s16
+ 318 000e 0221     		movs	r1, #2
+ 319 0010 0020     		movs	r0, #0
+ 320 0012 FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_SetOutputDataRate
+ 321              	.LVL18:
+ 113:Core/Src/IKS02A1_Simulink.c ****     // Gyro1
+ 114:Core/Src/IKS02A1_Simulink.c ****     // IKS02A1_MOTION_SENSOR_SetFullScale      (INSTANCE_ISM330DHCX,MOTION_GYRO,gyro_fsr);
+ 115:Core/Src/IKS02A1_Simulink.c ****     IKS02A1_MOTION_SENSOR_SetOutputDataRate (INSTANCE_ISM330DHCX,MOTION_GYRO,208.0f);
+ 322              		.loc 1 115 5 view .LVU55
+ 323 0016 B0EE480A 		vmov.f32	s0, s16
+ 324 001a 0121     		movs	r1, #1
+ 325 001c 0020     		movs	r0, #0
+ 326 001e FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_SetOutputDataRate
+ 327              	.LVL19:
+ 116:Core/Src/IKS02A1_Simulink.c **** 
+ 117:Core/Src/IKS02A1_Simulink.c ****     // Accel2
+ 118:Core/Src/IKS02A1_Simulink.c ****     // IKS02A1_MOTION_SENSOR_SetFullScale      (INSTANCE_IIS2DLPC,MOTION_ACCELERO,accel2_fsr);
+ 119:Core/Src/IKS02A1_Simulink.c ****     IKS02A1_MOTION_SENSOR_SetOutputDataRate (INSTANCE_IIS2DLPC,MOTION_ACCELERO,accel2_odr);
+ 328              		.loc 1 119 5 view .LVU56
+ 329 0022 094B     		ldr	r3, .L21+4
+ 330 0024 93ED000A 		vldr.32	s0, [r3]
+ 331 0028 0221     		movs	r1, #2
+ 332 002a 0120     		movs	r0, #1
+ 333 002c FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_SetOutputDataRate
+ 334              	.LVL20:
+ 120:Core/Src/IKS02A1_Simulink.c **** 
+ 121:Core/Src/IKS02A1_Simulink.c ****     // Magneto
+ 122:Core/Src/IKS02A1_Simulink.c ****     IKS02A1_MOTION_SENSOR_SetOutputDataRate (INSTANCE_IIS2MDC,MOTION_MAGNETO,mag_odr);
+ 335              		.loc 1 122 5 view .LVU57
+ 336 0030 064B     		ldr	r3, .L21+8
+ 337 0032 93ED000A 		vldr.32	s0, [r3]
+ 338 0036 0421     		movs	r1, #4
+ 339 0038 0220     		movs	r0, #2
+ 340 003a FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_SetOutputDataRate
+ 341              	.LVL21:
+ 123:Core/Src/IKS02A1_Simulink.c **** }
+ 342              		.loc 1 123 1 is_stmt 0 view .LVU58
+ 343 003e BDEC028B 		vldm	sp!, {d8}
+ 344              		.cfi_restore 80
+ARM GAS  C:\Temp\cc2NtLvd.s 			page 9
+
+
+ 345              		.cfi_restore 81
+ 346              		.cfi_def_cfa_offset 8
+ 347 0042 08BD     		pop	{r3, pc}
+ 348              	.L22:
+ 349              		.align	2
+ 350              	.L21:
+ 351 0044 00005043 		.word	1129316352
+ 352 0048 00000000 		.word	accel2_odr
+ 353 004c 00000000 		.word	mag_odr
+ 354              		.cfi_endproc
+ 355              	.LFE142:
+ 357              		.section	.text.calibrate_IKS02A1,"ax",%progbits
+ 358              		.align	1
+ 359              		.global	calibrate_IKS02A1
+ 360              		.syntax unified
+ 361              		.thumb
+ 362              		.thumb_func
+ 364              	calibrate_IKS02A1:
+ 365              	.LFB143:
+ 124:Core/Src/IKS02A1_Simulink.c **** 
+ 125:Core/Src/IKS02A1_Simulink.c **** // functions from BSP/<boards>
+ 126:Core/Src/IKS02A1_Simulink.c **** // parameters from BSP/<boards>
+ 127:Core/Src/IKS02A1_Simulink.c **** void calibrate_IKS02A1(){
+ 366              		.loc 1 127 25 is_stmt 1 view -0
+ 367              		.cfi_startproc
+ 368              		@ args = 0, pretend = 0, frame = 0
+ 369              		@ frame_needed = 0, uses_anonymous_args = 0
+ 370 0000 08B5     		push	{r3, lr}
+ 371              		.cfi_def_cfa_offset 8
+ 372              		.cfi_offset 3, -8
+ 373              		.cfi_offset 14, -4
+ 128:Core/Src/IKS02A1_Simulink.c **** 
+ 129:Core/Src/IKS02A1_Simulink.c ****     // Accel1
+ 130:Core/Src/IKS02A1_Simulink.c ****     IKS02A1_MOTION_SENSOR_SetFullScale      (INSTANCE_ISM330DHCX,MOTION_ACCELERO,accel1_fsr);
+ 374              		.loc 1 130 5 view .LVU60
+ 375 0002 174B     		ldr	r3, .L25
+ 376 0004 1A68     		ldr	r2, [r3]
+ 377 0006 0221     		movs	r1, #2
+ 378 0008 0020     		movs	r0, #0
+ 379 000a FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_SetFullScale
+ 380              	.LVL22:
+ 131:Core/Src/IKS02A1_Simulink.c ****     IKS02A1_MOTION_SENSOR_SetOutputDataRate (INSTANCE_ISM330DHCX,MOTION_ACCELERO,accel1_odr);
+ 381              		.loc 1 131 5 view .LVU61
+ 382 000e 154B     		ldr	r3, .L25+4
+ 383 0010 93ED000A 		vldr.32	s0, [r3]
+ 384 0014 0221     		movs	r1, #2
+ 385 0016 0020     		movs	r0, #0
+ 386 0018 FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_SetOutputDataRate
+ 387              	.LVL23:
+ 132:Core/Src/IKS02A1_Simulink.c ****     // Gyro1
+ 133:Core/Src/IKS02A1_Simulink.c ****     IKS02A1_MOTION_SENSOR_SetFullScale      (INSTANCE_ISM330DHCX,MOTION_GYRO,gyro_fsr);
+ 388              		.loc 1 133 5 view .LVU62
+ 389 001c 124B     		ldr	r3, .L25+8
+ 390 001e 1A68     		ldr	r2, [r3]
+ 391 0020 0121     		movs	r1, #1
+ 392 0022 0020     		movs	r0, #0
+ 393 0024 FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_SetFullScale
+ARM GAS  C:\Temp\cc2NtLvd.s 			page 10
+
+
+ 394              	.LVL24:
+ 134:Core/Src/IKS02A1_Simulink.c ****     IKS02A1_MOTION_SENSOR_SetOutputDataRate (INSTANCE_ISM330DHCX,MOTION_GYRO,gyro_odr);
+ 395              		.loc 1 134 5 view .LVU63
+ 396 0028 104B     		ldr	r3, .L25+12
+ 397 002a 93ED000A 		vldr.32	s0, [r3]
+ 398 002e 0121     		movs	r1, #1
+ 399 0030 0020     		movs	r0, #0
+ 400 0032 FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_SetOutputDataRate
+ 401              	.LVL25:
+ 135:Core/Src/IKS02A1_Simulink.c **** 
+ 136:Core/Src/IKS02A1_Simulink.c ****     // Accel2
+ 137:Core/Src/IKS02A1_Simulink.c ****     IKS02A1_MOTION_SENSOR_SetFullScale      (INSTANCE_IIS2DLPC,MOTION_ACCELERO,accel2_fsr);
+ 402              		.loc 1 137 5 view .LVU64
+ 403 0036 0E4B     		ldr	r3, .L25+16
+ 404 0038 1A68     		ldr	r2, [r3]
+ 405 003a 0221     		movs	r1, #2
+ 406 003c 0120     		movs	r0, #1
+ 407 003e FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_SetFullScale
+ 408              	.LVL26:
+ 138:Core/Src/IKS02A1_Simulink.c ****     IKS02A1_MOTION_SENSOR_SetOutputDataRate (INSTANCE_IIS2DLPC,MOTION_ACCELERO,accel2_odr);
+ 409              		.loc 1 138 5 view .LVU65
+ 410 0042 0C4B     		ldr	r3, .L25+20
+ 411 0044 93ED000A 		vldr.32	s0, [r3]
+ 412 0048 0221     		movs	r1, #2
+ 413 004a 0120     		movs	r0, #1
+ 414 004c FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_SetOutputDataRate
+ 415              	.LVL27:
+ 139:Core/Src/IKS02A1_Simulink.c **** 
+ 140:Core/Src/IKS02A1_Simulink.c ****     // Magneto
+ 141:Core/Src/IKS02A1_Simulink.c ****     IKS02A1_MOTION_SENSOR_SetOutputDataRate (INSTANCE_IIS2MDC,MOTION_MAGNETO,mag_odr);
+ 416              		.loc 1 141 5 view .LVU66
+ 417 0050 094B     		ldr	r3, .L25+24
+ 418 0052 93ED000A 		vldr.32	s0, [r3]
+ 419 0056 0421     		movs	r1, #4
+ 420 0058 0220     		movs	r0, #2
+ 421 005a FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_SetOutputDataRate
+ 422              	.LVL28:
+ 142:Core/Src/IKS02A1_Simulink.c **** 
+ 143:Core/Src/IKS02A1_Simulink.c **** }...
+ 423              		.loc 1 143 1 is_stmt 0 view .LVU67
+ 424 005e 08BD     		pop	{r3, pc}
+ 425              	.L26:
+ 426              		.align	2
+ 427              	.L25:
+ 428 0060 00000000 		.word	accel1_fsr
+ 429 0064 00000000 		.word	accel1_odr
+ 430 0068 00000000 		.word	gyro_fsr
+ 431 006c 00000000 		.word	gyro_odr
+ 432 0070 00000000 		.word	accel2_fsr
+ 433 0074 00000000 		.word	accel2_odr
+ 434 0078 00000000 		.word	mag_odr
+ 435              		.cfi_endproc
+ 436              	.LFE143:
+ 438              		.global	temperature
+ 439              		.section	.bss.temperature,"aw",%nobits
+ 440              		.align	2
+ 443              	temperature:
+ARM GAS  C:\Temp\cc2NtLvd.s 			page 11
+
+
+ 444 0000 00000000 		.space	4
+ 445              		.global	temperature_raw_h
+ 446              		.section	.bss.temperature_raw_h,"aw",%nobits
+ 449              	temperature_raw_h:
+ 450 0000 00       		.space	1
+ 451              		.global	temperature_raw_l
+ 452              		.section	.bss.temperature_raw_l,"aw",%nobits
+ 455              	temperature_raw_l:
+ 456 0000 00       		.space	1
+ 457              		.global	fastestODR
+ 458              		.section	.bss.fastestODR,"aw",%nobits
+ 459              		.align	2
+ 462              	fastestODR:
+ 463 0000 00000000 		.space	4
+ 464              		.global	mag_odr
+ 465              		.section	.bss.mag_odr,"aw",%nobits
+ 466              		.align	2
+ 469              	mag_odr:
+ 470 0000 00000000 		.space	4
+ 471              		.global	accel2_odr
+ 472              		.section	.bss.accel2_odr,"aw",%nobits
+ 473              		.align	2
+ 476              	accel2_odr:
+ 477 0000 00000000 		.space	4
+ 478              		.global	accel2_fsr
+ 479              		.section	.bss.accel2_fsr,"aw",%nobits
+ 480              		.align	2
+ 483              	accel2_fsr:
+ 484 0000 00000000 		.space	4
+ 485              		.global	gyro_odr
+ 486              		.section	.bss.gyro_odr,"aw",%nobits
+ 487              		.align	2
+ 490              	gyro_odr:
+ 491 0000 00000000 		.space	4
+ 492              		.global	gyro_fsr
+ 493              		.section	.bss.gyro_fsr,"aw",%nobits
+ 494              		.align	2
+ 497              	gyro_fsr:
+ 498 0000 00000000 		.space	4
+ 499              		.global	accel1_odr
+ 500              		.section	.bss.accel1_odr,"aw",%nobits
+ 501              		.align	2
+ 504              	accel1_odr:
+ 505 0000 00000000 		.space	4
+ 506              		.global	accel1_fsr
+ 507              		.section	.bss.accel1_fsr,"aw",%nobits
+ 508              		.align	2
+ 511              	accel1_fsr:
+ 512 0000 00000000 		.space	4
+ 513              		.global	tim2_arr
+ 514              		.section	.bss.tim2_arr,"aw",%nobits
+ 515              		.align	2
+ 518              	tim2_arr:
+ 519 0000 00000000 		.space	4
+ 520              		.global	tim2_psc
+ 521              		.section	.bss.tim2_psc,"aw",%nobits
+ 522              		.align	2
+ARM GAS  C:\Temp\cc2NtLvd.s 			page 12
+
+
+ 525              	tim2_psc:
+ 526 0000 00000000 		.space	4
+ 527              		.text
+ 528              	.Letext0:
+ 529              		.file 2 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 530              		.file 3 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 531              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f411xe.h"
+ 532              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 533              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 534              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h"
+ 535              		.file 8 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 536              		.file 9 "Drivers/BSP/IKS02A1/iks02a1_motion_sensors.h"
+ 537              		.file 10 "Core/Inc/stm32f4xx_nucleo_bus.h"
+ 538              		.file 11 "Drivers/BSP/Components/iis2dlpc/iis2dlpc_reg.h"
+ARM GAS  C:\Temp\cc2NtLvd.s 			page 13
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 IKS02A1_Simulink.c
+  C:\Temp\cc2NtLvd.s:21     .text.getTemperature:00000000 $t
+  C:\Temp\cc2NtLvd.s:27     .text.getTemperature:00000000 getTemperature
+  C:\Temp\cc2NtLvd.s:93     .text.getTemperature:0000004c $d
+  C:\Temp\cc2NtLvd.s:455    .bss.temperature_raw_l:00000000 temperature_raw_l
+  C:\Temp\cc2NtLvd.s:449    .bss.temperature_raw_h:00000000 temperature_raw_h
+  C:\Temp\cc2NtLvd.s:443    .bss.temperature:00000000 temperature
+  C:\Temp\cc2NtLvd.s:101    .text.bytesToFloat:00000000 $t
+  C:\Temp\cc2NtLvd.s:107    .text.bytesToFloat:00000000 bytesToFloat
+  C:\Temp\cc2NtLvd.s:137    .text.bytesToInt32:00000000 $t
+  C:\Temp\cc2NtLvd.s:143    .text.bytesToInt32:00000000 bytesToInt32
+  C:\Temp\cc2NtLvd.s:178    .text.initIKS02A1:00000000 $t
+  C:\Temp\cc2NtLvd.s:184    .text.initIKS02A1:00000000 initIKS02A1
+  C:\Temp\cc2NtLvd.s:215    .text.getIKS02A1:00000000 $t
+  C:\Temp\cc2NtLvd.s:221    .text.getIKS02A1:00000000 getIKS02A1
+  C:\Temp\cc2NtLvd.s:287    .text.getIKS02A1:00000040 $d
+  C:\Temp\cc2NtLvd.s:295    .text.initial_calibrate:00000000 $t
+  C:\Temp\cc2NtLvd.s:301    .text.initial_calibrate:00000000 initial_calibrate
+  C:\Temp\cc2NtLvd.s:351    .text.initial_calibrate:00000044 $d
+  C:\Temp\cc2NtLvd.s:476    .bss.accel2_odr:00000000 accel2_odr
+  C:\Temp\cc2NtLvd.s:469    .bss.mag_odr:00000000 mag_odr
+  C:\Temp\cc2NtLvd.s:358    .text.calibrate_IKS02A1:00000000 $t
+  C:\Temp\cc2NtLvd.s:364    .text.calibrate_IKS02A1:00000000 calibrate_IKS02A1
+  C:\Temp\cc2NtLvd.s:428    .text.calibrate_IKS02A1:00000060 $d
+  C:\Temp\cc2NtLvd.s:511    .bss.accel1_fsr:00000000 accel1_fsr
+  C:\Temp\cc2NtLvd.s:504    .bss.accel1_odr:00000000 accel1_odr
+  C:\Temp\cc2NtLvd.s:497    .bss.gyro_fsr:00000000 gyro_fsr
+  C:\Temp\cc2NtLvd.s:490    .bss.gyro_odr:00000000 gyro_odr
+  C:\Temp\cc2NtLvd.s:483    .bss.accel2_fsr:00000000 accel2_fsr
+  C:\Temp\cc2NtLvd.s:440    .bss.temperature:00000000 $d
+  C:\Temp\cc2NtLvd.s:450    .bss.temperature_raw_h:00000000 $d
+  C:\Temp\cc2NtLvd.s:456    .bss.temperature_raw_l:00000000 $d
+  C:\Temp\cc2NtLvd.s:462    .bss.fastestODR:00000000 fastestODR
+  C:\Temp\cc2NtLvd.s:459    .bss.fastestODR:00000000 $d
+  C:\Temp\cc2NtLvd.s:466    .bss.mag_odr:00000000 $d
+  C:\Temp\cc2NtLvd.s:473    .bss.accel2_odr:00000000 $d
+  C:\Temp\cc2NtLvd.s:480    .bss.accel2_fsr:00000000 $d
+  C:\Temp\cc2NtLvd.s:487    .bss.gyro_odr:00000000 $d
+  C:\Temp\cc2NtLvd.s:494    .bss.gyro_fsr:00000000 $d
+  C:\Temp\cc2NtLvd.s:501    .bss.accel1_odr:00000000 $d
+  C:\Temp\cc2NtLvd.s:508    .bss.accel1_fsr:00000000 $d
+  C:\Temp\cc2NtLvd.s:518    .bss.tim2_arr:00000000 tim2_arr
+  C:\Temp\cc2NtLvd.s:515    .bss.tim2_arr:00000000 $d
+  C:\Temp\cc2NtLvd.s:525    .bss.tim2_psc:00000000 tim2_psc
+  C:\Temp\cc2NtLvd.s:522    .bss.tim2_psc:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_I2C_Mem_Read
+iis2dlpc_from_lsb_to_celsius
+hi2c1
+IKS02A1_MOTION_SENSOR_Init
+IKS02A1_MOTION_SENSOR_GetAxes
+accel1_axis
+gyro_axis
+accel2_axis
+mag_axis
+ARM GAS  C:\Temp\cc2NtLvd.s 			page 14
+
+
+IKS02A1_MOTION_SENSOR_SetOutputDataRate
+IKS02A1_MOTION_SENSOR_SetFullScale
