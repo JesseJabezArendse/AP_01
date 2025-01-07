@@ -1,13 +1,3 @@
-function auto_program(filename)
-    if ispc
-        auto_program_win(filename)
-    end
-    if isunix
-        auto_program_win(filename)
-    end
-
-end
-
 function auto_program_win(filename)
     drives = getdrives('-nofloppy');
     for i = size(drives)
@@ -27,6 +17,7 @@ function auto_program_win(filename)
     error("No STM32 Nucleo F411RE Found")
     clearvars -except STLINK_COMPORT STLINK_DRIVE STM32_ODR
 end
+
 
 function drive_name = DriveName( drive_letter ) 
     cmd_str = sprintf( 'vol %s:', drive_letter );
