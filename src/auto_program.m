@@ -31,7 +31,7 @@ function auto_program_linux(filename)
 end
 
 function auto_program_mac(filename)
-    drives = getdrives('-nofloppy');
+    drives = getdrives('-nofloppy')
     for i = size(drives)
         drive_letter = drives{i};
         drive_name = DriveName(drive_letter(1));
