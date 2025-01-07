@@ -32,7 +32,11 @@ or download the repo as a .zip
 ### For Windows:
    It's plug and play :)
 
-### For Linux and Mac: (plug and play funtionality pending)
+### For Linux 
+   It's plug and play, hopefully (limited USB device access with a Virtual Machine, apologies)
+   If not you'll be prompted to choose the COM Port for the Nucleo Board - one of the /dev/ttyACM's (you probably want to check which one appears when you plug it in)
+   
+### For Mac: (plug and play funtionality pending)
    - Copy the .bin file of the model you are wanting to run into the F411 mass storage drive
    - Create a variable called STLINK_COMPORT that is the string of the comport of the Nucleo Board
    - Run the model
