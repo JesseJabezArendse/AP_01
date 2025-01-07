@@ -3,51 +3,9 @@ function auto_program(filename)
         auto_program_win(filename)
     end
     if isunix
-        auto_program_linux(filename)
+        auto_program_win(filename)
     end
-    if ismac
-        auto_program_mac(filename)
-    end
-end
 
-function auto_program_linux(filename)
-    drives = getdrives('-nofloppy');
-    for i = size(drives)
-        drive_letter = drives{i};
-        drive_name = DriveName(drive_letter(1));
-        if drive_name(end-5:end) == 'F411RE' % found the STM Drag and Drop Programming
-            STLINK_DRIVE = upper(drive_letter);
-            disp("Found STM32 Drive")
-            copyfile('binaries/'+filename+'.bin' , upper(drive_letter));
-            pause(3);
-            disp("STM32 Programmed")
-            STM32_ODR = 200;
-            return 
-        end 
-        
-    end
-    error("No STM32 Nucleo F411RE Found")
-    clearvars -except STLINK_COMPORT STLINK_DRIVE STM32_ODR
-end
-
-function auto_program_mac(filename)
-    drives = getdrives('-nofloppy');
-    for i = size(drives)
-        drive_letter = drives{i};
-        drive_name = DriveName(drive_letter(1));
-        if drive_name(end-5:end) == 'F411RE' % found the STM Drag and Drop Programming
-            STLINK_DRIVE = upper(drive_letter);
-            disp("Found STM32 Drive")
-            copyfile('binaries/'+filename+'.bin' , upper(drive_letter));
-            pause(3);
-            disp("STM32 Programmed")
-            STM32_ODR = 200;
-            return 
-        end 
-        
-    end
-    error("No STM32 Nucleo F411RE Found")
-    clearvars -except STLINK_COMPORT STLINK_DRIVE STM32_ODR
 end
 
 function auto_program_win(filename)
