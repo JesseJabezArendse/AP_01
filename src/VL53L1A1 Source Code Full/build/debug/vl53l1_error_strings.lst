@@ -1,0 +1,1412 @@
+ARM GAS  C:\Temp\cczzE9g4.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"vl53l1_error_strings.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c"
+  20              		.section	.rodata.VL53L1_get_pal_error_string.str1.4,"aMS",%progbits,1
+  21              		.align	2
+  22              	.LC0:
+  23 0000 4E6F2045 		.ascii	"No Error\000"
+  23      72726F72 
+  23      00
+  24 0009 000000   		.align	2
+  25              	.LC1:
+  26 000c 43616C69 		.ascii	"Calibration Warning Error\000"
+  26      62726174 
+  26      696F6E20 
+  26      5761726E 
+  26      696E6720 
+  27 0026 0000     		.align	2
+  28              	.LC2:
+  29 0028 4D696E20 		.ascii	"Min clipped error\000"
+  29      636C6970 
+  29      70656420 
+  29      6572726F 
+  29      7200
+  30 003a 0000     		.align	2
+  31              	.LC3:
+  32 003c 556E6465 		.ascii	"Undefined error\000"
+  32      66696E65 
+  32      64206572 
+  32      726F7200 
+  33              		.align	2
+  34              	.LC4:
+  35 004c 496E7661 		.ascii	"Invalid parameters error\000"
+  35      6C696420 
+  35      70617261 
+  35      6D657465 
+  35      72732065 
+  36 0065 000000   		.align	2
+  37              	.LC5:
+  38 0068 4E6F7420 		.ascii	"Not supported error\000"
+  38      73757070 
+  38      6F727465 
+ARM GAS  C:\Temp\cczzE9g4.s 			page 2
+
+
+  38      64206572 
+  38      726F7200 
+  39              		.align	2
+  40              	.LC6:
+  41 007c 52616E67 		.ascii	"Range error\000"
+  41      65206572 
+  41      726F7200 
+  42              		.align	2
+  43              	.LC7:
+  44 0088 54696D65 		.ascii	"Time out error\000"
+  44      206F7574 
+  44      20657272 
+  44      6F7200
+  45 0097 00       		.align	2
+  46              	.LC8:
+  47 0098 4D6F6465 		.ascii	"Mode not supported error\000"
+  47      206E6F74 
+  47      20737570 
+  47      706F7274 
+  47      65642065 
+  48 00b1 000000   		.align	2
+  49              	.LC9:
+  50 00b4 42756666 		.ascii	"Buffer too small\000"
+  50      65722074 
+  50      6F6F2073 
+  50      6D616C6C 
+  50      00
+  51 00c5 000000   		.align	2
+  52              	.LC10:
+  53 00c8 436F6D6D 		.ascii	"Comms Buffer too small\000"
+  53      73204275 
+  53      66666572 
+  53      20746F6F 
+  53      20736D61 
+  54 00df 00       		.align	2
+  55              	.LC11:
+  56 00e0 4750494F 		.ascii	"GPIO not existing\000"
+  56      206E6F74 
+  56      20657869 
+  56      7374696E 
+  56      6700
+  57 00f2 0000     		.align	2
+  58              	.LC12:
+  59 00f4 4750494F 		.ascii	"GPIO funct not supported\000"
+  59      2066756E 
+  59      6374206E 
+  59      6F742073 
+  59      7570706F 
+  60 010d 000000   		.align	2
+  61              	.LC13:
+  62 0110 436F6E74 		.ascii	"Control Interface Error\000"
+  62      726F6C20 
+  62      496E7465 
+  62      72666163 
+  62      65204572 
+  63              		.align	2
+  64              	.LC14:
+ARM GAS  C:\Temp\cczzE9g4.s 			page 3
+
+
+  65 0128 496E7661 		.ascii	"Invalid Command Error\000"
+  65      6C696420 
+  65      436F6D6D 
+  65      616E6420 
+  65      4572726F 
+  66 013e 0000     		.align	2
+  67              	.LC15:
+  68 0140 44697669 		.ascii	"Division by zero Error\000"
+  68      73696F6E 
+  68      20627920 
+  68      7A65726F 
+  68      20457272 
+  69 0157 00       		.align	2
+  70              	.LC16:
+  71 0158 52656665 		.ascii	"Reference Spad Init Error\000"
+  71      72656E63 
+  71      65205370 
+  71      61642049 
+  71      6E697420 
+  72 0172 0000     		.align	2
+  73              	.LC17:
+  74 0174 47504820 		.ascii	"GPH Sync Check Fail - API out of sync\000"
+  74      53796E63 
+  74      20436865 
+  74      636B2046 
+  74      61696C20 
+  75 019a 0000     		.align	2
+  76              	.LC18:
+  77 019c 53747265 		.ascii	"Stream Count Check Fail - API out of sync\000"
+  77      616D2043 
+  77      6F756E74 
+  77      20436865 
+  77      636B2046 
+  78 01c6 0000     		.align	2
+  79              	.LC19:
+  80 01c8 47504820 		.ascii	"GPH ID Check Fail - API out of sync\000"
+  80      49442043 
+  80      6865636B 
+  80      20466169 
+  80      6C202D20 
+  81              		.align	2
+  82              	.LC20:
+  83 01ec 5A6F6E65 		.ascii	"Zone Stream Count Check Fail - API out of sync\000"
+  83      20537472 
+  83      65616D20 
+  83      436F756E 
+  83      74204368 
+  84 021b 00       		.align	2
+  85              	.LC21:
+  86 021c 5A6F6E65 		.ascii	"Zone GPH ID Check Fail - API out of sync\000"
+  86      20475048 
+  86      20494420 
+  86      43686563 
+  86      6B204661 
+  87 0245 000000   		.align	2
+  88              	.LC22:
+  89 0248 4E6F2058 		.ascii	"No Xtalk using full array - Xtalk Extract Fail\000"
+ARM GAS  C:\Temp\cczzE9g4.s 			page 4
+
+
+  89      74616C6B 
+  89      20757369 
+  89      6E672066 
+  89      756C6C20 
+  90 0277 00       		.align	2
+  91              	.LC23:
+  92 0278 5874616C 		.ascii	"Xtalk does not meet required VL53L1_p_011 limit - X"
+  92      6B20646F 
+  92      6573206E 
+  92      6F74206D 
+  92      65657420 
+  93 02ab 74616C6B 		.ascii	"talk Extract Fail\000"
+  93      20457874 
+  93      72616374 
+  93      20466169 
+  93      6C00
+  94 02bd 000000   		.align	2
+  95              	.LC24:
+  96 02c0 4F666673 		.ascii	"Offset Cal - one of more stages with no valid sampl"
+  96      65742043 
+  96      616C202D 
+  96      206F6E65 
+  96      206F6620 
+  97 02f3 6573202D 		.ascii	"es - fatal\000"
+  97      20666174 
+  97      616C00
+  98 02fe 0000     		.align	2
+  99              	.LC25:
+ 100 0300 4F666673 		.ascii	"Offset Cal - one of more stages with no SPADS enabl"
+ 100      65742043 
+ 100      616C202D 
+ 100      206F6E65 
+ 100      206F6620 
+ 101 0333 6573202D 		.ascii	"es - fatal\000"
+ 101      20666174 
+ 101      616C00
+ 102 033e 0000     		.align	2
+ 103              	.LC26:
+ 104 0340 5A6F6E65 		.ascii	"Zone Cal - one of more zones with no valid samples "
+ 104      2043616C 
+ 104      202D206F 
+ 104      6E65206F 
+ 104      66206D6F 
+ 105 0373 2D206661 		.ascii	"- fatal\000"
+ 105      74616C00 
+ 106 037b 00       		.align	2
+ 107              	.LC27:
+ 108 037c 4F666673 		.ascii	"Offset Cal - Less than the requested number of vali"
+ 108      65742043 
+ 108      616C202D 
+ 108      204C6573 
+ 108      73207468 
+ 109 03af 64207361 		.ascii	"d samples\000"
+ 109      6D706C65 
+ 109      7300
+ 110 03b9 000000   		.align	2
+ 111              	.LC28:
+ARM GAS  C:\Temp\cczzE9g4.s 			page 5
+
+
+ 112 03bc 4F666673 		.ascii	"Offset Cal - Sigma estimate value too high - offset"
+ 112      65742043 
+ 112      616C202D 
+ 112      20536967 
+ 112      6D612065 
+ 113 03ef 206E6F74 		.ascii	" not stable\000"
+ 113      20737461 
+ 113      626C6500 
+ 114 03fb 00       		.align	2
+ 115              	.LC29:
+ 116 03fc 4F666673 		.ascii	"Offset Cal - Rate too high - in pile up\000"
+ 116      65742043 
+ 116      616C202D 
+ 116      20526174 
+ 116      6520746F 
+ 117              		.align	2
+ 118              	.LC30:
+ 119 0424 4F666673 		.ascii	"Offset Cal - Insufficient SPADs - offset may not be"
+ 119      65742043 
+ 119      616C202D 
+ 119      20496E73 
+ 119      75666669 
+ 120 0457 20737461 		.ascii	" stable\000"
+ 120      626C6500 
+ 121 045f 00       		.align	2
+ 122              	.LC31:
+ 123 0460 5A6F6E65 		.ascii	"Zone Cal - One or more zone with less than requeste"
+ 123      2043616C 
+ 123      202D204F 
+ 123      6E65206F 
+ 123      72206D6F 
+ 124 0493 64207661 		.ascii	"d valid samples\000"
+ 124      6C696420 
+ 124      73616D70 
+ 124      6C657300 
+ 125 04a3 00       		.align	2
+ 126              	.LC32:
+ 127 04a4 5A6F6E65 		.ascii	"Zone Cal - One of more zones the VL53L1_p_011 estim"
+ 127      2043616C 
+ 127      202D204F 
+ 127      6E65206F 
+ 127      66206D6F 
+ 128 04d7 61746520 		.ascii	"ate too high\000"
+ 128      746F6F20 
+ 128      68696768 
+ 128      00
+ 129              		.align	2
+ 130              	.LC33:
+ 131 04e4 5A6F6E65 		.ascii	"Zone Cal - One of more zones with rate too high - i"
+ 131      2043616C 
+ 131      202D204F 
+ 131      6E65206F 
+ 131      66206D6F 
+ 132 0517 6E207069 		.ascii	"n pile up\000"
+ 132      6C652075 
+ 132      7000
+ 133 0521 000000   		.align	2
+ARM GAS  C:\Temp\cczzE9g4.s 			page 6
+
+
+ 134              	.LC34:
+ 135 0524 52656620 		.ascii	"Ref SPAD Char - Not Enough Good SPADs\000"
+ 135      53504144 
+ 135      20436861 
+ 135      72202D20 
+ 135      4E6F7420 
+ 136 054a 0000     		.align	2
+ 137              	.LC35:
+ 138 054c 52656620 		.ascii	"Ref SPAD Char - Final Ref Rate too high\000"
+ 138      53504144 
+ 138      20436861 
+ 138      72202D20 
+ 138      46696E61 
+ 139              		.align	2
+ 140              	.LC36:
+ 141 0574 52656620 		.ascii	"Ref SPAD Char - Final Ref Rate too low\000"
+ 141      53504144 
+ 141      20436861 
+ 141      72202D20 
+ 141      46696E61 
+ 142 059b 00       		.align	2
+ 143              	.LC37:
+ 144 059c 5874616C 		.ascii	"Xtalk - Some missing and invalid samples\000"
+ 144      6B202D20 
+ 144      536F6D65 
+ 144      206D6973 
+ 144      73696E67 
+ 145 05c5 000000   		.align	2
+ 146              	.LC38:
+ 147 05c8 5874616C 		.ascii	"Xtalk - Gradient sample num = 0\000"
+ 147      6B202D20 
+ 147      47726164 
+ 147      69656E74 
+ 147      2073616D 
+ 148              		.align	2
+ 149              	.LC39:
+ 150 05e8 5874616C 		.ascii	"Xtalk - Gradient Sigma > Limit\000"
+ 150      6B202D20 
+ 150      47726164 
+ 150      69656E74 
+ 150      20536967 
+ 151 0607 00       		.align	2
+ 152              	.LC40:
+ 153 0608 44657669 		.ascii	"Device Firmware too old\000"
+ 153      63652046 
+ 153      69726D77 
+ 153      61726520 
+ 153      746F6F20 
+ 154              		.align	2
+ 155              	.LC41:
+ 156 0620 44657669 		.ascii	"Device Firmware too new\000"
+ 156      63652046 
+ 156      69726D77 
+ 156      61726520 
+ 156      746F6F20 
+ 157              		.align	2
+ 158              	.LC42:
+ARM GAS  C:\Temp\cczzE9g4.s 			page 7
+
+
+ 159 0638 556E6974 		.ascii	"Unit Test Fail\000"
+ 159      20546573 
+ 159      74204661 
+ 159      696C00
+ 160 0647 00       		.align	2
+ 161              	.LC43:
+ 162 0648 46696C65 		.ascii	"File Read Fail\000"
+ 162      20526561 
+ 162      64204661 
+ 162      696C00
+ 163 0657 00       		.align	2
+ 164              	.LC44:
+ 165 0658 46696C65 		.ascii	"File Write Fail\000"
+ 165      20577269 
+ 165      74652046 
+ 165      61696C00 
+ 166              		.align	2
+ 167              	.LC45:
+ 168 0668 4E6F7420 		.ascii	"Not implemented error\000"
+ 168      696D706C 
+ 168      656D656E 
+ 168      74656420 
+ 168      6572726F 
+ 169 067e 0000     		.align	2
+ 170              	.LC46:
+ 171 0680 556E6B6E 		.ascii	"Unknown Error Code\000"
+ 171      6F776E20 
+ 171      4572726F 
+ 171      7220436F 
+ 171      646500
+ 172              		.section	.text.VL53L1_get_pal_error_string,"ax",%progbits
+ 173              		.align	1
+ 174              		.global	VL53L1_get_pal_error_string
+ 175              		.syntax unified
+ 176              		.thumb
+ 177              		.thumb_func
+ 179              	VL53L1_get_pal_error_string:
+ 180              	.LVL0:
+ 181              	.LFB3:
+   1:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** /**
+   2:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c ****  ******************************************************************************
+   3:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c ****  * Copyright (c) 2020, STMicroelectronics - All Rights Reserved
+   4:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c ****  *
+   5:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c ****  * This software is licensed under terms that can be found in the LICENSE file
+   6:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c ****  * in the root directory of this software component.
+   7:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c ****  * If no LICENSE file comes with this software, it is provided AS-IS.
+   8:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c ****  *
+   9:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c ****  ******************************************************************************
+  10:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c ****  */
+  11:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+  12:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+  13:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+  14:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+  15:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** #include "vl53l1_error_codes.h"
+  16:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** #include "vl53l1_error_strings.h"
+  17:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** #include "vl53l1_platform_log.h"
+  18:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** #include "vl53l1_ll_def.h"
+ARM GAS  C:\Temp\cczzE9g4.s 			page 8
+
+
+  19:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+  20:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** #define LOG_FUNCTION_START(fmt, ...) \
+  21:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	_LOG_FUNCTION_START(VL53L1_TRACE_MODULE_API, fmt, ##__VA_ARGS__)
+  22:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** #define LOG_FUNCTION_END(status, ...) \
+  23:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	_LOG_FUNCTION_END(VL53L1_TRACE_MODULE_API, status, ##__VA_ARGS__)
+  24:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** #define LOG_FUNCTION_END_FMT(status, fmt, ...) \
+  25:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	_LOG_FUNCTION_END_FMT(VL53L1_TRACE_MODULE_API, \
+  26:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		status, fmt, ##__VA_ARGS__)
+  27:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+  28:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+  29:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** VL53L1_Error VL53L1_get_pal_error_string(
+  30:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	VL53L1_Error   PalErrorCode,
+  31:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	char          *pPalErrorString)
+  32:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** {
+ 182              		.loc 1 32 1 view -0
+ 183              		.cfi_startproc
+ 184              		@ args = 0, pretend = 0, frame = 0
+ 185              		@ frame_needed = 0, uses_anonymous_args = 0
+ 186              		.loc 1 32 1 is_stmt 0 view .LVU1
+ 187 0000 08B5     		push	{r3, lr}
+ 188              		.cfi_def_cfa_offset 8
+ 189              		.cfi_offset 3, -8
+ 190              		.cfi_offset 14, -4
+ 191 0002 0346     		mov	r3, r0
+ 192 0004 0846     		mov	r0, r1
+ 193              	.LVL1:
+  33:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	VL53L1_Error Status = VL53L1_ERROR_NONE;
+ 194              		.loc 1 33 2 is_stmt 1 view .LVU2
+  34:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+  35:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** #ifdef VL53L1_USE_EMPTY_STRING
+  36:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	SUPPRESS_UNUSED_WARNING(PalErrorCode);
+  37:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** #endif
+  38:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+  39:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	LOG_FUNCTION_START("");
+ 195              		.loc 1 39 24 view .LVU3
+  40:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+  41:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** #ifdef VL53L1_USE_EMPTY_STRING
+  42:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	VL53L1_COPYSTRING(pPalErrorString, "");
+  43:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** #else
+  44:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+  45:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	switch (PalErrorCode) {
+ 196              		.loc 1 45 2 view .LVU4
+ 197 0006 6033     		adds	r3, r3, #96
+ 198 0008 602B     		cmp	r3, #96
+ 199 000a 00F27881 		bhi	.L2
+ 200 000e DFE813F0 		tbh	[pc, r3, lsl #1]
+ 201              	.L4:
+ 202 0012 6A01     		.2byte	(.L49-.L4)/2
+ 203 0014 6401     		.2byte	(.L48-.L4)/2
+ 204 0016 7601     		.2byte	(.L2-.L4)/2
+ 205 0018 7601     		.2byte	(.L2-.L4)/2
+ 206 001a 7601     		.2byte	(.L2-.L4)/2
+ 207 001c 7601     		.2byte	(.L2-.L4)/2
+ 208 001e 5E01     		.2byte	(.L47-.L4)/2
+ 209 0020 7601     		.2byte	(.L2-.L4)/2
+ 210 0022 7601     		.2byte	(.L2-.L4)/2
+ 211 0024 7601     		.2byte	(.L2-.L4)/2
+ARM GAS  C:\Temp\cczzE9g4.s 			page 9
+
+
+ 212 0026 7601     		.2byte	(.L2-.L4)/2
+ 213 0028 5801     		.2byte	(.L46-.L4)/2
+ 214 002a 7601     		.2byte	(.L2-.L4)/2
+ 215 002c 7601     		.2byte	(.L2-.L4)/2
+ 216 002e 7601     		.2byte	(.L2-.L4)/2
+ 217 0030 7601     		.2byte	(.L2-.L4)/2
+ 218 0032 5201     		.2byte	(.L45-.L4)/2
+ 219 0034 7601     		.2byte	(.L2-.L4)/2
+ 220 0036 7601     		.2byte	(.L2-.L4)/2
+ 221 0038 7601     		.2byte	(.L2-.L4)/2
+ 222 003a 7601     		.2byte	(.L2-.L4)/2
+ 223 003c 7601     		.2byte	(.L2-.L4)/2
+ 224 003e 7601     		.2byte	(.L2-.L4)/2
+ 225 0040 7601     		.2byte	(.L2-.L4)/2
+ 226 0042 7601     		.2byte	(.L2-.L4)/2
+ 227 0044 7601     		.2byte	(.L2-.L4)/2
+ 228 0046 7601     		.2byte	(.L2-.L4)/2
+ 229 0048 7601     		.2byte	(.L2-.L4)/2
+ 230 004a 7601     		.2byte	(.L2-.L4)/2
+ 231 004c 7601     		.2byte	(.L2-.L4)/2
+ 232 004e 7601     		.2byte	(.L2-.L4)/2
+ 233 0050 7601     		.2byte	(.L2-.L4)/2
+ 234 0052 7601     		.2byte	(.L2-.L4)/2
+ 235 0054 7601     		.2byte	(.L2-.L4)/2
+ 236 0056 7601     		.2byte	(.L2-.L4)/2
+ 237 0058 7601     		.2byte	(.L2-.L4)/2
+ 238 005a 7601     		.2byte	(.L2-.L4)/2
+ 239 005c 7601     		.2byte	(.L2-.L4)/2
+ 240 005e 7601     		.2byte	(.L2-.L4)/2
+ 241 0060 7601     		.2byte	(.L2-.L4)/2
+ 242 0062 7601     		.2byte	(.L2-.L4)/2
+ 243 0064 7601     		.2byte	(.L2-.L4)/2
+ 244 0066 7601     		.2byte	(.L2-.L4)/2
+ 245 0068 7601     		.2byte	(.L2-.L4)/2
+ 246 006a 7601     		.2byte	(.L2-.L4)/2
+ 247 006c 7601     		.2byte	(.L2-.L4)/2
+ 248 006e 7601     		.2byte	(.L2-.L4)/2
+ 249 0070 7601     		.2byte	(.L2-.L4)/2
+ 250 0072 7601     		.2byte	(.L2-.L4)/2
+ 251 0074 7601     		.2byte	(.L2-.L4)/2
+ 252 0076 7601     		.2byte	(.L2-.L4)/2
+ 253 0078 7601     		.2byte	(.L2-.L4)/2
+ 254 007a 7601     		.2byte	(.L2-.L4)/2
+ 255 007c 7601     		.2byte	(.L2-.L4)/2
+ 256 007e 7601     		.2byte	(.L2-.L4)/2
+ 257 0080 7001     		.2byte	(.L44-.L4)/2
+ 258 0082 4C01     		.2byte	(.L43-.L4)/2
+ 259 0084 4601     		.2byte	(.L42-.L4)/2
+ 260 0086 4001     		.2byte	(.L41-.L4)/2
+ 261 0088 2801     		.2byte	(.L40-.L4)/2
+ 262 008a 2201     		.2byte	(.L39-.L4)/2
+ 263 008c 1C01     		.2byte	(.L38-.L4)/2
+ 264 008e 1601     		.2byte	(.L37-.L4)/2
+ 265 0090 1001     		.2byte	(.L36-.L4)/2
+ 266 0092 0A01     		.2byte	(.L35-.L4)/2
+ 267 0094 0401     		.2byte	(.L34-.L4)/2
+ 268 0096 3A01     		.2byte	(.L33-.L4)/2
+ARM GAS  C:\Temp\cczzE9g4.s 			page 10
+
+
+ 269 0098 3401     		.2byte	(.L32-.L4)/2
+ 270 009a 2E01     		.2byte	(.L31-.L4)/2
+ 271 009c 7601     		.2byte	(.L2-.L4)/2
+ 272 009e FE00     		.2byte	(.L30-.L4)/2
+ 273 00a0 F800     		.2byte	(.L29-.L4)/2
+ 274 00a2 F200     		.2byte	(.L28-.L4)/2
+ 275 00a4 EC00     		.2byte	(.L27-.L4)/2
+ 276 00a6 E600     		.2byte	(.L26-.L4)/2
+ 277 00a8 E000     		.2byte	(.L25-.L4)/2
+ 278 00aa DA00     		.2byte	(.L24-.L4)/2
+ 279 00ac D400     		.2byte	(.L23-.L4)/2
+ 280 00ae CE00     		.2byte	(.L22-.L4)/2
+ 281 00b0 C800     		.2byte	(.L21-.L4)/2
+ 282 00b2 C200     		.2byte	(.L20-.L4)/2
+ 283 00b4 BC00     		.2byte	(.L19-.L4)/2
+ 284 00b6 B600     		.2byte	(.L18-.L4)/2
+ 285 00b8 B000     		.2byte	(.L17-.L4)/2
+ 286 00ba AA00     		.2byte	(.L16-.L4)/2
+ 287 00bc A400     		.2byte	(.L15-.L4)/2
+ 288 00be 9E00     		.2byte	(.L14-.L4)/2
+ 289 00c0 9800     		.2byte	(.L13-.L4)/2
+ 290 00c2 9200     		.2byte	(.L12-.L4)/2
+ 291 00c4 8C00     		.2byte	(.L11-.L4)/2
+ 292 00c6 8600     		.2byte	(.L10-.L4)/2
+ 293 00c8 8000     		.2byte	(.L9-.L4)/2
+ 294 00ca 7A00     		.2byte	(.L8-.L4)/2
+ 295 00cc 7400     		.2byte	(.L7-.L4)/2
+ 296 00ce 6E00     		.2byte	(.L6-.L4)/2
+ 297 00d0 6800     		.2byte	(.L5-.L4)/2
+ 298 00d2 6100     		.2byte	(.L3-.L4)/2
+ 299              		.p2align 1
+ 300              	.L3:
+  46:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_NONE:
+  47:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 301              		.loc 1 47 3 view .LVU5
+ 302 00d4 40F2FF12 		movw	r2, #511
+ 303 00d8 8C49     		ldr	r1, .L52
+ 304              	.LVL2:
+ 305              		.loc 1 47 3 is_stmt 0 view .LVU6
+ 306 00da FFF7FEFF 		bl	strncpy
+ 307              	.LVL3:
+  48:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_NONE);
+  49:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 308              		.loc 1 49 3 is_stmt 1 view .LVU7
+ 309              	.L50:
+  50:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_CALIBRATION_WARNING:
+  51:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+  52:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_CALIBRATION_WARNING);
+  53:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+  54:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_MIN_CLIPPED:
+  55:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+  56:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_MIN_CLIPPED);
+  57:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+  58:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_UNDEFINED:
+  59:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+  60:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_UNDEFINED);
+  61:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ARM GAS  C:\Temp\cczzE9g4.s 			page 11
+
+
+  62:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_INVALID_PARAMS:
+  63:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+  64:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_INVALID_PARAMS);
+  65:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+  66:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_NOT_SUPPORTED:
+  67:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+  68:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_NOT_SUPPORTED);
+  69:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+  70:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_RANGE_ERROR:
+  71:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+  72:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_RANGE_ERROR);
+  73:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+  74:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_TIME_OUT:
+  75:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+  76:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_TIME_OUT);
+  77:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+  78:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_MODE_NOT_SUPPORTED:
+  79:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+  80:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_MODE_NOT_SUPPORTED);
+  81:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+  82:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_BUFFER_TOO_SMALL:
+  83:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+  84:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_BUFFER_TOO_SMALL);
+  85:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+  86:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_COMMS_BUFFER_TOO_SMALL:
+  87:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+  88:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_COMMS_BUFFER_TOO_SMALL);
+  89:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+  90:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_GPIO_NOT_EXISTING:
+  91:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+  92:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_GPIO_NOT_EXISTING);
+  93:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+  94:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_GPIO_FUNCTIONALITY_NOT_SUPPORTED:
+  95:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+  96:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_GPIO_FUNCTIONALITY_NOT_SUPPORTED);
+  97:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+  98:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_CONTROL_INTERFACE:
+  99:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 100:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_CONTROL_INTERFACE);
+ 101:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 102:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_INVALID_COMMAND:
+ 103:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 104:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_INVALID_COMMAND);
+ 105:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 106:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_DIVISION_BY_ZERO:
+ 107:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 108:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_DIVISION_BY_ZERO);
+ 109:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 110:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_REF_SPAD_INIT:
+ 111:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 112:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_REF_SPAD_INIT);
+ 113:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 114:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_GPH_SYNC_CHECK_FAIL:
+ 115:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 116:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_GPH_SYNC_CHECK_FAIL);
+ 117:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 118:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_STREAM_COUNT_CHECK_FAIL:
+ARM GAS  C:\Temp\cczzE9g4.s 			page 12
+
+
+ 119:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 120:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_STREAM_COUNT_CHECK_FAIL);
+ 121:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 122:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_GPH_ID_CHECK_FAIL:
+ 123:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 124:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_GPH_ID_CHECK_FAIL);
+ 125:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 126:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_ZONE_STREAM_COUNT_CHECK_FAIL:
+ 127:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 128:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_ZONE_STREAM_COUNT_CHECK_FAIL);
+ 129:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 130:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_ZONE_GPH_ID_CHECK_FAIL:
+ 131:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 132:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_ZONE_GPH_ID_CHECK_FAIL);
+ 133:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 134:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+ 135:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_XTALK_EXTRACTION_NO_SAMPLE_FAIL:
+ 136:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 137:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_XTALK_EXTRACTION_NO_SAMPLES_FAIL);
+ 138:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 139:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_XTALK_EXTRACTION_SIGMA_LIMIT_FAIL:
+ 140:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 141:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_XTALK_EXTRACTION_SIGMA_LIMIT_FAIL);
+ 142:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 143:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+ 144:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_OFFSET_CAL_NO_SAMPLE_FAIL:
+ 145:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 146:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_OFFSET_CAL_NO_SAMPLE_FAIL);
+ 147:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 148:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_OFFSET_CAL_NO_SPADS_ENABLED_FAIL:
+ 149:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 150:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_OFFSET_CAL_NO_SPADS_ENABLED_FAIL);
+ 151:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 152:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_ZONE_CAL_NO_SAMPLE_FAIL:
+ 153:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 154:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_ZONE_CAL_NO_SAMPLE_FAIL);
+ 155:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 156:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+ 157:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_WARNING_OFFSET_CAL_MISSING_SAMPLES:
+ 158:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 159:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_WARNING_OFFSET_CAL_MISSING_SAMPLES);
+ 160:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 161:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_WARNING_OFFSET_CAL_SIGMA_TOO_HIGH:
+ 162:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 163:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_WARNING_OFFSET_CAL_SIGMA_TOO_HIGH);
+ 164:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 165:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_WARNING_OFFSET_CAL_RATE_TOO_HIGH:
+ 166:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 167:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_WARNING_OFFSET_CAL_RATE_TOO_HIGH);
+ 168:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 169:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_WARNING_OFFSET_CAL_SPAD_COUNT_TOO_LOW:
+ 170:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 171:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_WARNING_OFFSET_CAL_SPAD_COUNT_TOO_LOW);
+ 172:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 173:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+ 174:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_WARNING_ZONE_CAL_MISSING_SAMPLES:
+ 175:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ARM GAS  C:\Temp\cczzE9g4.s 			page 13
+
+
+ 176:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_WARNING_ZONE_CAL_MISSING_SAMPLES);
+ 177:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 178:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_WARNING_ZONE_CAL_SIGMA_TOO_HIGH:
+ 179:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 180:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_WARNING_ZONE_CAL_SIGMA_TOO_HIGH);
+ 181:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 182:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_WARNING_ZONE_CAL_RATE_TOO_HIGH:
+ 183:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 184:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_WARNING_ZONE_CAL_RATE_TOO_HIGH);
+ 185:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 186:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+ 187:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_WARNING_REF_SPAD_CHAR_NOT_ENOUGH_SPADS:
+ 188:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 189:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_WARNING_REF_SPAD_CHAR_NOT_ENOUGH_SPADS);
+ 190:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 191:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_WARNING_REF_SPAD_CHAR_RATE_TOO_HIGH:
+ 192:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 193:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_WARNING_REF_SPAD_CHAR_RATE_TOO_HIGH);
+ 194:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 195:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_WARNING_REF_SPAD_CHAR_RATE_TOO_LOW:
+ 196:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 197:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_WARNING_REF_SPAD_CHAR_RATE_TOO_LOW);
+ 198:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 199:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+ 200:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_WARNING_XTALK_MISSING_SAMPLES:
+ 201:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 202:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_WARNING_XTALK_MISSING_SAMPLES);
+ 203:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 204:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_WARNING_XTALK_NO_SAMPLES_FOR_GRADIENT:
+ 205:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 206:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_WARNING_XTALK_NO_SAMPLES_FOR_GRADIENT);
+ 207:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 208:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_WARNING_XTALK_SIGMA_LIMIT_FOR_GRADIENT:
+ 209:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 210:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_WARNING_XTALK_SIGMA_LIMIT_FOR_GRADIENT);
+ 211:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 212:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+ 213:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_DEVICE_FIRMWARE_TOO_OLD:
+ 214:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 215:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_DEVICE_FIRMWARE_TOO_OLD);
+ 216:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 217:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_DEVICE_FIRMWARE_TOO_NEW:
+ 218:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 219:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_DEVICE_FIRMWARE_TOO_NEW);
+ 220:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 221:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_UNIT_TEST_FAIL:
+ 222:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 223:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_UNIT_TEST_FAIL);
+ 224:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 225:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_FILE_READ_FAIL:
+ 226:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 227:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_FILE_READ_FAIL);
+ 228:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 229:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_FILE_WRITE_FAIL:
+ 230:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 231:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_FILE_WRITE_FAIL);
+ 232:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ARM GAS  C:\Temp\cczzE9g4.s 			page 14
+
+
+ 233:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_NOT_IMPLEMENTED:
+ 234:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 235:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_NOT_IMPLEMENTED);
+ 236:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		break;
+ 237:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	default:
+ 238:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 		VL53L1_COPYSTRING(pPalErrorString,
+ 239:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 				VL53L1_STRING_UNKNOW_ERROR_CODE);
+ 240:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	}
+ 241:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+ 242:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** #endif
+ 243:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+ 244:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	LOG_FUNCTION_END(Status);
+ 310              		.loc 1 244 26 view .LVU8
+ 245:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+ 246:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	return Status;
+ 311              		.loc 1 246 2 view .LVU9
+ 247:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** }
+ 312              		.loc 1 247 1 is_stmt 0 view .LVU10
+ 313 00de 0020     		movs	r0, #0
+ 314 00e0 08BD     		pop	{r3, pc}
+ 315              	.LVL4:
+ 316              	.L5:
+  51:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_CALIBRATION_WARNING);
+ 317              		.loc 1 51 3 is_stmt 1 view .LVU11
+ 318 00e2 40F2FF12 		movw	r2, #511
+ 319 00e6 8A49     		ldr	r1, .L52+4
+ 320 00e8 FFF7FEFF 		bl	strncpy
+ 321              	.LVL5:
+  53:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_MIN_CLIPPED:
+ 322              		.loc 1 53 3 view .LVU12
+ 323 00ec F7E7     		b	.L50
+ 324              	.LVL6:
+ 325              	.L6:
+  55:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_MIN_CLIPPED);
+ 326              		.loc 1 55 3 view .LVU13
+ 327 00ee 40F2FF12 		movw	r2, #511
+ 328 00f2 8849     		ldr	r1, .L52+8
+ 329 00f4 FFF7FEFF 		bl	strncpy
+ 330              	.LVL7:
+  57:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_UNDEFINED:
+ 331              		.loc 1 57 3 view .LVU14
+ 332 00f8 F1E7     		b	.L50
+ 333              	.LVL8:
+ 334              	.L7:
+  59:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_UNDEFINED);
+ 335              		.loc 1 59 3 view .LVU15
+ 336 00fa 40F2FF12 		movw	r2, #511
+ 337 00fe 8649     		ldr	r1, .L52+12
+ 338 0100 FFF7FEFF 		bl	strncpy
+ 339              	.LVL9:
+  61:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_INVALID_PARAMS:
+ 340              		.loc 1 61 3 view .LVU16
+ 341 0104 EBE7     		b	.L50
+ 342              	.LVL10:
+ 343              	.L8:
+  63:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_INVALID_PARAMS);
+ 344              		.loc 1 63 3 view .LVU17
+ARM GAS  C:\Temp\cczzE9g4.s 			page 15
+
+
+ 345 0106 40F2FF12 		movw	r2, #511
+ 346 010a 8449     		ldr	r1, .L52+16
+ 347 010c FFF7FEFF 		bl	strncpy
+ 348              	.LVL11:
+  65:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_NOT_SUPPORTED:
+ 349              		.loc 1 65 3 view .LVU18
+ 350 0110 E5E7     		b	.L50
+ 351              	.LVL12:
+ 352              	.L9:
+  67:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_NOT_SUPPORTED);
+ 353              		.loc 1 67 3 view .LVU19
+ 354 0112 40F2FF12 		movw	r2, #511
+ 355 0116 8249     		ldr	r1, .L52+20
+ 356 0118 FFF7FEFF 		bl	strncpy
+ 357              	.LVL13:
+  69:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_RANGE_ERROR:
+ 358              		.loc 1 69 3 view .LVU20
+ 359 011c DFE7     		b	.L50
+ 360              	.LVL14:
+ 361              	.L10:
+  71:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_RANGE_ERROR);
+ 362              		.loc 1 71 3 view .LVU21
+ 363 011e 40F2FF12 		movw	r2, #511
+ 364 0122 8049     		ldr	r1, .L52+24
+ 365 0124 FFF7FEFF 		bl	strncpy
+ 366              	.LVL15:
+  73:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_TIME_OUT:
+ 367              		.loc 1 73 3 view .LVU22
+ 368 0128 D9E7     		b	.L50
+ 369              	.LVL16:
+ 370              	.L11:
+  75:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_TIME_OUT);
+ 371              		.loc 1 75 3 view .LVU23
+ 372 012a 40F2FF12 		movw	r2, #511
+ 373 012e 7E49     		ldr	r1, .L52+28
+ 374 0130 FFF7FEFF 		bl	strncpy
+ 375              	.LVL17:
+  77:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_MODE_NOT_SUPPORTED:
+ 376              		.loc 1 77 3 view .LVU24
+ 377 0134 D3E7     		b	.L50
+ 378              	.LVL18:
+ 379              	.L12:
+  79:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_MODE_NOT_SUPPORTED);
+ 380              		.loc 1 79 3 view .LVU25
+ 381 0136 40F2FF12 		movw	r2, #511
+ 382 013a 7C49     		ldr	r1, .L52+32
+ 383 013c FFF7FEFF 		bl	strncpy
+ 384              	.LVL19:
+  81:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_BUFFER_TOO_SMALL:
+ 385              		.loc 1 81 3 view .LVU26
+ 386 0140 CDE7     		b	.L50
+ 387              	.LVL20:
+ 388              	.L13:
+  83:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_BUFFER_TOO_SMALL);
+ 389              		.loc 1 83 3 view .LVU27
+ 390 0142 40F2FF12 		movw	r2, #511
+ 391 0146 7A49     		ldr	r1, .L52+36
+ARM GAS  C:\Temp\cczzE9g4.s 			page 16
+
+
+ 392 0148 FFF7FEFF 		bl	strncpy
+ 393              	.LVL21:
+  85:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_COMMS_BUFFER_TOO_SMALL:
+ 394              		.loc 1 85 3 view .LVU28
+ 395 014c C7E7     		b	.L50
+ 396              	.LVL22:
+ 397              	.L14:
+  87:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_COMMS_BUFFER_TOO_SMALL);
+ 398              		.loc 1 87 3 view .LVU29
+ 399 014e 40F2FF12 		movw	r2, #511
+ 400 0152 7849     		ldr	r1, .L52+40
+ 401 0154 FFF7FEFF 		bl	strncpy
+ 402              	.LVL23:
+  89:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_GPIO_NOT_EXISTING:
+ 403              		.loc 1 89 3 view .LVU30
+ 404 0158 C1E7     		b	.L50
+ 405              	.LVL24:
+ 406              	.L15:
+  91:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_GPIO_NOT_EXISTING);
+ 407              		.loc 1 91 3 view .LVU31
+ 408 015a 40F2FF12 		movw	r2, #511
+ 409 015e 7649     		ldr	r1, .L52+44
+ 410 0160 FFF7FEFF 		bl	strncpy
+ 411              	.LVL25:
+  93:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_GPIO_FUNCTIONALITY_NOT_SUPPORTED:
+ 412              		.loc 1 93 3 view .LVU32
+ 413 0164 BBE7     		b	.L50
+ 414              	.LVL26:
+ 415              	.L16:
+  95:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_GPIO_FUNCTIONALITY_NOT_SUPPORTED);
+ 416              		.loc 1 95 3 view .LVU33
+ 417 0166 40F2FF12 		movw	r2, #511
+ 418 016a 7449     		ldr	r1, .L52+48
+ 419 016c FFF7FEFF 		bl	strncpy
+ 420              	.LVL27:
+  97:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_CONTROL_INTERFACE:
+ 421              		.loc 1 97 3 view .LVU34
+ 422 0170 B5E7     		b	.L50
+ 423              	.LVL28:
+ 424              	.L17:
+  99:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_CONTROL_INTERFACE);
+ 425              		.loc 1 99 3 view .LVU35
+ 426 0172 40F2FF12 		movw	r2, #511
+ 427 0176 7249     		ldr	r1, .L52+52
+ 428 0178 FFF7FEFF 		bl	strncpy
+ 429              	.LVL29:
+ 101:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_INVALID_COMMAND:
+ 430              		.loc 1 101 3 view .LVU36
+ 431 017c AFE7     		b	.L50
+ 432              	.LVL30:
+ 433              	.L18:
+ 103:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_INVALID_COMMAND);
+ 434              		.loc 1 103 3 view .LVU37
+ 435 017e 40F2FF12 		movw	r2, #511
+ 436 0182 7049     		ldr	r1, .L52+56
+ 437 0184 FFF7FEFF 		bl	strncpy
+ 438              	.LVL31:
+ARM GAS  C:\Temp\cczzE9g4.s 			page 17
+
+
+ 105:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_DIVISION_BY_ZERO:
+ 439              		.loc 1 105 3 view .LVU38
+ 440 0188 A9E7     		b	.L50
+ 441              	.LVL32:
+ 442              	.L19:
+ 107:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_DIVISION_BY_ZERO);
+ 443              		.loc 1 107 3 view .LVU39
+ 444 018a 40F2FF12 		movw	r2, #511
+ 445 018e 6E49     		ldr	r1, .L52+60
+ 446 0190 FFF7FEFF 		bl	strncpy
+ 447              	.LVL33:
+ 109:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_REF_SPAD_INIT:
+ 448              		.loc 1 109 3 view .LVU40
+ 449 0194 A3E7     		b	.L50
+ 450              	.LVL34:
+ 451              	.L20:
+ 111:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_REF_SPAD_INIT);
+ 452              		.loc 1 111 3 view .LVU41
+ 453 0196 40F2FF12 		movw	r2, #511
+ 454 019a 6C49     		ldr	r1, .L52+64
+ 455 019c FFF7FEFF 		bl	strncpy
+ 456              	.LVL35:
+ 113:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_GPH_SYNC_CHECK_FAIL:
+ 457              		.loc 1 113 3 view .LVU42
+ 458 01a0 9DE7     		b	.L50
+ 459              	.LVL36:
+ 460              	.L21:
+ 115:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_GPH_SYNC_CHECK_FAIL);
+ 461              		.loc 1 115 3 view .LVU43
+ 462 01a2 40F2FF12 		movw	r2, #511
+ 463 01a6 6A49     		ldr	r1, .L52+68
+ 464 01a8 FFF7FEFF 		bl	strncpy
+ 465              	.LVL37:
+ 117:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_STREAM_COUNT_CHECK_FAIL:
+ 466              		.loc 1 117 3 view .LVU44
+ 467 01ac 97E7     		b	.L50
+ 468              	.LVL38:
+ 469              	.L22:
+ 119:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_STREAM_COUNT_CHECK_FAIL);
+ 470              		.loc 1 119 3 view .LVU45
+ 471 01ae 40F2FF12 		movw	r2, #511
+ 472 01b2 6849     		ldr	r1, .L52+72
+ 473 01b4 FFF7FEFF 		bl	strncpy
+ 474              	.LVL39:
+ 121:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_GPH_ID_CHECK_FAIL:
+ 475              		.loc 1 121 3 view .LVU46
+ 476 01b8 91E7     		b	.L50
+ 477              	.LVL40:
+ 478              	.L23:
+ 123:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_GPH_ID_CHECK_FAIL);
+ 479              		.loc 1 123 3 view .LVU47
+ 480 01ba 40F2FF12 		movw	r2, #511
+ 481 01be 6649     		ldr	r1, .L52+76
+ 482 01c0 FFF7FEFF 		bl	strncpy
+ 483              	.LVL41:
+ 125:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_ZONE_STREAM_COUNT_CHECK_FAIL:
+ 484              		.loc 1 125 3 view .LVU48
+ARM GAS  C:\Temp\cczzE9g4.s 			page 18
+
+
+ 485 01c4 8BE7     		b	.L50
+ 486              	.LVL42:
+ 487              	.L24:
+ 127:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_ZONE_STREAM_COUNT_CHECK_FAIL);
+ 488              		.loc 1 127 3 view .LVU49
+ 489 01c6 40F2FF12 		movw	r2, #511
+ 490 01ca 6449     		ldr	r1, .L52+80
+ 491 01cc FFF7FEFF 		bl	strncpy
+ 492              	.LVL43:
+ 129:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_ZONE_GPH_ID_CHECK_FAIL:
+ 493              		.loc 1 129 3 view .LVU50
+ 494 01d0 85E7     		b	.L50
+ 495              	.LVL44:
+ 496              	.L25:
+ 131:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_ZONE_GPH_ID_CHECK_FAIL);
+ 497              		.loc 1 131 3 view .LVU51
+ 498 01d2 40F2FF12 		movw	r2, #511
+ 499 01d6 6249     		ldr	r1, .L52+84
+ 500 01d8 FFF7FEFF 		bl	strncpy
+ 501              	.LVL45:
+ 133:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+ 502              		.loc 1 133 3 view .LVU52
+ 503 01dc 7FE7     		b	.L50
+ 504              	.LVL46:
+ 505              	.L26:
+ 136:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_XTALK_EXTRACTION_NO_SAMPLES_FAIL);
+ 506              		.loc 1 136 3 view .LVU53
+ 507 01de 40F2FF12 		movw	r2, #511
+ 508 01e2 6049     		ldr	r1, .L52+88
+ 509 01e4 FFF7FEFF 		bl	strncpy
+ 510              	.LVL47:
+ 138:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_XTALK_EXTRACTION_SIGMA_LIMIT_FAIL:
+ 511              		.loc 1 138 3 view .LVU54
+ 512 01e8 79E7     		b	.L50
+ 513              	.LVL48:
+ 514              	.L27:
+ 140:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_XTALK_EXTRACTION_SIGMA_LIMIT_FAIL);
+ 515              		.loc 1 140 3 view .LVU55
+ 516 01ea 40F2FF12 		movw	r2, #511
+ 517 01ee 5E49     		ldr	r1, .L52+92
+ 518 01f0 FFF7FEFF 		bl	strncpy
+ 519              	.LVL49:
+ 142:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+ 520              		.loc 1 142 3 view .LVU56
+ 521 01f4 73E7     		b	.L50
+ 522              	.LVL50:
+ 523              	.L28:
+ 145:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_OFFSET_CAL_NO_SAMPLE_FAIL);
+ 524              		.loc 1 145 3 view .LVU57
+ 525 01f6 40F2FF12 		movw	r2, #511
+ 526 01fa 5C49     		ldr	r1, .L52+96
+ 527 01fc FFF7FEFF 		bl	strncpy
+ 528              	.LVL51:
+ 147:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_OFFSET_CAL_NO_SPADS_ENABLED_FAIL:
+ 529              		.loc 1 147 3 view .LVU58
+ 530 0200 6DE7     		b	.L50
+ 531              	.LVL52:
+ARM GAS  C:\Temp\cczzE9g4.s 			page 19
+
+
+ 532              	.L29:
+ 149:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_OFFSET_CAL_NO_SPADS_ENABLED_FAIL);
+ 533              		.loc 1 149 3 view .LVU59
+ 534 0202 40F2FF12 		movw	r2, #511
+ 535 0206 5A49     		ldr	r1, .L52+100
+ 536 0208 FFF7FEFF 		bl	strncpy
+ 537              	.LVL53:
+ 151:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_ZONE_CAL_NO_SAMPLE_FAIL:
+ 538              		.loc 1 151 3 view .LVU60
+ 539 020c 67E7     		b	.L50
+ 540              	.LVL54:
+ 541              	.L30:
+ 153:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_ZONE_CAL_NO_SAMPLE_FAIL);
+ 542              		.loc 1 153 3 view .LVU61
+ 543 020e 40F2FF12 		movw	r2, #511
+ 544 0212 5849     		ldr	r1, .L52+104
+ 545 0214 FFF7FEFF 		bl	strncpy
+ 546              	.LVL55:
+ 155:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+ 547              		.loc 1 155 3 view .LVU62
+ 548 0218 61E7     		b	.L50
+ 549              	.LVL56:
+ 550              	.L34:
+ 158:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_WARNING_OFFSET_CAL_MISSING_SAMPLES);
+ 551              		.loc 1 158 3 view .LVU63
+ 552 021a 40F2FF12 		movw	r2, #511
+ 553 021e 5649     		ldr	r1, .L52+108
+ 554 0220 FFF7FEFF 		bl	strncpy
+ 555              	.LVL57:
+ 160:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_WARNING_OFFSET_CAL_SIGMA_TOO_HIGH:
+ 556              		.loc 1 160 3 view .LVU64
+ 557 0224 5BE7     		b	.L50
+ 558              	.LVL58:
+ 559              	.L35:
+ 162:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_WARNING_OFFSET_CAL_SIGMA_TOO_HIGH);
+ 560              		.loc 1 162 3 view .LVU65
+ 561 0226 40F2FF12 		movw	r2, #511
+ 562 022a 5449     		ldr	r1, .L52+112
+ 563 022c FFF7FEFF 		bl	strncpy
+ 564              	.LVL59:
+ 164:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_WARNING_OFFSET_CAL_RATE_TOO_HIGH:
+ 565              		.loc 1 164 3 view .LVU66
+ 566 0230 55E7     		b	.L50
+ 567              	.LVL60:
+ 568              	.L36:
+ 166:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_WARNING_OFFSET_CAL_RATE_TOO_HIGH);
+ 569              		.loc 1 166 3 view .LVU67
+ 570 0232 40F2FF12 		movw	r2, #511
+ 571 0236 5249     		ldr	r1, .L52+116
+ 572 0238 FFF7FEFF 		bl	strncpy
+ 573              	.LVL61:
+ 168:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_WARNING_OFFSET_CAL_SPAD_COUNT_TOO_LOW:
+ 574              		.loc 1 168 3 view .LVU68
+ 575 023c 4FE7     		b	.L50
+ 576              	.LVL62:
+ 577              	.L37:
+ 170:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_WARNING_OFFSET_CAL_SPAD_COUNT_TOO_LOW);
+ARM GAS  C:\Temp\cczzE9g4.s 			page 20
+
+
+ 578              		.loc 1 170 3 view .LVU69
+ 579 023e 40F2FF12 		movw	r2, #511
+ 580 0242 5049     		ldr	r1, .L52+120
+ 581 0244 FFF7FEFF 		bl	strncpy
+ 582              	.LVL63:
+ 172:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+ 583              		.loc 1 172 3 view .LVU70
+ 584 0248 49E7     		b	.L50
+ 585              	.LVL64:
+ 586              	.L38:
+ 175:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_WARNING_ZONE_CAL_MISSING_SAMPLES);
+ 587              		.loc 1 175 3 view .LVU71
+ 588 024a 40F2FF12 		movw	r2, #511
+ 589 024e 4E49     		ldr	r1, .L52+124
+ 590 0250 FFF7FEFF 		bl	strncpy
+ 591              	.LVL65:
+ 177:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_WARNING_ZONE_CAL_SIGMA_TOO_HIGH:
+ 592              		.loc 1 177 3 view .LVU72
+ 593 0254 43E7     		b	.L50
+ 594              	.LVL66:
+ 595              	.L39:
+ 179:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_WARNING_ZONE_CAL_SIGMA_TOO_HIGH);
+ 596              		.loc 1 179 3 view .LVU73
+ 597 0256 40F2FF12 		movw	r2, #511
+ 598 025a 4C49     		ldr	r1, .L52+128
+ 599 025c FFF7FEFF 		bl	strncpy
+ 600              	.LVL67:
+ 181:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_WARNING_ZONE_CAL_RATE_TOO_HIGH:
+ 601              		.loc 1 181 3 view .LVU74
+ 602 0260 3DE7     		b	.L50
+ 603              	.LVL68:
+ 604              	.L40:
+ 183:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_WARNING_ZONE_CAL_RATE_TOO_HIGH);
+ 605              		.loc 1 183 3 view .LVU75
+ 606 0262 40F2FF12 		movw	r2, #511
+ 607 0266 4A49     		ldr	r1, .L52+132
+ 608 0268 FFF7FEFF 		bl	strncpy
+ 609              	.LVL69:
+ 185:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+ 610              		.loc 1 185 3 view .LVU76
+ 611 026c 37E7     		b	.L50
+ 612              	.LVL70:
+ 613              	.L31:
+ 188:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_WARNING_REF_SPAD_CHAR_NOT_ENOUGH_SPADS);
+ 614              		.loc 1 188 3 view .LVU77
+ 615 026e 40F2FF12 		movw	r2, #511
+ 616 0272 4849     		ldr	r1, .L52+136
+ 617 0274 FFF7FEFF 		bl	strncpy
+ 618              	.LVL71:
+ 190:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_WARNING_REF_SPAD_CHAR_RATE_TOO_HIGH:
+ 619              		.loc 1 190 3 view .LVU78
+ 620 0278 31E7     		b	.L50
+ 621              	.LVL72:
+ 622              	.L32:
+ 192:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_WARNING_REF_SPAD_CHAR_RATE_TOO_HIGH);
+ 623              		.loc 1 192 3 view .LVU79
+ 624 027a 40F2FF12 		movw	r2, #511
+ARM GAS  C:\Temp\cczzE9g4.s 			page 21
+
+
+ 625 027e 4649     		ldr	r1, .L52+140
+ 626 0280 FFF7FEFF 		bl	strncpy
+ 627              	.LVL73:
+ 194:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_WARNING_REF_SPAD_CHAR_RATE_TOO_LOW:
+ 628              		.loc 1 194 3 view .LVU80
+ 629 0284 2BE7     		b	.L50
+ 630              	.LVL74:
+ 631              	.L33:
+ 196:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_WARNING_REF_SPAD_CHAR_RATE_TOO_LOW);
+ 632              		.loc 1 196 3 view .LVU81
+ 633 0286 40F2FF12 		movw	r2, #511
+ 634 028a 4449     		ldr	r1, .L52+144
+ 635 028c FFF7FEFF 		bl	strncpy
+ 636              	.LVL75:
+ 198:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+ 637              		.loc 1 198 3 view .LVU82
+ 638 0290 25E7     		b	.L50
+ 639              	.LVL76:
+ 640              	.L41:
+ 201:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_WARNING_XTALK_MISSING_SAMPLES);
+ 641              		.loc 1 201 3 view .LVU83
+ 642 0292 40F2FF12 		movw	r2, #511
+ 643 0296 4249     		ldr	r1, .L52+148
+ 644 0298 FFF7FEFF 		bl	strncpy
+ 645              	.LVL77:
+ 203:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_WARNING_XTALK_NO_SAMPLES_FOR_GRADIENT:
+ 646              		.loc 1 203 3 view .LVU84
+ 647 029c 1FE7     		b	.L50
+ 648              	.LVL78:
+ 649              	.L42:
+ 205:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_WARNING_XTALK_NO_SAMPLES_FOR_GRADIENT);
+ 650              		.loc 1 205 3 view .LVU85
+ 651 029e 40F2FF12 		movw	r2, #511
+ 652 02a2 4049     		ldr	r1, .L52+152
+ 653 02a4 FFF7FEFF 		bl	strncpy
+ 654              	.LVL79:
+ 207:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_WARNING_XTALK_SIGMA_LIMIT_FOR_GRADIENT:
+ 655              		.loc 1 207 3 view .LVU86
+ 656 02a8 19E7     		b	.L50
+ 657              	.LVL80:
+ 658              	.L43:
+ 209:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_WARNING_XTALK_SIGMA_LIMIT_FOR_GRADIENT);
+ 659              		.loc 1 209 3 view .LVU87
+ 660 02aa 40F2FF12 		movw	r2, #511
+ 661 02ae 3E49     		ldr	r1, .L52+156
+ 662 02b0 FFF7FEFF 		bl	strncpy
+ 663              	.LVL81:
+ 211:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 
+ 664              		.loc 1 211 3 view .LVU88
+ 665 02b4 13E7     		b	.L50
+ 666              	.LVL82:
+ 667              	.L45:
+ 214:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_DEVICE_FIRMWARE_TOO_OLD);
+ 668              		.loc 1 214 3 view .LVU89
+ 669 02b6 40F2FF12 		movw	r2, #511
+ 670 02ba 3C49     		ldr	r1, .L52+160
+ 671 02bc FFF7FEFF 		bl	strncpy
+ARM GAS  C:\Temp\cczzE9g4.s 			page 22
+
+
+ 672              	.LVL83:
+ 216:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_DEVICE_FIRMWARE_TOO_NEW:
+ 673              		.loc 1 216 3 view .LVU90
+ 674 02c0 0DE7     		b	.L50
+ 675              	.LVL84:
+ 676              	.L46:
+ 218:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_DEVICE_FIRMWARE_TOO_NEW);
+ 677              		.loc 1 218 3 view .LVU91
+ 678 02c2 40F2FF12 		movw	r2, #511
+ 679 02c6 3A49     		ldr	r1, .L52+164
+ 680 02c8 FFF7FEFF 		bl	strncpy
+ 681              	.LVL85:
+ 220:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_UNIT_TEST_FAIL:
+ 682              		.loc 1 220 3 view .LVU92
+ 683 02cc 07E7     		b	.L50
+ 684              	.LVL86:
+ 685              	.L47:
+ 222:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_UNIT_TEST_FAIL);
+ 686              		.loc 1 222 3 view .LVU93
+ 687 02ce 40F2FF12 		movw	r2, #511
+ 688 02d2 3849     		ldr	r1, .L52+168
+ 689 02d4 FFF7FEFF 		bl	strncpy
+ 690              	.LVL87:
+ 224:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_FILE_READ_FAIL:
+ 691              		.loc 1 224 3 view .LVU94
+ 692 02d8 01E7     		b	.L50
+ 693              	.LVL88:
+ 694              	.L48:
+ 226:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_FILE_READ_FAIL);
+ 695              		.loc 1 226 3 view .LVU95
+ 696 02da 40F2FF12 		movw	r2, #511
+ 697 02de 3649     		ldr	r1, .L52+172
+ 698 02e0 FFF7FEFF 		bl	strncpy
+ 699              	.LVL89:
+ 228:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_FILE_WRITE_FAIL:
+ 700              		.loc 1 228 3 view .LVU96
+ 701 02e4 FBE6     		b	.L50
+ 702              	.LVL90:
+ 703              	.L49:
+ 230:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_FILE_WRITE_FAIL);
+ 704              		.loc 1 230 3 view .LVU97
+ 705 02e6 40F2FF12 		movw	r2, #511
+ 706 02ea 3449     		ldr	r1, .L52+176
+ 707 02ec FFF7FEFF 		bl	strncpy
+ 708              	.LVL91:
+ 232:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	case VL53L1_ERROR_NOT_IMPLEMENTED:
+ 709              		.loc 1 232 3 view .LVU98
+ 710 02f0 F5E6     		b	.L50
+ 711              	.LVL92:
+ 712              	.L44:
+ 234:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 			VL53L1_STRING_ERROR_NOT_IMPLEMENTED);
+ 713              		.loc 1 234 3 view .LVU99
+ 714 02f2 40F2FF12 		movw	r2, #511
+ 715 02f6 3249     		ldr	r1, .L52+180
+ 716 02f8 FFF7FEFF 		bl	strncpy
+ 717              	.LVL93:
+ 236:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 	default:
+ARM GAS  C:\Temp\cczzE9g4.s 			page 23
+
+
+ 718              		.loc 1 236 3 view .LVU100
+ 719 02fc EFE6     		b	.L50
+ 720              	.LVL94:
+ 721              	.L2:
+ 238:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 				VL53L1_STRING_UNKNOW_ERROR_CODE);
+ 722              		.loc 1 238 3 view .LVU101
+ 723 02fe 40F2FF12 		movw	r2, #511
+ 724 0302 3049     		ldr	r1, .L52+184
+ 725 0304 FFF7FEFF 		bl	strncpy
+ 726              	.LVL95:
+ 238:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c **** 				VL53L1_STRING_UNKNOW_ERROR_CODE);
+ 727              		.loc 1 238 3 is_stmt 0 view .LVU102
+ 728 0308 E9E6     		b	.L50
+ 729              	.L53:
+ 730 030a 00BF     		.align	2
+ 731              	.L52:
+ 732 030c 00000000 		.word	.LC0
+ 733 0310 0C000000 		.word	.LC1
+ 734 0314 28000000 		.word	.LC2
+ 735 0318 3C000000 		.word	.LC3
+ 736 031c 4C000000 		.word	.LC4
+ 737 0320 68000000 		.word	.LC5
+ 738 0324 7C000000 		.word	.LC6
+ 739 0328 88000000 		.word	.LC7
+ 740 032c 98000000 		.word	.LC8
+ 741 0330 B4000000 		.word	.LC9
+ 742 0334 C8000000 		.word	.LC10
+ 743 0338 E0000000 		.word	.LC11
+ 744 033c F4000000 		.word	.LC12
+ 745 0340 10010000 		.word	.LC13
+ 746 0344 28010000 		.word	.LC14
+ 747 0348 40010000 		.word	.LC15
+ 748 034c 58010000 		.word	.LC16
+ 749 0350 74010000 		.word	.LC17
+ 750 0354 9C010000 		.word	.LC18
+ 751 0358 C8010000 		.word	.LC19
+ 752 035c EC010000 		.word	.LC20
+ 753 0360 1C020000 		.word	.LC21
+ 754 0364 48020000 		.word	.LC22
+ 755 0368 78020000 		.word	.LC23
+ 756 036c C0020000 		.word	.LC24
+ 757 0370 00030000 		.word	.LC25
+ 758 0374 40030000 		.word	.LC26
+ 759 0378 7C030000 		.word	.LC27
+ 760 037c BC030000 		.word	.LC28
+ 761 0380 FC030000 		.word	.LC29
+ 762 0384 24040000 		.word	.LC30
+ 763 0388 60040000 		.word	.LC31
+ 764 038c A4040000 		.word	.LC32
+ 765 0390 E4040000 		.word	.LC33
+ 766 0394 24050000 		.word	.LC34
+ 767 0398 4C050000 		.word	.LC35
+ 768 039c 74050000 		.word	.LC36
+ 769 03a0 9C050000 		.word	.LC37
+ 770 03a4 C8050000 		.word	.LC38
+ 771 03a8 E8050000 		.word	.LC39
+ 772 03ac 08060000 		.word	.LC40
+ARM GAS  C:\Temp\cczzE9g4.s 			page 24
+
+
+ 773 03b0 20060000 		.word	.LC41
+ 774 03b4 38060000 		.word	.LC42
+ 775 03b8 48060000 		.word	.LC43
+ 776 03bc 58060000 		.word	.LC44
+ 777 03c0 68060000 		.word	.LC45
+ 778 03c4 80060000 		.word	.LC46
+ 779              		.cfi_endproc
+ 780              	.LFE3:
+ 782              		.text
+ 783              	.Letext0:
+ 784              		.file 2 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 785              		.file 3 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 786              		.file 4 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 787              		.file 5 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_codes.h"
+ 788              		.file 6 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ARM GAS  C:\Temp\cczzE9g4.s 			page 25
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 vl53l1_error_strings.c
+  C:\Temp\cczzE9g4.s:21     .rodata.VL53L1_get_pal_error_string.str1.4:00000000 $d
+  C:\Temp\cczzE9g4.s:173    .text.VL53L1_get_pal_error_string:00000000 $t
+  C:\Temp\cczzE9g4.s:179    .text.VL53L1_get_pal_error_string:00000000 VL53L1_get_pal_error_string
+  C:\Temp\cczzE9g4.s:202    .text.VL53L1_get_pal_error_string:00000012 $d
+  C:\Temp\cczzE9g4.s:299    .text.VL53L1_get_pal_error_string:000000d4 $t
+  C:\Temp\cczzE9g4.s:732    .text.VL53L1_get_pal_error_string:0000030c $d
+
+UNDEFINED SYMBOLS
+strncpy

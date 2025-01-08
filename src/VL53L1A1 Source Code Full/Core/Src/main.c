@@ -41,7 +41,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 TIM_HandleTypeDef htim2;
-TIM_HandleTypeDef htim3;
+TIM_HandleTypeDef htim5;
 
 UART_HandleTypeDef huart2;
 DMA_HandleTypeDef hdma_usart2_rx;
@@ -69,7 +69,7 @@ uint8_t clearToGetL1 = 0;
 void SystemClock_Config(void);
 static void MX_TIM2_Init(void);
 static void MX_USART2_UART_Init(void);
-static void MX_TIM3_Init(void);
+static void MX_TIM5_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -78,7 +78,7 @@ static void MX_TIM3_Init(void);
 /* USER CODE BEGIN 0 */
 
 
-void configureTimer(float desired_frequency) {
+void configureTimer(float desired_frequency, TIM_TypeDef* tim) {
     // Assuming the clock frequency driving the timer is 100 MHz
     float clock_frequency = SystemCoreClock; // 100 MHz
 
@@ -92,45 +92,18 @@ void configureTimer(float desired_frequency) {
     }
 
     // Calculate the ARR based on the chosen PSC
-    uint32_t arr = (uint32_t)(timer_period / (prescaler + 1));
-    if (arr > 65535) {
-        arr = 65535; // Cap ARR if it exceeds 16-bit value
-    }
+    uint64_t arr = (uint64_t)(timer_period / (prescaler + 1));
+
+
 
     // Update the timer registers
-    TIM2->PSC = prescaler;   // Set the prescaler
-    TIM2->ARR = arr;         // Set the auto-reload register
+    tim->PSC = prescaler;   // Set the prescaler
+    tim->ARR = arr;         // Set the auto-reload register
 
     // Reload the timer settings to apply the changes immediately
-    TIM2->EGR = TIM_EGR_UG;  // Generate an update event to reload PSC and ARR
+    tim->EGR = TIM_EGR_UG;  // Generate an update event to reload PSC and ARR
 }
 
-void configureOtherTimer(float desired_frequency) {
-    // Assuming the clock frequency driving the timer is 100 MHz
-    float clock_frequency = SystemCoreClock; // 100 MHz
-
-    // Calculate the required total timer period in timer clock cycles
-    float timer_period = clock_frequency / desired_frequency;
-
-    // Choose a suitable prescaler (PSC) to fit the period within ARR's range
-    uint32_t prescaler = (uint32_t)(timer_period / 65536.0f); // PSC ensures ARR <= 65535
-    if (prescaler > 65535) {
-        prescaler = 65535; // Cap PSC if it exceeds 16-bit value
-    }
-
-    // Calculate the ARR based on the chosen PSC
-    uint32_t arr = (uint32_t)(timer_period / (prescaler + 1));
-    if (arr > 65535) {
-        arr = 65535; // Cap ARR if it exceeds 16-bit value
-    }
-
-    // Update the timer registers
-    TIM3->PSC = prescaler;   // Set the prescaler
-    TIM3->ARR = arr;         // Set the auto-reload register
-
-    // Reload the timer settings to apply the changes immediately
-    TIM3->EGR = TIM_EGR_UG;  // Generate an update event to reload PSC and ARR
-}
 
 void initialCalibration(){
   HAL_UART_Receive(&huart2,(uint8_t *) &bigBuffer, (size_t) (numberOfSimulinkBytes+3+3),1);
@@ -142,10 +115,8 @@ void initialCalibration(){
       bigBuffer[numberOfSimulinkBytes+3+2] == expectedTerminator[2]){
         calibrated = 1;
         receivedFromSimulink(&bigBuffer);
-        configureOtherTimer(L1_BUFFER_SIZE);
-        configureTimer(tof_odr);
+        configureTimer(tof_odr,TIM2);
         HAL_TIM_Base_Start_IT(&htim2);
-        HAL_TIM_Base_Start_IT(&htim3);
   }
 }
 
@@ -185,7 +156,7 @@ int main(void)
   MX_DMA_Init();
   MX_TIM2_Init();
   MX_USART2_UART_Init();
-  MX_TIM3_Init();
+  MX_TIM5_Init();
   /* USER CODE BEGIN 2 */
   while (calibrated != 1){
     initialCalibration();
@@ -303,47 +274,47 @@ static void MX_TIM2_Init(void)
 }
 
 /**
-  * @brief TIM3 Initialization Function
+  * @brief TIM5 Initialization Function
   * @param None
   * @retval None
   */
-static void MX_TIM3_Init(void)
+static void MX_TIM5_Init(void)
 {
 
-  /* USER CODE BEGIN TIM3_Init 0 */
+  /* USER CODE BEGIN TIM5_Init 0 */
 
-  /* USER CODE END TIM3_Init 0 */
+  /* USER CODE END TIM5_Init 0 */
 
   TIM_ClockConfigTypeDef sClockSourceConfig = {0};
   TIM_MasterConfigTypeDef sMasterConfig = {0};
 
-  /* USER CODE BEGIN TIM3_Init 1 */
+  /* USER CODE BEGIN TIM5_Init 1 */
 
-  /* USER CODE END TIM3_Init 1 */
-  htim3.Instance = TIM3;
-  htim3.Init.Prescaler = 0;
-  htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim3.Init.Period = 65535;
-  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
-  if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
+  /* USER CODE END TIM5_Init 1 */
+  htim5.Instance = TIM5;
+  htim5.Init.Prescaler = 0;
+  htim5.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim5.Init.Period = 4294967295;
+  htim5.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim5.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+  if (HAL_TIM_Base_Init(&htim5) != HAL_OK)
   {
     Error_Handler();
   }
   sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
-  if (HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig) != HAL_OK)
+  if (HAL_TIM_ConfigClockSource(&htim5, &sClockSourceConfig) != HAL_OK)
   {
     Error_Handler();
   }
   sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
   sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-  if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim5, &sMasterConfig) != HAL_OK)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN TIM3_Init 2 */
+  /* USER CODE BEGIN TIM5_Init 2 */
 
-  /* USER CODE END TIM3_Init 2 */
+  /* USER CODE END TIM5_Init 2 */
 
 }
 

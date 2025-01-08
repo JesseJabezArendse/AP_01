@@ -1,0 +1,717 @@
+ARM GAS  C:\Temp\ccaNGCLw.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"vl53l1_api_debug.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c"
+  20              		.section	.text.VL53L1_decode_calibration_data_buffer,"ax",%progbits
+  21              		.align	1
+  22              		.global	VL53L1_decode_calibration_data_buffer
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	VL53L1_decode_calibration_data_buffer:
+  28              	.LVL0:
+  29              	.LFB3:
+   1:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** /**
+   2:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c ****  ******************************************************************************
+   3:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c ****  * Copyright (c) 2020, STMicroelectronics - All Rights Reserved
+   4:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c ****  *
+   5:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c ****  * This software is licensed under terms that can be found in the LICENSE file
+   6:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c ****  * in the root directory of this software component.
+   7:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c ****  * If no LICENSE file comes with this software, it is provided AS-IS.
+   8:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c ****  *
+   9:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c ****  ******************************************************************************
+  10:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c ****  */
+  11:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  12:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  13:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  14:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  15:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** #include "vl53l1_ll_def.h"
+  16:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** #include "vl53l1_ll_device.h"
+  17:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** #include "vl53l1_register_structs.h"
+  18:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** #include "vl53l1_hist_structs.h"
+  19:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** #include "vl53l1_nvm_structs.h"
+  20:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** #include "vl53l1_nvm.h"
+  21:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** #include "vl53l1_core.h"
+  22:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** #include "vl53l1_api_debug.h"
+  23:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  24:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** #ifdef VL53L1_LOG_ENABLE
+  25:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** #include "vl53l1_nvm_debug.h"
+  26:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** #endif
+  27:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  28:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** #define LOG_FUNCTION_START(fmt, ...) \
+  29:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	_LOG_FUNCTION_START(VL53L1_TRACE_MODULE_CORE, fmt, ##__VA_ARGS__)
+ARM GAS  C:\Temp\ccaNGCLw.s 			page 2
+
+
+  30:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** #define LOG_FUNCTION_END(status, ...) \
+  31:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	_LOG_FUNCTION_END(VL53L1_TRACE_MODULE_CORE, status, ##__VA_ARGS__)
+  32:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** #define LOG_FUNCTION_END_FMT(status, fmt, ...) \
+  33:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	_LOG_FUNCTION_END_FMT(VL53L1_TRACE_MODULE_CORE, status, \
+  34:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	fmt, ##__VA_ARGS__)
+  35:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  36:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** #define trace_print(level, ...) \
+  37:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	_LOG_TRACE_PRINT(trace_flags, \
+  38:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	level, VL53L1_TRACE_FUNCTION_NONE, ##__VA_ARGS__)
+  39:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  40:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  41:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** VL53L1_Error VL53L1_decode_calibration_data_buffer(
+  42:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	uint16_t                   buf_size,
+  43:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	uint8_t                   *pbuffer,
+  44:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	VL53L1_calibration_data_t *pdata)
+  45:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** {
+  30              		.loc 1 45 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 45 1 is_stmt 0 view .LVU1
+  35 0000 08B5     		push	{r3, lr}
+  36              		.cfi_def_cfa_offset 8
+  37              		.cfi_offset 3, -8
+  38              		.cfi_offset 14, -4
+  46:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	VL53L1_Error  status = VL53L1_ERROR_NONE;
+  39              		.loc 1 46 2 is_stmt 1 view .LVU2
+  40              	.LVL1:
+  47:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  48:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	LOG_FUNCTION_START("");
+  41              		.loc 1 48 24 view .LVU3
+  49:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  50:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	if (sizeof(VL53L1_calibration_data_t) > buf_size)
+  42              		.loc 1 50 2 view .LVU4
+  43              		.loc 1 50 5 is_stmt 0 view .LVU5
+  44 0002 B0F5BE7F 		cmp	r0, #380
+  45 0006 06D3     		bcc	.L3
+  46 0008 1046     		mov	r0, r2
+  47              	.LVL2:
+  51:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		return VL53L1_ERROR_COMMS_BUFFER_TOO_SMALL;
+  52:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  53:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	memcpy(pdata, pbuffer, sizeof(VL53L1_calibration_data_t));
+  48              		.loc 1 53 2 is_stmt 1 view .LVU6
+  49 000a 4FF4BE72 		mov	r2, #380
+  50              	.LVL3:
+  51              		.loc 1 53 2 is_stmt 0 view .LVU7
+  52 000e FFF7FEFF 		bl	memcpy
+  53              	.LVL4:
+  54:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  55:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	LOG_FUNCTION_END(status);
+  54              		.loc 1 55 26 is_stmt 1 view .LVU8
+  56:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  57:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	return status;
+  55              		.loc 1 57 2 view .LVU9
+  56              		.loc 1 57 9 is_stmt 0 view .LVU10
+  57 0012 0020     		movs	r0, #0
+  58              	.L2:
+ARM GAS  C:\Temp\ccaNGCLw.s 			page 3
+
+
+  58:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** }
+  59              		.loc 1 58 1 view .LVU11
+  60 0014 08BD     		pop	{r3, pc}
+  61              	.LVL5:
+  62              	.L3:
+  51:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  63              		.loc 1 51 10 view .LVU12
+  64 0016 6FF00900 		mvn	r0, #9
+  65              	.LVL6:
+  51:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  66              		.loc 1 51 10 view .LVU13
+  67 001a FBE7     		b	.L2
+  68              		.cfi_endproc
+  69              	.LFE3:
+  71              		.section	.text.VL53L1_get_nvm_debug_data,"ax",%progbits
+  72              		.align	1
+  73              		.global	VL53L1_get_nvm_debug_data
+  74              		.syntax unified
+  75              		.thumb
+  76              		.thumb_func
+  78              	VL53L1_get_nvm_debug_data:
+  79              	.LVL7:
+  80              	.LFB4:
+  59:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  60:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  61:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** VL53L1_Error VL53L1_get_nvm_debug_data(
+  62:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	VL53L1_DEV                          Dev,
+  63:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	VL53L1_decoded_nvm_data_t          *pdata)
+  64:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** {
+  81              		.loc 1 64 1 is_stmt 1 view -0
+  82              		.cfi_startproc
+  83              		@ args = 0, pretend = 0, frame = 0
+  84              		@ frame_needed = 0, uses_anonymous_args = 0
+  85              		.loc 1 64 1 is_stmt 0 view .LVU15
+  86 0000 08B5     		push	{r3, lr}
+  87              		.cfi_def_cfa_offset 8
+  88              		.cfi_offset 3, -8
+  89              		.cfi_offset 14, -4
+  90 0002 0A46     		mov	r2, r1
+  65:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  66:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  67:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	VL53L1_Error  status = VL53L1_ERROR_NONE;
+  91              		.loc 1 67 2 is_stmt 1 view .LVU16
+  92              	.LVL8:
+  68:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  69:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	LOG_FUNCTION_START("");
+  93              		.loc 1 69 24 view .LVU17
+  70:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  71:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	status = VL53L1_read_nvm(Dev, 0, pdata);
+  94              		.loc 1 71 2 view .LVU18
+  95              		.loc 1 71 11 is_stmt 0 view .LVU19
+  96 0004 0021     		movs	r1, #0
+  97              	.LVL9:
+  98              		.loc 1 71 11 view .LVU20
+  99 0006 FFF7FEFF 		bl	VL53L1_read_nvm
+ 100              	.LVL10:
+  72:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ARM GAS  C:\Temp\ccaNGCLw.s 			page 4
+
+
+  73:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** #ifdef VL53L1_LOG_ENABLE
+  74:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	if (status == VL53L1_ERROR_NONE)
+  75:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		VL53L1_print_decoded_nvm_data(
+  76:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 			pdata,
+  77:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 			"get_nvm_debug_data():pnvm_info.",
+  78:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 			VL53L1_TRACE_MODULE_NVM_DATA);
+  79:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** #endif
+  80:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  81:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	LOG_FUNCTION_END(status);
+ 101              		.loc 1 81 26 is_stmt 1 view .LVU21
+  82:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  83:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	return status;
+ 102              		.loc 1 83 2 view .LVU22
+  84:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** }
+ 103              		.loc 1 84 1 is_stmt 0 view .LVU23
+ 104 000a 08BD     		pop	{r3, pc}
+ 105              		.cfi_endproc
+ 106              	.LFE4:
+ 108              		.section	.text.VL53L1_get_histogram_debug_data,"ax",%progbits
+ 109              		.align	1
+ 110              		.global	VL53L1_get_histogram_debug_data
+ 111              		.syntax unified
+ 112              		.thumb
+ 113              		.thumb_func
+ 115              	VL53L1_get_histogram_debug_data:
+ 116              	.LVL11:
+ 117              	.LFB5:
+  85:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  86:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  87:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** VL53L1_Error VL53L1_get_histogram_debug_data(
+  88:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	VL53L1_DEV                          Dev,
+  89:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	VL53L1_histogram_bin_data_t        *pdata)
+  90:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** {
+ 118              		.loc 1 90 1 is_stmt 1 view -0
+ 119              		.cfi_startproc
+ 120              		@ args = 0, pretend = 0, frame = 0
+ 121              		@ frame_needed = 0, uses_anonymous_args = 0
+ 122              		.loc 1 90 1 is_stmt 0 view .LVU25
+ 123 0000 08B5     		push	{r3, lr}
+ 124              		.cfi_def_cfa_offset 8
+ 125              		.cfi_offset 3, -8
+ 126              		.cfi_offset 14, -4
+ 127 0002 0B46     		mov	r3, r1
+  91:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  92:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  93:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	VL53L1_Error  status = VL53L1_ERROR_NONE;
+ 128              		.loc 1 93 2 is_stmt 1 view .LVU26
+ 129              	.LVL12:
+  94:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  95:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
+ 130              		.loc 1 95 2 view .LVU27
+  96:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  97:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	LOG_FUNCTION_START("");
+ 131              		.loc 1 97 24 view .LVU28
+  98:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+  99:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 100:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	memcpy(
+ARM GAS  C:\Temp\ccaNGCLw.s 			page 5
+
+
+ 132              		.loc 1 100 2 view .LVU29
+ 133 0004 AC22     		movs	r2, #172
+ 134 0006 00F22441 		addw	r1, r0, #1060
+ 135              	.LVL13:
+ 136              		.loc 1 100 2 is_stmt 0 view .LVU30
+ 137 000a 1846     		mov	r0, r3
+ 138              	.LVL14:
+ 139              		.loc 1 100 2 view .LVU31
+ 140 000c FFF7FEFF 		bl	memcpy
+ 141              	.LVL15:
+ 101:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		pdata,
+ 102:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		&(pdev->hist_data),
+ 103:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		sizeof(VL53L1_histogram_bin_data_t));
+ 104:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 105:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	LOG_FUNCTION_END(status);
+ 142              		.loc 1 105 26 is_stmt 1 view .LVU32
+ 106:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 107:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	return status;
+ 143              		.loc 1 107 2 view .LVU33
+ 108:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** }
+ 144              		.loc 1 108 1 is_stmt 0 view .LVU34
+ 145 0010 0020     		movs	r0, #0
+ 146 0012 08BD     		pop	{r3, pc}
+ 147              		.cfi_endproc
+ 148              	.LFE5:
+ 150              		.section	.text.VL53L1_get_additional_data,"ax",%progbits
+ 151              		.align	1
+ 152              		.global	VL53L1_get_additional_data
+ 153              		.syntax unified
+ 154              		.thumb
+ 155              		.thumb_func
+ 157              	VL53L1_get_additional_data:
+ 158              	.LVL16:
+ 159              	.LFB6:
+ 109:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 110:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 111:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 112:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 113:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** VL53L1_Error VL53L1_get_additional_data(
+ 114:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	VL53L1_DEV                       Dev,
+ 115:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	VL53L1_additional_data_t        *pdata)
+ 116:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** {
+ 160              		.loc 1 116 1 is_stmt 1 view -0
+ 161              		.cfi_startproc
+ 162              		@ args = 0, pretend = 0, frame = 0
+ 163              		@ frame_needed = 0, uses_anonymous_args = 0
+ 164              		.loc 1 116 1 is_stmt 0 view .LVU36
+ 165 0000 08B5     		push	{r3, lr}
+ 166              		.cfi_def_cfa_offset 8
+ 167              		.cfi_offset 3, -8
+ 168              		.cfi_offset 14, -4
+ 117:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 118:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 119:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	VL53L1_Error  status = VL53L1_ERROR_NONE;
+ 169              		.loc 1 119 2 is_stmt 1 view .LVU37
+ 170              	.LVL17:
+ 120:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ARM GAS  C:\Temp\ccaNGCLw.s 			page 6
+
+
+ 121:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
+ 171              		.loc 1 121 2 view .LVU38
+ 122:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 123:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	LOG_FUNCTION_START("");
+ 172              		.loc 1 123 24 view .LVU39
+ 124:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 125:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 126:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 127:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	pdata->preset_mode             = pdev->preset_mode;
+ 173              		.loc 1 127 2 view .LVU40
+ 174              		.loc 1 127 39 is_stmt 0 view .LVU41
+ 175 0002 427E     		ldrb	r2, [r0, #25]	@ zero_extendqisi2
+ 176              		.loc 1 127 33 view .LVU42
+ 177 0004 0A70     		strb	r2, [r1]
+ 128:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	pdata->zone_preset             = pdev->zone_preset;
+ 178              		.loc 1 128 2 is_stmt 1 view .LVU43
+ 179              		.loc 1 128 39 is_stmt 0 view .LVU44
+ 180 0006 827E     		ldrb	r2, [r0, #26]	@ zero_extendqisi2
+ 181              		.loc 1 128 33 view .LVU45
+ 182 0008 4A70     		strb	r2, [r1, #1]
+ 129:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	pdata->measurement_mode        = pdev->measurement_mode;
+ 183              		.loc 1 129 2 is_stmt 1 view .LVU46
+ 184              		.loc 1 129 39 is_stmt 0 view .LVU47
+ 185 000a C27E     		ldrb	r2, [r0, #27]	@ zero_extendqisi2
+ 186              		.loc 1 129 33 view .LVU48
+ 187 000c 8A70     		strb	r2, [r1, #2]
+ 130:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	pdata->offset_calibration_mode = pdev->offset_calibration_mode;
+ 188              		.loc 1 130 2 is_stmt 1 view .LVU49
+ 189              		.loc 1 130 39 is_stmt 0 view .LVU50
+ 190 000e 027F     		ldrb	r2, [r0, #28]	@ zero_extendqisi2
+ 191              		.loc 1 130 33 view .LVU51
+ 192 0010 CA70     		strb	r2, [r1, #3]
+ 131:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	pdata->offset_correction_mode  = pdev->offset_correction_mode;
+ 193              		.loc 1 131 2 is_stmt 1 view .LVU52
+ 194              		.loc 1 131 39 is_stmt 0 view .LVU53
+ 195 0012 427F     		ldrb	r2, [r0, #29]	@ zero_extendqisi2
+ 196              		.loc 1 131 33 view .LVU54
+ 197 0014 0A71     		strb	r2, [r1, #4]
+ 132:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	pdata->dmax_mode               = pdev->dmax_mode;
+ 198              		.loc 1 132 2 is_stmt 1 view .LVU55
+ 199              		.loc 1 132 39 is_stmt 0 view .LVU56
+ 200 0016 827F     		ldrb	r2, [r0, #30]	@ zero_extendqisi2
+ 201              		.loc 1 132 33 view .LVU57
+ 202 0018 4A71     		strb	r2, [r1, #5]
+ 133:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 134:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	pdata->phasecal_config_timeout_us  = pdev->phasecal_config_timeout_us;
+ 203              		.loc 1 134 2 is_stmt 1 view .LVU58
+ 204              		.loc 1 134 43 is_stmt 0 view .LVU59
+ 205 001a 026A     		ldr	r2, [r0, #32]
+ 206              		.loc 1 134 37 view .LVU60
+ 207 001c 8A60     		str	r2, [r1, #8]
+ 135:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	pdata->mm_config_timeout_us        = pdev->mm_config_timeout_us;
+ 208              		.loc 1 135 2 is_stmt 1 view .LVU61
+ 209              		.loc 1 135 43 is_stmt 0 view .LVU62
+ 210 001e 426A     		ldr	r2, [r0, #36]
+ 211              		.loc 1 135 37 view .LVU63
+ 212 0020 CA60     		str	r2, [r1, #12]
+ARM GAS  C:\Temp\ccaNGCLw.s 			page 7
+
+
+ 136:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	pdata->range_config_timeout_us     = pdev->range_config_timeout_us;
+ 213              		.loc 1 136 2 is_stmt 1 view .LVU64
+ 214              		.loc 1 136 43 is_stmt 0 view .LVU65
+ 215 0022 826A     		ldr	r2, [r0, #40]
+ 216              		.loc 1 136 37 view .LVU66
+ 217 0024 0A61     		str	r2, [r1, #16]
+ 137:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	pdata->inter_measurement_period_ms = pdev->inter_measurement_period_ms;
+ 218              		.loc 1 137 2 is_stmt 1 view .LVU67
+ 219              		.loc 1 137 43 is_stmt 0 view .LVU68
+ 220 0026 C26A     		ldr	r2, [r0, #44]
+ 221              		.loc 1 137 37 view .LVU69
+ 222 0028 4A61     		str	r2, [r1, #20]
+ 138:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	pdata->dss_config__target_total_rate_mcps =
+ 223              		.loc 1 138 2 is_stmt 1 view .LVU70
+ 139:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 			pdev->dss_config__target_total_rate_mcps;
+ 224              		.loc 1 139 8 is_stmt 0 view .LVU71
+ 225 002a 038E     		ldrh	r3, [r0, #48]
+ 138:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	pdata->dss_config__target_total_rate_mcps =
+ 226              		.loc 1 138 44 view .LVU72
+ 227 002c 0B83     		strh	r3, [r1, #24]	@ movhi
+ 140:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 141:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 142:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 143:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	status =
+ 228              		.loc 1 143 2 is_stmt 1 view .LVU73
+ 144:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		VL53L1_get_histogram_debug_data(
+ 229              		.loc 1 144 3 is_stmt 0 view .LVU74
+ 230 002e 1C31     		adds	r1, r1, #28
+ 231              	.LVL18:
+ 232              		.loc 1 144 3 view .LVU75
+ 233 0030 FFF7FEFF 		bl	VL53L1_get_histogram_debug_data
+ 234              	.LVL19:
+ 145:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 			Dev,
+ 146:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 			&(pdata->VL53L1_p_010));
+ 147:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 148:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	LOG_FUNCTION_END(status);
+ 235              		.loc 1 148 26 is_stmt 1 view .LVU76
+ 149:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 150:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	return status;
+ 236              		.loc 1 150 2 view .LVU77
+ 151:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** }
+ 237              		.loc 1 151 1 is_stmt 0 view .LVU78
+ 238 0034 08BD     		pop	{r3, pc}
+ 239              		.cfi_endproc
+ 240              	.LFE6:
+ 242              		.section	.text.VL53L1_get_xtalk_debug_data,"ax",%progbits
+ 243              		.align	1
+ 244              		.global	VL53L1_get_xtalk_debug_data
+ 245              		.syntax unified
+ 246              		.thumb
+ 247              		.thumb_func
+ 249              	VL53L1_get_xtalk_debug_data:
+ 250              	.LVL20:
+ 251              	.LFB7:
+ 152:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 153:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 154:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ARM GAS  C:\Temp\ccaNGCLw.s 			page 8
+
+
+ 155:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 156:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** VL53L1_Error VL53L1_get_xtalk_debug_data(
+ 157:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	VL53L1_DEV                          Dev,
+ 158:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	VL53L1_xtalk_debug_data_t          *pdata)
+ 159:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** {
+ 252              		.loc 1 159 1 is_stmt 1 view -0
+ 253              		.cfi_startproc
+ 254              		@ args = 0, pretend = 0, frame = 0
+ 255              		@ frame_needed = 0, uses_anonymous_args = 0
+ 256              		.loc 1 159 1 is_stmt 0 view .LVU80
+ 257 0000 70B5     		push	{r4, r5, r6, lr}
+ 258              		.cfi_def_cfa_offset 16
+ 259              		.cfi_offset 4, -16
+ 260              		.cfi_offset 5, -12
+ 261              		.cfi_offset 6, -8
+ 262              		.cfi_offset 14, -4
+ 263 0002 0446     		mov	r4, r0
+ 264 0004 0D46     		mov	r5, r1
+ 160:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 161:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 162:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	VL53L1_Error  status = VL53L1_ERROR_NONE;
+ 265              		.loc 1 162 2 is_stmt 1 view .LVU81
+ 266              	.LVL21:
+ 163:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 164:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
+ 267              		.loc 1 164 2 view .LVU82
+ 165:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 166:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	LOG_FUNCTION_START("");
+ 268              		.loc 1 166 24 view .LVU83
+ 167:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 168:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 169:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	memcpy(
+ 269              		.loc 1 169 2 view .LVU84
+ 270 0006 026E     		ldr	r2, [r0, #96]	@ unaligned
+ 271 0008 436E     		ldr	r3, [r0, #100]	@ unaligned
+ 272 000a 806E     		ldr	r0, [r0, #104]	@ unaligned
+ 273              	.LVL22:
+ 274              		.loc 1 169 2 is_stmt 0 view .LVU85
+ 275 000c E16E     		ldr	r1, [r4, #108]	@ unaligned
+ 276              	.LVL23:
+ 277              		.loc 1 169 2 view .LVU86
+ 278 000e 2A60     		str	r2, [r5]	@ unaligned
+ 279 0010 6B60     		str	r3, [r5, #4]	@ unaligned
+ 280 0012 A860     		str	r0, [r5, #8]	@ unaligned
+ 281 0014 E960     		str	r1, [r5, #12]	@ unaligned
+ 282 0016 226F     		ldr	r2, [r4, #112]	@ unaligned
+ 283 0018 636F     		ldr	r3, [r4, #116]	@ unaligned
+ 284 001a 2A61     		str	r2, [r5, #16]	@ unaligned
+ 285 001c 6B61     		str	r3, [r5, #20]	@ unaligned
+ 170:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		&(pdata->customer),
+ 171:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		&(pdev->customer),
+ 172:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		sizeof(VL53L1_customer_nvm_managed_t));
+ 173:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 174:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	memcpy(
+ 286              		.loc 1 174 2 is_stmt 1 view .LVU87
+ 175:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		&(pdata->xtalk_cfg),
+ 176:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		&(pdev->xtalk_cfg),
+ARM GAS  C:\Temp\ccaNGCLw.s 			page 9
+
+
+ 287              		.loc 1 176 3 is_stmt 0 view .LVU88
+ 288 001e 04F53B73 		add	r3, r4, #748
+ 174:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		&(pdata->xtalk_cfg),
+ 289              		.loc 1 174 2 view .LVU89
+ 290 0022 05F13402 		add	r2, r5, #52
+ 291 0026 04F54371 		add	r1, r4, #780
+ 292              	.L12:
+ 293 002a 1E68     		ldr	r6, [r3]	@ unaligned
+ 294 002c D3F804E0 		ldr	lr, [r3, #4]	@ unaligned
+ 295 0030 D3F808C0 		ldr	ip, [r3, #8]	@ unaligned
+ 296 0034 D868     		ldr	r0, [r3, #12]	@ unaligned
+ 297 0036 1660     		str	r6, [r2]	@ unaligned
+ 298 0038 C2F804E0 		str	lr, [r2, #4]	@ unaligned
+ 299 003c C2F808C0 		str	ip, [r2, #8]	@ unaligned
+ 300 0040 D060     		str	r0, [r2, #12]	@ unaligned
+ 301 0042 1033     		adds	r3, r3, #16
+ 302 0044 1032     		adds	r2, r2, #16
+ 303 0046 8B42     		cmp	r3, r1
+ 304 0048 EFD1     		bne	.L12
+ 305 004a 1B68     		ldr	r3, [r3]	@ unaligned
+ 306 004c 1360     		str	r3, [r2]	@ unaligned
+ 177:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		sizeof(VL53L1_xtalk_config_t));
+ 178:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 179:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	memcpy(
+ 307              		.loc 1 179 2 is_stmt 1 view .LVU90
+ 308 004e AC22     		movs	r2, #172
+ 309 0050 04F22441 		addw	r1, r4, #1060
+ 310 0054 05F15800 		add	r0, r5, #88
+ 311 0058 FFF7FEFF 		bl	memcpy
+ 312              	.LVL24:
+ 180:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		&(pdata->hist_data),
+ 181:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		&(pdev->hist_data),
+ 182:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		sizeof(VL53L1_histogram_bin_data_t));
+ 183:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 184:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	memcpy(
+ 313              		.loc 1 184 2 view .LVU91
+ 314 005c F422     		movs	r2, #244
+ 315 005e 04F27C51 		addw	r1, r4, #1404
+ 316 0062 05F58270 		add	r0, r5, #260
+ 317 0066 FFF7FEFF 		bl	memcpy
+ 318              	.LVL25:
+ 185:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		&(pdata->xtalk_shapes),
+ 186:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		&(pdev->xtalk_shapes),
+ 187:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		sizeof(VL53L1_xtalk_histogram_data_t));
+ 188:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 189:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	memcpy(
+ 319              		.loc 1 189 2 view .LVU92
+ 320 006a 40F62C42 		movw	r2, #3116
+ 321 006e 04F5CE61 		add	r1, r4, #1648
+ 322 0072 05F5FC70 		add	r0, r5, #504
+ 323 0076 FFF7FEFF 		bl	memcpy
+ 324              	.LVL26:
+ 190:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		&(pdata->xtalk_results),
+ 191:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		&(pdev->xtalk_results),
+ 192:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		sizeof(VL53L1_xtalk_range_results_t));
+ 193:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 194:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	LOG_FUNCTION_END(status);
+ARM GAS  C:\Temp\ccaNGCLw.s 			page 10
+
+
+ 325              		.loc 1 194 26 view .LVU93
+ 195:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 196:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	return status;
+ 326              		.loc 1 196 2 view .LVU94
+ 197:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** }
+ 327              		.loc 1 197 1 is_stmt 0 view .LVU95
+ 328 007a 0020     		movs	r0, #0
+ 329 007c 70BD     		pop	{r4, r5, r6, pc}
+ 330              		.loc 1 197 1 view .LVU96
+ 331              		.cfi_endproc
+ 332              	.LFE7:
+ 334              		.section	.text.VL53L1_get_offset_debug_data,"ax",%progbits
+ 335              		.align	1
+ 336              		.global	VL53L1_get_offset_debug_data
+ 337              		.syntax unified
+ 338              		.thumb
+ 339              		.thumb_func
+ 341              	VL53L1_get_offset_debug_data:
+ 342              	.LVL27:
+ 343              	.LFB8:
+ 198:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 199:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 200:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** VL53L1_Error VL53L1_get_offset_debug_data(
+ 201:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	VL53L1_DEV                          Dev,
+ 202:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	VL53L1_offset_debug_data_t         *pdata)
+ 203:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** {
+ 344              		.loc 1 203 1 is_stmt 1 view -0
+ 345              		.cfi_startproc
+ 346              		@ args = 0, pretend = 0, frame = 0
+ 347              		@ frame_needed = 0, uses_anonymous_args = 0
+ 348              		.loc 1 203 1 is_stmt 0 view .LVU98
+ 349 0000 08B5     		push	{r3, lr}
+ 350              		.cfi_def_cfa_offset 8
+ 351              		.cfi_offset 3, -8
+ 352              		.cfi_offset 14, -4
+ 353 0002 0B46     		mov	r3, r1
+ 204:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 205:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 206:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	VL53L1_Error  status = VL53L1_ERROR_NONE;
+ 354              		.loc 1 206 2 is_stmt 1 view .LVU99
+ 355              	.LVL28:
+ 207:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 208:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	VL53L1_LLDriverData_t *pdev = VL53L1DevStructGetLLDriverHandle(Dev);
+ 356              		.loc 1 208 2 view .LVU100
+ 209:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 210:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	LOG_FUNCTION_START("");
+ 357              		.loc 1 210 24 view .LVU101
+ 211:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 212:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 213:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	memcpy(
+ 358              		.loc 1 213 2 view .LVU102
+ 359 0004 016E     		ldr	r1, [r0, #96]	@ unaligned
+ 360              	.LVL29:
+ 361              		.loc 1 213 2 is_stmt 0 view .LVU103
+ 362 0006 426E     		ldr	r2, [r0, #100]	@ unaligned
+ 363 0008 D0F868E0 		ldr	lr, [r0, #104]	@ unaligned
+ 364 000c D0F86CC0 		ldr	ip, [r0, #108]	@ unaligned
+ARM GAS  C:\Temp\ccaNGCLw.s 			page 11
+
+
+ 365 0010 1960     		str	r1, [r3]	@ unaligned
+ 366 0012 5A60     		str	r2, [r3, #4]	@ unaligned
+ 367 0014 C3F808E0 		str	lr, [r3, #8]	@ unaligned
+ 368 0018 C3F80CC0 		str	ip, [r3, #12]	@ unaligned
+ 369 001c 016F     		ldr	r1, [r0, #112]	@ unaligned
+ 370 001e 426F     		ldr	r2, [r0, #116]	@ unaligned
+ 371 0020 1961     		str	r1, [r3, #16]	@ unaligned
+ 372 0022 5A61     		str	r2, [r3, #20]	@ unaligned
+ 214:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		&(pdata->customer),
+ 215:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		&(pdev->customer),
+ 216:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		sizeof(VL53L1_customer_nvm_managed_t));
+ 217:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 218:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	memcpy(
+ 373              		.loc 1 218 2 is_stmt 1 view .LVU104
+ 374 0024 D0F8BC10 		ldr	r1, [r0, #188]	@ unaligned
+ 375 0028 D0F8C020 		ldr	r2, [r0, #192]	@ unaligned
+ 376 002c 9961     		str	r1, [r3, #24]	@ unaligned
+ 377 002e DA61     		str	r2, [r3, #28]	@ unaligned
+ 378 0030 B0F8C420 		ldrh	r2, [r0, #196]	@ unaligned
+ 379 0034 1A84     		strh	r2, [r3, #32]	@ unaligned
+ 219:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		&(pdata->fmt_dmax_cal),
+ 220:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		&(pdev->fmt_dmax_cal),
+ 221:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		sizeof(VL53L1_dmax_calibration_data_t));
+ 222:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 223:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	memcpy(
+ 380              		.loc 1 223 2 view .LVU105
+ 381 0036 D0F8C610 		ldr	r1, [r0, #198]	@ unaligned
+ 382 003a D0F8CA20 		ldr	r2, [r0, #202]	@ unaligned
+ 383 003e C3F82210 		str	r1, [r3, #34]	@ unaligned
+ 384 0042 C3F82620 		str	r2, [r3, #38]	@ unaligned
+ 385 0046 B0F8CE20 		ldrh	r2, [r0, #206]	@ unaligned
+ 386 004a 5A85     		strh	r2, [r3, #42]	@ unaligned
+ 224:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		&(pdata->cust_dmax_cal),
+ 225:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		&(pdev->cust_dmax_cal),
+ 226:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		sizeof(VL53L1_dmax_calibration_data_t));
+ 227:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 228:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	memcpy(
+ 387              		.loc 1 228 2 view .LVU106
+ 388 004c D0F8B410 		ldr	r1, [r0, #180]	@ unaligned
+ 389 0050 D0F8B820 		ldr	r2, [r0, #184]	@ unaligned
+ 390 0054 D962     		str	r1, [r3, #44]	@ unaligned
+ 391 0056 1A63     		str	r2, [r3, #48]	@ unaligned
+ 229:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		&(pdata->add_off_cal_data),
+ 230:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		&(pdev->add_off_cal_data),
+ 231:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		sizeof(VL53L1_additional_offset_cal_data_t));
+ 232:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 233:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	memcpy(
+ 392              		.loc 1 233 2 view .LVU107
+ 393 0058 5C22     		movs	r2, #92
+ 394 005a 00F59951 		add	r1, r0, #4896
+ 395 005e 1C31     		adds	r1, r1, #28
+ 396 0060 03F13400 		add	r0, r3, #52
+ 397              	.LVL30:
+ 398              		.loc 1 233 2 is_stmt 0 view .LVU108
+ 399 0064 FFF7FEFF 		bl	memcpy
+ 400              	.LVL31:
+ 234:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		&(pdata->offset_results),
+ARM GAS  C:\Temp\ccaNGCLw.s 			page 12
+
+
+ 235:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		&(pdev->offset_results),
+ 236:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 		sizeof(VL53L1_offset_range_results_t));
+ 237:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 238:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	LOG_FUNCTION_END(status);
+ 401              		.loc 1 238 26 is_stmt 1 view .LVU109
+ 239:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 
+ 240:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** 	return status;
+ 402              		.loc 1 240 2 view .LVU110
+ 241:Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c **** }
+ 403              		.loc 1 241 1 is_stmt 0 view .LVU111
+ 404 0068 0020     		movs	r0, #0
+ 405 006a 08BD     		pop	{r3, pc}
+ 406              		.cfi_endproc
+ 407              	.LFE8:
+ 409              		.text
+ 410              	.Letext0:
+ 411              		.file 2 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 412              		.file 3 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 413              		.file 4 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 414              		.file 5 "Drivers/BSP/Components/vl53l1cb/porting/vl53l1_types.h"
+ 415              		.file 6 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_codes.h"
+ 416              		.file 7 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_register_structs.h"
+ 417              		.file 8 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_ll_device.h"
+ 418              		.file 9 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax_structs.h"
+ 419              		.file 10 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_structs.h"
+ 420              		.file 11 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_ll_def.h"
+ 421              		.file 12 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_def.h"
+ 422              		.file 13 "Drivers/BSP/Components/vl53l1cb/vl53l1cb.h"
+ 423              		.file 14 "Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_user_data.h"
+ 424              		.file 15 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_nvm_structs.h"
+ 425              		.file 16 "Drivers/BSP/Components/vl53l1cb/modules/vl53l1_nvm.h"
+ 426              		.file 17 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for
+ 427              		.file 18 "<built-in>"
+ARM GAS  C:\Temp\ccaNGCLw.s 			page 13
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 vl53l1_api_debug.c
+  C:\Temp\ccaNGCLw.s:21     .text.VL53L1_decode_calibration_data_buffer:00000000 $t
+  C:\Temp\ccaNGCLw.s:27     .text.VL53L1_decode_calibration_data_buffer:00000000 VL53L1_decode_calibration_data_buffer
+  C:\Temp\ccaNGCLw.s:72     .text.VL53L1_get_nvm_debug_data:00000000 $t
+  C:\Temp\ccaNGCLw.s:78     .text.VL53L1_get_nvm_debug_data:00000000 VL53L1_get_nvm_debug_data
+  C:\Temp\ccaNGCLw.s:109    .text.VL53L1_get_histogram_debug_data:00000000 $t
+  C:\Temp\ccaNGCLw.s:115    .text.VL53L1_get_histogram_debug_data:00000000 VL53L1_get_histogram_debug_data
+  C:\Temp\ccaNGCLw.s:151    .text.VL53L1_get_additional_data:00000000 $t
+  C:\Temp\ccaNGCLw.s:157    .text.VL53L1_get_additional_data:00000000 VL53L1_get_additional_data
+  C:\Temp\ccaNGCLw.s:243    .text.VL53L1_get_xtalk_debug_data:00000000 $t
+  C:\Temp\ccaNGCLw.s:249    .text.VL53L1_get_xtalk_debug_data:00000000 VL53L1_get_xtalk_debug_data
+  C:\Temp\ccaNGCLw.s:335    .text.VL53L1_get_offset_debug_data:00000000 $t
+  C:\Temp\ccaNGCLw.s:341    .text.VL53L1_get_offset_debug_data:00000000 VL53L1_get_offset_debug_data
+
+UNDEFINED SYMBOLS
+memcpy
+VL53L1_read_nvm

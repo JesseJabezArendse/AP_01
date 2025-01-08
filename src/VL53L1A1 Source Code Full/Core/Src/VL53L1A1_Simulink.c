@@ -177,26 +177,35 @@ uint8_t isItWorthy(RANGING_SENSOR_Result_t *sub_TOF){
 }
 
 void getVL53L1A1(){
-    VL53L1A2_RANGING_SENSOR_GetDistance(INSTANCE_TOF_LEFT   , &sub_TOF_left   );
-    VL53L1A2_RANGING_SENSOR_GetDistance(INSTANCE_TOF_CENTRE , &sub_TOF_centre );
-    VL53L1A2_RANGING_SENSOR_GetDistance(INSTANCE_TOF_RIGHT  , &sub_TOF_right  );
+    VL53L1A2_RANGING_SENSOR_GetDistance(INSTANCE_TOF_LEFT   , &temp_TOF_left   );
+    VL53L1A2_RANGING_SENSOR_GetDistance(INSTANCE_TOF_CENTRE , &temp_TOF_centre );
+    VL53L1A2_RANGING_SENSOR_GetDistance(INSTANCE_TOF_RIGHT  , &temp_TOF_right  );
 
-    if (isItWorthy(&sub_TOF_left) == 1){
-        temp_TOF_left = sub_TOF_left;
+    for (int i = 0 ; i < 4 ; i++){
+        if (((temp_TOF_left   .ZoneResult[0]) .Status  [i]) == 0){
+            TOF_left = temp_TOF_left;
+        }
+        if (((temp_TOF_left   .ZoneResult[0]) .Status  [i]) == 255){
+            TOF_left = temp_TOF_left;
+        }
     }
-    if (isItWorthy(&sub_TOF_centre) == 1){
-        temp_TOF_centre = sub_TOF_centre;
-    }
-    if (isItWorthy(&sub_TOF_right) == 1){
-        temp_TOF_right = sub_TOF_right;
-    }
-    buff_counter++;
 
-    if (buff_counter == 60/tof_odr){
-        TOF_left = temp_TOF_left;
-        TOF_centre = temp_TOF_centre;
-        TOF_right = temp_TOF_right;
-        buff_counter = 0;
+    for (int i = 0 ; i < 4 ; i++){
+        if (((temp_TOF_centre   .ZoneResult[0]) .Status  [i]) == 0){
+            TOF_centre = temp_TOF_centre;
+        }
+        if (((temp_TOF_centre   .ZoneResult[0]) .Status  [i]) == 255){
+            TOF_centre = temp_TOF_centre;
+        }
+    }
+
+    for (int i = 0 ; i < 4 ; i++){
+        if (((temp_TOF_right   .ZoneResult[0]) .Status  [i]) == 0){
+            TOF_right = temp_TOF_right;
+        }
+        if (((temp_TOF_right   .ZoneResult[0]) .Status  [i]) == 255){
+            TOF_right = temp_TOF_right;
+        }
     }
 }
 
@@ -214,14 +223,19 @@ void sendToSimulink(){
     HAL_UART_Transmit(&huart2, (uint32_t *) &((TOF_left   .ZoneResult[0]) .Distance  [TOF_left.ZoneResult[0].NumberOfTargets -1])  , 4 , HAL_MAX_DELAY);
     HAL_UART_Transmit(&huart2, (float_t *)  &((TOF_left   .ZoneResult[0]) .Ambient   [TOF_left.ZoneResult[0].NumberOfTargets -1])  , 4 , HAL_MAX_DELAY);
     HAL_UART_Transmit(&huart2, (float_t *)  &((TOF_left   .ZoneResult[0]) .Signal    [TOF_left.ZoneResult[0].NumberOfTargets -1])  , 4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2, (float_t *)  &((TOF_left   .ZoneResult[0]) .Status    [TOF_left.ZoneResult[0].NumberOfTargets -1])  , 4 , HAL_MAX_DELAY);
+
     HAL_UART_Transmit(&huart2, (uint32_t *) &((TOF_centre .ZoneResult[0]) .Distance  [TOF_centre.ZoneResult[0].NumberOfTargets -1])  , 4 , HAL_MAX_DELAY);
     HAL_UART_Transmit(&huart2, (float_t *)  &((TOF_centre .ZoneResult[0]) .Ambient   [TOF_centre.ZoneResult[0].NumberOfTargets -1])  , 4 , HAL_MAX_DELAY);
     HAL_UART_Transmit(&huart2, (float_t *)  &((TOF_centre .ZoneResult[0]) .Signal    [TOF_centre.ZoneResult[0].NumberOfTargets -1])  , 4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2, (float_t *)  &((TOF_centre .ZoneResult[0]) .Status    [TOF_centre.ZoneResult[0].NumberOfTargets -1])  , 4 , HAL_MAX_DELAY);
+
     HAL_UART_Transmit(&huart2, (uint32_t *) &((TOF_right  .ZoneResult[0]) .Distance  [TOF_right.ZoneResult[0].NumberOfTargets -1])  , 4 , HAL_MAX_DELAY);
     HAL_UART_Transmit(&huart2, (float_t *)  &((TOF_right  .ZoneResult[0]) .Ambient   [TOF_right.ZoneResult[0].NumberOfTargets -1])  , 4 , HAL_MAX_DELAY);
     HAL_UART_Transmit(&huart2, (float_t *)  &((TOF_right  .ZoneResult[0]) .Signal    [TOF_right.ZoneResult[0].NumberOfTargets -1])  , 4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2, (float_t *)  &((TOF_right  .ZoneResult[0]) .Status    [TOF_right.ZoneResult[0].NumberOfTargets -1])  , 4 , HAL_MAX_DELAY);
 
-    HAL_UART_Transmit(&huart2, (uint32_t *) &counter          ,4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2, (uint32_t *) &counter         ,4 , HAL_MAX_DELAY);
     HAL_UART_Transmit(&huart2, (uint8_t *) &terminator       ,3 , HAL_MAX_DELAY);
 }
 
