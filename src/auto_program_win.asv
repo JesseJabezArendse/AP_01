@@ -1,8 +1,8 @@
-function auto_program_win(filename)
+function found = auto_program_win(filename)
     drives = getdrives('-nofloppy');
-    num_drives = size(drives,2);
-    for i = linspace(1,num_drives,num_drives)
-        drive_letter = drives{i};
+    size(drives,2)
+    for d = size(drives)
+        drive_letter = drives{d};
         drive_name = DriveName(drive_letter(1));
         if drive_name(end-5:end) == 'F411RE' % found the STM Drag and Drop Programming
             STLINK_DRIVE = upper(drive_letter);
@@ -15,8 +15,9 @@ function auto_program_win(filename)
         end 
         
     end
+
     error("No STM32 Nucleo F411RE Found")
-    %clearvars -except STLINK_COMPORT STLINK_DRIVE STM32_ODR
+    clearvars -except STLINK_COMPORT STLINK_DRIVE STM32_ODR
 end
 
 
