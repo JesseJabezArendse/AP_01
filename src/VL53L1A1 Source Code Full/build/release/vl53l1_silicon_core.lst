@@ -1,0 +1,92 @@
+ARM GAS  C:\Temp\ccBxSB7D.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"vl53l1_silicon_core.c"
+  16              		.text
+  17              		.section	.text.VL53L1_is_firmware_ready_silicon,"ax",%progbits
+  18              		.align	1
+  19              		.global	VL53L1_is_firmware_ready_silicon
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	VL53L1_is_firmware_ready_silicon:
+  25              		@ args = 0, pretend = 0, frame = 8
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 30B5     		push	{r4, r5, lr}
+  28 0002 83B0     		sub	sp, sp, #12
+  29 0004 0446     		mov	r4, r0
+  30 0006 0D46     		mov	r5, r1
+  31 0008 0523     		movs	r3, #5
+  32 000a 6A46     		mov	r2, sp
+  33 000c FD21     		movs	r1, #253
+  34 000e FFF7FEFF 		bl	VL53L1_ReadMulti
+  35 0012 00BB     		cbnz	r0, .L2
+  36 0014 9DF80020 		ldrb	r2, [sp]	@ zero_extendqisi2
+  37 0018 04F58053 		add	r3, r4, #4096
+  38 001c 83F8E123 		strb	r2, [r3, #993]
+  39 0020 9DF80110 		ldrb	r1, [sp, #1]	@ zero_extendqisi2
+  40 0024 83F8E213 		strb	r1, [r3, #994]
+  41 0028 9DF802C0 		ldrb	ip, [sp, #2]	@ zero_extendqisi2
+  42 002c 83F8E3C3 		strb	ip, [r3, #995]
+  43 0030 9DF803C0 		ldrb	ip, [sp, #3]	@ zero_extendqisi2
+  44 0034 83F8E4C3 		strb	ip, [r3, #996]
+  45 0038 9DF804C0 		ldrb	ip, [sp, #4]	@ zero_extendqisi2
+  46 003c 83F8E5C3 		strb	ip, [r3, #997]
+  47 0040 94F8C033 		ldrb	r3, [r4, #960]	@ zero_extendqisi2
+  48 0044 13F0010F 		tst	r3, #1
+  49 0048 0ED0     		beq	.L3
+  50 004a 02F01F02 		and	r2, r2, #31
+  51 004e 1F2A     		cmp	r2, #31
+  52 0050 03D0     		beq	.L7
+  53              	.L4:
+  54 0052 0023     		movs	r3, #0
+  55 0054 2B70     		strb	r3, [r5]
+  56              	.L2:
+  57 0056 03B0     		add	sp, sp, #12
+  58              		@ sp needed
+ARM GAS  C:\Temp\ccBxSB7D.s 			page 2
+
+
+  59 0058 30BD     		pop	{r4, r5, pc}
+  60              	.L7:
+  61 005a 01F01F01 		and	r1, r1, #31
+  62 005e 1F29     		cmp	r1, #31
+  63 0060 F7D1     		bne	.L4
+  64 0062 0123     		movs	r3, #1
+  65 0064 2B70     		strb	r3, [r5]
+  66 0066 F6E7     		b	.L2
+  67              	.L3:
+  68 0068 1CF0010F 		tst	ip, #1
+  69 006c 02D1     		bne	.L5
+  70 006e 0123     		movs	r3, #1
+  71 0070 2B70     		strb	r3, [r5]
+  72 0072 F0E7     		b	.L2
+  73              	.L5:
+  74 0074 0023     		movs	r3, #0
+  75 0076 2B70     		strb	r3, [r5]
+  76 0078 EDE7     		b	.L2
+  78              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccBxSB7D.s 			page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 vl53l1_silicon_core.c
+  C:\Temp\ccBxSB7D.s:18     .text.VL53L1_is_firmware_ready_silicon:00000000 $t
+  C:\Temp\ccBxSB7D.s:24     .text.VL53L1_is_firmware_ready_silicon:00000000 VL53L1_is_firmware_ready_silicon
+
+UNDEFINED SYMBOLS
+VL53L1_ReadMulti

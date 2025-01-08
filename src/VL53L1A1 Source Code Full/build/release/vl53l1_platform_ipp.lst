@@ -1,0 +1,152 @@
+ARM GAS  C:\Temp\ccbULJwc.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"vl53l1_platform_ipp.c"
+  16              		.text
+  17              		.section	.text.VL53L1_ipp_hist_process_data,"ax",%progbits
+  18              		.align	1
+  19              		.global	VL53L1_ipp_hist_process_data
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	VL53L1_ipp_hist_process_data:
+  25              		@ args = 24, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 00B5     		push	{lr}
+  28 0002 87B0     		sub	sp, sp, #28
+  29 0004 0846     		mov	r0, r1
+  30 0006 1146     		mov	r1, r2
+  31 0008 1A46     		mov	r2, r3
+  32 000a 0C9B     		ldr	r3, [sp, #48]
+  33 000c 0493     		str	r3, [sp, #16]
+  34 000e 0D9B     		ldr	r3, [sp, #52]
+  35 0010 0393     		str	r3, [sp, #12]
+  36 0012 0B9B     		ldr	r3, [sp, #44]
+  37 0014 0293     		str	r3, [sp, #8]
+  38 0016 0A9B     		ldr	r3, [sp, #40]
+  39 0018 0193     		str	r3, [sp, #4]
+  40 001a 099B     		ldr	r3, [sp, #36]
+  41 001c 0093     		str	r3, [sp]
+  42 001e 089B     		ldr	r3, [sp, #32]
+  43 0020 FFF7FEFF 		bl	VL53L1_hist_process_data
+  44 0024 07B0     		add	sp, sp, #28
+  45              		@ sp needed
+  46 0026 5DF804FB 		ldr	pc, [sp], #4
+  48              		.section	.text.VL53L1_ipp_hist_ambient_dmax,"ax",%progbits
+  49              		.align	1
+  50              		.global	VL53L1_ipp_hist_ambient_dmax
+  51              		.syntax unified
+  52              		.thumb
+  53              		.thumb_func
+  55              	VL53L1_ipp_hist_ambient_dmax:
+  56              		@ args = 8, pretend = 0, frame = 0
+  57              		@ frame_needed = 0, uses_anonymous_args = 0
+  58 0000 00B5     		push	{lr}
+  59 0002 83B0     		sub	sp, sp, #12
+  60 0004 0846     		mov	r0, r1
+ARM GAS  C:\Temp\ccbULJwc.s 			page 2
+
+
+  61 0006 1146     		mov	r1, r2
+  62 0008 1A46     		mov	r2, r3
+  63 000a 059B     		ldr	r3, [sp, #20]
+  64 000c 0093     		str	r3, [sp]
+  65 000e 049B     		ldr	r3, [sp, #16]
+  66 0010 FFF7FEFF 		bl	VL53L1_hist_ambient_dmax
+  67 0014 03B0     		add	sp, sp, #12
+  68              		@ sp needed
+  69 0016 5DF804FB 		ldr	pc, [sp], #4
+  71              		.section	.text.VL53L1_ipp_xtalk_calibration_process_data,"ax",%progbits
+  72              		.align	1
+  73              		.global	VL53L1_ipp_xtalk_calibration_process_data
+  74              		.syntax unified
+  75              		.thumb
+  76              		.thumb_func
+  78              	VL53L1_ipp_xtalk_calibration_process_data:
+  79              		@ args = 0, pretend = 0, frame = 0
+  80              		@ frame_needed = 0, uses_anonymous_args = 0
+  81 0000 08B5     		push	{r3, lr}
+  82 0002 0846     		mov	r0, r1
+  83 0004 1146     		mov	r1, r2
+  84 0006 1A46     		mov	r2, r3
+  85 0008 FFF7FEFF 		bl	VL53L1_xtalk_calibration_process_data
+  86 000c 08BD     		pop	{r3, pc}
+  88              		.section	.text.VL53L1_ipp_hist_xtalk_correction,"ax",%progbits
+  89              		.align	1
+  90              		.global	VL53L1_ipp_hist_xtalk_correction
+  91              		.syntax unified
+  92              		.thumb
+  93              		.thumb_func
+  95              	VL53L1_ipp_hist_xtalk_correction:
+  96              		@ args = 12, pretend = 0, frame = 0
+  97              		@ frame_needed = 0, uses_anonymous_args = 0
+  98 0000 00B5     		push	{lr}
+  99 0002 83B0     		sub	sp, sp, #12
+ 100 0004 0846     		mov	r0, r1
+ 101 0006 1146     		mov	r1, r2
+ 102 0008 1A46     		mov	r2, r3
+ 103 000a 069B     		ldr	r3, [sp, #24]
+ 104 000c 0193     		str	r3, [sp, #4]
+ 105 000e 059B     		ldr	r3, [sp, #20]
+ 106 0010 0093     		str	r3, [sp]
+ 107 0012 049B     		ldr	r3, [sp, #16]
+ 108 0014 FFF7FEFF 		bl	VL53L1_f_054
+ 109 0018 03B0     		add	sp, sp, #12
+ 110              		@ sp needed
+ 111 001a 5DF804FB 		ldr	pc, [sp], #4
+ 113              		.section	.text.VL53L1_ipp_generate_dual_reflectance_xtalk_samples,"ax",%progbits
+ 114              		.align	1
+ 115              		.global	VL53L1_ipp_generate_dual_reflectance_xtalk_samples
+ 116              		.syntax unified
+ 117              		.thumb
+ 118              		.thumb_func
+ 120              	VL53L1_ipp_generate_dual_reflectance_xtalk_samples:
+ 121              		@ args = 4, pretend = 0, frame = 0
+ 122              		@ frame_needed = 0, uses_anonymous_args = 0
+ 123 0000 08B5     		push	{r3, lr}
+ARM GAS  C:\Temp\ccbULJwc.s 			page 3
+
+
+ 124 0002 0846     		mov	r0, r1
+ 125 0004 1146     		mov	r1, r2
+ 126 0006 1A46     		mov	r2, r3
+ 127 0008 029B     		ldr	r3, [sp, #8]
+ 128 000a FFF7FEFF 		bl	VL53L1_generate_dual_reflectance_xtalk_samples
+ 129 000e 08BD     		pop	{r3, pc}
+ 131              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccbULJwc.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 vl53l1_platform_ipp.c
+  C:\Temp\ccbULJwc.s:18     .text.VL53L1_ipp_hist_process_data:00000000 $t
+  C:\Temp\ccbULJwc.s:24     .text.VL53L1_ipp_hist_process_data:00000000 VL53L1_ipp_hist_process_data
+  C:\Temp\ccbULJwc.s:49     .text.VL53L1_ipp_hist_ambient_dmax:00000000 $t
+  C:\Temp\ccbULJwc.s:55     .text.VL53L1_ipp_hist_ambient_dmax:00000000 VL53L1_ipp_hist_ambient_dmax
+  C:\Temp\ccbULJwc.s:72     .text.VL53L1_ipp_xtalk_calibration_process_data:00000000 $t
+  C:\Temp\ccbULJwc.s:78     .text.VL53L1_ipp_xtalk_calibration_process_data:00000000 VL53L1_ipp_xtalk_calibration_process_data
+  C:\Temp\ccbULJwc.s:89     .text.VL53L1_ipp_hist_xtalk_correction:00000000 $t
+  C:\Temp\ccbULJwc.s:95     .text.VL53L1_ipp_hist_xtalk_correction:00000000 VL53L1_ipp_hist_xtalk_correction
+  C:\Temp\ccbULJwc.s:114    .text.VL53L1_ipp_generate_dual_reflectance_xtalk_samples:00000000 $t
+  C:\Temp\ccbULJwc.s:120    .text.VL53L1_ipp_generate_dual_reflectance_xtalk_samples:00000000 VL53L1_ipp_generate_dual_reflectance_xtalk_samples
+
+UNDEFINED SYMBOLS
+VL53L1_hist_process_data
+VL53L1_hist_ambient_dmax
+VL53L1_xtalk_calibration_process_data
+VL53L1_f_054
+VL53L1_generate_dual_reflectance_xtalk_samples

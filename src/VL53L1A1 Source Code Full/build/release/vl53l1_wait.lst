@@ -1,0 +1,471 @@
+ARM GAS  C:\Temp\ccNHuEwC.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"vl53l1_wait.c"
+  16              		.text
+  17              		.section	.text.VL53L1_is_boot_complete,"ax",%progbits
+  18              		.align	1
+  19              		.global	VL53L1_is_boot_complete
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	VL53L1_is_boot_complete:
+  25              		@ args = 0, pretend = 0, frame = 8
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 70B5     		push	{r4, r5, r6, lr}
+  28 0002 82B0     		sub	sp, sp, #8
+  29 0004 0546     		mov	r5, r0
+  30 0006 0E46     		mov	r6, r1
+  31 0008 0023     		movs	r3, #0
+  32 000a 8DF80730 		strb	r3, [sp, #7]
+  33 000e 0DF10702 		add	r2, sp, #7
+  34 0012 E521     		movs	r1, #229
+  35 0014 FFF7FEFF 		bl	VL53L1_RdByte
+  36 0018 0446     		mov	r4, r0
+  37 001a 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+  38 001e 13F0010F 		tst	r3, #1
+  39 0022 08D0     		beq	.L2
+  40 0024 0123     		movs	r3, #1
+  41 0026 3370     		strb	r3, [r6]
+  42 0028 0321     		movs	r1, #3
+  43 002a 2846     		mov	r0, r5
+  44 002c FFF7FEFF 		bl	VL53L1_init_ll_driver_state
+  45              	.L3:
+  46 0030 2046     		mov	r0, r4
+  47 0032 02B0     		add	sp, sp, #8
+  48              		@ sp needed
+  49 0034 70BD     		pop	{r4, r5, r6, pc}
+  50              	.L2:
+  51 0036 0023     		movs	r3, #0
+  52 0038 3370     		strb	r3, [r6]
+  53 003a 0221     		movs	r1, #2
+  54 003c 2846     		mov	r0, r5
+  55 003e FFF7FEFF 		bl	VL53L1_init_ll_driver_state
+  56 0042 F5E7     		b	.L3
+  58              		.section	.text.VL53L1_is_firmware_ready,"ax",%progbits
+  59              		.align	1
+ARM GAS  C:\Temp\ccNHuEwC.s 			page 2
+
+
+  60              		.global	VL53L1_is_firmware_ready
+  61              		.syntax unified
+  62              		.thumb
+  63              		.thumb_func
+  65              	VL53L1_is_firmware_ready:
+  66              		@ args = 0, pretend = 0, frame = 0
+  67              		@ frame_needed = 0, uses_anonymous_args = 0
+  68 0000 38B5     		push	{r3, r4, r5, lr}
+  69 0002 0446     		mov	r4, r0
+  70 0004 0D46     		mov	r5, r1
+  71 0006 FFF7FEFF 		bl	VL53L1_is_firmware_ready_silicon
+  72 000a 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+  73 000c 84F83830 		strb	r3, [r4, #56]
+  74 0010 38BD     		pop	{r3, r4, r5, pc}
+  76              		.section	.text.VL53L1_is_new_data_ready,"ax",%progbits
+  77              		.align	1
+  78              		.global	VL53L1_is_new_data_ready
+  79              		.syntax unified
+  80              		.thumb
+  81              		.thumb_func
+  83              	VL53L1_is_new_data_ready:
+  84              		@ args = 0, pretend = 0, frame = 8
+  85              		@ frame_needed = 0, uses_anonymous_args = 0
+  86 0000 30B5     		push	{r4, r5, lr}
+  87 0002 83B0     		sub	sp, sp, #12
+  88 0004 0C46     		mov	r4, r1
+  89 0006 0023     		movs	r3, #0
+  90 0008 8DF80730 		strb	r3, [sp, #7]
+  91 000c 90F86A33 		ldrb	r3, [r0, #874]	@ zero_extendqisi2
+  92 0010 13F0100F 		tst	r3, #16
+  93 0014 0FD1     		bne	.L11
+  94 0016 0125     		movs	r5, #1
+  95              	.L8:
+  96 0018 0DF10702 		add	r2, sp, #7
+  97 001c 3121     		movs	r1, #49
+  98 001e FFF7FEFF 		bl	VL53L1_RdByte
+  99 0022 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 100 0026 03F00103 		and	r3, r3, #1
+ 101 002a 9D42     		cmp	r5, r3
+ 102 002c 05D0     		beq	.L13
+ 103 002e 0023     		movs	r3, #0
+ 104 0030 2370     		strb	r3, [r4]
+ 105              	.L10:
+ 106 0032 03B0     		add	sp, sp, #12
+ 107              		@ sp needed
+ 108 0034 30BD     		pop	{r4, r5, pc}
+ 109              	.L11:
+ 110 0036 0025     		movs	r5, #0
+ 111 0038 EEE7     		b	.L8
+ 112              	.L13:
+ 113 003a 0123     		movs	r3, #1
+ 114 003c 2370     		strb	r3, [r4]
+ 115 003e F8E7     		b	.L10
+ 117              		.section	.text.VL53L1_poll_for_boot_completion,"ax",%progbits
+ 118              		.align	1
+ 119              		.global	VL53L1_poll_for_boot_completion
+ 120              		.syntax unified
+ARM GAS  C:\Temp\ccNHuEwC.s 			page 3
+
+
+ 121              		.thumb
+ 122              		.thumb_func
+ 124              	VL53L1_poll_for_boot_completion:
+ 125              		@ args = 0, pretend = 0, frame = 0
+ 126              		@ frame_needed = 0, uses_anonymous_args = 0
+ 127 0000 70B5     		push	{r4, r5, r6, lr}
+ 128 0002 82B0     		sub	sp, sp, #8
+ 129 0004 0446     		mov	r4, r0
+ 130 0006 0D46     		mov	r5, r1
+ 131 0008 4FF49661 		mov	r1, #1200
+ 132 000c FFF7FEFF 		bl	VL53L1_WaitUs
+ 133 0010 0646     		mov	r6, r0
+ 134 0012 10B1     		cbz	r0, .L17
+ 135              	.L15:
+ 136 0014 3046     		mov	r0, r6
+ 137 0016 02B0     		add	sp, sp, #8
+ 138              		@ sp needed
+ 139 0018 70BD     		pop	{r4, r5, r6, pc}
+ 140              	.L17:
+ 141 001a 0123     		movs	r3, #1
+ 142 001c 0193     		str	r3, [sp, #4]
+ 143 001e 0093     		str	r3, [sp]
+ 144 0020 E522     		movs	r2, #229
+ 145 0022 2946     		mov	r1, r5
+ 146 0024 2046     		mov	r0, r4
+ 147 0026 FFF7FEFF 		bl	VL53L1_WaitValueMaskEx
+ 148 002a 0646     		mov	r6, r0
+ 149 002c 0028     		cmp	r0, #0
+ 150 002e F1D1     		bne	.L15
+ 151 0030 0321     		movs	r1, #3
+ 152 0032 2046     		mov	r0, r4
+ 153 0034 FFF7FEFF 		bl	VL53L1_init_ll_driver_state
+ 154 0038 ECE7     		b	.L15
+ 156              		.section	.text.VL53L1_wait_for_boot_completion,"ax",%progbits
+ 157              		.align	1
+ 158              		.global	VL53L1_wait_for_boot_completion
+ 159              		.syntax unified
+ 160              		.thumb
+ 161              		.thumb_func
+ 163              	VL53L1_wait_for_boot_completion:
+ 164              		@ args = 0, pretend = 0, frame = 8
+ 165              		@ frame_needed = 0, uses_anonymous_args = 0
+ 166 0000 10B5     		push	{r4, lr}
+ 167 0002 82B0     		sub	sp, sp, #8
+ 168 0004 0446     		mov	r4, r0
+ 169 0006 0023     		movs	r3, #0
+ 170 0008 8DF80730 		strb	r3, [sp, #7]
+ 171 000c 037E     		ldrb	r3, [r0, #24]	@ zero_extendqisi2
+ 172 000e 93B1     		cbz	r3, .L25
+ 173 0010 0023     		movs	r3, #0
+ 174              	.L21:
+ 175 0012 9DF80720 		ldrb	r2, [sp, #7]	@ zero_extendqisi2
+ 176 0016 9AB9     		cbnz	r2, .L20
+ 177 0018 93B9     		cbnz	r3, .L20
+ 178 001a 0DF10701 		add	r1, sp, #7
+ 179 001e 2046     		mov	r0, r4
+ 180 0020 FFF7FEFF 		bl	VL53L1_is_boot_complete
+ARM GAS  C:\Temp\ccNHuEwC.s 			page 4
+
+
+ 181 0024 0346     		mov	r3, r0
+ 182 0026 0028     		cmp	r0, #0
+ 183 0028 F3D1     		bne	.L21
+ 184 002a 0121     		movs	r1, #1
+ 185 002c 2046     		mov	r0, r4
+ 186 002e FFF7FEFF 		bl	VL53L1_WaitMs
+ 187 0032 0346     		mov	r3, r0
+ 188 0034 EDE7     		b	.L21
+ 189              	.L25:
+ 190 0036 4FF4FA71 		mov	r1, #500
+ 191 003a FFF7FEFF 		bl	VL53L1_poll_for_boot_completion
+ 192 003e 0346     		mov	r3, r0
+ 193              	.L20:
+ 194 0040 1846     		mov	r0, r3
+ 195 0042 02B0     		add	sp, sp, #8
+ 196              		@ sp needed
+ 197 0044 10BD     		pop	{r4, pc}
+ 199              		.section	.text.VL53L1_poll_for_firmware_ready,"ax",%progbits
+ 200              		.align	1
+ 201              		.global	VL53L1_poll_for_firmware_ready
+ 202              		.syntax unified
+ 203              		.thumb
+ 204              		.thumb_func
+ 206              	VL53L1_poll_for_firmware_ready:
+ 207              		@ args = 0, pretend = 0, frame = 16
+ 208              		@ frame_needed = 0, uses_anonymous_args = 0
+ 209 0000 70B5     		push	{r4, r5, r6, lr}
+ 210 0002 84B0     		sub	sp, sp, #16
+ 211 0004 0446     		mov	r4, r0
+ 212 0006 0E46     		mov	r6, r1
+ 213 0008 0025     		movs	r5, #0
+ 214 000a 0395     		str	r5, [sp, #12]
+ 215 000c 0295     		str	r5, [sp, #8]
+ 216 000e 8DF80750 		strb	r5, [sp, #7]
+ 217 0012 03A9     		add	r1, sp, #12
+ 218 0014 FFF7FEFF 		bl	VL53L1_GetTickCount
+ 219 0018 6563     		str	r5, [r4, #52]
+ 220 001a 07E0     		b	.L27
+ 221              	.L28:
+ 222 001c 02A9     		add	r1, sp, #8
+ 223 001e 2046     		mov	r0, r4
+ 224 0020 FFF7FEFF 		bl	VL53L1_GetTickCount
+ 225 0024 029B     		ldr	r3, [sp, #8]
+ 226 0026 039A     		ldr	r2, [sp, #12]
+ 227 0028 9B1A     		subs	r3, r3, r2
+ 228 002a 6363     		str	r3, [r4, #52]
+ 229              	.L27:
+ 230 002c BDB9     		cbnz	r5, .L29
+ 231 002e 636B     		ldr	r3, [r4, #52]
+ 232 0030 B342     		cmp	r3, r6
+ 233 0032 14D2     		bcs	.L29
+ 234 0034 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 235 0038 8BB9     		cbnz	r3, .L29
+ 236 003a 0DF10701 		add	r1, sp, #7
+ 237 003e 2046     		mov	r0, r4
+ 238 0040 FFF7FEFF 		bl	VL53L1_is_firmware_ready
+ 239 0044 0546     		mov	r5, r0
+ARM GAS  C:\Temp\ccNHuEwC.s 			page 5
+
+
+ 240 0046 0028     		cmp	r0, #0
+ 241 0048 E8D1     		bne	.L28
+ 242 004a 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 243 004e 002B     		cmp	r3, #0
+ 244 0050 E4D1     		bne	.L28
+ 245 0052 0121     		movs	r1, #1
+ 246 0054 2046     		mov	r0, r4
+ 247 0056 FFF7FEFF 		bl	VL53L1_WaitMs
+ 248 005a 0546     		mov	r5, r0
+ 249 005c DEE7     		b	.L28
+ 250              	.L29:
+ 251 005e 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 252 0062 03B9     		cbnz	r3, .L31
+ 253 0064 15B1     		cbz	r5, .L34
+ 254              	.L31:
+ 255 0066 2846     		mov	r0, r5
+ 256 0068 04B0     		add	sp, sp, #16
+ 257              		@ sp needed
+ 258 006a 70BD     		pop	{r4, r5, r6, pc}
+ 259              	.L34:
+ 260 006c 6FF00605 		mvn	r5, #6
+ 261 0070 F9E7     		b	.L31
+ 263              		.section	.text.VL53L1_wait_for_firmware_ready,"ax",%progbits
+ 264              		.align	1
+ 265              		.global	VL53L1_wait_for_firmware_ready
+ 266              		.syntax unified
+ 267              		.thumb
+ 268              		.thumb_func
+ 270              	VL53L1_wait_for_firmware_ready:
+ 271              		@ args = 0, pretend = 0, frame = 8
+ 272              		@ frame_needed = 0, uses_anonymous_args = 0
+ 273 0000 10B5     		push	{r4, lr}
+ 274 0002 82B0     		sub	sp, sp, #8
+ 275 0004 0446     		mov	r4, r0
+ 276 0006 0023     		movs	r3, #0
+ 277 0008 8DF80730 		strb	r3, [sp, #7]
+ 278 000c 90F8C433 		ldrb	r3, [r0, #964]	@ zero_extendqisi2
+ 279 0010 03F0F003 		and	r3, r3, #240
+ 280 0014 402B     		cmp	r3, #64
+ 281 0016 05D0     		beq	.L36
+ 282 0018 102B     		cmp	r3, #16
+ 283 001a 03D0     		beq	.L36
+ 284 001c 0023     		movs	r3, #0
+ 285              	.L37:
+ 286 001e 1846     		mov	r0, r3
+ 287 0020 02B0     		add	sp, sp, #8
+ 288              		@ sp needed
+ 289 0022 10BD     		pop	{r4, pc}
+ 290              	.L36:
+ 291 0024 237E     		ldrb	r3, [r4, #24]	@ zero_extendqisi2
+ 292 0026 A3B1     		cbz	r3, .L44
+ 293 0028 0023     		movs	r3, #0
+ 294              	.L39:
+ 295 002a 9DF80720 		ldrb	r2, [sp, #7]	@ zero_extendqisi2
+ 296 002e 002A     		cmp	r2, #0
+ 297 0030 F5D1     		bne	.L37
+ 298 0032 002B     		cmp	r3, #0
+ARM GAS  C:\Temp\ccNHuEwC.s 			page 6
+
+
+ 299 0034 F3D1     		bne	.L37
+ 300 0036 0DF10701 		add	r1, sp, #7
+ 301 003a 2046     		mov	r0, r4
+ 302 003c FFF7FEFF 		bl	VL53L1_is_firmware_ready
+ 303 0040 0346     		mov	r3, r0
+ 304 0042 0028     		cmp	r0, #0
+ 305 0044 F1D1     		bne	.L39
+ 306 0046 0121     		movs	r1, #1
+ 307 0048 2046     		mov	r0, r4
+ 308 004a FFF7FEFF 		bl	VL53L1_WaitMs
+ 309 004e 0346     		mov	r3, r0
+ 310 0050 EBE7     		b	.L39
+ 311              	.L44:
+ 312 0052 4FF4FA61 		mov	r1, #2000
+ 313 0056 2046     		mov	r0, r4
+ 314 0058 FFF7FEFF 		bl	VL53L1_poll_for_firmware_ready
+ 315 005c 0346     		mov	r3, r0
+ 316 005e DEE7     		b	.L37
+ 318              		.section	.text.VL53L1_poll_for_range_completion,"ax",%progbits
+ 319              		.align	1
+ 320              		.global	VL53L1_poll_for_range_completion
+ 321              		.syntax unified
+ 322              		.thumb
+ 323              		.thumb_func
+ 325              	VL53L1_poll_for_range_completion:
+ 326              		@ args = 0, pretend = 0, frame = 0
+ 327              		@ frame_needed = 0, uses_anonymous_args = 0
+ 328 0000 00B5     		push	{lr}
+ 329 0002 83B0     		sub	sp, sp, #12
+ 330 0004 90F86A33 		ldrb	r3, [r0, #874]	@ zero_extendqisi2
+ 331 0008 13F0100F 		tst	r3, #16
+ 332 000c 09D1     		bne	.L47
+ 333 000e 0123     		movs	r3, #1
+ 334              	.L46:
+ 335 0010 0122     		movs	r2, #1
+ 336 0012 0192     		str	r2, [sp, #4]
+ 337 0014 0092     		str	r2, [sp]
+ 338 0016 3122     		movs	r2, #49
+ 339 0018 FFF7FEFF 		bl	VL53L1_WaitValueMaskEx
+ 340 001c 03B0     		add	sp, sp, #12
+ 341              		@ sp needed
+ 342 001e 5DF804FB 		ldr	pc, [sp], #4
+ 343              	.L47:
+ 344 0022 0023     		movs	r3, #0
+ 345 0024 F4E7     		b	.L46
+ 347              		.section	.text.VL53L1_wait_for_range_completion,"ax",%progbits
+ 348              		.align	1
+ 349              		.global	VL53L1_wait_for_range_completion
+ 350              		.syntax unified
+ 351              		.thumb
+ 352              		.thumb_func
+ 354              	VL53L1_wait_for_range_completion:
+ 355              		@ args = 0, pretend = 0, frame = 8
+ 356              		@ frame_needed = 0, uses_anonymous_args = 0
+ 357 0000 10B5     		push	{r4, lr}
+ 358 0002 82B0     		sub	sp, sp, #8
+ 359 0004 0446     		mov	r4, r0
+ARM GAS  C:\Temp\ccNHuEwC.s 			page 7
+
+
+ 360 0006 0023     		movs	r3, #0
+ 361 0008 8DF80730 		strb	r3, [sp, #7]
+ 362 000c 037E     		ldrb	r3, [r0, #24]	@ zero_extendqisi2
+ 363 000e 93B1     		cbz	r3, .L56
+ 364 0010 0023     		movs	r3, #0
+ 365              	.L52:
+ 366 0012 9DF80720 		ldrb	r2, [sp, #7]	@ zero_extendqisi2
+ 367 0016 9AB9     		cbnz	r2, .L51
+ 368 0018 93B9     		cbnz	r3, .L51
+ 369 001a 0DF10701 		add	r1, sp, #7
+ 370 001e 2046     		mov	r0, r4
+ 371 0020 FFF7FEFF 		bl	VL53L1_is_new_data_ready
+ 372 0024 0346     		mov	r3, r0
+ 373 0026 0028     		cmp	r0, #0
+ 374 0028 F3D1     		bne	.L52
+ 375 002a 0121     		movs	r1, #1
+ 376 002c 2046     		mov	r0, r4
+ 377 002e FFF7FEFF 		bl	VL53L1_WaitMs
+ 378 0032 0346     		mov	r3, r0
+ 379 0034 EDE7     		b	.L52
+ 380              	.L56:
+ 381 0036 4FF4FA61 		mov	r1, #2000
+ 382 003a FFF7FEFF 		bl	VL53L1_poll_for_range_completion
+ 383 003e 0346     		mov	r3, r0
+ 384              	.L51:
+ 385 0040 1846     		mov	r0, r3
+ 386 0042 02B0     		add	sp, sp, #8
+ 387              		@ sp needed
+ 388 0044 10BD     		pop	{r4, pc}
+ 390              		.section	.text.VL53L1_wait_for_test_completion,"ax",%progbits
+ 391              		.align	1
+ 392              		.global	VL53L1_wait_for_test_completion
+ 393              		.syntax unified
+ 394              		.thumb
+ 395              		.thumb_func
+ 397              	VL53L1_wait_for_test_completion:
+ 398              		@ args = 0, pretend = 0, frame = 8
+ 399              		@ frame_needed = 0, uses_anonymous_args = 0
+ 400 0000 10B5     		push	{r4, lr}
+ 401 0002 82B0     		sub	sp, sp, #8
+ 402 0004 0446     		mov	r4, r0
+ 403 0006 0023     		movs	r3, #0
+ 404 0008 8DF80730 		strb	r3, [sp, #7]
+ 405 000c 037E     		ldrb	r3, [r0, #24]	@ zero_extendqisi2
+ 406 000e 93B1     		cbz	r3, .L64
+ 407 0010 0023     		movs	r3, #0
+ 408              	.L60:
+ 409 0012 9DF80720 		ldrb	r2, [sp, #7]	@ zero_extendqisi2
+ 410 0016 9AB9     		cbnz	r2, .L59
+ 411 0018 93B9     		cbnz	r3, .L59
+ 412 001a 0DF10701 		add	r1, sp, #7
+ 413 001e 2046     		mov	r0, r4
+ 414 0020 FFF7FEFF 		bl	VL53L1_is_new_data_ready
+ 415 0024 0346     		mov	r3, r0
+ 416 0026 0028     		cmp	r0, #0
+ 417 0028 F3D1     		bne	.L60
+ 418 002a 0121     		movs	r1, #1
+ARM GAS  C:\Temp\ccNHuEwC.s 			page 8
+
+
+ 419 002c 2046     		mov	r0, r4
+ 420 002e FFF7FEFF 		bl	VL53L1_WaitMs
+ 421 0032 0346     		mov	r3, r0
+ 422 0034 EDE7     		b	.L60
+ 423              	.L64:
+ 424 0036 4EF66021 		movw	r1, #60000
+ 425 003a FFF7FEFF 		bl	VL53L1_poll_for_range_completion
+ 426 003e 0346     		mov	r3, r0
+ 427              	.L59:
+ 428 0040 1846     		mov	r0, r3
+ 429 0042 02B0     		add	sp, sp, #8
+ 430              		@ sp needed
+ 431 0044 10BD     		pop	{r4, pc}
+ 433              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccNHuEwC.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 vl53l1_wait.c
+  C:\Temp\ccNHuEwC.s:18     .text.VL53L1_is_boot_complete:00000000 $t
+  C:\Temp\ccNHuEwC.s:24     .text.VL53L1_is_boot_complete:00000000 VL53L1_is_boot_complete
+  C:\Temp\ccNHuEwC.s:59     .text.VL53L1_is_firmware_ready:00000000 $t
+  C:\Temp\ccNHuEwC.s:65     .text.VL53L1_is_firmware_ready:00000000 VL53L1_is_firmware_ready
+  C:\Temp\ccNHuEwC.s:77     .text.VL53L1_is_new_data_ready:00000000 $t
+  C:\Temp\ccNHuEwC.s:83     .text.VL53L1_is_new_data_ready:00000000 VL53L1_is_new_data_ready
+  C:\Temp\ccNHuEwC.s:118    .text.VL53L1_poll_for_boot_completion:00000000 $t
+  C:\Temp\ccNHuEwC.s:124    .text.VL53L1_poll_for_boot_completion:00000000 VL53L1_poll_for_boot_completion
+  C:\Temp\ccNHuEwC.s:157    .text.VL53L1_wait_for_boot_completion:00000000 $t
+  C:\Temp\ccNHuEwC.s:163    .text.VL53L1_wait_for_boot_completion:00000000 VL53L1_wait_for_boot_completion
+  C:\Temp\ccNHuEwC.s:200    .text.VL53L1_poll_for_firmware_ready:00000000 $t
+  C:\Temp\ccNHuEwC.s:206    .text.VL53L1_poll_for_firmware_ready:00000000 VL53L1_poll_for_firmware_ready
+  C:\Temp\ccNHuEwC.s:264    .text.VL53L1_wait_for_firmware_ready:00000000 $t
+  C:\Temp\ccNHuEwC.s:270    .text.VL53L1_wait_for_firmware_ready:00000000 VL53L1_wait_for_firmware_ready
+  C:\Temp\ccNHuEwC.s:319    .text.VL53L1_poll_for_range_completion:00000000 $t
+  C:\Temp\ccNHuEwC.s:325    .text.VL53L1_poll_for_range_completion:00000000 VL53L1_poll_for_range_completion
+  C:\Temp\ccNHuEwC.s:348    .text.VL53L1_wait_for_range_completion:00000000 $t
+  C:\Temp\ccNHuEwC.s:354    .text.VL53L1_wait_for_range_completion:00000000 VL53L1_wait_for_range_completion
+  C:\Temp\ccNHuEwC.s:391    .text.VL53L1_wait_for_test_completion:00000000 $t
+  C:\Temp\ccNHuEwC.s:397    .text.VL53L1_wait_for_test_completion:00000000 VL53L1_wait_for_test_completion
+
+UNDEFINED SYMBOLS
+VL53L1_RdByte
+VL53L1_init_ll_driver_state
+VL53L1_is_firmware_ready_silicon
+VL53L1_WaitUs
+VL53L1_WaitValueMaskEx
+VL53L1_WaitMs
+VL53L1_GetTickCount

@@ -1,0 +1,828 @@
+ARM GAS  C:\Temp\ccU32dxb.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"vl53l1_error_strings.c"
+  16              		.text
+  17              		.section	.rodata.VL53L1_get_pal_error_string.str1.4,"aMS",%progbits,1
+  18              		.align	2
+  19              	.LC0:
+  20 0000 4E6F2045 		.ascii	"No Error\000"
+  20      72726F72 
+  20      00
+  21 0009 000000   		.align	2
+  22              	.LC1:
+  23 000c 43616C69 		.ascii	"Calibration Warning Error\000"
+  23      62726174 
+  23      696F6E20 
+  23      5761726E 
+  23      696E6720 
+  24 0026 0000     		.align	2
+  25              	.LC2:
+  26 0028 4D696E20 		.ascii	"Min clipped error\000"
+  26      636C6970 
+  26      70656420 
+  26      6572726F 
+  26      7200
+  27 003a 0000     		.align	2
+  28              	.LC3:
+  29 003c 556E6465 		.ascii	"Undefined error\000"
+  29      66696E65 
+  29      64206572 
+  29      726F7200 
+  30              		.align	2
+  31              	.LC4:
+  32 004c 496E7661 		.ascii	"Invalid parameters error\000"
+  32      6C696420 
+  32      70617261 
+  32      6D657465 
+  32      72732065 
+  33 0065 000000   		.align	2
+  34              	.LC5:
+  35 0068 4E6F7420 		.ascii	"Not supported error\000"
+  35      73757070 
+  35      6F727465 
+  35      64206572 
+  35      726F7200 
+  36              		.align	2
+ARM GAS  C:\Temp\ccU32dxb.s 			page 2
+
+
+  37              	.LC6:
+  38 007c 52616E67 		.ascii	"Range error\000"
+  38      65206572 
+  38      726F7200 
+  39              		.align	2
+  40              	.LC7:
+  41 0088 54696D65 		.ascii	"Time out error\000"
+  41      206F7574 
+  41      20657272 
+  41      6F7200
+  42 0097 00       		.align	2
+  43              	.LC8:
+  44 0098 4D6F6465 		.ascii	"Mode not supported error\000"
+  44      206E6F74 
+  44      20737570 
+  44      706F7274 
+  44      65642065 
+  45 00b1 000000   		.align	2
+  46              	.LC9:
+  47 00b4 42756666 		.ascii	"Buffer too small\000"
+  47      65722074 
+  47      6F6F2073 
+  47      6D616C6C 
+  47      00
+  48 00c5 000000   		.align	2
+  49              	.LC10:
+  50 00c8 436F6D6D 		.ascii	"Comms Buffer too small\000"
+  50      73204275 
+  50      66666572 
+  50      20746F6F 
+  50      20736D61 
+  51 00df 00       		.align	2
+  52              	.LC11:
+  53 00e0 4750494F 		.ascii	"GPIO not existing\000"
+  53      206E6F74 
+  53      20657869 
+  53      7374696E 
+  53      6700
+  54 00f2 0000     		.align	2
+  55              	.LC12:
+  56 00f4 4750494F 		.ascii	"GPIO funct not supported\000"
+  56      2066756E 
+  56      6374206E 
+  56      6F742073 
+  56      7570706F 
+  57 010d 000000   		.align	2
+  58              	.LC13:
+  59 0110 436F6E74 		.ascii	"Control Interface Error\000"
+  59      726F6C20 
+  59      496E7465 
+  59      72666163 
+  59      65204572 
+  60              		.align	2
+  61              	.LC14:
+  62 0128 496E7661 		.ascii	"Invalid Command Error\000"
+  62      6C696420 
+  62      436F6D6D 
+ARM GAS  C:\Temp\ccU32dxb.s 			page 3
+
+
+  62      616E6420 
+  62      4572726F 
+  63 013e 0000     		.align	2
+  64              	.LC15:
+  65 0140 44697669 		.ascii	"Division by zero Error\000"
+  65      73696F6E 
+  65      20627920 
+  65      7A65726F 
+  65      20457272 
+  66 0157 00       		.align	2
+  67              	.LC16:
+  68 0158 52656665 		.ascii	"Reference Spad Init Error\000"
+  68      72656E63 
+  68      65205370 
+  68      61642049 
+  68      6E697420 
+  69 0172 0000     		.align	2
+  70              	.LC17:
+  71 0174 47504820 		.ascii	"GPH Sync Check Fail - API out of sync\000"
+  71      53796E63 
+  71      20436865 
+  71      636B2046 
+  71      61696C20 
+  72 019a 0000     		.align	2
+  73              	.LC18:
+  74 019c 53747265 		.ascii	"Stream Count Check Fail - API out of sync\000"
+  74      616D2043 
+  74      6F756E74 
+  74      20436865 
+  74      636B2046 
+  75 01c6 0000     		.align	2
+  76              	.LC19:
+  77 01c8 47504820 		.ascii	"GPH ID Check Fail - API out of sync\000"
+  77      49442043 
+  77      6865636B 
+  77      20466169 
+  77      6C202D20 
+  78              		.align	2
+  79              	.LC20:
+  80 01ec 5A6F6E65 		.ascii	"Zone Stream Count Check Fail - API out of sync\000"
+  80      20537472 
+  80      65616D20 
+  80      436F756E 
+  80      74204368 
+  81 021b 00       		.align	2
+  82              	.LC21:
+  83 021c 5A6F6E65 		.ascii	"Zone GPH ID Check Fail - API out of sync\000"
+  83      20475048 
+  83      20494420 
+  83      43686563 
+  83      6B204661 
+  84 0245 000000   		.align	2
+  85              	.LC22:
+  86 0248 4E6F2058 		.ascii	"No Xtalk using full array - Xtalk Extract Fail\000"
+  86      74616C6B 
+  86      20757369 
+  86      6E672066 
+ARM GAS  C:\Temp\ccU32dxb.s 			page 4
+
+
+  86      756C6C20 
+  87 0277 00       		.align	2
+  88              	.LC23:
+  89 0278 5874616C 		.ascii	"Xtalk does not meet required VL53L1_p_011 limit - X"
+  89      6B20646F 
+  89      6573206E 
+  89      6F74206D 
+  89      65657420 
+  90 02ab 74616C6B 		.ascii	"talk Extract Fail\000"
+  90      20457874 
+  90      72616374 
+  90      20466169 
+  90      6C00
+  91 02bd 000000   		.align	2
+  92              	.LC24:
+  93 02c0 4F666673 		.ascii	"Offset Cal - one of more stages with no valid sampl"
+  93      65742043 
+  93      616C202D 
+  93      206F6E65 
+  93      206F6620 
+  94 02f3 6573202D 		.ascii	"es - fatal\000"
+  94      20666174 
+  94      616C00
+  95 02fe 0000     		.align	2
+  96              	.LC25:
+  97 0300 4F666673 		.ascii	"Offset Cal - one of more stages with no SPADS enabl"
+  97      65742043 
+  97      616C202D 
+  97      206F6E65 
+  97      206F6620 
+  98 0333 6573202D 		.ascii	"es - fatal\000"
+  98      20666174 
+  98      616C00
+  99 033e 0000     		.align	2
+ 100              	.LC26:
+ 101 0340 5A6F6E65 		.ascii	"Zone Cal - one of more zones with no valid samples "
+ 101      2043616C 
+ 101      202D206F 
+ 101      6E65206F 
+ 101      66206D6F 
+ 102 0373 2D206661 		.ascii	"- fatal\000"
+ 102      74616C00 
+ 103 037b 00       		.align	2
+ 104              	.LC27:
+ 105 037c 4F666673 		.ascii	"Offset Cal - Less than the requested number of vali"
+ 105      65742043 
+ 105      616C202D 
+ 105      204C6573 
+ 105      73207468 
+ 106 03af 64207361 		.ascii	"d samples\000"
+ 106      6D706C65 
+ 106      7300
+ 107 03b9 000000   		.align	2
+ 108              	.LC28:
+ 109 03bc 4F666673 		.ascii	"Offset Cal - Sigma estimate value too high - offset"
+ 109      65742043 
+ 109      616C202D 
+ARM GAS  C:\Temp\ccU32dxb.s 			page 5
+
+
+ 109      20536967 
+ 109      6D612065 
+ 110 03ef 206E6F74 		.ascii	" not stable\000"
+ 110      20737461 
+ 110      626C6500 
+ 111 03fb 00       		.align	2
+ 112              	.LC29:
+ 113 03fc 4F666673 		.ascii	"Offset Cal - Rate too high - in pile up\000"
+ 113      65742043 
+ 113      616C202D 
+ 113      20526174 
+ 113      6520746F 
+ 114              		.align	2
+ 115              	.LC30:
+ 116 0424 4F666673 		.ascii	"Offset Cal - Insufficient SPADs - offset may not be"
+ 116      65742043 
+ 116      616C202D 
+ 116      20496E73 
+ 116      75666669 
+ 117 0457 20737461 		.ascii	" stable\000"
+ 117      626C6500 
+ 118 045f 00       		.align	2
+ 119              	.LC31:
+ 120 0460 5A6F6E65 		.ascii	"Zone Cal - One or more zone with less than requeste"
+ 120      2043616C 
+ 120      202D204F 
+ 120      6E65206F 
+ 120      72206D6F 
+ 121 0493 64207661 		.ascii	"d valid samples\000"
+ 121      6C696420 
+ 121      73616D70 
+ 121      6C657300 
+ 122 04a3 00       		.align	2
+ 123              	.LC32:
+ 124 04a4 5A6F6E65 		.ascii	"Zone Cal - One of more zones the VL53L1_p_011 estim"
+ 124      2043616C 
+ 124      202D204F 
+ 124      6E65206F 
+ 124      66206D6F 
+ 125 04d7 61746520 		.ascii	"ate too high\000"
+ 125      746F6F20 
+ 125      68696768 
+ 125      00
+ 126              		.align	2
+ 127              	.LC33:
+ 128 04e4 5A6F6E65 		.ascii	"Zone Cal - One of more zones with rate too high - i"
+ 128      2043616C 
+ 128      202D204F 
+ 128      6E65206F 
+ 128      66206D6F 
+ 129 0517 6E207069 		.ascii	"n pile up\000"
+ 129      6C652075 
+ 129      7000
+ 130 0521 000000   		.align	2
+ 131              	.LC34:
+ 132 0524 52656620 		.ascii	"Ref SPAD Char - Not Enough Good SPADs\000"
+ 132      53504144 
+ARM GAS  C:\Temp\ccU32dxb.s 			page 6
+
+
+ 132      20436861 
+ 132      72202D20 
+ 132      4E6F7420 
+ 133 054a 0000     		.align	2
+ 134              	.LC35:
+ 135 054c 52656620 		.ascii	"Ref SPAD Char - Final Ref Rate too high\000"
+ 135      53504144 
+ 135      20436861 
+ 135      72202D20 
+ 135      46696E61 
+ 136              		.align	2
+ 137              	.LC36:
+ 138 0574 52656620 		.ascii	"Ref SPAD Char - Final Ref Rate too low\000"
+ 138      53504144 
+ 138      20436861 
+ 138      72202D20 
+ 138      46696E61 
+ 139 059b 00       		.align	2
+ 140              	.LC37:
+ 141 059c 5874616C 		.ascii	"Xtalk - Some missing and invalid samples\000"
+ 141      6B202D20 
+ 141      536F6D65 
+ 141      206D6973 
+ 141      73696E67 
+ 142 05c5 000000   		.align	2
+ 143              	.LC38:
+ 144 05c8 5874616C 		.ascii	"Xtalk - Gradient sample num = 0\000"
+ 144      6B202D20 
+ 144      47726164 
+ 144      69656E74 
+ 144      2073616D 
+ 145              		.align	2
+ 146              	.LC39:
+ 147 05e8 5874616C 		.ascii	"Xtalk - Gradient Sigma > Limit\000"
+ 147      6B202D20 
+ 147      47726164 
+ 147      69656E74 
+ 147      20536967 
+ 148 0607 00       		.align	2
+ 149              	.LC40:
+ 150 0608 44657669 		.ascii	"Device Firmware too old\000"
+ 150      63652046 
+ 150      69726D77 
+ 150      61726520 
+ 150      746F6F20 
+ 151              		.align	2
+ 152              	.LC41:
+ 153 0620 44657669 		.ascii	"Device Firmware too new\000"
+ 153      63652046 
+ 153      69726D77 
+ 153      61726520 
+ 153      746F6F20 
+ 154              		.align	2
+ 155              	.LC42:
+ 156 0638 556E6974 		.ascii	"Unit Test Fail\000"
+ 156      20546573 
+ 156      74204661 
+ARM GAS  C:\Temp\ccU32dxb.s 			page 7
+
+
+ 156      696C00
+ 157 0647 00       		.align	2
+ 158              	.LC43:
+ 159 0648 46696C65 		.ascii	"File Read Fail\000"
+ 159      20526561 
+ 159      64204661 
+ 159      696C00
+ 160 0657 00       		.align	2
+ 161              	.LC44:
+ 162 0658 46696C65 		.ascii	"File Write Fail\000"
+ 162      20577269 
+ 162      74652046 
+ 162      61696C00 
+ 163              		.align	2
+ 164              	.LC45:
+ 165 0668 4E6F7420 		.ascii	"Not implemented error\000"
+ 165      696D706C 
+ 165      656D656E 
+ 165      74656420 
+ 165      6572726F 
+ 166 067e 0000     		.align	2
+ 167              	.LC46:
+ 168 0680 556E6B6E 		.ascii	"Unknown Error Code\000"
+ 168      6F776E20 
+ 168      4572726F 
+ 168      7220436F 
+ 168      646500
+ 169              		.section	.text.VL53L1_get_pal_error_string,"ax",%progbits
+ 170              		.align	1
+ 171              		.global	VL53L1_get_pal_error_string
+ 172              		.syntax unified
+ 173              		.thumb
+ 174              		.thumb_func
+ 176              	VL53L1_get_pal_error_string:
+ 177              		@ args = 0, pretend = 0, frame = 0
+ 178              		@ frame_needed = 0, uses_anonymous_args = 0
+ 179 0000 08B5     		push	{r3, lr}
+ 180 0002 0346     		mov	r3, r0
+ 181 0004 0846     		mov	r0, r1
+ 182 0006 6033     		adds	r3, r3, #96
+ 183 0008 602B     		cmp	r3, #96
+ 184 000a 00F27881 		bhi	.L2
+ 185 000e DFE813F0 		tbh	[pc, r3, lsl #1]
+ 186              	.L4:
+ 187 0012 6A01     		.2byte	(.L49-.L4)/2
+ 188 0014 6401     		.2byte	(.L48-.L4)/2
+ 189 0016 7601     		.2byte	(.L2-.L4)/2
+ 190 0018 7601     		.2byte	(.L2-.L4)/2
+ 191 001a 7601     		.2byte	(.L2-.L4)/2
+ 192 001c 7601     		.2byte	(.L2-.L4)/2
+ 193 001e 5E01     		.2byte	(.L47-.L4)/2
+ 194 0020 7601     		.2byte	(.L2-.L4)/2
+ 195 0022 7601     		.2byte	(.L2-.L4)/2
+ 196 0024 7601     		.2byte	(.L2-.L4)/2
+ 197 0026 7601     		.2byte	(.L2-.L4)/2
+ 198 0028 5801     		.2byte	(.L46-.L4)/2
+ 199 002a 7601     		.2byte	(.L2-.L4)/2
+ARM GAS  C:\Temp\ccU32dxb.s 			page 8
+
+
+ 200 002c 7601     		.2byte	(.L2-.L4)/2
+ 201 002e 7601     		.2byte	(.L2-.L4)/2
+ 202 0030 7601     		.2byte	(.L2-.L4)/2
+ 203 0032 5201     		.2byte	(.L45-.L4)/2
+ 204 0034 7601     		.2byte	(.L2-.L4)/2
+ 205 0036 7601     		.2byte	(.L2-.L4)/2
+ 206 0038 7601     		.2byte	(.L2-.L4)/2
+ 207 003a 7601     		.2byte	(.L2-.L4)/2
+ 208 003c 7601     		.2byte	(.L2-.L4)/2
+ 209 003e 7601     		.2byte	(.L2-.L4)/2
+ 210 0040 7601     		.2byte	(.L2-.L4)/2
+ 211 0042 7601     		.2byte	(.L2-.L4)/2
+ 212 0044 7601     		.2byte	(.L2-.L4)/2
+ 213 0046 7601     		.2byte	(.L2-.L4)/2
+ 214 0048 7601     		.2byte	(.L2-.L4)/2
+ 215 004a 7601     		.2byte	(.L2-.L4)/2
+ 216 004c 7601     		.2byte	(.L2-.L4)/2
+ 217 004e 7601     		.2byte	(.L2-.L4)/2
+ 218 0050 7601     		.2byte	(.L2-.L4)/2
+ 219 0052 7601     		.2byte	(.L2-.L4)/2
+ 220 0054 7601     		.2byte	(.L2-.L4)/2
+ 221 0056 7601     		.2byte	(.L2-.L4)/2
+ 222 0058 7601     		.2byte	(.L2-.L4)/2
+ 223 005a 7601     		.2byte	(.L2-.L4)/2
+ 224 005c 7601     		.2byte	(.L2-.L4)/2
+ 225 005e 7601     		.2byte	(.L2-.L4)/2
+ 226 0060 7601     		.2byte	(.L2-.L4)/2
+ 227 0062 7601     		.2byte	(.L2-.L4)/2
+ 228 0064 7601     		.2byte	(.L2-.L4)/2
+ 229 0066 7601     		.2byte	(.L2-.L4)/2
+ 230 0068 7601     		.2byte	(.L2-.L4)/2
+ 231 006a 7601     		.2byte	(.L2-.L4)/2
+ 232 006c 7601     		.2byte	(.L2-.L4)/2
+ 233 006e 7601     		.2byte	(.L2-.L4)/2
+ 234 0070 7601     		.2byte	(.L2-.L4)/2
+ 235 0072 7601     		.2byte	(.L2-.L4)/2
+ 236 0074 7601     		.2byte	(.L2-.L4)/2
+ 237 0076 7601     		.2byte	(.L2-.L4)/2
+ 238 0078 7601     		.2byte	(.L2-.L4)/2
+ 239 007a 7601     		.2byte	(.L2-.L4)/2
+ 240 007c 7601     		.2byte	(.L2-.L4)/2
+ 241 007e 7601     		.2byte	(.L2-.L4)/2
+ 242 0080 7001     		.2byte	(.L44-.L4)/2
+ 243 0082 4C01     		.2byte	(.L43-.L4)/2
+ 244 0084 4601     		.2byte	(.L42-.L4)/2
+ 245 0086 4001     		.2byte	(.L41-.L4)/2
+ 246 0088 2801     		.2byte	(.L40-.L4)/2
+ 247 008a 2201     		.2byte	(.L39-.L4)/2
+ 248 008c 1C01     		.2byte	(.L38-.L4)/2
+ 249 008e 1601     		.2byte	(.L37-.L4)/2
+ 250 0090 1001     		.2byte	(.L36-.L4)/2
+ 251 0092 0A01     		.2byte	(.L35-.L4)/2
+ 252 0094 0401     		.2byte	(.L34-.L4)/2
+ 253 0096 3A01     		.2byte	(.L33-.L4)/2
+ 254 0098 3401     		.2byte	(.L32-.L4)/2
+ 255 009a 2E01     		.2byte	(.L31-.L4)/2
+ 256 009c 7601     		.2byte	(.L2-.L4)/2
+ARM GAS  C:\Temp\ccU32dxb.s 			page 9
+
+
+ 257 009e FE00     		.2byte	(.L30-.L4)/2
+ 258 00a0 F800     		.2byte	(.L29-.L4)/2
+ 259 00a2 F200     		.2byte	(.L28-.L4)/2
+ 260 00a4 EC00     		.2byte	(.L27-.L4)/2
+ 261 00a6 E600     		.2byte	(.L26-.L4)/2
+ 262 00a8 E000     		.2byte	(.L25-.L4)/2
+ 263 00aa DA00     		.2byte	(.L24-.L4)/2
+ 264 00ac D400     		.2byte	(.L23-.L4)/2
+ 265 00ae CE00     		.2byte	(.L22-.L4)/2
+ 266 00b0 C800     		.2byte	(.L21-.L4)/2
+ 267 00b2 C200     		.2byte	(.L20-.L4)/2
+ 268 00b4 BC00     		.2byte	(.L19-.L4)/2
+ 269 00b6 B600     		.2byte	(.L18-.L4)/2
+ 270 00b8 B000     		.2byte	(.L17-.L4)/2
+ 271 00ba AA00     		.2byte	(.L16-.L4)/2
+ 272 00bc A400     		.2byte	(.L15-.L4)/2
+ 273 00be 9E00     		.2byte	(.L14-.L4)/2
+ 274 00c0 9800     		.2byte	(.L13-.L4)/2
+ 275 00c2 9200     		.2byte	(.L12-.L4)/2
+ 276 00c4 8C00     		.2byte	(.L11-.L4)/2
+ 277 00c6 8600     		.2byte	(.L10-.L4)/2
+ 278 00c8 8000     		.2byte	(.L9-.L4)/2
+ 279 00ca 7A00     		.2byte	(.L8-.L4)/2
+ 280 00cc 7400     		.2byte	(.L7-.L4)/2
+ 281 00ce 6E00     		.2byte	(.L6-.L4)/2
+ 282 00d0 6800     		.2byte	(.L5-.L4)/2
+ 283 00d2 6100     		.2byte	(.L3-.L4)/2
+ 284              		.p2align 1
+ 285              	.L3:
+ 286 00d4 40F2FF12 		movw	r2, #511
+ 287 00d8 8C49     		ldr	r1, .L52
+ 288 00da FFF7FEFF 		bl	strncpy
+ 289              	.L50:
+ 290 00de 0020     		movs	r0, #0
+ 291 00e0 08BD     		pop	{r3, pc}
+ 292              	.L5:
+ 293 00e2 40F2FF12 		movw	r2, #511
+ 294 00e6 8A49     		ldr	r1, .L52+4
+ 295 00e8 FFF7FEFF 		bl	strncpy
+ 296 00ec F7E7     		b	.L50
+ 297              	.L6:
+ 298 00ee 40F2FF12 		movw	r2, #511
+ 299 00f2 8849     		ldr	r1, .L52+8
+ 300 00f4 FFF7FEFF 		bl	strncpy
+ 301 00f8 F1E7     		b	.L50
+ 302              	.L7:
+ 303 00fa 40F2FF12 		movw	r2, #511
+ 304 00fe 8649     		ldr	r1, .L52+12
+ 305 0100 FFF7FEFF 		bl	strncpy
+ 306 0104 EBE7     		b	.L50
+ 307              	.L8:
+ 308 0106 40F2FF12 		movw	r2, #511
+ 309 010a 8449     		ldr	r1, .L52+16
+ 310 010c FFF7FEFF 		bl	strncpy
+ 311 0110 E5E7     		b	.L50
+ 312              	.L9:
+ 313 0112 40F2FF12 		movw	r2, #511
+ARM GAS  C:\Temp\ccU32dxb.s 			page 10
+
+
+ 314 0116 8249     		ldr	r1, .L52+20
+ 315 0118 FFF7FEFF 		bl	strncpy
+ 316 011c DFE7     		b	.L50
+ 317              	.L10:
+ 318 011e 40F2FF12 		movw	r2, #511
+ 319 0122 8049     		ldr	r1, .L52+24
+ 320 0124 FFF7FEFF 		bl	strncpy
+ 321 0128 D9E7     		b	.L50
+ 322              	.L11:
+ 323 012a 40F2FF12 		movw	r2, #511
+ 324 012e 7E49     		ldr	r1, .L52+28
+ 325 0130 FFF7FEFF 		bl	strncpy
+ 326 0134 D3E7     		b	.L50
+ 327              	.L12:
+ 328 0136 40F2FF12 		movw	r2, #511
+ 329 013a 7C49     		ldr	r1, .L52+32
+ 330 013c FFF7FEFF 		bl	strncpy
+ 331 0140 CDE7     		b	.L50
+ 332              	.L13:
+ 333 0142 40F2FF12 		movw	r2, #511
+ 334 0146 7A49     		ldr	r1, .L52+36
+ 335 0148 FFF7FEFF 		bl	strncpy
+ 336 014c C7E7     		b	.L50
+ 337              	.L14:
+ 338 014e 40F2FF12 		movw	r2, #511
+ 339 0152 7849     		ldr	r1, .L52+40
+ 340 0154 FFF7FEFF 		bl	strncpy
+ 341 0158 C1E7     		b	.L50
+ 342              	.L15:
+ 343 015a 40F2FF12 		movw	r2, #511
+ 344 015e 7649     		ldr	r1, .L52+44
+ 345 0160 FFF7FEFF 		bl	strncpy
+ 346 0164 BBE7     		b	.L50
+ 347              	.L16:
+ 348 0166 40F2FF12 		movw	r2, #511
+ 349 016a 7449     		ldr	r1, .L52+48
+ 350 016c FFF7FEFF 		bl	strncpy
+ 351 0170 B5E7     		b	.L50
+ 352              	.L17:
+ 353 0172 40F2FF12 		movw	r2, #511
+ 354 0176 7249     		ldr	r1, .L52+52
+ 355 0178 FFF7FEFF 		bl	strncpy
+ 356 017c AFE7     		b	.L50
+ 357              	.L18:
+ 358 017e 40F2FF12 		movw	r2, #511
+ 359 0182 7049     		ldr	r1, .L52+56
+ 360 0184 FFF7FEFF 		bl	strncpy
+ 361 0188 A9E7     		b	.L50
+ 362              	.L19:
+ 363 018a 40F2FF12 		movw	r2, #511
+ 364 018e 6E49     		ldr	r1, .L52+60
+ 365 0190 FFF7FEFF 		bl	strncpy
+ 366 0194 A3E7     		b	.L50
+ 367              	.L20:
+ 368 0196 40F2FF12 		movw	r2, #511
+ 369 019a 6C49     		ldr	r1, .L52+64
+ 370 019c FFF7FEFF 		bl	strncpy
+ARM GAS  C:\Temp\ccU32dxb.s 			page 11
+
+
+ 371 01a0 9DE7     		b	.L50
+ 372              	.L21:
+ 373 01a2 40F2FF12 		movw	r2, #511
+ 374 01a6 6A49     		ldr	r1, .L52+68
+ 375 01a8 FFF7FEFF 		bl	strncpy
+ 376 01ac 97E7     		b	.L50
+ 377              	.L22:
+ 378 01ae 40F2FF12 		movw	r2, #511
+ 379 01b2 6849     		ldr	r1, .L52+72
+ 380 01b4 FFF7FEFF 		bl	strncpy
+ 381 01b8 91E7     		b	.L50
+ 382              	.L23:
+ 383 01ba 40F2FF12 		movw	r2, #511
+ 384 01be 6649     		ldr	r1, .L52+76
+ 385 01c0 FFF7FEFF 		bl	strncpy
+ 386 01c4 8BE7     		b	.L50
+ 387              	.L24:
+ 388 01c6 40F2FF12 		movw	r2, #511
+ 389 01ca 6449     		ldr	r1, .L52+80
+ 390 01cc FFF7FEFF 		bl	strncpy
+ 391 01d0 85E7     		b	.L50
+ 392              	.L25:
+ 393 01d2 40F2FF12 		movw	r2, #511
+ 394 01d6 6249     		ldr	r1, .L52+84
+ 395 01d8 FFF7FEFF 		bl	strncpy
+ 396 01dc 7FE7     		b	.L50
+ 397              	.L26:
+ 398 01de 40F2FF12 		movw	r2, #511
+ 399 01e2 6049     		ldr	r1, .L52+88
+ 400 01e4 FFF7FEFF 		bl	strncpy
+ 401 01e8 79E7     		b	.L50
+ 402              	.L27:
+ 403 01ea 40F2FF12 		movw	r2, #511
+ 404 01ee 5E49     		ldr	r1, .L52+92
+ 405 01f0 FFF7FEFF 		bl	strncpy
+ 406 01f4 73E7     		b	.L50
+ 407              	.L28:
+ 408 01f6 40F2FF12 		movw	r2, #511
+ 409 01fa 5C49     		ldr	r1, .L52+96
+ 410 01fc FFF7FEFF 		bl	strncpy
+ 411 0200 6DE7     		b	.L50
+ 412              	.L29:
+ 413 0202 40F2FF12 		movw	r2, #511
+ 414 0206 5A49     		ldr	r1, .L52+100
+ 415 0208 FFF7FEFF 		bl	strncpy
+ 416 020c 67E7     		b	.L50
+ 417              	.L30:
+ 418 020e 40F2FF12 		movw	r2, #511
+ 419 0212 5849     		ldr	r1, .L52+104
+ 420 0214 FFF7FEFF 		bl	strncpy
+ 421 0218 61E7     		b	.L50
+ 422              	.L34:
+ 423 021a 40F2FF12 		movw	r2, #511
+ 424 021e 5649     		ldr	r1, .L52+108
+ 425 0220 FFF7FEFF 		bl	strncpy
+ 426 0224 5BE7     		b	.L50
+ 427              	.L35:
+ARM GAS  C:\Temp\ccU32dxb.s 			page 12
+
+
+ 428 0226 40F2FF12 		movw	r2, #511
+ 429 022a 5449     		ldr	r1, .L52+112
+ 430 022c FFF7FEFF 		bl	strncpy
+ 431 0230 55E7     		b	.L50
+ 432              	.L36:
+ 433 0232 40F2FF12 		movw	r2, #511
+ 434 0236 5249     		ldr	r1, .L52+116
+ 435 0238 FFF7FEFF 		bl	strncpy
+ 436 023c 4FE7     		b	.L50
+ 437              	.L37:
+ 438 023e 40F2FF12 		movw	r2, #511
+ 439 0242 5049     		ldr	r1, .L52+120
+ 440 0244 FFF7FEFF 		bl	strncpy
+ 441 0248 49E7     		b	.L50
+ 442              	.L38:
+ 443 024a 40F2FF12 		movw	r2, #511
+ 444 024e 4E49     		ldr	r1, .L52+124
+ 445 0250 FFF7FEFF 		bl	strncpy
+ 446 0254 43E7     		b	.L50
+ 447              	.L39:
+ 448 0256 40F2FF12 		movw	r2, #511
+ 449 025a 4C49     		ldr	r1, .L52+128
+ 450 025c FFF7FEFF 		bl	strncpy
+ 451 0260 3DE7     		b	.L50
+ 452              	.L40:
+ 453 0262 40F2FF12 		movw	r2, #511
+ 454 0266 4A49     		ldr	r1, .L52+132
+ 455 0268 FFF7FEFF 		bl	strncpy
+ 456 026c 37E7     		b	.L50
+ 457              	.L31:
+ 458 026e 40F2FF12 		movw	r2, #511
+ 459 0272 4849     		ldr	r1, .L52+136
+ 460 0274 FFF7FEFF 		bl	strncpy
+ 461 0278 31E7     		b	.L50
+ 462              	.L32:
+ 463 027a 40F2FF12 		movw	r2, #511
+ 464 027e 4649     		ldr	r1, .L52+140
+ 465 0280 FFF7FEFF 		bl	strncpy
+ 466 0284 2BE7     		b	.L50
+ 467              	.L33:
+ 468 0286 40F2FF12 		movw	r2, #511
+ 469 028a 4449     		ldr	r1, .L52+144
+ 470 028c FFF7FEFF 		bl	strncpy
+ 471 0290 25E7     		b	.L50
+ 472              	.L41:
+ 473 0292 40F2FF12 		movw	r2, #511
+ 474 0296 4249     		ldr	r1, .L52+148
+ 475 0298 FFF7FEFF 		bl	strncpy
+ 476 029c 1FE7     		b	.L50
+ 477              	.L42:
+ 478 029e 40F2FF12 		movw	r2, #511
+ 479 02a2 4049     		ldr	r1, .L52+152
+ 480 02a4 FFF7FEFF 		bl	strncpy
+ 481 02a8 19E7     		b	.L50
+ 482              	.L43:
+ 483 02aa 40F2FF12 		movw	r2, #511
+ 484 02ae 3E49     		ldr	r1, .L52+156
+ARM GAS  C:\Temp\ccU32dxb.s 			page 13
+
+
+ 485 02b0 FFF7FEFF 		bl	strncpy
+ 486 02b4 13E7     		b	.L50
+ 487              	.L45:
+ 488 02b6 40F2FF12 		movw	r2, #511
+ 489 02ba 3C49     		ldr	r1, .L52+160
+ 490 02bc FFF7FEFF 		bl	strncpy
+ 491 02c0 0DE7     		b	.L50
+ 492              	.L46:
+ 493 02c2 40F2FF12 		movw	r2, #511
+ 494 02c6 3A49     		ldr	r1, .L52+164
+ 495 02c8 FFF7FEFF 		bl	strncpy
+ 496 02cc 07E7     		b	.L50
+ 497              	.L47:
+ 498 02ce 40F2FF12 		movw	r2, #511
+ 499 02d2 3849     		ldr	r1, .L52+168
+ 500 02d4 FFF7FEFF 		bl	strncpy
+ 501 02d8 01E7     		b	.L50
+ 502              	.L48:
+ 503 02da 40F2FF12 		movw	r2, #511
+ 504 02de 3649     		ldr	r1, .L52+172
+ 505 02e0 FFF7FEFF 		bl	strncpy
+ 506 02e4 FBE6     		b	.L50
+ 507              	.L49:
+ 508 02e6 40F2FF12 		movw	r2, #511
+ 509 02ea 3449     		ldr	r1, .L52+176
+ 510 02ec FFF7FEFF 		bl	strncpy
+ 511 02f0 F5E6     		b	.L50
+ 512              	.L44:
+ 513 02f2 40F2FF12 		movw	r2, #511
+ 514 02f6 3249     		ldr	r1, .L52+180
+ 515 02f8 FFF7FEFF 		bl	strncpy
+ 516 02fc EFE6     		b	.L50
+ 517              	.L2:
+ 518 02fe 40F2FF12 		movw	r2, #511
+ 519 0302 3049     		ldr	r1, .L52+184
+ 520 0304 FFF7FEFF 		bl	strncpy
+ 521 0308 E9E6     		b	.L50
+ 522              	.L53:
+ 523 030a 00BF     		.align	2
+ 524              	.L52:
+ 525 030c 00000000 		.word	.LC0
+ 526 0310 0C000000 		.word	.LC1
+ 527 0314 28000000 		.word	.LC2
+ 528 0318 3C000000 		.word	.LC3
+ 529 031c 4C000000 		.word	.LC4
+ 530 0320 68000000 		.word	.LC5
+ 531 0324 7C000000 		.word	.LC6
+ 532 0328 88000000 		.word	.LC7
+ 533 032c 98000000 		.word	.LC8
+ 534 0330 B4000000 		.word	.LC9
+ 535 0334 C8000000 		.word	.LC10
+ 536 0338 E0000000 		.word	.LC11
+ 537 033c F4000000 		.word	.LC12
+ 538 0340 10010000 		.word	.LC13
+ 539 0344 28010000 		.word	.LC14
+ 540 0348 40010000 		.word	.LC15
+ 541 034c 58010000 		.word	.LC16
+ARM GAS  C:\Temp\ccU32dxb.s 			page 14
+
+
+ 542 0350 74010000 		.word	.LC17
+ 543 0354 9C010000 		.word	.LC18
+ 544 0358 C8010000 		.word	.LC19
+ 545 035c EC010000 		.word	.LC20
+ 546 0360 1C020000 		.word	.LC21
+ 547 0364 48020000 		.word	.LC22
+ 548 0368 78020000 		.word	.LC23
+ 549 036c C0020000 		.word	.LC24
+ 550 0370 00030000 		.word	.LC25
+ 551 0374 40030000 		.word	.LC26
+ 552 0378 7C030000 		.word	.LC27
+ 553 037c BC030000 		.word	.LC28
+ 554 0380 FC030000 		.word	.LC29
+ 555 0384 24040000 		.word	.LC30
+ 556 0388 60040000 		.word	.LC31
+ 557 038c A4040000 		.word	.LC32
+ 558 0390 E4040000 		.word	.LC33
+ 559 0394 24050000 		.word	.LC34
+ 560 0398 4C050000 		.word	.LC35
+ 561 039c 74050000 		.word	.LC36
+ 562 03a0 9C050000 		.word	.LC37
+ 563 03a4 C8050000 		.word	.LC38
+ 564 03a8 E8050000 		.word	.LC39
+ 565 03ac 08060000 		.word	.LC40
+ 566 03b0 20060000 		.word	.LC41
+ 567 03b4 38060000 		.word	.LC42
+ 568 03b8 48060000 		.word	.LC43
+ 569 03bc 58060000 		.word	.LC44
+ 570 03c0 68060000 		.word	.LC45
+ 571 03c4 80060000 		.word	.LC46
+ 573              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccU32dxb.s 			page 15
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 vl53l1_error_strings.c
+  C:\Temp\ccU32dxb.s:18     .rodata.VL53L1_get_pal_error_string.str1.4:00000000 $d
+  C:\Temp\ccU32dxb.s:170    .text.VL53L1_get_pal_error_string:00000000 $t
+  C:\Temp\ccU32dxb.s:176    .text.VL53L1_get_pal_error_string:00000000 VL53L1_get_pal_error_string
+  C:\Temp\ccU32dxb.s:187    .text.VL53L1_get_pal_error_string:00000012 $d
+  C:\Temp\ccU32dxb.s:284    .text.VL53L1_get_pal_error_string:000000d4 $t
+  C:\Temp\ccU32dxb.s:525    .text.VL53L1_get_pal_error_string:0000030c $d
+
+UNDEFINED SYMBOLS
+strncpy

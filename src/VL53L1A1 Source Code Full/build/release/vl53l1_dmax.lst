@@ -1,0 +1,301 @@
+ARM GAS  C:\Temp\ccKWcSai.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"vl53l1_dmax.c"
+  16              		.text
+  17              		.section	.text.VL53L1_f_002,"ax",%progbits
+  18              		.align	1
+  19              		.global	VL53L1_f_002
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	VL53L1_f_002:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 70B5     		push	{r4, r5, r6, lr}
+  28 0002 0E46     		mov	r6, r1
+  29 0004 1546     		mov	r5, r2
+  30 0006 1C46     		mov	r4, r3
+  31 0008 03FB03F3 		mul	r3, r3, r3
+  32 000c 03EB8000 		add	r0, r3, r0, lsl #2
+  33 0010 FFF7FEFF 		bl	VL53L1_isqrt
+  34 0014 0444     		add	r4, r4, r0
+  35 0016 3001     		lsls	r0, r6, #4
+  36 0018 FFF7FEFF 		bl	VL53L1_isqrt
+  37 001c 05FB00F0 		mul	r0, r5, r0
+  38 0020 1CB1     		cbz	r4, .L1
+  39 0022 2044     		add	r0, r0, r4
+  40 0024 6400     		lsls	r4, r4, #1
+  41 0026 B0FBF4F0 		udiv	r0, r0, r4
+  42              	.L1:
+  43 002a 70BD     		pop	{r4, r5, r6, pc}
+  45              		.global	__aeabi_uldivmod
+  46              		.section	.text.VL53L1_f_001,"ax",%progbits
+  47              		.align	1
+  48              		.global	VL53L1_f_001
+  49              		.syntax unified
+  50              		.thumb
+  51              		.thumb_func
+  53              	VL53L1_f_001:
+  54              		@ args = 8, pretend = 0, frame = 16
+  55              		@ frame_needed = 0, uses_anonymous_args = 0
+  56 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+  57 0004 85B0     		sub	sp, sp, #20
+  58 0006 0190     		str	r0, [sp, #4]
+  59 0008 0E46     		mov	r6, r1
+  60 000a 1746     		mov	r7, r2
+ARM GAS  C:\Temp\ccKWcSai.s 			page 2
+
+
+  61 000c 1D46     		mov	r5, r3
+  62 000e 0E9C     		ldr	r4, [sp, #56]
+  63 0010 0023     		movs	r3, #0
+  64 0012 6383     		strh	r3, [r4, #26]	@ movhi
+  65 0014 6361     		str	r3, [r4, #20]
+  66 0016 2383     		strh	r3, [r4, #24]	@ movhi
+  67 0018 2361     		str	r3, [r4, #16]
+  68 001a E361     		str	r3, [r4, #28]
+  69 001c 2362     		str	r3, [r4, #32]
+  70 001e A384     		strh	r3, [r4, #36]	@ movhi
+  71 0020 E384     		strh	r3, [r4, #38]	@ movhi
+  72 0022 0F9A     		ldr	r2, [sp, #60]
+  73 0024 1380     		strh	r3, [r2]	@ movhi
+  74 0026 B5F88600 		ldrh	r0, [r5, #134]
+  75 002a 20B1     		cbz	r0, .L5
+  76 002c D5F88830 		ldr	r3, [r5, #136]
+  77 0030 002B     		cmp	r3, #0
+  78 0032 40F0C580 		bne	.L15
+  79              	.L5:
+  80 0036 3288     		ldrh	r2, [r6]
+  81 0038 002A     		cmp	r2, #0
+  82 003a 00F0BD80 		beq	.L6
+  83 003e B5F88630 		ldrh	r3, [r5, #134]
+  84 0042 002B     		cmp	r3, #0
+  85 0044 00F0B880 		beq	.L6
+  86 0048 F388     		ldrh	r3, [r6, #6]
+  87 004a 002B     		cmp	r3, #0
+  88 004c 00F0B480 		beq	.L6
+  89 0050 D5F88830 		ldr	r3, [r5, #136]
+  90 0054 002B     		cmp	r3, #0
+  91 0056 00F0AF80 		beq	.L6
+  92 005a 7088     		ldrh	r0, [r6, #2]
+  93 005c 4301     		lsls	r3, r0, #5
+  94 005e 1B1A     		subs	r3, r3, r0
+  95 0060 61EB0101 		sbc	r1, r1, r1
+  96 0064 8900     		lsls	r1, r1, #2
+  97 0066 41EA9371 		orr	r1, r1, r3, lsr #30
+  98 006a 9B00     		lsls	r3, r3, #2
+  99 006c 1B18     		adds	r3, r3, r0
+ 100 006e 41F10001 		adc	r1, r1, #0
+ 101 0072 C902     		lsls	r1, r1, #11
+ 102 0074 41EA5351 		orr	r1, r1, r3, lsr #21
+ 103 0078 DB02     		lsls	r3, r3, #11
+ 104 007a 5008     		lsrs	r0, r2, #1
+ 105 007c C018     		adds	r0, r0, r3
+ 106 007e 4FF00003 		mov	r3, #0
+ 107 0082 41F10001 		adc	r1, r1, #0
+ 108 0086 FFF7FEFF 		bl	__aeabi_uldivmod
+ 109 008a 2061     		str	r0, [r4, #16]
+ 110 008c 4FEA0018 		lsl	r8, r0, #4
+ 111 0090 C4F81080 		str	r8, [r4, #16]
+ 112 0094 D4F800A0 		ldr	r10, [r4]
+ 113 0098 6369     		ldr	r3, [r4, #20]
+ 114 009a A3FB0A92 		umull	r9, r2, r3, r10
+ 115 009e B4F81AB0 		ldrh	fp, [r4, #26]
+ 116 00a2 CDF808B0 		str	fp, [sp, #8]
+ 117 00a6 ABFB0993 		umull	r9, r3, fp, r9
+ARM GAS  C:\Temp\ccKWcSai.s 			page 3
+
+
+ 118 00aa 0BFB0233 		mla	r3, fp, r2, r3
+ 119 00ae 19F58029 		adds	r9, r9, #262144
+ 120 00b2 43F10003 		adc	r3, r3, #0
+ 121 00b6 4FEAD949 		lsr	r9, r9, #19
+ 122 00ba 49EA4339 		orr	r9, r9, r3, lsl #13
+ 123 00be DB0C     		lsrs	r3, r3, #19
+ 124 00c0 19F5FA79 		adds	r9, r9, #500
+ 125 00c4 43F10003 		adc	r3, r3, #0
+ 126 00c8 1946     		mov	r1, r3
+ 127 00ca 4FF47A72 		mov	r2, #1000
+ 128 00ce 0023     		movs	r3, #0
+ 129 00d0 4846     		mov	r0, r9
+ 130 00d2 0391     		str	r1, [sp, #12]
+ 131 00d4 FFF7FEFF 		bl	__aeabi_uldivmod
+ 132 00d8 6FF0C053 		mvn	r3, #402653184
+ 133 00dc 4B45     		cmp	r3, r9
+ 134 00de 4FF00303 		mov	r3, #3
+ 135 00e2 0399     		ldr	r1, [sp, #12]
+ 136 00e4 8B41     		sbcs	r3, r3, r1
+ 137 00e6 01D2     		bcs	.L7
+ 138 00e8 6FF07F40 		mvn	r0, #-16777216
+ 139              	.L7:
+ 140 00ec 8146     		mov	r9, r0
+ 141 00ee E061     		str	r0, [r4, #28]
+ 142 00f0 A8FB0A8A 		umull	r8, r10, r8, r10
+ 143 00f4 029B     		ldr	r3, [sp, #8]
+ 144 00f6 A3FB0828 		umull	r2, r8, r3, r8
+ 145 00fa 0BFB0A83 		mla	r3, fp, r10, r8
+ 146 00fe 12F58022 		adds	r2, r2, #262144
+ 147 0102 43F10003 		adc	r3, r3, #0
+ 148 0106 D20C     		lsrs	r2, r2, #19
+ 149 0108 42EA4332 		orr	r2, r2, r3, lsl #13
+ 150 010c D80C     		lsrs	r0, r3, #19
+ 151 010e 3389     		ldrh	r3, [r6, #8]
+ 152 0110 0199     		ldr	r1, [sp, #4]
+ 153 0112 A1FB0331 		umull	r3, r1, r1, r3
+ 154 0116 A3FB0221 		umull	r2, r1, r3, r2
+ 155 011a 03FB0011 		mla	r1, r3, r0, r1
+ 156 011e F388     		ldrh	r3, [r6, #6]
+ 157 0120 D801     		lsls	r0, r3, #7
+ 158 0122 8018     		adds	r0, r0, r2
+ 159 0124 4FEA0322 		lsl	r2, r3, #8
+ 160 0128 4FF00003 		mov	r3, #0
+ 161 012c 41F10001 		adc	r1, r1, #0
+ 162 0130 FFF7FEFF 		bl	__aeabi_uldivmod
+ 163 0134 10F5FA78 		adds	r8, r0, #500
+ 164 0138 41F1000A 		adc	r10, r1, #0
+ 165 013c 4FF47A72 		mov	r2, #1000
+ 166 0140 0023     		movs	r3, #0
+ 167 0142 4046     		mov	r0, r8
+ 168 0144 5146     		mov	r1, r10
+ 169 0146 FFF7FEFF 		bl	__aeabi_uldivmod
+ 170 014a 6FF0C053 		mvn	r3, #402653184
+ 171 014e 4345     		cmp	r3, r8
+ 172 0150 4FF00303 		mov	r3, #3
+ 173 0154 73EB0A03 		sbcs	r3, r3, r10
+ 174 0158 01D2     		bcs	.L8
+ARM GAS  C:\Temp\ccKWcSai.s 			page 4
+
+
+ 175 015a 6FF07F40 		mvn	r0, #-16777216
+ 176              	.L8:
+ 177 015e 2062     		str	r0, [r4, #32]
+ 178 0160 4FEA0920 		lsl	r0, r9, #8
+ 179 0164 FFF7FEFF 		bl	VL53L1_isqrt
+ 180 0168 7B78     		ldrb	r3, [r7, #1]	@ zero_extendqisi2
+ 181 016a 03FB00F0 		mul	r0, r3, r0
+ 182 016e E269     		ldr	r2, [r4, #28]
+ 183 0170 7B68     		ldr	r3, [r7, #4]
+ 184 0172 9A42     		cmp	r2, r3
+ 185 0174 05D2     		bcs	.L9
+ 186 0176 9B1A     		subs	r3, r3, r2
+ 187 0178 1A02     		lsls	r2, r3, #8
+ 188 017a B0EB032F 		cmp	r0, r3, lsl #8
+ 189 017e 00D2     		bcs	.L9
+ 190 0180 1046     		mov	r0, r2
+ 191              	.L9:
+ 192 0182 3B78     		ldrb	r3, [r7]	@ zero_extendqisi2
+ 193 0184 B288     		ldrh	r2, [r6, #4]
+ 194 0186 216A     		ldr	r1, [r4, #32]
+ 195 0188 FFF7FEFF 		bl	VL53L1_f_002
+ 196 018c E084     		strh	r0, [r4, #38]	@ movhi
+ 197 018e 236A     		ldr	r3, [r4, #32]
+ 198 0190 B5F88210 		ldrh	r1, [r5, #130]
+ 199 0194 03FB01F1 		mul	r1, r3, r1
+ 200 0198 0831     		adds	r1, r1, #8
+ 201 019a B868     		ldr	r0, [r7, #8]
+ 202 019c 3B78     		ldrb	r3, [r7]	@ zero_extendqisi2
+ 203 019e B288     		ldrh	r2, [r6, #4]
+ 204 01a0 0909     		lsrs	r1, r1, #4
+ 205 01a2 0002     		lsls	r0, r0, #8
+ 206 01a4 FFF7FEFF 		bl	VL53L1_f_002
+ 207 01a8 00B2     		sxth	r0, r0
+ 208 01aa A084     		strh	r0, [r4, #36]	@ movhi
+ 209 01ac B4F92630 		ldrsh	r3, [r4, #38]
+ 210 01b0 9842     		cmp	r0, r3
+ 211 01b2 49DA     		bge	.L10
+ 212 01b4 0F9B     		ldr	r3, [sp, #60]
+ 213 01b6 1880     		strh	r0, [r3]	@ movhi
+ 214              	.L6:
+ 215 01b8 0020     		movs	r0, #0
+ 216 01ba 05B0     		add	sp, sp, #20
+ 217              		@ sp needed
+ 218 01bc BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 219              	.L15:
+ 220 01c0 FFF7FEFF 		bl	VL53L1_calc_pll_period_us
+ 221 01c4 D5F88830 		ldr	r3, [r5, #136]
+ 222 01c8 0133     		adds	r3, r3, #1
+ 223 01ca 4FF40062 		mov	r2, #2048
+ 224 01ce 1021     		movs	r1, #16
+ 225 01d0 FFF7FEFF 		bl	VL53L1_duration_maths
+ 226 01d4 0146     		mov	r1, r0
+ 227 01d6 2060     		str	r0, [r4]
+ 228 01d8 D5F8A400 		ldr	r0, [r5, #164]
+ 229 01dc FFF7FEFF 		bl	VL53L1_rate_maths
+ 230 01e0 2083     		strh	r0, [r4, #24]	@ movhi
+ 231 01e2 2268     		ldr	r2, [r4]
+ARM GAS  C:\Temp\ccKWcSai.s 			page 5
+
+
+ 232 01e4 B5F87C10 		ldrh	r1, [r5, #124]
+ 233 01e8 D5F8A400 		ldr	r0, [r5, #164]
+ 234 01ec FFF7FEFF 		bl	VL53L1_events_per_spad_maths
+ 235 01f0 0246     		mov	r2, r0
+ 236 01f2 6061     		str	r0, [r4, #20]
+ 237 01f4 FB8A     		ldrh	r3, [r7, #22]
+ 238 01f6 A381     		strh	r3, [r4, #12]	@ movhi
+ 239 01f8 6383     		strh	r3, [r4, #26]	@ movhi
+ 240 01fa 0028     		cmp	r0, #0
+ 241 01fc 3FF41BAF 		beq	.L5
+ 242 0200 388B     		ldrh	r0, [r7, #24]
+ 243 0202 4301     		lsls	r3, r0, #5
+ 244 0204 1B1A     		subs	r3, r3, r0
+ 245 0206 61EB0101 		sbc	r1, r1, r1
+ 246 020a 8900     		lsls	r1, r1, #2
+ 247 020c 41EA9371 		orr	r1, r1, r3, lsr #30
+ 248 0210 9B00     		lsls	r3, r3, #2
+ 249 0212 1B18     		adds	r3, r3, r0
+ 250 0214 41F10001 		adc	r1, r1, #0
+ 251 0218 C900     		lsls	r1, r1, #3
+ 252 021a 41EA5371 		orr	r1, r1, r3, lsr #29
+ 253 021e DB00     		lsls	r3, r3, #3
+ 254 0220 0903     		lsls	r1, r1, #12
+ 255 0222 41EA1351 		orr	r1, r1, r3, lsr #20
+ 256 0226 1B03     		lsls	r3, r3, #12
+ 257 0228 5008     		lsrs	r0, r2, #1
+ 258 022a C018     		adds	r0, r0, r3
+ 259 022c 4FF00003 		mov	r3, #0
+ 260 0230 41F10001 		adc	r1, r1, #0
+ 261 0234 FFF7FEFF 		bl	__aeabi_uldivmod
+ 262 0238 FB8A     		ldrh	r3, [r7, #22]
+ 263 023a 9842     		cmp	r0, r3
+ 264 023c 71F10001 		sbcs	r1, r1, #0
+ 265 0240 BFF4F9AE 		bcs	.L5
+ 266 0244 6083     		strh	r0, [r4, #26]	@ movhi
+ 267 0246 F6E6     		b	.L5
+ 268              	.L10:
+ 269 0248 0F9A     		ldr	r2, [sp, #60]
+ 270 024a 1380     		strh	r3, [r2]	@ movhi
+ 271 024c B4E7     		b	.L6
+ 273              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccKWcSai.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 vl53l1_dmax.c
+  C:\Temp\ccKWcSai.s:18     .text.VL53L1_f_002:00000000 $t
+  C:\Temp\ccKWcSai.s:24     .text.VL53L1_f_002:00000000 VL53L1_f_002
+  C:\Temp\ccKWcSai.s:47     .text.VL53L1_f_001:00000000 $t
+  C:\Temp\ccKWcSai.s:53     .text.VL53L1_f_001:00000000 VL53L1_f_001
+
+UNDEFINED SYMBOLS
+VL53L1_isqrt
+__aeabi_uldivmod
+VL53L1_calc_pll_period_us
+VL53L1_duration_maths
+VL53L1_rate_maths
+VL53L1_events_per_spad_maths

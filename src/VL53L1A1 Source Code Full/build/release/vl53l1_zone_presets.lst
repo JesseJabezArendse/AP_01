@@ -1,0 +1,161 @@
+ARM GAS  C:\Temp\ccHQKNML.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"vl53l1_zone_presets.c"
+  16              		.text
+  17              		.section	.text.VL53L1_init_zone_config_histogram_bins,"ax",%progbits
+  18              		.align	1
+  19              		.global	VL53L1_init_zone_config_histogram_bins
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	VL53L1_init_zone_config_histogram_bins:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27              		@ link register save eliminated.
+  28 0000 0023     		movs	r3, #0
+  29 0002 05E0     		b	.L2
+  30              	.L3:
+  31 0004 C218     		adds	r2, r0, r3
+  32 0006 0121     		movs	r1, #1
+  33 0008 82F85C10 		strb	r1, [r2, #92]
+  34 000c 0B44     		add	r3, r3, r1
+  35 000e DBB2     		uxtb	r3, r3
+  36              	.L2:
+  37 0010 0278     		ldrb	r2, [r0]	@ zero_extendqisi2
+  38 0012 9A42     		cmp	r2, r3
+  39 0014 F6D8     		bhi	.L3
+  40 0016 0020     		movs	r0, #0
+  41 0018 7047     		bx	lr
+  43              		.section	.text.VL53L1_init_zone_config_structure,"ax",%progbits
+  44              		.align	1
+  45              		.global	VL53L1_init_zone_config_structure
+  46              		.syntax unified
+  47              		.thumb
+  48              		.thumb_func
+  50              	VL53L1_init_zone_config_structure:
+  51              		@ args = 20, pretend = 0, frame = 0
+  52              		@ frame_needed = 0, uses_anonymous_args = 0
+  53 0000 2DE9F84F 		push	{r3, r4, r5, r6, r7, r8, r9, r10, fp, lr}
+  54 0004 0546     		mov	r5, r0
+  55 0006 0C46     		mov	r4, r1
+  56 0008 9046     		mov	r8, r2
+  57 000a 1946     		mov	r1, r3
+  58 000c 9DF82890 		ldrb	r9, [sp, #40]	@ zero_extendqisi2
+  59 0010 9DF82C20 		ldrb	r2, [sp, #44]	@ zero_extendqisi2
+  60 0014 9DF83070 		ldrb	r7, [sp, #48]	@ zero_extendqisi2
+ARM GAS  C:\Temp\ccHQKNML.s 			page 2
+
+
+  61 0018 9DF83460 		ldrb	r6, [sp, #52]	@ zero_extendqisi2
+  62 001c 0E98     		ldr	r0, [sp, #56]
+  63 001e 1023     		movs	r3, #16
+  64 0020 0370     		strb	r3, [r0]
+  65 0022 4FF0000C 		mov	ip, #0
+  66 0026 6346     		mov	r3, ip
+  67 0028 25E0     		b	.L5
+  68              	.L6:
+  69 002a 0CF1010C 		add	ip, ip, #1
+  70 002e 1FFA8CFC 		uxth	ip, ip
+  71 0032 0AF1010E 		add	lr, r10, #1
+  72 0036 5FFA8EFA 		uxtb	r10, lr
+  73              	.L8:
+  74 003a 9245     		cmp	r10, r2
+  75 003c 19D2     		bcs	.L11
+  76 003e BCF10F0F 		cmp	ip, #15
+  77 0042 F2D8     		bhi	.L6
+  78 0044 80F801C0 		strb	ip, [r0, #1]
+  79 0048 0CF1060E 		add	lr, ip, #6
+  80 004c 00EB8E0E 		add	lr, r0, lr, lsl #2
+  81 0050 8EF80760 		strb	r6, [lr, #7]
+  82 0054 8EF80670 		strb	r7, [lr, #6]
+  83 0058 13FB04FB 		smulbb	fp, r3, r4
+  84 005c 55FA8BFB 		uxtab	fp, r5, fp
+  85 0060 8EF804B0 		strb	fp, [lr, #4]
+  86 0064 1AFB09FB 		smulbb	fp, r10, r9
+  87 0068 51FA8BFB 		uxtab	fp, r1, fp
+  88 006c 8EF805B0 		strb	fp, [lr, #5]
+  89 0070 DBE7     		b	.L6
+  90              	.L11:
+  91 0072 0133     		adds	r3, r3, #1
+  92 0074 DBB2     		uxtb	r3, r3
+  93              	.L5:
+  94 0076 4345     		cmp	r3, r8
+  95 0078 02D2     		bcs	.L12
+  96 007a 4FF0000A 		mov	r10, #0
+  97 007e DCE7     		b	.L8
+  98              	.L12:
+  99 0080 FFF7FEFF 		bl	VL53L1_init_zone_config_histogram_bins
+ 100 0084 BDE8F88F 		pop	{r3, r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 102              		.section	.text.VL53L1_zone_preset_xtalk_planar,"ax",%progbits
+ 103              		.align	1
+ 104              		.global	VL53L1_zone_preset_xtalk_planar
+ 105              		.syntax unified
+ 106              		.thumb
+ 107              		.thumb_func
+ 109              	VL53L1_zone_preset_xtalk_planar:
+ 110              		@ args = 0, pretend = 0, frame = 0
+ 111              		@ frame_needed = 0, uses_anonymous_args = 0
+ 112 0000 08B5     		push	{r3, lr}
+ 113 0002 0523     		movs	r3, #5
+ 114 0004 4370     		strb	r3, [r0, #1]
+ 115 0006 4FF0040C 		mov	ip, #4
+ 116 000a 81F801C0 		strb	ip, [r1, #1]
+ 117 000e 0F22     		movs	r2, #15
+ 118 0010 CA77     		strb	r2, [r1, #31]
+ 119 0012 0720     		movs	r0, #7
+ARM GAS  C:\Temp\ccHQKNML.s 			page 3
+
+
+ 120 0014 8877     		strb	r0, [r1, #30]
+ 121 0016 81F81CC0 		strb	ip, [r1, #28]
+ 122 001a 0823     		movs	r3, #8
+ 123 001c 4B77     		strb	r3, [r1, #29]
+ 124 001e 81F82320 		strb	r2, [r1, #35]
+ 125 0022 81F82200 		strb	r0, [r1, #34]
+ 126 0026 4FF00C0E 		mov	lr, #12
+ 127 002a 81F820E0 		strb	lr, [r1, #32]
+ 128 002e 81F82130 		strb	r3, [r1, #33]
+ 129 0032 81F82700 		strb	r0, [r1, #39]
+ 130 0036 81F82620 		strb	r2, [r1, #38]
+ 131 003a 81F82430 		strb	r3, [r1, #36]
+ 132 003e 81F825C0 		strb	ip, [r1, #37]
+ 133 0042 81F82B00 		strb	r0, [r1, #43]
+ 134 0046 81F82A20 		strb	r2, [r1, #42]
+ 135 004a 81F82830 		strb	r3, [r1, #40]
+ 136 004e 81F829E0 		strb	lr, [r1, #41]
+ 137 0052 81F82F20 		strb	r2, [r1, #47]
+ 138 0056 81F82E20 		strb	r2, [r1, #46]
+ 139 005a 81F82C30 		strb	r3, [r1, #44]
+ 140 005e 81F82D30 		strb	r3, [r1, #45]
+ 141 0062 0846     		mov	r0, r1
+ 142 0064 FFF7FEFF 		bl	VL53L1_init_zone_config_histogram_bins
+ 143 0068 08BD     		pop	{r3, pc}
+ 145              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccHQKNML.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 vl53l1_zone_presets.c
+  C:\Temp\ccHQKNML.s:18     .text.VL53L1_init_zone_config_histogram_bins:00000000 $t
+  C:\Temp\ccHQKNML.s:24     .text.VL53L1_init_zone_config_histogram_bins:00000000 VL53L1_init_zone_config_histogram_bins
+  C:\Temp\ccHQKNML.s:44     .text.VL53L1_init_zone_config_structure:00000000 $t
+  C:\Temp\ccHQKNML.s:50     .text.VL53L1_init_zone_config_structure:00000000 VL53L1_init_zone_config_structure
+  C:\Temp\ccHQKNML.s:103    .text.VL53L1_zone_preset_xtalk_planar:00000000 $t
+  C:\Temp\ccHQKNML.s:109    .text.VL53L1_zone_preset_xtalk_planar:00000000 VL53L1_zone_preset_xtalk_planar
+
+NO UNDEFINED SYMBOLS

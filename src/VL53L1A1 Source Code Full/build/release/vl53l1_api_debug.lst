@@ -1,0 +1,239 @@
+ARM GAS  C:\Temp\ccvBXKcO.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"vl53l1_api_debug.c"
+  16              		.text
+  17              		.section	.text.VL53L1_decode_calibration_data_buffer,"ax",%progbits
+  18              		.align	1
+  19              		.global	VL53L1_decode_calibration_data_buffer
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	VL53L1_decode_calibration_data_buffer:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 08B5     		push	{r3, lr}
+  28 0002 B0F5BE7F 		cmp	r0, #380
+  29 0006 06D3     		bcc	.L3
+  30 0008 1046     		mov	r0, r2
+  31 000a 4FF4BE72 		mov	r2, #380
+  32 000e FFF7FEFF 		bl	memcpy
+  33 0012 0020     		movs	r0, #0
+  34              	.L2:
+  35 0014 08BD     		pop	{r3, pc}
+  36              	.L3:
+  37 0016 6FF00900 		mvn	r0, #9
+  38 001a FBE7     		b	.L2
+  40              		.section	.text.VL53L1_get_nvm_debug_data,"ax",%progbits
+  41              		.align	1
+  42              		.global	VL53L1_get_nvm_debug_data
+  43              		.syntax unified
+  44              		.thumb
+  45              		.thumb_func
+  47              	VL53L1_get_nvm_debug_data:
+  48              		@ args = 0, pretend = 0, frame = 0
+  49              		@ frame_needed = 0, uses_anonymous_args = 0
+  50 0000 08B5     		push	{r3, lr}
+  51 0002 0A46     		mov	r2, r1
+  52 0004 0021     		movs	r1, #0
+  53 0006 FFF7FEFF 		bl	VL53L1_read_nvm
+  54 000a 08BD     		pop	{r3, pc}
+  56              		.section	.text.VL53L1_get_histogram_debug_data,"ax",%progbits
+  57              		.align	1
+  58              		.global	VL53L1_get_histogram_debug_data
+  59              		.syntax unified
+  60              		.thumb
+  61              		.thumb_func
+ARM GAS  C:\Temp\ccvBXKcO.s 			page 2
+
+
+  63              	VL53L1_get_histogram_debug_data:
+  64              		@ args = 0, pretend = 0, frame = 0
+  65              		@ frame_needed = 0, uses_anonymous_args = 0
+  66 0000 08B5     		push	{r3, lr}
+  67 0002 0B46     		mov	r3, r1
+  68 0004 AC22     		movs	r2, #172
+  69 0006 00F22441 		addw	r1, r0, #1060
+  70 000a 1846     		mov	r0, r3
+  71 000c FFF7FEFF 		bl	memcpy
+  72 0010 0020     		movs	r0, #0
+  73 0012 08BD     		pop	{r3, pc}
+  75              		.section	.text.VL53L1_get_additional_data,"ax",%progbits
+  76              		.align	1
+  77              		.global	VL53L1_get_additional_data
+  78              		.syntax unified
+  79              		.thumb
+  80              		.thumb_func
+  82              	VL53L1_get_additional_data:
+  83              		@ args = 0, pretend = 0, frame = 0
+  84              		@ frame_needed = 0, uses_anonymous_args = 0
+  85 0000 08B5     		push	{r3, lr}
+  86 0002 427E     		ldrb	r2, [r0, #25]	@ zero_extendqisi2
+  87 0004 0A70     		strb	r2, [r1]
+  88 0006 827E     		ldrb	r2, [r0, #26]	@ zero_extendqisi2
+  89 0008 4A70     		strb	r2, [r1, #1]
+  90 000a C27E     		ldrb	r2, [r0, #27]	@ zero_extendqisi2
+  91 000c 8A70     		strb	r2, [r1, #2]
+  92 000e 027F     		ldrb	r2, [r0, #28]	@ zero_extendqisi2
+  93 0010 CA70     		strb	r2, [r1, #3]
+  94 0012 427F     		ldrb	r2, [r0, #29]	@ zero_extendqisi2
+  95 0014 0A71     		strb	r2, [r1, #4]
+  96 0016 827F     		ldrb	r2, [r0, #30]	@ zero_extendqisi2
+  97 0018 4A71     		strb	r2, [r1, #5]
+  98 001a 026A     		ldr	r2, [r0, #32]
+  99 001c 8A60     		str	r2, [r1, #8]
+ 100 001e 426A     		ldr	r2, [r0, #36]
+ 101 0020 CA60     		str	r2, [r1, #12]
+ 102 0022 826A     		ldr	r2, [r0, #40]
+ 103 0024 0A61     		str	r2, [r1, #16]
+ 104 0026 C26A     		ldr	r2, [r0, #44]
+ 105 0028 4A61     		str	r2, [r1, #20]
+ 106 002a 038E     		ldrh	r3, [r0, #48]
+ 107 002c 0B83     		strh	r3, [r1, #24]	@ movhi
+ 108 002e 1C31     		adds	r1, r1, #28
+ 109 0030 FFF7FEFF 		bl	VL53L1_get_histogram_debug_data
+ 110 0034 08BD     		pop	{r3, pc}
+ 112              		.section	.text.VL53L1_get_xtalk_debug_data,"ax",%progbits
+ 113              		.align	1
+ 114              		.global	VL53L1_get_xtalk_debug_data
+ 115              		.syntax unified
+ 116              		.thumb
+ 117              		.thumb_func
+ 119              	VL53L1_get_xtalk_debug_data:
+ 120              		@ args = 0, pretend = 0, frame = 0
+ 121              		@ frame_needed = 0, uses_anonymous_args = 0
+ 122 0000 70B5     		push	{r4, r5, r6, lr}
+ 123 0002 0446     		mov	r4, r0
+ARM GAS  C:\Temp\ccvBXKcO.s 			page 3
+
+
+ 124 0004 0D46     		mov	r5, r1
+ 125 0006 026E     		ldr	r2, [r0, #96]	@ unaligned
+ 126 0008 436E     		ldr	r3, [r0, #100]	@ unaligned
+ 127 000a 806E     		ldr	r0, [r0, #104]	@ unaligned
+ 128 000c E16E     		ldr	r1, [r4, #108]	@ unaligned
+ 129 000e 2A60     		str	r2, [r5]	@ unaligned
+ 130 0010 6B60     		str	r3, [r5, #4]	@ unaligned
+ 131 0012 A860     		str	r0, [r5, #8]	@ unaligned
+ 132 0014 E960     		str	r1, [r5, #12]	@ unaligned
+ 133 0016 226F     		ldr	r2, [r4, #112]	@ unaligned
+ 134 0018 636F     		ldr	r3, [r4, #116]	@ unaligned
+ 135 001a 2A61     		str	r2, [r5, #16]	@ unaligned
+ 136 001c 6B61     		str	r3, [r5, #20]	@ unaligned
+ 137 001e 04F53B73 		add	r3, r4, #748
+ 138 0022 05F13402 		add	r2, r5, #52
+ 139 0026 04F54371 		add	r1, r4, #780
+ 140              	.L12:
+ 141 002a 1E68     		ldr	r6, [r3]	@ unaligned
+ 142 002c D3F804E0 		ldr	lr, [r3, #4]	@ unaligned
+ 143 0030 D3F808C0 		ldr	ip, [r3, #8]	@ unaligned
+ 144 0034 D868     		ldr	r0, [r3, #12]	@ unaligned
+ 145 0036 1660     		str	r6, [r2]	@ unaligned
+ 146 0038 C2F804E0 		str	lr, [r2, #4]	@ unaligned
+ 147 003c C2F808C0 		str	ip, [r2, #8]	@ unaligned
+ 148 0040 D060     		str	r0, [r2, #12]	@ unaligned
+ 149 0042 1033     		adds	r3, r3, #16
+ 150 0044 1032     		adds	r2, r2, #16
+ 151 0046 8B42     		cmp	r3, r1
+ 152 0048 EFD1     		bne	.L12
+ 153 004a 1B68     		ldr	r3, [r3]	@ unaligned
+ 154 004c 1360     		str	r3, [r2]	@ unaligned
+ 155 004e AC22     		movs	r2, #172
+ 156 0050 04F22441 		addw	r1, r4, #1060
+ 157 0054 05F15800 		add	r0, r5, #88
+ 158 0058 FFF7FEFF 		bl	memcpy
+ 159 005c F422     		movs	r2, #244
+ 160 005e 04F27C51 		addw	r1, r4, #1404
+ 161 0062 05F58270 		add	r0, r5, #260
+ 162 0066 FFF7FEFF 		bl	memcpy
+ 163 006a 40F62C42 		movw	r2, #3116
+ 164 006e 04F5CE61 		add	r1, r4, #1648
+ 165 0072 05F5FC70 		add	r0, r5, #504
+ 166 0076 FFF7FEFF 		bl	memcpy
+ 167 007a 0020     		movs	r0, #0
+ 168 007c 70BD     		pop	{r4, r5, r6, pc}
+ 170              		.section	.text.VL53L1_get_offset_debug_data,"ax",%progbits
+ 171              		.align	1
+ 172              		.global	VL53L1_get_offset_debug_data
+ 173              		.syntax unified
+ 174              		.thumb
+ 175              		.thumb_func
+ 177              	VL53L1_get_offset_debug_data:
+ 178              		@ args = 0, pretend = 0, frame = 0
+ 179              		@ frame_needed = 0, uses_anonymous_args = 0
+ 180 0000 08B5     		push	{r3, lr}
+ 181 0002 0B46     		mov	r3, r1
+ 182 0004 016E     		ldr	r1, [r0, #96]	@ unaligned
+ARM GAS  C:\Temp\ccvBXKcO.s 			page 4
+
+
+ 183 0006 426E     		ldr	r2, [r0, #100]	@ unaligned
+ 184 0008 D0F868E0 		ldr	lr, [r0, #104]	@ unaligned
+ 185 000c D0F86CC0 		ldr	ip, [r0, #108]	@ unaligned
+ 186 0010 1960     		str	r1, [r3]	@ unaligned
+ 187 0012 5A60     		str	r2, [r3, #4]	@ unaligned
+ 188 0014 C3F808E0 		str	lr, [r3, #8]	@ unaligned
+ 189 0018 C3F80CC0 		str	ip, [r3, #12]	@ unaligned
+ 190 001c 016F     		ldr	r1, [r0, #112]	@ unaligned
+ 191 001e 426F     		ldr	r2, [r0, #116]	@ unaligned
+ 192 0020 1961     		str	r1, [r3, #16]	@ unaligned
+ 193 0022 5A61     		str	r2, [r3, #20]	@ unaligned
+ 194 0024 D0F8BC10 		ldr	r1, [r0, #188]	@ unaligned
+ 195 0028 D0F8C020 		ldr	r2, [r0, #192]	@ unaligned
+ 196 002c 9961     		str	r1, [r3, #24]	@ unaligned
+ 197 002e DA61     		str	r2, [r3, #28]	@ unaligned
+ 198 0030 B0F8C420 		ldrh	r2, [r0, #196]	@ unaligned
+ 199 0034 1A84     		strh	r2, [r3, #32]	@ unaligned
+ 200 0036 D0F8C610 		ldr	r1, [r0, #198]	@ unaligned
+ 201 003a D0F8CA20 		ldr	r2, [r0, #202]	@ unaligned
+ 202 003e C3F82210 		str	r1, [r3, #34]	@ unaligned
+ 203 0042 C3F82620 		str	r2, [r3, #38]	@ unaligned
+ 204 0046 B0F8CE20 		ldrh	r2, [r0, #206]	@ unaligned
+ 205 004a 5A85     		strh	r2, [r3, #42]	@ unaligned
+ 206 004c D0F8B410 		ldr	r1, [r0, #180]	@ unaligned
+ 207 0050 D0F8B820 		ldr	r2, [r0, #184]	@ unaligned
+ 208 0054 D962     		str	r1, [r3, #44]	@ unaligned
+ 209 0056 1A63     		str	r2, [r3, #48]	@ unaligned
+ 210 0058 5C22     		movs	r2, #92
+ 211 005a 00F59951 		add	r1, r0, #4896
+ 212 005e 1C31     		adds	r1, r1, #28
+ 213 0060 03F13400 		add	r0, r3, #52
+ 214 0064 FFF7FEFF 		bl	memcpy
+ 215 0068 0020     		movs	r0, #0
+ 216 006a 08BD     		pop	{r3, pc}
+ 218              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccvBXKcO.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 vl53l1_api_debug.c
+  C:\Temp\ccvBXKcO.s:18     .text.VL53L1_decode_calibration_data_buffer:00000000 $t
+  C:\Temp\ccvBXKcO.s:24     .text.VL53L1_decode_calibration_data_buffer:00000000 VL53L1_decode_calibration_data_buffer
+  C:\Temp\ccvBXKcO.s:41     .text.VL53L1_get_nvm_debug_data:00000000 $t
+  C:\Temp\ccvBXKcO.s:47     .text.VL53L1_get_nvm_debug_data:00000000 VL53L1_get_nvm_debug_data
+  C:\Temp\ccvBXKcO.s:57     .text.VL53L1_get_histogram_debug_data:00000000 $t
+  C:\Temp\ccvBXKcO.s:63     .text.VL53L1_get_histogram_debug_data:00000000 VL53L1_get_histogram_debug_data
+  C:\Temp\ccvBXKcO.s:76     .text.VL53L1_get_additional_data:00000000 $t
+  C:\Temp\ccvBXKcO.s:82     .text.VL53L1_get_additional_data:00000000 VL53L1_get_additional_data
+  C:\Temp\ccvBXKcO.s:113    .text.VL53L1_get_xtalk_debug_data:00000000 $t
+  C:\Temp\ccvBXKcO.s:119    .text.VL53L1_get_xtalk_debug_data:00000000 VL53L1_get_xtalk_debug_data
+  C:\Temp\ccvBXKcO.s:171    .text.VL53L1_get_offset_debug_data:00000000 $t
+  C:\Temp\ccvBXKcO.s:177    .text.VL53L1_get_offset_debug_data:00000000 VL53L1_get_offset_debug_data
+
+UNDEFINED SYMBOLS
+memcpy
+VL53L1_read_nvm

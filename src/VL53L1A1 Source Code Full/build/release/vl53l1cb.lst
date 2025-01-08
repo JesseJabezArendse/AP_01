@@ -1,0 +1,902 @@
+ARM GAS  C:\Temp\ccfWYdyT.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"vl53l1cb.c"
+  16              		.text
+  17              		.section	.text.VL53L1CB_DeInit,"ax",%progbits
+  18              		.align	1
+  19              		.global	VL53L1CB_DeInit
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	VL53L1CB_DeInit:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 00F5C043 		add	r3, r0, #24576
+  28 0004 93F8703F 		ldrb	r3, [r3, #3952]	@ zero_extendqisi2
+  29 0008 012B     		cmp	r3, #1
+  30 000a 09D1     		bne	.L3
+  31 000c 10B5     		push	{r4, lr}
+  32 000e 0446     		mov	r4, r0
+  33 0010 4368     		ldr	r3, [r0, #4]
+  34 0012 9847     		blx	r3
+  35 0014 38B9     		cbnz	r0, .L4
+  36 0016 04F5C044 		add	r4, r4, #24576
+  37 001a 84F8700F 		strb	r0, [r4, #3952]
+  38              	.L1:
+  39 001e 10BD     		pop	{r4, pc}
+  40              	.L3:
+  41 0020 4FF0FF30 		mov	r0, #-1
+  42 0024 7047     		bx	lr
+  43              	.L4:
+  44 0026 4FF0FF30 		mov	r0, #-1
+  45 002a F8E7     		b	.L1
+  47              		.section	.text.VL53L1CB_GetCapabilities,"ax",%progbits
+  48              		.align	1
+  49              		.global	VL53L1CB_GetCapabilities
+  50              		.syntax unified
+  51              		.thumb
+  52              		.thumb_func
+  54              	VL53L1CB_GetCapabilities:
+  55              		@ args = 0, pretend = 0, frame = 0
+  56              		@ frame_needed = 0, uses_anonymous_args = 0
+  57              		@ link register save eliminated.
+  58 0000 40B1     		cbz	r0, .L11
+  59 0002 51B1     		cbz	r1, .L12
+  60 0004 0123     		movs	r3, #1
+ARM GAS  C:\Temp\ccfWYdyT.s 			page 2
+
+
+  61 0006 0B60     		str	r3, [r1]
+  62 0008 0422     		movs	r2, #4
+  63 000a 4A60     		str	r2, [r1, #4]
+  64 000c 8B60     		str	r3, [r1, #8]
+  65 000e 0020     		movs	r0, #0
+  66 0010 C860     		str	r0, [r1, #12]
+  67 0012 7047     		bx	lr
+  68              	.L11:
+  69 0014 6FF00100 		mvn	r0, #1
+  70 0018 7047     		bx	lr
+  71              	.L12:
+  72 001a 6FF00100 		mvn	r0, #1
+  73 001e 7047     		bx	lr
+  75              		.section	.text.VL53L1CB_ConfigIT,"ax",%progbits
+  76              		.align	1
+  77              		.global	VL53L1CB_ConfigIT
+  78              		.syntax unified
+  79              		.thumb
+  80              		.thumb_func
+  82              	VL53L1CB_ConfigIT:
+  83              		@ args = 0, pretend = 0, frame = 0
+  84              		@ frame_needed = 0, uses_anonymous_args = 0
+  85              		@ link register save eliminated.
+  86 0000 6FF00300 		mvn	r0, #3
+  87 0004 7047     		bx	lr
+  89              		.section	.text.VL53L1CB_GetAddress,"ax",%progbits
+  90              		.align	1
+  91              		.global	VL53L1CB_GetAddress
+  92              		.syntax unified
+  93              		.thumb
+  94              		.thumb_func
+  96              	VL53L1CB_GetAddress:
+  97              		@ args = 0, pretend = 0, frame = 0
+  98              		@ frame_needed = 0, uses_anonymous_args = 0
+  99              		@ link register save eliminated.
+ 100 0000 20B1     		cbz	r0, .L16
+ 101 0002 31B1     		cbz	r1, .L17
+ 102 0004 0389     		ldrh	r3, [r0, #8]
+ 103 0006 0B60     		str	r3, [r1]
+ 104 0008 0020     		movs	r0, #0
+ 105 000a 7047     		bx	lr
+ 106              	.L16:
+ 107 000c 6FF00100 		mvn	r0, #1
+ 108 0010 7047     		bx	lr
+ 109              	.L17:
+ 110 0012 6FF00100 		mvn	r0, #1
+ 111 0016 7047     		bx	lr
+ 113              		.section	.text.VL53L1CB_SetPowerMode,"ax",%progbits
+ 114              		.align	1
+ 115              		.global	VL53L1CB_SetPowerMode
+ 116              		.syntax unified
+ 117              		.thumb
+ 118              		.thumb_func
+ 120              	VL53L1CB_SetPowerMode:
+ 121              		@ args = 0, pretend = 0, frame = 0
+ 122              		@ frame_needed = 0, uses_anonymous_args = 0
+ 123              		@ link register save eliminated.
+ARM GAS  C:\Temp\ccfWYdyT.s 			page 3
+
+
+ 124 0000 6FF00300 		mvn	r0, #3
+ 125 0004 7047     		bx	lr
+ 127              		.section	.text.VL53L1CB_GetPowerMode,"ax",%progbits
+ 128              		.align	1
+ 129              		.global	VL53L1CB_GetPowerMode
+ 130              		.syntax unified
+ 131              		.thumb
+ 132              		.thumb_func
+ 134              	VL53L1CB_GetPowerMode:
+ 135              		@ args = 0, pretend = 0, frame = 0
+ 136              		@ frame_needed = 0, uses_anonymous_args = 0
+ 137              		@ link register save eliminated.
+ 138 0000 6FF00300 		mvn	r0, #3
+ 139 0004 7047     		bx	lr
+ 141              		.section	.text.VL53L1CB_Init,"ax",%progbits
+ 142              		.align	1
+ 143              		.global	VL53L1CB_Init
+ 144              		.syntax unified
+ 145              		.thumb
+ 146              		.thumb_func
+ 148              	VL53L1CB_Init:
+ 149              		@ args = 0, pretend = 0, frame = 0
+ 150              		@ frame_needed = 0, uses_anonymous_args = 0
+ 151 0000 00F5C043 		add	r3, r0, #24576
+ 152 0004 93F8703F 		ldrb	r3, [r3, #3952]	@ zero_extendqisi2
+ 153 0008 03BB     		cbnz	r3, .L22
+ 154 000a 10B5     		push	{r4, lr}
+ 155 000c 0446     		mov	r4, r0
+ 156 000e FFF7FEFF 		bl	VL53L1_WaitDeviceBooted
+ 157 0012 F0B9     		cbnz	r0, .L23
+ 158 0014 2046     		mov	r0, r4
+ 159 0016 FFF7FEFF 		bl	VL53L1_DataInit
+ 160 001a E8B9     		cbnz	r0, .L24
+ 161 001c 2046     		mov	r0, r4
+ 162 001e FFF7FEFF 		bl	VL53L1_StaticInit
+ 163 0022 E0B9     		cbnz	r0, .L25
+ 164 0024 2046     		mov	r0, r4
+ 165 0026 FFF7FEFF 		bl	VL53L1_PerformRefSpadManagement
+ 166 002a D8B9     		cbnz	r0, .L26
+ 167 002c 04F5C044 		add	r4, r4, #24576
+ 168 0030 84F8710F 		strb	r0, [r4, #3953]
+ 169 0034 84F8720F 		strb	r0, [r4, #3954]
+ 170 0038 84F8730F 		strb	r0, [r4, #3955]
+ 171 003c 84F8740F 		strb	r0, [r4, #3956]
+ 172 0040 84F8750F 		strb	r0, [r4, #3957]
+ 173 0044 0123     		movs	r3, #1
+ 174 0046 84F8703F 		strb	r3, [r4, #3952]
+ 175              	.L20:
+ 176 004a 10BD     		pop	{r4, pc}
+ 177              	.L22:
+ 178 004c 4FF0FF30 		mov	r0, #-1
+ 179 0050 7047     		bx	lr
+ 180              	.L23:
+ 181 0052 4FF0FF30 		mov	r0, #-1
+ 182 0056 F8E7     		b	.L20
+ 183              	.L24:
+ 184 0058 4FF0FF30 		mov	r0, #-1
+ARM GAS  C:\Temp\ccfWYdyT.s 			page 4
+
+
+ 185 005c F5E7     		b	.L20
+ 186              	.L25:
+ 187 005e 4FF0FF30 		mov	r0, #-1
+ 188 0062 F2E7     		b	.L20
+ 189              	.L26:
+ 190 0064 4FF0FF30 		mov	r0, #-1
+ 191 0068 EFE7     		b	.L20
+ 193              		.section	.text.VL53L1CB_ReadID,"ax",%progbits
+ 194              		.align	1
+ 195              		.global	VL53L1CB_ReadID
+ 196              		.syntax unified
+ 197              		.thumb
+ 198              		.thumb_func
+ 200              	VL53L1CB_ReadID:
+ 201              		@ args = 0, pretend = 0, frame = 0
+ 202              		@ frame_needed = 0, uses_anonymous_args = 0
+ 203 0000 48B1     		cbz	r0, .L33
+ 204 0002 08B5     		push	{r3, lr}
+ 205 0004 0A46     		mov	r2, r1
+ 206 0006 49B1     		cbz	r1, .L34
+ 207 0008 0021     		movs	r1, #0
+ 208 000a 1160     		str	r1, [r2]
+ 209 000c 40F20F11 		movw	r1, #271
+ 210 0010 FFF7FEFF 		bl	VL53L1_RdWord
+ 211              	.L31:
+ 212 0014 08BD     		pop	{r3, pc}
+ 213              	.L33:
+ 214 0016 6FF00100 		mvn	r0, #1
+ 215 001a 7047     		bx	lr
+ 216              	.L34:
+ 217 001c 6FF00100 		mvn	r0, #1
+ 218 0020 F8E7     		b	.L31
+ 220              		.section	.text.VL53L1CB_ConfigProfile,"ax",%progbits
+ 221              		.align	1
+ 222              		.global	VL53L1CB_ConfigProfile
+ 223              		.syntax unified
+ 224              		.thumb
+ 225              		.thumb_func
+ 227              	VL53L1CB_ConfigProfile:
+ 228              		@ args = 0, pretend = 0, frame = 0
+ 229              		@ frame_needed = 0, uses_anonymous_args = 0
+ 230 0000 18B3     		cbz	r0, .L41
+ 231 0002 38B5     		push	{r3, r4, r5, lr}
+ 232 0004 0C46     		mov	r4, r1
+ 233 0006 0546     		mov	r5, r0
+ 234 0008 11B3     		cbz	r1, .L42
+ 235 000a 0978     		ldrb	r1, [r1]	@ zero_extendqisi2
+ 236 000c 4B1E     		subs	r3, r1, #1
+ 237 000e DBB2     		uxtb	r3, r3
+ 238 0010 022B     		cmp	r3, #2
+ 239 0012 20D8     		bhi	.L43
+ 240 0014 FFF7FEFF 		bl	VL53L1_SetDistanceMode
+ 241 0018 00BB     		cbnz	r0, .L44
+ 242 001a 6368     		ldr	r3, [r4, #4]
+ 243 001c 4FF47A71 		mov	r1, #1000
+ 244 0020 03FB01F1 		mul	r1, r3, r1
+ 245 0024 2846     		mov	r0, r5
+ARM GAS  C:\Temp\ccfWYdyT.s 			page 5
+
+
+ 246 0026 FFF7FEFF 		bl	VL53L1_SetMeasurementTimingBudgetMicroSeconds
+ 247 002a D0B9     		cbnz	r0, .L45
+ 248 002c E368     		ldr	r3, [r4, #12]
+ 249 002e 003B     		subs	r3, r3, #0
+ 250 0030 18BF     		it	ne
+ 251 0032 0123     		movne	r3, #1
+ 252 0034 05F5C045 		add	r5, r5, #24576
+ 253 0038 85F8743F 		strb	r3, [r5, #3956]
+ 254 003c 2369     		ldr	r3, [r4, #16]
+ 255 003e 003B     		subs	r3, r3, #0
+ 256 0040 18BF     		it	ne
+ 257 0042 0123     		movne	r3, #1
+ 258 0044 85F8753F 		strb	r3, [r5, #3957]
+ 259              	.L39:
+ 260 0048 38BD     		pop	{r3, r4, r5, pc}
+ 261              	.L41:
+ 262 004a 6FF00100 		mvn	r0, #1
+ 263 004e 7047     		bx	lr
+ 264              	.L42:
+ 265 0050 6FF00100 		mvn	r0, #1
+ 266 0054 F8E7     		b	.L39
+ 267              	.L43:
+ 268 0056 6FF00100 		mvn	r0, #1
+ 269 005a F5E7     		b	.L39
+ 270              	.L44:
+ 271 005c 4FF0FF30 		mov	r0, #-1
+ 272 0060 F2E7     		b	.L39
+ 273              	.L45:
+ 274 0062 4FF0FF30 		mov	r0, #-1
+ 275 0066 EFE7     		b	.L39
+ 277              		.section	.text.VL53L1CB_ConfigROI,"ax",%progbits
+ 278              		.align	1
+ 279              		.global	VL53L1CB_ConfigROI
+ 280              		.syntax unified
+ 281              		.thumb
+ 282              		.thumb_func
+ 284              	VL53L1CB_ConfigROI:
+ 285              		@ args = 0, pretend = 0, frame = 72
+ 286              		@ frame_needed = 0, uses_anonymous_args = 0
+ 287 0000 E0B1     		cbz	r0, .L52
+ 288 0002 F1B1     		cbz	r1, .L53
+ 289 0004 00B5     		push	{lr}
+ 290 0006 93B0     		sub	sp, sp, #76
+ 291 0008 0122     		movs	r2, #1
+ 292 000a 8DF80420 		strb	r2, [sp, #4]
+ 293 000e 8A78     		ldrb	r2, [r1, #2]	@ zero_extendqisi2
+ 294 0010 8DF80720 		strb	r2, [sp, #7]
+ 295 0014 CA78     		ldrb	r2, [r1, #3]	@ zero_extendqisi2
+ 296 0016 8DF80820 		strb	r2, [sp, #8]
+ 297 001a 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 298 001c 8DF80520 		strb	r2, [sp, #5]
+ 299 0020 4A78     		ldrb	r2, [r1, #1]	@ zero_extendqisi2
+ 300 0022 8DF80620 		strb	r2, [sp, #6]
+ 301 0026 01A9     		add	r1, sp, #4
+ 302 0028 FFF7FEFF 		bl	VL53L1_SetROI
+ 303 002c 18B9     		cbnz	r0, .L59
+ 304 002e 0020     		movs	r0, #0
+ARM GAS  C:\Temp\ccfWYdyT.s 			page 6
+
+
+ 305              	.L50:
+ 306 0030 13B0     		add	sp, sp, #76
+ 307              		@ sp needed
+ 308 0032 5DF804FB 		ldr	pc, [sp], #4
+ 309              	.L59:
+ 310 0036 4FF0FF30 		mov	r0, #-1
+ 311 003a F9E7     		b	.L50
+ 312              	.L52:
+ 313 003c 6FF00100 		mvn	r0, #1
+ 314 0040 7047     		bx	lr
+ 315              	.L53:
+ 316 0042 6FF00100 		mvn	r0, #1
+ 317 0046 7047     		bx	lr
+ 319              		.section	.text.vl53l1cb_poll_for_measurement,"ax",%progbits
+ 320              		.align	1
+ 321              		.syntax unified
+ 322              		.thumb
+ 323              		.thumb_func
+ 325              	vl53l1cb_poll_for_measurement:
+ 326              		@ args = 0, pretend = 0, frame = 8
+ 327              		@ frame_needed = 0, uses_anonymous_args = 0
+ 328 0000 70B5     		push	{r4, r5, r6, lr}
+ 329 0002 82B0     		sub	sp, sp, #8
+ 330 0004 0023     		movs	r3, #0
+ 331 0006 8DF80730 		strb	r3, [sp, #7]
+ 332 000a A8B1     		cbz	r0, .L63
+ 333 000c 0E46     		mov	r6, r1
+ 334 000e 0446     		mov	r4, r0
+ 335 0010 4369     		ldr	r3, [r0, #20]
+ 336 0012 9847     		blx	r3
+ 337 0014 0546     		mov	r5, r0
+ 338              	.L62:
+ 339 0016 0DF10701 		add	r1, sp, #7
+ 340 001a 2046     		mov	r0, r4
+ 341 001c FFF7FEFF 		bl	VL53L1_GetMeasurementDataReady
+ 342 0020 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 343 0024 012B     		cmp	r3, #1
+ 344 0026 0AD0     		beq	.L64
+ 345 0028 6369     		ldr	r3, [r4, #20]
+ 346 002a 9847     		blx	r3
+ 347 002c 401B     		subs	r0, r0, r5
+ 348 002e B042     		cmp	r0, r6
+ 349 0030 F1D3     		bcc	.L62
+ 350 0032 6FF00200 		mvn	r0, #2
+ 351 0036 03E0     		b	.L60
+ 352              	.L63:
+ 353 0038 6FF00100 		mvn	r0, #1
+ 354 003c 00E0     		b	.L60
+ 355              	.L64:
+ 356 003e 0020     		movs	r0, #0
+ 357              	.L60:
+ 358 0040 02B0     		add	sp, sp, #8
+ 359              		@ sp needed
+ 360 0042 70BD     		pop	{r4, r5, r6, pc}
+ 362              		.section	.text.vl53l1cb_get_result,"ax",%progbits
+ 363              		.align	1
+ 364              		.syntax unified
+ARM GAS  C:\Temp\ccfWYdyT.s 			page 7
+
+
+ 365              		.thumb
+ 366              		.thumb_func
+ 368              	vl53l1cb_get_result:
+ 369              		@ args = 0, pretend = 0, frame = 0
+ 370              		@ frame_needed = 0, uses_anonymous_args = 0
+ 371 0000 0028     		cmp	r0, #0
+ 372 0002 00F0AC80 		beq	.L78
+ 373 0006 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 374 0008 0C46     		mov	r4, r1
+ 375 000a 0546     		mov	r5, r0
+ 376 000c 0029     		cmp	r1, #0
+ 377 000e 00F0A980 		beq	.L79
+ 378 0012 5749     		ldr	r1, .L89
+ 379 0014 FFF7FEFF 		bl	VL53L1_GetMultiRangingData
+ 380 0018 0028     		cmp	r0, #0
+ 381 001a 40F0A680 		bne	.L80
+ 382 001e 0026     		movs	r6, #0
+ 383 0020 98E0     		b	.L68
+ 384              	.L77:
+ 385 0022 3246     		mov	r2, r6
+ 386 0024 524B     		ldr	r3, .L89
+ 387 0026 9979     		ldrb	r1, [r3, #6]	@ zero_extendqisi2
+ 388 0028 06EB0613 		add	r3, r6, r6, lsl #4
+ 389 002c 04EB8303 		add	r3, r4, r3, lsl #2
+ 390 0030 5960     		str	r1, [r3, #4]
+ 391 0032 3346     		mov	r3, r6
+ 392 0034 31E0     		b	.L69
+ 393              	.L88:
+ 394 0036 02EB0210 		add	r0, r2, r2, lsl #4
+ 395 003a 1844     		add	r0, r0, r3
+ 396 003c 04EB8000 		add	r0, r4, r0, lsl #2
+ 397 0040 0027     		movs	r7, #0
+ 398 0042 8760     		str	r7, [r0, #8]
+ 399              	.L71:
+ 400 0044 05F5C040 		add	r0, r5, #24576
+ 401 0048 90F8740F 		ldrb	r0, [r0, #3956]	@ zero_extendqisi2
+ 402 004c 0128     		cmp	r0, #1
+ 403 004e 39D0     		beq	.L85
+ 404 0050 02EB0210 		add	r0, r2, r2, lsl #4
+ 405 0054 0844     		add	r0, r0, r1
+ 406 0056 0830     		adds	r0, r0, #8
+ 407 0058 04EB8000 		add	r0, r4, r0, lsl #2
+ 408 005c 0027     		movs	r7, #0
+ 409 005e 8760     		str	r7, [r0, #8]	@ float
+ 410              	.L73:
+ 411 0060 05F5C040 		add	r0, r5, #24576
+ 412 0064 90F8750F 		ldrb	r0, [r0, #3957]	@ zero_extendqisi2
+ 413 0068 0128     		cmp	r0, #1
+ 414 006a 4ED0     		beq	.L86
+ 415 006c 02EB0210 		add	r0, r2, r2, lsl #4
+ 416 0070 0844     		add	r0, r0, r1
+ 417 0072 0C30     		adds	r0, r0, #12
+ 418 0074 04EB8000 		add	r0, r4, r0, lsl #2
+ 419 0078 0027     		movs	r7, #0
+ 420 007a 8760     		str	r7, [r0, #8]	@ float
+ 421              	.L75:
+ 422 007c C1EBC107 		rsb	r7, r1, r1, lsl #3
+ARM GAS  C:\Temp\ccfWYdyT.s 			page 8
+
+
+ 423 0080 3B48     		ldr	r0, .L89
+ 424 0082 00EB8700 		add	r0, r0, r7, lsl #2
+ 425 0086 C77F     		ldrb	r7, [r0, #31]	@ zero_extendqisi2
+ 426 0088 02EB0210 		add	r0, r2, r2, lsl #4
+ 427 008c 0844     		add	r0, r0, r1
+ 428 008e 0430     		adds	r0, r0, #4
+ 429 0090 04EB8000 		add	r0, r4, r0, lsl #2
+ 430 0094 8760     		str	r7, [r0, #8]
+ 431 0096 0133     		adds	r3, r3, #1
+ 432 0098 DBB2     		uxtb	r3, r3
+ 433              	.L69:
+ 434 009a 3549     		ldr	r1, .L89
+ 435 009c 8979     		ldrb	r1, [r1, #6]	@ zero_extendqisi2
+ 436 009e 9942     		cmp	r1, r3
+ 437 00a0 56D9     		bls	.L87
+ 438 00a2 1946     		mov	r1, r3
+ 439 00a4 C3EBC30C 		rsb	ip, r3, r3, lsl #3
+ 440 00a8 3148     		ldr	r0, .L89
+ 441 00aa 00EB8C00 		add	r0, r0, ip, lsl #2
+ 442 00ae B0F91C70 		ldrsh	r7, [r0, #28]
+ 443 00b2 002F     		cmp	r7, #0
+ 444 00b4 BFDB     		blt	.L88
+ 445 00b6 02EB0210 		add	r0, r2, r2, lsl #4
+ 446 00ba 1844     		add	r0, r0, r3
+ 447 00bc 04EB8000 		add	r0, r4, r0, lsl #2
+ 448 00c0 8760     		str	r7, [r0, #8]
+ 449 00c2 BFE7     		b	.L71
+ 450              	.L85:
+ 451 00c4 2A4F     		ldr	r7, .L89
+ 452 00c6 C1EBC100 		rsb	r0, r1, r1, lsl #3
+ 453 00ca 07EB8000 		add	r0, r7, r0, lsl #2
+ 454 00ce D0ED057A 		vldr.32	s15, [r0, #20]	@ int
+ 455 00d2 F8EE677A 		vcvt.f32.u32	s15, s15
+ 456 00d6 9FED277A 		vldr.32	s14, .L89+4
+ 457 00da 67EE877A 		vmul.f32	s15, s15, s14
+ 458 00de 9FED267A 		vldr.32	s14, .L89+8
+ 459 00e2 67EE877A 		vmul.f32	s15, s15, s14
+ 460 00e6 B7F87A00 		ldrh	r0, [r7, #122]
+ 461 00ea 000A     		lsrs	r0, r0, #8
+ 462 00ec 07EE100A 		vmov	s14, r0	@ int
+ 463 00f0 B8EE477A 		vcvt.f32.u32	s14, s14
+ 464 00f4 C7EE876A 		vdiv.f32	s13, s15, s14
+ 465 00f8 02EB0210 		add	r0, r2, r2, lsl #4
+ 466 00fc 0844     		add	r0, r0, r1
+ 467 00fe 0830     		adds	r0, r0, #8
+ 468 0100 04EB8000 		add	r0, r4, r0, lsl #2
+ 469 0104 C0ED026A 		vstr.32	s13, [r0, #8]
+ 470 0108 AAE7     		b	.L73
+ 471              	.L86:
+ 472 010a 194F     		ldr	r7, .L89
+ 473 010c C1EBC100 		rsb	r0, r1, r1, lsl #3
+ 474 0110 07EB8000 		add	r0, r7, r0, lsl #2
+ 475 0114 D0ED047A 		vldr.32	s15, [r0, #16]	@ int
+ 476 0118 F8EE677A 		vcvt.f32.u32	s15, s15
+ 477 011c 9FED157A 		vldr.32	s14, .L89+4
+ 478 0120 67EE877A 		vmul.f32	s15, s15, s14
+ 479 0124 9FED147A 		vldr.32	s14, .L89+8
+ARM GAS  C:\Temp\ccfWYdyT.s 			page 9
+
+
+ 480 0128 67EE877A 		vmul.f32	s15, s15, s14
+ 481 012c B7F87A00 		ldrh	r0, [r7, #122]
+ 482 0130 000A     		lsrs	r0, r0, #8
+ 483 0132 07EE100A 		vmov	s14, r0	@ int
+ 484 0136 B8EE477A 		vcvt.f32.u32	s14, s14
+ 485 013a C7EE876A 		vdiv.f32	s13, s15, s14
+ 486 013e 02EB0210 		add	r0, r2, r2, lsl #4
+ 487 0142 0844     		add	r0, r0, r1
+ 488 0144 0C30     		adds	r0, r0, #12
+ 489 0146 04EB8000 		add	r0, r4, r0, lsl #2
+ 490 014a C0ED026A 		vstr.32	s13, [r0, #8]
+ 491 014e 95E7     		b	.L75
+ 492              	.L87:
+ 493 0150 0136     		adds	r6, r6, #1
+ 494 0152 F6B2     		uxtb	r6, r6
+ 495              	.L68:
+ 496 0154 002E     		cmp	r6, #0
+ 497 0156 3FF464AF 		beq	.L77
+ 498 015a 0020     		movs	r0, #0
+ 499              	.L66:
+ 500 015c F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 501              	.L78:
+ 502 015e 6FF00100 		mvn	r0, #1
+ 503 0162 7047     		bx	lr
+ 504              	.L79:
+ 505 0164 6FF00100 		mvn	r0, #1
+ 506 0168 F8E7     		b	.L66
+ 507              	.L80:
+ 508 016a 4FF0FF30 		mov	r0, #-1
+ 509 016e F5E7     		b	.L66
+ 510              	.L90:
+ 511              		.align	2
+ 512              	.L89:
+ 513 0170 00000000 		.word	data.0
+ 514 0174 00008037 		.word	931135488
+ 515 0178 00007A44 		.word	1148846080
+ 517              		.section	.text.VL53L1CB_GetDistance,"ax",%progbits
+ 518              		.align	1
+ 519              		.global	VL53L1CB_GetDistance
+ 520              		.syntax unified
+ 521              		.thumb
+ 522              		.thumb_func
+ 524              	VL53L1CB_GetDistance:
+ 525              		@ args = 0, pretend = 0, frame = 0
+ 526              		@ frame_needed = 0, uses_anonymous_args = 0
+ 527 0000 38B3     		cbz	r0, .L95
+ 528 0002 38B5     		push	{r3, r4, r5, lr}
+ 529 0004 0D46     		mov	r5, r1
+ 530 0006 0446     		mov	r4, r0
+ 531 0008 31B3     		cbz	r1, .L96
+ 532 000a 00F5C043 		add	r3, r0, #24576
+ 533 000e 93F8713F 		ldrb	r3, [r3, #3953]	@ zero_extendqisi2
+ 534 0012 23B3     		cbz	r3, .L97
+ 535 0014 00F5C043 		add	r3, r0, #24576
+ 536 0018 93F8723F 		ldrb	r3, [r3, #3954]	@ zero_extendqisi2
+ 537 001c 012B     		cmp	r3, #1
+ 538 001e 04D0     		beq	.L103
+ARM GAS  C:\Temp\ccfWYdyT.s 			page 10
+
+
+ 539 0020 0021     		movs	r1, #0
+ 540 0022 FFF7FEFF 		bl	vl53l1cb_poll_for_measurement
+ 541              	.L94:
+ 542 0026 28B1     		cbz	r0, .L104
+ 543              	.L91:
+ 544 0028 38BD     		pop	{r3, r4, r5, pc}
+ 545              	.L103:
+ 546 002a 4FF6FF71 		movw	r1, #65535
+ 547 002e FFF7FEFF 		bl	vl53l1cb_poll_for_measurement
+ 548 0032 F8E7     		b	.L94
+ 549              	.L104:
+ 550 0034 2946     		mov	r1, r5
+ 551 0036 2046     		mov	r0, r4
+ 552 0038 FFF7FEFF 		bl	vl53l1cb_get_result
+ 553 003c 90B9     		cbnz	r0, .L98
+ 554 003e 04F5C043 		add	r3, r4, #24576
+ 555 0042 93F8733F 		ldrb	r3, [r3, #3955]	@ zero_extendqisi2
+ 556 0046 012B     		cmp	r3, #1
+ 557 0048 EED1     		bne	.L91
+ 558 004a 2046     		mov	r0, r4
+ 559 004c FFF7FEFF 		bl	VL53L1_ClearInterruptAndStartMeasurement
+ 560 0050 EAE7     		b	.L91
+ 561              	.L95:
+ 562 0052 6FF00100 		mvn	r0, #1
+ 563 0056 7047     		bx	lr
+ 564              	.L96:
+ 565 0058 6FF00100 		mvn	r0, #1
+ 566 005c E4E7     		b	.L91
+ 567              	.L97:
+ 568 005e 4FF0FF30 		mov	r0, #-1
+ 569 0062 E1E7     		b	.L91
+ 570              	.L98:
+ 571 0064 4FF0FF30 		mov	r0, #-1
+ 572 0068 DEE7     		b	.L91
+ 574              		.section	.text.VL53L1CB_Start,"ax",%progbits
+ 575              		.align	1
+ 576              		.global	VL53L1CB_Start
+ 577              		.syntax unified
+ 578              		.thumb
+ 579              		.thumb_func
+ 581              	VL53L1CB_Start:
+ 582              		@ args = 0, pretend = 0, frame = 0
+ 583              		@ frame_needed = 0, uses_anonymous_args = 0
+ 584 0000 0028     		cmp	r0, #0
+ 585 0002 45D0     		beq	.L113
+ 586 0004 38B5     		push	{r3, r4, r5, lr}
+ 587 0006 0D46     		mov	r5, r1
+ 588 0008 0446     		mov	r4, r0
+ 589 000a 00F5C043 		add	r3, r0, #24576
+ 590 000e 93F8713F 		ldrb	r3, [r3, #3953]	@ zero_extendqisi2
+ 591 0012 012B     		cmp	r3, #1
+ 592 0014 3FD0     		beq	.L114
+ 593 0016 FFF7FEFF 		bl	VL53L1_StartMeasurement
+ 594 001a 0028     		cmp	r0, #0
+ 595 001c 3ED1     		bne	.L115
+ 596 001e 04F5C043 		add	r3, r4, #24576
+ 597 0022 0122     		movs	r2, #1
+ARM GAS  C:\Temp\ccfWYdyT.s 			page 11
+
+
+ 598 0024 83F8712F 		strb	r2, [r3, #3953]
+ 599 0028 2046     		mov	r0, r4
+ 600 002a FFF7FEFF 		bl	VL53L1_ClearInterruptAndStartMeasurement
+ 601 002e 691E     		subs	r1, r5, #1
+ 602 0030 0329     		cmp	r1, #3
+ 603 0032 25D8     		bhi	.L107
+ 604 0034 DFE801F0 		tbb	[pc, r1]
+ 605              	.L109:
+ 606 0038 02       		.byte	(.L112-.L109)/2
+ 607 0039 0A       		.byte	(.L111-.L109)/2
+ 608 003a 13       		.byte	(.L110-.L109)/2
+ 609 003b 1C       		.byte	(.L108-.L109)/2
+ 610              		.p2align 1
+ 611              	.L112:
+ 612 003c 04F5C044 		add	r4, r4, #24576
+ 613 0040 0123     		movs	r3, #1
+ 614 0042 84F8733F 		strb	r3, [r4, #3955]
+ 615 0046 84F8723F 		strb	r3, [r4, #3954]
+ 616              	.L105:
+ 617 004a 38BD     		pop	{r3, r4, r5, pc}
+ 618              	.L111:
+ 619 004c 04F5C044 		add	r4, r4, #24576
+ 620 0050 0023     		movs	r3, #0
+ 621 0052 84F8733F 		strb	r3, [r4, #3955]
+ 622 0056 0123     		movs	r3, #1
+ 623 0058 84F8723F 		strb	r3, [r4, #3954]
+ 624 005c F5E7     		b	.L105
+ 625              	.L110:
+ 626 005e 04F5C044 		add	r4, r4, #24576
+ 627 0062 0123     		movs	r3, #1
+ 628 0064 84F8733F 		strb	r3, [r4, #3955]
+ 629 0068 0023     		movs	r3, #0
+ 630 006a 84F8723F 		strb	r3, [r4, #3954]
+ 631 006e ECE7     		b	.L105
+ 632              	.L108:
+ 633 0070 04F5C044 		add	r4, r4, #24576
+ 634 0074 0023     		movs	r3, #0
+ 635 0076 84F8733F 		strb	r3, [r4, #3955]
+ 636 007a 84F8723F 		strb	r3, [r4, #3954]
+ 637 007e E4E7     		b	.L105
+ 638              	.L107:
+ 639 0080 04F5C044 		add	r4, r4, #24576
+ 640 0084 0023     		movs	r3, #0
+ 641 0086 84F8713F 		strb	r3, [r4, #3953]
+ 642 008a 6FF00100 		mvn	r0, #1
+ 643 008e DCE7     		b	.L105
+ 644              	.L113:
+ 645 0090 6FF00100 		mvn	r0, #1
+ 646 0094 7047     		bx	lr
+ 647              	.L114:
+ 648 0096 4FF0FF30 		mov	r0, #-1
+ 649 009a D6E7     		b	.L105
+ 650              	.L115:
+ 651 009c 4FF0FF30 		mov	r0, #-1
+ 652 00a0 D3E7     		b	.L105
+ 654              		.section	.text.VL53L1CB_Stop,"ax",%progbits
+ 655              		.align	1
+ARM GAS  C:\Temp\ccfWYdyT.s 			page 12
+
+
+ 656              		.global	VL53L1CB_Stop
+ 657              		.syntax unified
+ 658              		.thumb
+ 659              		.thumb_func
+ 661              	VL53L1CB_Stop:
+ 662              		@ args = 0, pretend = 0, frame = 0
+ 663              		@ frame_needed = 0, uses_anonymous_args = 0
+ 664 0000 70B1     		cbz	r0, .L122
+ 665 0002 10B5     		push	{r4, lr}
+ 666 0004 0446     		mov	r4, r0
+ 667 0006 00F5C043 		add	r3, r0, #24576
+ 668 000a 93F8713F 		ldrb	r3, [r3, #3953]	@ zero_extendqisi2
+ 669 000e 53B1     		cbz	r3, .L123
+ 670 0010 FFF7FEFF 		bl	VL53L1_StopMeasurement
+ 671 0014 50B9     		cbnz	r0, .L124
+ 672 0016 04F5C044 		add	r4, r4, #24576
+ 673 001a 84F8710F 		strb	r0, [r4, #3953]
+ 674              	.L120:
+ 675 001e 10BD     		pop	{r4, pc}
+ 676              	.L122:
+ 677 0020 6FF00100 		mvn	r0, #1
+ 678 0024 7047     		bx	lr
+ 679              	.L123:
+ 680 0026 4FF0FF30 		mov	r0, #-1
+ 681 002a F8E7     		b	.L120
+ 682              	.L124:
+ 683 002c 4FF0FF30 		mov	r0, #-1
+ 684 0030 F5E7     		b	.L120
+ 686              		.section	.text.VL53L1CB_SetAddress,"ax",%progbits
+ 687              		.align	1
+ 688              		.global	VL53L1CB_SetAddress
+ 689              		.syntax unified
+ 690              		.thumb
+ 691              		.thumb_func
+ 693              	VL53L1CB_SetAddress:
+ 694              		@ args = 0, pretend = 0, frame = 0
+ 695              		@ frame_needed = 0, uses_anonymous_args = 0
+ 696 0000 40B1     		cbz	r0, .L131
+ 697 0002 38B5     		push	{r3, r4, r5, lr}
+ 698 0004 0C46     		mov	r4, r1
+ 699 0006 0546     		mov	r5, r0
+ 700 0008 C9B2     		uxtb	r1, r1
+ 701 000a FFF7FEFF 		bl	VL53L1_SetDeviceAddress
+ 702 000e 20B9     		cbnz	r0, .L132
+ 703 0010 2C81     		strh	r4, [r5, #8]	@ movhi
+ 704              	.L129:
+ 705 0012 38BD     		pop	{r3, r4, r5, pc}
+ 706              	.L131:
+ 707 0014 6FF00100 		mvn	r0, #1
+ 708 0018 7047     		bx	lr
+ 709              	.L132:
+ 710 001a 4FF0FF30 		mov	r0, #-1
+ 711 001e F8E7     		b	.L129
+ 713              		.section	.text.VL53L1CB_RegisterBusIO,"ax",%progbits
+ 714              		.align	1
+ 715              		.global	VL53L1CB_RegisterBusIO
+ 716              		.syntax unified
+ARM GAS  C:\Temp\ccfWYdyT.s 			page 13
+
+
+ 717              		.thumb
+ 718              		.thumb_func
+ 720              	VL53L1CB_RegisterBusIO:
+ 721              		@ args = 0, pretend = 0, frame = 0
+ 722              		@ frame_needed = 0, uses_anonymous_args = 0
+ 723 0000 80B1     		cbz	r0, .L139
+ 724 0002 08B5     		push	{r3, lr}
+ 725 0004 0346     		mov	r3, r0
+ 726 0006 0A68     		ldr	r2, [r1]
+ 727 0008 0260     		str	r2, [r0]
+ 728 000a 4868     		ldr	r0, [r1, #4]
+ 729 000c 5860     		str	r0, [r3, #4]
+ 730 000e 0889     		ldrh	r0, [r1, #8]
+ 731 0010 1881     		strh	r0, [r3, #8]	@ movhi
+ 732 0012 C868     		ldr	r0, [r1, #12]
+ 733 0014 D860     		str	r0, [r3, #12]
+ 734 0016 0869     		ldr	r0, [r1, #16]
+ 735 0018 1861     		str	r0, [r3, #16]
+ 736 001a 4969     		ldr	r1, [r1, #20]
+ 737 001c 5961     		str	r1, [r3, #20]
+ 738 001e 22B1     		cbz	r2, .L140
+ 739 0020 9047     		blx	r2
+ 740              	.L137:
+ 741 0022 08BD     		pop	{r3, pc}
+ 742              	.L139:
+ 743 0024 6FF00100 		mvn	r0, #1
+ 744 0028 7047     		bx	lr
+ 745              	.L140:
+ 746 002a 4FF0FF30 		mov	r0, #-1
+ 747 002e F8E7     		b	.L137
+ 749              		.section	.text.VL53L1CB_OffsetCalibration,"ax",%progbits
+ 750              		.align	1
+ 751              		.global	VL53L1CB_OffsetCalibration
+ 752              		.syntax unified
+ 753              		.thumb
+ 754              		.thumb_func
+ 756              	VL53L1CB_OffsetCalibration:
+ 757              		@ args = 0, pretend = 0, frame = 0
+ 758              		@ frame_needed = 0, uses_anonymous_args = 0
+ 759 0000 38B5     		push	{r3, r4, r5, lr}
+ 760 0002 0446     		mov	r4, r0
+ 761 0004 0D46     		mov	r5, r1
+ 762 0006 0121     		movs	r1, #1
+ 763 0008 FFF7FEFF 		bl	VL53L1_SetOffsetCorrectionMode
+ 764 000c 48B9     		cbnz	r0, .L147
+ 765 000e 2946     		mov	r1, r5
+ 766 0010 2046     		mov	r0, r4
+ 767 0012 FFF7FEFF 		bl	VL53L1_PerformOffsetSimpleCalibration
+ 768 0016 08B9     		cbnz	r0, .L150
+ 769 0018 0020     		movs	r0, #0
+ 770              	.L145:
+ 771 001a 38BD     		pop	{r3, r4, r5, pc}
+ 772              	.L150:
+ 773 001c 4FF0FF30 		mov	r0, #-1
+ 774 0020 FBE7     		b	.L145
+ 775              	.L147:
+ 776 0022 4FF0FF30 		mov	r0, #-1
+ARM GAS  C:\Temp\ccfWYdyT.s 			page 14
+
+
+ 777 0026 F8E7     		b	.L145
+ 779              		.section	.text.VL53L1CB_XTalkCalibration,"ax",%progbits
+ 780              		.align	1
+ 781              		.global	VL53L1CB_XTalkCalibration
+ 782              		.syntax unified
+ 783              		.thumb
+ 784              		.thumb_func
+ 786              	VL53L1CB_XTalkCalibration:
+ 787              		@ args = 0, pretend = 0, frame = 0
+ 788              		@ frame_needed = 0, uses_anonymous_args = 0
+ 789 0000 08B5     		push	{r3, lr}
+ 790 0002 0221     		movs	r1, #2
+ 791 0004 FFF7FEFF 		bl	VL53L1_PerformXTalkCalibration
+ 792 0008 08B9     		cbnz	r0, .L155
+ 793 000a 0020     		movs	r0, #0
+ 794              	.L151:
+ 795 000c 08BD     		pop	{r3, pc}
+ 796              	.L155:
+ 797 000e 4FF0FF30 		mov	r0, #-1
+ 798 0012 FBE7     		b	.L151
+ 800              		.section	.bss.data.0,"aw",%nobits
+ 801              		.align	2
+ 804              	data.0:
+ 805 0000 00000000 		.space	128
+ 805      00000000 
+ 805      00000000 
+ 805      00000000 
+ 805      00000000 
+ 806              		.global	VL53L1CB_RANGING_SENSOR_Driver
+ 807              		.section	.data.VL53L1CB_RANGING_SENSOR_Driver,"aw"
+ 808              		.align	2
+ 811              	VL53L1CB_RANGING_SENSOR_Driver:
+ 812 0000 00000000 		.word	VL53L1CB_Init
+ 813 0004 00000000 		.word	VL53L1CB_DeInit
+ 814 0008 00000000 		.word	VL53L1CB_ReadID
+ 815 000c 00000000 		.word	VL53L1CB_GetCapabilities
+ 816 0010 00000000 		.word	VL53L1CB_ConfigProfile
+ 817 0014 00000000 		.word	VL53L1CB_ConfigROI
+ 818 0018 00000000 		.word	VL53L1CB_ConfigIT
+ 819 001c 00000000 		.word	VL53L1CB_GetDistance
+ 820 0020 00000000 		.word	VL53L1CB_Start
+ 821 0024 00000000 		.word	VL53L1CB_Stop
+ 822 0028 00000000 		.word	VL53L1CB_SetAddress
+ 823 002c 00000000 		.word	VL53L1CB_GetAddress
+ 824 0030 00000000 		.word	VL53L1CB_SetPowerMode
+ 825 0034 00000000 		.word	VL53L1CB_GetPowerMode
+ 826              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccfWYdyT.s 			page 15
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 vl53l1cb.c
+  C:\Temp\ccfWYdyT.s:18     .text.VL53L1CB_DeInit:00000000 $t
+  C:\Temp\ccfWYdyT.s:24     .text.VL53L1CB_DeInit:00000000 VL53L1CB_DeInit
+  C:\Temp\ccfWYdyT.s:48     .text.VL53L1CB_GetCapabilities:00000000 $t
+  C:\Temp\ccfWYdyT.s:54     .text.VL53L1CB_GetCapabilities:00000000 VL53L1CB_GetCapabilities
+  C:\Temp\ccfWYdyT.s:76     .text.VL53L1CB_ConfigIT:00000000 $t
+  C:\Temp\ccfWYdyT.s:82     .text.VL53L1CB_ConfigIT:00000000 VL53L1CB_ConfigIT
+  C:\Temp\ccfWYdyT.s:90     .text.VL53L1CB_GetAddress:00000000 $t
+  C:\Temp\ccfWYdyT.s:96     .text.VL53L1CB_GetAddress:00000000 VL53L1CB_GetAddress
+  C:\Temp\ccfWYdyT.s:114    .text.VL53L1CB_SetPowerMode:00000000 $t
+  C:\Temp\ccfWYdyT.s:120    .text.VL53L1CB_SetPowerMode:00000000 VL53L1CB_SetPowerMode
+  C:\Temp\ccfWYdyT.s:128    .text.VL53L1CB_GetPowerMode:00000000 $t
+  C:\Temp\ccfWYdyT.s:134    .text.VL53L1CB_GetPowerMode:00000000 VL53L1CB_GetPowerMode
+  C:\Temp\ccfWYdyT.s:142    .text.VL53L1CB_Init:00000000 $t
+  C:\Temp\ccfWYdyT.s:148    .text.VL53L1CB_Init:00000000 VL53L1CB_Init
+  C:\Temp\ccfWYdyT.s:194    .text.VL53L1CB_ReadID:00000000 $t
+  C:\Temp\ccfWYdyT.s:200    .text.VL53L1CB_ReadID:00000000 VL53L1CB_ReadID
+  C:\Temp\ccfWYdyT.s:221    .text.VL53L1CB_ConfigProfile:00000000 $t
+  C:\Temp\ccfWYdyT.s:227    .text.VL53L1CB_ConfigProfile:00000000 VL53L1CB_ConfigProfile
+  C:\Temp\ccfWYdyT.s:278    .text.VL53L1CB_ConfigROI:00000000 $t
+  C:\Temp\ccfWYdyT.s:284    .text.VL53L1CB_ConfigROI:00000000 VL53L1CB_ConfigROI
+  C:\Temp\ccfWYdyT.s:320    .text.vl53l1cb_poll_for_measurement:00000000 $t
+  C:\Temp\ccfWYdyT.s:325    .text.vl53l1cb_poll_for_measurement:00000000 vl53l1cb_poll_for_measurement
+  C:\Temp\ccfWYdyT.s:363    .text.vl53l1cb_get_result:00000000 $t
+  C:\Temp\ccfWYdyT.s:368    .text.vl53l1cb_get_result:00000000 vl53l1cb_get_result
+  C:\Temp\ccfWYdyT.s:513    .text.vl53l1cb_get_result:00000170 $d
+  C:\Temp\ccfWYdyT.s:804    .bss.data.0:00000000 data.0
+  C:\Temp\ccfWYdyT.s:518    .text.VL53L1CB_GetDistance:00000000 $t
+  C:\Temp\ccfWYdyT.s:524    .text.VL53L1CB_GetDistance:00000000 VL53L1CB_GetDistance
+  C:\Temp\ccfWYdyT.s:575    .text.VL53L1CB_Start:00000000 $t
+  C:\Temp\ccfWYdyT.s:581    .text.VL53L1CB_Start:00000000 VL53L1CB_Start
+  C:\Temp\ccfWYdyT.s:606    .text.VL53L1CB_Start:00000038 $d
+  C:\Temp\ccfWYdyT.s:610    .text.VL53L1CB_Start:0000003c $t
+  C:\Temp\ccfWYdyT.s:655    .text.VL53L1CB_Stop:00000000 $t
+  C:\Temp\ccfWYdyT.s:661    .text.VL53L1CB_Stop:00000000 VL53L1CB_Stop
+  C:\Temp\ccfWYdyT.s:687    .text.VL53L1CB_SetAddress:00000000 $t
+  C:\Temp\ccfWYdyT.s:693    .text.VL53L1CB_SetAddress:00000000 VL53L1CB_SetAddress
+  C:\Temp\ccfWYdyT.s:714    .text.VL53L1CB_RegisterBusIO:00000000 $t
+  C:\Temp\ccfWYdyT.s:720    .text.VL53L1CB_RegisterBusIO:00000000 VL53L1CB_RegisterBusIO
+  C:\Temp\ccfWYdyT.s:750    .text.VL53L1CB_OffsetCalibration:00000000 $t
+  C:\Temp\ccfWYdyT.s:756    .text.VL53L1CB_OffsetCalibration:00000000 VL53L1CB_OffsetCalibration
+  C:\Temp\ccfWYdyT.s:780    .text.VL53L1CB_XTalkCalibration:00000000 $t
+  C:\Temp\ccfWYdyT.s:786    .text.VL53L1CB_XTalkCalibration:00000000 VL53L1CB_XTalkCalibration
+  C:\Temp\ccfWYdyT.s:801    .bss.data.0:00000000 $d
+  C:\Temp\ccfWYdyT.s:811    .data.VL53L1CB_RANGING_SENSOR_Driver:00000000 VL53L1CB_RANGING_SENSOR_Driver
+  C:\Temp\ccfWYdyT.s:808    .data.VL53L1CB_RANGING_SENSOR_Driver:00000000 $d
+
+UNDEFINED SYMBOLS
+VL53L1_WaitDeviceBooted
+VL53L1_DataInit
+VL53L1_StaticInit
+VL53L1_PerformRefSpadManagement
+VL53L1_RdWord
+VL53L1_SetDistanceMode
+VL53L1_SetMeasurementTimingBudgetMicroSeconds
+VL53L1_SetROI
+ARM GAS  C:\Temp\ccfWYdyT.s 			page 16
+
+
+VL53L1_GetMeasurementDataReady
+VL53L1_GetMultiRangingData
+VL53L1_ClearInterruptAndStartMeasurement
+VL53L1_StartMeasurement
+VL53L1_StopMeasurement
+VL53L1_SetDeviceAddress
+VL53L1_SetOffsetCorrectionMode
+VL53L1_PerformOffsetSimpleCalibration
+VL53L1_PerformXTalkCalibration

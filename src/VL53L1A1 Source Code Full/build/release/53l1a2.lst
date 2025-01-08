@@ -1,0 +1,494 @@
+ARM GAS  C:\Temp\ccNUtqBV.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"53l1a2.c"
+  16              		.text
+  17              		.section	.text._I2cFailRecover,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  23              	_I2cFailRecover:
+  24              		@ args = 0, pretend = 0, frame = 24
+  25              		@ frame_needed = 0, uses_anonymous_args = 0
+  26 0000 354B     		ldr	r3, .L13
+  27 0002 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  28 0004 012B     		cmp	r3, #1
+  29 0006 62D0     		beq	.L7
+  30 0008 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+  31 000c 87B0     		sub	sp, sp, #28
+  32 000e 0026     		movs	r6, #0
+  33 0010 0096     		str	r6, [sp]
+  34 0012 324B     		ldr	r3, .L13+4
+  35 0014 1A6B     		ldr	r2, [r3, #48]
+  36 0016 42F00202 		orr	r2, r2, #2
+  37 001a 1A63     		str	r2, [r3, #48]
+  38 001c 1B6B     		ldr	r3, [r3, #48]
+  39 001e 03F00203 		and	r3, r3, #2
+  40 0022 0093     		str	r3, [sp]
+  41 0024 009B     		ldr	r3, [sp]
+  42 0026 4FF48078 		mov	r8, #256
+  43 002a CDF80480 		str	r8, [sp, #4]
+  44 002e 4FF01109 		mov	r9, #17
+  45 0032 CDF80890 		str	r9, [sp, #8]
+  46 0036 0125     		movs	r5, #1
+  47 0038 0395     		str	r5, [sp, #12]
+  48 003a 294C     		ldr	r4, .L13+8
+  49 003c 01A9     		add	r1, sp, #4
+  50 003e 2046     		mov	r0, r4
+  51 0040 FFF7FEFF 		bl	HAL_GPIO_Init
+  52 0044 4FF40077 		mov	r7, #512
+  53 0048 0197     		str	r7, [sp, #4]
+  54 004a CDF80890 		str	r9, [sp, #8]
+  55 004e 0395     		str	r5, [sp, #12]
+  56 0050 01A9     		add	r1, sp, #4
+  57 0052 2046     		mov	r0, r4
+  58 0054 FFF7FEFF 		bl	HAL_GPIO_Init
+ARM GAS  C:\Temp\ccNUtqBV.s 			page 2
+
+
+  59 0058 2A46     		mov	r2, r5
+  60 005a 4146     		mov	r1, r8
+  61 005c 2046     		mov	r0, r4
+  62 005e FFF7FEFF 		bl	HAL_GPIO_WritePin
+  63 0062 2A46     		mov	r2, r5
+  64 0064 3946     		mov	r1, r7
+  65 0066 2046     		mov	r0, r4
+  66 0068 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  67 006c 20E0     		b	.L6
+  68              	.L4:
+  69 006e 1C4D     		ldr	r5, .L13+8
+  70 0070 0022     		movs	r2, #0
+  71 0072 4FF48071 		mov	r1, #256
+  72 0076 2846     		mov	r0, r5
+  73 0078 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  74 007c 0120     		movs	r0, #1
+  75 007e FFF7FEFF 		bl	HAL_Delay
+  76 0082 0122     		movs	r2, #1
+  77 0084 4FF48071 		mov	r1, #256
+  78 0088 2846     		mov	r0, r5
+  79 008a FFF7FEFF 		bl	HAL_GPIO_WritePin
+  80 008e 0120     		movs	r0, #1
+  81 0090 FFF7FEFF 		bl	HAL_Delay
+  82 0094 0134     		adds	r4, r4, #1
+  83 0096 E4B2     		uxtb	r4, r4
+  84              	.L3:
+  85 0098 092C     		cmp	r4, #9
+  86 009a E8D9     		bls	.L4
+  87 009c 0136     		adds	r6, r6, #1
+  88 009e F6B2     		uxtb	r6, r6
+  89 00a0 4FF40071 		mov	r1, #512
+  90 00a4 0E48     		ldr	r0, .L13+8
+  91 00a6 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+  92 00aa 18B9     		cbnz	r0, .L5
+  93 00ac 062E     		cmp	r6, #6
+  94 00ae 01D8     		bhi	.L5
+  95              	.L6:
+  96 00b0 0024     		movs	r4, #0
+  97 00b2 F1E7     		b	.L3
+  98              	.L5:
+  99 00b4 4FF40071 		mov	r1, #512
+ 100 00b8 0948     		ldr	r0, .L13+8
+ 101 00ba FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 102 00be 40B1     		cbz	r0, .L8
+ 103 00c0 054B     		ldr	r3, .L13
+ 104 00c2 0122     		movs	r2, #1
+ 105 00c4 1A70     		strb	r2, [r3]
+ 106 00c6 0020     		movs	r0, #0
+ 107              	.L1:
+ 108 00c8 07B0     		add	sp, sp, #28
+ 109              		@ sp needed
+ 110 00ca BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 111              	.L7:
+ 112 00ce 0020     		movs	r0, #0
+ 113 00d0 7047     		bx	lr
+ 114              	.L8:
+ 115 00d2 6FF00400 		mvn	r0, #4
+ARM GAS  C:\Temp\ccNUtqBV.s 			page 3
+
+
+ 116 00d6 F7E7     		b	.L1
+ 117              	.L14:
+ 118              		.align	2
+ 119              	.L13:
+ 120 00d8 00000000 		.word	is_already_init.0
+ 121 00dc 00380240 		.word	1073887232
+ 122 00e0 00040240 		.word	1073873920
+ 124              		.section	.text._ExpanderRd,"ax",%progbits
+ 125              		.align	1
+ 126              		.syntax unified
+ 127              		.thumb
+ 128              		.thumb_func
+ 130              	_ExpanderRd:
+ 131              		@ args = 0, pretend = 0, frame = 8
+ 132              		@ frame_needed = 0, uses_anonymous_args = 0
+ 133 0000 70B5     		push	{r4, r5, r6, lr}
+ 134 0002 84B0     		sub	sp, sp, #16
+ 135 0004 1646     		mov	r6, r2
+ 136 0006 1D46     		mov	r5, r3
+ 137 0008 8DF80F10 		strb	r1, [sp, #15]
+ 138 000c 84B2     		uxth	r4, r0
+ 139 000e 6421     		movs	r1, #100
+ 140 0010 0091     		str	r1, [sp]
+ 141 0012 0123     		movs	r3, #1
+ 142 0014 0DF10F02 		add	r2, sp, #15
+ 143 0018 2146     		mov	r1, r4
+ 144 001a 0848     		ldr	r0, .L19
+ 145 001c FFF7FEFF 		bl	HAL_I2C_Master_Transmit
+ 146 0020 08B1     		cbz	r0, .L18
+ 147              	.L15:
+ 148 0022 04B0     		add	sp, sp, #16
+ 149              		@ sp needed
+ 150 0024 70BD     		pop	{r4, r5, r6, pc}
+ 151              	.L18:
+ 152 0026 6423     		movs	r3, #100
+ 153 0028 05FB03F3 		mul	r3, r5, r3
+ 154 002c 0093     		str	r3, [sp]
+ 155 002e ABB2     		uxth	r3, r5
+ 156 0030 3246     		mov	r2, r6
+ 157 0032 2146     		mov	r1, r4
+ 158 0034 0148     		ldr	r0, .L19
+ 159 0036 FFF7FEFF 		bl	HAL_I2C_Master_Receive
+ 160 003a F2E7     		b	.L15
+ 161              	.L20:
+ 162              		.align	2
+ 163              	.L19:
+ 164 003c 00000000 		.word	hi2c1
+ 166              		.section	.text._ExpanderWR,"ax",%progbits
+ 167              		.align	1
+ 168              		.syntax unified
+ 169              		.thumb
+ 170              		.thumb_func
+ 172              	_ExpanderWR:
+ 173              		@ args = 0, pretend = 0, frame = 16
+ 174              		@ frame_needed = 0, uses_anonymous_args = 0
+ 175 0000 30B5     		push	{r4, r5, lr}
+ 176 0002 87B0     		sub	sp, sp, #28
+ARM GAS  C:\Temp\ccNUtqBV.s 			page 4
+
+
+ 177 0004 0546     		mov	r5, r0
+ 178 0006 0846     		mov	r0, r1
+ 179 0008 1146     		mov	r1, r2
+ 180 000a 1C46     		mov	r4, r3
+ 181 000c 8DF80800 		strb	r0, [sp, #8]
+ 182 0010 1A46     		mov	r2, r3
+ 183 0012 0DF10900 		add	r0, sp, #9
+ 184 0016 FFF7FEFF 		bl	memcpy
+ 185 001a 631C     		adds	r3, r4, #1
+ 186 001c 6422     		movs	r2, #100
+ 187 001e 0092     		str	r2, [sp]
+ 188 0020 9BB2     		uxth	r3, r3
+ 189 0022 02AA     		add	r2, sp, #8
+ 190 0024 A9B2     		uxth	r1, r5
+ 191 0026 0248     		ldr	r0, .L23
+ 192 0028 FFF7FEFF 		bl	HAL_I2C_Master_Transmit
+ 193 002c 07B0     		add	sp, sp, #28
+ 194              		@ sp needed
+ 195 002e 30BD     		pop	{r4, r5, pc}
+ 196              	.L24:
+ 197              		.align	2
+ 198              	.L23:
+ 199 0030 00000000 		.word	hi2c1
+ 201              		.section	.text._ExpandersSetAllIO,"ax",%progbits
+ 202              		.align	1
+ 203              		.syntax unified
+ 204              		.thumb
+ 205              		.thumb_func
+ 207              	_ExpandersSetAllIO:
+ 208              		@ args = 0, pretend = 0, frame = 0
+ 209              		@ frame_needed = 0, uses_anonymous_args = 0
+ 210 0000 08B5     		push	{r3, lr}
+ 211 0002 0223     		movs	r3, #2
+ 212 0004 064A     		ldr	r2, .L29
+ 213 0006 1221     		movs	r1, #18
+ 214 0008 8620     		movs	r0, #134
+ 215 000a FFF7FEFF 		bl	_ExpanderWR
+ 216 000e 00B1     		cbz	r0, .L28
+ 217              	.L25:
+ 218 0010 08BD     		pop	{r3, pc}
+ 219              	.L28:
+ 220 0012 0223     		movs	r3, #2
+ 221 0014 034A     		ldr	r2, .L29+4
+ 222 0016 1221     		movs	r1, #18
+ 223 0018 8420     		movs	r0, #132
+ 224 001a FFF7FEFF 		bl	_ExpanderWR
+ 225              	.L26:
+ 226 001e F7E7     		b	.L25
+ 227              	.L30:
+ 228              		.align	2
+ 229              	.L29:
+ 230 0020 00000000 		.word	CurIOVal
+ 231 0024 02000000 		.word	CurIOVal+2
+ 233              		.section	.text.VL53L1A2_Init,"ax",%progbits
+ 234              		.align	1
+ 235              		.global	VL53L1A2_Init
+ 236              		.syntax unified
+ARM GAS  C:\Temp\ccNUtqBV.s 			page 5
+
+
+ 237              		.thumb
+ 238              		.thumb_func
+ 240              	VL53L1A2_Init:
+ 241              		@ args = 0, pretend = 0, frame = 8
+ 242              		@ frame_needed = 0, uses_anonymous_args = 0
+ 243 0000 2B4A     		ldr	r2, .L40
+ 244 0002 1368     		ldr	r3, [r2]
+ 245 0004 591C     		adds	r1, r3, #1
+ 246 0006 1160     		str	r1, [r2]
+ 247 0008 0BB1     		cbz	r3, .L38
+ 248 000a 0020     		movs	r0, #0
+ 249              	.L32:
+ 250 000c 7047     		bx	lr
+ 251              	.L38:
+ 252 000e 10B5     		push	{r4, lr}
+ 253 0010 82B0     		sub	sp, sp, #8
+ 254 0012 FFF7FEFF 		bl	_I2cFailRecover
+ 255 0016 0446     		mov	r4, r0
+ 256 0018 FFF7FEFF 		bl	BSP_I2C1_Init
+ 257 001c 2043     		orrs	r0, r0, r4
+ 258 001e 01D0     		beq	.L39
+ 259              	.L31:
+ 260 0020 02B0     		add	sp, sp, #8
+ 261              		@ sp needed
+ 262 0022 10BD     		pop	{r4, pc}
+ 263              	.L39:
+ 264 0024 0223     		movs	r3, #2
+ 265 0026 01AA     		add	r2, sp, #4
+ 266 0028 0021     		movs	r1, #0
+ 267 002a 8620     		movs	r0, #134
+ 268 002c FFF7FEFF 		bl	_ExpanderRd
+ 269 0030 0028     		cmp	r0, #0
+ 270 0032 F5D1     		bne	.L31
+ 271 0034 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 272 0038 002B     		cmp	r3, #0
+ 273 003a F1D1     		bne	.L31
+ 274 003c 9DF80530 		ldrb	r3, [sp, #5]	@ zero_extendqisi2
+ 275 0040 162B     		cmp	r3, #22
+ 276 0042 EDD1     		bne	.L31
+ 277 0044 0223     		movs	r3, #2
+ 278 0046 01AA     		add	r2, sp, #4
+ 279 0048 0021     		movs	r1, #0
+ 280 004a 8420     		movs	r0, #132
+ 281 004c FFF7FEFF 		bl	_ExpanderRd
+ 282 0050 0028     		cmp	r0, #0
+ 283 0052 E5D1     		bne	.L31
+ 284 0054 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 285 0058 002B     		cmp	r3, #0
+ 286 005a E1D1     		bne	.L31
+ 287 005c 9DF80530 		ldrb	r3, [sp, #5]	@ zero_extendqisi2
+ 288 0060 162B     		cmp	r3, #22
+ 289 0062 DDD1     		bne	.L31
+ 290 0064 134B     		ldr	r3, .L40+4
+ 291 0066 0022     		movs	r2, #0
+ 292 0068 1A60     		str	r2, [r3]
+ 293 006a FF23     		movs	r3, #255
+ 294 006c 8DF80430 		strb	r3, [sp, #4]
+ARM GAS  C:\Temp\ccNUtqBV.s 			page 6
+
+
+ 295 0070 8DF80530 		strb	r3, [sp, #5]
+ 296 0074 0223     		movs	r3, #2
+ 297 0076 01AA     		add	r2, sp, #4
+ 298 0078 1421     		movs	r1, #20
+ 299 007a 8620     		movs	r0, #134
+ 300 007c FFF7FEFF 		bl	_ExpanderWR
+ 301 0080 0028     		cmp	r0, #0
+ 302 0082 CDD1     		bne	.L31
+ 303 0084 FF23     		movs	r3, #255
+ 304 0086 8DF80430 		strb	r3, [sp, #4]
+ 305 008a BF23     		movs	r3, #191
+ 306 008c 8DF80530 		strb	r3, [sp, #5]
+ 307 0090 0223     		movs	r3, #2
+ 308 0092 01AA     		add	r2, sp, #4
+ 309 0094 1421     		movs	r1, #20
+ 310 0096 8420     		movs	r0, #132
+ 311 0098 FFF7FEFF 		bl	_ExpanderWR
+ 312 009c 0028     		cmp	r0, #0
+ 313 009e BFD1     		bne	.L31
+ 314 00a0 044B     		ldr	r3, .L40+4
+ 315 00a2 6FF0C022 		mvn	r2, #-1073692672
+ 316 00a6 1A60     		str	r2, [r3]
+ 317 00a8 FFF7FEFF 		bl	_ExpandersSetAllIO
+ 318 00ac B8E7     		b	.L31
+ 319              	.L41:
+ 320 00ae 00BF     		.align	2
+ 321              	.L40:
+ 322 00b0 00000000 		.word	InitCounter
+ 323 00b4 00000000 		.word	CurIOVal
+ 325              		.section	.text.VL53L1A2_DeInit,"ax",%progbits
+ 326              		.align	1
+ 327              		.global	VL53L1A2_DeInit
+ 328              		.syntax unified
+ 329              		.thumb
+ 330              		.thumb_func
+ 332              	VL53L1A2_DeInit:
+ 333              		@ args = 0, pretend = 0, frame = 0
+ 334              		@ frame_needed = 0, uses_anonymous_args = 0
+ 335 0000 08B5     		push	{r3, lr}
+ 336 0002 074B     		ldr	r3, .L48
+ 337 0004 1B68     		ldr	r3, [r3]
+ 338 0006 43B1     		cbz	r3, .L44
+ 339 0008 013B     		subs	r3, r3, #1
+ 340 000a 054A     		ldr	r2, .L48
+ 341 000c 1360     		str	r3, [r2]
+ 342 000e 0BB1     		cbz	r3, .L47
+ 343 0010 0020     		movs	r0, #0
+ 344 0012 03E0     		b	.L42
+ 345              	.L47:
+ 346 0014 FFF7FEFF 		bl	BSP_I2C1_DeInit
+ 347 0018 00E0     		b	.L42
+ 348              	.L44:
+ 349 001a 0020     		movs	r0, #0
+ 350              	.L42:
+ 351 001c 08BD     		pop	{r3, pc}
+ 352              	.L49:
+ 353 001e 00BF     		.align	2
+ARM GAS  C:\Temp\ccNUtqBV.s 			page 7
+
+
+ 354              	.L48:
+ 355 0020 00000000 		.word	InitCounter
+ 357              		.section	.text.VL53L1A2_ResetId,"ax",%progbits
+ 358              		.align	1
+ 359              		.global	VL53L1A2_ResetId
+ 360              		.syntax unified
+ 361              		.thumb
+ 362              		.thumb_func
+ 364              	VL53L1A2_ResetId:
+ 365              		@ args = 0, pretend = 0, frame = 0
+ 366              		@ frame_needed = 0, uses_anonymous_args = 0
+ 367 0000 08B5     		push	{r3, lr}
+ 368 0002 0128     		cmp	r0, #1
+ 369 0004 05D0     		beq	.L51
+ 370 0006 0228     		cmp	r0, #2
+ 371 0008 23D0     		beq	.L52
+ 372 000a 90B1     		cbz	r0, .L53
+ 373 000c 4FF0FF30 		mov	r0, #-1
+ 374              	.L50:
+ 375 0010 08BD     		pop	{r3, pc}
+ 376              	.L51:
+ 377 0012 184A     		ldr	r2, .L59
+ 378 0014 D378     		ldrb	r3, [r2, #3]	@ zero_extendqisi2
+ 379 0016 03F07F03 		and	r3, r3, #127
+ 380 001a D370     		strb	r3, [r2, #3]
+ 381 001c 11B1     		cbz	r1, .L55
+ 382 001e 63F07F03 		orn	r3, r3, #127
+ 383 0022 D370     		strb	r3, [r2, #3]
+ 384              	.L55:
+ 385 0024 0123     		movs	r3, #1
+ 386 0026 144A     		ldr	r2, .L59+4
+ 387 0028 1321     		movs	r1, #19
+ 388 002a 8420     		movs	r0, #132
+ 389 002c FFF7FEFF 		bl	_ExpanderWR
+ 390 0030 EEE7     		b	.L50
+ 391              	.L53:
+ 392 0032 104A     		ldr	r2, .L59
+ 393 0034 5378     		ldrb	r3, [r2, #1]	@ zero_extendqisi2
+ 394 0036 03F0BF03 		and	r3, r3, #191
+ 395 003a 5370     		strb	r3, [r2, #1]
+ 396 003c 11B1     		cbz	r1, .L56
+ 397 003e 43F04003 		orr	r3, r3, #64
+ 398 0042 5370     		strb	r3, [r2, #1]
+ 399              	.L56:
+ 400 0044 0123     		movs	r3, #1
+ 401 0046 0D4A     		ldr	r2, .L59+8
+ 402 0048 1321     		movs	r1, #19
+ 403 004a 8620     		movs	r0, #134
+ 404 004c FFF7FEFF 		bl	_ExpanderWR
+ 405 0050 DEE7     		b	.L50
+ 406              	.L52:
+ 407 0052 084A     		ldr	r2, .L59
+ 408 0054 5378     		ldrb	r3, [r2, #1]	@ zero_extendqisi2
+ 409 0056 03F07F03 		and	r3, r3, #127
+ 410 005a 5370     		strb	r3, [r2, #1]
+ 411 005c 11B1     		cbz	r1, .L57
+ 412 005e 63F07F03 		orn	r3, r3, #127
+ARM GAS  C:\Temp\ccNUtqBV.s 			page 8
+
+
+ 413 0062 5370     		strb	r3, [r2, #1]
+ 414              	.L57:
+ 415 0064 0123     		movs	r3, #1
+ 416 0066 054A     		ldr	r2, .L59+8
+ 417 0068 1321     		movs	r1, #19
+ 418 006a 8620     		movs	r0, #134
+ 419 006c FFF7FEFF 		bl	_ExpanderWR
+ 420              	.L54:
+ 421 0070 CEE7     		b	.L50
+ 422              	.L60:
+ 423 0072 00BF     		.align	2
+ 424              	.L59:
+ 425 0074 00000000 		.word	CurIOVal
+ 426 0078 03000000 		.word	CurIOVal+3
+ 427 007c 01000000 		.word	CurIOVal+1
+ 429              		.section	.bss.is_already_init.0,"aw",%nobits
+ 432              	is_already_init.0:
+ 433 0000 00       		.space	1
+ 434              		.section	.bss.CurIOVal,"aw",%nobits
+ 435              		.align	2
+ 438              	CurIOVal:
+ 439 0000 00000000 		.space	4
+ 440              		.section	.bss.InitCounter,"aw",%nobits
+ 441              		.align	2
+ 444              	InitCounter:
+ 445 0000 00000000 		.space	4
+ 446              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccNUtqBV.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 53l1a2.c
+  C:\Temp\ccNUtqBV.s:18     .text._I2cFailRecover:00000000 $t
+  C:\Temp\ccNUtqBV.s:23     .text._I2cFailRecover:00000000 _I2cFailRecover
+  C:\Temp\ccNUtqBV.s:120    .text._I2cFailRecover:000000d8 $d
+  C:\Temp\ccNUtqBV.s:432    .bss.is_already_init.0:00000000 is_already_init.0
+  C:\Temp\ccNUtqBV.s:125    .text._ExpanderRd:00000000 $t
+  C:\Temp\ccNUtqBV.s:130    .text._ExpanderRd:00000000 _ExpanderRd
+  C:\Temp\ccNUtqBV.s:164    .text._ExpanderRd:0000003c $d
+  C:\Temp\ccNUtqBV.s:167    .text._ExpanderWR:00000000 $t
+  C:\Temp\ccNUtqBV.s:172    .text._ExpanderWR:00000000 _ExpanderWR
+  C:\Temp\ccNUtqBV.s:199    .text._ExpanderWR:00000030 $d
+  C:\Temp\ccNUtqBV.s:202    .text._ExpandersSetAllIO:00000000 $t
+  C:\Temp\ccNUtqBV.s:207    .text._ExpandersSetAllIO:00000000 _ExpandersSetAllIO
+  C:\Temp\ccNUtqBV.s:230    .text._ExpandersSetAllIO:00000020 $d
+  C:\Temp\ccNUtqBV.s:438    .bss.CurIOVal:00000000 CurIOVal
+  C:\Temp\ccNUtqBV.s:234    .text.VL53L1A2_Init:00000000 $t
+  C:\Temp\ccNUtqBV.s:240    .text.VL53L1A2_Init:00000000 VL53L1A2_Init
+  C:\Temp\ccNUtqBV.s:322    .text.VL53L1A2_Init:000000b0 $d
+  C:\Temp\ccNUtqBV.s:444    .bss.InitCounter:00000000 InitCounter
+  C:\Temp\ccNUtqBV.s:326    .text.VL53L1A2_DeInit:00000000 $t
+  C:\Temp\ccNUtqBV.s:332    .text.VL53L1A2_DeInit:00000000 VL53L1A2_DeInit
+  C:\Temp\ccNUtqBV.s:355    .text.VL53L1A2_DeInit:00000020 $d
+  C:\Temp\ccNUtqBV.s:358    .text.VL53L1A2_ResetId:00000000 $t
+  C:\Temp\ccNUtqBV.s:364    .text.VL53L1A2_ResetId:00000000 VL53L1A2_ResetId
+  C:\Temp\ccNUtqBV.s:425    .text.VL53L1A2_ResetId:00000074 $d
+  C:\Temp\ccNUtqBV.s:433    .bss.is_already_init.0:00000000 $d
+  C:\Temp\ccNUtqBV.s:435    .bss.CurIOVal:00000000 $d
+  C:\Temp\ccNUtqBV.s:441    .bss.InitCounter:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_Init
+HAL_GPIO_WritePin
+HAL_Delay
+HAL_GPIO_ReadPin
+HAL_I2C_Master_Transmit
+HAL_I2C_Master_Receive
+hi2c1
+memcpy
+BSP_I2C1_Init
+BSP_I2C1_DeInit
