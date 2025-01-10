@@ -1,71 +1,45 @@
-function STLINK_COMPORT = auto_COMPORT()
-    Skey = 'HKEY_LOCAL_MACHINE\HARDWARE\DEVICEMAP\SERIALCOMM';
-    % Find connected serial devices and clean up the output
-    [~, list] = dos(['REG QUERY ' Skey]);
-    list = strread(list,'%s','delimiter',' ');
-    coms = 0;
-    for i = 1:numel(list)
-      if strcmp(list{i}(1:3),'COM')
-          if ~iscell(coms)
-              coms = list(i);
-          else
-              coms{end+1} = list{i};
-          end
-      end
+function STLINK_COMPORT = auto_COMPORT_mac()
+    % auto_COMPORT_mac - Automatically detects and selects a USB modem COM port on macOS.
+    % 
+    % If one USB modem is found, it is selected automatically.
+    % If multiple USB modems are found, the user is prompted to select one.
+    % If none are found, an error is raised.
+    %
+    % Output:
+    %   selectedPort - The selected USB modem COM port (e.g., '/dev/tty.usbmodem12345').
+    
+    % Use system command to list all tty.usbmodem devices
+    [status, cmdout] = system('ls /dev/tty.usbmodem* 2>/dev/null');
+    
+    % Check if the command was successful and there are results
+    if status ~= 0 || isempty(cmdout)
+        error('No USB modem devices found.');
     end
-    key = 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USB\';
-    % Find all installed USB devices entries and clean up the output
-    [~, vals] = dos(['REG QUERY ' key ' /s /f "FriendlyName" /t "REG_SZ"']);
-    vals = textscan(vals,'%s','delimiter','\t');
-    vals = cat(1,vals{:});
-    out = 0;
-    % Find all friendly name property entries
-    for i = 1:numel(vals)
-      if strcmp(vals{i}(1:min(12,end)),'FriendlyName')
-          if ~iscell(out)
-              out = vals(i);
-          else
-              out{end+1} = vals{i};
-          end
-      end
-    end
-    % Compare friendly name entries with connected ports and generate output
-    for i = 1:numel(coms)
-      match = strfind(out,[coms{i},')']);
-      ind = 0;
-      for j = 1:numel(match)
-          if ~isempty(match{j})
-              ind = j;
-          end
-      end
-      if ind ~= 0
-          com = str2double(coms{i}(4:end));
-    % Trim the trailing ' (COM##)' from the friendly name - works on ports from 1 to 99
-          if com > 9
-              length = 8;
-          else
-              length = 7;
-          end
-          devs{i,1} = out{ind}(27:end-length);
-          devs{i,2} = "COM"+string(com);
-      end
-    end
-
-    STLINK_COMPORT = "NULL";
-    if size(devs,1) == 1 % only nucleo plugged in
-        STLINK_COMPORT = devs{1,2};
+    
+    % Parse the output into individual lines
+    matchingDevices = strsplit(strtrim(cmdout), '\n');
+    
+    % Check the number of matching devices found
+    if numel(matchingDevices) == 1
+        % If exactly one device is found, select it automatically
+        STLINK_COMPORT = matchingDevices{1};
+        disp(['Found USB modem: ', STLINK_COMPORT]);
+    elseif numel(matchingDevices) > 1
+        % If multiple devices are found, prompt the user to select one
+        [selection, ok] = listdlg(...
+            'PromptString', 'Multiple USB modems found. Select one:', ...
+            'SelectionMode', 'single', ...
+            'ListString', matchingDevices, ...
+            'Name', 'Select USB Modem');
+        
+        % Handle user response
+        if ok
+            STLINK_COMPORT = matchingDevices{selection};
+            disp(['Selected USB modem: ', STLINK_COMPORT]);
+        else
+            error('No USB modem selected. Aborting.');
+        end
     else
-        for i = size(devs,1) % checks for nucleo specific comport (needs drivers)
-            if devs{i,1} == 'STMicroelectronics STLink Virtual COM Port';
-                STLINK_COMPORT = devs{i,2};
-            end
-        end
-        if STLINK_COMPORT == "NULL";
-            for i = size(devs,1) % checks for generic comport (assumes others are specifc)
-                if devs{i,1} == 'USB Serial Device';
-                    STLINK_COMPORT = devs{i,2};
-                end
-            end
-        end
+        error('Unexpected error while detecting USB modems.');
     end
 end
