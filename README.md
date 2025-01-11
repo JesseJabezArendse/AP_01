@@ -43,5 +43,5 @@ or download the repo as a .zip
 ### If it doesn't work on any OS:
    - Disable the automation switch in Simulink
    - Copy the .bin file of the model you are wanting to run into the STM32 Mucleo F411 mass storage drive
-   -  you'll be prompted to choose the COM Port for the Nucleo Board - one of the COMx's OR /dev/ttyACM's OR /dev/usbmodem's
+   - You'll be prompted to choose the COM Port for the Nucleo Board - one of the COMx's OR /dev/ttyACM's OR /dev/usbmodem's
    - Run the model
