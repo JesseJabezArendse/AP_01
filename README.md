@@ -15,7 +15,7 @@ This directory contains the installers for the drivers needed to use the STLink,
 This directory contains C Code for each sensor board that does the data aquisition and porting to Simulink. Not necessary unless you're curious and want to make custom changes.
 
 ### [Binaries/](https://github.com/JesseJabezArendse/AP_01/tree/main/binaries)
-This directory contains the precompiled binaries of the source code folders, which is needed by Simulink.
+This directory contains the precompiled binaries for each Model, which is needed by Simulink.
 
 ---
 
@@ -34,10 +34,14 @@ or download the repo as a .zip
 
 ### For Linux 
    Hopefully plug and play (limited USB device access with a Virtual Machine, apologies)
+   If not you'll be prompted to choose the COM Port for the Nucleo Board - one of the /dev/ttyACM's
    
-   If not you'll be prompted to choose the COM Port for the Nucleo Board - one of the /dev/ttyACM's (you probably want to check which one appears when you plug it in before selecting it)
-   
-### For Mac: (plug and play funtionality pending)
-   - Copy the .bin file of the model you are wanting to run into the F411 mass storage drive
-   - Create a variable called STLINK_COMPORT that is the string of the comport of the Nucleo Board
+### For Mac:
+   Hopefully plug and play too
+
+
+### If it doesn't work on any OS:
+   - Disable the automation switch in Simulink
+   - Copy the .bin file of the model you are wanting to run into the STM32 Mucleo F411 mass storage drive
+   - You'll be prompted to choose the COM Port for the Nucleo Board - one of the COMx's OR /dev/ttyACM's OR /dev/usbmodem's
    - Run the model
