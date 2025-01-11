@@ -15,7 +15,7 @@ This directory contains the installers for the drivers needed to use the STLink,
 This directory contains C Code for each sensor board that does the data aquisition and porting to Simulink. Not necessary unless you're curious and want to make custom changes.
 
 ### [Binaries/](https://github.com/JesseJabezArendse/AP_01/tree/main/binaries)
-This directory contains the precompiled binaries of the source code folders, which is needed by Simulink.
+This directory contains the precompiled binaries for each Model, which is needed by Simulink.
 
 ---
 
