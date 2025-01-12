@@ -17,7 +17,7 @@ function auto_program(filename)
     else
         % Check and prompt to copy the file to the "F411" directory
         if exist('filename', 'var') && ~isempty(filename)
-            msg = sprintf(['Please ensure the file "%s.bin" is copied to the "F411RE" directory before proceeding.\n', ...
+            msg = sprintf(['Please ensure the file "binaries/%s.bin" is copied to the "F411RE" USB Drive before proceeding.\n', ...
                'Also, make sure you pressed the reset button (black) if you are just re-running this model!'], filename);
             uiwait(msgbox(msg, 'Copy File Reminder', 'warn'));
         else
