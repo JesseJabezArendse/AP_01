@@ -1,0 +1,158 @@
+ARM GAS  C:\Temp\ccYNEShF.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"system_stm32f3xx.c"
+  16              		.text
+  17              		.section	.text.SystemInit,"ax",%progbits
+  18              		.align	1
+  19              		.global	SystemInit
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	SystemInit:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27              		@ link register save eliminated.
+  28 0000 034A     		ldr	r2, .L2
+  29 0002 D2F88830 		ldr	r3, [r2, #136]
+  30 0006 43F47003 		orr	r3, r3, #15728640
+  31 000a C2F88830 		str	r3, [r2, #136]
+  32 000e 7047     		bx	lr
+  33              	.L3:
+  34              		.align	2
+  35              	.L2:
+  36 0010 00ED00E0 		.word	-536810240
+  38              		.section	.text.SystemCoreClockUpdate,"ax",%progbits
+  39              		.align	1
+  40              		.global	SystemCoreClockUpdate
+  41              		.syntax unified
+  42              		.thumb
+  43              		.thumb_func
+  45              	SystemCoreClockUpdate:
+  46              		@ args = 0, pretend = 0, frame = 0
+  47              		@ frame_needed = 0, uses_anonymous_args = 0
+  48              		@ link register save eliminated.
+  49 0000 1E4B     		ldr	r3, .L12
+  50 0002 5B68     		ldr	r3, [r3, #4]
+  51 0004 03F00C03 		and	r3, r3, #12
+  52 0008 042B     		cmp	r3, #4
+  53 000a 14D0     		beq	.L5
+  54 000c 082B     		cmp	r3, #8
+  55 000e 16D0     		beq	.L6
+  56 0010 1BB1     		cbz	r3, .L10
+  57 0012 1B4B     		ldr	r3, .L12+4
+  58 0014 1B4A     		ldr	r2, .L12+8
+  59 0016 1A60     		str	r2, [r3]
+  60 0018 02E0     		b	.L8
+ARM GAS  C:\Temp\ccYNEShF.s 			page 2
+
+
+  61              	.L10:
+  62 001a 194B     		ldr	r3, .L12+4
+  63 001c 194A     		ldr	r2, .L12+8
+  64 001e 1A60     		str	r2, [r3]
+  65              	.L8:
+  66 0020 164B     		ldr	r3, .L12
+  67 0022 5B68     		ldr	r3, [r3, #4]
+  68 0024 C3F30313 		ubfx	r3, r3, #4, #4
+  69 0028 174A     		ldr	r2, .L12+12
+  70 002a D15C     		ldrb	r1, [r2, r3]	@ zero_extendqisi2
+  71 002c 144A     		ldr	r2, .L12+4
+  72 002e 1368     		ldr	r3, [r2]
+  73 0030 CB40     		lsrs	r3, r3, r1
+  74 0032 1360     		str	r3, [r2]
+  75 0034 7047     		bx	lr
+  76              	.L5:
+  77 0036 124B     		ldr	r3, .L12+4
+  78 0038 124A     		ldr	r2, .L12+8
+  79 003a 1A60     		str	r2, [r3]
+  80 003c F0E7     		b	.L8
+  81              	.L6:
+  82 003e 0F4A     		ldr	r2, .L12
+  83 0040 5368     		ldr	r3, [r2, #4]
+  84 0042 5168     		ldr	r1, [r2, #4]
+  85 0044 01F4C031 		and	r1, r1, #98304
+  86 0048 C3F38343 		ubfx	r3, r3, #18, #4
+  87 004c 0233     		adds	r3, r3, #2
+  88 004e D26A     		ldr	r2, [r2, #44]
+  89 0050 02F00F02 		and	r2, r2, #15
+  90 0054 0132     		adds	r2, r2, #1
+  91 0056 B1F5803F 		cmp	r1, #65536
+  92 005a 07D0     		beq	.L11
+  93 005c 0949     		ldr	r1, .L12+8
+  94 005e B1FBF2F2 		udiv	r2, r1, r2
+  95 0062 02FB03F3 		mul	r3, r2, r3
+  96 0066 064A     		ldr	r2, .L12+4
+  97 0068 1360     		str	r3, [r2]
+  98 006a D9E7     		b	.L8
+  99              	.L11:
+ 100 006c 0549     		ldr	r1, .L12+8
+ 101 006e B1FBF2F2 		udiv	r2, r1, r2
+ 102 0072 02FB03F3 		mul	r3, r2, r3
+ 103 0076 024A     		ldr	r2, .L12+4
+ 104 0078 1360     		str	r3, [r2]
+ 105 007a D1E7     		b	.L8
+ 106              	.L13:
+ 107              		.align	2
+ 108              	.L12:
+ 109 007c 00100240 		.word	1073876992
+ 110 0080 00000000 		.word	SystemCoreClock
+ 111 0084 00127A00 		.word	8000000
+ 112 0088 00000000 		.word	AHBPrescTable
+ 114              		.global	APBPrescTable
+ 115              		.section	.rodata.APBPrescTable,"a"
+ 116              		.align	2
+ 119              	APBPrescTable:
+ 120 0000 00000000 		.ascii	"\000\000\000\000\001\002\003\004"
+ARM GAS  C:\Temp\ccYNEShF.s 			page 3
+
+
+ 120      01020304 
+ 121              		.global	AHBPrescTable
+ 122              		.section	.rodata.AHBPrescTable,"a"
+ 123              		.align	2
+ 126              	AHBPrescTable:
+ 127 0000 00000000 		.ascii	"\000\000\000\000\000\000\000\000\001\002\003\004\006"
+ 127      00000000 
+ 127      01020304 
+ 127      06
+ 128 000d 070809   		.ascii	"\007\010\011"
+ 129              		.global	SystemCoreClock
+ 130              		.section	.data.SystemCoreClock,"aw"
+ 131              		.align	2
+ 134              	SystemCoreClock:
+ 135 0000 00127A00 		.word	8000000
+ 136              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccYNEShF.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 system_stm32f3xx.c
+  C:\Temp\ccYNEShF.s:18     .text.SystemInit:00000000 $t
+  C:\Temp\ccYNEShF.s:24     .text.SystemInit:00000000 SystemInit
+  C:\Temp\ccYNEShF.s:36     .text.SystemInit:00000010 $d
+  C:\Temp\ccYNEShF.s:39     .text.SystemCoreClockUpdate:00000000 $t
+  C:\Temp\ccYNEShF.s:45     .text.SystemCoreClockUpdate:00000000 SystemCoreClockUpdate
+  C:\Temp\ccYNEShF.s:109    .text.SystemCoreClockUpdate:0000007c $d
+  C:\Temp\ccYNEShF.s:134    .data.SystemCoreClock:00000000 SystemCoreClock
+  C:\Temp\ccYNEShF.s:126    .rodata.AHBPrescTable:00000000 AHBPrescTable
+  C:\Temp\ccYNEShF.s:119    .rodata.APBPrescTable:00000000 APBPrescTable
+  C:\Temp\ccYNEShF.s:116    .rodata.APBPrescTable:00000000 $d
+  C:\Temp\ccYNEShF.s:123    .rodata.AHBPrescTable:00000000 $d
+  C:\Temp\ccYNEShF.s:131    .data.SystemCoreClock:00000000 $d
+
+NO UNDEFINED SYMBOLS

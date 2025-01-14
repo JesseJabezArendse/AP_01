@@ -1,0 +1,669 @@
+ARM GAS  C:\Temp\cci60i2l.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"stm32f3xx_hal_uart_ex.c"
+  16              		.text
+  17              		.section	.text.UARTEx_Wakeup_AddressConfig,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  23              	UARTEx_Wakeup_AddressConfig:
+  24              		@ args = 0, pretend = 0, frame = 8
+  25              		@ frame_needed = 0, uses_anonymous_args = 0
+  26              		@ link register save eliminated.
+  27 0000 82B0     		sub	sp, sp, #8
+  28 0002 02AB     		add	r3, sp, #8
+  29 0004 03E90600 		stmdb	r3, {r1, r2}
+  30 0008 0268     		ldr	r2, [r0]
+  31 000a 5368     		ldr	r3, [r2, #4]
+  32 000c 23F01003 		bic	r3, r3, #16
+  33 0010 BDF80410 		ldrh	r1, [sp, #4]
+  34 0014 0B43     		orrs	r3, r3, r1
+  35 0016 5360     		str	r3, [r2, #4]
+  36 0018 0268     		ldr	r2, [r0]
+  37 001a 5368     		ldr	r3, [r2, #4]
+  38 001c 23F07F43 		bic	r3, r3, #-16777216
+  39 0020 9DF80610 		ldrb	r1, [sp, #6]	@ zero_extendqisi2
+  40 0024 43EA0163 		orr	r3, r3, r1, lsl #24
+  41 0028 5360     		str	r3, [r2, #4]
+  42 002a 02B0     		add	sp, sp, #8
+  43              		@ sp needed
+  44 002c 7047     		bx	lr
+  46              		.section	.text.HAL_RS485Ex_Init,"ax",%progbits
+  47              		.align	1
+  48              		.global	HAL_RS485Ex_Init
+  49              		.syntax unified
+  50              		.thumb
+  51              		.thumb_func
+  53              	HAL_RS485Ex_Init:
+  54              		@ args = 0, pretend = 0, frame = 0
+  55              		@ frame_needed = 0, uses_anonymous_args = 0
+  56 0000 0028     		cmp	r0, #0
+  57 0002 3CD0     		beq	.L7
+  58 0004 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  59 0006 0F46     		mov	r7, r1
+  60 0008 1646     		mov	r6, r2
+ARM GAS  C:\Temp\cci60i2l.s 			page 2
+
+
+  61 000a 1D46     		mov	r5, r3
+  62 000c 0446     		mov	r4, r0
+  63 000e C36F     		ldr	r3, [r0, #124]
+  64 0010 63B3     		cbz	r3, .L12
+  65              	.L5:
+  66 0012 2423     		movs	r3, #36
+  67 0014 E367     		str	r3, [r4, #124]
+  68 0016 2268     		ldr	r2, [r4]
+  69 0018 1368     		ldr	r3, [r2]
+  70 001a 23F00103 		bic	r3, r3, #1
+  71 001e 1360     		str	r3, [r2]
+  72 0020 636A     		ldr	r3, [r4, #36]
+  73 0022 43BB     		cbnz	r3, .L13
+  74              	.L6:
+  75 0024 2046     		mov	r0, r4
+  76 0026 FFF7FEFF 		bl	UART_SetConfig
+  77 002a 0128     		cmp	r0, #1
+  78 002c 1DD0     		beq	.L4
+  79 002e 2268     		ldr	r2, [r4]
+  80 0030 9368     		ldr	r3, [r2, #8]
+  81 0032 43F48043 		orr	r3, r3, #16384
+  82 0036 9360     		str	r3, [r2, #8]
+  83 0038 2268     		ldr	r2, [r4]
+  84 003a 9368     		ldr	r3, [r2, #8]
+  85 003c 23F40043 		bic	r3, r3, #32768
+  86 0040 3B43     		orrs	r3, r3, r7
+  87 0042 9360     		str	r3, [r2, #8]
+  88 0044 2D04     		lsls	r5, r5, #16
+  89 0046 45EA4652 		orr	r2, r5, r6, lsl #21
+  90 004a 2168     		ldr	r1, [r4]
+  91 004c 0B68     		ldr	r3, [r1]
+  92 004e 23F07F73 		bic	r3, r3, #66846720
+  93 0052 23F44033 		bic	r3, r3, #196608
+  94 0056 1343     		orrs	r3, r3, r2
+  95 0058 0B60     		str	r3, [r1]
+  96 005a 2268     		ldr	r2, [r4]
+  97 005c 1368     		ldr	r3, [r2]
+  98 005e 43F00103 		orr	r3, r3, #1
+  99 0062 1360     		str	r3, [r2]
+ 100 0064 2046     		mov	r0, r4
+ 101 0066 FFF7FEFF 		bl	UART_CheckIdleState
+ 102              	.L4:
+ 103 006a F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 104              	.L12:
+ 105 006c 80F87830 		strb	r3, [r0, #120]
+ 106 0070 FFF7FEFF 		bl	HAL_UART_MspInit
+ 107 0074 CDE7     		b	.L5
+ 108              	.L13:
+ 109 0076 2046     		mov	r0, r4
+ 110 0078 FFF7FEFF 		bl	UART_AdvFeatureConfig
+ 111 007c D2E7     		b	.L6
+ 112              	.L7:
+ 113 007e 0120     		movs	r0, #1
+ 114 0080 7047     		bx	lr
+ 116              		.section	.text.HAL_UARTEx_WakeupCallback,"ax",%progbits
+ 117              		.align	1
+ 118              		.weak	HAL_UARTEx_WakeupCallback
+ARM GAS  C:\Temp\cci60i2l.s 			page 3
+
+
+ 119              		.syntax unified
+ 120              		.thumb
+ 121              		.thumb_func
+ 123              	HAL_UARTEx_WakeupCallback:
+ 124              		@ args = 0, pretend = 0, frame = 0
+ 125              		@ frame_needed = 0, uses_anonymous_args = 0
+ 126              		@ link register save eliminated.
+ 127 0000 7047     		bx	lr
+ 129              		.section	.text.HAL_MultiProcessorEx_AddressLength_Set,"ax",%progbits
+ 130              		.align	1
+ 131              		.global	HAL_MultiProcessorEx_AddressLength_Set
+ 132              		.syntax unified
+ 133              		.thumb
+ 134              		.thumb_func
+ 136              	HAL_MultiProcessorEx_AddressLength_Set:
+ 137              		@ args = 0, pretend = 0, frame = 0
+ 138              		@ frame_needed = 0, uses_anonymous_args = 0
+ 139 0000 B8B1     		cbz	r0, .L17
+ 140 0002 08B5     		push	{r3, lr}
+ 141 0004 0346     		mov	r3, r0
+ 142 0006 2422     		movs	r2, #36
+ 143 0008 C267     		str	r2, [r0, #124]
+ 144 000a 0068     		ldr	r0, [r0]
+ 145 000c 0268     		ldr	r2, [r0]
+ 146 000e 22F00102 		bic	r2, r2, #1
+ 147 0012 0260     		str	r2, [r0]
+ 148 0014 1868     		ldr	r0, [r3]
+ 149 0016 4268     		ldr	r2, [r0, #4]
+ 150 0018 22F01002 		bic	r2, r2, #16
+ 151 001c 1143     		orrs	r1, r1, r2
+ 152 001e 4160     		str	r1, [r0, #4]
+ 153 0020 1968     		ldr	r1, [r3]
+ 154 0022 0A68     		ldr	r2, [r1]
+ 155 0024 42F00102 		orr	r2, r2, #1
+ 156 0028 0A60     		str	r2, [r1]
+ 157 002a 1846     		mov	r0, r3
+ 158 002c FFF7FEFF 		bl	UART_CheckIdleState
+ 159 0030 08BD     		pop	{r3, pc}
+ 160              	.L17:
+ 161 0032 0120     		movs	r0, #1
+ 162 0034 7047     		bx	lr
+ 164              		.section	.text.HAL_UARTEx_StopModeWakeUpSourceConfig,"ax",%progbits
+ 165              		.align	1
+ 166              		.global	HAL_UARTEx_StopModeWakeUpSourceConfig
+ 167              		.syntax unified
+ 168              		.thumb
+ 169              		.thumb_func
+ 171              	HAL_UARTEx_StopModeWakeUpSourceConfig:
+ 172              		@ args = 0, pretend = 0, frame = 8
+ 173              		@ frame_needed = 0, uses_anonymous_args = 0
+ 174 0000 10B5     		push	{r4, lr}
+ 175 0002 84B0     		sub	sp, sp, #16
+ 176 0004 04AB     		add	r3, sp, #16
+ 177 0006 03E90600 		stmdb	r3, {r1, r2}
+ 178 000a 90F87830 		ldrb	r3, [r0, #120]	@ zero_extendqisi2
+ 179 000e 012B     		cmp	r3, #1
+ 180 0010 33D0     		beq	.L26
+ARM GAS  C:\Temp\cci60i2l.s 			page 4
+
+
+ 181 0012 0446     		mov	r4, r0
+ 182 0014 0123     		movs	r3, #1
+ 183 0016 80F87830 		strb	r3, [r0, #120]
+ 184 001a 2423     		movs	r3, #36
+ 185 001c C367     		str	r3, [r0, #124]
+ 186 001e 0268     		ldr	r2, [r0]
+ 187 0020 1368     		ldr	r3, [r2]
+ 188 0022 23F00103 		bic	r3, r3, #1
+ 189 0026 1360     		str	r3, [r2]
+ 190 0028 0168     		ldr	r1, [r0]
+ 191 002a 8B68     		ldr	r3, [r1, #8]
+ 192 002c 23F44013 		bic	r3, r3, #3145728
+ 193 0030 029A     		ldr	r2, [sp, #8]
+ 194 0032 1343     		orrs	r3, r3, r2
+ 195 0034 8B60     		str	r3, [r1, #8]
+ 196 0036 A2B1     		cbz	r2, .L29
+ 197              	.L24:
+ 198 0038 2268     		ldr	r2, [r4]
+ 199 003a 1368     		ldr	r3, [r2]
+ 200 003c 43F00103 		orr	r3, r3, #1
+ 201 0040 1360     		str	r3, [r2]
+ 202 0042 FFF7FEFF 		bl	HAL_GetTick
+ 203 0046 0346     		mov	r3, r0
+ 204 0048 6FF07E42 		mvn	r2, #-33554432
+ 205 004c 0092     		str	r2, [sp]
+ 206 004e 0022     		movs	r2, #0
+ 207 0050 4FF48001 		mov	r1, #4194304
+ 208 0054 2046     		mov	r0, r4
+ 209 0056 FFF7FEFF 		bl	UART_WaitOnFlagUntilTimeout
+ 210 005a 40B9     		cbnz	r0, .L27
+ 211 005c 2023     		movs	r3, #32
+ 212 005e E367     		str	r3, [r4, #124]
+ 213 0060 06E0     		b	.L25
+ 214              	.L29:
+ 215 0062 04AB     		add	r3, sp, #16
+ 216 0064 13E90600 		ldmdb	r3, {r1, r2}
+ 217 0068 FFF7FEFF 		bl	UARTEx_Wakeup_AddressConfig
+ 218 006c E4E7     		b	.L24
+ 219              	.L27:
+ 220 006e 0320     		movs	r0, #3
+ 221              	.L25:
+ 222 0070 0023     		movs	r3, #0
+ 223 0072 84F87830 		strb	r3, [r4, #120]
+ 224              	.L23:
+ 225 0076 04B0     		add	sp, sp, #16
+ 226              		@ sp needed
+ 227 0078 10BD     		pop	{r4, pc}
+ 228              	.L26:
+ 229 007a 0220     		movs	r0, #2
+ 230 007c FBE7     		b	.L23
+ 232              		.section	.text.HAL_UARTEx_EnableStopMode,"ax",%progbits
+ 233              		.align	1
+ 234              		.global	HAL_UARTEx_EnableStopMode
+ 235              		.syntax unified
+ 236              		.thumb
+ 237              		.thumb_func
+ 239              	HAL_UARTEx_EnableStopMode:
+ARM GAS  C:\Temp\cci60i2l.s 			page 5
+
+
+ 240              		@ args = 0, pretend = 0, frame = 0
+ 241              		@ frame_needed = 0, uses_anonymous_args = 0
+ 242              		@ link register save eliminated.
+ 243 0000 90F87830 		ldrb	r3, [r0, #120]	@ zero_extendqisi2
+ 244 0004 012B     		cmp	r3, #1
+ 245 0006 10D0     		beq	.L33
+ 246 0008 0123     		movs	r3, #1
+ 247 000a 80F87830 		strb	r3, [r0, #120]
+ 248              	.L32:
+ 249 000e 0268     		ldr	r2, [r0]
+ 250              		.syntax unified
+ 251              	@ 1072 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 252 0010 52E8003F 		ldrex r3, [r2]
+ 253              	@ 0 "" 2
+ 254              		.thumb
+ 255              		.syntax unified
+ 256 0014 43F00203 		orr	r3, r3, #2
+ 257              		.syntax unified
+ 258              	@ 1123 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 259 0018 42E80031 		strex r1, r3, [r2]
+ 260              	@ 0 "" 2
+ 261              		.thumb
+ 262              		.syntax unified
+ 263 001c 0029     		cmp	r1, #0
+ 264 001e F6D1     		bne	.L32
+ 265 0020 0023     		movs	r3, #0
+ 266 0022 80F87830 		strb	r3, [r0, #120]
+ 267 0026 1846     		mov	r0, r3
+ 268 0028 7047     		bx	lr
+ 269              	.L33:
+ 270 002a 0220     		movs	r0, #2
+ 271 002c 7047     		bx	lr
+ 273              		.section	.text.HAL_UARTEx_DisableStopMode,"ax",%progbits
+ 274              		.align	1
+ 275              		.global	HAL_UARTEx_DisableStopMode
+ 276              		.syntax unified
+ 277              		.thumb
+ 278              		.thumb_func
+ 280              	HAL_UARTEx_DisableStopMode:
+ 281              		@ args = 0, pretend = 0, frame = 0
+ 282              		@ frame_needed = 0, uses_anonymous_args = 0
+ 283              		@ link register save eliminated.
+ 284 0000 90F87830 		ldrb	r3, [r0, #120]	@ zero_extendqisi2
+ 285 0004 012B     		cmp	r3, #1
+ 286 0006 10D0     		beq	.L37
+ 287 0008 0123     		movs	r3, #1
+ 288 000a 80F87830 		strb	r3, [r0, #120]
+ 289              	.L36:
+ 290 000e 0268     		ldr	r2, [r0]
+ 291              		.syntax unified
+ 292              	@ 1072 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 293 0010 52E8003F 		ldrex r3, [r2]
+ 294              	@ 0 "" 2
+ 295              		.thumb
+ 296              		.syntax unified
+ 297 0014 23F00203 		bic	r3, r3, #2
+ 298              		.syntax unified
+ARM GAS  C:\Temp\cci60i2l.s 			page 6
+
+
+ 299              	@ 1123 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 300 0018 42E80031 		strex r1, r3, [r2]
+ 301              	@ 0 "" 2
+ 302              		.thumb
+ 303              		.syntax unified
+ 304 001c 0029     		cmp	r1, #0
+ 305 001e F6D1     		bne	.L36
+ 306 0020 0023     		movs	r3, #0
+ 307 0022 80F87830 		strb	r3, [r0, #120]
+ 308 0026 1846     		mov	r0, r3
+ 309 0028 7047     		bx	lr
+ 310              	.L37:
+ 311 002a 0220     		movs	r0, #2
+ 312 002c 7047     		bx	lr
+ 314              		.section	.text.HAL_UARTEx_ReceiveToIdle,"ax",%progbits
+ 315              		.align	1
+ 316              		.global	HAL_UARTEx_ReceiveToIdle
+ 317              		.syntax unified
+ 318              		.thumb
+ 319              		.thumb_func
+ 321              	HAL_UARTEx_ReceiveToIdle:
+ 322              		@ args = 4, pretend = 0, frame = 0
+ 323              		@ frame_needed = 0, uses_anonymous_args = 0
+ 324 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+ 325 0004 1D46     		mov	r5, r3
+ 326 0006 089E     		ldr	r6, [sp, #32]
+ 327 0008 D0F88030 		ldr	r3, [r0, #128]
+ 328 000c 202B     		cmp	r3, #32
+ 329 000e 40F0A380 		bne	.L56
+ 330 0012 0446     		mov	r4, r0
+ 331 0014 0F46     		mov	r7, r1
+ 332 0016 9146     		mov	r9, r2
+ 333 0018 0029     		cmp	r1, #0
+ 334 001a 00F0A080 		beq	.L57
+ 335 001e 0AB9     		cbnz	r2, .L62
+ 336 0020 0120     		movs	r0, #1
+ 337 0022 9AE0     		b	.L39
+ 338              	.L62:
+ 339 0024 0023     		movs	r3, #0
+ 340 0026 C0F88430 		str	r3, [r0, #132]
+ 341 002a 2222     		movs	r2, #34
+ 342 002c C0F88020 		str	r2, [r0, #128]
+ 343 0030 0122     		movs	r2, #1
+ 344 0032 0266     		str	r2, [r0, #96]
+ 345 0034 4366     		str	r3, [r0, #100]
+ 346 0036 FFF7FEFF 		bl	HAL_GetTick
+ 347 003a 8046     		mov	r8, r0
+ 348 003c A4F85890 		strh	r9, [r4, #88]	@ movhi
+ 349 0040 A4F85A90 		strh	r9, [r4, #90]	@ movhi
+ 350 0044 A368     		ldr	r3, [r4, #8]
+ 351 0046 B3F5805F 		cmp	r3, #4096
+ 352 004a 06D0     		beq	.L63
+ 353 004c A3B9     		cbnz	r3, .L43
+ 354 004e 2269     		ldr	r2, [r4, #16]
+ 355 0050 72B9     		cbnz	r2, .L44
+ 356 0052 FF22     		movs	r2, #255
+ 357 0054 A4F85C20 		strh	r2, [r4, #92]	@ movhi
+ARM GAS  C:\Temp\cci60i2l.s 			page 7
+
+
+ 358 0058 14E0     		b	.L42
+ 359              	.L63:
+ 360 005a 2269     		ldr	r2, [r4, #16]
+ 361 005c 22B9     		cbnz	r2, .L41
+ 362 005e 40F2FF12 		movw	r2, #511
+ 363 0062 A4F85C20 		strh	r2, [r4, #92]	@ movhi
+ 364 0066 0DE0     		b	.L42
+ 365              	.L41:
+ 366 0068 FF22     		movs	r2, #255
+ 367 006a A4F85C20 		strh	r2, [r4, #92]	@ movhi
+ 368 006e 09E0     		b	.L42
+ 369              	.L44:
+ 370 0070 7F22     		movs	r2, #127
+ 371 0072 A4F85C20 		strh	r2, [r4, #92]	@ movhi
+ 372 0076 05E0     		b	.L42
+ 373              	.L43:
+ 374 0078 B3F1805F 		cmp	r3, #268435456
+ 375 007c 0CD0     		beq	.L64
+ 376 007e 0022     		movs	r2, #0
+ 377 0080 A4F85C20 		strh	r2, [r4, #92]	@ movhi
+ 378              	.L42:
+ 379 0084 B4F85C90 		ldrh	r9, [r4, #92]
+ 380 0088 B3F5805F 		cmp	r3, #4096
+ 381 008c 0ED0     		beq	.L65
+ 382 008e 4FF0000A 		mov	r10, #0
+ 383              	.L47:
+ 384 0092 0023     		movs	r3, #0
+ 385 0094 2B80     		strh	r3, [r5]	@ movhi
+ 386 0096 2AE0     		b	.L48
+ 387              	.L64:
+ 388 0098 2269     		ldr	r2, [r4, #16]
+ 389 009a 1AB9     		cbnz	r2, .L46
+ 390 009c 7F22     		movs	r2, #127
+ 391 009e A4F85C20 		strh	r2, [r4, #92]	@ movhi
+ 392 00a2 EFE7     		b	.L42
+ 393              	.L46:
+ 394 00a4 3F22     		movs	r2, #63
+ 395 00a6 A4F85C20 		strh	r2, [r4, #92]	@ movhi
+ 396 00aa EBE7     		b	.L42
+ 397              	.L65:
+ 398 00ac 2369     		ldr	r3, [r4, #16]
+ 399 00ae 13B1     		cbz	r3, .L60
+ 400 00b0 4FF0000A 		mov	r10, #0
+ 401 00b4 EDE7     		b	.L47
+ 402              	.L60:
+ 403 00b6 BA46     		mov	r10, r7
+ 404 00b8 0027     		movs	r7, #0
+ 405 00ba EAE7     		b	.L47
+ 406              	.L68:
+ 407 00bc 0223     		movs	r3, #2
+ 408 00be 6366     		str	r3, [r4, #100]
+ 409 00c0 2023     		movs	r3, #32
+ 410 00c2 C4F88030 		str	r3, [r4, #128]
+ 411 00c6 0020     		movs	r0, #0
+ 412 00c8 47E0     		b	.L39
+ 413              	.L69:
+ 414 00ca 9B8C     		ldrh	r3, [r3, #36]
+ARM GAS  C:\Temp\cci60i2l.s 			page 8
+
+
+ 415 00cc 09EA0303 		and	r3, r9, r3
+ 416 00d0 2AF8023B 		strh	r3, [r10], #2	@ movhi
+ 417              	.L52:
+ 418 00d4 2B88     		ldrh	r3, [r5]
+ 419 00d6 0133     		adds	r3, r3, #1
+ 420 00d8 2B80     		strh	r3, [r5]	@ movhi
+ 421 00da B4F85A30 		ldrh	r3, [r4, #90]
+ 422 00de 9BB2     		uxth	r3, r3
+ 423 00e0 013B     		subs	r3, r3, #1
+ 424 00e2 9BB2     		uxth	r3, r3
+ 425 00e4 A4F85A30 		strh	r3, [r4, #90]	@ movhi
+ 426              	.L50:
+ 427 00e8 B6F1FF3F 		cmp	r6, #-1
+ 428 00ec 1BD1     		bne	.L66
+ 429              	.L48:
+ 430 00ee B4F85A20 		ldrh	r2, [r4, #90]
+ 431 00f2 92B2     		uxth	r2, r2
+ 432 00f4 22B3     		cbz	r2, .L67
+ 433 00f6 2368     		ldr	r3, [r4]
+ 434 00f8 DA69     		ldr	r2, [r3, #28]
+ 435 00fa 12F0100F 		tst	r2, #16
+ 436 00fe 04D0     		beq	.L49
+ 437 0100 1022     		movs	r2, #16
+ 438 0102 1A62     		str	r2, [r3, #32]
+ 439 0104 2B88     		ldrh	r3, [r5]
+ 440 0106 002B     		cmp	r3, #0
+ 441 0108 D8D1     		bne	.L68
+ 442              	.L49:
+ 443 010a 2368     		ldr	r3, [r4]
+ 444 010c DA69     		ldr	r2, [r3, #28]
+ 445 010e 12F0200F 		tst	r2, #32
+ 446 0112 E9D0     		beq	.L50
+ 447 0114 002F     		cmp	r7, #0
+ 448 0116 D8D0     		beq	.L69
+ 449 0118 9A8C     		ldrh	r2, [r3, #36]
+ 450 011a 5FFA89F3 		uxtb	r3, r9
+ 451 011e 1340     		ands	r3, r3, r2
+ 452 0120 07F8013B 		strb	r3, [r7], #1
+ 453 0124 D6E7     		b	.L52
+ 454              	.L66:
+ 455 0126 FFF7FEFF 		bl	HAL_GetTick
+ 456 012a A0EB0800 		sub	r0, r0, r8
+ 457 012e B042     		cmp	r0, r6
+ 458 0130 01D8     		bhi	.L54
+ 459 0132 002E     		cmp	r6, #0
+ 460 0134 DBD1     		bne	.L48
+ 461              	.L54:
+ 462 0136 2023     		movs	r3, #32
+ 463 0138 C4F88030 		str	r3, [r4, #128]
+ 464 013c 0320     		movs	r0, #3
+ 465 013e 0CE0     		b	.L39
+ 466              	.L67:
+ 467 0140 B4F85830 		ldrh	r3, [r4, #88]
+ 468 0144 B4F85A20 		ldrh	r2, [r4, #90]
+ 469 0148 92B2     		uxth	r2, r2
+ 470 014a 9B1A     		subs	r3, r3, r2
+ 471 014c 2B80     		strh	r3, [r5]	@ movhi
+ARM GAS  C:\Temp\cci60i2l.s 			page 9
+
+
+ 472 014e 2023     		movs	r3, #32
+ 473 0150 C4F88030 		str	r3, [r4, #128]
+ 474 0154 0020     		movs	r0, #0
+ 475 0156 00E0     		b	.L39
+ 476              	.L56:
+ 477 0158 0220     		movs	r0, #2
+ 478              	.L39:
+ 479 015a BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 480              	.L57:
+ 481 015e 0120     		movs	r0, #1
+ 482 0160 FBE7     		b	.L39
+ 484              		.section	.text.HAL_UARTEx_ReceiveToIdle_IT,"ax",%progbits
+ 485              		.align	1
+ 486              		.global	HAL_UARTEx_ReceiveToIdle_IT
+ 487              		.syntax unified
+ 488              		.thumb
+ 489              		.thumb_func
+ 491              	HAL_UARTEx_ReceiveToIdle_IT:
+ 492              		@ args = 0, pretend = 0, frame = 0
+ 493              		@ frame_needed = 0, uses_anonymous_args = 0
+ 494 0000 D0F88030 		ldr	r3, [r0, #128]
+ 495 0004 202B     		cmp	r3, #32
+ 496 0006 1ED1     		bne	.L74
+ 497 0008 10B5     		push	{r4, lr}
+ 498 000a 0446     		mov	r4, r0
+ 499 000c E9B1     		cbz	r1, .L75
+ 500 000e 0AB9     		cbnz	r2, .L82
+ 501 0010 0120     		movs	r0, #1
+ 502              	.L71:
+ 503 0012 10BD     		pop	{r4, pc}
+ 504              	.L82:
+ 505 0014 0123     		movs	r3, #1
+ 506 0016 0366     		str	r3, [r0, #96]
+ 507 0018 0023     		movs	r3, #0
+ 508 001a 4366     		str	r3, [r0, #100]
+ 509 001c FFF7FEFF 		bl	UART_Start_Receive_IT
+ 510 0020 236E     		ldr	r3, [r4, #96]
+ 511 0022 012B     		cmp	r3, #1
+ 512 0024 01D0     		beq	.L83
+ 513 0026 0120     		movs	r0, #1
+ 514 0028 F3E7     		b	.L71
+ 515              	.L83:
+ 516 002a 2368     		ldr	r3, [r4]
+ 517 002c 1022     		movs	r2, #16
+ 518 002e 1A62     		str	r2, [r3, #32]
+ 519              	.L73:
+ 520 0030 2268     		ldr	r2, [r4]
+ 521              		.syntax unified
+ 522              	@ 1072 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 523 0032 52E8003F 		ldrex r3, [r2]
+ 524              	@ 0 "" 2
+ 525              		.thumb
+ 526              		.syntax unified
+ 527 0036 43F01003 		orr	r3, r3, #16
+ 528              		.syntax unified
+ 529              	@ 1123 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 530 003a 42E80031 		strex r1, r3, [r2]
+ARM GAS  C:\Temp\cci60i2l.s 			page 10
+
+
+ 531              	@ 0 "" 2
+ 532              		.thumb
+ 533              		.syntax unified
+ 534 003e 0029     		cmp	r1, #0
+ 535 0040 F6D1     		bne	.L73
+ 536 0042 0020     		movs	r0, #0
+ 537 0044 E5E7     		b	.L71
+ 538              	.L74:
+ 539 0046 0220     		movs	r0, #2
+ 540 0048 7047     		bx	lr
+ 541              	.L75:
+ 542 004a 0120     		movs	r0, #1
+ 543 004c E1E7     		b	.L71
+ 545              		.section	.text.HAL_UARTEx_ReceiveToIdle_DMA,"ax",%progbits
+ 546              		.align	1
+ 547              		.global	HAL_UARTEx_ReceiveToIdle_DMA
+ 548              		.syntax unified
+ 549              		.thumb
+ 550              		.thumb_func
+ 552              	HAL_UARTEx_ReceiveToIdle_DMA:
+ 553              		@ args = 0, pretend = 0, frame = 0
+ 554              		@ frame_needed = 0, uses_anonymous_args = 0
+ 555 0000 D0F88030 		ldr	r3, [r0, #128]
+ 556 0004 202B     		cmp	r3, #32
+ 557 0006 1FD1     		bne	.L88
+ 558 0008 10B5     		push	{r4, lr}
+ 559 000a 0446     		mov	r4, r0
+ 560 000c F1B1     		cbz	r1, .L89
+ 561 000e 0AB9     		cbnz	r2, .L96
+ 562 0010 0120     		movs	r0, #1
+ 563              	.L85:
+ 564 0012 10BD     		pop	{r4, pc}
+ 565              	.L96:
+ 566 0014 0123     		movs	r3, #1
+ 567 0016 0366     		str	r3, [r0, #96]
+ 568 0018 0023     		movs	r3, #0
+ 569 001a 4366     		str	r3, [r0, #100]
+ 570 001c FFF7FEFF 		bl	UART_Start_Receive_DMA
+ 571 0020 0028     		cmp	r0, #0
+ 572 0022 F6D1     		bne	.L85
+ 573 0024 236E     		ldr	r3, [r4, #96]
+ 574 0026 012B     		cmp	r3, #1
+ 575 0028 01D0     		beq	.L97
+ 576 002a 0120     		movs	r0, #1
+ 577 002c F1E7     		b	.L85
+ 578              	.L97:
+ 579 002e 2368     		ldr	r3, [r4]
+ 580 0030 1022     		movs	r2, #16
+ 581 0032 1A62     		str	r2, [r3, #32]
+ 582              	.L87:
+ 583 0034 2268     		ldr	r2, [r4]
+ 584              		.syntax unified
+ 585              	@ 1072 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 586 0036 52E8003F 		ldrex r3, [r2]
+ 587              	@ 0 "" 2
+ 588              		.thumb
+ 589              		.syntax unified
+ARM GAS  C:\Temp\cci60i2l.s 			page 11
+
+
+ 590 003a 43F01003 		orr	r3, r3, #16
+ 591              		.syntax unified
+ 592              	@ 1123 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 593 003e 42E80031 		strex r1, r3, [r2]
+ 594              	@ 0 "" 2
+ 595              		.thumb
+ 596              		.syntax unified
+ 597 0042 0029     		cmp	r1, #0
+ 598 0044 F6D1     		bne	.L87
+ 599 0046 E4E7     		b	.L85
+ 600              	.L88:
+ 601 0048 0220     		movs	r0, #2
+ 602 004a 7047     		bx	lr
+ 603              	.L89:
+ 604 004c 0120     		movs	r0, #1
+ 605 004e E0E7     		b	.L85
+ 607              		.section	.text.HAL_UARTEx_GetRxEventType,"ax",%progbits
+ 608              		.align	1
+ 609              		.global	HAL_UARTEx_GetRxEventType
+ 610              		.syntax unified
+ 611              		.thumb
+ 612              		.thumb_func
+ 614              	HAL_UARTEx_GetRxEventType:
+ 615              		@ args = 0, pretend = 0, frame = 0
+ 616              		@ frame_needed = 0, uses_anonymous_args = 0
+ 617              		@ link register save eliminated.
+ 618 0000 406E     		ldr	r0, [r0, #100]
+ 619 0002 7047     		bx	lr
+ 621              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\cci60i2l.s 			page 12
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f3xx_hal_uart_ex.c
+  C:\Temp\cci60i2l.s:18     .text.UARTEx_Wakeup_AddressConfig:00000000 $t
+  C:\Temp\cci60i2l.s:23     .text.UARTEx_Wakeup_AddressConfig:00000000 UARTEx_Wakeup_AddressConfig
+  C:\Temp\cci60i2l.s:47     .text.HAL_RS485Ex_Init:00000000 $t
+  C:\Temp\cci60i2l.s:53     .text.HAL_RS485Ex_Init:00000000 HAL_RS485Ex_Init
+  C:\Temp\cci60i2l.s:117    .text.HAL_UARTEx_WakeupCallback:00000000 $t
+  C:\Temp\cci60i2l.s:123    .text.HAL_UARTEx_WakeupCallback:00000000 HAL_UARTEx_WakeupCallback
+  C:\Temp\cci60i2l.s:130    .text.HAL_MultiProcessorEx_AddressLength_Set:00000000 $t
+  C:\Temp\cci60i2l.s:136    .text.HAL_MultiProcessorEx_AddressLength_Set:00000000 HAL_MultiProcessorEx_AddressLength_Set
+  C:\Temp\cci60i2l.s:165    .text.HAL_UARTEx_StopModeWakeUpSourceConfig:00000000 $t
+  C:\Temp\cci60i2l.s:171    .text.HAL_UARTEx_StopModeWakeUpSourceConfig:00000000 HAL_UARTEx_StopModeWakeUpSourceConfig
+  C:\Temp\cci60i2l.s:233    .text.HAL_UARTEx_EnableStopMode:00000000 $t
+  C:\Temp\cci60i2l.s:239    .text.HAL_UARTEx_EnableStopMode:00000000 HAL_UARTEx_EnableStopMode
+  C:\Temp\cci60i2l.s:274    .text.HAL_UARTEx_DisableStopMode:00000000 $t
+  C:\Temp\cci60i2l.s:280    .text.HAL_UARTEx_DisableStopMode:00000000 HAL_UARTEx_DisableStopMode
+  C:\Temp\cci60i2l.s:315    .text.HAL_UARTEx_ReceiveToIdle:00000000 $t
+  C:\Temp\cci60i2l.s:321    .text.HAL_UARTEx_ReceiveToIdle:00000000 HAL_UARTEx_ReceiveToIdle
+  C:\Temp\cci60i2l.s:485    .text.HAL_UARTEx_ReceiveToIdle_IT:00000000 $t
+  C:\Temp\cci60i2l.s:491    .text.HAL_UARTEx_ReceiveToIdle_IT:00000000 HAL_UARTEx_ReceiveToIdle_IT
+  C:\Temp\cci60i2l.s:546    .text.HAL_UARTEx_ReceiveToIdle_DMA:00000000 $t
+  C:\Temp\cci60i2l.s:552    .text.HAL_UARTEx_ReceiveToIdle_DMA:00000000 HAL_UARTEx_ReceiveToIdle_DMA
+  C:\Temp\cci60i2l.s:608    .text.HAL_UARTEx_GetRxEventType:00000000 $t
+  C:\Temp\cci60i2l.s:614    .text.HAL_UARTEx_GetRxEventType:00000000 HAL_UARTEx_GetRxEventType
+
+UNDEFINED SYMBOLS
+UART_SetConfig
+UART_CheckIdleState
+HAL_UART_MspInit
+UART_AdvFeatureConfig
+HAL_GetTick
+UART_WaitOnFlagUntilTimeout
+UART_Start_Receive_IT
+UART_Start_Receive_DMA

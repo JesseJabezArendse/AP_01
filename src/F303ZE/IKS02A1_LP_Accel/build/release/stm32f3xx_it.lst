@@ -1,0 +1,350 @@
+ARM GAS  C:\Temp\ccJP6Im6.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"stm32f3xx_it.c"
+  16              		.text
+  17              		.section	.text.__NVIC_SystemReset,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  23              	__NVIC_SystemReset:
+  24              		@ Volatile: function does not return.
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27              		@ link register save eliminated.
+  28              		.syntax unified
+  29              	@ 879 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+  30 0000 BFF34F8F 		dsb 0xF
+  31              	@ 0 "" 2
+  32              		.thumb
+  33              		.syntax unified
+  34 0004 0549     		ldr	r1, .L3
+  35 0006 CA68     		ldr	r2, [r1, #12]
+  36 0008 02F4E062 		and	r2, r2, #1792
+  37 000c 044B     		ldr	r3, .L3+4
+  38 000e 1343     		orrs	r3, r3, r2
+  39 0010 CB60     		str	r3, [r1, #12]
+  40              		.syntax unified
+  41              	@ 879 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+  42 0012 BFF34F8F 		dsb 0xF
+  43              	@ 0 "" 2
+  44              		.thumb
+  45              		.syntax unified
+  46              	.L2:
+  47              		.syntax unified
+  48              	@ 1950 "Drivers/CMSIS/Include/core_cm4.h" 1
+  49 0016 00BF     		nop
+  50              	@ 0 "" 2
+  51              		.thumb
+  52              		.syntax unified
+  53 0018 FDE7     		b	.L2
+  54              	.L4:
+  55 001a 00BF     		.align	2
+  56              	.L3:
+  57 001c 00ED00E0 		.word	-536810240
+  58 0020 0400FA05 		.word	100270084
+ARM GAS  C:\Temp\ccJP6Im6.s 			page 2
+
+
+  60              		.section	.text.NMI_Handler,"ax",%progbits
+  61              		.align	1
+  62              		.global	NMI_Handler
+  63              		.syntax unified
+  64              		.thumb
+  65              		.thumb_func
+  67              	NMI_Handler:
+  68              		@ Volatile: function does not return.
+  69              		@ args = 0, pretend = 0, frame = 0
+  70              		@ frame_needed = 0, uses_anonymous_args = 0
+  71              		@ link register save eliminated.
+  72              	.L6:
+  73 0000 FEE7     		b	.L6
+  75              		.section	.text.HardFault_Handler,"ax",%progbits
+  76              		.align	1
+  77              		.global	HardFault_Handler
+  78              		.syntax unified
+  79              		.thumb
+  80              		.thumb_func
+  82              	HardFault_Handler:
+  83              		@ Volatile: function does not return.
+  84              		@ args = 0, pretend = 0, frame = 0
+  85              		@ frame_needed = 0, uses_anonymous_args = 0
+  86 0000 08B5     		push	{r3, lr}
+  87 0002 0022     		movs	r2, #0
+  88 0004 0121     		movs	r1, #1
+  89 0006 0448     		ldr	r0, .L9
+  90 0008 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  91 000c 4FF09043 		mov	r3, #1207959552
+  92 0010 0022     		movs	r2, #0
+  93 0012 5A61     		str	r2, [r3, #20]
+  94 0014 FFF7FEFF 		bl	__NVIC_SystemReset
+  95              	.L10:
+  96              		.align	2
+  97              	.L9:
+  98 0018 00040048 		.word	1207960576
+ 100              		.section	.text.MemManage_Handler,"ax",%progbits
+ 101              		.align	1
+ 102              		.global	MemManage_Handler
+ 103              		.syntax unified
+ 104              		.thumb
+ 105              		.thumb_func
+ 107              	MemManage_Handler:
+ 108              		@ Volatile: function does not return.
+ 109              		@ args = 0, pretend = 0, frame = 0
+ 110              		@ frame_needed = 0, uses_anonymous_args = 0
+ 111              		@ link register save eliminated.
+ 112              	.L12:
+ 113 0000 FEE7     		b	.L12
+ 115              		.section	.text.BusFault_Handler,"ax",%progbits
+ 116              		.align	1
+ 117              		.global	BusFault_Handler
+ 118              		.syntax unified
+ 119              		.thumb
+ 120              		.thumb_func
+ 122              	BusFault_Handler:
+ 123              		@ Volatile: function does not return.
+ARM GAS  C:\Temp\ccJP6Im6.s 			page 3
+
+
+ 124              		@ args = 0, pretend = 0, frame = 0
+ 125              		@ frame_needed = 0, uses_anonymous_args = 0
+ 126              		@ link register save eliminated.
+ 127              	.L14:
+ 128 0000 FEE7     		b	.L14
+ 130              		.section	.text.UsageFault_Handler,"ax",%progbits
+ 131              		.align	1
+ 132              		.global	UsageFault_Handler
+ 133              		.syntax unified
+ 134              		.thumb
+ 135              		.thumb_func
+ 137              	UsageFault_Handler:
+ 138              		@ Volatile: function does not return.
+ 139              		@ args = 0, pretend = 0, frame = 0
+ 140              		@ frame_needed = 0, uses_anonymous_args = 0
+ 141              		@ link register save eliminated.
+ 142              	.L16:
+ 143 0000 FEE7     		b	.L16
+ 145              		.section	.text.SVC_Handler,"ax",%progbits
+ 146              		.align	1
+ 147              		.global	SVC_Handler
+ 148              		.syntax unified
+ 149              		.thumb
+ 150              		.thumb_func
+ 152              	SVC_Handler:
+ 153              		@ args = 0, pretend = 0, frame = 0
+ 154              		@ frame_needed = 0, uses_anonymous_args = 0
+ 155              		@ link register save eliminated.
+ 156 0000 7047     		bx	lr
+ 158              		.section	.text.DebugMon_Handler,"ax",%progbits
+ 159              		.align	1
+ 160              		.global	DebugMon_Handler
+ 161              		.syntax unified
+ 162              		.thumb
+ 163              		.thumb_func
+ 165              	DebugMon_Handler:
+ 166              		@ args = 0, pretend = 0, frame = 0
+ 167              		@ frame_needed = 0, uses_anonymous_args = 0
+ 168              		@ link register save eliminated.
+ 169 0000 7047     		bx	lr
+ 171              		.section	.text.PendSV_Handler,"ax",%progbits
+ 172              		.align	1
+ 173              		.global	PendSV_Handler
+ 174              		.syntax unified
+ 175              		.thumb
+ 176              		.thumb_func
+ 178              	PendSV_Handler:
+ 179              		@ args = 0, pretend = 0, frame = 0
+ 180              		@ frame_needed = 0, uses_anonymous_args = 0
+ 181              		@ link register save eliminated.
+ 182 0000 7047     		bx	lr
+ 184              		.section	.text.SysTick_Handler,"ax",%progbits
+ 185              		.align	1
+ 186              		.global	SysTick_Handler
+ 187              		.syntax unified
+ 188              		.thumb
+ 189              		.thumb_func
+ARM GAS  C:\Temp\ccJP6Im6.s 			page 4
+
+
+ 191              	SysTick_Handler:
+ 192              		@ args = 0, pretend = 0, frame = 0
+ 193              		@ frame_needed = 0, uses_anonymous_args = 0
+ 194              		@ link register save eliminated.
+ 195 0000 7047     		bx	lr
+ 197              		.section	.text.DMA1_Channel3_IRQHandler,"ax",%progbits
+ 198              		.align	1
+ 199              		.global	DMA1_Channel3_IRQHandler
+ 200              		.syntax unified
+ 201              		.thumb
+ 202              		.thumb_func
+ 204              	DMA1_Channel3_IRQHandler:
+ 205              		@ args = 0, pretend = 0, frame = 0
+ 206              		@ frame_needed = 0, uses_anonymous_args = 0
+ 207 0000 08B5     		push	{r3, lr}
+ 208 0002 0248     		ldr	r0, .L23
+ 209 0004 FFF7FEFF 		bl	HAL_DMA_IRQHandler
+ 210 0008 08BD     		pop	{r3, pc}
+ 211              	.L24:
+ 212 000a 00BF     		.align	2
+ 213              	.L23:
+ 214 000c 00000000 		.word	hdma_usart3_rx
+ 216              		.section	.text.USB_LP_CAN_RX0_IRQHandler,"ax",%progbits
+ 217              		.align	1
+ 218              		.global	USB_LP_CAN_RX0_IRQHandler
+ 219              		.syntax unified
+ 220              		.thumb
+ 221              		.thumb_func
+ 223              	USB_LP_CAN_RX0_IRQHandler:
+ 224              		@ args = 0, pretend = 0, frame = 0
+ 225              		@ frame_needed = 0, uses_anonymous_args = 0
+ 226 0000 08B5     		push	{r3, lr}
+ 227 0002 0248     		ldr	r0, .L27
+ 228 0004 FFF7FEFF 		bl	HAL_PCD_IRQHandler
+ 229 0008 08BD     		pop	{r3, pc}
+ 230              	.L28:
+ 231 000a 00BF     		.align	2
+ 232              	.L27:
+ 233 000c 00000000 		.word	hpcd_USB_FS
+ 235              		.section	.text.TIM1_UP_TIM16_IRQHandler,"ax",%progbits
+ 236              		.align	1
+ 237              		.global	TIM1_UP_TIM16_IRQHandler
+ 238              		.syntax unified
+ 239              		.thumb
+ 240              		.thumb_func
+ 242              	TIM1_UP_TIM16_IRQHandler:
+ 243              		@ args = 0, pretend = 0, frame = 0
+ 244              		@ frame_needed = 0, uses_anonymous_args = 0
+ 245 0000 08B5     		push	{r3, lr}
+ 246 0002 0248     		ldr	r0, .L31
+ 247 0004 FFF7FEFF 		bl	HAL_TIM_IRQHandler
+ 248 0008 08BD     		pop	{r3, pc}
+ 249              	.L32:
+ 250 000a 00BF     		.align	2
+ 251              	.L31:
+ 252 000c 00000000 		.word	htim1
+ 254              		.section	.text.TIM2_IRQHandler,"ax",%progbits
+ARM GAS  C:\Temp\ccJP6Im6.s 			page 5
+
+
+ 255              		.align	1
+ 256              		.global	TIM2_IRQHandler
+ 257              		.syntax unified
+ 258              		.thumb
+ 259              		.thumb_func
+ 261              	TIM2_IRQHandler:
+ 262              		@ args = 0, pretend = 0, frame = 0
+ 263              		@ frame_needed = 0, uses_anonymous_args = 0
+ 264 0000 10B5     		push	{r4, lr}
+ 265 0002 094C     		ldr	r4, .L35
+ 266 0004 0121     		movs	r1, #1
+ 267 0006 2170     		strb	r1, [r4]
+ 268 0008 084A     		ldr	r2, .L35+4
+ 269 000a 1368     		ldr	r3, [r2]
+ 270 000c 0B44     		add	r3, r3, r1
+ 271 000e 1360     		str	r3, [r2]
+ 272 0010 0748     		ldr	r0, .L35+8
+ 273 0012 FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 274 0016 FFF7FEFF 		bl	sendToSimulink
+ 275 001a 0023     		movs	r3, #0
+ 276 001c 2370     		strb	r3, [r4]
+ 277 001e 0548     		ldr	r0, .L35+12
+ 278 0020 FFF7FEFF 		bl	HAL_TIM_IRQHandler
+ 279 0024 10BD     		pop	{r4, pc}
+ 280              	.L36:
+ 281 0026 00BF     		.align	2
+ 282              	.L35:
+ 283 0028 00000000 		.word	clearToSend
+ 284 002c 00000000 		.word	counter
+ 285 0030 00040048 		.word	1207960576
+ 286 0034 00000000 		.word	htim2
+ 288              		.section	.text.USART3_IRQHandler,"ax",%progbits
+ 289              		.align	1
+ 290              		.global	USART3_IRQHandler
+ 291              		.syntax unified
+ 292              		.thumb
+ 293              		.thumb_func
+ 295              	USART3_IRQHandler:
+ 296              		@ args = 0, pretend = 0, frame = 0
+ 297              		@ frame_needed = 0, uses_anonymous_args = 0
+ 298 0000 08B5     		push	{r3, lr}
+ 299 0002 0248     		ldr	r0, .L39
+ 300 0004 FFF7FEFF 		bl	HAL_UART_IRQHandler
+ 301 0008 08BD     		pop	{r3, pc}
+ 302              	.L40:
+ 303 000a 00BF     		.align	2
+ 304              	.L39:
+ 305 000c 00000000 		.word	huart3
+ 307              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccJP6Im6.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f3xx_it.c
+  C:\Temp\ccJP6Im6.s:18     .text.__NVIC_SystemReset:00000000 $t
+  C:\Temp\ccJP6Im6.s:23     .text.__NVIC_SystemReset:00000000 __NVIC_SystemReset
+  C:\Temp\ccJP6Im6.s:57     .text.__NVIC_SystemReset:0000001c $d
+  C:\Temp\ccJP6Im6.s:61     .text.NMI_Handler:00000000 $t
+  C:\Temp\ccJP6Im6.s:67     .text.NMI_Handler:00000000 NMI_Handler
+  C:\Temp\ccJP6Im6.s:76     .text.HardFault_Handler:00000000 $t
+  C:\Temp\ccJP6Im6.s:82     .text.HardFault_Handler:00000000 HardFault_Handler
+  C:\Temp\ccJP6Im6.s:98     .text.HardFault_Handler:00000018 $d
+  C:\Temp\ccJP6Im6.s:101    .text.MemManage_Handler:00000000 $t
+  C:\Temp\ccJP6Im6.s:107    .text.MemManage_Handler:00000000 MemManage_Handler
+  C:\Temp\ccJP6Im6.s:116    .text.BusFault_Handler:00000000 $t
+  C:\Temp\ccJP6Im6.s:122    .text.BusFault_Handler:00000000 BusFault_Handler
+  C:\Temp\ccJP6Im6.s:131    .text.UsageFault_Handler:00000000 $t
+  C:\Temp\ccJP6Im6.s:137    .text.UsageFault_Handler:00000000 UsageFault_Handler
+  C:\Temp\ccJP6Im6.s:146    .text.SVC_Handler:00000000 $t
+  C:\Temp\ccJP6Im6.s:152    .text.SVC_Handler:00000000 SVC_Handler
+  C:\Temp\ccJP6Im6.s:159    .text.DebugMon_Handler:00000000 $t
+  C:\Temp\ccJP6Im6.s:165    .text.DebugMon_Handler:00000000 DebugMon_Handler
+  C:\Temp\ccJP6Im6.s:172    .text.PendSV_Handler:00000000 $t
+  C:\Temp\ccJP6Im6.s:178    .text.PendSV_Handler:00000000 PendSV_Handler
+  C:\Temp\ccJP6Im6.s:185    .text.SysTick_Handler:00000000 $t
+  C:\Temp\ccJP6Im6.s:191    .text.SysTick_Handler:00000000 SysTick_Handler
+  C:\Temp\ccJP6Im6.s:198    .text.DMA1_Channel3_IRQHandler:00000000 $t
+  C:\Temp\ccJP6Im6.s:204    .text.DMA1_Channel3_IRQHandler:00000000 DMA1_Channel3_IRQHandler
+  C:\Temp\ccJP6Im6.s:214    .text.DMA1_Channel3_IRQHandler:0000000c $d
+  C:\Temp\ccJP6Im6.s:217    .text.USB_LP_CAN_RX0_IRQHandler:00000000 $t
+  C:\Temp\ccJP6Im6.s:223    .text.USB_LP_CAN_RX0_IRQHandler:00000000 USB_LP_CAN_RX0_IRQHandler
+  C:\Temp\ccJP6Im6.s:233    .text.USB_LP_CAN_RX0_IRQHandler:0000000c $d
+  C:\Temp\ccJP6Im6.s:236    .text.TIM1_UP_TIM16_IRQHandler:00000000 $t
+  C:\Temp\ccJP6Im6.s:242    .text.TIM1_UP_TIM16_IRQHandler:00000000 TIM1_UP_TIM16_IRQHandler
+  C:\Temp\ccJP6Im6.s:252    .text.TIM1_UP_TIM16_IRQHandler:0000000c $d
+  C:\Temp\ccJP6Im6.s:255    .text.TIM2_IRQHandler:00000000 $t
+  C:\Temp\ccJP6Im6.s:261    .text.TIM2_IRQHandler:00000000 TIM2_IRQHandler
+  C:\Temp\ccJP6Im6.s:283    .text.TIM2_IRQHandler:00000028 $d
+  C:\Temp\ccJP6Im6.s:289    .text.USART3_IRQHandler:00000000 $t
+  C:\Temp\ccJP6Im6.s:295    .text.USART3_IRQHandler:00000000 USART3_IRQHandler
+  C:\Temp\ccJP6Im6.s:305    .text.USART3_IRQHandler:0000000c $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_WritePin
+HAL_DMA_IRQHandler
+hdma_usart3_rx
+HAL_PCD_IRQHandler
+hpcd_USB_FS
+HAL_TIM_IRQHandler
+htim1
+HAL_GPIO_TogglePin
+sendToSimulink
+clearToSend
+counter
+htim2
+HAL_UART_IRQHandler
+huart3

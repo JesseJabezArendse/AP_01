@@ -1,0 +1,719 @@
+ARM GAS  C:\Temp\cc1UVqFh.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"iis2mdc.c"
+  16              		.text
+  17              		.section	.text.IIS2MDC_GetCapabilities,"ax",%progbits
+  18              		.align	1
+  19              		.global	IIS2MDC_GetCapabilities
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	IIS2MDC_GetCapabilities:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27              		@ link register save eliminated.
+  28 0000 0020     		movs	r0, #0
+  29 0002 0870     		strb	r0, [r1]
+  30 0004 4870     		strb	r0, [r1, #1]
+  31 0006 0123     		movs	r3, #1
+  32 0008 8B70     		strb	r3, [r1, #2]
+  33 000a C870     		strb	r0, [r1, #3]
+  34 000c 4860     		str	r0, [r1, #4]
+  35 000e 8860     		str	r0, [r1, #8]
+  36 0010 3223     		movs	r3, #50
+  37 0012 CB60     		str	r3, [r1, #12]
+  38 0014 0023     		movs	r3, #0
+  39 0016 0B61     		str	r3, [r1, #16]	@ float
+  40 0018 4B61     		str	r3, [r1, #20]	@ float
+  41 001a 014B     		ldr	r3, .L2
+  42 001c 8B61     		str	r3, [r1, #24]	@ float
+  43 001e 7047     		bx	lr
+  44              	.L3:
+  45              		.align	2
+  46              	.L2:
+  47 0020 0000C842 		.word	1120403456
+  49              		.section	.text.IIS2MDC_MAG_GetSensitivity,"ax",%progbits
+  50              		.align	1
+  51              		.global	IIS2MDC_MAG_GetSensitivity
+  52              		.syntax unified
+  53              		.thumb
+  54              		.thumb_func
+  56              	IIS2MDC_MAG_GetSensitivity:
+  57              		@ args = 0, pretend = 0, frame = 0
+  58              		@ frame_needed = 0, uses_anonymous_args = 0
+  59              		@ link register save eliminated.
+  60 0000 4FF07F53 		mov	r3, #1069547520
+ARM GAS  C:\Temp\cc1UVqFh.s 			page 2
+
+
+  61 0004 0B60     		str	r3, [r1]	@ float
+  62 0006 0020     		movs	r0, #0
+  63 0008 7047     		bx	lr
+  65              		.section	.text.IIS2MDC_MAG_GetFullScale,"ax",%progbits
+  66              		.align	1
+  67              		.global	IIS2MDC_MAG_GetFullScale
+  68              		.syntax unified
+  69              		.thumb
+  70              		.thumb_func
+  72              	IIS2MDC_MAG_GetFullScale:
+  73              		@ args = 0, pretend = 0, frame = 0
+  74              		@ frame_needed = 0, uses_anonymous_args = 0
+  75              		@ link register save eliminated.
+  76 0000 3223     		movs	r3, #50
+  77 0002 0B60     		str	r3, [r1]
+  78 0004 0020     		movs	r0, #0
+  79 0006 7047     		bx	lr
+  81              		.section	.text.IIS2MDC_MAG_SetFullScale,"ax",%progbits
+  82              		.align	1
+  83              		.global	IIS2MDC_MAG_SetFullScale
+  84              		.syntax unified
+  85              		.thumb
+  86              		.thumb_func
+  88              	IIS2MDC_MAG_SetFullScale:
+  89              		@ args = 0, pretend = 0, frame = 0
+  90              		@ frame_needed = 0, uses_anonymous_args = 0
+  91              		@ link register save eliminated.
+  92 0000 0020     		movs	r0, #0
+  93 0002 7047     		bx	lr
+  95              		.section	.text.ReadMagRegWrap,"ax",%progbits
+  96              		.align	1
+  97              		.syntax unified
+  98              		.thumb
+  99              		.thumb_func
+ 101              	ReadMagRegWrap:
+ 102              		@ args = 0, pretend = 0, frame = 0
+ 103              		@ frame_needed = 0, uses_anonymous_args = 0
+ 104 0000 10B5     		push	{r4, lr}
+ 105 0002 8468     		ldr	r4, [r0, #8]
+ 106 0004 2CB9     		cbnz	r4, .L8
+ 107 0006 4469     		ldr	r4, [r0, #20]
+ 108 0008 41F08001 		orr	r1, r1, #128
+ 109 000c 007B     		ldrb	r0, [r0, #12]	@ zero_extendqisi2
+ 110 000e A047     		blx	r4
+ 111              	.L7:
+ 112 0010 10BD     		pop	{r4, pc}
+ 113              	.L8:
+ 114 0012 4469     		ldr	r4, [r0, #20]
+ 115 0014 41F04001 		orr	r1, r1, #64
+ 116 0018 007B     		ldrb	r0, [r0, #12]	@ zero_extendqisi2
+ 117 001a A047     		blx	r4
+ 118 001c F8E7     		b	.L7
+ 120              		.section	.text.WriteMagRegWrap,"ax",%progbits
+ 121              		.align	1
+ 122              		.syntax unified
+ 123              		.thumb
+ 124              		.thumb_func
+ARM GAS  C:\Temp\cc1UVqFh.s 			page 3
+
+
+ 126              	WriteMagRegWrap:
+ 127              		@ args = 0, pretend = 0, frame = 0
+ 128              		@ frame_needed = 0, uses_anonymous_args = 0
+ 129 0000 10B5     		push	{r4, lr}
+ 130 0002 8468     		ldr	r4, [r0, #8]
+ 131 0004 2CB9     		cbnz	r4, .L12
+ 132 0006 0469     		ldr	r4, [r0, #16]
+ 133 0008 41F08001 		orr	r1, r1, #128
+ 134 000c 007B     		ldrb	r0, [r0, #12]	@ zero_extendqisi2
+ 135 000e A047     		blx	r4
+ 136              	.L11:
+ 137 0010 10BD     		pop	{r4, pc}
+ 138              	.L12:
+ 139 0012 0469     		ldr	r4, [r0, #16]
+ 140 0014 41F04001 		orr	r1, r1, #64
+ 141 0018 007B     		ldrb	r0, [r0, #12]	@ zero_extendqisi2
+ 142 001a A047     		blx	r4
+ 143 001c F8E7     		b	.L11
+ 145              		.section	.text.IIS2MDC_MAG_Enable,"ax",%progbits
+ 146              		.align	1
+ 147              		.global	IIS2MDC_MAG_Enable
+ 148              		.syntax unified
+ 149              		.thumb
+ 150              		.thumb_func
+ 152              	IIS2MDC_MAG_Enable:
+ 153              		@ args = 0, pretend = 0, frame = 0
+ 154              		@ frame_needed = 0, uses_anonymous_args = 0
+ 155 0000 90F83130 		ldrb	r3, [r0, #49]	@ zero_extendqisi2
+ 156 0004 012B     		cmp	r3, #1
+ 157 0006 0AD0     		beq	.L17
+ 158 0008 10B5     		push	{r4, lr}
+ 159 000a 0446     		mov	r4, r0
+ 160 000c 0021     		movs	r1, #0
+ 161 000e 2030     		adds	r0, r0, #32
+ 162 0010 FFF7FEFF 		bl	iis2mdc_operating_mode_set
+ 163 0014 28B9     		cbnz	r0, .L18
+ 164 0016 0123     		movs	r3, #1
+ 165 0018 84F83130 		strb	r3, [r4, #49]
+ 166              	.L15:
+ 167 001c 10BD     		pop	{r4, pc}
+ 168              	.L17:
+ 169 001e 0020     		movs	r0, #0
+ 170 0020 7047     		bx	lr
+ 171              	.L18:
+ 172 0022 4FF0FF30 		mov	r0, #-1
+ 173 0026 F9E7     		b	.L15
+ 175              		.section	.text.IIS2MDC_MAG_Disable,"ax",%progbits
+ 176              		.align	1
+ 177              		.global	IIS2MDC_MAG_Disable
+ 178              		.syntax unified
+ 179              		.thumb
+ 180              		.thumb_func
+ 182              	IIS2MDC_MAG_Disable:
+ 183              		@ args = 0, pretend = 0, frame = 0
+ 184              		@ frame_needed = 0, uses_anonymous_args = 0
+ 185 0000 90F83130 		ldrb	r3, [r0, #49]	@ zero_extendqisi2
+ 186 0004 0BB9     		cbnz	r3, .L31
+ARM GAS  C:\Temp\cc1UVqFh.s 			page 4
+
+
+ 187 0006 0020     		movs	r0, #0
+ 188 0008 7047     		bx	lr
+ 189              	.L31:
+ 190 000a 10B5     		push	{r4, lr}
+ 191 000c 0446     		mov	r4, r0
+ 192 000e 0221     		movs	r1, #2
+ 193 0010 2030     		adds	r0, r0, #32
+ 194 0012 FFF7FEFF 		bl	iis2mdc_operating_mode_set
+ 195 0016 10B9     		cbnz	r0, .L26
+ 196 0018 84F83100 		strb	r0, [r4, #49]
+ 197              	.L23:
+ 198 001c 10BD     		pop	{r4, pc}
+ 199              	.L26:
+ 200 001e 4FF0FF30 		mov	r0, #-1
+ 201 0022 FBE7     		b	.L23
+ 203              		.section	.text.IIS2MDC_DeInit,"ax",%progbits
+ 204              		.align	1
+ 205              		.global	IIS2MDC_DeInit
+ 206              		.syntax unified
+ 207              		.thumb
+ 208              		.thumb_func
+ 210              	IIS2MDC_DeInit:
+ 211              		@ args = 0, pretend = 0, frame = 0
+ 212              		@ frame_needed = 0, uses_anonymous_args = 0
+ 213 0000 10B5     		push	{r4, lr}
+ 214 0002 0446     		mov	r4, r0
+ 215 0004 FFF7FEFF 		bl	IIS2MDC_MAG_Disable
+ 216 0008 10B9     		cbnz	r0, .L34
+ 217 000a 84F83000 		strb	r0, [r4, #48]
+ 218              	.L32:
+ 219 000e 10BD     		pop	{r4, pc}
+ 220              	.L34:
+ 221 0010 4FF0FF30 		mov	r0, #-1
+ 222 0014 FBE7     		b	.L32
+ 224              		.section	.text.IIS2MDC_MAG_SetOutputDataRate,"ax",%progbits
+ 225              		.align	1
+ 226              		.global	IIS2MDC_MAG_SetOutputDataRate
+ 227              		.syntax unified
+ 228              		.thumb
+ 229              		.thumb_func
+ 231              	IIS2MDC_MAG_SetOutputDataRate:
+ 232              		@ args = 0, pretend = 0, frame = 0
+ 233              		@ frame_needed = 0, uses_anonymous_args = 0
+ 234 0000 08B5     		push	{r3, lr}
+ 235 0002 F2EE047A 		vmov.f32	s15, #1.0e+1
+ 236 0006 B4EEE70A 		vcmpe.f32	s0, s15
+ 237 000a F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 238 000e 0FD9     		bls	.L40
+ 239 0010 F3EE047A 		vmov.f32	s15, #2.0e+1
+ 240 0014 B4EEE70A 		vcmpe.f32	s0, s15
+ 241 0018 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 242 001c 0ED9     		bls	.L41
+ 243 001e DFED0B7A 		vldr.32	s15, .L48
+ 244 0022 B4EEE70A 		vcmpe.f32	s0, s15
+ 245 0026 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 246 002a 09D8     		bhi	.L45
+ 247 002c 0221     		movs	r1, #2
+ARM GAS  C:\Temp\cc1UVqFh.s 			page 5
+
+
+ 248 002e 00E0     		b	.L37
+ 249              	.L40:
+ 250 0030 0021     		movs	r1, #0
+ 251              	.L37:
+ 252 0032 2030     		adds	r0, r0, #32
+ 253 0034 FFF7FEFF 		bl	iis2mdc_data_rate_set
+ 254 0038 20B9     		cbnz	r0, .L47
+ 255              	.L36:
+ 256 003a 08BD     		pop	{r3, pc}
+ 257              	.L41:
+ 258 003c 0121     		movs	r1, #1
+ 259 003e F8E7     		b	.L37
+ 260              	.L45:
+ 261 0040 0321     		movs	r1, #3
+ 262 0042 F6E7     		b	.L37
+ 263              	.L47:
+ 264 0044 4FF0FF30 		mov	r0, #-1
+ 265 0048 F7E7     		b	.L36
+ 266              	.L49:
+ 267 004a 00BF     		.align	2
+ 268              	.L48:
+ 269 004c 00004842 		.word	1112014848
+ 271              		.section	.text.IIS2MDC_Init,"ax",%progbits
+ 272              		.align	1
+ 273              		.global	IIS2MDC_Init
+ 274              		.syntax unified
+ 275              		.thumb
+ 276              		.thumb_func
+ 278              	IIS2MDC_Init:
+ 279              		@ args = 0, pretend = 0, frame = 0
+ 280              		@ frame_needed = 0, uses_anonymous_args = 0
+ 281 0000 38B5     		push	{r3, r4, r5, lr}
+ 282 0002 0446     		mov	r4, r0
+ 283 0004 00F12005 		add	r5, r0, #32
+ 284 0008 0121     		movs	r1, #1
+ 285 000a 2846     		mov	r0, r5
+ 286 000c FFF7FEFF 		bl	iis2mdc_block_data_update_set
+ 287 0010 90B9     		cbnz	r0, .L52
+ 288 0012 0221     		movs	r1, #2
+ 289 0014 2846     		mov	r0, r5
+ 290 0016 FFF7FEFF 		bl	iis2mdc_operating_mode_set
+ 291 001a 80B9     		cbnz	r0, .L53
+ 292 001c 0321     		movs	r1, #3
+ 293 001e 2846     		mov	r0, r5
+ 294 0020 FFF7FEFF 		bl	iis2mdc_data_rate_set
+ 295 0024 70B9     		cbnz	r0, .L54
+ 296 0026 0021     		movs	r1, #0
+ 297 0028 2846     		mov	r0, r5
+ 298 002a FFF7FEFF 		bl	iis2mdc_self_test_set
+ 299 002e 60B9     		cbnz	r0, .L55
+ 300 0030 0123     		movs	r3, #1
+ 301 0032 84F83030 		strb	r3, [r4, #48]
+ 302              	.L50:
+ 303 0036 38BD     		pop	{r3, r4, r5, pc}
+ 304              	.L52:
+ 305 0038 4FF0FF30 		mov	r0, #-1
+ 306 003c FBE7     		b	.L50
+ARM GAS  C:\Temp\cc1UVqFh.s 			page 6
+
+
+ 307              	.L53:
+ 308 003e 4FF0FF30 		mov	r0, #-1
+ 309 0042 F8E7     		b	.L50
+ 310              	.L54:
+ 311 0044 4FF0FF30 		mov	r0, #-1
+ 312 0048 F5E7     		b	.L50
+ 313              	.L55:
+ 314 004a 4FF0FF30 		mov	r0, #-1
+ 315 004e F2E7     		b	.L50
+ 317              		.section	.text.IIS2MDC_ReadID,"ax",%progbits
+ 318              		.align	1
+ 319              		.global	IIS2MDC_ReadID
+ 320              		.syntax unified
+ 321              		.thumb
+ 322              		.thumb_func
+ 324              	IIS2MDC_ReadID:
+ 325              		@ args = 0, pretend = 0, frame = 0
+ 326              		@ frame_needed = 0, uses_anonymous_args = 0
+ 327 0000 08B5     		push	{r3, lr}
+ 328 0002 2030     		adds	r0, r0, #32
+ 329 0004 FFF7FEFF 		bl	iis2mdc_device_id_get
+ 330 0008 00B9     		cbnz	r0, .L61
+ 331              	.L57:
+ 332 000a 08BD     		pop	{r3, pc}
+ 333              	.L61:
+ 334 000c 4FF0FF30 		mov	r0, #-1
+ 335 0010 FBE7     		b	.L57
+ 337              		.section	.text.IIS2MDC_MAG_GetOutputDataRate,"ax",%progbits
+ 338              		.align	1
+ 339              		.global	IIS2MDC_MAG_GetOutputDataRate
+ 340              		.syntax unified
+ 341              		.thumb
+ 342              		.thumb_func
+ 344              	IIS2MDC_MAG_GetOutputDataRate:
+ 345              		@ args = 0, pretend = 0, frame = 8
+ 346              		@ frame_needed = 0, uses_anonymous_args = 0
+ 347 0000 10B5     		push	{r4, lr}
+ 348 0002 82B0     		sub	sp, sp, #8
+ 349 0004 0C46     		mov	r4, r1
+ 350 0006 0DF10701 		add	r1, sp, #7
+ 351 000a 2030     		adds	r0, r0, #32
+ 352 000c FFF7FEFF 		bl	iis2mdc_data_rate_get
+ 353 0010 A0B9     		cbnz	r0, .L69
+ 354 0012 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 355 0016 032B     		cmp	r3, #3
+ 356 0018 13D8     		bhi	.L70
+ 357 001a DFE803F0 		tbb	[pc, r3]
+ 358              	.L65:
+ 359 001e 02       		.byte	(.L68-.L65)/2
+ 360 001f 06       		.byte	(.L67-.L65)/2
+ 361 0020 09       		.byte	(.L66-.L65)/2
+ 362 0021 0C       		.byte	(.L64-.L65)/2
+ 363              		.p2align 1
+ 364              	.L68:
+ 365 0022 094B     		ldr	r3, .L72
+ 366 0024 2360     		str	r3, [r4]	@ float
+ 367              	.L62:
+ARM GAS  C:\Temp\cc1UVqFh.s 			page 7
+
+
+ 368 0026 02B0     		add	sp, sp, #8
+ 369              		@ sp needed
+ 370 0028 10BD     		pop	{r4, pc}
+ 371              	.L67:
+ 372 002a 084B     		ldr	r3, .L72+4
+ 373 002c 2360     		str	r3, [r4]	@ float
+ 374 002e FAE7     		b	.L62
+ 375              	.L66:
+ 376 0030 074B     		ldr	r3, .L72+8
+ 377 0032 2360     		str	r3, [r4]	@ float
+ 378 0034 F7E7     		b	.L62
+ 379              	.L64:
+ 380 0036 074B     		ldr	r3, .L72+12
+ 381 0038 2360     		str	r3, [r4]	@ float
+ 382 003a F4E7     		b	.L62
+ 383              	.L69:
+ 384 003c 4FF0FF30 		mov	r0, #-1
+ 385 0040 F1E7     		b	.L62
+ 386              	.L70:
+ 387 0042 4FF0FF30 		mov	r0, #-1
+ 388 0046 EEE7     		b	.L62
+ 389              	.L73:
+ 390              		.align	2
+ 391              	.L72:
+ 392 0048 00002041 		.word	1092616192
+ 393 004c 0000A041 		.word	1101004800
+ 394 0050 00004842 		.word	1112014848
+ 395 0054 0000C842 		.word	1120403456
+ 397              		.section	.text.IIS2MDC_MAG_GetAxesRaw,"ax",%progbits
+ 398              		.align	1
+ 399              		.global	IIS2MDC_MAG_GetAxesRaw
+ 400              		.syntax unified
+ 401              		.thumb
+ 402              		.thumb_func
+ 404              	IIS2MDC_MAG_GetAxesRaw:
+ 405              		@ args = 0, pretend = 0, frame = 8
+ 406              		@ frame_needed = 0, uses_anonymous_args = 0
+ 407 0000 10B5     		push	{r4, lr}
+ 408 0002 82B0     		sub	sp, sp, #8
+ 409 0004 0C46     		mov	r4, r1
+ 410 0006 6946     		mov	r1, sp
+ 411 0008 2030     		adds	r0, r0, #32
+ 412 000a FFF7FEFF 		bl	iis2mdc_magnetic_raw_get
+ 413 000e 50B9     		cbnz	r0, .L76
+ 414 0010 BDF90030 		ldrsh	r3, [sp]
+ 415 0014 2380     		strh	r3, [r4]	@ movhi
+ 416 0016 BDF90230 		ldrsh	r3, [sp, #2]
+ 417 001a 6380     		strh	r3, [r4, #2]	@ movhi
+ 418 001c BDF90430 		ldrsh	r3, [sp, #4]
+ 419 0020 A380     		strh	r3, [r4, #4]	@ movhi
+ 420              	.L74:
+ 421 0022 02B0     		add	sp, sp, #8
+ 422              		@ sp needed
+ 423 0024 10BD     		pop	{r4, pc}
+ 424              	.L76:
+ 425 0026 4FF0FF30 		mov	r0, #-1
+ 426 002a FAE7     		b	.L74
+ARM GAS  C:\Temp\cc1UVqFh.s 			page 8
+
+
+ 428              		.section	.text.IIS2MDC_MAG_GetAxes,"ax",%progbits
+ 429              		.align	1
+ 430              		.global	IIS2MDC_MAG_GetAxes
+ 431              		.syntax unified
+ 432              		.thumb
+ 433              		.thumb_func
+ 435              	IIS2MDC_MAG_GetAxes:
+ 436              		@ args = 0, pretend = 0, frame = 16
+ 437              		@ frame_needed = 0, uses_anonymous_args = 0
+ 438 0000 70B5     		push	{r4, r5, r6, lr}
+ 439 0002 84B0     		sub	sp, sp, #16
+ 440 0004 0546     		mov	r5, r0
+ 441 0006 0C46     		mov	r4, r1
+ 442 0008 0023     		movs	r3, #0
+ 443 000a 0193     		str	r3, [sp, #4]	@ float
+ 444 000c 02A9     		add	r1, sp, #8
+ 445 000e 2030     		adds	r0, r0, #32
+ 446 0010 FFF7FEFF 		bl	iis2mdc_magnetic_raw_get
+ 447 0014 68BB     		cbnz	r0, .L80
+ 448 0016 0646     		mov	r6, r0
+ 449 0018 01A9     		add	r1, sp, #4
+ 450 001a 2846     		mov	r0, r5
+ 451 001c FFF7FEFF 		bl	IIS2MDC_MAG_GetSensitivity
+ 452 0020 BDF90830 		ldrsh	r3, [sp, #8]
+ 453 0024 07EE103A 		vmov	s14, r3	@ int
+ 454 0028 B8EEC77A 		vcvt.f32.s32	s14, s14
+ 455 002c DDED017A 		vldr.32	s15, [sp, #4]
+ 456 0030 27EE277A 		vmul.f32	s14, s14, s15
+ 457 0034 BDEEC77A 		vcvt.s32.f32	s14, s14
+ 458 0038 84ED007A 		vstr.32	s14, [r4]	@ int
+ 459 003c BDF90A30 		ldrsh	r3, [sp, #10]
+ 460 0040 07EE103A 		vmov	s14, r3	@ int
+ 461 0044 B8EEC77A 		vcvt.f32.s32	s14, s14
+ 462 0048 27EE277A 		vmul.f32	s14, s14, s15
+ 463 004c BDEEC77A 		vcvt.s32.f32	s14, s14
+ 464 0050 84ED017A 		vstr.32	s14, [r4, #4]	@ int
+ 465 0054 BDF90C30 		ldrsh	r3, [sp, #12]
+ 466 0058 07EE103A 		vmov	s14, r3	@ int
+ 467 005c B8EEC77A 		vcvt.f32.s32	s14, s14
+ 468 0060 67EE877A 		vmul.f32	s15, s15, s14
+ 469 0064 FDEEE77A 		vcvt.s32.f32	s15, s15
+ 470 0068 C4ED027A 		vstr.32	s15, [r4, #8]	@ int
+ 471              	.L78:
+ 472 006c 3046     		mov	r0, r6
+ 473 006e 04B0     		add	sp, sp, #16
+ 474              		@ sp needed
+ 475 0070 70BD     		pop	{r4, r5, r6, pc}
+ 476              	.L80:
+ 477 0072 4FF0FF36 		mov	r6, #-1
+ 478 0076 F9E7     		b	.L78
+ 480              		.section	.text.IIS2MDC_RegisterBusIO,"ax",%progbits
+ 481              		.align	1
+ 482              		.global	IIS2MDC_RegisterBusIO
+ 483              		.syntax unified
+ 484              		.thumb
+ 485              		.thumb_func
+ 487              	IIS2MDC_RegisterBusIO:
+ARM GAS  C:\Temp\cc1UVqFh.s 			page 9
+
+
+ 488              		@ args = 0, pretend = 0, frame = 0
+ 489              		@ frame_needed = 0, uses_anonymous_args = 0
+ 490 0000 0028     		cmp	r0, #0
+ 491 0002 29D0     		beq	.L84
+ 492 0004 10B5     		push	{r4, lr}
+ 493 0006 0446     		mov	r4, r0
+ 494 0008 0B68     		ldr	r3, [r1]
+ 495 000a 0360     		str	r3, [r0]
+ 496 000c 4A68     		ldr	r2, [r1, #4]
+ 497 000e 4260     		str	r2, [r0, #4]
+ 498 0010 8A68     		ldr	r2, [r1, #8]
+ 499 0012 8260     		str	r2, [r0, #8]
+ 500 0014 0A7B     		ldrb	r2, [r1, #12]	@ zero_extendqisi2
+ 501 0016 0273     		strb	r2, [r0, #12]
+ 502 0018 0A69     		ldr	r2, [r1, #16]
+ 503 001a 0261     		str	r2, [r0, #16]
+ 504 001c 4A69     		ldr	r2, [r1, #20]
+ 505 001e 4261     		str	r2, [r0, #20]
+ 506 0020 8A69     		ldr	r2, [r1, #24]
+ 507 0022 8261     		str	r2, [r0, #24]
+ 508 0024 114A     		ldr	r2, .L93
+ 509 0026 4262     		str	r2, [r0, #36]
+ 510 0028 114A     		ldr	r2, .L93+4
+ 511 002a 0262     		str	r2, [r0, #32]
+ 512 002c CA69     		ldr	r2, [r1, #28]
+ 513 002e 8262     		str	r2, [r0, #40]
+ 514 0030 C062     		str	r0, [r0, #44]
+ 515 0032 A3B1     		cbz	r3, .L85
+ 516 0034 9847     		blx	r3
+ 517 0036 A8B9     		cbnz	r0, .L86
+ 518 0038 A368     		ldr	r3, [r4, #8]
+ 519 003a 13B1     		cbz	r3, .L82
+ 520 003c 94F83030 		ldrb	r3, [r4, #48]	@ zero_extendqisi2
+ 521 0040 03B1     		cbz	r3, .L92
+ 522              	.L82:
+ 523 0042 10BD     		pop	{r4, pc}
+ 524              	.L92:
+ 525 0044 0121     		movs	r1, #1
+ 526 0046 04F12000 		add	r0, r4, #32
+ 527 004a FFF7FEFF 		bl	iis2mdc_i2c_interface_set
+ 528 004e 0028     		cmp	r0, #0
+ 529 0050 F7D0     		beq	.L82
+ 530 0052 4FF0FF30 		mov	r0, #-1
+ 531 0056 F4E7     		b	.L82
+ 532              	.L84:
+ 533 0058 4FF0FF30 		mov	r0, #-1
+ 534 005c 7047     		bx	lr
+ 535              	.L85:
+ 536 005e 4FF0FF30 		mov	r0, #-1
+ 537 0062 EEE7     		b	.L82
+ 538              	.L86:
+ 539 0064 4FF0FF30 		mov	r0, #-1
+ 540 0068 EBE7     		b	.L82
+ 541              	.L94:
+ 542 006a 00BF     		.align	2
+ 543              	.L93:
+ 544 006c 00000000 		.word	ReadMagRegWrap
+ARM GAS  C:\Temp\cc1UVqFh.s 			page 10
+
+
+ 545 0070 00000000 		.word	WriteMagRegWrap
+ 547              		.section	.text.IIS2MDC_Read_Reg,"ax",%progbits
+ 548              		.align	1
+ 549              		.global	IIS2MDC_Read_Reg
+ 550              		.syntax unified
+ 551              		.thumb
+ 552              		.thumb_func
+ 554              	IIS2MDC_Read_Reg:
+ 555              		@ args = 0, pretend = 0, frame = 0
+ 556              		@ frame_needed = 0, uses_anonymous_args = 0
+ 557 0000 08B5     		push	{r3, lr}
+ 558 0002 0123     		movs	r3, #1
+ 559 0004 2030     		adds	r0, r0, #32
+ 560 0006 FFF7FEFF 		bl	iis2mdc_read_reg
+ 561 000a 00B9     		cbnz	r0, .L99
+ 562              	.L95:
+ 563 000c 08BD     		pop	{r3, pc}
+ 564              	.L99:
+ 565 000e 4FF0FF30 		mov	r0, #-1
+ 566 0012 FBE7     		b	.L95
+ 568              		.section	.text.IIS2MDC_Write_Reg,"ax",%progbits
+ 569              		.align	1
+ 570              		.global	IIS2MDC_Write_Reg
+ 571              		.syntax unified
+ 572              		.thumb
+ 573              		.thumb_func
+ 575              	IIS2MDC_Write_Reg:
+ 576              		@ args = 0, pretend = 0, frame = 8
+ 577              		@ frame_needed = 0, uses_anonymous_args = 0
+ 578 0000 00B5     		push	{lr}
+ 579 0002 83B0     		sub	sp, sp, #12
+ 580 0004 8DF80720 		strb	r2, [sp, #7]
+ 581 0008 0123     		movs	r3, #1
+ 582 000a 0DF10702 		add	r2, sp, #7
+ 583 000e 2030     		adds	r0, r0, #32
+ 584 0010 FFF7FEFF 		bl	iis2mdc_write_reg
+ 585 0014 10B9     		cbnz	r0, .L104
+ 586              	.L100:
+ 587 0016 03B0     		add	sp, sp, #12
+ 588              		@ sp needed
+ 589 0018 5DF804FB 		ldr	pc, [sp], #4
+ 590              	.L104:
+ 591 001c 4FF0FF30 		mov	r0, #-1
+ 592 0020 F9E7     		b	.L100
+ 594              		.section	.text.IIS2MDC_MAG_Get_DRDY_Status,"ax",%progbits
+ 595              		.align	1
+ 596              		.global	IIS2MDC_MAG_Get_DRDY_Status
+ 597              		.syntax unified
+ 598              		.thumb
+ 599              		.thumb_func
+ 601              	IIS2MDC_MAG_Get_DRDY_Status:
+ 602              		@ args = 0, pretend = 0, frame = 0
+ 603              		@ frame_needed = 0, uses_anonymous_args = 0
+ 604 0000 08B5     		push	{r3, lr}
+ 605 0002 2030     		adds	r0, r0, #32
+ 606 0004 FFF7FEFF 		bl	iis2mdc_mag_data_ready_get
+ 607 0008 00B9     		cbnz	r0, .L109
+ARM GAS  C:\Temp\cc1UVqFh.s 			page 11
+
+
+ 608              	.L105:
+ 609 000a 08BD     		pop	{r3, pc}
+ 610              	.L109:
+ 611 000c 4FF0FF30 		mov	r0, #-1
+ 612 0010 FBE7     		b	.L105
+ 614              		.section	.text.IIS2MDC_MAG_Get_Init_Status,"ax",%progbits
+ 615              		.align	1
+ 616              		.global	IIS2MDC_MAG_Get_Init_Status
+ 617              		.syntax unified
+ 618              		.thumb
+ 619              		.thumb_func
+ 621              	IIS2MDC_MAG_Get_Init_Status:
+ 622              		@ args = 0, pretend = 0, frame = 0
+ 623              		@ frame_needed = 0, uses_anonymous_args = 0
+ 624              		@ link register save eliminated.
+ 625 0000 20B1     		cbz	r0, .L112
+ 626 0002 90F83030 		ldrb	r3, [r0, #48]	@ zero_extendqisi2
+ 627 0006 0B70     		strb	r3, [r1]
+ 628 0008 0020     		movs	r0, #0
+ 629 000a 7047     		bx	lr
+ 630              	.L112:
+ 631 000c 4FF0FF30 		mov	r0, #-1
+ 632 0010 7047     		bx	lr
+ 634              		.global	IIS2MDC_MAG_Driver
+ 635              		.section	.data.IIS2MDC_MAG_Driver,"aw"
+ 636              		.align	2
+ 639              	IIS2MDC_MAG_Driver:
+ 640 0000 00000000 		.word	IIS2MDC_MAG_Enable
+ 641 0004 00000000 		.word	IIS2MDC_MAG_Disable
+ 642 0008 00000000 		.word	IIS2MDC_MAG_GetSensitivity
+ 643 000c 00000000 		.word	IIS2MDC_MAG_GetOutputDataRate
+ 644 0010 00000000 		.word	IIS2MDC_MAG_SetOutputDataRate
+ 645 0014 00000000 		.word	IIS2MDC_MAG_GetFullScale
+ 646 0018 00000000 		.word	IIS2MDC_MAG_SetFullScale
+ 647 001c 00000000 		.word	IIS2MDC_MAG_GetAxes
+ 648 0020 00000000 		.word	IIS2MDC_MAG_GetAxesRaw
+ 649              		.global	IIS2MDC_COMMON_Driver
+ 650              		.section	.data.IIS2MDC_COMMON_Driver,"aw"
+ 651              		.align	2
+ 654              	IIS2MDC_COMMON_Driver:
+ 655 0000 00000000 		.word	IIS2MDC_Init
+ 656 0004 00000000 		.word	IIS2MDC_DeInit
+ 657 0008 00000000 		.word	IIS2MDC_ReadID
+ 658 000c 00000000 		.word	IIS2MDC_GetCapabilities
+ 659              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\cc1UVqFh.s 			page 12
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 iis2mdc.c
+  C:\Temp\cc1UVqFh.s:18     .text.IIS2MDC_GetCapabilities:00000000 $t
+  C:\Temp\cc1UVqFh.s:24     .text.IIS2MDC_GetCapabilities:00000000 IIS2MDC_GetCapabilities
+  C:\Temp\cc1UVqFh.s:47     .text.IIS2MDC_GetCapabilities:00000020 $d
+  C:\Temp\cc1UVqFh.s:50     .text.IIS2MDC_MAG_GetSensitivity:00000000 $t
+  C:\Temp\cc1UVqFh.s:56     .text.IIS2MDC_MAG_GetSensitivity:00000000 IIS2MDC_MAG_GetSensitivity
+  C:\Temp\cc1UVqFh.s:66     .text.IIS2MDC_MAG_GetFullScale:00000000 $t
+  C:\Temp\cc1UVqFh.s:72     .text.IIS2MDC_MAG_GetFullScale:00000000 IIS2MDC_MAG_GetFullScale
+  C:\Temp\cc1UVqFh.s:82     .text.IIS2MDC_MAG_SetFullScale:00000000 $t
+  C:\Temp\cc1UVqFh.s:88     .text.IIS2MDC_MAG_SetFullScale:00000000 IIS2MDC_MAG_SetFullScale
+  C:\Temp\cc1UVqFh.s:96     .text.ReadMagRegWrap:00000000 $t
+  C:\Temp\cc1UVqFh.s:101    .text.ReadMagRegWrap:00000000 ReadMagRegWrap
+  C:\Temp\cc1UVqFh.s:121    .text.WriteMagRegWrap:00000000 $t
+  C:\Temp\cc1UVqFh.s:126    .text.WriteMagRegWrap:00000000 WriteMagRegWrap
+  C:\Temp\cc1UVqFh.s:146    .text.IIS2MDC_MAG_Enable:00000000 $t
+  C:\Temp\cc1UVqFh.s:152    .text.IIS2MDC_MAG_Enable:00000000 IIS2MDC_MAG_Enable
+  C:\Temp\cc1UVqFh.s:176    .text.IIS2MDC_MAG_Disable:00000000 $t
+  C:\Temp\cc1UVqFh.s:182    .text.IIS2MDC_MAG_Disable:00000000 IIS2MDC_MAG_Disable
+  C:\Temp\cc1UVqFh.s:204    .text.IIS2MDC_DeInit:00000000 $t
+  C:\Temp\cc1UVqFh.s:210    .text.IIS2MDC_DeInit:00000000 IIS2MDC_DeInit
+  C:\Temp\cc1UVqFh.s:225    .text.IIS2MDC_MAG_SetOutputDataRate:00000000 $t
+  C:\Temp\cc1UVqFh.s:231    .text.IIS2MDC_MAG_SetOutputDataRate:00000000 IIS2MDC_MAG_SetOutputDataRate
+  C:\Temp\cc1UVqFh.s:269    .text.IIS2MDC_MAG_SetOutputDataRate:0000004c $d
+  C:\Temp\cc1UVqFh.s:272    .text.IIS2MDC_Init:00000000 $t
+  C:\Temp\cc1UVqFh.s:278    .text.IIS2MDC_Init:00000000 IIS2MDC_Init
+  C:\Temp\cc1UVqFh.s:318    .text.IIS2MDC_ReadID:00000000 $t
+  C:\Temp\cc1UVqFh.s:324    .text.IIS2MDC_ReadID:00000000 IIS2MDC_ReadID
+  C:\Temp\cc1UVqFh.s:338    .text.IIS2MDC_MAG_GetOutputDataRate:00000000 $t
+  C:\Temp\cc1UVqFh.s:344    .text.IIS2MDC_MAG_GetOutputDataRate:00000000 IIS2MDC_MAG_GetOutputDataRate
+  C:\Temp\cc1UVqFh.s:359    .text.IIS2MDC_MAG_GetOutputDataRate:0000001e $d
+  C:\Temp\cc1UVqFh.s:363    .text.IIS2MDC_MAG_GetOutputDataRate:00000022 $t
+  C:\Temp\cc1UVqFh.s:392    .text.IIS2MDC_MAG_GetOutputDataRate:00000048 $d
+  C:\Temp\cc1UVqFh.s:398    .text.IIS2MDC_MAG_GetAxesRaw:00000000 $t
+  C:\Temp\cc1UVqFh.s:404    .text.IIS2MDC_MAG_GetAxesRaw:00000000 IIS2MDC_MAG_GetAxesRaw
+  C:\Temp\cc1UVqFh.s:429    .text.IIS2MDC_MAG_GetAxes:00000000 $t
+  C:\Temp\cc1UVqFh.s:435    .text.IIS2MDC_MAG_GetAxes:00000000 IIS2MDC_MAG_GetAxes
+  C:\Temp\cc1UVqFh.s:481    .text.IIS2MDC_RegisterBusIO:00000000 $t
+  C:\Temp\cc1UVqFh.s:487    .text.IIS2MDC_RegisterBusIO:00000000 IIS2MDC_RegisterBusIO
+  C:\Temp\cc1UVqFh.s:544    .text.IIS2MDC_RegisterBusIO:0000006c $d
+  C:\Temp\cc1UVqFh.s:548    .text.IIS2MDC_Read_Reg:00000000 $t
+  C:\Temp\cc1UVqFh.s:554    .text.IIS2MDC_Read_Reg:00000000 IIS2MDC_Read_Reg
+  C:\Temp\cc1UVqFh.s:569    .text.IIS2MDC_Write_Reg:00000000 $t
+  C:\Temp\cc1UVqFh.s:575    .text.IIS2MDC_Write_Reg:00000000 IIS2MDC_Write_Reg
+  C:\Temp\cc1UVqFh.s:595    .text.IIS2MDC_MAG_Get_DRDY_Status:00000000 $t
+  C:\Temp\cc1UVqFh.s:601    .text.IIS2MDC_MAG_Get_DRDY_Status:00000000 IIS2MDC_MAG_Get_DRDY_Status
+  C:\Temp\cc1UVqFh.s:615    .text.IIS2MDC_MAG_Get_Init_Status:00000000 $t
+  C:\Temp\cc1UVqFh.s:621    .text.IIS2MDC_MAG_Get_Init_Status:00000000 IIS2MDC_MAG_Get_Init_Status
+  C:\Temp\cc1UVqFh.s:639    .data.IIS2MDC_MAG_Driver:00000000 IIS2MDC_MAG_Driver
+  C:\Temp\cc1UVqFh.s:636    .data.IIS2MDC_MAG_Driver:00000000 $d
+  C:\Temp\cc1UVqFh.s:654    .data.IIS2MDC_COMMON_Driver:00000000 IIS2MDC_COMMON_Driver
+  C:\Temp\cc1UVqFh.s:651    .data.IIS2MDC_COMMON_Driver:00000000 $d
+
+UNDEFINED SYMBOLS
+iis2mdc_operating_mode_set
+iis2mdc_data_rate_set
+iis2mdc_block_data_update_set
+ARM GAS  C:\Temp\cc1UVqFh.s 			page 13
+
+
+iis2mdc_self_test_set
+iis2mdc_device_id_get
+iis2mdc_data_rate_get
+iis2mdc_magnetic_raw_get
+iis2mdc_i2c_interface_set
+iis2mdc_read_reg
+iis2mdc_write_reg
+iis2mdc_mag_data_ready_get

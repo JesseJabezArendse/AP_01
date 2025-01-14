@@ -1,0 +1,1421 @@
+ARM GAS  C:\Temp\ccoZnLU4.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"iis2dlpc.c"
+  16              		.text
+  17              		.section	.text.IIS2DLPC_GetCapabilities,"ax",%progbits
+  18              		.align	1
+  19              		.global	IIS2DLPC_GetCapabilities
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	IIS2DLPC_GetCapabilities:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27              		@ link register save eliminated.
+  28 0000 0123     		movs	r3, #1
+  29 0002 0B70     		strb	r3, [r1]
+  30 0004 0020     		movs	r0, #0
+  31 0006 4870     		strb	r0, [r1, #1]
+  32 0008 8870     		strb	r0, [r1, #2]
+  33 000a C870     		strb	r0, [r1, #3]
+  34 000c 4860     		str	r0, [r1, #4]
+  35 000e 1023     		movs	r3, #16
+  36 0010 8B60     		str	r3, [r1, #8]
+  37 0012 C860     		str	r0, [r1, #12]
+  38 0014 0023     		movs	r3, #0
+  39 0016 0B61     		str	r3, [r1, #16]	@ float
+  40 0018 014A     		ldr	r2, .L2
+  41 001a 4A61     		str	r2, [r1, #20]	@ float
+  42 001c 8B61     		str	r3, [r1, #24]	@ float
+  43 001e 7047     		bx	lr
+  44              	.L3:
+  45              		.align	2
+  46              	.L2:
+  47 0020 0000C844 		.word	1153957888
+  49              		.section	.text.IIS2DLPC_ACC_SetOutputDataRate_When_Disabled,"ax",%progbits
+  50              		.align	1
+  51              		.syntax unified
+  52              		.thumb
+  53              		.thumb_func
+  55              	IIS2DLPC_ACC_SetOutputDataRate_When_Disabled:
+  56              		@ args = 0, pretend = 0, frame = 0
+  57              		@ frame_needed = 0, uses_anonymous_args = 0
+  58              		@ link register save eliminated.
+  59 0000 80F83810 		strb	r1, [r0, #56]
+  60 0004 80F83920 		strb	r2, [r0, #57]
+ARM GAS  C:\Temp\ccoZnLU4.s 			page 2
+
+
+  61 0008 DFED267A 		vldr.32	s15, .L17
+  62 000c B4EEE70A 		vcmpe.f32	s0, s15
+  63 0010 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+  64 0014 33D9     		bls	.L7
+  65 0016 F2EE097A 		vmov.f32	s15, #1.25e+1
+  66 001a B4EEE70A 		vcmpe.f32	s0, s15
+  67 001e F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+  68 0022 30D9     		bls	.L8
+  69 0024 F3EE097A 		vmov.f32	s15, #2.5e+1
+  70 0028 B4EEE70A 		vcmpe.f32	s0, s15
+  71 002c F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+  72 0030 2BD9     		bls	.L9
+  73 0032 DFED1D7A 		vldr.32	s15, .L17+4
+  74 0036 B4EEE70A 		vcmpe.f32	s0, s15
+  75 003a F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+  76 003e 26D9     		bls	.L10
+  77 0040 DFED1A7A 		vldr.32	s15, .L17+8
+  78 0044 B4EEE70A 		vcmpe.f32	s0, s15
+  79 0048 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+  80 004c 21D9     		bls	.L11
+  81 004e DFED187A 		vldr.32	s15, .L17+12
+  82 0052 B4EEE70A 		vcmpe.f32	s0, s15
+  83 0056 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+  84 005a 1CD9     		bls	.L12
+  85 005c DFED157A 		vldr.32	s15, .L17+16
+  86 0060 B4EEE70A 		vcmpe.f32	s0, s15
+  87 0064 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+  88 0068 17D9     		bls	.L13
+  89 006a DFED137A 		vldr.32	s15, .L17+20
+  90 006e B4EEE70A 		vcmpe.f32	s0, s15
+  91 0072 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+  92 0076 12D8     		bhi	.L16
+  93 0078 17EE903A 		vmov	r3, s15
+  94 007c 00E0     		b	.L5
+  95              	.L7:
+  96 007e 0F4B     		ldr	r3, .L17+24
+  97              	.L5:
+  98 0080 4363     		str	r3, [r0, #52]	@ float
+  99 0082 0020     		movs	r0, #0
+ 100 0084 7047     		bx	lr
+ 101              	.L8:
+ 102 0086 0E4B     		ldr	r3, .L17+28
+ 103 0088 FAE7     		b	.L5
+ 104              	.L9:
+ 105 008a 0E4B     		ldr	r3, .L17+32
+ 106 008c F8E7     		b	.L5
+ 107              	.L10:
+ 108 008e 0E4B     		ldr	r3, .L17+36
+ 109 0090 F6E7     		b	.L5
+ 110              	.L11:
+ 111 0092 0E4B     		ldr	r3, .L17+40
+ 112 0094 F4E7     		b	.L5
+ 113              	.L12:
+ 114 0096 0E4B     		ldr	r3, .L17+44
+ 115 0098 F2E7     		b	.L5
+ 116              	.L13:
+ 117 009a 0E4B     		ldr	r3, .L17+48
+ARM GAS  C:\Temp\ccoZnLU4.s 			page 3
+
+
+ 118 009c F0E7     		b	.L5
+ 119              	.L16:
+ 120 009e 0E4B     		ldr	r3, .L17+52
+ 121 00a0 EEE7     		b	.L5
+ 122              	.L18:
+ 123 00a2 00BF     		.align	2
+ 124              	.L17:
+ 125 00a4 CDCCCC3F 		.word	1070386381
+ 126 00a8 00004842 		.word	1112014848
+ 127 00ac 0000C842 		.word	1120403456
+ 128 00b0 00004843 		.word	1128792064
+ 129 00b4 0000C843 		.word	1137180672
+ 130 00b8 00004844 		.word	1145569280
+ 131 00bc CDCCCC3F 		.word	1070386381
+ 132 00c0 00004841 		.word	1095237632
+ 133 00c4 0000C841 		.word	1103626240
+ 134 00c8 00004842 		.word	1112014848
+ 135 00cc 0000C842 		.word	1120403456
+ 136 00d0 00004843 		.word	1128792064
+ 137 00d4 0000C843 		.word	1137180672
+ 138 00d8 0000C844 		.word	1153957888
+ 140              		.section	.text.ReadRegWrap,"ax",%progbits
+ 141              		.align	1
+ 142              		.syntax unified
+ 143              		.thumb
+ 144              		.thumb_func
+ 146              	ReadRegWrap:
+ 147              		@ args = 0, pretend = 0, frame = 0
+ 148              		@ frame_needed = 0, uses_anonymous_args = 0
+ 149 0000 10B5     		push	{r4, lr}
+ 150 0002 4469     		ldr	r4, [r0, #20]
+ 151 0004 007B     		ldrb	r0, [r0, #12]	@ zero_extendqisi2
+ 152 0006 A047     		blx	r4
+ 153 0008 10BD     		pop	{r4, pc}
+ 155              		.section	.text.WriteRegWrap,"ax",%progbits
+ 156              		.align	1
+ 157              		.syntax unified
+ 158              		.thumb
+ 159              		.thumb_func
+ 161              	WriteRegWrap:
+ 162              		@ args = 0, pretend = 0, frame = 0
+ 163              		@ frame_needed = 0, uses_anonymous_args = 0
+ 164 0000 10B5     		push	{r4, lr}
+ 165 0002 0469     		ldr	r4, [r0, #16]
+ 166 0004 007B     		ldrb	r0, [r0, #12]	@ zero_extendqisi2
+ 167 0006 A047     		blx	r4
+ 168 0008 10BD     		pop	{r4, pc}
+ 170              		.section	.text.IIS2DLPC_ACC_SetOutputDataRate_When_Enabled,"ax",%progbits
+ 171              		.align	1
+ 172              		.syntax unified
+ 173              		.thumb
+ 174              		.thumb_func
+ 176              	IIS2DLPC_ACC_SetOutputDataRate_When_Enabled:
+ 177              		@ args = 0, pretend = 0, frame = 0
+ 178              		@ frame_needed = 0, uses_anonymous_args = 0
+ 179 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 180 0004 2DED028B 		vpush.64	{d8}
+ARM GAS  C:\Temp\ccoZnLU4.s 			page 4
+
+
+ 181 0008 0446     		mov	r4, r0
+ 182 000a B0EE408A 		vmov.f32	s16, s0
+ 183 000e 0D46     		mov	r5, r1
+ 184 0010 1646     		mov	r6, r2
+ 185 0012 4B1E     		subs	r3, r1, #1
+ 186 0014 032B     		cmp	r3, #3
+ 187 0016 03D8     		bhi	.L24
+ 188 0018 DFE803F0 		tbb	[pc, r3]
+ 189              	.L26:
+ 190 001c 13       		.byte	(.L29-.L26)/2
+ 191 001d 5B       		.byte	(.L28-.L26)/2
+ 192 001e 6B       		.byte	(.L27-.L26)/2
+ 193 001f 7C       		.byte	(.L25-.L26)/2
+ 194              		.p2align 1
+ 195              	.L24:
+ 196 0020 012E     		cmp	r6, #1
+ 197 0022 0BD0     		beq	.L39
+ 198 0024 4FF00408 		mov	r8, #4
+ 199              	.L30:
+ 200 0028 F2EE097A 		vmov.f32	s15, #1.25e+1
+ 201 002c B4EEE78A 		vcmpe.f32	s16, s15
+ 202 0030 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 203 0034 10D5     		bpl	.L31
+ 204 0036 B2EE098A 		vmov.f32	s16, #1.25e+1
+ 205 003a 0DE0     		b	.L31
+ 206              	.L39:
+ 207 003c 4FF01408 		mov	r8, #20
+ 208 0040 F2E7     		b	.L30
+ 209              	.L29:
+ 210 0042 012E     		cmp	r6, #1
+ 211 0044 42D0     		beq	.L41
+ 212 0046 4FF00308 		mov	r8, #3
+ 213              	.L32:
+ 214 004a DFED517A 		vldr.32	s15, .L62
+ 215 004e B4EEE78A 		vcmpe.f32	s16, s15
+ 216 0052 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 217 0056 6EDC     		bgt	.L42
+ 218              	.L31:
+ 219 0058 DFED4E7A 		vldr.32	s15, .L62+4
+ 220 005c B4EEE78A 		vcmpe.f32	s16, s15
+ 221 0060 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 222 0064 6AD9     		bls	.L49
+ 223 0066 F2EE097A 		vmov.f32	s15, #1.25e+1
+ 224 006a B4EEE78A 		vcmpe.f32	s16, s15
+ 225 006e F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 226 0072 79D9     		bls	.L50
+ 227 0074 F3EE097A 		vmov.f32	s15, #2.5e+1
+ 228 0078 B4EEE78A 		vcmpe.f32	s16, s15
+ 229 007c F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 230 0080 74D9     		bls	.L51
+ 231 0082 DFED457A 		vldr.32	s15, .L62+8
+ 232 0086 B4EEE78A 		vcmpe.f32	s16, s15
+ 233 008a F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 234 008e 6FD9     		bls	.L52
+ 235 0090 DFED427A 		vldr.32	s15, .L62+12
+ 236 0094 B4EEE78A 		vcmpe.f32	s16, s15
+ 237 0098 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ARM GAS  C:\Temp\ccoZnLU4.s 			page 5
+
+
+ 238 009c 6AD9     		bls	.L53
+ 239 009e DFED3C7A 		vldr.32	s15, .L62
+ 240 00a2 B4EEE78A 		vcmpe.f32	s16, s15
+ 241 00a6 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 242 00aa 65D9     		bls	.L54
+ 243 00ac DFED3C7A 		vldr.32	s15, .L62+16
+ 244 00b0 B4EEE78A 		vcmpe.f32	s16, s15
+ 245 00b4 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 246 00b8 60D9     		bls	.L55
+ 247 00ba DFED3A7A 		vldr.32	s15, .L62+20
+ 248 00be B4EEE78A 		vcmpe.f32	s16, s15
+ 249 00c2 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 250 00c6 5BD8     		bhi	.L60
+ 251 00c8 0821     		movs	r1, #8
+ 252 00ca 38E0     		b	.L36
+ 253              	.L41:
+ 254 00cc 4FF01308 		mov	r8, #19
+ 255 00d0 BBE7     		b	.L32
+ 256              	.L28:
+ 257 00d2 012E     		cmp	r6, #1
+ 258 00d4 0AD0     		beq	.L43
+ 259 00d6 8846     		mov	r8, r1
+ 260              	.L33:
+ 261 00d8 DFED2D7A 		vldr.32	s15, .L62
+ 262 00dc B4EEE78A 		vcmpe.f32	s16, s15
+ 263 00e0 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 264 00e4 B8DD     		ble	.L31
+ 265 00e6 9FED2A8A 		vldr.32	s16, .L62
+ 266 00ea B5E7     		b	.L31
+ 267              	.L43:
+ 268 00ec 4FF01208 		mov	r8, #18
+ 269 00f0 F2E7     		b	.L33
+ 270              	.L27:
+ 271 00f2 012E     		cmp	r6, #1
+ 272 00f4 0BD0     		beq	.L45
+ 273 00f6 4FF00108 		mov	r8, #1
+ 274              	.L34:
+ 275 00fa DFED257A 		vldr.32	s15, .L62
+ 276 00fe B4EEE78A 		vcmpe.f32	s16, s15
+ 277 0102 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 278 0106 A7DD     		ble	.L31
+ 279 0108 9FED218A 		vldr.32	s16, .L62
+ 280 010c A4E7     		b	.L31
+ 281              	.L45:
+ 282 010e 4FF01108 		mov	r8, #17
+ 283 0112 F2E7     		b	.L34
+ 284              	.L25:
+ 285 0114 012E     		cmp	r6, #1
+ 286 0116 0BD0     		beq	.L47
+ 287 0118 4FF00008 		mov	r8, #0
+ 288              	.L35:
+ 289 011c DFED1C7A 		vldr.32	s15, .L62
+ 290 0120 B4EEE78A 		vcmpe.f32	s16, s15
+ 291 0124 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 292 0128 96DD     		ble	.L31
+ 293 012a 9FED198A 		vldr.32	s16, .L62
+ 294 012e 93E7     		b	.L31
+ARM GAS  C:\Temp\ccoZnLU4.s 			page 6
+
+
+ 295              	.L47:
+ 296 0130 4FF01008 		mov	r8, #16
+ 297 0134 F2E7     		b	.L35
+ 298              	.L42:
+ 299 0136 9FED168A 		vldr.32	s16, .L62
+ 300 013a 8DE7     		b	.L31
+ 301              	.L49:
+ 302 013c 0121     		movs	r1, #1
+ 303              	.L36:
+ 304 013e 04F12007 		add	r7, r4, #32
+ 305 0142 3846     		mov	r0, r7
+ 306 0144 FFF7FEFF 		bl	iis2dlpc_data_rate_set
+ 307 0148 E0B9     		cbnz	r0, .L57
+ 308 014a 4146     		mov	r1, r8
+ 309 014c 3846     		mov	r0, r7
+ 310 014e FFF7FEFF 		bl	iis2dlpc_power_mode_set
+ 311 0152 D0B9     		cbnz	r0, .L58
+ 312 0154 84ED0D8A 		vstr.32	s16, [r4, #52]
+ 313 0158 84F83850 		strb	r5, [r4, #56]
+ 314 015c 84F83960 		strb	r6, [r4, #57]
+ 315              	.L23:
+ 316 0160 BDEC028B 		vldm	sp!, {d8}
+ 317 0164 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 318              	.L50:
+ 319 0168 0221     		movs	r1, #2
+ 320 016a E8E7     		b	.L36
+ 321              	.L51:
+ 322 016c 0321     		movs	r1, #3
+ 323 016e E6E7     		b	.L36
+ 324              	.L52:
+ 325 0170 0421     		movs	r1, #4
+ 326 0172 E4E7     		b	.L36
+ 327              	.L53:
+ 328 0174 0521     		movs	r1, #5
+ 329 0176 E2E7     		b	.L36
+ 330              	.L54:
+ 331 0178 0621     		movs	r1, #6
+ 332 017a E0E7     		b	.L36
+ 333              	.L55:
+ 334 017c 0721     		movs	r1, #7
+ 335 017e DEE7     		b	.L36
+ 336              	.L60:
+ 337 0180 0921     		movs	r1, #9
+ 338 0182 DCE7     		b	.L36
+ 339              	.L57:
+ 340 0184 4FF0FF30 		mov	r0, #-1
+ 341 0188 EAE7     		b	.L23
+ 342              	.L58:
+ 343 018a 4FF0FF30 		mov	r0, #-1
+ 344 018e E7E7     		b	.L23
+ 345              	.L63:
+ 346              		.align	2
+ 347              	.L62:
+ 348 0190 00004843 		.word	1128792064
+ 349 0194 CDCCCC3F 		.word	1070386381
+ 350 0198 00004842 		.word	1112014848
+ 351 019c 0000C842 		.word	1120403456
+ARM GAS  C:\Temp\ccoZnLU4.s 			page 7
+
+
+ 352 01a0 0000C843 		.word	1137180672
+ 353 01a4 00004844 		.word	1145569280
+ 355              		.section	.text.IIS2DLPC_ACC_Enable,"ax",%progbits
+ 356              		.align	1
+ 357              		.global	IIS2DLPC_ACC_Enable
+ 358              		.syntax unified
+ 359              		.thumb
+ 360              		.thumb_func
+ 362              	IIS2DLPC_ACC_Enable:
+ 363              		@ args = 0, pretend = 0, frame = 0
+ 364              		@ frame_needed = 0, uses_anonymous_args = 0
+ 365 0000 90F83130 		ldrb	r3, [r0, #49]	@ zero_extendqisi2
+ 366 0004 012B     		cmp	r3, #1
+ 367 0006 0ED0     		beq	.L66
+ 368 0008 10B5     		push	{r4, lr}
+ 369 000a 0446     		mov	r4, r0
+ 370 000c 90F83920 		ldrb	r2, [r0, #57]	@ zero_extendqisi2
+ 371 0010 90F83810 		ldrb	r1, [r0, #56]	@ zero_extendqisi2
+ 372 0014 90ED0D0A 		vldr.32	s0, [r0, #52]
+ 373 0018 FFF7FEFF 		bl	IIS2DLPC_ACC_SetOutputDataRate_When_Enabled
+ 374 001c 28B9     		cbnz	r0, .L67
+ 375 001e 0123     		movs	r3, #1
+ 376 0020 84F83130 		strb	r3, [r4, #49]
+ 377              	.L64:
+ 378 0024 10BD     		pop	{r4, pc}
+ 379              	.L66:
+ 380 0026 0020     		movs	r0, #0
+ 381 0028 7047     		bx	lr
+ 382              	.L67:
+ 383 002a 4FF0FF30 		mov	r0, #-1
+ 384 002e F9E7     		b	.L64
+ 386              		.section	.text.IIS2DLPC_ACC_Disable,"ax",%progbits
+ 387              		.align	1
+ 388              		.global	IIS2DLPC_ACC_Disable
+ 389              		.syntax unified
+ 390              		.thumb
+ 391              		.thumb_func
+ 393              	IIS2DLPC_ACC_Disable:
+ 394              		@ args = 0, pretend = 0, frame = 0
+ 395              		@ frame_needed = 0, uses_anonymous_args = 0
+ 396 0000 90F83130 		ldrb	r3, [r0, #49]	@ zero_extendqisi2
+ 397 0004 0BB9     		cbnz	r3, .L80
+ 398 0006 0020     		movs	r0, #0
+ 399 0008 7047     		bx	lr
+ 400              	.L80:
+ 401 000a 10B5     		push	{r4, lr}
+ 402 000c 0446     		mov	r4, r0
+ 403 000e 0021     		movs	r1, #0
+ 404 0010 2030     		adds	r0, r0, #32
+ 405 0012 FFF7FEFF 		bl	iis2dlpc_data_rate_set
+ 406 0016 10B9     		cbnz	r0, .L75
+ 407 0018 84F83100 		strb	r0, [r4, #49]
+ 408              	.L72:
+ 409 001c 10BD     		pop	{r4, pc}
+ 410              	.L75:
+ 411 001e 4FF0FF30 		mov	r0, #-1
+ 412 0022 FBE7     		b	.L72
+ARM GAS  C:\Temp\ccoZnLU4.s 			page 8
+
+
+ 414              		.section	.text.IIS2DLPC_DeInit,"ax",%progbits
+ 415              		.align	1
+ 416              		.global	IIS2DLPC_DeInit
+ 417              		.syntax unified
+ 418              		.thumb
+ 419              		.thumb_func
+ 421              	IIS2DLPC_DeInit:
+ 422              		@ args = 0, pretend = 0, frame = 0
+ 423              		@ frame_needed = 0, uses_anonymous_args = 0
+ 424 0000 10B5     		push	{r4, lr}
+ 425 0002 0446     		mov	r4, r0
+ 426 0004 FFF7FEFF 		bl	IIS2DLPC_ACC_Disable
+ 427 0008 48B9     		cbnz	r0, .L83
+ 428 000a 0023     		movs	r3, #0
+ 429 000c 6363     		str	r3, [r4, #52]	@ float
+ 430 000e 0023     		movs	r3, #0
+ 431 0010 84F83830 		strb	r3, [r4, #56]
+ 432 0014 84F83930 		strb	r3, [r4, #57]
+ 433 0018 84F83030 		strb	r3, [r4, #48]
+ 434              	.L81:
+ 435 001c 10BD     		pop	{r4, pc}
+ 436              	.L83:
+ 437 001e 4FF0FF30 		mov	r0, #-1
+ 438 0022 FBE7     		b	.L81
+ 440              		.section	.text.IIS2DLPC_Init,"ax",%progbits
+ 441              		.align	1
+ 442              		.global	IIS2DLPC_Init
+ 443              		.syntax unified
+ 444              		.thumb
+ 445              		.thumb_func
+ 447              	IIS2DLPC_Init:
+ 448              		@ args = 0, pretend = 0, frame = 0
+ 449              		@ frame_needed = 0, uses_anonymous_args = 0
+ 450 0000 38B5     		push	{r3, r4, r5, lr}
+ 451 0002 0446     		mov	r4, r0
+ 452 0004 00F12005 		add	r5, r0, #32
+ 453 0008 0121     		movs	r1, #1
+ 454 000a 2846     		mov	r0, r5
+ 455 000c FFF7FEFF 		bl	iis2dlpc_auto_increment_set
+ 456 0010 10BB     		cbnz	r0, .L87
+ 457 0012 0121     		movs	r1, #1
+ 458 0014 2846     		mov	r0, r5
+ 459 0016 FFF7FEFF 		bl	iis2dlpc_block_data_update_set
+ 460 001a 00BB     		cbnz	r0, .L88
+ 461 001c 0021     		movs	r1, #0
+ 462 001e 2846     		mov	r0, r5
+ 463 0020 FFF7FEFF 		bl	iis2dlpc_fifo_mode_set
+ 464 0024 F0B9     		cbnz	r0, .L89
+ 465 0026 0421     		movs	r1, #4
+ 466 0028 2846     		mov	r0, r5
+ 467 002a FFF7FEFF 		bl	iis2dlpc_power_mode_set
+ 468 002e E0B9     		cbnz	r0, .L90
+ 469 0030 124B     		ldr	r3, .L94
+ 470 0032 6363     		str	r3, [r4, #52]	@ float
+ 471 0034 0021     		movs	r1, #0
+ 472 0036 84F83810 		strb	r1, [r4, #56]
+ 473 003a 84F83910 		strb	r1, [r4, #57]
+ARM GAS  C:\Temp\ccoZnLU4.s 			page 9
+
+
+ 474 003e 2846     		mov	r0, r5
+ 475 0040 FFF7FEFF 		bl	iis2dlpc_data_rate_set
+ 476 0044 A0B9     		cbnz	r0, .L91
+ 477 0046 0021     		movs	r1, #0
+ 478 0048 2846     		mov	r0, r5
+ 479 004a FFF7FEFF 		bl	iis2dlpc_full_scale_set
+ 480 004e 90B9     		cbnz	r0, .L92
+ 481 0050 0123     		movs	r3, #1
+ 482 0052 84F83030 		strb	r3, [r4, #48]
+ 483              	.L85:
+ 484 0056 38BD     		pop	{r3, r4, r5, pc}
+ 485              	.L87:
+ 486 0058 4FF0FF30 		mov	r0, #-1
+ 487 005c FBE7     		b	.L85
+ 488              	.L88:
+ 489 005e 4FF0FF30 		mov	r0, #-1
+ 490 0062 F8E7     		b	.L85
+ 491              	.L89:
+ 492 0064 4FF0FF30 		mov	r0, #-1
+ 493 0068 F5E7     		b	.L85
+ 494              	.L90:
+ 495 006a 4FF0FF30 		mov	r0, #-1
+ 496 006e F2E7     		b	.L85
+ 497              	.L91:
+ 498 0070 4FF0FF30 		mov	r0, #-1
+ 499 0074 EFE7     		b	.L85
+ 500              	.L92:
+ 501 0076 4FF0FF30 		mov	r0, #-1
+ 502 007a ECE7     		b	.L85
+ 503              	.L95:
+ 504              		.align	2
+ 505              	.L94:
+ 506 007c 0000C842 		.word	1120403456
+ 508              		.section	.text.IIS2DLPC_ACC_SetFullScale,"ax",%progbits
+ 509              		.align	1
+ 510              		.global	IIS2DLPC_ACC_SetFullScale
+ 511              		.syntax unified
+ 512              		.thumb
+ 513              		.thumb_func
+ 515              	IIS2DLPC_ACC_SetFullScale:
+ 516              		@ args = 0, pretend = 0, frame = 0
+ 517              		@ frame_needed = 0, uses_anonymous_args = 0
+ 518 0000 08B5     		push	{r3, lr}
+ 519 0002 0229     		cmp	r1, #2
+ 520 0004 05DD     		ble	.L99
+ 521 0006 0429     		cmp	r1, #4
+ 522 0008 09DD     		ble	.L100
+ 523 000a 0829     		cmp	r1, #8
+ 524 000c 09DC     		bgt	.L101
+ 525 000e 0221     		movs	r1, #2
+ 526 0010 00E0     		b	.L97
+ 527              	.L99:
+ 528 0012 0021     		movs	r1, #0
+ 529              	.L97:
+ 530 0014 2030     		adds	r0, r0, #32
+ 531 0016 FFF7FEFF 		bl	iis2dlpc_full_scale_set
+ 532 001a 20B9     		cbnz	r0, .L104
+ARM GAS  C:\Temp\ccoZnLU4.s 			page 10
+
+
+ 533              	.L96:
+ 534 001c 08BD     		pop	{r3, pc}
+ 535              	.L100:
+ 536 001e 0121     		movs	r1, #1
+ 537 0020 F8E7     		b	.L97
+ 538              	.L101:
+ 539 0022 0321     		movs	r1, #3
+ 540 0024 F6E7     		b	.L97
+ 541              	.L104:
+ 542 0026 4FF0FF30 		mov	r0, #-1
+ 543 002a F7E7     		b	.L96
+ 545              		.section	.text.IIS2DLPC_ReadID,"ax",%progbits
+ 546              		.align	1
+ 547              		.global	IIS2DLPC_ReadID
+ 548              		.syntax unified
+ 549              		.thumb
+ 550              		.thumb_func
+ 552              	IIS2DLPC_ReadID:
+ 553              		@ args = 0, pretend = 0, frame = 0
+ 554              		@ frame_needed = 0, uses_anonymous_args = 0
+ 555 0000 08B5     		push	{r3, lr}
+ 556 0002 2030     		adds	r0, r0, #32
+ 557 0004 FFF7FEFF 		bl	iis2dlpc_device_id_get
+ 558 0008 00B9     		cbnz	r0, .L109
+ 559              	.L105:
+ 560 000a 08BD     		pop	{r3, pc}
+ 561              	.L109:
+ 562 000c 4FF0FF30 		mov	r0, #-1
+ 563 0010 FBE7     		b	.L105
+ 565              		.section	.text.IIS2DLPC_ACC_GetFullScale,"ax",%progbits
+ 566              		.align	1
+ 567              		.global	IIS2DLPC_ACC_GetFullScale
+ 568              		.syntax unified
+ 569              		.thumb
+ 570              		.thumb_func
+ 572              	IIS2DLPC_ACC_GetFullScale:
+ 573              		@ args = 0, pretend = 0, frame = 8
+ 574              		@ frame_needed = 0, uses_anonymous_args = 0
+ 575 0000 10B5     		push	{r4, lr}
+ 576 0002 82B0     		sub	sp, sp, #8
+ 577 0004 0C46     		mov	r4, r1
+ 578 0006 0DF10701 		add	r1, sp, #7
+ 579 000a 2030     		adds	r0, r0, #32
+ 580 000c FFF7FEFF 		bl	iis2dlpc_full_scale_get
+ 581 0010 C0B9     		cbnz	r0, .L118
+ 582 0012 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 583 0016 032B     		cmp	r3, #3
+ 584 0018 10D8     		bhi	.L112
+ 585 001a DFE803F0 		tbb	[pc, r3]
+ 586              	.L114:
+ 587 001e 02       		.byte	(.L117-.L114)/2
+ 588 001f 06       		.byte	(.L116-.L114)/2
+ 589 0020 09       		.byte	(.L115-.L114)/2
+ 590 0021 0C       		.byte	(.L113-.L114)/2
+ 591              		.p2align 1
+ 592              	.L117:
+ 593 0022 0223     		movs	r3, #2
+ARM GAS  C:\Temp\ccoZnLU4.s 			page 11
+
+
+ 594 0024 2360     		str	r3, [r4]
+ 595              	.L110:
+ 596 0026 02B0     		add	sp, sp, #8
+ 597              		@ sp needed
+ 598 0028 10BD     		pop	{r4, pc}
+ 599              	.L116:
+ 600 002a 0423     		movs	r3, #4
+ 601 002c 2360     		str	r3, [r4]
+ 602 002e FAE7     		b	.L110
+ 603              	.L115:
+ 604 0030 0823     		movs	r3, #8
+ 605 0032 2360     		str	r3, [r4]
+ 606 0034 F7E7     		b	.L110
+ 607              	.L113:
+ 608 0036 1023     		movs	r3, #16
+ 609 0038 2360     		str	r3, [r4]
+ 610 003a F4E7     		b	.L110
+ 611              	.L112:
+ 612 003c 4FF0FF30 		mov	r0, #-1
+ 613 0040 2060     		str	r0, [r4]
+ 614 0042 F0E7     		b	.L110
+ 615              	.L118:
+ 616 0044 4FF0FF30 		mov	r0, #-1
+ 617 0048 EDE7     		b	.L110
+ 619              		.section	.text.IIS2DLPC_ACC_GetSensitivity,"ax",%progbits
+ 620              		.align	1
+ 621              		.global	IIS2DLPC_ACC_GetSensitivity
+ 622              		.syntax unified
+ 623              		.thumb
+ 624              		.thumb_func
+ 626              	IIS2DLPC_ACC_GetSensitivity:
+ 627              		@ args = 0, pretend = 0, frame = 8
+ 628              		@ frame_needed = 0, uses_anonymous_args = 0
+ 629 0000 30B5     		push	{r4, r5, lr}
+ 630 0002 83B0     		sub	sp, sp, #12
+ 631 0004 0D46     		mov	r5, r1
+ 632 0006 00F12004 		add	r4, r0, #32
+ 633 000a 0DF10701 		add	r1, sp, #7
+ 634 000e 2046     		mov	r0, r4
+ 635 0010 FFF7FEFF 		bl	iis2dlpc_full_scale_get
+ 636 0014 0028     		cmp	r0, #0
+ 637 0016 4CD1     		bne	.L136
+ 638 0018 0DF10601 		add	r1, sp, #6
+ 639 001c 2046     		mov	r0, r4
+ 640 001e FFF7FEFF 		bl	iis2dlpc_power_mode_get
+ 641 0022 0028     		cmp	r0, #0
+ 642 0024 48D1     		bne	.L137
+ 643 0026 9DF80620 		ldrb	r2, [sp, #6]	@ zero_extendqisi2
+ 644 002a 1B2A     		cmp	r2, #27
+ 645 002c 09D8     		bhi	.L122
+ 646 002e 0123     		movs	r3, #1
+ 647 0030 9340     		lsls	r3, r3, r2
+ 648 0032 03F01E32 		and	r2, r3, #505290270
+ 649 0036 22F01022 		bic	r2, r2, #268439552
+ 650 003a 0ABB     		cbnz	r2, .L123
+ 651 003c 13F0013F 		tst	r3, #16843009
+ 652 0040 05D1     		bne	.L139
+ARM GAS  C:\Temp\ccoZnLU4.s 			page 12
+
+
+ 653              	.L122:
+ 654 0042 1F4B     		ldr	r3, .L140
+ 655 0044 2B60     		str	r3, [r5]	@ float
+ 656 0046 4FF0FF30 		mov	r0, #-1
+ 657              	.L120:
+ 658 004a 03B0     		add	sp, sp, #12
+ 659              		@ sp needed
+ 660 004c 30BD     		pop	{r4, r5, pc}
+ 661              	.L139:
+ 662 004e 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 663 0052 032B     		cmp	r3, #3
+ 664 0054 0FD8     		bhi	.L124
+ 665 0056 DFE803F0 		tbb	[pc, r3]
+ 666              	.L126:
+ 667 005a 02       		.byte	(.L129-.L126)/2
+ 668 005b 05       		.byte	(.L128-.L126)/2
+ 669 005c 08       		.byte	(.L127-.L126)/2
+ 670 005d 0B       		.byte	(.L125-.L126)/2
+ 671              		.p2align 1
+ 672              	.L129:
+ 673 005e 194B     		ldr	r3, .L140+4
+ 674 0060 2B60     		str	r3, [r5]	@ float
+ 675 0062 F2E7     		b	.L120
+ 676              	.L128:
+ 677 0064 184B     		ldr	r3, .L140+8
+ 678 0066 2B60     		str	r3, [r5]	@ float
+ 679 0068 EFE7     		b	.L120
+ 680              	.L127:
+ 681 006a 184B     		ldr	r3, .L140+12
+ 682 006c 2B60     		str	r3, [r5]	@ float
+ 683 006e ECE7     		b	.L120
+ 684              	.L125:
+ 685 0070 174B     		ldr	r3, .L140+16
+ 686 0072 2B60     		str	r3, [r5]	@ float
+ 687 0074 E9E7     		b	.L120
+ 688              	.L124:
+ 689 0076 124B     		ldr	r3, .L140
+ 690 0078 2B60     		str	r3, [r5]	@ float
+ 691 007a 4FF0FF30 		mov	r0, #-1
+ 692 007e E4E7     		b	.L120
+ 693              	.L123:
+ 694 0080 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 695 0084 032B     		cmp	r3, #3
+ 696 0086 0FD8     		bhi	.L130
+ 697 0088 DFE803F0 		tbb	[pc, r3]
+ 698              	.L132:
+ 699 008c 02       		.byte	(.L135-.L132)/2
+ 700 008d 05       		.byte	(.L134-.L132)/2
+ 701 008e 08       		.byte	(.L133-.L132)/2
+ 702 008f 0B       		.byte	(.L131-.L132)/2
+ 703              		.p2align 1
+ 704              	.L135:
+ 705 0090 104B     		ldr	r3, .L140+20
+ 706 0092 2B60     		str	r3, [r5]	@ float
+ 707 0094 D9E7     		b	.L120
+ 708              	.L134:
+ 709 0096 104B     		ldr	r3, .L140+24
+ARM GAS  C:\Temp\ccoZnLU4.s 			page 13
+
+
+ 710 0098 2B60     		str	r3, [r5]	@ float
+ 711 009a D6E7     		b	.L120
+ 712              	.L133:
+ 713 009c 094B     		ldr	r3, .L140+4
+ 714 009e 2B60     		str	r3, [r5]	@ float
+ 715 00a0 D3E7     		b	.L120
+ 716              	.L131:
+ 717 00a2 094B     		ldr	r3, .L140+8
+ 718 00a4 2B60     		str	r3, [r5]	@ float
+ 719 00a6 D0E7     		b	.L120
+ 720              	.L130:
+ 721 00a8 054B     		ldr	r3, .L140
+ 722 00aa 2B60     		str	r3, [r5]	@ float
+ 723 00ac 4FF0FF30 		mov	r0, #-1
+ 724 00b0 CBE7     		b	.L120
+ 725              	.L136:
+ 726 00b2 4FF0FF30 		mov	r0, #-1
+ 727 00b6 C8E7     		b	.L120
+ 728              	.L137:
+ 729 00b8 4FF0FF30 		mov	r0, #-1
+ 730 00bc C5E7     		b	.L120
+ 731              	.L141:
+ 732 00be 00BF     		.align	2
+ 733              	.L140:
+ 734 00c0 000080BF 		.word	-1082130432
+ 735 00c4 23DB793F 		.word	1064950563
+ 736 00c8 23DBF93F 		.word	1073339171
+ 737 00cc 23DB7940 		.word	1081727779
+ 738 00d0 23DBF940 		.word	1090116387
+ 739 00d4 23DB793E 		.word	1048173347
+ 740 00d8 23DBF93E 		.word	1056561955
+ 742              		.section	.text.IIS2DLPC_ACC_GetOutputDataRate,"ax",%progbits
+ 743              		.align	1
+ 744              		.global	IIS2DLPC_ACC_GetOutputDataRate
+ 745              		.syntax unified
+ 746              		.thumb
+ 747              		.thumb_func
+ 749              	IIS2DLPC_ACC_GetOutputDataRate:
+ 750              		@ args = 0, pretend = 0, frame = 8
+ 751              		@ frame_needed = 0, uses_anonymous_args = 0
+ 752 0000 30B5     		push	{r4, r5, lr}
+ 753 0002 83B0     		sub	sp, sp, #12
+ 754 0004 0D46     		mov	r5, r1
+ 755 0006 00F12004 		add	r4, r0, #32
+ 756 000a 0DF10701 		add	r1, sp, #7
+ 757 000e 2046     		mov	r0, r4
+ 758 0010 FFF7FEFF 		bl	iis2dlpc_data_rate_get
+ 759 0014 0028     		cmp	r0, #0
+ 760 0016 40F09580 		bne	.L164
+ 761 001a 0DF10601 		add	r1, sp, #6
+ 762 001e 2046     		mov	r0, r4
+ 763 0020 FFF7FEFF 		bl	iis2dlpc_power_mode_get
+ 764 0024 0028     		cmp	r0, #0
+ 765 0026 40F09080 		bne	.L165
+ 766 002a 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 767 002e 222B     		cmp	r3, #34
+ 768 0030 00F28380 		bhi	.L144
+ARM GAS  C:\Temp\ccoZnLU4.s 			page 14
+
+
+ 769 0034 DFE803F0 		tbb	[pc, r3]
+ 770              	.L146:
+ 771 0038 12       		.byte	(.L145-.L146)/2
+ 772 0039 16       		.byte	(.L155-.L146)/2
+ 773 003a 2D       		.byte	(.L154-.L146)/2
+ 774 003b 30       		.byte	(.L153-.L146)/2
+ 775 003c 33       		.byte	(.L152-.L146)/2
+ 776 003d 36       		.byte	(.L151-.L146)/2
+ 777 003e 39       		.byte	(.L150-.L146)/2
+ 778 003f 3C       		.byte	(.L149-.L146)/2
+ 779 0040 53       		.byte	(.L148-.L146)/2
+ 780 0041 6A       		.byte	(.L147-.L146)/2
+ 781 0042 81       		.byte	(.L144-.L146)/2
+ 782 0043 81       		.byte	(.L144-.L146)/2
+ 783 0044 81       		.byte	(.L144-.L146)/2
+ 784 0045 81       		.byte	(.L144-.L146)/2
+ 785 0046 81       		.byte	(.L144-.L146)/2
+ 786 0047 81       		.byte	(.L144-.L146)/2
+ 787 0048 81       		.byte	(.L144-.L146)/2
+ 788 0049 81       		.byte	(.L144-.L146)/2
+ 789 004a 12       		.byte	(.L145-.L146)/2
+ 790 004b 81       		.byte	(.L144-.L146)/2
+ 791 004c 81       		.byte	(.L144-.L146)/2
+ 792 004d 81       		.byte	(.L144-.L146)/2
+ 793 004e 81       		.byte	(.L144-.L146)/2
+ 794 004f 81       		.byte	(.L144-.L146)/2
+ 795 0050 81       		.byte	(.L144-.L146)/2
+ 796 0051 81       		.byte	(.L144-.L146)/2
+ 797 0052 81       		.byte	(.L144-.L146)/2
+ 798 0053 81       		.byte	(.L144-.L146)/2
+ 799 0054 81       		.byte	(.L144-.L146)/2
+ 800 0055 81       		.byte	(.L144-.L146)/2
+ 801 0056 81       		.byte	(.L144-.L146)/2
+ 802 0057 81       		.byte	(.L144-.L146)/2
+ 803 0058 81       		.byte	(.L144-.L146)/2
+ 804 0059 81       		.byte	(.L144-.L146)/2
+ 805 005a 12       		.byte	(.L145-.L146)/2
+ 806 005b 00       		.p2align 1
+ 807              	.L145:
+ 808 005c 0023     		movs	r3, #0
+ 809 005e 2B60     		str	r3, [r5]	@ float
+ 810              	.L142:
+ 811 0060 03B0     		add	sp, sp, #12
+ 812              		@ sp needed
+ 813 0062 30BD     		pop	{r4, r5, pc}
+ 814              	.L155:
+ 815 0064 9DF80620 		ldrb	r2, [sp, #6]	@ zero_extendqisi2
+ 816 0068 1B2A     		cmp	r2, #27
+ 817 006a 0AD8     		bhi	.L156
+ 818 006c 0123     		movs	r3, #1
+ 819 006e 9340     		lsls	r3, r3, r2
+ 820 0070 13F00F3F 		tst	r3, #252645135
+ 821 0074 02D0     		beq	.L167
+ 822 0076 364B     		ldr	r3, .L175
+ 823 0078 2B60     		str	r3, [r5]	@ float
+ 824 007a F1E7     		b	.L142
+ 825              	.L167:
+ARM GAS  C:\Temp\ccoZnLU4.s 			page 15
+
+
+ 826 007c 13F0101F 		tst	r3, #1048592
+ 827 0080 04D1     		bne	.L168
+ 828              	.L156:
+ 829 0082 344B     		ldr	r3, .L175+4
+ 830 0084 2B60     		str	r3, [r5]	@ float
+ 831 0086 4FF0FF30 		mov	r0, #-1
+ 832 008a E9E7     		b	.L142
+ 833              	.L168:
+ 834 008c 324B     		ldr	r3, .L175+8
+ 835 008e 2B60     		str	r3, [r5]	@ float
+ 836 0090 E6E7     		b	.L142
+ 837              	.L154:
+ 838 0092 314B     		ldr	r3, .L175+8
+ 839 0094 2B60     		str	r3, [r5]	@ float
+ 840 0096 E3E7     		b	.L142
+ 841              	.L153:
+ 842 0098 304B     		ldr	r3, .L175+12
+ 843 009a 2B60     		str	r3, [r5]	@ float
+ 844 009c E0E7     		b	.L142
+ 845              	.L152:
+ 846 009e 304B     		ldr	r3, .L175+16
+ 847 00a0 2B60     		str	r3, [r5]	@ float
+ 848 00a2 DDE7     		b	.L142
+ 849              	.L151:
+ 850 00a4 2F4B     		ldr	r3, .L175+20
+ 851 00a6 2B60     		str	r3, [r5]	@ float
+ 852 00a8 DAE7     		b	.L142
+ 853              	.L150:
+ 854 00aa 2F4B     		ldr	r3, .L175+24
+ 855 00ac 2B60     		str	r3, [r5]	@ float
+ 856 00ae D7E7     		b	.L142
+ 857              	.L149:
+ 858 00b0 9DF80620 		ldrb	r2, [sp, #6]	@ zero_extendqisi2
+ 859 00b4 1B2A     		cmp	r2, #27
+ 860 00b6 0AD8     		bhi	.L158
+ 861 00b8 0123     		movs	r3, #1
+ 862 00ba 9340     		lsls	r3, r3, r2
+ 863 00bc 13F00F3F 		tst	r3, #252645135
+ 864 00c0 02D0     		beq	.L169
+ 865 00c2 294B     		ldr	r3, .L175+24
+ 866 00c4 2B60     		str	r3, [r5]	@ float
+ 867 00c6 CBE7     		b	.L142
+ 868              	.L169:
+ 869 00c8 13F0101F 		tst	r3, #1048592
+ 870 00cc 04D1     		bne	.L170
+ 871              	.L158:
+ 872 00ce 214B     		ldr	r3, .L175+4
+ 873 00d0 2B60     		str	r3, [r5]	@ float
+ 874 00d2 4FF0FF30 		mov	r0, #-1
+ 875 00d6 C3E7     		b	.L142
+ 876              	.L170:
+ 877 00d8 244B     		ldr	r3, .L175+28
+ 878 00da 2B60     		str	r3, [r5]	@ float
+ 879 00dc C0E7     		b	.L142
+ 880              	.L148:
+ 881 00de 9DF80620 		ldrb	r2, [sp, #6]	@ zero_extendqisi2
+ 882 00e2 1B2A     		cmp	r2, #27
+ARM GAS  C:\Temp\ccoZnLU4.s 			page 16
+
+
+ 883 00e4 0AD8     		bhi	.L160
+ 884 00e6 0123     		movs	r3, #1
+ 885 00e8 9340     		lsls	r3, r3, r2
+ 886 00ea 13F00F3F 		tst	r3, #252645135
+ 887 00ee 02D0     		beq	.L171
+ 888 00f0 1D4B     		ldr	r3, .L175+24
+ 889 00f2 2B60     		str	r3, [r5]	@ float
+ 890 00f4 B4E7     		b	.L142
+ 891              	.L171:
+ 892 00f6 13F0101F 		tst	r3, #1048592
+ 893 00fa 04D1     		bne	.L172
+ 894              	.L160:
+ 895 00fc 154B     		ldr	r3, .L175+4
+ 896 00fe 2B60     		str	r3, [r5]	@ float
+ 897 0100 4FF0FF30 		mov	r0, #-1
+ 898 0104 ACE7     		b	.L142
+ 899              	.L172:
+ 900 0106 1A4B     		ldr	r3, .L175+32
+ 901 0108 2B60     		str	r3, [r5]	@ float
+ 902 010a A9E7     		b	.L142
+ 903              	.L147:
+ 904 010c 9DF80620 		ldrb	r2, [sp, #6]	@ zero_extendqisi2
+ 905 0110 1B2A     		cmp	r2, #27
+ 906 0112 0AD8     		bhi	.L162
+ 907 0114 0123     		movs	r3, #1
+ 908 0116 9340     		lsls	r3, r3, r2
+ 909 0118 13F00F3F 		tst	r3, #252645135
+ 910 011c 02D0     		beq	.L173
+ 911 011e 124B     		ldr	r3, .L175+24
+ 912 0120 2B60     		str	r3, [r5]	@ float
+ 913 0122 9DE7     		b	.L142
+ 914              	.L173:
+ 915 0124 13F0101F 		tst	r3, #1048592
+ 916 0128 04D1     		bne	.L174
+ 917              	.L162:
+ 918 012a 0A4B     		ldr	r3, .L175+4
+ 919 012c 2B60     		str	r3, [r5]	@ float
+ 920 012e 4FF0FF30 		mov	r0, #-1
+ 921 0132 95E7     		b	.L142
+ 922              	.L174:
+ 923 0134 0F4B     		ldr	r3, .L175+36
+ 924 0136 2B60     		str	r3, [r5]	@ float
+ 925 0138 92E7     		b	.L142
+ 926              	.L144:
+ 927 013a 064B     		ldr	r3, .L175+4
+ 928 013c 2B60     		str	r3, [r5]	@ float
+ 929 013e 4FF0FF30 		mov	r0, #-1
+ 930 0142 8DE7     		b	.L142
+ 931              	.L164:
+ 932 0144 4FF0FF30 		mov	r0, #-1
+ 933 0148 8AE7     		b	.L142
+ 934              	.L165:
+ 935 014a 4FF0FF30 		mov	r0, #-1
+ 936 014e 87E7     		b	.L142
+ 937              	.L176:
+ 938              		.align	2
+ 939              	.L175:
+ARM GAS  C:\Temp\ccoZnLU4.s 			page 17
+
+
+ 940 0150 CDCCCC3F 		.word	1070386381
+ 941 0154 000080BF 		.word	-1082130432
+ 942 0158 00004841 		.word	1095237632
+ 943 015c 0000C841 		.word	1103626240
+ 944 0160 00004842 		.word	1112014848
+ 945 0164 0000C842 		.word	1120403456
+ 946 0168 00004843 		.word	1128792064
+ 947 016c 0000C843 		.word	1137180672
+ 948 0170 00004844 		.word	1145569280
+ 949 0174 0000C844 		.word	1153957888
+ 951              		.section	.text.IIS2DLPC_ACC_GetAxesRaw,"ax",%progbits
+ 952              		.align	1
+ 953              		.global	IIS2DLPC_ACC_GetAxesRaw
+ 954              		.syntax unified
+ 955              		.thumb
+ 956              		.thumb_func
+ 958              	IIS2DLPC_ACC_GetAxesRaw:
+ 959              		@ args = 0, pretend = 0, frame = 16
+ 960              		@ frame_needed = 0, uses_anonymous_args = 0
+ 961 0000 30B5     		push	{r4, r5, lr}
+ 962 0002 85B0     		sub	sp, sp, #20
+ 963 0004 0D46     		mov	r5, r1
+ 964 0006 00F12004 		add	r4, r0, #32
+ 965 000a 0DF10701 		add	r1, sp, #7
+ 966 000e 2046     		mov	r0, r4
+ 967 0010 FFF7FEFF 		bl	iis2dlpc_power_mode_get
+ 968 0014 0028     		cmp	r0, #0
+ 969 0016 49D1     		bne	.L186
+ 970 0018 02A9     		add	r1, sp, #8
+ 971 001a 2046     		mov	r0, r4
+ 972 001c FFF7FEFF 		bl	iis2dlpc_acceleration_raw_get
+ 973 0020 0028     		cmp	r0, #0
+ 974 0022 46D1     		bne	.L187
+ 975 0024 9DF80720 		ldrb	r2, [sp, #7]	@ zero_extendqisi2
+ 976 0028 1B2A     		cmp	r2, #27
+ 977 002a 45D8     		bhi	.L188
+ 978 002c 0123     		movs	r3, #1
+ 979 002e 9340     		lsls	r3, r3, r2
+ 980 0030 03F01E32 		and	r2, r3, #505290270
+ 981 0034 22F01022 		bic	r2, r2, #268439552
+ 982 0038 FAB9     		cbnz	r2, .L179
+ 983 003a 13F0013F 		tst	r3, #16843009
+ 984 003e 02D1     		bne	.L191
+ 985 0040 4FF0FF30 		mov	r0, #-1
+ 986 0044 11E0     		b	.L177
+ 987              	.L191:
+ 988 0046 BDF90830 		ldrsh	r3, [sp, #8]
+ 989 004a 002B     		cmp	r3, #0
+ 990 004c 0FDB     		blt	.L192
+ 991              	.L180:
+ 992 004e 1B11     		asrs	r3, r3, #4
+ 993 0050 2B80     		strh	r3, [r5]	@ movhi
+ 994 0052 BDF90A30 		ldrsh	r3, [sp, #10]
+ 995 0056 002B     		cmp	r3, #0
+ 996 0058 0BDB     		blt	.L193
+ 997              	.L181:
+ 998 005a 1B11     		asrs	r3, r3, #4
+ARM GAS  C:\Temp\ccoZnLU4.s 			page 18
+
+
+ 999 005c 6B80     		strh	r3, [r5, #2]	@ movhi
+ 1000 005e BDF90C30 		ldrsh	r3, [sp, #12]
+ 1001 0062 002B     		cmp	r3, #0
+ 1002 0064 07DB     		blt	.L194
+ 1003              	.L182:
+ 1004 0066 1B11     		asrs	r3, r3, #4
+ 1005 0068 AB80     		strh	r3, [r5, #4]	@ movhi
+ 1006              	.L177:
+ 1007 006a 05B0     		add	sp, sp, #20
+ 1008              		@ sp needed
+ 1009 006c 30BD     		pop	{r4, r5, pc}
+ 1010              	.L192:
+ 1011 006e 0F33     		adds	r3, r3, #15
+ 1012 0070 EDE7     		b	.L180
+ 1013              	.L193:
+ 1014 0072 0F33     		adds	r3, r3, #15
+ 1015 0074 F1E7     		b	.L181
+ 1016              	.L194:
+ 1017 0076 0F33     		adds	r3, r3, #15
+ 1018 0078 F5E7     		b	.L182
+ 1019              	.L179:
+ 1020 007a BDF90830 		ldrsh	r3, [sp, #8]
+ 1021 007e 002B     		cmp	r3, #0
+ 1022 0080 0EDB     		blt	.L195
+ 1023              	.L183:
+ 1024 0082 9B10     		asrs	r3, r3, #2
+ 1025 0084 2B80     		strh	r3, [r5]	@ movhi
+ 1026 0086 BDF90A30 		ldrsh	r3, [sp, #10]
+ 1027 008a 002B     		cmp	r3, #0
+ 1028 008c 0ADB     		blt	.L196
+ 1029              	.L184:
+ 1030 008e 9B10     		asrs	r3, r3, #2
+ 1031 0090 6B80     		strh	r3, [r5, #2]	@ movhi
+ 1032 0092 BDF90C30 		ldrsh	r3, [sp, #12]
+ 1033 0096 002B     		cmp	r3, #0
+ 1034 0098 06DB     		blt	.L197
+ 1035              	.L185:
+ 1036 009a 9B10     		asrs	r3, r3, #2
+ 1037 009c AB80     		strh	r3, [r5, #4]	@ movhi
+ 1038 009e E4E7     		b	.L177
+ 1039              	.L195:
+ 1040 00a0 0333     		adds	r3, r3, #3
+ 1041 00a2 EEE7     		b	.L183
+ 1042              	.L196:
+ 1043 00a4 0333     		adds	r3, r3, #3
+ 1044 00a6 F2E7     		b	.L184
+ 1045              	.L197:
+ 1046 00a8 0333     		adds	r3, r3, #3
+ 1047 00aa F6E7     		b	.L185
+ 1048              	.L186:
+ 1049 00ac 4FF0FF30 		mov	r0, #-1
+ 1050 00b0 DBE7     		b	.L177
+ 1051              	.L187:
+ 1052 00b2 4FF0FF30 		mov	r0, #-1
+ 1053 00b6 D8E7     		b	.L177
+ 1054              	.L188:
+ 1055 00b8 4FF0FF30 		mov	r0, #-1
+ARM GAS  C:\Temp\ccoZnLU4.s 			page 19
+
+
+ 1056 00bc D5E7     		b	.L177
+ 1058              		.section	.text.IIS2DLPC_ACC_GetAxes,"ax",%progbits
+ 1059              		.align	1
+ 1060              		.global	IIS2DLPC_ACC_GetAxes
+ 1061              		.syntax unified
+ 1062              		.thumb
+ 1063              		.thumb_func
+ 1065              	IIS2DLPC_ACC_GetAxes:
+ 1066              		@ args = 0, pretend = 0, frame = 16
+ 1067              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1068 0000 30B5     		push	{r4, r5, lr}
+ 1069 0002 85B0     		sub	sp, sp, #20
+ 1070 0004 0546     		mov	r5, r0
+ 1071 0006 0C46     		mov	r4, r1
+ 1072 0008 0023     		movs	r3, #0
+ 1073 000a 0193     		str	r3, [sp, #4]	@ float
+ 1074 000c 02A9     		add	r1, sp, #8
+ 1075 000e FFF7FEFF 		bl	IIS2DLPC_ACC_GetAxesRaw
+ 1076 0012 60BB     		cbnz	r0, .L200
+ 1077 0014 01A9     		add	r1, sp, #4
+ 1078 0016 2846     		mov	r0, r5
+ 1079 0018 FFF7FEFF 		bl	IIS2DLPC_ACC_GetSensitivity
+ 1080 001c 50BB     		cbnz	r0, .L201
+ 1081 001e BDF90830 		ldrsh	r3, [sp, #8]
+ 1082 0022 07EE103A 		vmov	s14, r3	@ int
+ 1083 0026 B8EEC77A 		vcvt.f32.s32	s14, s14
+ 1084 002a DDED017A 		vldr.32	s15, [sp, #4]
+ 1085 002e 27EE277A 		vmul.f32	s14, s14, s15
+ 1086 0032 BDEEC77A 		vcvt.s32.f32	s14, s14
+ 1087 0036 84ED007A 		vstr.32	s14, [r4]	@ int
+ 1088 003a BDF90A30 		ldrsh	r3, [sp, #10]
+ 1089 003e 07EE103A 		vmov	s14, r3	@ int
+ 1090 0042 B8EEC77A 		vcvt.f32.s32	s14, s14
+ 1091 0046 27EE277A 		vmul.f32	s14, s14, s15
+ 1092 004a BDEEC77A 		vcvt.s32.f32	s14, s14
+ 1093 004e 84ED017A 		vstr.32	s14, [r4, #4]	@ int
+ 1094 0052 BDF90C30 		ldrsh	r3, [sp, #12]
+ 1095 0056 07EE103A 		vmov	s14, r3	@ int
+ 1096 005a B8EEC77A 		vcvt.f32.s32	s14, s14
+ 1097 005e 67EE877A 		vmul.f32	s15, s15, s14
+ 1098 0062 FDEEE77A 		vcvt.s32.f32	s15, s15
+ 1099 0066 C4ED027A 		vstr.32	s15, [r4, #8]	@ int
+ 1100              	.L198:
+ 1101 006a 05B0     		add	sp, sp, #20
+ 1102              		@ sp needed
+ 1103 006c 30BD     		pop	{r4, r5, pc}
+ 1104              	.L200:
+ 1105 006e 4FF0FF30 		mov	r0, #-1
+ 1106 0072 FAE7     		b	.L198
+ 1107              	.L201:
+ 1108 0074 4FF0FF30 		mov	r0, #-1
+ 1109 0078 F7E7     		b	.L198
+ 1111              		.section	.text.IIS2DLPC_ACC_SetOutputDataRate_With_Mode,"ax",%progbits
+ 1112              		.align	1
+ 1113              		.global	IIS2DLPC_ACC_SetOutputDataRate_With_Mode
+ 1114              		.syntax unified
+ 1115              		.thumb
+ARM GAS  C:\Temp\ccoZnLU4.s 			page 20
+
+
+ 1116              		.thumb_func
+ 1118              	IIS2DLPC_ACC_SetOutputDataRate_With_Mode:
+ 1119              		@ args = 0, pretend = 0, frame = 0
+ 1120              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1121 0000 08B5     		push	{r3, lr}
+ 1122 0002 90F83130 		ldrb	r3, [r0, #49]	@ zero_extendqisi2
+ 1123 0006 012B     		cmp	r3, #1
+ 1124 0008 02D0     		beq	.L207
+ 1125 000a FFF7FEFF 		bl	IIS2DLPC_ACC_SetOutputDataRate_When_Disabled
+ 1126              	.L203:
+ 1127 000e 08BD     		pop	{r3, pc}
+ 1128              	.L207:
+ 1129 0010 FFF7FEFF 		bl	IIS2DLPC_ACC_SetOutputDataRate_When_Enabled
+ 1130 0014 FBE7     		b	.L203
+ 1132              		.section	.text.IIS2DLPC_ACC_SetOutputDataRate,"ax",%progbits
+ 1133              		.align	1
+ 1134              		.global	IIS2DLPC_ACC_SetOutputDataRate
+ 1135              		.syntax unified
+ 1136              		.thumb
+ 1137              		.thumb_func
+ 1139              	IIS2DLPC_ACC_SetOutputDataRate:
+ 1140              		@ args = 0, pretend = 0, frame = 0
+ 1141              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1142 0000 08B5     		push	{r3, lr}
+ 1143 0002 0022     		movs	r2, #0
+ 1144 0004 1146     		mov	r1, r2
+ 1145 0006 FFF7FEFF 		bl	IIS2DLPC_ACC_SetOutputDataRate_With_Mode
+ 1146 000a 08BD     		pop	{r3, pc}
+ 1148              		.section	.text.IIS2DLPC_Read_Reg,"ax",%progbits
+ 1149              		.align	1
+ 1150              		.global	IIS2DLPC_Read_Reg
+ 1151              		.syntax unified
+ 1152              		.thumb
+ 1153              		.thumb_func
+ 1155              	IIS2DLPC_Read_Reg:
+ 1156              		@ args = 0, pretend = 0, frame = 0
+ 1157              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1158 0000 08B5     		push	{r3, lr}
+ 1159 0002 0123     		movs	r3, #1
+ 1160 0004 2030     		adds	r0, r0, #32
+ 1161 0006 FFF7FEFF 		bl	iis2dlpc_read_reg
+ 1162 000a 00B9     		cbnz	r0, .L214
+ 1163              	.L210:
+ 1164 000c 08BD     		pop	{r3, pc}
+ 1165              	.L214:
+ 1166 000e 4FF0FF30 		mov	r0, #-1
+ 1167 0012 FBE7     		b	.L210
+ 1169              		.section	.text.IIS2DLPC_Write_Reg,"ax",%progbits
+ 1170              		.align	1
+ 1171              		.global	IIS2DLPC_Write_Reg
+ 1172              		.syntax unified
+ 1173              		.thumb
+ 1174              		.thumb_func
+ 1176              	IIS2DLPC_Write_Reg:
+ 1177              		@ args = 0, pretend = 0, frame = 8
+ 1178              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1179 0000 00B5     		push	{lr}
+ARM GAS  C:\Temp\ccoZnLU4.s 			page 21
+
+
+ 1180 0002 83B0     		sub	sp, sp, #12
+ 1181 0004 8DF80720 		strb	r2, [sp, #7]
+ 1182 0008 0123     		movs	r3, #1
+ 1183 000a 0DF10702 		add	r2, sp, #7
+ 1184 000e 2030     		adds	r0, r0, #32
+ 1185 0010 FFF7FEFF 		bl	iis2dlpc_write_reg
+ 1186 0014 10B9     		cbnz	r0, .L219
+ 1187              	.L215:
+ 1188 0016 03B0     		add	sp, sp, #12
+ 1189              		@ sp needed
+ 1190 0018 5DF804FB 		ldr	pc, [sp], #4
+ 1191              	.L219:
+ 1192 001c 4FF0FF30 		mov	r0, #-1
+ 1193 0020 F9E7     		b	.L215
+ 1195              		.section	.text.IIS2DLPC_RegisterBusIO,"ax",%progbits
+ 1196              		.align	1
+ 1197              		.global	IIS2DLPC_RegisterBusIO
+ 1198              		.syntax unified
+ 1199              		.thumb
+ 1200              		.thumb_func
+ 1202              	IIS2DLPC_RegisterBusIO:
+ 1203              		@ args = 0, pretend = 0, frame = 0
+ 1204              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1205 0000 0028     		cmp	r0, #0
+ 1206 0002 2BD0     		beq	.L222
+ 1207 0004 10B5     		push	{r4, lr}
+ 1208 0006 0446     		mov	r4, r0
+ 1209 0008 0B68     		ldr	r3, [r1]
+ 1210 000a 0360     		str	r3, [r0]
+ 1211 000c 4A68     		ldr	r2, [r1, #4]
+ 1212 000e 4260     		str	r2, [r0, #4]
+ 1213 0010 8A68     		ldr	r2, [r1, #8]
+ 1214 0012 8260     		str	r2, [r0, #8]
+ 1215 0014 0A7B     		ldrb	r2, [r1, #12]	@ zero_extendqisi2
+ 1216 0016 0273     		strb	r2, [r0, #12]
+ 1217 0018 0A69     		ldr	r2, [r1, #16]
+ 1218 001a 0261     		str	r2, [r0, #16]
+ 1219 001c 4A69     		ldr	r2, [r1, #20]
+ 1220 001e 4261     		str	r2, [r0, #20]
+ 1221 0020 8A69     		ldr	r2, [r1, #24]
+ 1222 0022 8261     		str	r2, [r0, #24]
+ 1223 0024 124A     		ldr	r2, .L231
+ 1224 0026 4262     		str	r2, [r0, #36]
+ 1225 0028 124A     		ldr	r2, .L231+4
+ 1226 002a 0262     		str	r2, [r0, #32]
+ 1227 002c CA69     		ldr	r2, [r1, #28]
+ 1228 002e 8262     		str	r2, [r0, #40]
+ 1229 0030 C062     		str	r0, [r0, #44]
+ 1230 0032 B3B1     		cbz	r3, .L223
+ 1231 0034 9847     		blx	r3
+ 1232 0036 B8B9     		cbnz	r0, .L224
+ 1233 0038 A368     		ldr	r3, [r4, #8]
+ 1234 003a 022B     		cmp	r3, #2
+ 1235 003c 00D0     		beq	.L230
+ 1236              	.L220:
+ 1237 003e 10BD     		pop	{r4, pc}
+ 1238              	.L230:
+ARM GAS  C:\Temp\ccoZnLU4.s 			page 22
+
+
+ 1239 0040 94F83030 		ldrb	r3, [r4, #48]	@ zero_extendqisi2
+ 1240 0044 002B     		cmp	r3, #0
+ 1241 0046 FAD1     		bne	.L220
+ 1242 0048 0522     		movs	r2, #5
+ 1243 004a 2121     		movs	r1, #33
+ 1244 004c 2046     		mov	r0, r4
+ 1245 004e FFF7FEFF 		bl	IIS2DLPC_Write_Reg
+ 1246 0052 0028     		cmp	r0, #0
+ 1247 0054 F3D0     		beq	.L220
+ 1248 0056 4FF0FF30 		mov	r0, #-1
+ 1249 005a F0E7     		b	.L220
+ 1250              	.L222:
+ 1251 005c 4FF0FF30 		mov	r0, #-1
+ 1252 0060 7047     		bx	lr
+ 1253              	.L223:
+ 1254 0062 4FF0FF30 		mov	r0, #-1
+ 1255 0066 EAE7     		b	.L220
+ 1256              	.L224:
+ 1257 0068 4FF0FF30 		mov	r0, #-1
+ 1258 006c E7E7     		b	.L220
+ 1259              	.L232:
+ 1260 006e 00BF     		.align	2
+ 1261              	.L231:
+ 1262 0070 00000000 		.word	ReadRegWrap
+ 1263 0074 00000000 		.word	WriteRegWrap
+ 1265              		.section	.text.IIS2DLPC_ACC_Get_DRDY_Status,"ax",%progbits
+ 1266              		.align	1
+ 1267              		.global	IIS2DLPC_ACC_Get_DRDY_Status
+ 1268              		.syntax unified
+ 1269              		.thumb
+ 1270              		.thumb_func
+ 1272              	IIS2DLPC_ACC_Get_DRDY_Status:
+ 1273              		@ args = 0, pretend = 0, frame = 0
+ 1274              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1275 0000 08B5     		push	{r3, lr}
+ 1276 0002 2030     		adds	r0, r0, #32
+ 1277 0004 FFF7FEFF 		bl	iis2dlpc_flag_data_ready_get
+ 1278 0008 00B9     		cbnz	r0, .L237
+ 1279              	.L233:
+ 1280 000a 08BD     		pop	{r3, pc}
+ 1281              	.L237:
+ 1282 000c 4FF0FF30 		mov	r0, #-1
+ 1283 0010 FBE7     		b	.L233
+ 1285              		.global	IIS2DLPC_ACC_Driver
+ 1286              		.section	.data.IIS2DLPC_ACC_Driver,"aw"
+ 1287              		.align	2
+ 1290              	IIS2DLPC_ACC_Driver:
+ 1291 0000 00000000 		.word	IIS2DLPC_ACC_Enable
+ 1292 0004 00000000 		.word	IIS2DLPC_ACC_Disable
+ 1293 0008 00000000 		.word	IIS2DLPC_ACC_GetSensitivity
+ 1294 000c 00000000 		.word	IIS2DLPC_ACC_GetOutputDataRate
+ 1295 0010 00000000 		.word	IIS2DLPC_ACC_SetOutputDataRate
+ 1296 0014 00000000 		.word	IIS2DLPC_ACC_GetFullScale
+ 1297 0018 00000000 		.word	IIS2DLPC_ACC_SetFullScale
+ 1298 001c 00000000 		.word	IIS2DLPC_ACC_GetAxes
+ 1299 0020 00000000 		.word	IIS2DLPC_ACC_GetAxesRaw
+ 1300              		.global	IIS2DLPC_COMMON_Driver
+ARM GAS  C:\Temp\ccoZnLU4.s 			page 23
+
+
+ 1301              		.section	.data.IIS2DLPC_COMMON_Driver,"aw"
+ 1302              		.align	2
+ 1305              	IIS2DLPC_COMMON_Driver:
+ 1306 0000 00000000 		.word	IIS2DLPC_Init
+ 1307 0004 00000000 		.word	IIS2DLPC_DeInit
+ 1308 0008 00000000 		.word	IIS2DLPC_ReadID
+ 1309 000c 00000000 		.word	IIS2DLPC_GetCapabilities
+ 1310              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccoZnLU4.s 			page 24
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 iis2dlpc.c
+  C:\Temp\ccoZnLU4.s:18     .text.IIS2DLPC_GetCapabilities:00000000 $t
+  C:\Temp\ccoZnLU4.s:24     .text.IIS2DLPC_GetCapabilities:00000000 IIS2DLPC_GetCapabilities
+  C:\Temp\ccoZnLU4.s:47     .text.IIS2DLPC_GetCapabilities:00000020 $d
+  C:\Temp\ccoZnLU4.s:50     .text.IIS2DLPC_ACC_SetOutputDataRate_When_Disabled:00000000 $t
+  C:\Temp\ccoZnLU4.s:55     .text.IIS2DLPC_ACC_SetOutputDataRate_When_Disabled:00000000 IIS2DLPC_ACC_SetOutputDataRate_When_Disabled
+  C:\Temp\ccoZnLU4.s:125    .text.IIS2DLPC_ACC_SetOutputDataRate_When_Disabled:000000a4 $d
+  C:\Temp\ccoZnLU4.s:141    .text.ReadRegWrap:00000000 $t
+  C:\Temp\ccoZnLU4.s:146    .text.ReadRegWrap:00000000 ReadRegWrap
+  C:\Temp\ccoZnLU4.s:156    .text.WriteRegWrap:00000000 $t
+  C:\Temp\ccoZnLU4.s:161    .text.WriteRegWrap:00000000 WriteRegWrap
+  C:\Temp\ccoZnLU4.s:171    .text.IIS2DLPC_ACC_SetOutputDataRate_When_Enabled:00000000 $t
+  C:\Temp\ccoZnLU4.s:176    .text.IIS2DLPC_ACC_SetOutputDataRate_When_Enabled:00000000 IIS2DLPC_ACC_SetOutputDataRate_When_Enabled
+  C:\Temp\ccoZnLU4.s:190    .text.IIS2DLPC_ACC_SetOutputDataRate_When_Enabled:0000001c $d
+  C:\Temp\ccoZnLU4.s:194    .text.IIS2DLPC_ACC_SetOutputDataRate_When_Enabled:00000020 $t
+  C:\Temp\ccoZnLU4.s:348    .text.IIS2DLPC_ACC_SetOutputDataRate_When_Enabled:00000190 $d
+  C:\Temp\ccoZnLU4.s:356    .text.IIS2DLPC_ACC_Enable:00000000 $t
+  C:\Temp\ccoZnLU4.s:362    .text.IIS2DLPC_ACC_Enable:00000000 IIS2DLPC_ACC_Enable
+  C:\Temp\ccoZnLU4.s:387    .text.IIS2DLPC_ACC_Disable:00000000 $t
+  C:\Temp\ccoZnLU4.s:393    .text.IIS2DLPC_ACC_Disable:00000000 IIS2DLPC_ACC_Disable
+  C:\Temp\ccoZnLU4.s:415    .text.IIS2DLPC_DeInit:00000000 $t
+  C:\Temp\ccoZnLU4.s:421    .text.IIS2DLPC_DeInit:00000000 IIS2DLPC_DeInit
+  C:\Temp\ccoZnLU4.s:441    .text.IIS2DLPC_Init:00000000 $t
+  C:\Temp\ccoZnLU4.s:447    .text.IIS2DLPC_Init:00000000 IIS2DLPC_Init
+  C:\Temp\ccoZnLU4.s:506    .text.IIS2DLPC_Init:0000007c $d
+  C:\Temp\ccoZnLU4.s:509    .text.IIS2DLPC_ACC_SetFullScale:00000000 $t
+  C:\Temp\ccoZnLU4.s:515    .text.IIS2DLPC_ACC_SetFullScale:00000000 IIS2DLPC_ACC_SetFullScale
+  C:\Temp\ccoZnLU4.s:546    .text.IIS2DLPC_ReadID:00000000 $t
+  C:\Temp\ccoZnLU4.s:552    .text.IIS2DLPC_ReadID:00000000 IIS2DLPC_ReadID
+  C:\Temp\ccoZnLU4.s:566    .text.IIS2DLPC_ACC_GetFullScale:00000000 $t
+  C:\Temp\ccoZnLU4.s:572    .text.IIS2DLPC_ACC_GetFullScale:00000000 IIS2DLPC_ACC_GetFullScale
+  C:\Temp\ccoZnLU4.s:587    .text.IIS2DLPC_ACC_GetFullScale:0000001e $d
+  C:\Temp\ccoZnLU4.s:591    .text.IIS2DLPC_ACC_GetFullScale:00000022 $t
+  C:\Temp\ccoZnLU4.s:620    .text.IIS2DLPC_ACC_GetSensitivity:00000000 $t
+  C:\Temp\ccoZnLU4.s:626    .text.IIS2DLPC_ACC_GetSensitivity:00000000 IIS2DLPC_ACC_GetSensitivity
+  C:\Temp\ccoZnLU4.s:667    .text.IIS2DLPC_ACC_GetSensitivity:0000005a $d
+  C:\Temp\ccoZnLU4.s:671    .text.IIS2DLPC_ACC_GetSensitivity:0000005e $t
+  C:\Temp\ccoZnLU4.s:699    .text.IIS2DLPC_ACC_GetSensitivity:0000008c $d
+  C:\Temp\ccoZnLU4.s:703    .text.IIS2DLPC_ACC_GetSensitivity:00000090 $t
+  C:\Temp\ccoZnLU4.s:734    .text.IIS2DLPC_ACC_GetSensitivity:000000c0 $d
+  C:\Temp\ccoZnLU4.s:743    .text.IIS2DLPC_ACC_GetOutputDataRate:00000000 $t
+  C:\Temp\ccoZnLU4.s:749    .text.IIS2DLPC_ACC_GetOutputDataRate:00000000 IIS2DLPC_ACC_GetOutputDataRate
+  C:\Temp\ccoZnLU4.s:771    .text.IIS2DLPC_ACC_GetOutputDataRate:00000038 $d
+  C:\Temp\ccoZnLU4.s:940    .text.IIS2DLPC_ACC_GetOutputDataRate:00000150 $d
+  C:\Temp\ccoZnLU4.s:952    .text.IIS2DLPC_ACC_GetAxesRaw:00000000 $t
+  C:\Temp\ccoZnLU4.s:958    .text.IIS2DLPC_ACC_GetAxesRaw:00000000 IIS2DLPC_ACC_GetAxesRaw
+  C:\Temp\ccoZnLU4.s:1059   .text.IIS2DLPC_ACC_GetAxes:00000000 $t
+  C:\Temp\ccoZnLU4.s:1065   .text.IIS2DLPC_ACC_GetAxes:00000000 IIS2DLPC_ACC_GetAxes
+  C:\Temp\ccoZnLU4.s:1112   .text.IIS2DLPC_ACC_SetOutputDataRate_With_Mode:00000000 $t
+  C:\Temp\ccoZnLU4.s:1118   .text.IIS2DLPC_ACC_SetOutputDataRate_With_Mode:00000000 IIS2DLPC_ACC_SetOutputDataRate_With_Mode
+  C:\Temp\ccoZnLU4.s:1133   .text.IIS2DLPC_ACC_SetOutputDataRate:00000000 $t
+  C:\Temp\ccoZnLU4.s:1139   .text.IIS2DLPC_ACC_SetOutputDataRate:00000000 IIS2DLPC_ACC_SetOutputDataRate
+  C:\Temp\ccoZnLU4.s:1149   .text.IIS2DLPC_Read_Reg:00000000 $t
+  C:\Temp\ccoZnLU4.s:1155   .text.IIS2DLPC_Read_Reg:00000000 IIS2DLPC_Read_Reg
+  C:\Temp\ccoZnLU4.s:1170   .text.IIS2DLPC_Write_Reg:00000000 $t
+  C:\Temp\ccoZnLU4.s:1176   .text.IIS2DLPC_Write_Reg:00000000 IIS2DLPC_Write_Reg
+ARM GAS  C:\Temp\ccoZnLU4.s 			page 25
+
+
+  C:\Temp\ccoZnLU4.s:1196   .text.IIS2DLPC_RegisterBusIO:00000000 $t
+  C:\Temp\ccoZnLU4.s:1202   .text.IIS2DLPC_RegisterBusIO:00000000 IIS2DLPC_RegisterBusIO
+  C:\Temp\ccoZnLU4.s:1262   .text.IIS2DLPC_RegisterBusIO:00000070 $d
+  C:\Temp\ccoZnLU4.s:1266   .text.IIS2DLPC_ACC_Get_DRDY_Status:00000000 $t
+  C:\Temp\ccoZnLU4.s:1272   .text.IIS2DLPC_ACC_Get_DRDY_Status:00000000 IIS2DLPC_ACC_Get_DRDY_Status
+  C:\Temp\ccoZnLU4.s:1290   .data.IIS2DLPC_ACC_Driver:00000000 IIS2DLPC_ACC_Driver
+  C:\Temp\ccoZnLU4.s:1287   .data.IIS2DLPC_ACC_Driver:00000000 $d
+  C:\Temp\ccoZnLU4.s:1305   .data.IIS2DLPC_COMMON_Driver:00000000 IIS2DLPC_COMMON_Driver
+  C:\Temp\ccoZnLU4.s:1302   .data.IIS2DLPC_COMMON_Driver:00000000 $d
+  C:\Temp\ccoZnLU4.s:806    .text.IIS2DLPC_ACC_GetOutputDataRate:0000005b $d
+  C:\Temp\ccoZnLU4.s:806    .text.IIS2DLPC_ACC_GetOutputDataRate:0000005c $t
+
+UNDEFINED SYMBOLS
+iis2dlpc_data_rate_set
+iis2dlpc_power_mode_set
+iis2dlpc_auto_increment_set
+iis2dlpc_block_data_update_set
+iis2dlpc_fifo_mode_set
+iis2dlpc_full_scale_set
+iis2dlpc_device_id_get
+iis2dlpc_full_scale_get
+iis2dlpc_power_mode_get
+iis2dlpc_data_rate_get
+iis2dlpc_acceleration_raw_get
+iis2dlpc_read_reg
+iis2dlpc_write_reg
+iis2dlpc_flag_data_ready_get

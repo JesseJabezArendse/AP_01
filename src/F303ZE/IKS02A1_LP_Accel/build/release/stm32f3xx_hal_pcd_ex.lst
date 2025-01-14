@@ -1,0 +1,108 @@
+ARM GAS  C:\Temp\cckuzxAy.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"stm32f3xx_hal_pcd_ex.c"
+  16              		.text
+  17              		.section	.text.HAL_PCDEx_PMAConfig,"ax",%progbits
+  18              		.align	1
+  19              		.global	HAL_PCDEx_PMAConfig
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	HAL_PCDEx_PMAConfig:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27              		@ link register save eliminated.
+  28 0000 11F0800F 		tst	r1, #128
+  29 0004 0BD0     		beq	.L2
+  30 0006 01F00701 		and	r1, r1, #7
+  31 000a 01EB8101 		add	r1, r1, r1, lsl #2
+  32 000e C900     		lsls	r1, r1, #3
+  33 0010 1031     		adds	r1, r1, #16
+  34 0012 0844     		add	r0, r0, r1
+  35              	.L3:
+  36 0014 52B9     		cbnz	r2, .L4
+  37 0016 0273     		strb	r2, [r0, #12]
+  38 0018 C380     		strh	r3, [r0, #6]	@ movhi
+  39              	.L5:
+  40 001a 0020     		movs	r0, #0
+  41 001c 7047     		bx	lr
+  42              	.L2:
+  43 001e 01EB8101 		add	r1, r1, r1, lsl #2
+  44 0022 C900     		lsls	r1, r1, #3
+  45 0024 01F5A871 		add	r1, r1, #336
+  46 0028 0844     		add	r0, r0, r1
+  47 002a F3E7     		b	.L3
+  48              	.L4:
+  49 002c 0122     		movs	r2, #1
+  50 002e 0273     		strb	r2, [r0, #12]
+  51 0030 0381     		strh	r3, [r0, #8]	@ movhi
+  52 0032 1B0C     		lsrs	r3, r3, #16
+  53 0034 4381     		strh	r3, [r0, #10]	@ movhi
+  54 0036 F0E7     		b	.L5
+  56              		.section	.text.HAL_PCDEx_SetConnectionState,"ax",%progbits
+  57              		.align	1
+  58              		.weak	HAL_PCDEx_SetConnectionState
+  59              		.syntax unified
+ARM GAS  C:\Temp\cckuzxAy.s 			page 2
+
+
+  60              		.thumb
+  61              		.thumb_func
+  63              	HAL_PCDEx_SetConnectionState:
+  64              		@ args = 0, pretend = 0, frame = 0
+  65              		@ frame_needed = 0, uses_anonymous_args = 0
+  66              		@ link register save eliminated.
+  67 0000 7047     		bx	lr
+  69              		.section	.text.HAL_PCDEx_LPM_Callback,"ax",%progbits
+  70              		.align	1
+  71              		.weak	HAL_PCDEx_LPM_Callback
+  72              		.syntax unified
+  73              		.thumb
+  74              		.thumb_func
+  76              	HAL_PCDEx_LPM_Callback:
+  77              		@ args = 0, pretend = 0, frame = 0
+  78              		@ frame_needed = 0, uses_anonymous_args = 0
+  79              		@ link register save eliminated.
+  80 0000 7047     		bx	lr
+  82              		.section	.text.HAL_PCDEx_BCD_Callback,"ax",%progbits
+  83              		.align	1
+  84              		.weak	HAL_PCDEx_BCD_Callback
+  85              		.syntax unified
+  86              		.thumb
+  87              		.thumb_func
+  89              	HAL_PCDEx_BCD_Callback:
+  90              		@ args = 0, pretend = 0, frame = 0
+  91              		@ frame_needed = 0, uses_anonymous_args = 0
+  92              		@ link register save eliminated.
+  93 0000 7047     		bx	lr
+  95              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\cckuzxAy.s 			page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f3xx_hal_pcd_ex.c
+  C:\Temp\cckuzxAy.s:18     .text.HAL_PCDEx_PMAConfig:00000000 $t
+  C:\Temp\cckuzxAy.s:24     .text.HAL_PCDEx_PMAConfig:00000000 HAL_PCDEx_PMAConfig
+  C:\Temp\cckuzxAy.s:57     .text.HAL_PCDEx_SetConnectionState:00000000 $t
+  C:\Temp\cckuzxAy.s:63     .text.HAL_PCDEx_SetConnectionState:00000000 HAL_PCDEx_SetConnectionState
+  C:\Temp\cckuzxAy.s:70     .text.HAL_PCDEx_LPM_Callback:00000000 $t
+  C:\Temp\cckuzxAy.s:76     .text.HAL_PCDEx_LPM_Callback:00000000 HAL_PCDEx_LPM_Callback
+  C:\Temp\cckuzxAy.s:83     .text.HAL_PCDEx_BCD_Callback:00000000 $t
+  C:\Temp\cckuzxAy.s:89     .text.HAL_PCDEx_BCD_Callback:00000000 HAL_PCDEx_BCD_Callback
+
+NO UNDEFINED SYMBOLS

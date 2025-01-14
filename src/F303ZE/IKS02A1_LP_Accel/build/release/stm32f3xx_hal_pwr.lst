@@ -1,0 +1,375 @@
+ARM GAS  C:\Temp\ccWFhsKw.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"stm32f3xx_hal_pwr.c"
+  16              		.text
+  17              		.section	.text.HAL_PWR_DeInit,"ax",%progbits
+  18              		.align	1
+  19              		.global	HAL_PWR_DeInit
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	HAL_PWR_DeInit:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27              		@ link register save eliminated.
+  28 0000 044B     		ldr	r3, .L2
+  29 0002 1A69     		ldr	r2, [r3, #16]
+  30 0004 42F08052 		orr	r2, r2, #268435456
+  31 0008 1A61     		str	r2, [r3, #16]
+  32 000a 1A69     		ldr	r2, [r3, #16]
+  33 000c 22F08052 		bic	r2, r2, #268435456
+  34 0010 1A61     		str	r2, [r3, #16]
+  35 0012 7047     		bx	lr
+  36              	.L3:
+  37              		.align	2
+  38              	.L2:
+  39 0014 00100240 		.word	1073876992
+  41              		.section	.text.HAL_PWR_EnableBkUpAccess,"ax",%progbits
+  42              		.align	1
+  43              		.global	HAL_PWR_EnableBkUpAccess
+  44              		.syntax unified
+  45              		.thumb
+  46              		.thumb_func
+  48              	HAL_PWR_EnableBkUpAccess:
+  49              		@ args = 0, pretend = 0, frame = 0
+  50              		@ frame_needed = 0, uses_anonymous_args = 0
+  51              		@ link register save eliminated.
+  52 0000 024A     		ldr	r2, .L5
+  53 0002 1368     		ldr	r3, [r2]
+  54 0004 43F48073 		orr	r3, r3, #256
+  55 0008 1360     		str	r3, [r2]
+  56 000a 7047     		bx	lr
+  57              	.L6:
+  58              		.align	2
+  59              	.L5:
+  60 000c 00700040 		.word	1073770496
+ARM GAS  C:\Temp\ccWFhsKw.s 			page 2
+
+
+  62              		.section	.text.HAL_PWR_DisableBkUpAccess,"ax",%progbits
+  63              		.align	1
+  64              		.global	HAL_PWR_DisableBkUpAccess
+  65              		.syntax unified
+  66              		.thumb
+  67              		.thumb_func
+  69              	HAL_PWR_DisableBkUpAccess:
+  70              		@ args = 0, pretend = 0, frame = 0
+  71              		@ frame_needed = 0, uses_anonymous_args = 0
+  72              		@ link register save eliminated.
+  73 0000 024A     		ldr	r2, .L8
+  74 0002 1368     		ldr	r3, [r2]
+  75 0004 23F48073 		bic	r3, r3, #256
+  76 0008 1360     		str	r3, [r2]
+  77 000a 7047     		bx	lr
+  78              	.L9:
+  79              		.align	2
+  80              	.L8:
+  81 000c 00700040 		.word	1073770496
+  83              		.section	.text.HAL_PWR_EnableWakeUpPin,"ax",%progbits
+  84              		.align	1
+  85              		.global	HAL_PWR_EnableWakeUpPin
+  86              		.syntax unified
+  87              		.thumb
+  88              		.thumb_func
+  90              	HAL_PWR_EnableWakeUpPin:
+  91              		@ args = 0, pretend = 0, frame = 0
+  92              		@ frame_needed = 0, uses_anonymous_args = 0
+  93              		@ link register save eliminated.
+  94 0000 024A     		ldr	r2, .L11
+  95 0002 5368     		ldr	r3, [r2, #4]
+  96 0004 0343     		orrs	r3, r3, r0
+  97 0006 5360     		str	r3, [r2, #4]
+  98 0008 7047     		bx	lr
+  99              	.L12:
+ 100 000a 00BF     		.align	2
+ 101              	.L11:
+ 102 000c 00700040 		.word	1073770496
+ 104              		.section	.text.HAL_PWR_DisableWakeUpPin,"ax",%progbits
+ 105              		.align	1
+ 106              		.global	HAL_PWR_DisableWakeUpPin
+ 107              		.syntax unified
+ 108              		.thumb
+ 109              		.thumb_func
+ 111              	HAL_PWR_DisableWakeUpPin:
+ 112              		@ args = 0, pretend = 0, frame = 0
+ 113              		@ frame_needed = 0, uses_anonymous_args = 0
+ 114              		@ link register save eliminated.
+ 115 0000 024A     		ldr	r2, .L14
+ 116 0002 5368     		ldr	r3, [r2, #4]
+ 117 0004 23EA0003 		bic	r3, r3, r0
+ 118 0008 5360     		str	r3, [r2, #4]
+ 119 000a 7047     		bx	lr
+ 120              	.L15:
+ 121              		.align	2
+ 122              	.L14:
+ 123 000c 00700040 		.word	1073770496
+ARM GAS  C:\Temp\ccWFhsKw.s 			page 3
+
+
+ 125              		.section	.text.HAL_PWR_EnterSLEEPMode,"ax",%progbits
+ 126              		.align	1
+ 127              		.global	HAL_PWR_EnterSLEEPMode
+ 128              		.syntax unified
+ 129              		.thumb
+ 130              		.thumb_func
+ 132              	HAL_PWR_EnterSLEEPMode:
+ 133              		@ args = 0, pretend = 0, frame = 0
+ 134              		@ frame_needed = 0, uses_anonymous_args = 0
+ 135              		@ link register save eliminated.
+ 136 0000 064A     		ldr	r2, .L20
+ 137 0002 1369     		ldr	r3, [r2, #16]
+ 138 0004 23F00403 		bic	r3, r3, #4
+ 139 0008 1361     		str	r3, [r2, #16]
+ 140 000a 0129     		cmp	r1, #1
+ 141 000c 03D0     		beq	.L19
+ 142              		.syntax unified
+ 143              	@ 301 "Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c" 1
+ 144 000e 40BF     		sev
+ 145              	@ 0 "" 2
+ 146              	@ 302 "Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c" 1
+ 147 0010 20BF     		wfe
+ 148              	@ 0 "" 2
+ 149              	@ 303 "Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c" 1
+ 150 0012 20BF     		wfe
+ 151              	@ 0 "" 2
+ 152              		.thumb
+ 153              		.syntax unified
+ 154 0014 7047     		bx	lr
+ 155              	.L19:
+ 156              		.syntax unified
+ 157              	@ 296 "Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c" 1
+ 158 0016 30BF     		wfi
+ 159              	@ 0 "" 2
+ 160              		.thumb
+ 161              		.syntax unified
+ 162 0018 7047     		bx	lr
+ 163              	.L21:
+ 164 001a 00BF     		.align	2
+ 165              	.L20:
+ 166 001c 00ED00E0 		.word	-536810240
+ 168              		.section	.text.HAL_PWR_EnterSTOPMode,"ax",%progbits
+ 169              		.align	1
+ 170              		.global	HAL_PWR_EnterSTOPMode
+ 171              		.syntax unified
+ 172              		.thumb
+ 173              		.thumb_func
+ 175              	HAL_PWR_EnterSTOPMode:
+ 176              		@ args = 0, pretend = 0, frame = 0
+ 177              		@ frame_needed = 0, uses_anonymous_args = 0
+ 178              		@ link register save eliminated.
+ 179 0000 0B4A     		ldr	r2, .L26
+ 180 0002 1368     		ldr	r3, [r2]
+ 181 0004 23F00303 		bic	r3, r3, #3
+ 182 0008 0343     		orrs	r3, r3, r0
+ 183 000a 1360     		str	r3, [r2]
+ 184 000c 094A     		ldr	r2, .L26+4
+ARM GAS  C:\Temp\ccWFhsKw.s 			page 4
+
+
+ 185 000e 1369     		ldr	r3, [r2, #16]
+ 186 0010 43F00403 		orr	r3, r3, #4
+ 187 0014 1361     		str	r3, [r2, #16]
+ 188 0016 0129     		cmp	r1, #1
+ 189 0018 08D0     		beq	.L25
+ 190              		.syntax unified
+ 191              	@ 358 "Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c" 1
+ 192 001a 40BF     		sev
+ 193              	@ 0 "" 2
+ 194              	@ 359 "Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c" 1
+ 195 001c 20BF     		wfe
+ 196              	@ 0 "" 2
+ 197              	@ 360 "Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c" 1
+ 198 001e 20BF     		wfe
+ 199              	@ 0 "" 2
+ 200              		.thumb
+ 201              		.syntax unified
+ 202              	.L24:
+ 203 0020 044A     		ldr	r2, .L26+4
+ 204 0022 1369     		ldr	r3, [r2, #16]
+ 205 0024 23F00403 		bic	r3, r3, #4
+ 206 0028 1361     		str	r3, [r2, #16]
+ 207 002a 7047     		bx	lr
+ 208              	.L25:
+ 209              		.syntax unified
+ 210              	@ 353 "Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c" 1
+ 211 002c 30BF     		wfi
+ 212              	@ 0 "" 2
+ 213              		.thumb
+ 214              		.syntax unified
+ 215 002e F7E7     		b	.L24
+ 216              	.L27:
+ 217              		.align	2
+ 218              	.L26:
+ 219 0030 00700040 		.word	1073770496
+ 220 0034 00ED00E0 		.word	-536810240
+ 222              		.section	.text.HAL_PWR_EnterSTANDBYMode,"ax",%progbits
+ 223              		.align	1
+ 224              		.global	HAL_PWR_EnterSTANDBYMode
+ 225              		.syntax unified
+ 226              		.thumb
+ 227              		.thumb_func
+ 229              	HAL_PWR_EnterSTANDBYMode:
+ 230              		@ args = 0, pretend = 0, frame = 0
+ 231              		@ frame_needed = 0, uses_anonymous_args = 0
+ 232              		@ link register save eliminated.
+ 233 0000 054A     		ldr	r2, .L29
+ 234 0002 1368     		ldr	r3, [r2]
+ 235 0004 43F00203 		orr	r3, r3, #2
+ 236 0008 1360     		str	r3, [r2]
+ 237 000a 044A     		ldr	r2, .L29+4
+ 238 000c 1369     		ldr	r3, [r2, #16]
+ 239 000e 43F00403 		orr	r3, r3, #4
+ 240 0012 1361     		str	r3, [r2, #16]
+ 241              		.syntax unified
+ 242              	@ 389 "Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_pwr.c" 1
+ 243 0014 30BF     		wfi
+ARM GAS  C:\Temp\ccWFhsKw.s 			page 5
+
+
+ 244              	@ 0 "" 2
+ 245              		.thumb
+ 246              		.syntax unified
+ 247 0016 7047     		bx	lr
+ 248              	.L30:
+ 249              		.align	2
+ 250              	.L29:
+ 251 0018 00700040 		.word	1073770496
+ 252 001c 00ED00E0 		.word	-536810240
+ 254              		.section	.text.HAL_PWR_EnableSleepOnExit,"ax",%progbits
+ 255              		.align	1
+ 256              		.global	HAL_PWR_EnableSleepOnExit
+ 257              		.syntax unified
+ 258              		.thumb
+ 259              		.thumb_func
+ 261              	HAL_PWR_EnableSleepOnExit:
+ 262              		@ args = 0, pretend = 0, frame = 0
+ 263              		@ frame_needed = 0, uses_anonymous_args = 0
+ 264              		@ link register save eliminated.
+ 265 0000 024A     		ldr	r2, .L32
+ 266 0002 1369     		ldr	r3, [r2, #16]
+ 267 0004 43F00203 		orr	r3, r3, #2
+ 268 0008 1361     		str	r3, [r2, #16]
+ 269 000a 7047     		bx	lr
+ 270              	.L33:
+ 271              		.align	2
+ 272              	.L32:
+ 273 000c 00ED00E0 		.word	-536810240
+ 275              		.section	.text.HAL_PWR_DisableSleepOnExit,"ax",%progbits
+ 276              		.align	1
+ 277              		.global	HAL_PWR_DisableSleepOnExit
+ 278              		.syntax unified
+ 279              		.thumb
+ 280              		.thumb_func
+ 282              	HAL_PWR_DisableSleepOnExit:
+ 283              		@ args = 0, pretend = 0, frame = 0
+ 284              		@ frame_needed = 0, uses_anonymous_args = 0
+ 285              		@ link register save eliminated.
+ 286 0000 024A     		ldr	r2, .L35
+ 287 0002 1369     		ldr	r3, [r2, #16]
+ 288 0004 23F00203 		bic	r3, r3, #2
+ 289 0008 1361     		str	r3, [r2, #16]
+ 290 000a 7047     		bx	lr
+ 291              	.L36:
+ 292              		.align	2
+ 293              	.L35:
+ 294 000c 00ED00E0 		.word	-536810240
+ 296              		.section	.text.HAL_PWR_EnableSEVOnPend,"ax",%progbits
+ 297              		.align	1
+ 298              		.global	HAL_PWR_EnableSEVOnPend
+ 299              		.syntax unified
+ 300              		.thumb
+ 301              		.thumb_func
+ 303              	HAL_PWR_EnableSEVOnPend:
+ 304              		@ args = 0, pretend = 0, frame = 0
+ 305              		@ frame_needed = 0, uses_anonymous_args = 0
+ 306              		@ link register save eliminated.
+ARM GAS  C:\Temp\ccWFhsKw.s 			page 6
+
+
+ 307 0000 024A     		ldr	r2, .L38
+ 308 0002 1369     		ldr	r3, [r2, #16]
+ 309 0004 43F01003 		orr	r3, r3, #16
+ 310 0008 1361     		str	r3, [r2, #16]
+ 311 000a 7047     		bx	lr
+ 312              	.L39:
+ 313              		.align	2
+ 314              	.L38:
+ 315 000c 00ED00E0 		.word	-536810240
+ 317              		.section	.text.HAL_PWR_DisableSEVOnPend,"ax",%progbits
+ 318              		.align	1
+ 319              		.global	HAL_PWR_DisableSEVOnPend
+ 320              		.syntax unified
+ 321              		.thumb
+ 322              		.thumb_func
+ 324              	HAL_PWR_DisableSEVOnPend:
+ 325              		@ args = 0, pretend = 0, frame = 0
+ 326              		@ frame_needed = 0, uses_anonymous_args = 0
+ 327              		@ link register save eliminated.
+ 328 0000 024A     		ldr	r2, .L41
+ 329 0002 1369     		ldr	r3, [r2, #16]
+ 330 0004 23F01003 		bic	r3, r3, #16
+ 331 0008 1361     		str	r3, [r2, #16]
+ 332 000a 7047     		bx	lr
+ 333              	.L42:
+ 334              		.align	2
+ 335              	.L41:
+ 336 000c 00ED00E0 		.word	-536810240
+ 338              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccWFhsKw.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f3xx_hal_pwr.c
+  C:\Temp\ccWFhsKw.s:18     .text.HAL_PWR_DeInit:00000000 $t
+  C:\Temp\ccWFhsKw.s:24     .text.HAL_PWR_DeInit:00000000 HAL_PWR_DeInit
+  C:\Temp\ccWFhsKw.s:39     .text.HAL_PWR_DeInit:00000014 $d
+  C:\Temp\ccWFhsKw.s:42     .text.HAL_PWR_EnableBkUpAccess:00000000 $t
+  C:\Temp\ccWFhsKw.s:48     .text.HAL_PWR_EnableBkUpAccess:00000000 HAL_PWR_EnableBkUpAccess
+  C:\Temp\ccWFhsKw.s:60     .text.HAL_PWR_EnableBkUpAccess:0000000c $d
+  C:\Temp\ccWFhsKw.s:63     .text.HAL_PWR_DisableBkUpAccess:00000000 $t
+  C:\Temp\ccWFhsKw.s:69     .text.HAL_PWR_DisableBkUpAccess:00000000 HAL_PWR_DisableBkUpAccess
+  C:\Temp\ccWFhsKw.s:81     .text.HAL_PWR_DisableBkUpAccess:0000000c $d
+  C:\Temp\ccWFhsKw.s:84     .text.HAL_PWR_EnableWakeUpPin:00000000 $t
+  C:\Temp\ccWFhsKw.s:90     .text.HAL_PWR_EnableWakeUpPin:00000000 HAL_PWR_EnableWakeUpPin
+  C:\Temp\ccWFhsKw.s:102    .text.HAL_PWR_EnableWakeUpPin:0000000c $d
+  C:\Temp\ccWFhsKw.s:105    .text.HAL_PWR_DisableWakeUpPin:00000000 $t
+  C:\Temp\ccWFhsKw.s:111    .text.HAL_PWR_DisableWakeUpPin:00000000 HAL_PWR_DisableWakeUpPin
+  C:\Temp\ccWFhsKw.s:123    .text.HAL_PWR_DisableWakeUpPin:0000000c $d
+  C:\Temp\ccWFhsKw.s:126    .text.HAL_PWR_EnterSLEEPMode:00000000 $t
+  C:\Temp\ccWFhsKw.s:132    .text.HAL_PWR_EnterSLEEPMode:00000000 HAL_PWR_EnterSLEEPMode
+  C:\Temp\ccWFhsKw.s:166    .text.HAL_PWR_EnterSLEEPMode:0000001c $d
+  C:\Temp\ccWFhsKw.s:169    .text.HAL_PWR_EnterSTOPMode:00000000 $t
+  C:\Temp\ccWFhsKw.s:175    .text.HAL_PWR_EnterSTOPMode:00000000 HAL_PWR_EnterSTOPMode
+  C:\Temp\ccWFhsKw.s:219    .text.HAL_PWR_EnterSTOPMode:00000030 $d
+  C:\Temp\ccWFhsKw.s:223    .text.HAL_PWR_EnterSTANDBYMode:00000000 $t
+  C:\Temp\ccWFhsKw.s:229    .text.HAL_PWR_EnterSTANDBYMode:00000000 HAL_PWR_EnterSTANDBYMode
+  C:\Temp\ccWFhsKw.s:251    .text.HAL_PWR_EnterSTANDBYMode:00000018 $d
+  C:\Temp\ccWFhsKw.s:255    .text.HAL_PWR_EnableSleepOnExit:00000000 $t
+  C:\Temp\ccWFhsKw.s:261    .text.HAL_PWR_EnableSleepOnExit:00000000 HAL_PWR_EnableSleepOnExit
+  C:\Temp\ccWFhsKw.s:273    .text.HAL_PWR_EnableSleepOnExit:0000000c $d
+  C:\Temp\ccWFhsKw.s:276    .text.HAL_PWR_DisableSleepOnExit:00000000 $t
+  C:\Temp\ccWFhsKw.s:282    .text.HAL_PWR_DisableSleepOnExit:00000000 HAL_PWR_DisableSleepOnExit
+  C:\Temp\ccWFhsKw.s:294    .text.HAL_PWR_DisableSleepOnExit:0000000c $d
+  C:\Temp\ccWFhsKw.s:297    .text.HAL_PWR_EnableSEVOnPend:00000000 $t
+  C:\Temp\ccWFhsKw.s:303    .text.HAL_PWR_EnableSEVOnPend:00000000 HAL_PWR_EnableSEVOnPend
+  C:\Temp\ccWFhsKw.s:315    .text.HAL_PWR_EnableSEVOnPend:0000000c $d
+  C:\Temp\ccWFhsKw.s:318    .text.HAL_PWR_DisableSEVOnPend:00000000 $t
+  C:\Temp\ccWFhsKw.s:324    .text.HAL_PWR_DisableSEVOnPend:00000000 HAL_PWR_DisableSEVOnPend
+  C:\Temp\ccWFhsKw.s:336    .text.HAL_PWR_DisableSEVOnPend:0000000c $d
+
+NO UNDEFINED SYMBOLS

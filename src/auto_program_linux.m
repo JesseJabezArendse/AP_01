@@ -8,11 +8,21 @@ function auto_program_linux(filename)
         drive_name = drives{i}.name;
 
         % Check if the mount point ends with 'NOD_F411RE'
-        if endsWith(drive_path, 'NOD_F411RE')
-            disp("Found STM32 Drive: " + drive_name);
+        if endsWith(drive_path, 'F411RE')
+            disp("Found STM32 F411RE Drive: " + drive_name);
 
             % Copy the binary file to the drive
             copyfile(['binaries/' filename '.bin'], drive_path);
+
+            pause(3); % Pause to ensure the file is copied
+            disp("STM32 Programmed");
+            return;
+        end
+        if endsWith(drive_path, 'F303ZE')
+            disp("Found STM32 F303ZE Drive: " + drive_name);
+
+            % Copy the binary file to the drive
+            copyfile(['binaries/' filename '_F303ZE.bin'], drive_path);
 
             pause(3); % Pause to ensure the file is copied
             disp("STM32 Programmed");

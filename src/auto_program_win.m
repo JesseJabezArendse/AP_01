@@ -6,8 +6,17 @@ function auto_program_win(filename)
         drive_name = DriveName(drive_letter(1));
         if drive_name(end-5:end) == 'F411RE' % found the STM Drag and Drop Programming
             STLINK_DRIVE = upper(drive_letter);
-            disp("Found STM32 Drive")
+            disp("Found STM32 F411RE Drive")
             copyfile('binaries/'+filename+'.bin' , upper(drive_letter));
+            pause(3);
+            disp("STM32 Programmed")
+            STM32_ODR = 200;
+            return 
+        end 
+        if drive_name(end-5:end) == 'F303ZE' % found the STM Drag and Drop Programming
+            STLINK_DRIVE = upper(drive_letter);
+            disp("Found STM32 F303ZE Drive")
+            copyfile('binaries/'+filename+'_F303ZE.bin' , upper(drive_letter));
             pause(3);
             disp("STM32 Programmed")
             STM32_ODR = 200;

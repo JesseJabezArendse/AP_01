@@ -12,11 +12,23 @@ function auto_program_mac(filename)
 
         % Check if the drive name contains 'F411RE'
         if contains(cleaned_drive_name, 'F411RE')
-            disp("Found STM32 Drive: " + cleaned_drive_name);
+            disp("Found STM32 F411RE Drive: " + cleaned_drive_name);
 
             % Copy the binary file to the drive
             drive_path = "/Volumes/"+drives{i}.name
             file_path = "binaries/" +filename +".bin"
+            copyfile(file_path, drive_path);
+
+            pause(3); % Pause to ensure the file is copied
+            disp("STM32 Programmed");
+            return;
+        end
+        if contains(cleaned_drive_name, 'F303ZE')
+            disp("Found STM32 F303ZE Drive: " + cleaned_drive_name);
+
+            % Copy the binary file to the drive
+            drive_path = "/Volumes/"+drives{i}.name
+            file_path = "binaries/" +filename +"_F303ZE.bin"
             copyfile(file_path, drive_path);
 
             pause(3); % Pause to ensure the file is copied

@@ -1,0 +1,436 @@
+ARM GAS  C:\Temp\ccDGUGJh.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"stm32f3xx_hal_msp.c"
+  16              		.text
+  17              		.section	.text.HAL_MspInit,"ax",%progbits
+  18              		.align	1
+  19              		.global	HAL_MspInit
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	HAL_MspInit:
+  25              		@ args = 0, pretend = 0, frame = 8
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27              		@ link register save eliminated.
+  28 0000 82B0     		sub	sp, sp, #8
+  29 0002 0A4B     		ldr	r3, .L3
+  30 0004 9A69     		ldr	r2, [r3, #24]
+  31 0006 42F00102 		orr	r2, r2, #1
+  32 000a 9A61     		str	r2, [r3, #24]
+  33 000c 9A69     		ldr	r2, [r3, #24]
+  34 000e 02F00102 		and	r2, r2, #1
+  35 0012 0092     		str	r2, [sp]
+  36 0014 009A     		ldr	r2, [sp]
+  37 0016 DA69     		ldr	r2, [r3, #28]
+  38 0018 42F08052 		orr	r2, r2, #268435456
+  39 001c DA61     		str	r2, [r3, #28]
+  40 001e DB69     		ldr	r3, [r3, #28]
+  41 0020 03F08053 		and	r3, r3, #268435456
+  42 0024 0193     		str	r3, [sp, #4]
+  43 0026 019B     		ldr	r3, [sp, #4]
+  44 0028 02B0     		add	sp, sp, #8
+  45              		@ sp needed
+  46 002a 7047     		bx	lr
+  47              	.L4:
+  48              		.align	2
+  49              	.L3:
+  50 002c 00100240 		.word	1073876992
+  52              		.section	.text.HAL_RTC_MspInit,"ax",%progbits
+  53              		.align	1
+  54              		.global	HAL_RTC_MspInit
+  55              		.syntax unified
+  56              		.thumb
+  57              		.thumb_func
+  59              	HAL_RTC_MspInit:
+  60              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Temp\ccDGUGJh.s 			page 2
+
+
+  61              		@ frame_needed = 0, uses_anonymous_args = 0
+  62              		@ link register save eliminated.
+  63 0000 0268     		ldr	r2, [r0]
+  64 0002 084B     		ldr	r3, .L8
+  65 0004 9A42     		cmp	r2, r3
+  66 0006 00D0     		beq	.L7
+  67              	.L5:
+  68 0008 7047     		bx	lr
+  69              	.L7:
+  70 000a 4FF40042 		mov	r2, #32768
+  71              		.syntax unified
+  72              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+  73 000e 92FAA2F2 		rbit r2, r2
+  74              	@ 0 "" 2
+  75              		.thumb
+  76              		.syntax unified
+  77 0012 B2FA82F2 		clz	r2, r2
+  78 0016 044B     		ldr	r3, .L8+4
+  79 0018 1344     		add	r3, r3, r2
+  80 001a 9B00     		lsls	r3, r3, #2
+  81 001c 0122     		movs	r2, #1
+  82 001e 1A60     		str	r2, [r3]
+  83 0020 F2E7     		b	.L5
+  84              	.L9:
+  85 0022 00BF     		.align	2
+  86              	.L8:
+  87 0024 00280040 		.word	1073752064
+  88 0028 00819010 		.word	277905664
+  90              		.section	.text.HAL_RTC_MspDeInit,"ax",%progbits
+  91              		.align	1
+  92              		.global	HAL_RTC_MspDeInit
+  93              		.syntax unified
+  94              		.thumb
+  95              		.thumb_func
+  97              	HAL_RTC_MspDeInit:
+  98              		@ args = 0, pretend = 0, frame = 0
+  99              		@ frame_needed = 0, uses_anonymous_args = 0
+ 100              		@ link register save eliminated.
+ 101 0000 0268     		ldr	r2, [r0]
+ 102 0002 084B     		ldr	r3, .L13
+ 103 0004 9A42     		cmp	r2, r3
+ 104 0006 00D0     		beq	.L12
+ 105              	.L10:
+ 106 0008 7047     		bx	lr
+ 107              	.L12:
+ 108 000a 4FF40042 		mov	r2, #32768
+ 109              		.syntax unified
+ 110              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 111 000e 92FAA2F2 		rbit r2, r2
+ 112              	@ 0 "" 2
+ 113              		.thumb
+ 114              		.syntax unified
+ 115 0012 B2FA82F2 		clz	r2, r2
+ 116 0016 044B     		ldr	r3, .L13+4
+ 117 0018 1344     		add	r3, r3, r2
+ 118 001a 9B00     		lsls	r3, r3, #2
+ 119 001c 0022     		movs	r2, #0
+ARM GAS  C:\Temp\ccDGUGJh.s 			page 3
+
+
+ 120 001e 1A60     		str	r2, [r3]
+ 121 0020 F2E7     		b	.L10
+ 122              	.L14:
+ 123 0022 00BF     		.align	2
+ 124              	.L13:
+ 125 0024 00280040 		.word	1073752064
+ 126 0028 00819010 		.word	277905664
+ 128              		.section	.text.HAL_TIM_Base_MspInit,"ax",%progbits
+ 129              		.align	1
+ 130              		.global	HAL_TIM_Base_MspInit
+ 131              		.syntax unified
+ 132              		.thumb
+ 133              		.thumb_func
+ 135              	HAL_TIM_Base_MspInit:
+ 136              		@ args = 0, pretend = 0, frame = 8
+ 137              		@ frame_needed = 0, uses_anonymous_args = 0
+ 138 0000 0368     		ldr	r3, [r0]
+ 139 0002 B3F1804F 		cmp	r3, #1073741824
+ 140 0006 00D0     		beq	.L21
+ 141 0008 7047     		bx	lr
+ 142              	.L21:
+ 143 000a 00B5     		push	{lr}
+ 144 000c 83B0     		sub	sp, sp, #12
+ 145 000e 03F50433 		add	r3, r3, #135168
+ 146 0012 DA69     		ldr	r2, [r3, #28]
+ 147 0014 42F00102 		orr	r2, r2, #1
+ 148 0018 DA61     		str	r2, [r3, #28]
+ 149 001a DB69     		ldr	r3, [r3, #28]
+ 150 001c 03F00103 		and	r3, r3, #1
+ 151 0020 0193     		str	r3, [sp, #4]
+ 152 0022 019B     		ldr	r3, [sp, #4]
+ 153 0024 0022     		movs	r2, #0
+ 154 0026 1146     		mov	r1, r2
+ 155 0028 1C20     		movs	r0, #28
+ 156 002a FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 157 002e 1C20     		movs	r0, #28
+ 158 0030 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 159 0034 03B0     		add	sp, sp, #12
+ 160              		@ sp needed
+ 161 0036 5DF804FB 		ldr	pc, [sp], #4
+ 163              		.section	.text.HAL_TIM_Base_MspDeInit,"ax",%progbits
+ 164              		.align	1
+ 165              		.global	HAL_TIM_Base_MspDeInit
+ 166              		.syntax unified
+ 167              		.thumb
+ 168              		.thumb_func
+ 170              	HAL_TIM_Base_MspDeInit:
+ 171              		@ args = 0, pretend = 0, frame = 0
+ 172              		@ frame_needed = 0, uses_anonymous_args = 0
+ 173 0000 08B5     		push	{r3, lr}
+ 174 0002 0368     		ldr	r3, [r0]
+ 175 0004 B3F1804F 		cmp	r3, #1073741824
+ 176 0008 00D0     		beq	.L25
+ 177              	.L22:
+ 178 000a 08BD     		pop	{r3, pc}
+ 179              	.L25:
+ 180 000c 044A     		ldr	r2, .L26
+ARM GAS  C:\Temp\ccDGUGJh.s 			page 4
+
+
+ 181 000e D369     		ldr	r3, [r2, #28]
+ 182 0010 23F00103 		bic	r3, r3, #1
+ 183 0014 D361     		str	r3, [r2, #28]
+ 184 0016 1C20     		movs	r0, #28
+ 185 0018 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 186 001c F5E7     		b	.L22
+ 187              	.L27:
+ 188 001e 00BF     		.align	2
+ 189              	.L26:
+ 190 0020 00100240 		.word	1073876992
+ 192              		.section	.text.HAL_UART_MspInit,"ax",%progbits
+ 193              		.align	1
+ 194              		.global	HAL_UART_MspInit
+ 195              		.syntax unified
+ 196              		.thumb
+ 197              		.thumb_func
+ 199              	HAL_UART_MspInit:
+ 200              		@ args = 0, pretend = 0, frame = 32
+ 201              		@ frame_needed = 0, uses_anonymous_args = 0
+ 202 0000 10B5     		push	{r4, lr}
+ 203 0002 88B0     		sub	sp, sp, #32
+ 204 0004 0023     		movs	r3, #0
+ 205 0006 0393     		str	r3, [sp, #12]
+ 206 0008 0493     		str	r3, [sp, #16]
+ 207 000a 0593     		str	r3, [sp, #20]
+ 208 000c 0693     		str	r3, [sp, #24]
+ 209 000e 0793     		str	r3, [sp, #28]
+ 210 0010 0268     		ldr	r2, [r0]
+ 211 0012 234B     		ldr	r3, .L34
+ 212 0014 9A42     		cmp	r2, r3
+ 213 0016 01D0     		beq	.L32
+ 214              	.L28:
+ 215 0018 08B0     		add	sp, sp, #32
+ 216              		@ sp needed
+ 217 001a 10BD     		pop	{r4, pc}
+ 218              	.L32:
+ 219 001c 0446     		mov	r4, r0
+ 220 001e 03F5E433 		add	r3, r3, #116736
+ 221 0022 DA69     		ldr	r2, [r3, #28]
+ 222 0024 42F48022 		orr	r2, r2, #262144
+ 223 0028 DA61     		str	r2, [r3, #28]
+ 224 002a DA69     		ldr	r2, [r3, #28]
+ 225 002c 02F48022 		and	r2, r2, #262144
+ 226 0030 0192     		str	r2, [sp, #4]
+ 227 0032 019A     		ldr	r2, [sp, #4]
+ 228 0034 5A69     		ldr	r2, [r3, #20]
+ 229 0036 42F48012 		orr	r2, r2, #1048576
+ 230 003a 5A61     		str	r2, [r3, #20]
+ 231 003c 5B69     		ldr	r3, [r3, #20]
+ 232 003e 03F48013 		and	r3, r3, #1048576
+ 233 0042 0293     		str	r3, [sp, #8]
+ 234 0044 029B     		ldr	r3, [sp, #8]
+ 235 0046 4FF44073 		mov	r3, #768
+ 236 004a 0393     		str	r3, [sp, #12]
+ 237 004c 0223     		movs	r3, #2
+ 238 004e 0493     		str	r3, [sp, #16]
+ 239 0050 0323     		movs	r3, #3
+ARM GAS  C:\Temp\ccDGUGJh.s 			page 5
+
+
+ 240 0052 0693     		str	r3, [sp, #24]
+ 241 0054 0723     		movs	r3, #7
+ 242 0056 0793     		str	r3, [sp, #28]
+ 243 0058 03A9     		add	r1, sp, #12
+ 244 005a 1248     		ldr	r0, .L34+4
+ 245 005c FFF7FEFF 		bl	HAL_GPIO_Init
+ 246 0060 1148     		ldr	r0, .L34+8
+ 247 0062 124B     		ldr	r3, .L34+12
+ 248 0064 0360     		str	r3, [r0]
+ 249 0066 0023     		movs	r3, #0
+ 250 0068 4360     		str	r3, [r0, #4]
+ 251 006a 8360     		str	r3, [r0, #8]
+ 252 006c 8022     		movs	r2, #128
+ 253 006e C260     		str	r2, [r0, #12]
+ 254 0070 0361     		str	r3, [r0, #16]
+ 255 0072 4361     		str	r3, [r0, #20]
+ 256 0074 2022     		movs	r2, #32
+ 257 0076 8261     		str	r2, [r0, #24]
+ 258 0078 C361     		str	r3, [r0, #28]
+ 259 007a FFF7FEFF 		bl	HAL_DMA_Init
+ 260 007e 58B9     		cbnz	r0, .L33
+ 261              	.L30:
+ 262 0080 094B     		ldr	r3, .L34+8
+ 263 0082 6367     		str	r3, [r4, #116]
+ 264 0084 5C62     		str	r4, [r3, #36]
+ 265 0086 0022     		movs	r2, #0
+ 266 0088 1146     		mov	r1, r2
+ 267 008a 2720     		movs	r0, #39
+ 268 008c FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 269 0090 2720     		movs	r0, #39
+ 270 0092 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 271 0096 BFE7     		b	.L28
+ 272              	.L33:
+ 273 0098 FFF7FEFF 		bl	Error_Handler
+ 274 009c F0E7     		b	.L30
+ 275              	.L35:
+ 276 009e 00BF     		.align	2
+ 277              	.L34:
+ 278 00a0 00480040 		.word	1073760256
+ 279 00a4 000C0048 		.word	1207962624
+ 280 00a8 00000000 		.word	hdma_usart3_rx
+ 281 00ac 30000240 		.word	1073872944
+ 283              		.section	.text.HAL_UART_MspDeInit,"ax",%progbits
+ 284              		.align	1
+ 285              		.global	HAL_UART_MspDeInit
+ 286              		.syntax unified
+ 287              		.thumb
+ 288              		.thumb_func
+ 290              	HAL_UART_MspDeInit:
+ 291              		@ args = 0, pretend = 0, frame = 0
+ 292              		@ frame_needed = 0, uses_anonymous_args = 0
+ 293 0000 0268     		ldr	r2, [r0]
+ 294 0002 0B4B     		ldr	r3, .L43
+ 295 0004 9A42     		cmp	r2, r3
+ 296 0006 00D0     		beq	.L42
+ 297 0008 7047     		bx	lr
+ 298              	.L42:
+ARM GAS  C:\Temp\ccDGUGJh.s 			page 6
+
+
+ 299 000a 10B5     		push	{r4, lr}
+ 300 000c 0446     		mov	r4, r0
+ 301 000e 094A     		ldr	r2, .L43+4
+ 302 0010 D369     		ldr	r3, [r2, #28]
+ 303 0012 23F48023 		bic	r3, r3, #262144
+ 304 0016 D361     		str	r3, [r2, #28]
+ 305 0018 4FF44071 		mov	r1, #768
+ 306 001c 0648     		ldr	r0, .L43+8
+ 307 001e FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 308 0022 606F     		ldr	r0, [r4, #116]
+ 309 0024 FFF7FEFF 		bl	HAL_DMA_DeInit
+ 310 0028 2720     		movs	r0, #39
+ 311 002a FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 312 002e 10BD     		pop	{r4, pc}
+ 313              	.L44:
+ 314              		.align	2
+ 315              	.L43:
+ 316 0030 00480040 		.word	1073760256
+ 317 0034 00100240 		.word	1073876992
+ 318 0038 000C0048 		.word	1207962624
+ 320              		.section	.text.HAL_PCD_MspInit,"ax",%progbits
+ 321              		.align	1
+ 322              		.global	HAL_PCD_MspInit
+ 323              		.syntax unified
+ 324              		.thumb
+ 325              		.thumb_func
+ 327              	HAL_PCD_MspInit:
+ 328              		@ args = 0, pretend = 0, frame = 8
+ 329              		@ frame_needed = 0, uses_anonymous_args = 0
+ 330 0000 0268     		ldr	r2, [r0]
+ 331 0002 0E4B     		ldr	r3, .L52
+ 332 0004 9A42     		cmp	r2, r3
+ 333 0006 00D0     		beq	.L51
+ 334 0008 7047     		bx	lr
+ 335              	.L51:
+ 336 000a 00B5     		push	{lr}
+ 337 000c 83B0     		sub	sp, sp, #12
+ 338 000e 03F5DA33 		add	r3, r3, #111616
+ 339 0012 DA69     		ldr	r2, [r3, #28]
+ 340 0014 42F40002 		orr	r2, r2, #8388608
+ 341 0018 DA61     		str	r2, [r3, #28]
+ 342 001a DB69     		ldr	r3, [r3, #28]
+ 343 001c 03F40003 		and	r3, r3, #8388608
+ 344 0020 0193     		str	r3, [sp, #4]
+ 345 0022 019B     		ldr	r3, [sp, #4]
+ 346 0024 0022     		movs	r2, #0
+ 347 0026 1146     		mov	r1, r2
+ 348 0028 1420     		movs	r0, #20
+ 349 002a FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 350 002e 1420     		movs	r0, #20
+ 351 0030 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 352 0034 03B0     		add	sp, sp, #12
+ 353              		@ sp needed
+ 354 0036 5DF804FB 		ldr	pc, [sp], #4
+ 355              	.L53:
+ 356 003a 00BF     		.align	2
+ 357              	.L52:
+ARM GAS  C:\Temp\ccDGUGJh.s 			page 7
+
+
+ 358 003c 005C0040 		.word	1073765376
+ 360              		.section	.text.HAL_PCD_MspDeInit,"ax",%progbits
+ 361              		.align	1
+ 362              		.global	HAL_PCD_MspDeInit
+ 363              		.syntax unified
+ 364              		.thumb
+ 365              		.thumb_func
+ 367              	HAL_PCD_MspDeInit:
+ 368              		@ args = 0, pretend = 0, frame = 0
+ 369              		@ frame_needed = 0, uses_anonymous_args = 0
+ 370 0000 08B5     		push	{r3, lr}
+ 371 0002 0268     		ldr	r2, [r0]
+ 372 0004 064B     		ldr	r3, .L58
+ 373 0006 9A42     		cmp	r2, r3
+ 374 0008 00D0     		beq	.L57
+ 375              	.L54:
+ 376 000a 08BD     		pop	{r3, pc}
+ 377              	.L57:
+ 378 000c 054A     		ldr	r2, .L58+4
+ 379 000e D369     		ldr	r3, [r2, #28]
+ 380 0010 23F40003 		bic	r3, r3, #8388608
+ 381 0014 D361     		str	r3, [r2, #28]
+ 382 0016 1420     		movs	r0, #20
+ 383 0018 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 384 001c F5E7     		b	.L54
+ 385              	.L59:
+ 386 001e 00BF     		.align	2
+ 387              	.L58:
+ 388 0020 005C0040 		.word	1073765376
+ 389 0024 00100240 		.word	1073876992
+ 391              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccDGUGJh.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f3xx_hal_msp.c
+  C:\Temp\ccDGUGJh.s:18     .text.HAL_MspInit:00000000 $t
+  C:\Temp\ccDGUGJh.s:24     .text.HAL_MspInit:00000000 HAL_MspInit
+  C:\Temp\ccDGUGJh.s:50     .text.HAL_MspInit:0000002c $d
+  C:\Temp\ccDGUGJh.s:53     .text.HAL_RTC_MspInit:00000000 $t
+  C:\Temp\ccDGUGJh.s:59     .text.HAL_RTC_MspInit:00000000 HAL_RTC_MspInit
+  C:\Temp\ccDGUGJh.s:87     .text.HAL_RTC_MspInit:00000024 $d
+  C:\Temp\ccDGUGJh.s:91     .text.HAL_RTC_MspDeInit:00000000 $t
+  C:\Temp\ccDGUGJh.s:97     .text.HAL_RTC_MspDeInit:00000000 HAL_RTC_MspDeInit
+  C:\Temp\ccDGUGJh.s:125    .text.HAL_RTC_MspDeInit:00000024 $d
+  C:\Temp\ccDGUGJh.s:129    .text.HAL_TIM_Base_MspInit:00000000 $t
+  C:\Temp\ccDGUGJh.s:135    .text.HAL_TIM_Base_MspInit:00000000 HAL_TIM_Base_MspInit
+  C:\Temp\ccDGUGJh.s:164    .text.HAL_TIM_Base_MspDeInit:00000000 $t
+  C:\Temp\ccDGUGJh.s:170    .text.HAL_TIM_Base_MspDeInit:00000000 HAL_TIM_Base_MspDeInit
+  C:\Temp\ccDGUGJh.s:190    .text.HAL_TIM_Base_MspDeInit:00000020 $d
+  C:\Temp\ccDGUGJh.s:193    .text.HAL_UART_MspInit:00000000 $t
+  C:\Temp\ccDGUGJh.s:199    .text.HAL_UART_MspInit:00000000 HAL_UART_MspInit
+  C:\Temp\ccDGUGJh.s:278    .text.HAL_UART_MspInit:000000a0 $d
+  C:\Temp\ccDGUGJh.s:284    .text.HAL_UART_MspDeInit:00000000 $t
+  C:\Temp\ccDGUGJh.s:290    .text.HAL_UART_MspDeInit:00000000 HAL_UART_MspDeInit
+  C:\Temp\ccDGUGJh.s:316    .text.HAL_UART_MspDeInit:00000030 $d
+  C:\Temp\ccDGUGJh.s:321    .text.HAL_PCD_MspInit:00000000 $t
+  C:\Temp\ccDGUGJh.s:327    .text.HAL_PCD_MspInit:00000000 HAL_PCD_MspInit
+  C:\Temp\ccDGUGJh.s:358    .text.HAL_PCD_MspInit:0000003c $d
+  C:\Temp\ccDGUGJh.s:361    .text.HAL_PCD_MspDeInit:00000000 $t
+  C:\Temp\ccDGUGJh.s:367    .text.HAL_PCD_MspDeInit:00000000 HAL_PCD_MspDeInit
+  C:\Temp\ccDGUGJh.s:388    .text.HAL_PCD_MspDeInit:00000020 $d
+
+UNDEFINED SYMBOLS
+HAL_NVIC_SetPriority
+HAL_NVIC_EnableIRQ
+HAL_NVIC_DisableIRQ
+HAL_GPIO_Init
+HAL_DMA_Init
+Error_Handler
+hdma_usart3_rx
+HAL_GPIO_DeInit
+HAL_DMA_DeInit

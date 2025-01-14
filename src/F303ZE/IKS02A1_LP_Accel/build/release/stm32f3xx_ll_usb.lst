@@ -1,0 +1,1903 @@
+ARM GAS  C:\Temp\cctjGfx7.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"stm32f3xx_ll_usb.c"
+  16              		.text
+  17              		.section	.text.USB_CoreInit,"ax",%progbits
+  18              		.align	1
+  19              		.global	USB_CoreInit
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	USB_CoreInit:
+  25              		@ args = 0, pretend = 0, frame = 8
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27              		@ link register save eliminated.
+  28 0000 82B0     		sub	sp, sp, #8
+  29 0002 02AB     		add	r3, sp, #8
+  30 0004 03E90600 		stmdb	r3, {r1, r2}
+  31 0008 0020     		movs	r0, #0
+  32 000a 02B0     		add	sp, sp, #8
+  33              		@ sp needed
+  34 000c 7047     		bx	lr
+  36              		.section	.text.USB_EnableGlobalInt,"ax",%progbits
+  37              		.align	1
+  38              		.global	USB_EnableGlobalInt
+  39              		.syntax unified
+  40              		.thumb
+  41              		.thumb_func
+  43              	USB_EnableGlobalInt:
+  44              		@ args = 0, pretend = 0, frame = 0
+  45              		@ frame_needed = 0, uses_anonymous_args = 0
+  46              		@ link register save eliminated.
+  47 0000 0346     		mov	r3, r0
+  48 0002 0020     		movs	r0, #0
+  49 0004 A3F84400 		strh	r0, [r3, #68]	@ movhi
+  50 0008 4FF43F42 		mov	r2, #48896
+  51 000c A3F84020 		strh	r2, [r3, #64]	@ movhi
+  52 0010 7047     		bx	lr
+  54              		.section	.text.USB_DisableGlobalInt,"ax",%progbits
+  55              		.align	1
+  56              		.global	USB_DisableGlobalInt
+  57              		.syntax unified
+  58              		.thumb
+  59              		.thumb_func
+  61              	USB_DisableGlobalInt:
+  62              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Temp\cctjGfx7.s 			page 2
+
+
+  63              		@ frame_needed = 0, uses_anonymous_args = 0
+  64              		@ link register save eliminated.
+  65 0000 B0F84030 		ldrh	r3, [r0, #64]
+  66 0004 23F47C53 		bic	r3, r3, #16128
+  67 0008 5B04     		lsls	r3, r3, #17
+  68 000a 5B0C     		lsrs	r3, r3, #17
+  69 000c A0F84030 		strh	r3, [r0, #64]	@ movhi
+  70 0010 0020     		movs	r0, #0
+  71 0012 7047     		bx	lr
+  73              		.section	.text.USB_SetCurrentMode,"ax",%progbits
+  74              		.align	1
+  75              		.global	USB_SetCurrentMode
+  76              		.syntax unified
+  77              		.thumb
+  78              		.thumb_func
+  80              	USB_SetCurrentMode:
+  81              		@ args = 0, pretend = 0, frame = 0
+  82              		@ frame_needed = 0, uses_anonymous_args = 0
+  83              		@ link register save eliminated.
+  84 0000 0020     		movs	r0, #0
+  85 0002 7047     		bx	lr
+  87              		.section	.text.USB_DevInit,"ax",%progbits
+  88              		.align	1
+  89              		.global	USB_DevInit
+  90              		.syntax unified
+  91              		.thumb
+  92              		.thumb_func
+  94              	USB_DevInit:
+  95              		@ args = 0, pretend = 0, frame = 8
+  96              		@ frame_needed = 0, uses_anonymous_args = 0
+  97              		@ link register save eliminated.
+  98 0000 82B0     		sub	sp, sp, #8
+  99 0002 0346     		mov	r3, r0
+ 100 0004 02A8     		add	r0, sp, #8
+ 101 0006 00E90600 		stmdb	r0, {r1, r2}
+ 102 000a 0122     		movs	r2, #1
+ 103 000c A3F84020 		strh	r2, [r3, #64]	@ movhi
+ 104 0010 0020     		movs	r0, #0
+ 105 0012 A3F84000 		strh	r0, [r3, #64]	@ movhi
+ 106 0016 A3F84400 		strh	r0, [r3, #68]	@ movhi
+ 107 001a A3F85000 		strh	r0, [r3, #80]	@ movhi
+ 108 001e 02B0     		add	sp, sp, #8
+ 109              		@ sp needed
+ 110 0020 7047     		bx	lr
+ 112              		.section	.text.USB_FlushTxFifo,"ax",%progbits
+ 113              		.align	1
+ 114              		.global	USB_FlushTxFifo
+ 115              		.syntax unified
+ 116              		.thumb
+ 117              		.thumb_func
+ 119              	USB_FlushTxFifo:
+ 120              		@ args = 0, pretend = 0, frame = 0
+ 121              		@ frame_needed = 0, uses_anonymous_args = 0
+ 122              		@ link register save eliminated.
+ 123 0000 0020     		movs	r0, #0
+ 124 0002 7047     		bx	lr
+ 126              		.section	.text.USB_FlushRxFifo,"ax",%progbits
+ARM GAS  C:\Temp\cctjGfx7.s 			page 3
+
+
+ 127              		.align	1
+ 128              		.global	USB_FlushRxFifo
+ 129              		.syntax unified
+ 130              		.thumb
+ 131              		.thumb_func
+ 133              	USB_FlushRxFifo:
+ 134              		@ args = 0, pretend = 0, frame = 0
+ 135              		@ frame_needed = 0, uses_anonymous_args = 0
+ 136              		@ link register save eliminated.
+ 137 0000 0020     		movs	r0, #0
+ 138 0002 7047     		bx	lr
+ 140              		.section	.text.USB_ActivateEndpoint,"ax",%progbits
+ 141              		.align	1
+ 142              		.global	USB_ActivateEndpoint
+ 143              		.syntax unified
+ 144              		.thumb
+ 145              		.thumb_func
+ 147              	USB_ActivateEndpoint:
+ 148              		@ args = 0, pretend = 0, frame = 0
+ 149              		@ frame_needed = 0, uses_anonymous_args = 0
+ 150 0000 10B5     		push	{r4, lr}
+ 151 0002 0346     		mov	r3, r0
+ 152 0004 91F800C0 		ldrb	ip, [r1]	@ zero_extendqisi2
+ 153 0008 30F82C20 		ldrh	r2, [r0, ip, lsl #2]
+ 154 000c 92B2     		uxth	r2, r2
+ 155 000e 22F4EC42 		bic	r2, r2, #30208
+ 156 0012 22F07002 		bic	r2, r2, #112
+ 157 0016 92B2     		uxth	r2, r2
+ 158 0018 C878     		ldrb	r0, [r1, #3]	@ zero_extendqisi2
+ 159 001a 0328     		cmp	r0, #3
+ 160 001c 61D8     		bhi	.L38
+ 161 001e DFE800F0 		tbb	[pc, r0]
+ 162              	.L13:
+ 163 0022 55       		.byte	(.L16-.L13)/2
+ 164 0023 5C       		.byte	(.L15-.L13)/2
+ 165 0024 02       		.byte	(.L14-.L13)/2
+ 166 0025 58       		.byte	(.L12-.L13)/2
+ 167              		.p2align 1
+ 168              	.L14:
+ 169 0026 0020     		movs	r0, #0
+ 170              	.L11:
+ 171 0028 48F2800E 		movw	lr, #32896
+ 172 002c 42EA0E02 		orr	r2, r2, lr
+ 173 0030 23F82C20 		strh	r2, [r3, ip, lsl #2]	@ movhi
+ 174 0034 91F800C0 		ldrb	ip, [r1]	@ zero_extendqisi2
+ 175 0038 33F82C20 		ldrh	r2, [r3, ip, lsl #2]
+ 176 003c 92B2     		uxth	r2, r2
+ 177 003e 22F4E042 		bic	r2, r2, #28672
+ 178 0042 22F07002 		bic	r2, r2, #112
+ 179 0046 4CEA0202 		orr	r2, ip, r2
+ 180 004a 42EA0E02 		orr	r2, r2, lr
+ 181 004e 23F82C20 		strh	r2, [r3, ip, lsl #2]	@ movhi
+ 182 0052 0A7B     		ldrb	r2, [r1, #12]	@ zero_extendqisi2
+ 183 0054 002A     		cmp	r2, #0
+ 184 0056 40F0DC80 		bne	.L17
+ 185 005a 4A78     		ldrb	r2, [r1, #1]	@ zero_extendqisi2
+ 186 005c 002A     		cmp	r2, #0
+ARM GAS  C:\Temp\cctjGfx7.s 			page 4
+
+
+ 187 005e 51D0     		beq	.L18
+ 188 0060 B3F85020 		ldrh	r2, [r3, #80]
+ 189 0064 13FA82F2 		uxtah	r2, r3, r2
+ 190 0068 0C78     		ldrb	r4, [r1]	@ zero_extendqisi2
+ 191 006a 02EBC402 		add	r2, r2, r4, lsl #3
+ 192 006e B1F806C0 		ldrh	ip, [r1, #6]
+ 193 0072 4FEA5C0C 		lsr	ip, ip, #1
+ 194 0076 4FEA4C0C 		lsl	ip, ip, #1
+ 195 007a A2F800C4 		strh	ip, [r2, #1024]	@ movhi
+ 196 007e 0C78     		ldrb	r4, [r1]	@ zero_extendqisi2
+ 197 0080 33F82420 		ldrh	r2, [r3, r4, lsl #2]
+ 198 0084 12F0400F 		tst	r2, #64
+ 199 0088 0CD0     		beq	.L19
+ 200 008a 33F82420 		ldrh	r2, [r3, r4, lsl #2]
+ 201 008e 92B2     		uxth	r2, r2
+ 202 0090 22F4E042 		bic	r2, r2, #28672
+ 203 0094 22F07002 		bic	r2, r2, #112
+ 204 0098 42F40042 		orr	r2, r2, #32768
+ 205 009c 42F0C002 		orr	r2, r2, #192
+ 206 00a0 23F82420 		strh	r2, [r3, r4, lsl #2]	@ movhi
+ 207              	.L19:
+ 208 00a4 CA78     		ldrb	r2, [r1, #3]	@ zero_extendqisi2
+ 209 00a6 012A     		cmp	r2, #1
+ 210 00a8 1DD0     		beq	.L20
+ 211 00aa 0978     		ldrb	r1, [r1]	@ zero_extendqisi2
+ 212 00ac 33F82120 		ldrh	r2, [r3, r1, lsl #2]
+ 213 00b0 92B2     		uxth	r2, r2
+ 214 00b2 22F4E042 		bic	r2, r2, #28672
+ 215 00b6 22F04002 		bic	r2, r2, #64
+ 216 00ba 82F02002 		eor	r2, r2, #32
+ 217 00be 42F40042 		orr	r2, r2, #32768
+ 218 00c2 42F08002 		orr	r2, r2, #128
+ 219 00c6 23F82120 		strh	r2, [r3, r1, lsl #2]	@ movhi
+ 220 00ca 18E1     		b	.L21
+ 221              	.L16:
+ 222 00cc 42F40072 		orr	r2, r2, #512
+ 223 00d0 AAE7     		b	.L11
+ 224              	.L12:
+ 225 00d2 42F4C062 		orr	r2, r2, #1536
+ 226 00d6 0020     		movs	r0, #0
+ 227 00d8 A6E7     		b	.L11
+ 228              	.L15:
+ 229 00da 42F48062 		orr	r2, r2, #1024
+ 230 00de 0020     		movs	r0, #0
+ 231 00e0 A2E7     		b	.L11
+ 232              	.L38:
+ 233 00e2 0120     		movs	r0, #1
+ 234 00e4 A0E7     		b	.L11
+ 235              	.L20:
+ 236 00e6 0978     		ldrb	r1, [r1]	@ zero_extendqisi2
+ 237 00e8 33F82120 		ldrh	r2, [r3, r1, lsl #2]
+ 238 00ec 92B2     		uxth	r2, r2
+ 239 00ee 22F4E042 		bic	r2, r2, #28672
+ 240 00f2 22F04002 		bic	r2, r2, #64
+ 241 00f6 42F40042 		orr	r2, r2, #32768
+ 242 00fa 42F08002 		orr	r2, r2, #128
+ 243 00fe 23F82120 		strh	r2, [r3, r1, lsl #2]	@ movhi
+ARM GAS  C:\Temp\cctjGfx7.s 			page 5
+
+
+ 244 0102 FCE0     		b	.L21
+ 245              	.L18:
+ 246 0104 B3F85020 		ldrh	r2, [r3, #80]
+ 247 0108 13FA82F2 		uxtah	r2, r3, r2
+ 248 010c 0C78     		ldrb	r4, [r1]	@ zero_extendqisi2
+ 249 010e 02EBC402 		add	r2, r2, r4, lsl #3
+ 250 0112 B1F806C0 		ldrh	ip, [r1, #6]
+ 251 0116 4FEA5C0C 		lsr	ip, ip, #1
+ 252 011a 4FEA4C0C 		lsl	ip, ip, #1
+ 253 011e A2F804C4 		strh	ip, [r2, #1028]	@ movhi
+ 254 0122 B3F85020 		ldrh	r2, [r3, #80]
+ 255 0126 13FA82F2 		uxtah	r2, r3, r2
+ 256 012a 0C78     		ldrb	r4, [r1]	@ zero_extendqisi2
+ 257 012c 02EBC402 		add	r2, r2, r4, lsl #3
+ 258 0130 B2F806C4 		ldrh	ip, [r2, #1030]
+ 259 0134 CCF3090C 		ubfx	ip, ip, #0, #10
+ 260 0138 A2F806C4 		strh	ip, [r2, #1030]	@ movhi
+ 261 013c 0C69     		ldr	r4, [r1, #16]
+ 262 013e 74BB     		cbnz	r4, .L22
+ 263 0140 B2F806C4 		ldrh	ip, [r2, #1030]
+ 264 0144 6FEA4C4C 		mvn	ip, ip, lsl #17
+ 265 0148 6FEA5C4C 		mvn	ip, ip, lsr #17
+ 266 014c 1FFA8CFC 		uxth	ip, ip
+ 267 0150 A2F806C4 		strh	ip, [r2, #1030]	@ movhi
+ 268              	.L23:
+ 269 0154 0C78     		ldrb	r4, [r1]	@ zero_extendqisi2
+ 270 0156 33F82420 		ldrh	r2, [r3, r4, lsl #2]
+ 271 015a 12F4804F 		tst	r2, #16384
+ 272 015e 0CD0     		beq	.L27
+ 273 0160 33F82420 		ldrh	r2, [r3, r4, lsl #2]
+ 274 0164 92B2     		uxth	r2, r2
+ 275 0166 22F4E042 		bic	r2, r2, #28672
+ 276 016a 22F07002 		bic	r2, r2, #112
+ 277 016e 42F44042 		orr	r2, r2, #49152
+ 278 0172 42F08002 		orr	r2, r2, #128
+ 279 0176 23F82420 		strh	r2, [r3, r4, lsl #2]	@ movhi
+ 280              	.L27:
+ 281 017a 0978     		ldrb	r1, [r1]	@ zero_extendqisi2
+ 282 017c C9BB     		cbnz	r1, .L28
+ 283 017e 33F82120 		ldrh	r2, [r3, r1, lsl #2]
+ 284 0182 92B2     		uxth	r2, r2
+ 285 0184 22F48042 		bic	r2, r2, #16384
+ 286 0188 22F07002 		bic	r2, r2, #112
+ 287 018c 82F44052 		eor	r2, r2, #12288
+ 288 0190 42F40042 		orr	r2, r2, #32768
+ 289 0194 42F08002 		orr	r2, r2, #128
+ 290 0198 23F82120 		strh	r2, [r3, r1, lsl #2]	@ movhi
+ 291 019c AFE0     		b	.L21
+ 292              	.L22:
+ 293 019e 3E2C     		cmp	r4, #62
+ 294 01a0 12D8     		bhi	.L24
+ 295 01a2 4FEA540C 		lsr	ip, r4, #1
+ 296 01a6 14F0010F 		tst	r4, #1
+ 297 01aa 01D0     		beq	.L25
+ 298 01ac 0CF1010C 		add	ip, ip, #1
+ 299              	.L25:
+ 300 01b0 B2F80644 		ldrh	r4, [r2, #1030]
+ARM GAS  C:\Temp\cctjGfx7.s 			page 6
+
+
+ 301 01b4 A4B2     		uxth	r4, r4
+ 302 01b6 4FEA8C2C 		lsl	ip, ip, #10
+ 303 01ba 1FFA8CFC 		uxth	ip, ip
+ 304 01be 44EA0C04 		orr	r4, r4, ip
+ 305 01c2 A2F80644 		strh	r4, [r2, #1030]	@ movhi
+ 306 01c6 C5E7     		b	.L23
+ 307              	.L24:
+ 308 01c8 4FEA541C 		lsr	ip, r4, #5
+ 309 01cc 14F01F0F 		tst	r4, #31
+ 310 01d0 01D1     		bne	.L26
+ 311 01d2 0CF1FF3C 		add	ip, ip, #-1
+ 312              	.L26:
+ 313 01d6 B2F80644 		ldrh	r4, [r2, #1030]
+ 314 01da A4B2     		uxth	r4, r4
+ 315 01dc 4FEA8C2C 		lsl	ip, ip, #10
+ 316 01e0 1FFA8CFC 		uxth	ip, ip
+ 317 01e4 44EA0C04 		orr	r4, r4, ip
+ 318 01e8 44F40044 		orr	r4, r4, #32768
+ 319 01ec A2F80644 		strh	r4, [r2, #1030]	@ movhi
+ 320 01f0 B0E7     		b	.L23
+ 321              	.L28:
+ 322 01f2 33F82120 		ldrh	r2, [r3, r1, lsl #2]
+ 323 01f6 92B2     		uxth	r2, r2
+ 324 01f8 22F48042 		bic	r2, r2, #16384
+ 325 01fc 22F07002 		bic	r2, r2, #112
+ 326 0200 82F40052 		eor	r2, r2, #8192
+ 327 0204 42F40042 		orr	r2, r2, #32768
+ 328 0208 42F08002 		orr	r2, r2, #128
+ 329 020c 23F82120 		strh	r2, [r3, r1, lsl #2]	@ movhi
+ 330 0210 75E0     		b	.L21
+ 331              	.L17:
+ 332 0212 CA78     		ldrb	r2, [r1, #3]	@ zero_extendqisi2
+ 333 0214 022A     		cmp	r2, #2
+ 334 0216 73D0     		beq	.L40
+ 335 0218 91F800C0 		ldrb	ip, [r1]	@ zero_extendqisi2
+ 336 021c 33F82C20 		ldrh	r2, [r3, ip, lsl #2]
+ 337 0220 92B2     		uxth	r2, r2
+ 338 0222 22F4E242 		bic	r2, r2, #28928
+ 339 0226 22F07002 		bic	r2, r2, #112
+ 340 022a 42F40042 		orr	r2, r2, #32768
+ 341 022e 42F08002 		orr	r2, r2, #128
+ 342 0232 23F82C20 		strh	r2, [r3, ip, lsl #2]	@ movhi
+ 343              	.L30:
+ 344 0236 B3F85020 		ldrh	r2, [r3, #80]
+ 345 023a 13FA82F2 		uxtah	r2, r3, r2
+ 346 023e 91F800C0 		ldrb	ip, [r1]	@ zero_extendqisi2
+ 347 0242 02EBCC02 		add	r2, r2, ip, lsl #3
+ 348 0246 B1F808C0 		ldrh	ip, [r1, #8]
+ 349 024a 4FEA5C0C 		lsr	ip, ip, #1
+ 350 024e 4FEA4C0C 		lsl	ip, ip, #1
+ 351 0252 A2F800C4 		strh	ip, [r2, #1024]	@ movhi
+ 352 0256 B3F85020 		ldrh	r2, [r3, #80]
+ 353 025a 13FA82F2 		uxtah	r2, r3, r2
+ 354 025e 91F800C0 		ldrb	ip, [r1]	@ zero_extendqisi2
+ 355 0262 02EBCC02 		add	r2, r2, ip, lsl #3
+ 356 0266 B1F80AC0 		ldrh	ip, [r1, #10]
+ 357 026a 4FEA5C0C 		lsr	ip, ip, #1
+ARM GAS  C:\Temp\cctjGfx7.s 			page 7
+
+
+ 358 026e 4FEA4C0C 		lsl	ip, ip, #1
+ 359 0272 A2F804C4 		strh	ip, [r2, #1028]	@ movhi
+ 360 0276 4A78     		ldrb	r2, [r1, #1]	@ zero_extendqisi2
+ 361 0278 002A     		cmp	r2, #0
+ 362 027a 50D1     		bne	.L31
+ 363 027c 0C78     		ldrb	r4, [r1]	@ zero_extendqisi2
+ 364 027e 33F82420 		ldrh	r2, [r3, r4, lsl #2]
+ 365 0282 12F4804F 		tst	r2, #16384
+ 366 0286 0CD0     		beq	.L32
+ 367 0288 33F82420 		ldrh	r2, [r3, r4, lsl #2]
+ 368 028c 92B2     		uxth	r2, r2
+ 369 028e 22F4E042 		bic	r2, r2, #28672
+ 370 0292 22F07002 		bic	r2, r2, #112
+ 371 0296 42F44042 		orr	r2, r2, #49152
+ 372 029a 42F08002 		orr	r2, r2, #128
+ 373 029e 23F82420 		strh	r2, [r3, r4, lsl #2]	@ movhi
+ 374              	.L32:
+ 375 02a2 0C78     		ldrb	r4, [r1]	@ zero_extendqisi2
+ 376 02a4 33F82420 		ldrh	r2, [r3, r4, lsl #2]
+ 377 02a8 12F0400F 		tst	r2, #64
+ 378 02ac 0CD0     		beq	.L33
+ 379 02ae 33F82420 		ldrh	r2, [r3, r4, lsl #2]
+ 380 02b2 92B2     		uxth	r2, r2
+ 381 02b4 22F4E042 		bic	r2, r2, #28672
+ 382 02b8 22F07002 		bic	r2, r2, #112
+ 383 02bc 42F40042 		orr	r2, r2, #32768
+ 384 02c0 42F0C002 		orr	r2, r2, #192
+ 385 02c4 23F82420 		strh	r2, [r3, r4, lsl #2]	@ movhi
+ 386              	.L33:
+ 387 02c8 91F800C0 		ldrb	ip, [r1]	@ zero_extendqisi2
+ 388 02cc 33F82C20 		ldrh	r2, [r3, ip, lsl #2]
+ 389 02d0 92B2     		uxth	r2, r2
+ 390 02d2 22F48042 		bic	r2, r2, #16384
+ 391 02d6 22F07002 		bic	r2, r2, #112
+ 392 02da 82F44052 		eor	r2, r2, #12288
+ 393 02de 48F28004 		movw	r4, #32896
+ 394 02e2 2243     		orrs	r2, r2, r4
+ 395 02e4 23F82C20 		strh	r2, [r3, ip, lsl #2]	@ movhi
+ 396 02e8 0978     		ldrb	r1, [r1]	@ zero_extendqisi2
+ 397 02ea 33F82120 		ldrh	r2, [r3, r1, lsl #2]
+ 398 02ee 92B2     		uxth	r2, r2
+ 399 02f0 22F4E042 		bic	r2, r2, #28672
+ 400 02f4 22F04002 		bic	r2, r2, #64
+ 401 02f8 2243     		orrs	r2, r2, r4
+ 402 02fa 23F82120 		strh	r2, [r3, r1, lsl #2]	@ movhi
+ 403              	.L21:
+ 404 02fe 10BD     		pop	{r4, pc}
+ 405              	.L40:
+ 406 0300 0C78     		ldrb	r4, [r1]	@ zero_extendqisi2
+ 407 0302 33F82420 		ldrh	r2, [r3, r4, lsl #2]
+ 408 0306 92B2     		uxth	r2, r2
+ 409 0308 22F4E042 		bic	r2, r2, #28672
+ 410 030c 22F07002 		bic	r2, r2, #112
+ 411 0310 42F40142 		orr	r2, r2, #33024
+ 412 0314 42F08002 		orr	r2, r2, #128
+ 413 0318 23F82420 		strh	r2, [r3, r4, lsl #2]	@ movhi
+ 414 031c 8BE7     		b	.L30
+ARM GAS  C:\Temp\cctjGfx7.s 			page 8
+
+
+ 415              	.L31:
+ 416 031e 0C78     		ldrb	r4, [r1]	@ zero_extendqisi2
+ 417 0320 33F82420 		ldrh	r2, [r3, r4, lsl #2]
+ 418 0324 12F4804F 		tst	r2, #16384
+ 419 0328 0CD0     		beq	.L34
+ 420 032a 33F82420 		ldrh	r2, [r3, r4, lsl #2]
+ 421 032e 92B2     		uxth	r2, r2
+ 422 0330 22F4E042 		bic	r2, r2, #28672
+ 423 0334 22F07002 		bic	r2, r2, #112
+ 424 0338 42F44042 		orr	r2, r2, #49152
+ 425 033c 42F08002 		orr	r2, r2, #128
+ 426 0340 23F82420 		strh	r2, [r3, r4, lsl #2]	@ movhi
+ 427              	.L34:
+ 428 0344 0C78     		ldrb	r4, [r1]	@ zero_extendqisi2
+ 429 0346 33F82420 		ldrh	r2, [r3, r4, lsl #2]
+ 430 034a 12F0400F 		tst	r2, #64
+ 431 034e 0CD0     		beq	.L35
+ 432 0350 33F82420 		ldrh	r2, [r3, r4, lsl #2]
+ 433 0354 92B2     		uxth	r2, r2
+ 434 0356 22F4E042 		bic	r2, r2, #28672
+ 435 035a 22F07002 		bic	r2, r2, #112
+ 436 035e 42F40042 		orr	r2, r2, #32768
+ 437 0362 42F0C002 		orr	r2, r2, #192
+ 438 0366 23F82420 		strh	r2, [r3, r4, lsl #2]	@ movhi
+ 439              	.L35:
+ 440 036a CA78     		ldrb	r2, [r1, #3]	@ zero_extendqisi2
+ 441 036c 012A     		cmp	r2, #1
+ 442 036e 1ED0     		beq	.L36
+ 443 0370 0C78     		ldrb	r4, [r1]	@ zero_extendqisi2
+ 444 0372 33F82420 		ldrh	r2, [r3, r4, lsl #2]
+ 445 0376 92B2     		uxth	r2, r2
+ 446 0378 22F4E042 		bic	r2, r2, #28672
+ 447 037c 22F04002 		bic	r2, r2, #64
+ 448 0380 82F02002 		eor	r2, r2, #32
+ 449 0384 42F40042 		orr	r2, r2, #32768
+ 450 0388 42F08002 		orr	r2, r2, #128
+ 451 038c 23F82420 		strh	r2, [r3, r4, lsl #2]	@ movhi
+ 452              	.L37:
+ 453 0390 0978     		ldrb	r1, [r1]	@ zero_extendqisi2
+ 454 0392 33F82120 		ldrh	r2, [r3, r1, lsl #2]
+ 455 0396 92B2     		uxth	r2, r2
+ 456 0398 22F48042 		bic	r2, r2, #16384
+ 457 039c 22F07002 		bic	r2, r2, #112
+ 458 03a0 42F40042 		orr	r2, r2, #32768
+ 459 03a4 42F08002 		orr	r2, r2, #128
+ 460 03a8 23F82120 		strh	r2, [r3, r1, lsl #2]	@ movhi
+ 461 03ac A7E7     		b	.L21
+ 462              	.L36:
+ 463 03ae 0C78     		ldrb	r4, [r1]	@ zero_extendqisi2
+ 464 03b0 33F82420 		ldrh	r2, [r3, r4, lsl #2]
+ 465 03b4 92B2     		uxth	r2, r2
+ 466 03b6 22F4E042 		bic	r2, r2, #28672
+ 467 03ba 22F04002 		bic	r2, r2, #64
+ 468 03be 42F40042 		orr	r2, r2, #32768
+ 469 03c2 42F08002 		orr	r2, r2, #128
+ 470 03c6 23F82420 		strh	r2, [r3, r4, lsl #2]	@ movhi
+ 471 03ca E1E7     		b	.L37
+ARM GAS  C:\Temp\cctjGfx7.s 			page 9
+
+
+ 473              		.section	.text.USB_DeactivateEndpoint,"ax",%progbits
+ 474              		.align	1
+ 475              		.global	USB_DeactivateEndpoint
+ 476              		.syntax unified
+ 477              		.thumb
+ 478              		.thumb_func
+ 480              	USB_DeactivateEndpoint:
+ 481              		@ args = 0, pretend = 0, frame = 0
+ 482              		@ frame_needed = 0, uses_anonymous_args = 0
+ 483              		@ link register save eliminated.
+ 484 0000 0B7B     		ldrb	r3, [r1, #12]	@ zero_extendqisi2
+ 485 0002 002B     		cmp	r3, #0
+ 486 0004 46D1     		bne	.L42
+ 487 0006 4B78     		ldrb	r3, [r1, #1]	@ zero_extendqisi2
+ 488 0008 13B3     		cbz	r3, .L43
+ 489 000a 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 490 000c 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 491 0010 13F0400F 		tst	r3, #64
+ 492 0014 0CD0     		beq	.L44
+ 493 0016 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 494 001a 9BB2     		uxth	r3, r3
+ 495 001c 23F4E043 		bic	r3, r3, #28672
+ 496 0020 23F07003 		bic	r3, r3, #112
+ 497 0024 43F40043 		orr	r3, r3, #32768
+ 498 0028 43F0C003 		orr	r3, r3, #192
+ 499 002c 20F82230 		strh	r3, [r0, r2, lsl #2]	@ movhi
+ 500              	.L44:
+ 501 0030 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 502 0032 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 503 0036 9BB2     		uxth	r3, r3
+ 504 0038 23F4E043 		bic	r3, r3, #28672
+ 505 003c 23F04003 		bic	r3, r3, #64
+ 506 0040 43F40043 		orr	r3, r3, #32768
+ 507 0044 43F08003 		orr	r3, r3, #128
+ 508 0048 20F82230 		strh	r3, [r0, r2, lsl #2]	@ movhi
+ 509              	.L45:
+ 510 004c 0020     		movs	r0, #0
+ 511 004e 7047     		bx	lr
+ 512              	.L43:
+ 513 0050 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 514 0052 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 515 0056 13F4804F 		tst	r3, #16384
+ 516 005a 0CD0     		beq	.L46
+ 517 005c 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 518 0060 9BB2     		uxth	r3, r3
+ 519 0062 23F4E043 		bic	r3, r3, #28672
+ 520 0066 23F07003 		bic	r3, r3, #112
+ 521 006a 43F44043 		orr	r3, r3, #49152
+ 522 006e 43F08003 		orr	r3, r3, #128
+ 523 0072 20F82230 		strh	r3, [r0, r2, lsl #2]	@ movhi
+ 524              	.L46:
+ 525 0076 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 526 0078 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 527 007c 9BB2     		uxth	r3, r3
+ 528 007e 23F48043 		bic	r3, r3, #16384
+ 529 0082 23F07003 		bic	r3, r3, #112
+ 530 0086 43F40043 		orr	r3, r3, #32768
+ARM GAS  C:\Temp\cctjGfx7.s 			page 10
+
+
+ 531 008a 43F08003 		orr	r3, r3, #128
+ 532 008e 20F82230 		strh	r3, [r0, r2, lsl #2]	@ movhi
+ 533 0092 DBE7     		b	.L45
+ 534              	.L42:
+ 535 0094 4B78     		ldrb	r3, [r1, #1]	@ zero_extendqisi2
+ 536 0096 002B     		cmp	r3, #0
+ 537 0098 4ED1     		bne	.L47
+ 538 009a 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 539 009c 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 540 00a0 13F4804F 		tst	r3, #16384
+ 541 00a4 0CD0     		beq	.L48
+ 542 00a6 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 543 00aa 9BB2     		uxth	r3, r3
+ 544 00ac 23F4E043 		bic	r3, r3, #28672
+ 545 00b0 23F07003 		bic	r3, r3, #112
+ 546 00b4 43F44043 		orr	r3, r3, #49152
+ 547 00b8 43F08003 		orr	r3, r3, #128
+ 548 00bc 20F82230 		strh	r3, [r0, r2, lsl #2]	@ movhi
+ 549              	.L48:
+ 550 00c0 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 551 00c2 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 552 00c6 13F0400F 		tst	r3, #64
+ 553 00ca 0CD0     		beq	.L49
+ 554 00cc 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 555 00d0 9BB2     		uxth	r3, r3
+ 556 00d2 23F4E043 		bic	r3, r3, #28672
+ 557 00d6 23F07003 		bic	r3, r3, #112
+ 558 00da 43F40043 		orr	r3, r3, #32768
+ 559 00de 43F0C003 		orr	r3, r3, #192
+ 560 00e2 20F82230 		strh	r3, [r0, r2, lsl #2]	@ movhi
+ 561              	.L49:
+ 562 00e6 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 563 00e8 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 564 00ec 9BB2     		uxth	r3, r3
+ 565 00ee 23F4E043 		bic	r3, r3, #28672
+ 566 00f2 23F07003 		bic	r3, r3, #112
+ 567 00f6 43F40043 		orr	r3, r3, #32768
+ 568 00fa 43F0C003 		orr	r3, r3, #192
+ 569 00fe 20F82230 		strh	r3, [r0, r2, lsl #2]	@ movhi
+ 570 0102 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 571 0104 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 572 0108 9BB2     		uxth	r3, r3
+ 573 010a 23F48043 		bic	r3, r3, #16384
+ 574 010e 23F07003 		bic	r3, r3, #112
+ 575 0112 48F2800C 		movw	ip, #32896
+ 576 0116 43EA0C03 		orr	r3, r3, ip
+ 577 011a 20F82230 		strh	r3, [r0, r2, lsl #2]	@ movhi
+ 578 011e 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 579 0120 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 580 0124 9BB2     		uxth	r3, r3
+ 581 0126 23F4E043 		bic	r3, r3, #28672
+ 582 012a 23F04003 		bic	r3, r3, #64
+ 583 012e 43EA0C03 		orr	r3, r3, ip
+ 584 0132 20F82230 		strh	r3, [r0, r2, lsl #2]	@ movhi
+ 585 0136 89E7     		b	.L45
+ 586              	.L47:
+ 587 0138 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ARM GAS  C:\Temp\cctjGfx7.s 			page 11
+
+
+ 588 013a 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 589 013e 13F4804F 		tst	r3, #16384
+ 590 0142 0CD0     		beq	.L50
+ 591 0144 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 592 0148 9BB2     		uxth	r3, r3
+ 593 014a 23F4E043 		bic	r3, r3, #28672
+ 594 014e 23F07003 		bic	r3, r3, #112
+ 595 0152 43F44043 		orr	r3, r3, #49152
+ 596 0156 43F08003 		orr	r3, r3, #128
+ 597 015a 20F82230 		strh	r3, [r0, r2, lsl #2]	@ movhi
+ 598              	.L50:
+ 599 015e 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 600 0160 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 601 0164 13F0400F 		tst	r3, #64
+ 602 0168 0CD0     		beq	.L51
+ 603 016a 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 604 016e 9BB2     		uxth	r3, r3
+ 605 0170 23F4E043 		bic	r3, r3, #28672
+ 606 0174 23F07003 		bic	r3, r3, #112
+ 607 0178 43F40043 		orr	r3, r3, #32768
+ 608 017c 43F0C003 		orr	r3, r3, #192
+ 609 0180 20F82230 		strh	r3, [r0, r2, lsl #2]	@ movhi
+ 610              	.L51:
+ 611 0184 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 612 0186 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 613 018a 9BB2     		uxth	r3, r3
+ 614 018c 23F4E043 		bic	r3, r3, #28672
+ 615 0190 23F07003 		bic	r3, r3, #112
+ 616 0194 43F44043 		orr	r3, r3, #49152
+ 617 0198 43F08003 		orr	r3, r3, #128
+ 618 019c 20F82230 		strh	r3, [r0, r2, lsl #2]	@ movhi
+ 619 01a0 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 620 01a2 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 621 01a6 9BB2     		uxth	r3, r3
+ 622 01a8 23F4E043 		bic	r3, r3, #28672
+ 623 01ac 23F04003 		bic	r3, r3, #64
+ 624 01b0 48F2800C 		movw	ip, #32896
+ 625 01b4 43EA0C03 		orr	r3, r3, ip
+ 626 01b8 20F82230 		strh	r3, [r0, r2, lsl #2]	@ movhi
+ 627 01bc 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 628 01be 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 629 01c2 9BB2     		uxth	r3, r3
+ 630 01c4 23F48043 		bic	r3, r3, #16384
+ 631 01c8 23F07003 		bic	r3, r3, #112
+ 632 01cc 43EA0C03 		orr	r3, r3, ip
+ 633 01d0 20F82230 		strh	r3, [r0, r2, lsl #2]	@ movhi
+ 634 01d4 3AE7     		b	.L45
+ 636              		.section	.text.USB_EPSetStall,"ax",%progbits
+ 637              		.align	1
+ 638              		.global	USB_EPSetStall
+ 639              		.syntax unified
+ 640              		.thumb
+ 641              		.thumb_func
+ 643              	USB_EPSetStall:
+ 644              		@ args = 0, pretend = 0, frame = 0
+ 645              		@ frame_needed = 0, uses_anonymous_args = 0
+ 646              		@ link register save eliminated.
+ARM GAS  C:\Temp\cctjGfx7.s 			page 12
+
+
+ 647 0000 4B78     		ldrb	r3, [r1, #1]	@ zero_extendqisi2
+ 648 0002 8BB1     		cbz	r3, .L53
+ 649 0004 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 650 0006 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 651 000a 9BB2     		uxth	r3, r3
+ 652 000c 23F4E043 		bic	r3, r3, #28672
+ 653 0010 23F04003 		bic	r3, r3, #64
+ 654 0014 83F01003 		eor	r3, r3, #16
+ 655 0018 43F40043 		orr	r3, r3, #32768
+ 656 001c 43F08003 		orr	r3, r3, #128
+ 657 0020 20F82230 		strh	r3, [r0, r2, lsl #2]	@ movhi
+ 658              	.L54:
+ 659 0024 0020     		movs	r0, #0
+ 660 0026 7047     		bx	lr
+ 661              	.L53:
+ 662 0028 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 663 002a 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 664 002e 9BB2     		uxth	r3, r3
+ 665 0030 23F48043 		bic	r3, r3, #16384
+ 666 0034 23F07003 		bic	r3, r3, #112
+ 667 0038 83F48053 		eor	r3, r3, #4096
+ 668 003c 43F40043 		orr	r3, r3, #32768
+ 669 0040 43F08003 		orr	r3, r3, #128
+ 670 0044 20F82230 		strh	r3, [r0, r2, lsl #2]	@ movhi
+ 671 0048 ECE7     		b	.L54
+ 673              		.section	.text.USB_EPClearStall,"ax",%progbits
+ 674              		.align	1
+ 675              		.global	USB_EPClearStall
+ 676              		.syntax unified
+ 677              		.thumb
+ 678              		.thumb_func
+ 680              	USB_EPClearStall:
+ 681              		@ args = 0, pretend = 0, frame = 0
+ 682              		@ frame_needed = 0, uses_anonymous_args = 0
+ 683              		@ link register save eliminated.
+ 684 0000 0B7B     		ldrb	r3, [r1, #12]	@ zero_extendqisi2
+ 685 0002 002B     		cmp	r3, #0
+ 686 0004 4BD1     		bne	.L56
+ 687 0006 4B78     		ldrb	r3, [r1, #1]	@ zero_extendqisi2
+ 688 0008 33B3     		cbz	r3, .L57
+ 689 000a 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 690 000c 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 691 0010 13F0400F 		tst	r3, #64
+ 692 0014 0CD0     		beq	.L58
+ 693 0016 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 694 001a 9BB2     		uxth	r3, r3
+ 695 001c 23F4E043 		bic	r3, r3, #28672
+ 696 0020 23F07003 		bic	r3, r3, #112
+ 697 0024 43F40043 		orr	r3, r3, #32768
+ 698 0028 43F0C003 		orr	r3, r3, #192
+ 699 002c 20F82230 		strh	r3, [r0, r2, lsl #2]	@ movhi
+ 700              	.L58:
+ 701 0030 CB78     		ldrb	r3, [r1, #3]	@ zero_extendqisi2
+ 702 0032 012B     		cmp	r3, #1
+ 703 0034 33D0     		beq	.L56
+ 704 0036 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 705 0038 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ARM GAS  C:\Temp\cctjGfx7.s 			page 13
+
+
+ 706 003c 9BB2     		uxth	r3, r3
+ 707 003e 23F4E043 		bic	r3, r3, #28672
+ 708 0042 23F04003 		bic	r3, r3, #64
+ 709 0046 83F02003 		eor	r3, r3, #32
+ 710 004a 43F40043 		orr	r3, r3, #32768
+ 711 004e 43F08003 		orr	r3, r3, #128
+ 712 0052 20F82230 		strh	r3, [r0, r2, lsl #2]	@ movhi
+ 713 0056 22E0     		b	.L56
+ 714              	.L57:
+ 715 0058 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 716 005a 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 717 005e 13F4804F 		tst	r3, #16384
+ 718 0062 0CD0     		beq	.L59
+ 719 0064 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 720 0068 9BB2     		uxth	r3, r3
+ 721 006a 23F4E043 		bic	r3, r3, #28672
+ 722 006e 23F07003 		bic	r3, r3, #112
+ 723 0072 43F44043 		orr	r3, r3, #49152
+ 724 0076 43F08003 		orr	r3, r3, #128
+ 725 007a 20F82230 		strh	r3, [r0, r2, lsl #2]	@ movhi
+ 726              	.L59:
+ 727 007e 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 728 0080 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 729 0084 9BB2     		uxth	r3, r3
+ 730 0086 23F48043 		bic	r3, r3, #16384
+ 731 008a 23F07003 		bic	r3, r3, #112
+ 732 008e 83F44053 		eor	r3, r3, #12288
+ 733 0092 43F40043 		orr	r3, r3, #32768
+ 734 0096 43F08003 		orr	r3, r3, #128
+ 735 009a 20F82230 		strh	r3, [r0, r2, lsl #2]	@ movhi
+ 736              	.L56:
+ 737 009e 0020     		movs	r0, #0
+ 738 00a0 7047     		bx	lr
+ 740              		.section	.text.USB_EPStopXfer,"ax",%progbits
+ 741              		.align	1
+ 742              		.global	USB_EPStopXfer
+ 743              		.syntax unified
+ 744              		.thumb
+ 745              		.thumb_func
+ 747              	USB_EPStopXfer:
+ 748              		@ args = 0, pretend = 0, frame = 0
+ 749              		@ frame_needed = 0, uses_anonymous_args = 0
+ 750              		@ link register save eliminated.
+ 751 0000 4B78     		ldrb	r3, [r1, #1]	@ zero_extendqisi2
+ 752 0002 012B     		cmp	r3, #1
+ 753 0004 16D0     		beq	.L65
+ 754 0006 0B7B     		ldrb	r3, [r1, #12]	@ zero_extendqisi2
+ 755 0008 93B9     		cbnz	r3, .L62
+ 756 000a CB78     		ldrb	r3, [r1, #3]	@ zero_extendqisi2
+ 757 000c 012B     		cmp	r3, #1
+ 758 000e 37D0     		beq	.L64
+ 759 0010 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 760 0012 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 761 0016 9BB2     		uxth	r3, r3
+ 762 0018 23F48043 		bic	r3, r3, #16384
+ 763 001c 23F07003 		bic	r3, r3, #112
+ 764 0020 83F40053 		eor	r3, r3, #8192
+ARM GAS  C:\Temp\cctjGfx7.s 			page 14
+
+
+ 765 0024 43F40043 		orr	r3, r3, #32768
+ 766 0028 43F08003 		orr	r3, r3, #128
+ 767 002c 20F82230 		strh	r3, [r0, r2, lsl #2]	@ movhi
+ 768              	.L62:
+ 769 0030 0020     		movs	r0, #0
+ 770 0032 7047     		bx	lr
+ 771              	.L65:
+ 772 0034 0B7B     		ldrb	r3, [r1, #12]	@ zero_extendqisi2
+ 773 0036 002B     		cmp	r3, #0
+ 774 0038 FAD1     		bne	.L62
+ 775 003a CB78     		ldrb	r3, [r1, #3]	@ zero_extendqisi2
+ 776 003c 012B     		cmp	r3, #1
+ 777 003e 10D0     		beq	.L63
+ 778 0040 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 779 0042 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 780 0046 9BB2     		uxth	r3, r3
+ 781 0048 23F4E043 		bic	r3, r3, #28672
+ 782 004c 23F04003 		bic	r3, r3, #64
+ 783 0050 83F02003 		eor	r3, r3, #32
+ 784 0054 43F40043 		orr	r3, r3, #32768
+ 785 0058 43F08003 		orr	r3, r3, #128
+ 786 005c 20F82230 		strh	r3, [r0, r2, lsl #2]	@ movhi
+ 787 0060 E6E7     		b	.L62
+ 788              	.L63:
+ 789 0062 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 790 0064 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 791 0068 9BB2     		uxth	r3, r3
+ 792 006a 23F4E043 		bic	r3, r3, #28672
+ 793 006e 23F04003 		bic	r3, r3, #64
+ 794 0072 43F40043 		orr	r3, r3, #32768
+ 795 0076 43F08003 		orr	r3, r3, #128
+ 796 007a 20F82230 		strh	r3, [r0, r2, lsl #2]	@ movhi
+ 797 007e D7E7     		b	.L62
+ 798              	.L64:
+ 799 0080 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 800 0082 30F82230 		ldrh	r3, [r0, r2, lsl #2]
+ 801 0086 9BB2     		uxth	r3, r3
+ 802 0088 23F48043 		bic	r3, r3, #16384
+ 803 008c 23F07003 		bic	r3, r3, #112
+ 804 0090 43F40043 		orr	r3, r3, #32768
+ 805 0094 43F08003 		orr	r3, r3, #128
+ 806 0098 20F82230 		strh	r3, [r0, r2, lsl #2]	@ movhi
+ 807 009c C8E7     		b	.L62
+ 809              		.section	.text.USB_StopDevice,"ax",%progbits
+ 810              		.align	1
+ 811              		.global	USB_StopDevice
+ 812              		.syntax unified
+ 813              		.thumb
+ 814              		.thumb_func
+ 816              	USB_StopDevice:
+ 817              		@ args = 0, pretend = 0, frame = 0
+ 818              		@ frame_needed = 0, uses_anonymous_args = 0
+ 819              		@ link register save eliminated.
+ 820 0000 0346     		mov	r3, r0
+ 821 0002 0122     		movs	r2, #1
+ 822 0004 A0F84020 		strh	r2, [r0, #64]	@ movhi
+ 823 0008 0020     		movs	r0, #0
+ARM GAS  C:\Temp\cctjGfx7.s 			page 15
+
+
+ 824 000a A3F84400 		strh	r0, [r3, #68]	@ movhi
+ 825 000e 0322     		movs	r2, #3
+ 826 0010 A3F84020 		strh	r2, [r3, #64]	@ movhi
+ 827 0014 7047     		bx	lr
+ 829              		.section	.text.USB_SetDevAddress,"ax",%progbits
+ 830              		.align	1
+ 831              		.global	USB_SetDevAddress
+ 832              		.syntax unified
+ 833              		.thumb
+ 834              		.thumb_func
+ 836              	USB_SetDevAddress:
+ 837              		@ args = 0, pretend = 0, frame = 0
+ 838              		@ frame_needed = 0, uses_anonymous_args = 0
+ 839              		@ link register save eliminated.
+ 840 0000 11B9     		cbnz	r1, .L68
+ 841 0002 8023     		movs	r3, #128
+ 842 0004 A0F84C30 		strh	r3, [r0, #76]	@ movhi
+ 843              	.L68:
+ 844 0008 0020     		movs	r0, #0
+ 845 000a 7047     		bx	lr
+ 847              		.section	.text.USB_DevConnect,"ax",%progbits
+ 848              		.align	1
+ 849              		.global	USB_DevConnect
+ 850              		.syntax unified
+ 851              		.thumb
+ 852              		.thumb_func
+ 854              	USB_DevConnect:
+ 855              		@ args = 0, pretend = 0, frame = 0
+ 856              		@ frame_needed = 0, uses_anonymous_args = 0
+ 857              		@ link register save eliminated.
+ 858 0000 0020     		movs	r0, #0
+ 859 0002 7047     		bx	lr
+ 861              		.section	.text.USB_DevDisconnect,"ax",%progbits
+ 862              		.align	1
+ 863              		.global	USB_DevDisconnect
+ 864              		.syntax unified
+ 865              		.thumb
+ 866              		.thumb_func
+ 868              	USB_DevDisconnect:
+ 869              		@ args = 0, pretend = 0, frame = 0
+ 870              		@ frame_needed = 0, uses_anonymous_args = 0
+ 871              		@ link register save eliminated.
+ 872 0000 0020     		movs	r0, #0
+ 873 0002 7047     		bx	lr
+ 875              		.section	.text.USB_ReadInterrupts,"ax",%progbits
+ 876              		.align	1
+ 877              		.global	USB_ReadInterrupts
+ 878              		.syntax unified
+ 879              		.thumb
+ 880              		.thumb_func
+ 882              	USB_ReadInterrupts:
+ 883              		@ args = 0, pretend = 0, frame = 0
+ 884              		@ frame_needed = 0, uses_anonymous_args = 0
+ 885              		@ link register save eliminated.
+ 886 0000 B0F84400 		ldrh	r0, [r0, #68]
+ 887 0004 80B2     		uxth	r0, r0
+ 888 0006 7047     		bx	lr
+ARM GAS  C:\Temp\cctjGfx7.s 			page 16
+
+
+ 890              		.section	.text.USB_ActivateRemoteWakeup,"ax",%progbits
+ 891              		.align	1
+ 892              		.global	USB_ActivateRemoteWakeup
+ 893              		.syntax unified
+ 894              		.thumb
+ 895              		.thumb_func
+ 897              	USB_ActivateRemoteWakeup:
+ 898              		@ args = 0, pretend = 0, frame = 0
+ 899              		@ frame_needed = 0, uses_anonymous_args = 0
+ 900              		@ link register save eliminated.
+ 901 0000 B0F84030 		ldrh	r3, [r0, #64]
+ 902 0004 9BB2     		uxth	r3, r3
+ 903 0006 43F01003 		orr	r3, r3, #16
+ 904 000a A0F84030 		strh	r3, [r0, #64]	@ movhi
+ 905 000e 0020     		movs	r0, #0
+ 906 0010 7047     		bx	lr
+ 908              		.section	.text.USB_DeActivateRemoteWakeup,"ax",%progbits
+ 909              		.align	1
+ 910              		.global	USB_DeActivateRemoteWakeup
+ 911              		.syntax unified
+ 912              		.thumb
+ 913              		.thumb_func
+ 915              	USB_DeActivateRemoteWakeup:
+ 916              		@ args = 0, pretend = 0, frame = 0
+ 917              		@ frame_needed = 0, uses_anonymous_args = 0
+ 918              		@ link register save eliminated.
+ 919 0000 B0F84030 		ldrh	r3, [r0, #64]
+ 920 0004 9BB2     		uxth	r3, r3
+ 921 0006 23F01003 		bic	r3, r3, #16
+ 922 000a 9BB2     		uxth	r3, r3
+ 923 000c A0F84030 		strh	r3, [r0, #64]	@ movhi
+ 924 0010 0020     		movs	r0, #0
+ 925 0012 7047     		bx	lr
+ 927              		.section	.text.USB_WritePMA,"ax",%progbits
+ 928              		.align	1
+ 929              		.global	USB_WritePMA
+ 930              		.syntax unified
+ 931              		.thumb
+ 932              		.thumb_func
+ 934              	USB_WritePMA:
+ 935              		@ args = 0, pretend = 0, frame = 0
+ 936              		@ frame_needed = 0, uses_anonymous_args = 0
+ 937              		@ link register save eliminated.
+ 938 0000 0133     		adds	r3, r3, #1
+ 939 0002 5B08     		lsrs	r3, r3, #1
+ 940 0004 0244     		add	r2, r2, r0
+ 941 0006 02F58062 		add	r2, r2, #1024
+ 942 000a 08E0     		b	.L75
+ 943              	.L76:
+ 944 000c 0878     		ldrb	r0, [r1]	@ zero_extendqisi2
+ 945 000e 91F801C0 		ldrb	ip, [r1, #1]	@ zero_extendqisi2
+ 946 0012 40EA0C20 		orr	r0, r0, ip, lsl #8
+ 947 0016 22F8020B 		strh	r0, [r2], #2	@ movhi
+ 948 001a 0231     		adds	r1, r1, #2
+ 949 001c 013B     		subs	r3, r3, #1
+ 950              	.L75:
+ 951 001e 002B     		cmp	r3, #0
+ARM GAS  C:\Temp\cctjGfx7.s 			page 17
+
+
+ 952 0020 F4D1     		bne	.L76
+ 953 0022 7047     		bx	lr
+ 955              		.section	.text.USB_EPStartXfer,"ax",%progbits
+ 956              		.align	1
+ 957              		.global	USB_EPStartXfer
+ 958              		.syntax unified
+ 959              		.thumb
+ 960              		.thumb_func
+ 962              	USB_EPStartXfer:
+ 963              		@ args = 0, pretend = 0, frame = 0
+ 964              		@ frame_needed = 0, uses_anonymous_args = 0
+ 965 0000 70B5     		push	{r4, r5, r6, lr}
+ 966 0002 0546     		mov	r5, r0
+ 967 0004 0C46     		mov	r4, r1
+ 968 0006 4A78     		ldrb	r2, [r1, #1]	@ zero_extendqisi2
+ 969 0008 012A     		cmp	r2, #1
+ 970 000a 35D0     		beq	.L162
+ 971 000c 0B7B     		ldrb	r3, [r1, #12]	@ zero_extendqisi2
+ 972 000e 002B     		cmp	r3, #0
+ 973 0010 40F0A882 		bne	.L127
+ 974 0014 8B69     		ldr	r3, [r1, #24]
+ 975 0016 0A69     		ldr	r2, [r1, #16]
+ 976 0018 9342     		cmp	r3, r2
+ 977 001a 40F27F82 		bls	.L128
+ 978 001e 9B1A     		subs	r3, r3, r2
+ 979 0020 8B61     		str	r3, [r1, #24]
+ 980              	.L129:
+ 981 0022 B5F85030 		ldrh	r3, [r5, #80]
+ 982 0026 15FA83F3 		uxtah	r3, r5, r3
+ 983 002a 2178     		ldrb	r1, [r4]	@ zero_extendqisi2
+ 984 002c 03EBC103 		add	r3, r3, r1, lsl #3
+ 985 0030 B3F80614 		ldrh	r1, [r3, #1030]
+ 986 0034 C1F30901 		ubfx	r1, r1, #0, #10
+ 987 0038 A3F80614 		strh	r1, [r3, #1030]	@ movhi
+ 988 003c 002A     		cmp	r2, #0
+ 989 003e 40F07182 		bne	.L130
+ 990 0042 B3F80624 		ldrh	r2, [r3, #1030]
+ 991 0046 6FEA4242 		mvn	r2, r2, lsl #17
+ 992 004a 6FEA5242 		mvn	r2, r2, lsr #17
+ 993 004e 92B2     		uxth	r2, r2
+ 994 0050 A3F80624 		strh	r2, [r3, #1030]	@ movhi
+ 995              	.L131:
+ 996 0054 2278     		ldrb	r2, [r4]	@ zero_extendqisi2
+ 997 0056 35F82230 		ldrh	r3, [r5, r2, lsl #2]
+ 998 005a 9BB2     		uxth	r3, r3
+ 999 005c 23F48043 		bic	r3, r3, #16384
+ 1000 0060 23F07003 		bic	r3, r3, #112
+ 1001 0064 83F44053 		eor	r3, r3, #12288
+ 1002 0068 43F40043 		orr	r3, r3, #32768
+ 1003 006c 43F08003 		orr	r3, r3, #128
+ 1004 0070 25F82230 		strh	r3, [r5, r2, lsl #2]	@ movhi
+ 1005 0074 0020     		movs	r0, #0
+ 1006              	.L126:
+ 1007 0076 70BD     		pop	{r4, r5, r6, pc}
+ 1008              	.L162:
+ 1009 0078 8E69     		ldr	r6, [r1, #24]
+ 1010 007a 0969     		ldr	r1, [r1, #16]
+ARM GAS  C:\Temp\cctjGfx7.s 			page 18
+
+
+ 1011 007c 8E42     		cmp	r6, r1
+ 1012 007e 00D9     		bls	.L79
+ 1013 0080 0E46     		mov	r6, r1
+ 1014              	.L79:
+ 1015 0082 237B     		ldrb	r3, [r4, #12]	@ zero_extendqisi2
+ 1016 0084 43B3     		cbz	r3, .L163
+ 1017 0086 E378     		ldrb	r3, [r4, #3]	@ zero_extendqisi2
+ 1018 0088 022B     		cmp	r3, #2
+ 1019 008a 47D0     		beq	.L164
+ 1020 008c 236A     		ldr	r3, [r4, #32]
+ 1021 008e 9B1B     		subs	r3, r3, r6
+ 1022 0090 2362     		str	r3, [r4, #32]
+ 1023 0092 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 1024 0094 35F82310 		ldrh	r1, [r5, r3, lsl #2]
+ 1025 0098 11F0400F 		tst	r1, #64
+ 1026 009c 00F0F681 		beq	.L113
+ 1027 00a0 002A     		cmp	r2, #0
+ 1028 00a2 40F0E381 		bne	.L114
+ 1029 00a6 B5F85020 		ldrh	r2, [r5, #80]
+ 1030 00aa 15FA82F2 		uxtah	r2, r5, r2
+ 1031 00ae 02EBC303 		add	r3, r2, r3, lsl #3
+ 1032 00b2 B3F80624 		ldrh	r2, [r3, #1030]
+ 1033 00b6 C2F30902 		ubfx	r2, r2, #0, #10
+ 1034 00ba A3F80624 		strh	r2, [r3, #1030]	@ movhi
+ 1035 00be 002E     		cmp	r6, #0
+ 1036 00c0 40F0B481 		bne	.L115
+ 1037 00c4 B3F80624 		ldrh	r2, [r3, #1030]
+ 1038 00c8 6FEA4242 		mvn	r2, r2, lsl #17
+ 1039 00cc 6FEA5242 		mvn	r2, r2, lsr #17
+ 1040 00d0 92B2     		uxth	r2, r2
+ 1041 00d2 A3F80624 		strh	r2, [r3, #1030]	@ movhi
+ 1042 00d6 D2E1     		b	.L116
+ 1043              	.L163:
+ 1044 00d8 B6B2     		uxth	r6, r6
+ 1045 00da 3346     		mov	r3, r6
+ 1046 00dc E288     		ldrh	r2, [r4, #6]
+ 1047 00de 6169     		ldr	r1, [r4, #20]
+ 1048 00e0 2846     		mov	r0, r5
+ 1049 00e2 FFF7FEFF 		bl	USB_WritePMA
+ 1050 00e6 B5F85030 		ldrh	r3, [r5, #80]
+ 1051 00ea 15FA83F3 		uxtah	r3, r5, r3
+ 1052 00ee 2278     		ldrb	r2, [r4]	@ zero_extendqisi2
+ 1053 00f0 03EBC203 		add	r3, r3, r2, lsl #3
+ 1054 00f4 A3F80264 		strh	r6, [r3, #1026]	@ movhi
+ 1055              	.L81:
+ 1056 00f8 2278     		ldrb	r2, [r4]	@ zero_extendqisi2
+ 1057 00fa 35F82230 		ldrh	r3, [r5, r2, lsl #2]
+ 1058 00fe 9BB2     		uxth	r3, r3
+ 1059 0100 23F4E043 		bic	r3, r3, #28672
+ 1060 0104 23F04003 		bic	r3, r3, #64
+ 1061 0108 83F03003 		eor	r3, r3, #48
+ 1062 010c 43F40043 		orr	r3, r3, #32768
+ 1063 0110 43F08003 		orr	r3, r3, #128
+ 1064 0114 25F82230 		strh	r3, [r5, r2, lsl #2]	@ movhi
+ 1065 0118 0020     		movs	r0, #0
+ 1066 011a ACE7     		b	.L126
+ 1067              	.L164:
+ARM GAS  C:\Temp\cctjGfx7.s 			page 19
+
+
+ 1068 011c 236A     		ldr	r3, [r4, #32]
+ 1069 011e 9942     		cmp	r1, r3
+ 1070 0120 80F06681 		bcs	.L83
+ 1071 0124 2278     		ldrb	r2, [r4]	@ zero_extendqisi2
+ 1072 0126 35F82230 		ldrh	r3, [r5, r2, lsl #2]
+ 1073 012a 9BB2     		uxth	r3, r3
+ 1074 012c 23F4E043 		bic	r3, r3, #28672
+ 1075 0130 23F07003 		bic	r3, r3, #112
+ 1076 0134 43F40143 		orr	r3, r3, #33024
+ 1077 0138 43F08003 		orr	r3, r3, #128
+ 1078 013c 25F82230 		strh	r3, [r5, r2, lsl #2]	@ movhi
+ 1079 0140 236A     		ldr	r3, [r4, #32]
+ 1080 0142 9B1B     		subs	r3, r3, r6
+ 1081 0144 2362     		str	r3, [r4, #32]
+ 1082 0146 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 1083 0148 35F82320 		ldrh	r2, [r5, r3, lsl #2]
+ 1084 014c 12F0400F 		tst	r2, #64
+ 1085 0150 00F0A780 		beq	.L84
+ 1086 0154 6278     		ldrb	r2, [r4, #1]	@ zero_extendqisi2
+ 1087 0156 B2BB     		cbnz	r2, .L85
+ 1088 0158 B5F85020 		ldrh	r2, [r5, #80]
+ 1089 015c 15FA82F2 		uxtah	r2, r5, r2
+ 1090 0160 02EBC303 		add	r3, r2, r3, lsl #3
+ 1091 0164 B3F80624 		ldrh	r2, [r3, #1030]
+ 1092 0168 C2F30902 		ubfx	r2, r2, #0, #10
+ 1093 016c A3F80624 		strh	r2, [r3, #1030]	@ movhi
+ 1094 0170 4EB9     		cbnz	r6, .L86
+ 1095 0172 B3F80624 		ldrh	r2, [r3, #1030]
+ 1096 0176 6FEA4242 		mvn	r2, r2, lsl #17
+ 1097 017a 6FEA5242 		mvn	r2, r2, lsr #17
+ 1098 017e 92B2     		uxth	r2, r2
+ 1099 0180 A3F80624 		strh	r2, [r3, #1030]	@ movhi
+ 1100 0184 21E0     		b	.L87
+ 1101              	.L86:
+ 1102 0186 3E2E     		cmp	r6, #62
+ 1103 0188 0DD8     		bhi	.L88
+ 1104 018a 7208     		lsrs	r2, r6, #1
+ 1105 018c 16F0010F 		tst	r6, #1
+ 1106 0190 00D0     		beq	.L89
+ 1107 0192 0132     		adds	r2, r2, #1
+ 1108              	.L89:
+ 1109 0194 B3F80614 		ldrh	r1, [r3, #1030]
+ 1110 0198 89B2     		uxth	r1, r1
+ 1111 019a 9202     		lsls	r2, r2, #10
+ 1112 019c 92B2     		uxth	r2, r2
+ 1113 019e 0A43     		orrs	r2, r2, r1
+ 1114 01a0 A3F80624 		strh	r2, [r3, #1030]	@ movhi
+ 1115 01a4 11E0     		b	.L87
+ 1116              	.L88:
+ 1117 01a6 7109     		lsrs	r1, r6, #5
+ 1118 01a8 16F01F0F 		tst	r6, #31
+ 1119 01ac 00D1     		bne	.L90
+ 1120 01ae 0139     		subs	r1, r1, #1
+ 1121              	.L90:
+ 1122 01b0 B3F80624 		ldrh	r2, [r3, #1030]
+ 1123 01b4 92B2     		uxth	r2, r2
+ 1124 01b6 8902     		lsls	r1, r1, #10
+ARM GAS  C:\Temp\cctjGfx7.s 			page 20
+
+
+ 1125 01b8 89B2     		uxth	r1, r1
+ 1126 01ba 0A43     		orrs	r2, r2, r1
+ 1127 01bc 42F40042 		orr	r2, r2, #32768
+ 1128 01c0 A3F80624 		strh	r2, [r3, #1030]	@ movhi
+ 1129 01c4 01E0     		b	.L87
+ 1130              	.L85:
+ 1131 01c6 012A     		cmp	r2, #1
+ 1132 01c8 29D0     		beq	.L165
+ 1133              	.L87:
+ 1134 01ca B3B2     		uxth	r3, r6
+ 1135 01cc 6289     		ldrh	r2, [r4, #10]
+ 1136 01ce 6169     		ldr	r1, [r4, #20]
+ 1137 01d0 2846     		mov	r0, r5
+ 1138 01d2 FFF7FEFF 		bl	USB_WritePMA
+ 1139 01d6 6369     		ldr	r3, [r4, #20]
+ 1140 01d8 3344     		add	r3, r3, r6
+ 1141 01da 6361     		str	r3, [r4, #20]
+ 1142 01dc 236A     		ldr	r3, [r4, #32]
+ 1143 01de 2269     		ldr	r2, [r4, #16]
+ 1144 01e0 9342     		cmp	r3, r2
+ 1145 01e2 26D9     		bls	.L91
+ 1146 01e4 9B1B     		subs	r3, r3, r6
+ 1147 01e6 2362     		str	r3, [r4, #32]
+ 1148              	.L92:
+ 1149 01e8 6378     		ldrb	r3, [r4, #1]	@ zero_extendqisi2
+ 1150 01ea 002B     		cmp	r3, #0
+ 1151 01ec 45D1     		bne	.L93
+ 1152 01ee B5F85030 		ldrh	r3, [r5, #80]
+ 1153 01f2 15FA83F3 		uxtah	r3, r5, r3
+ 1154 01f6 2278     		ldrb	r2, [r4]	@ zero_extendqisi2
+ 1155 01f8 03EBC203 		add	r3, r3, r2, lsl #3
+ 1156 01fc B3F80224 		ldrh	r2, [r3, #1026]
+ 1157 0200 C2F30902 		ubfx	r2, r2, #0, #10
+ 1158 0204 A3F80224 		strh	r2, [r3, #1026]	@ movhi
+ 1159 0208 BEB9     		cbnz	r6, .L94
+ 1160 020a B3F80224 		ldrh	r2, [r3, #1026]
+ 1161 020e 6FEA4242 		mvn	r2, r2, lsl #17
+ 1162 0212 6FEA5242 		mvn	r2, r2, lsr #17
+ 1163 0216 92B2     		uxth	r2, r2
+ 1164 0218 A3F80224 		strh	r2, [r3, #1026]	@ movhi
+ 1165 021c 2FE0     		b	.L95
+ 1166              	.L165:
+ 1167 021e B5F85020 		ldrh	r2, [r5, #80]
+ 1168 0222 15FA82F2 		uxtah	r2, r5, r2
+ 1169 0226 02EBC303 		add	r3, r2, r3, lsl #3
+ 1170 022a B2B2     		uxth	r2, r6
+ 1171 022c A3F80624 		strh	r2, [r3, #1030]	@ movhi
+ 1172 0230 CBE7     		b	.L87
+ 1173              	.L91:
+ 1174 0232 0022     		movs	r2, #0
+ 1175 0234 2262     		str	r2, [r4, #32]
+ 1176 0236 1E46     		mov	r6, r3
+ 1177 0238 D6E7     		b	.L92
+ 1178              	.L94:
+ 1179 023a 3E2E     		cmp	r6, #62
+ 1180 023c 0DD8     		bhi	.L96
+ 1181 023e 7208     		lsrs	r2, r6, #1
+ARM GAS  C:\Temp\cctjGfx7.s 			page 21
+
+
+ 1182 0240 16F0010F 		tst	r6, #1
+ 1183 0244 00D0     		beq	.L97
+ 1184 0246 0132     		adds	r2, r2, #1
+ 1185              	.L97:
+ 1186 0248 B3F80214 		ldrh	r1, [r3, #1026]
+ 1187 024c 89B2     		uxth	r1, r1
+ 1188 024e 9202     		lsls	r2, r2, #10
+ 1189 0250 92B2     		uxth	r2, r2
+ 1190 0252 0A43     		orrs	r2, r2, r1
+ 1191 0254 A3F80224 		strh	r2, [r3, #1026]	@ movhi
+ 1192 0258 11E0     		b	.L95
+ 1193              	.L96:
+ 1194 025a 7109     		lsrs	r1, r6, #5
+ 1195 025c 16F01F0F 		tst	r6, #31
+ 1196 0260 00D1     		bne	.L98
+ 1197 0262 0139     		subs	r1, r1, #1
+ 1198              	.L98:
+ 1199 0264 B3F80224 		ldrh	r2, [r3, #1026]
+ 1200 0268 92B2     		uxth	r2, r2
+ 1201 026a 8902     		lsls	r1, r1, #10
+ 1202 026c 89B2     		uxth	r1, r1
+ 1203 026e 0A43     		orrs	r2, r2, r1
+ 1204 0270 42F40042 		orr	r2, r2, #32768
+ 1205 0274 A3F80224 		strh	r2, [r3, #1026]	@ movhi
+ 1206 0278 01E0     		b	.L95
+ 1207              	.L93:
+ 1208 027a 012B     		cmp	r3, #1
+ 1209 027c 06D0     		beq	.L166
+ 1210              	.L95:
+ 1211 027e B3B2     		uxth	r3, r6
+ 1212 0280 2289     		ldrh	r2, [r4, #8]
+ 1213 0282 6169     		ldr	r1, [r4, #20]
+ 1214 0284 2846     		mov	r0, r5
+ 1215 0286 FFF7FEFF 		bl	USB_WritePMA
+ 1216 028a 35E7     		b	.L81
+ 1217              	.L166:
+ 1218 028c B5F85030 		ldrh	r3, [r5, #80]
+ 1219 0290 15FA83F3 		uxtah	r3, r5, r3
+ 1220 0294 2278     		ldrb	r2, [r4]	@ zero_extendqisi2
+ 1221 0296 03EBC203 		add	r3, r3, r2, lsl #3
+ 1222 029a B2B2     		uxth	r2, r6
+ 1223 029c A3F80224 		strh	r2, [r3, #1026]	@ movhi
+ 1224 02a0 EDE7     		b	.L95
+ 1225              	.L84:
+ 1226 02a2 6278     		ldrb	r2, [r4, #1]	@ zero_extendqisi2
+ 1227 02a4 B2BB     		cbnz	r2, .L99
+ 1228 02a6 B5F85020 		ldrh	r2, [r5, #80]
+ 1229 02aa 15FA82F2 		uxtah	r2, r5, r2
+ 1230 02ae 02EBC303 		add	r3, r2, r3, lsl #3
+ 1231 02b2 B3F80224 		ldrh	r2, [r3, #1026]
+ 1232 02b6 C2F30902 		ubfx	r2, r2, #0, #10
+ 1233 02ba A3F80224 		strh	r2, [r3, #1026]	@ movhi
+ 1234 02be 4EB9     		cbnz	r6, .L100
+ 1235 02c0 B3F80224 		ldrh	r2, [r3, #1026]
+ 1236 02c4 6FEA4242 		mvn	r2, r2, lsl #17
+ 1237 02c8 6FEA5242 		mvn	r2, r2, lsr #17
+ 1238 02cc 92B2     		uxth	r2, r2
+ARM GAS  C:\Temp\cctjGfx7.s 			page 22
+
+
+ 1239 02ce A3F80224 		strh	r2, [r3, #1026]	@ movhi
+ 1240 02d2 21E0     		b	.L101
+ 1241              	.L100:
+ 1242 02d4 3E2E     		cmp	r6, #62
+ 1243 02d6 0DD8     		bhi	.L102
+ 1244 02d8 7208     		lsrs	r2, r6, #1
+ 1245 02da 16F0010F 		tst	r6, #1
+ 1246 02de 00D0     		beq	.L103
+ 1247 02e0 0132     		adds	r2, r2, #1
+ 1248              	.L103:
+ 1249 02e2 B3F80214 		ldrh	r1, [r3, #1026]
+ 1250 02e6 89B2     		uxth	r1, r1
+ 1251 02e8 9202     		lsls	r2, r2, #10
+ 1252 02ea 92B2     		uxth	r2, r2
+ 1253 02ec 0A43     		orrs	r2, r2, r1
+ 1254 02ee A3F80224 		strh	r2, [r3, #1026]	@ movhi
+ 1255 02f2 11E0     		b	.L101
+ 1256              	.L102:
+ 1257 02f4 7109     		lsrs	r1, r6, #5
+ 1258 02f6 16F01F0F 		tst	r6, #31
+ 1259 02fa 00D1     		bne	.L104
+ 1260 02fc 0139     		subs	r1, r1, #1
+ 1261              	.L104:
+ 1262 02fe B3F80224 		ldrh	r2, [r3, #1026]
+ 1263 0302 92B2     		uxth	r2, r2
+ 1264 0304 8902     		lsls	r1, r1, #10
+ 1265 0306 89B2     		uxth	r1, r1
+ 1266 0308 0A43     		orrs	r2, r2, r1
+ 1267 030a 42F40042 		orr	r2, r2, #32768
+ 1268 030e A3F80224 		strh	r2, [r3, #1026]	@ movhi
+ 1269 0312 01E0     		b	.L101
+ 1270              	.L99:
+ 1271 0314 012A     		cmp	r2, #1
+ 1272 0316 29D0     		beq	.L167
+ 1273              	.L101:
+ 1274 0318 B3B2     		uxth	r3, r6
+ 1275 031a 2289     		ldrh	r2, [r4, #8]
+ 1276 031c 6169     		ldr	r1, [r4, #20]
+ 1277 031e 2846     		mov	r0, r5
+ 1278 0320 FFF7FEFF 		bl	USB_WritePMA
+ 1279 0324 6369     		ldr	r3, [r4, #20]
+ 1280 0326 3344     		add	r3, r3, r6
+ 1281 0328 6361     		str	r3, [r4, #20]
+ 1282 032a 236A     		ldr	r3, [r4, #32]
+ 1283 032c 2269     		ldr	r2, [r4, #16]
+ 1284 032e 9342     		cmp	r3, r2
+ 1285 0330 26D9     		bls	.L105
+ 1286 0332 9B1B     		subs	r3, r3, r6
+ 1287 0334 2362     		str	r3, [r4, #32]
+ 1288              	.L106:
+ 1289 0336 6378     		ldrb	r3, [r4, #1]	@ zero_extendqisi2
+ 1290 0338 002B     		cmp	r3, #0
+ 1291 033a 45D1     		bne	.L107
+ 1292 033c B5F85030 		ldrh	r3, [r5, #80]
+ 1293 0340 15FA83F3 		uxtah	r3, r5, r3
+ 1294 0344 2278     		ldrb	r2, [r4]	@ zero_extendqisi2
+ 1295 0346 03EBC203 		add	r3, r3, r2, lsl #3
+ARM GAS  C:\Temp\cctjGfx7.s 			page 23
+
+
+ 1296 034a B3F80624 		ldrh	r2, [r3, #1030]
+ 1297 034e C2F30902 		ubfx	r2, r2, #0, #10
+ 1298 0352 A3F80624 		strh	r2, [r3, #1030]	@ movhi
+ 1299 0356 BEB9     		cbnz	r6, .L108
+ 1300 0358 B3F80624 		ldrh	r2, [r3, #1030]
+ 1301 035c 6FEA4242 		mvn	r2, r2, lsl #17
+ 1302 0360 6FEA5242 		mvn	r2, r2, lsr #17
+ 1303 0364 92B2     		uxth	r2, r2
+ 1304 0366 A3F80624 		strh	r2, [r3, #1030]	@ movhi
+ 1305 036a 2FE0     		b	.L109
+ 1306              	.L167:
+ 1307 036c B5F85020 		ldrh	r2, [r5, #80]
+ 1308 0370 15FA82F2 		uxtah	r2, r5, r2
+ 1309 0374 02EBC303 		add	r3, r2, r3, lsl #3
+ 1310 0378 B2B2     		uxth	r2, r6
+ 1311 037a A3F80224 		strh	r2, [r3, #1026]	@ movhi
+ 1312 037e CBE7     		b	.L101
+ 1313              	.L105:
+ 1314 0380 0022     		movs	r2, #0
+ 1315 0382 2262     		str	r2, [r4, #32]
+ 1316 0384 1E46     		mov	r6, r3
+ 1317 0386 D6E7     		b	.L106
+ 1318              	.L108:
+ 1319 0388 3E2E     		cmp	r6, #62
+ 1320 038a 0DD8     		bhi	.L110
+ 1321 038c 7208     		lsrs	r2, r6, #1
+ 1322 038e 16F0010F 		tst	r6, #1
+ 1323 0392 00D0     		beq	.L111
+ 1324 0394 0132     		adds	r2, r2, #1
+ 1325              	.L111:
+ 1326 0396 B3F80614 		ldrh	r1, [r3, #1030]
+ 1327 039a 89B2     		uxth	r1, r1
+ 1328 039c 9202     		lsls	r2, r2, #10
+ 1329 039e 92B2     		uxth	r2, r2
+ 1330 03a0 0A43     		orrs	r2, r2, r1
+ 1331 03a2 A3F80624 		strh	r2, [r3, #1030]	@ movhi
+ 1332 03a6 11E0     		b	.L109
+ 1333              	.L110:
+ 1334 03a8 7109     		lsrs	r1, r6, #5
+ 1335 03aa 16F01F0F 		tst	r6, #31
+ 1336 03ae 00D1     		bne	.L112
+ 1337 03b0 0139     		subs	r1, r1, #1
+ 1338              	.L112:
+ 1339 03b2 B3F80624 		ldrh	r2, [r3, #1030]
+ 1340 03b6 92B2     		uxth	r2, r2
+ 1341 03b8 8902     		lsls	r1, r1, #10
+ 1342 03ba 89B2     		uxth	r1, r1
+ 1343 03bc 0A43     		orrs	r2, r2, r1
+ 1344 03be 42F40042 		orr	r2, r2, #32768
+ 1345 03c2 A3F80624 		strh	r2, [r3, #1030]	@ movhi
+ 1346 03c6 01E0     		b	.L109
+ 1347              	.L107:
+ 1348 03c8 012B     		cmp	r3, #1
+ 1349 03ca 06D0     		beq	.L168
+ 1350              	.L109:
+ 1351 03cc B3B2     		uxth	r3, r6
+ 1352 03ce 6289     		ldrh	r2, [r4, #10]
+ARM GAS  C:\Temp\cctjGfx7.s 			page 24
+
+
+ 1353 03d0 6169     		ldr	r1, [r4, #20]
+ 1354 03d2 2846     		mov	r0, r5
+ 1355 03d4 FFF7FEFF 		bl	USB_WritePMA
+ 1356 03d8 8EE6     		b	.L81
+ 1357              	.L168:
+ 1358 03da B5F85030 		ldrh	r3, [r5, #80]
+ 1359 03de 15FA83F3 		uxtah	r3, r5, r3
+ 1360 03e2 2278     		ldrb	r2, [r4]	@ zero_extendqisi2
+ 1361 03e4 03EBC203 		add	r3, r3, r2, lsl #3
+ 1362 03e8 B2B2     		uxth	r2, r6
+ 1363 03ea A3F80624 		strh	r2, [r3, #1030]	@ movhi
+ 1364 03ee EDE7     		b	.L109
+ 1365              	.L83:
+ 1366 03f0 2178     		ldrb	r1, [r4]	@ zero_extendqisi2
+ 1367 03f2 35F82120 		ldrh	r2, [r5, r1, lsl #2]
+ 1368 03f6 92B2     		uxth	r2, r2
+ 1369 03f8 22F4E242 		bic	r2, r2, #28928
+ 1370 03fc 22F07002 		bic	r2, r2, #112
+ 1371 0400 42F40042 		orr	r2, r2, #32768
+ 1372 0404 42F08002 		orr	r2, r2, #128
+ 1373 0408 25F82120 		strh	r2, [r5, r1, lsl #2]	@ movhi
+ 1374 040c B5F85020 		ldrh	r2, [r5, #80]
+ 1375 0410 15FA82F2 		uxtah	r2, r5, r2
+ 1376 0414 2178     		ldrb	r1, [r4]	@ zero_extendqisi2
+ 1377 0416 02EBC102 		add	r2, r2, r1, lsl #3
+ 1378 041a 9BB2     		uxth	r3, r3
+ 1379 041c A2F80234 		strh	r3, [r2, #1026]	@ movhi
+ 1380 0420 2289     		ldrh	r2, [r4, #8]
+ 1381 0422 6169     		ldr	r1, [r4, #20]
+ 1382 0424 2846     		mov	r0, r5
+ 1383 0426 FFF7FEFF 		bl	USB_WritePMA
+ 1384 042a 65E6     		b	.L81
+ 1385              	.L115:
+ 1386 042c 3E2E     		cmp	r6, #62
+ 1387 042e 0DD8     		bhi	.L117
+ 1388 0430 7208     		lsrs	r2, r6, #1
+ 1389 0432 16F0010F 		tst	r6, #1
+ 1390 0436 00D0     		beq	.L118
+ 1391 0438 0132     		adds	r2, r2, #1
+ 1392              	.L118:
+ 1393 043a B3F80614 		ldrh	r1, [r3, #1030]
+ 1394 043e 89B2     		uxth	r1, r1
+ 1395 0440 9202     		lsls	r2, r2, #10
+ 1396 0442 92B2     		uxth	r2, r2
+ 1397 0444 0A43     		orrs	r2, r2, r1
+ 1398 0446 A3F80624 		strh	r2, [r3, #1030]	@ movhi
+ 1399 044a 18E0     		b	.L116
+ 1400              	.L117:
+ 1401 044c 7109     		lsrs	r1, r6, #5
+ 1402 044e 16F01F0F 		tst	r6, #31
+ 1403 0452 00D1     		bne	.L119
+ 1404 0454 0139     		subs	r1, r1, #1
+ 1405              	.L119:
+ 1406 0456 B3F80624 		ldrh	r2, [r3, #1030]
+ 1407 045a 92B2     		uxth	r2, r2
+ 1408 045c 8902     		lsls	r1, r1, #10
+ 1409 045e 89B2     		uxth	r1, r1
+ARM GAS  C:\Temp\cctjGfx7.s 			page 25
+
+
+ 1410 0460 0A43     		orrs	r2, r2, r1
+ 1411 0462 42F40042 		orr	r2, r2, #32768
+ 1412 0466 A3F80624 		strh	r2, [r3, #1030]	@ movhi
+ 1413 046a 08E0     		b	.L116
+ 1414              	.L114:
+ 1415 046c B5F85020 		ldrh	r2, [r5, #80]
+ 1416 0470 15FA82F2 		uxtah	r2, r5, r2
+ 1417 0474 02EBC303 		add	r3, r2, r3, lsl #3
+ 1418 0478 B2B2     		uxth	r2, r6
+ 1419 047a A3F80624 		strh	r2, [r3, #1030]	@ movhi
+ 1420              	.L116:
+ 1421 047e B3B2     		uxth	r3, r6
+ 1422 0480 6289     		ldrh	r2, [r4, #10]
+ 1423 0482 6169     		ldr	r1, [r4, #20]
+ 1424 0484 2846     		mov	r0, r5
+ 1425 0486 FFF7FEFF 		bl	USB_WritePMA
+ 1426 048a 35E6     		b	.L81
+ 1427              	.L113:
+ 1428 048c B2BB     		cbnz	r2, .L120
+ 1429 048e B5F85020 		ldrh	r2, [r5, #80]
+ 1430 0492 15FA82F2 		uxtah	r2, r5, r2
+ 1431 0496 02EBC303 		add	r3, r2, r3, lsl #3
+ 1432 049a B3F80224 		ldrh	r2, [r3, #1026]
+ 1433 049e C2F30902 		ubfx	r2, r2, #0, #10
+ 1434 04a2 A3F80224 		strh	r2, [r3, #1026]	@ movhi
+ 1435 04a6 4EB9     		cbnz	r6, .L121
+ 1436 04a8 B3F80224 		ldrh	r2, [r3, #1026]
+ 1437 04ac 6FEA4242 		mvn	r2, r2, lsl #17
+ 1438 04b0 6FEA5242 		mvn	r2, r2, lsr #17
+ 1439 04b4 92B2     		uxth	r2, r2
+ 1440 04b6 A3F80224 		strh	r2, [r3, #1026]	@ movhi
+ 1441 04ba 28E0     		b	.L122
+ 1442              	.L121:
+ 1443 04bc 3E2E     		cmp	r6, #62
+ 1444 04be 0DD8     		bhi	.L123
+ 1445 04c0 7208     		lsrs	r2, r6, #1
+ 1446 04c2 16F0010F 		tst	r6, #1
+ 1447 04c6 00D0     		beq	.L124
+ 1448 04c8 0132     		adds	r2, r2, #1
+ 1449              	.L124:
+ 1450 04ca B3F80214 		ldrh	r1, [r3, #1026]
+ 1451 04ce 89B2     		uxth	r1, r1
+ 1452 04d0 9202     		lsls	r2, r2, #10
+ 1453 04d2 92B2     		uxth	r2, r2
+ 1454 04d4 0A43     		orrs	r2, r2, r1
+ 1455 04d6 A3F80224 		strh	r2, [r3, #1026]	@ movhi
+ 1456 04da 18E0     		b	.L122
+ 1457              	.L123:
+ 1458 04dc 7109     		lsrs	r1, r6, #5
+ 1459 04de 16F01F0F 		tst	r6, #31
+ 1460 04e2 00D1     		bne	.L125
+ 1461 04e4 0139     		subs	r1, r1, #1
+ 1462              	.L125:
+ 1463 04e6 B3F80224 		ldrh	r2, [r3, #1026]
+ 1464 04ea 92B2     		uxth	r2, r2
+ 1465 04ec 8902     		lsls	r1, r1, #10
+ 1466 04ee 89B2     		uxth	r1, r1
+ARM GAS  C:\Temp\cctjGfx7.s 			page 26
+
+
+ 1467 04f0 0A43     		orrs	r2, r2, r1
+ 1468 04f2 42F40042 		orr	r2, r2, #32768
+ 1469 04f6 A3F80224 		strh	r2, [r3, #1026]	@ movhi
+ 1470 04fa 08E0     		b	.L122
+ 1471              	.L120:
+ 1472 04fc B5F85020 		ldrh	r2, [r5, #80]
+ 1473 0500 15FA82F2 		uxtah	r2, r5, r2
+ 1474 0504 02EBC303 		add	r3, r2, r3, lsl #3
+ 1475 0508 B2B2     		uxth	r2, r6
+ 1476 050a A3F80224 		strh	r2, [r3, #1026]	@ movhi
+ 1477              	.L122:
+ 1478 050e B3B2     		uxth	r3, r6
+ 1479 0510 2289     		ldrh	r2, [r4, #8]
+ 1480 0512 6169     		ldr	r1, [r4, #20]
+ 1481 0514 2846     		mov	r0, r5
+ 1482 0516 FFF7FEFF 		bl	USB_WritePMA
+ 1483 051a EDE5     		b	.L81
+ 1484              	.L128:
+ 1485 051c 0022     		movs	r2, #0
+ 1486 051e 8A61     		str	r2, [r1, #24]
+ 1487 0520 1A46     		mov	r2, r3
+ 1488 0522 7EE5     		b	.L129
+ 1489              	.L130:
+ 1490 0524 3E2A     		cmp	r2, #62
+ 1491 0526 0DD8     		bhi	.L132
+ 1492 0528 5108     		lsrs	r1, r2, #1
+ 1493 052a 12F0010F 		tst	r2, #1
+ 1494 052e 00D0     		beq	.L133
+ 1495 0530 0131     		adds	r1, r1, #1
+ 1496              	.L133:
+ 1497 0532 B3F80624 		ldrh	r2, [r3, #1030]
+ 1498 0536 92B2     		uxth	r2, r2
+ 1499 0538 8902     		lsls	r1, r1, #10
+ 1500 053a 89B2     		uxth	r1, r1
+ 1501 053c 0A43     		orrs	r2, r2, r1
+ 1502 053e A3F80624 		strh	r2, [r3, #1030]	@ movhi
+ 1503 0542 87E5     		b	.L131
+ 1504              	.L132:
+ 1505 0544 5109     		lsrs	r1, r2, #5
+ 1506 0546 12F01F0F 		tst	r2, #31
+ 1507 054a 00D1     		bne	.L134
+ 1508 054c 0139     		subs	r1, r1, #1
+ 1509              	.L134:
+ 1510 054e B3F80624 		ldrh	r2, [r3, #1030]
+ 1511 0552 92B2     		uxth	r2, r2
+ 1512 0554 8902     		lsls	r1, r1, #10
+ 1513 0556 89B2     		uxth	r1, r1
+ 1514 0558 0A43     		orrs	r2, r2, r1
+ 1515 055a 42F40042 		orr	r2, r2, #32768
+ 1516 055e A3F80624 		strh	r2, [r3, #1030]	@ movhi
+ 1517 0562 77E5     		b	.L131
+ 1518              	.L127:
+ 1519 0564 CB78     		ldrb	r3, [r1, #3]	@ zero_extendqisi2
+ 1520 0566 022B     		cmp	r3, #2
+ 1521 0568 41D0     		beq	.L169
+ 1522 056a 012B     		cmp	r3, #1
+ 1523 056c 40F03181 		bne	.L160
+ARM GAS  C:\Temp\cctjGfx7.s 			page 27
+
+
+ 1524 0570 8969     		ldr	r1, [r1, #24]
+ 1525 0572 2369     		ldr	r3, [r4, #16]
+ 1526 0574 9942     		cmp	r1, r3
+ 1527 0576 40F2DA80 		bls	.L148
+ 1528 057a C91A     		subs	r1, r1, r3
+ 1529 057c A161     		str	r1, [r4, #24]
+ 1530              	.L149:
+ 1531 057e C2B9     		cbnz	r2, .L150
+ 1532 0580 B5F85020 		ldrh	r2, [r5, #80]
+ 1533 0584 15FA82F2 		uxtah	r2, r5, r2
+ 1534 0588 2178     		ldrb	r1, [r4]	@ zero_extendqisi2
+ 1535 058a 02EBC102 		add	r2, r2, r1, lsl #3
+ 1536 058e B2F80214 		ldrh	r1, [r2, #1026]
+ 1537 0592 C1F30901 		ubfx	r1, r1, #0, #10
+ 1538 0596 A2F80214 		strh	r1, [r2, #1026]	@ movhi
+ 1539 059a 002B     		cmp	r3, #0
+ 1540 059c 40F0CB80 		bne	.L151
+ 1541 05a0 B2F80214 		ldrh	r1, [r2, #1026]
+ 1542 05a4 6FEA4141 		mvn	r1, r1, lsl #17
+ 1543 05a8 6FEA5141 		mvn	r1, r1, lsr #17
+ 1544 05ac 89B2     		uxth	r1, r1
+ 1545 05ae A2F80214 		strh	r1, [r2, #1026]	@ movhi
+ 1546              	.L150:
+ 1547 05b2 6278     		ldrb	r2, [r4, #1]	@ zero_extendqisi2
+ 1548 05b4 002A     		cmp	r2, #0
+ 1549 05b6 40F0FE80 		bne	.L155
+ 1550 05ba B5F85020 		ldrh	r2, [r5, #80]
+ 1551 05be 15FA82F2 		uxtah	r2, r5, r2
+ 1552 05c2 2178     		ldrb	r1, [r4]	@ zero_extendqisi2
+ 1553 05c4 02EBC102 		add	r2, r2, r1, lsl #3
+ 1554 05c8 B2F80614 		ldrh	r1, [r2, #1030]
+ 1555 05cc C1F30901 		ubfx	r1, r1, #0, #10
+ 1556 05d0 A2F80614 		strh	r1, [r2, #1030]	@ movhi
+ 1557 05d4 002B     		cmp	r3, #0
+ 1558 05d6 40F0CE80 		bne	.L156
+ 1559 05da B2F80634 		ldrh	r3, [r2, #1030]
+ 1560 05de 6FEA4343 		mvn	r3, r3, lsl #17
+ 1561 05e2 6FEA5343 		mvn	r3, r3, lsr #17
+ 1562 05e6 9BB2     		uxth	r3, r3
+ 1563 05e8 A2F80634 		strh	r3, [r2, #1030]	@ movhi
+ 1564 05ec 32E5     		b	.L131
+ 1565              	.L169:
+ 1566 05ee BAB9     		cbnz	r2, .L136
+ 1567 05f0 B0F85030 		ldrh	r3, [r0, #80]
+ 1568 05f4 10FA83F3 		uxtah	r3, r0, r3
+ 1569 05f8 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 1570 05fa 03EBC203 		add	r3, r3, r2, lsl #3
+ 1571 05fe B3F80224 		ldrh	r2, [r3, #1026]
+ 1572 0602 C2F30902 		ubfx	r2, r2, #0, #10
+ 1573 0606 A3F80224 		strh	r2, [r3, #1026]	@ movhi
+ 1574 060a 0A69     		ldr	r2, [r1, #16]
+ 1575 060c 22BB     		cbnz	r2, .L137
+ 1576 060e B3F80224 		ldrh	r2, [r3, #1026]
+ 1577 0612 6FEA4242 		mvn	r2, r2, lsl #17
+ 1578 0616 6FEA5242 		mvn	r2, r2, lsr #17
+ 1579 061a 92B2     		uxth	r2, r2
+ 1580 061c A3F80224 		strh	r2, [r3, #1026]	@ movhi
+ARM GAS  C:\Temp\cctjGfx7.s 			page 28
+
+
+ 1581              	.L136:
+ 1582 0620 6378     		ldrb	r3, [r4, #1]	@ zero_extendqisi2
+ 1583 0622 002B     		cmp	r3, #0
+ 1584 0624 58D1     		bne	.L141
+ 1585 0626 B5F85030 		ldrh	r3, [r5, #80]
+ 1586 062a 15FA83F3 		uxtah	r3, r5, r3
+ 1587 062e 2278     		ldrb	r2, [r4]	@ zero_extendqisi2
+ 1588 0630 03EBC203 		add	r3, r3, r2, lsl #3
+ 1589 0634 B3F80624 		ldrh	r2, [r3, #1030]
+ 1590 0638 C2F30902 		ubfx	r2, r2, #0, #10
+ 1591 063c A3F80624 		strh	r2, [r3, #1030]	@ movhi
+ 1592 0640 2269     		ldr	r2, [r4, #16]
+ 1593 0642 4ABB     		cbnz	r2, .L142
+ 1594 0644 B3F80624 		ldrh	r2, [r3, #1030]
+ 1595 0648 6FEA4242 		mvn	r2, r2, lsl #17
+ 1596 064c 6FEA5242 		mvn	r2, r2, lsr #17
+ 1597 0650 92B2     		uxth	r2, r2
+ 1598 0652 A3F80624 		strh	r2, [r3, #1030]	@ movhi
+ 1599 0656 41E0     		b	.L143
+ 1600              	.L137:
+ 1601 0658 3E2A     		cmp	r2, #62
+ 1602 065a 0DD8     		bhi	.L138
+ 1603 065c 5108     		lsrs	r1, r2, #1
+ 1604 065e 12F0010F 		tst	r2, #1
+ 1605 0662 00D0     		beq	.L139
+ 1606 0664 0131     		adds	r1, r1, #1
+ 1607              	.L139:
+ 1608 0666 B3F80224 		ldrh	r2, [r3, #1026]
+ 1609 066a 90B2     		uxth	r0, r2
+ 1610 066c 8A02     		lsls	r2, r1, #10
+ 1611 066e 92B2     		uxth	r2, r2
+ 1612 0670 0243     		orrs	r2, r2, r0
+ 1613 0672 A3F80224 		strh	r2, [r3, #1026]	@ movhi
+ 1614 0676 D3E7     		b	.L136
+ 1615              	.L138:
+ 1616 0678 5109     		lsrs	r1, r2, #5
+ 1617 067a 12F01F0F 		tst	r2, #31
+ 1618 067e 00D1     		bne	.L140
+ 1619 0680 0139     		subs	r1, r1, #1
+ 1620              	.L140:
+ 1621 0682 B3F80224 		ldrh	r2, [r3, #1026]
+ 1622 0686 92B2     		uxth	r2, r2
+ 1623 0688 8902     		lsls	r1, r1, #10
+ 1624 068a 89B2     		uxth	r1, r1
+ 1625 068c 0A43     		orrs	r2, r2, r1
+ 1626 068e 42F40042 		orr	r2, r2, #32768
+ 1627 0692 A3F80224 		strh	r2, [r3, #1026]	@ movhi
+ 1628 0696 C3E7     		b	.L136
+ 1629              	.L142:
+ 1630 0698 3E2A     		cmp	r2, #62
+ 1631 069a 0DD8     		bhi	.L144
+ 1632 069c 5108     		lsrs	r1, r2, #1
+ 1633 069e 12F0010F 		tst	r2, #1
+ 1634 06a2 00D0     		beq	.L145
+ 1635 06a4 0131     		adds	r1, r1, #1
+ 1636              	.L145:
+ 1637 06a6 B3F80624 		ldrh	r2, [r3, #1030]
+ARM GAS  C:\Temp\cctjGfx7.s 			page 29
+
+
+ 1638 06aa 90B2     		uxth	r0, r2
+ 1639 06ac 8A02     		lsls	r2, r1, #10
+ 1640 06ae 92B2     		uxth	r2, r2
+ 1641 06b0 0243     		orrs	r2, r2, r0
+ 1642 06b2 A3F80624 		strh	r2, [r3, #1030]	@ movhi
+ 1643 06b6 11E0     		b	.L143
+ 1644              	.L144:
+ 1645 06b8 5109     		lsrs	r1, r2, #5
+ 1646 06ba 12F01F0F 		tst	r2, #31
+ 1647 06be 00D1     		bne	.L146
+ 1648 06c0 0139     		subs	r1, r1, #1
+ 1649              	.L146:
+ 1650 06c2 B3F80624 		ldrh	r2, [r3, #1030]
+ 1651 06c6 92B2     		uxth	r2, r2
+ 1652 06c8 8902     		lsls	r1, r1, #10
+ 1653 06ca 89B2     		uxth	r1, r1
+ 1654 06cc 0A43     		orrs	r2, r2, r1
+ 1655 06ce 42F40042 		orr	r2, r2, #32768
+ 1656 06d2 A3F80624 		strh	r2, [r3, #1030]	@ movhi
+ 1657 06d6 01E0     		b	.L143
+ 1658              	.L141:
+ 1659 06d8 012B     		cmp	r3, #1
+ 1660 06da 1DD0     		beq	.L170
+ 1661              	.L143:
+ 1662 06dc E369     		ldr	r3, [r4, #28]
+ 1663 06de 002B     		cmp	r3, #0
+ 1664 06e0 3FF4B8AC 		beq	.L131
+ 1665 06e4 2278     		ldrb	r2, [r4]	@ zero_extendqisi2
+ 1666 06e6 35F82210 		ldrh	r1, [r5, r2, lsl #2]
+ 1667 06ea 44F24003 		movw	r3, #16448
+ 1668 06ee 03EA0100 		and	r0, r3, r1
+ 1669 06f2 8B43     		bics	r3, r3, r1
+ 1670 06f4 02D0     		beq	.L147
+ 1671 06f6 0028     		cmp	r0, #0
+ 1672 06f8 7FF4ACAC 		bne	.L131
+ 1673              	.L147:
+ 1674 06fc 35F82230 		ldrh	r3, [r5, r2, lsl #2]
+ 1675 0700 9BB2     		uxth	r3, r3
+ 1676 0702 23F4E043 		bic	r3, r3, #28672
+ 1677 0706 23F07003 		bic	r3, r3, #112
+ 1678 070a 43F40043 		orr	r3, r3, #32768
+ 1679 070e 43F0C003 		orr	r3, r3, #192
+ 1680 0712 25F82230 		strh	r3, [r5, r2, lsl #2]	@ movhi
+ 1681 0716 9DE4     		b	.L131
+ 1682              	.L170:
+ 1683 0718 B5F85030 		ldrh	r3, [r5, #80]
+ 1684 071c 15FA83F3 		uxtah	r3, r5, r3
+ 1685 0720 2278     		ldrb	r2, [r4]	@ zero_extendqisi2
+ 1686 0722 03EBC203 		add	r3, r3, r2, lsl #3
+ 1687 0726 228A     		ldrh	r2, [r4, #16]
+ 1688 0728 A3F80624 		strh	r2, [r3, #1030]	@ movhi
+ 1689 072c D6E7     		b	.L143
+ 1690              	.L148:
+ 1691 072e 0023     		movs	r3, #0
+ 1692 0730 A361     		str	r3, [r4, #24]
+ 1693 0732 0B46     		mov	r3, r1
+ 1694 0734 23E7     		b	.L149
+ARM GAS  C:\Temp\cctjGfx7.s 			page 30
+
+
+ 1695              	.L151:
+ 1696 0736 3E2B     		cmp	r3, #62
+ 1697 0738 0DD8     		bhi	.L152
+ 1698 073a 5908     		lsrs	r1, r3, #1
+ 1699 073c 13F0010F 		tst	r3, #1
+ 1700 0740 00D0     		beq	.L153
+ 1701 0742 0131     		adds	r1, r1, #1
+ 1702              	.L153:
+ 1703 0744 B2F80204 		ldrh	r0, [r2, #1026]
+ 1704 0748 80B2     		uxth	r0, r0
+ 1705 074a 8902     		lsls	r1, r1, #10
+ 1706 074c 89B2     		uxth	r1, r1
+ 1707 074e 0143     		orrs	r1, r1, r0
+ 1708 0750 A2F80214 		strh	r1, [r2, #1026]	@ movhi
+ 1709 0754 2DE7     		b	.L150
+ 1710              	.L152:
+ 1711 0756 5809     		lsrs	r0, r3, #5
+ 1712 0758 13F01F0F 		tst	r3, #31
+ 1713 075c 00D1     		bne	.L154
+ 1714 075e 0138     		subs	r0, r0, #1
+ 1715              	.L154:
+ 1716 0760 B2F80214 		ldrh	r1, [r2, #1026]
+ 1717 0764 89B2     		uxth	r1, r1
+ 1718 0766 8002     		lsls	r0, r0, #10
+ 1719 0768 80B2     		uxth	r0, r0
+ 1720 076a 0143     		orrs	r1, r1, r0
+ 1721 076c 41F40041 		orr	r1, r1, #32768
+ 1722 0770 A2F80214 		strh	r1, [r2, #1026]	@ movhi
+ 1723 0774 1DE7     		b	.L150
+ 1724              	.L156:
+ 1725 0776 3E2B     		cmp	r3, #62
+ 1726 0778 0DD8     		bhi	.L157
+ 1727 077a 5908     		lsrs	r1, r3, #1
+ 1728 077c 13F0010F 		tst	r3, #1
+ 1729 0780 00D0     		beq	.L158
+ 1730 0782 0131     		adds	r1, r1, #1
+ 1731              	.L158:
+ 1732 0784 B2F80634 		ldrh	r3, [r2, #1030]
+ 1733 0788 98B2     		uxth	r0, r3
+ 1734 078a 8B02     		lsls	r3, r1, #10
+ 1735 078c 9BB2     		uxth	r3, r3
+ 1736 078e 0343     		orrs	r3, r3, r0
+ 1737 0790 A2F80634 		strh	r3, [r2, #1030]	@ movhi
+ 1738 0794 5EE4     		b	.L131
+ 1739              	.L157:
+ 1740 0796 5909     		lsrs	r1, r3, #5
+ 1741 0798 13F01F0F 		tst	r3, #31
+ 1742 079c 00D1     		bne	.L159
+ 1743 079e 0139     		subs	r1, r1, #1
+ 1744              	.L159:
+ 1745 07a0 B2F80634 		ldrh	r3, [r2, #1030]
+ 1746 07a4 9BB2     		uxth	r3, r3
+ 1747 07a6 8902     		lsls	r1, r1, #10
+ 1748 07a8 89B2     		uxth	r1, r1
+ 1749 07aa 0B43     		orrs	r3, r3, r1
+ 1750 07ac 43F40043 		orr	r3, r3, #32768
+ 1751 07b0 A2F80634 		strh	r3, [r2, #1030]	@ movhi
+ARM GAS  C:\Temp\cctjGfx7.s 			page 31
+
+
+ 1752 07b4 4EE4     		b	.L131
+ 1753              	.L155:
+ 1754 07b6 012A     		cmp	r2, #1
+ 1755 07b8 7FF44CAC 		bne	.L131
+ 1756 07bc B5F85020 		ldrh	r2, [r5, #80]
+ 1757 07c0 15FA82F2 		uxtah	r2, r5, r2
+ 1758 07c4 2178     		ldrb	r1, [r4]	@ zero_extendqisi2
+ 1759 07c6 02EBC102 		add	r2, r2, r1, lsl #3
+ 1760 07ca 9BB2     		uxth	r3, r3
+ 1761 07cc A2F80634 		strh	r3, [r2, #1030]	@ movhi
+ 1762 07d0 40E4     		b	.L131
+ 1763              	.L160:
+ 1764 07d2 0120     		movs	r0, #1
+ 1765 07d4 4FE4     		b	.L126
+ 1767              		.section	.text.USB_ReadPMA,"ax",%progbits
+ 1768              		.align	1
+ 1769              		.global	USB_ReadPMA
+ 1770              		.syntax unified
+ 1771              		.thumb
+ 1772              		.thumb_func
+ 1774              	USB_ReadPMA:
+ 1775              		@ args = 0, pretend = 0, frame = 0
+ 1776              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1777              		@ link register save eliminated.
+ 1778 0000 10B4     		push	{r4}
+ 1779 0002 5C08     		lsrs	r4, r3, #1
+ 1780 0004 0244     		add	r2, r2, r0
+ 1781 0006 02F58062 		add	r2, r2, #1024
+ 1782 000a 07E0     		b	.L172
+ 1783              	.L173:
+ 1784 000c 32F8020B 		ldrh	r0, [r2], #2
+ 1785 0010 0870     		strb	r0, [r1]
+ 1786 0012 C0F30720 		ubfx	r0, r0, #8, #8
+ 1787 0016 4870     		strb	r0, [r1, #1]
+ 1788 0018 0231     		adds	r1, r1, #2
+ 1789 001a 013C     		subs	r4, r4, #1
+ 1790              	.L172:
+ 1791 001c 002C     		cmp	r4, #0
+ 1792 001e F5D1     		bne	.L173
+ 1793 0020 13F0010F 		tst	r3, #1
+ 1794 0024 01D0     		beq	.L171
+ 1795 0026 1388     		ldrh	r3, [r2]
+ 1796 0028 0B70     		strb	r3, [r1]
+ 1797              	.L171:
+ 1798 002a 5DF8044B 		ldr	r4, [sp], #4
+ 1799 002e 7047     		bx	lr
+ 1801              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\cctjGfx7.s 			page 32
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f3xx_ll_usb.c
+  C:\Temp\cctjGfx7.s:18     .text.USB_CoreInit:00000000 $t
+  C:\Temp\cctjGfx7.s:24     .text.USB_CoreInit:00000000 USB_CoreInit
+  C:\Temp\cctjGfx7.s:37     .text.USB_EnableGlobalInt:00000000 $t
+  C:\Temp\cctjGfx7.s:43     .text.USB_EnableGlobalInt:00000000 USB_EnableGlobalInt
+  C:\Temp\cctjGfx7.s:55     .text.USB_DisableGlobalInt:00000000 $t
+  C:\Temp\cctjGfx7.s:61     .text.USB_DisableGlobalInt:00000000 USB_DisableGlobalInt
+  C:\Temp\cctjGfx7.s:74     .text.USB_SetCurrentMode:00000000 $t
+  C:\Temp\cctjGfx7.s:80     .text.USB_SetCurrentMode:00000000 USB_SetCurrentMode
+  C:\Temp\cctjGfx7.s:88     .text.USB_DevInit:00000000 $t
+  C:\Temp\cctjGfx7.s:94     .text.USB_DevInit:00000000 USB_DevInit
+  C:\Temp\cctjGfx7.s:113    .text.USB_FlushTxFifo:00000000 $t
+  C:\Temp\cctjGfx7.s:119    .text.USB_FlushTxFifo:00000000 USB_FlushTxFifo
+  C:\Temp\cctjGfx7.s:127    .text.USB_FlushRxFifo:00000000 $t
+  C:\Temp\cctjGfx7.s:133    .text.USB_FlushRxFifo:00000000 USB_FlushRxFifo
+  C:\Temp\cctjGfx7.s:141    .text.USB_ActivateEndpoint:00000000 $t
+  C:\Temp\cctjGfx7.s:147    .text.USB_ActivateEndpoint:00000000 USB_ActivateEndpoint
+  C:\Temp\cctjGfx7.s:163    .text.USB_ActivateEndpoint:00000022 $d
+  C:\Temp\cctjGfx7.s:167    .text.USB_ActivateEndpoint:00000026 $t
+  C:\Temp\cctjGfx7.s:474    .text.USB_DeactivateEndpoint:00000000 $t
+  C:\Temp\cctjGfx7.s:480    .text.USB_DeactivateEndpoint:00000000 USB_DeactivateEndpoint
+  C:\Temp\cctjGfx7.s:637    .text.USB_EPSetStall:00000000 $t
+  C:\Temp\cctjGfx7.s:643    .text.USB_EPSetStall:00000000 USB_EPSetStall
+  C:\Temp\cctjGfx7.s:674    .text.USB_EPClearStall:00000000 $t
+  C:\Temp\cctjGfx7.s:680    .text.USB_EPClearStall:00000000 USB_EPClearStall
+  C:\Temp\cctjGfx7.s:741    .text.USB_EPStopXfer:00000000 $t
+  C:\Temp\cctjGfx7.s:747    .text.USB_EPStopXfer:00000000 USB_EPStopXfer
+  C:\Temp\cctjGfx7.s:810    .text.USB_StopDevice:00000000 $t
+  C:\Temp\cctjGfx7.s:816    .text.USB_StopDevice:00000000 USB_StopDevice
+  C:\Temp\cctjGfx7.s:830    .text.USB_SetDevAddress:00000000 $t
+  C:\Temp\cctjGfx7.s:836    .text.USB_SetDevAddress:00000000 USB_SetDevAddress
+  C:\Temp\cctjGfx7.s:848    .text.USB_DevConnect:00000000 $t
+  C:\Temp\cctjGfx7.s:854    .text.USB_DevConnect:00000000 USB_DevConnect
+  C:\Temp\cctjGfx7.s:862    .text.USB_DevDisconnect:00000000 $t
+  C:\Temp\cctjGfx7.s:868    .text.USB_DevDisconnect:00000000 USB_DevDisconnect
+  C:\Temp\cctjGfx7.s:876    .text.USB_ReadInterrupts:00000000 $t
+  C:\Temp\cctjGfx7.s:882    .text.USB_ReadInterrupts:00000000 USB_ReadInterrupts
+  C:\Temp\cctjGfx7.s:891    .text.USB_ActivateRemoteWakeup:00000000 $t
+  C:\Temp\cctjGfx7.s:897    .text.USB_ActivateRemoteWakeup:00000000 USB_ActivateRemoteWakeup
+  C:\Temp\cctjGfx7.s:909    .text.USB_DeActivateRemoteWakeup:00000000 $t
+  C:\Temp\cctjGfx7.s:915    .text.USB_DeActivateRemoteWakeup:00000000 USB_DeActivateRemoteWakeup
+  C:\Temp\cctjGfx7.s:928    .text.USB_WritePMA:00000000 $t
+  C:\Temp\cctjGfx7.s:934    .text.USB_WritePMA:00000000 USB_WritePMA
+  C:\Temp\cctjGfx7.s:956    .text.USB_EPStartXfer:00000000 $t
+  C:\Temp\cctjGfx7.s:962    .text.USB_EPStartXfer:00000000 USB_EPStartXfer
+  C:\Temp\cctjGfx7.s:1768   .text.USB_ReadPMA:00000000 $t
+  C:\Temp\cctjGfx7.s:1774   .text.USB_ReadPMA:00000000 USB_ReadPMA
+
+NO UNDEFINED SYMBOLS

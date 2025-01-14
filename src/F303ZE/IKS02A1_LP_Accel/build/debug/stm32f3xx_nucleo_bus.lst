@@ -1,0 +1,1884 @@
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"stm32f3xx_nucleo_bus.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Core/Src/stm32f3xx_nucleo_bus.c"
+  20              		.section	.text.I2C1_MspInit,"ax",%progbits
+  21              		.align	1
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	I2C1_MspInit:
+  27              	.LVL0:
+  28              	.LFB141:
+   1:Core/Src/stm32f3xx_nucleo_bus.c **** /* USER CODE BEGIN Header */
+   2:Core/Src/stm32f3xx_nucleo_bus.c **** /**
+   3:Core/Src/stm32f3xx_nucleo_bus.c ****   ******************************************************************************
+   4:Core/Src/stm32f3xx_nucleo_bus.c ****   * @file           : stm32f3xx_nucleo_bus.c
+   5:Core/Src/stm32f3xx_nucleo_bus.c ****   * @brief          : source file for the BSP BUS IO driver
+   6:Core/Src/stm32f3xx_nucleo_bus.c ****   ******************************************************************************
+   7:Core/Src/stm32f3xx_nucleo_bus.c ****   * @attention
+   8:Core/Src/stm32f3xx_nucleo_bus.c ****   *
+   9:Core/Src/stm32f3xx_nucleo_bus.c ****   * Copyright (c) 2025 STMicroelectronics.
+  10:Core/Src/stm32f3xx_nucleo_bus.c ****   * All rights reserved.
+  11:Core/Src/stm32f3xx_nucleo_bus.c ****   *
+  12:Core/Src/stm32f3xx_nucleo_bus.c ****   * This software is licensed under terms that can be found in the LICENSE file
+  13:Core/Src/stm32f3xx_nucleo_bus.c ****   * in the root directory of this software component.
+  14:Core/Src/stm32f3xx_nucleo_bus.c ****   * If no LICENSE file comes with this software, it is provided AS-IS.
+  15:Core/Src/stm32f3xx_nucleo_bus.c ****   *
+  16:Core/Src/stm32f3xx_nucleo_bus.c ****   ******************************************************************************
+  17:Core/Src/stm32f3xx_nucleo_bus.c **** */
+  18:Core/Src/stm32f3xx_nucleo_bus.c **** /* USER CODE END Header */
+  19:Core/Src/stm32f3xx_nucleo_bus.c **** 
+  20:Core/Src/stm32f3xx_nucleo_bus.c **** /* Includes ------------------------------------------------------------------*/
+  21:Core/Src/stm32f3xx_nucleo_bus.c **** #include "stm32f3xx_nucleo_bus.h"
+  22:Core/Src/stm32f3xx_nucleo_bus.c **** 
+  23:Core/Src/stm32f3xx_nucleo_bus.c **** __weak HAL_StatusTypeDef MX_I2C1_Init(I2C_HandleTypeDef* hi2c);
+  24:Core/Src/stm32f3xx_nucleo_bus.c **** 
+  25:Core/Src/stm32f3xx_nucleo_bus.c **** /** @addtogroup BSP
+  26:Core/Src/stm32f3xx_nucleo_bus.c ****   * @{
+  27:Core/Src/stm32f3xx_nucleo_bus.c ****   */
+  28:Core/Src/stm32f3xx_nucleo_bus.c **** 
+  29:Core/Src/stm32f3xx_nucleo_bus.c **** /** @addtogroup STM32F3XX_NUCLEO
+  30:Core/Src/stm32f3xx_nucleo_bus.c ****   * @{
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 2
+
+
+  31:Core/Src/stm32f3xx_nucleo_bus.c ****   */
+  32:Core/Src/stm32f3xx_nucleo_bus.c **** 
+  33:Core/Src/stm32f3xx_nucleo_bus.c **** /** @defgroup STM32F3XX_NUCLEO_BUS STM32F3XX_NUCLEO BUS
+  34:Core/Src/stm32f3xx_nucleo_bus.c ****   * @{
+  35:Core/Src/stm32f3xx_nucleo_bus.c ****   */
+  36:Core/Src/stm32f3xx_nucleo_bus.c **** 
+  37:Core/Src/stm32f3xx_nucleo_bus.c **** /** @defgroup STM32F3XX_NUCLEO_BUS_Exported_Variables BUS Exported Variables
+  38:Core/Src/stm32f3xx_nucleo_bus.c ****   * @{
+  39:Core/Src/stm32f3xx_nucleo_bus.c ****   */
+  40:Core/Src/stm32f3xx_nucleo_bus.c **** 
+  41:Core/Src/stm32f3xx_nucleo_bus.c **** I2C_HandleTypeDef hi2c1;
+  42:Core/Src/stm32f3xx_nucleo_bus.c **** /**
+  43:Core/Src/stm32f3xx_nucleo_bus.c ****   * @}
+  44:Core/Src/stm32f3xx_nucleo_bus.c ****   */
+  45:Core/Src/stm32f3xx_nucleo_bus.c **** 
+  46:Core/Src/stm32f3xx_nucleo_bus.c **** /** @defgroup STM32F3XX_NUCLEO_BUS_Private_Variables BUS Private Variables
+  47:Core/Src/stm32f3xx_nucleo_bus.c ****   * @{
+  48:Core/Src/stm32f3xx_nucleo_bus.c ****   */
+  49:Core/Src/stm32f3xx_nucleo_bus.c **** 
+  50:Core/Src/stm32f3xx_nucleo_bus.c **** #if (USE_HAL_I2C_REGISTER_CALLBACKS == 1U)
+  51:Core/Src/stm32f3xx_nucleo_bus.c **** static uint32_t IsI2C1MspCbValid = 0;
+  52:Core/Src/stm32f3xx_nucleo_bus.c **** #endif /* USE_HAL_I2C_REGISTER_CALLBACKS */
+  53:Core/Src/stm32f3xx_nucleo_bus.c **** static uint32_t I2C1InitCounter = 0;
+  54:Core/Src/stm32f3xx_nucleo_bus.c **** 
+  55:Core/Src/stm32f3xx_nucleo_bus.c **** /**
+  56:Core/Src/stm32f3xx_nucleo_bus.c ****   * @}
+  57:Core/Src/stm32f3xx_nucleo_bus.c ****   */
+  58:Core/Src/stm32f3xx_nucleo_bus.c **** 
+  59:Core/Src/stm32f3xx_nucleo_bus.c **** /** @defgroup STM32F3XX_NUCLEO_BUS_Private_FunctionPrototypes  BUS Private Function
+  60:Core/Src/stm32f3xx_nucleo_bus.c ****   * @{
+  61:Core/Src/stm32f3xx_nucleo_bus.c ****   */
+  62:Core/Src/stm32f3xx_nucleo_bus.c **** 
+  63:Core/Src/stm32f3xx_nucleo_bus.c **** static void I2C1_MspInit(I2C_HandleTypeDef* hI2c);
+  64:Core/Src/stm32f3xx_nucleo_bus.c **** static void I2C1_MspDeInit(I2C_HandleTypeDef* hI2c);
+  65:Core/Src/stm32f3xx_nucleo_bus.c **** #if (USE_CUBEMX_BSP_V2 == 1)
+  66:Core/Src/stm32f3xx_nucleo_bus.c **** static uint32_t I2C_GetTiming(uint32_t clock_src_hz, uint32_t i2cfreq_hz);
+  67:Core/Src/stm32f3xx_nucleo_bus.c **** static void Compute_PRESC_SCLDEL_SDADEL(uint32_t clock_src_freq, uint32_t I2C_Speed);
+  68:Core/Src/stm32f3xx_nucleo_bus.c **** static uint32_t Compute_SCLL_SCLH (uint32_t clock_src_freq, uint32_t I2C_speed);
+  69:Core/Src/stm32f3xx_nucleo_bus.c **** #endif
+  70:Core/Src/stm32f3xx_nucleo_bus.c **** 
+  71:Core/Src/stm32f3xx_nucleo_bus.c **** /**
+  72:Core/Src/stm32f3xx_nucleo_bus.c ****   * @}
+  73:Core/Src/stm32f3xx_nucleo_bus.c ****   */
+  74:Core/Src/stm32f3xx_nucleo_bus.c **** 
+  75:Core/Src/stm32f3xx_nucleo_bus.c **** /** @defgroup STM32F3XX_NUCLEO_LOW_LEVEL_Private_Functions STM32F3XX_NUCLEO LOW LEVEL Private Funct
+  76:Core/Src/stm32f3xx_nucleo_bus.c ****   * @{
+  77:Core/Src/stm32f3xx_nucleo_bus.c ****   */
+  78:Core/Src/stm32f3xx_nucleo_bus.c **** 
+  79:Core/Src/stm32f3xx_nucleo_bus.c **** /** @defgroup STM32F3XX_NUCLEO_BUS_Exported_Functions STM32F3XX_NUCLEO_BUS Exported Functions
+  80:Core/Src/stm32f3xx_nucleo_bus.c ****   * @{
+  81:Core/Src/stm32f3xx_nucleo_bus.c ****   */
+  82:Core/Src/stm32f3xx_nucleo_bus.c **** 
+  83:Core/Src/stm32f3xx_nucleo_bus.c **** /* BUS IO driver over I2C Peripheral */
+  84:Core/Src/stm32f3xx_nucleo_bus.c **** /*******************************************************************************
+  85:Core/Src/stm32f3xx_nucleo_bus.c ****                             BUS OPERATIONS OVER I2C
+  86:Core/Src/stm32f3xx_nucleo_bus.c **** *******************************************************************************/
+  87:Core/Src/stm32f3xx_nucleo_bus.c **** /**
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 3
+
+
+  88:Core/Src/stm32f3xx_nucleo_bus.c ****   * @brief  Initialize I2C HAL
+  89:Core/Src/stm32f3xx_nucleo_bus.c ****   * @retval BSP status
+  90:Core/Src/stm32f3xx_nucleo_bus.c ****   */
+  91:Core/Src/stm32f3xx_nucleo_bus.c **** int32_t BSP_I2C1_Init(void)
+  92:Core/Src/stm32f3xx_nucleo_bus.c **** {
+  93:Core/Src/stm32f3xx_nucleo_bus.c **** 
+  94:Core/Src/stm32f3xx_nucleo_bus.c ****   int32_t ret = BSP_ERROR_NONE;
+  95:Core/Src/stm32f3xx_nucleo_bus.c **** 
+  96:Core/Src/stm32f3xx_nucleo_bus.c ****   hi2c1.Instance  = I2C1;
+  97:Core/Src/stm32f3xx_nucleo_bus.c **** 
+  98:Core/Src/stm32f3xx_nucleo_bus.c ****   if(I2C1InitCounter++ == 0)
+  99:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 100:Core/Src/stm32f3xx_nucleo_bus.c ****     if (HAL_I2C_GetState(&hi2c1) == HAL_I2C_STATE_RESET)
+ 101:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 102:Core/Src/stm32f3xx_nucleo_bus.c ****     #if (USE_HAL_I2C_REGISTER_CALLBACKS == 0U)
+ 103:Core/Src/stm32f3xx_nucleo_bus.c ****       /* Init the I2C Msp */
+ 104:Core/Src/stm32f3xx_nucleo_bus.c ****       I2C1_MspInit(&hi2c1);
+ 105:Core/Src/stm32f3xx_nucleo_bus.c ****     #else
+ 106:Core/Src/stm32f3xx_nucleo_bus.c ****       if(IsI2C1MspCbValid == 0U)
+ 107:Core/Src/stm32f3xx_nucleo_bus.c ****       {
+ 108:Core/Src/stm32f3xx_nucleo_bus.c ****         if(BSP_I2C1_RegisterDefaultMspCallbacks() != BSP_ERROR_NONE)
+ 109:Core/Src/stm32f3xx_nucleo_bus.c ****         {
+ 110:Core/Src/stm32f3xx_nucleo_bus.c ****           return BSP_ERROR_MSP_FAILURE;
+ 111:Core/Src/stm32f3xx_nucleo_bus.c ****         }
+ 112:Core/Src/stm32f3xx_nucleo_bus.c ****       }
+ 113:Core/Src/stm32f3xx_nucleo_bus.c ****     #endif
+ 114:Core/Src/stm32f3xx_nucleo_bus.c ****       if(ret == BSP_ERROR_NONE)
+ 115:Core/Src/stm32f3xx_nucleo_bus.c ****       {
+ 116:Core/Src/stm32f3xx_nucleo_bus.c ****         /* Init the I2C */
+ 117:Core/Src/stm32f3xx_nucleo_bus.c ****         if(MX_I2C1_Init(&hi2c1) != HAL_OK)
+ 118:Core/Src/stm32f3xx_nucleo_bus.c ****         {
+ 119:Core/Src/stm32f3xx_nucleo_bus.c ****           ret = BSP_ERROR_BUS_FAILURE;
+ 120:Core/Src/stm32f3xx_nucleo_bus.c ****         }
+ 121:Core/Src/stm32f3xx_nucleo_bus.c ****         else if(HAL_I2CEx_ConfigAnalogFilter(&hi2c1, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
+ 122:Core/Src/stm32f3xx_nucleo_bus.c ****         {
+ 123:Core/Src/stm32f3xx_nucleo_bus.c ****           ret = BSP_ERROR_BUS_FAILURE;
+ 124:Core/Src/stm32f3xx_nucleo_bus.c ****         }
+ 125:Core/Src/stm32f3xx_nucleo_bus.c ****         else
+ 126:Core/Src/stm32f3xx_nucleo_bus.c ****         {
+ 127:Core/Src/stm32f3xx_nucleo_bus.c ****           ret = BSP_ERROR_NONE;
+ 128:Core/Src/stm32f3xx_nucleo_bus.c ****         }
+ 129:Core/Src/stm32f3xx_nucleo_bus.c ****       }
+ 130:Core/Src/stm32f3xx_nucleo_bus.c ****     }
+ 131:Core/Src/stm32f3xx_nucleo_bus.c ****   }
+ 132:Core/Src/stm32f3xx_nucleo_bus.c ****   return ret;
+ 133:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 134:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 135:Core/Src/stm32f3xx_nucleo_bus.c **** /**
+ 136:Core/Src/stm32f3xx_nucleo_bus.c ****   * @brief  DeInitialize I2C HAL.
+ 137:Core/Src/stm32f3xx_nucleo_bus.c ****   * @retval BSP status
+ 138:Core/Src/stm32f3xx_nucleo_bus.c ****   */
+ 139:Core/Src/stm32f3xx_nucleo_bus.c **** int32_t BSP_I2C1_DeInit(void)
+ 140:Core/Src/stm32f3xx_nucleo_bus.c **** {
+ 141:Core/Src/stm32f3xx_nucleo_bus.c ****   int32_t ret = BSP_ERROR_NONE;
+ 142:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 143:Core/Src/stm32f3xx_nucleo_bus.c ****   if (I2C1InitCounter > 0)
+ 144:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 4
+
+
+ 145:Core/Src/stm32f3xx_nucleo_bus.c ****     if (--I2C1InitCounter == 0)
+ 146:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 147:Core/Src/stm32f3xx_nucleo_bus.c ****   #if (USE_HAL_I2C_REGISTER_CALLBACKS == 0U)
+ 148:Core/Src/stm32f3xx_nucleo_bus.c ****       /* DeInit the I2C */
+ 149:Core/Src/stm32f3xx_nucleo_bus.c ****       I2C1_MspDeInit(&hi2c1);
+ 150:Core/Src/stm32f3xx_nucleo_bus.c ****   #endif
+ 151:Core/Src/stm32f3xx_nucleo_bus.c ****       /* DeInit the I2C */
+ 152:Core/Src/stm32f3xx_nucleo_bus.c ****       if (HAL_I2C_DeInit(&hi2c1) != HAL_OK)
+ 153:Core/Src/stm32f3xx_nucleo_bus.c ****       {
+ 154:Core/Src/stm32f3xx_nucleo_bus.c ****         ret = BSP_ERROR_BUS_FAILURE;
+ 155:Core/Src/stm32f3xx_nucleo_bus.c ****       }
+ 156:Core/Src/stm32f3xx_nucleo_bus.c ****     }
+ 157:Core/Src/stm32f3xx_nucleo_bus.c ****   }
+ 158:Core/Src/stm32f3xx_nucleo_bus.c ****   return ret;
+ 159:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 160:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 161:Core/Src/stm32f3xx_nucleo_bus.c **** /**
+ 162:Core/Src/stm32f3xx_nucleo_bus.c ****   * @brief  Check whether the I2C bus is ready.
+ 163:Core/Src/stm32f3xx_nucleo_bus.c ****   * @param DevAddr : I2C device address
+ 164:Core/Src/stm32f3xx_nucleo_bus.c ****   * @param Trials : Check trials number
+ 165:Core/Src/stm32f3xx_nucleo_bus.c ****   * @retval BSP status
+ 166:Core/Src/stm32f3xx_nucleo_bus.c ****   */
+ 167:Core/Src/stm32f3xx_nucleo_bus.c **** int32_t BSP_I2C1_IsReady(uint16_t DevAddr, uint32_t Trials)
+ 168:Core/Src/stm32f3xx_nucleo_bus.c **** {
+ 169:Core/Src/stm32f3xx_nucleo_bus.c ****   int32_t ret = BSP_ERROR_NONE;
+ 170:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 171:Core/Src/stm32f3xx_nucleo_bus.c ****   if (HAL_I2C_IsDeviceReady(&hi2c1, DevAddr, Trials, BUS_I2C1_POLL_TIMEOUT) != HAL_OK)
+ 172:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 173:Core/Src/stm32f3xx_nucleo_bus.c ****     ret = BSP_ERROR_BUSY;
+ 174:Core/Src/stm32f3xx_nucleo_bus.c ****   }
+ 175:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 176:Core/Src/stm32f3xx_nucleo_bus.c ****   return ret;
+ 177:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 178:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 179:Core/Src/stm32f3xx_nucleo_bus.c **** /**
+ 180:Core/Src/stm32f3xx_nucleo_bus.c ****   * @brief  Write a value in a register of the device through BUS.
+ 181:Core/Src/stm32f3xx_nucleo_bus.c ****   * @param  DevAddr Device address on Bus.
+ 182:Core/Src/stm32f3xx_nucleo_bus.c ****   * @param  Reg    The target register address to write
+ 183:Core/Src/stm32f3xx_nucleo_bus.c ****   * @param  pData  Pointer to data buffer to write
+ 184:Core/Src/stm32f3xx_nucleo_bus.c ****   * @param  Length Data Length
+ 185:Core/Src/stm32f3xx_nucleo_bus.c ****   * @retval BSP status
+ 186:Core/Src/stm32f3xx_nucleo_bus.c ****   */
+ 187:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 188:Core/Src/stm32f3xx_nucleo_bus.c **** int32_t BSP_I2C1_WriteReg(uint16_t DevAddr, uint16_t Reg, uint8_t *pData, uint16_t Length)
+ 189:Core/Src/stm32f3xx_nucleo_bus.c **** {
+ 190:Core/Src/stm32f3xx_nucleo_bus.c ****   int32_t ret = BSP_ERROR_NONE;
+ 191:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 192:Core/Src/stm32f3xx_nucleo_bus.c ****   if (HAL_I2C_Mem_Write(&hi2c1, DevAddr,Reg, I2C_MEMADD_SIZE_8BIT,pData, Length, BUS_I2C1_POLL_TIME
+ 193:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 194:Core/Src/stm32f3xx_nucleo_bus.c ****     if (HAL_I2C_GetError(&hi2c1) == HAL_I2C_ERROR_AF)
+ 195:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 196:Core/Src/stm32f3xx_nucleo_bus.c ****       ret = BSP_ERROR_BUS_ACKNOWLEDGE_FAILURE;
+ 197:Core/Src/stm32f3xx_nucleo_bus.c ****     }
+ 198:Core/Src/stm32f3xx_nucleo_bus.c ****     else
+ 199:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 200:Core/Src/stm32f3xx_nucleo_bus.c ****       ret =  BSP_ERROR_PERIPH_FAILURE;
+ 201:Core/Src/stm32f3xx_nucleo_bus.c ****     }
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 5
+
+
+ 202:Core/Src/stm32f3xx_nucleo_bus.c ****   }
+ 203:Core/Src/stm32f3xx_nucleo_bus.c ****   return ret;
+ 204:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 205:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 206:Core/Src/stm32f3xx_nucleo_bus.c **** /**
+ 207:Core/Src/stm32f3xx_nucleo_bus.c ****   * @brief  Read a register of the device through BUS
+ 208:Core/Src/stm32f3xx_nucleo_bus.c ****   * @param  DevAddr Device address on Bus.
+ 209:Core/Src/stm32f3xx_nucleo_bus.c ****   * @param  Reg    The target register address to read
+ 210:Core/Src/stm32f3xx_nucleo_bus.c ****   * @param  pData  Pointer to data buffer to read
+ 211:Core/Src/stm32f3xx_nucleo_bus.c ****   * @param  Length Data Length
+ 212:Core/Src/stm32f3xx_nucleo_bus.c ****   * @retval BSP status
+ 213:Core/Src/stm32f3xx_nucleo_bus.c ****   */
+ 214:Core/Src/stm32f3xx_nucleo_bus.c **** int32_t  BSP_I2C1_ReadReg(uint16_t DevAddr, uint16_t Reg, uint8_t *pData, uint16_t Length)
+ 215:Core/Src/stm32f3xx_nucleo_bus.c **** {
+ 216:Core/Src/stm32f3xx_nucleo_bus.c ****   int32_t ret = BSP_ERROR_NONE;
+ 217:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 218:Core/Src/stm32f3xx_nucleo_bus.c ****   if (HAL_I2C_Mem_Read(&hi2c1, DevAddr, Reg, I2C_MEMADD_SIZE_8BIT, pData, Length, BUS_I2C1_POLL_TIM
+ 219:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 220:Core/Src/stm32f3xx_nucleo_bus.c ****     if (HAL_I2C_GetError(&hi2c1) == HAL_I2C_ERROR_AF)
+ 221:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 222:Core/Src/stm32f3xx_nucleo_bus.c ****       ret = BSP_ERROR_BUS_ACKNOWLEDGE_FAILURE;
+ 223:Core/Src/stm32f3xx_nucleo_bus.c ****     }
+ 224:Core/Src/stm32f3xx_nucleo_bus.c ****     else
+ 225:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 226:Core/Src/stm32f3xx_nucleo_bus.c ****       ret = BSP_ERROR_PERIPH_FAILURE;
+ 227:Core/Src/stm32f3xx_nucleo_bus.c ****     }
+ 228:Core/Src/stm32f3xx_nucleo_bus.c ****   }
+ 229:Core/Src/stm32f3xx_nucleo_bus.c ****   return ret;
+ 230:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 231:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 232:Core/Src/stm32f3xx_nucleo_bus.c **** /**
+ 233:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 234:Core/Src/stm32f3xx_nucleo_bus.c ****   * @brief  Write a value in a register of the device through BUS.
+ 235:Core/Src/stm32f3xx_nucleo_bus.c ****   * @param  DevAddr Device address on Bus.
+ 236:Core/Src/stm32f3xx_nucleo_bus.c ****   * @param  Reg    The target register address to write
+ 237:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 238:Core/Src/stm32f3xx_nucleo_bus.c ****   * @param  pData  Pointer to data buffer to write
+ 239:Core/Src/stm32f3xx_nucleo_bus.c ****   * @param  Length Data Length
+ 240:Core/Src/stm32f3xx_nucleo_bus.c ****   * @retval BSP statu
+ 241:Core/Src/stm32f3xx_nucleo_bus.c ****   */
+ 242:Core/Src/stm32f3xx_nucleo_bus.c **** int32_t BSP_I2C1_WriteReg16(uint16_t DevAddr, uint16_t Reg, uint8_t *pData, uint16_t Length)
+ 243:Core/Src/stm32f3xx_nucleo_bus.c **** {
+ 244:Core/Src/stm32f3xx_nucleo_bus.c ****   int32_t ret = BSP_ERROR_NONE;
+ 245:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 246:Core/Src/stm32f3xx_nucleo_bus.c ****   if (HAL_I2C_Mem_Write(&hi2c1, DevAddr, Reg, I2C_MEMADD_SIZE_16BIT, pData, Length, BUS_I2C1_POLL_T
+ 247:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 248:Core/Src/stm32f3xx_nucleo_bus.c ****     if (HAL_I2C_GetError(&hi2c1) == HAL_I2C_ERROR_AF)
+ 249:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 250:Core/Src/stm32f3xx_nucleo_bus.c ****       ret = BSP_ERROR_BUS_ACKNOWLEDGE_FAILURE;
+ 251:Core/Src/stm32f3xx_nucleo_bus.c ****     }
+ 252:Core/Src/stm32f3xx_nucleo_bus.c ****     else
+ 253:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 254:Core/Src/stm32f3xx_nucleo_bus.c ****       ret =  BSP_ERROR_PERIPH_FAILURE;
+ 255:Core/Src/stm32f3xx_nucleo_bus.c ****     }
+ 256:Core/Src/stm32f3xx_nucleo_bus.c ****   }
+ 257:Core/Src/stm32f3xx_nucleo_bus.c ****   return ret;
+ 258:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 6
+
+
+ 259:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 260:Core/Src/stm32f3xx_nucleo_bus.c **** /**
+ 261:Core/Src/stm32f3xx_nucleo_bus.c ****   * @brief  Read registers through a bus (16 bits)
+ 262:Core/Src/stm32f3xx_nucleo_bus.c ****   * @param  DevAddr: Device address on BUS
+ 263:Core/Src/stm32f3xx_nucleo_bus.c ****   * @param  Reg: The target register address to read
+ 264:Core/Src/stm32f3xx_nucleo_bus.c ****   * @param  Length Data Length
+ 265:Core/Src/stm32f3xx_nucleo_bus.c ****   * @retval BSP status
+ 266:Core/Src/stm32f3xx_nucleo_bus.c ****   */
+ 267:Core/Src/stm32f3xx_nucleo_bus.c **** int32_t  BSP_I2C1_ReadReg16(uint16_t DevAddr, uint16_t Reg, uint8_t *pData, uint16_t Length)
+ 268:Core/Src/stm32f3xx_nucleo_bus.c **** {
+ 269:Core/Src/stm32f3xx_nucleo_bus.c ****   int32_t ret = BSP_ERROR_NONE;
+ 270:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 271:Core/Src/stm32f3xx_nucleo_bus.c ****   if (HAL_I2C_Mem_Read(&hi2c1, DevAddr, Reg, I2C_MEMADD_SIZE_16BIT, pData, Length, BUS_I2C1_POLL_TI
+ 272:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 273:Core/Src/stm32f3xx_nucleo_bus.c ****     if (HAL_I2C_GetError(&hi2c1) != HAL_I2C_ERROR_AF)
+ 274:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 275:Core/Src/stm32f3xx_nucleo_bus.c ****       ret =  BSP_ERROR_BUS_ACKNOWLEDGE_FAILURE;
+ 276:Core/Src/stm32f3xx_nucleo_bus.c ****     }
+ 277:Core/Src/stm32f3xx_nucleo_bus.c ****     else
+ 278:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 279:Core/Src/stm32f3xx_nucleo_bus.c ****       ret =  BSP_ERROR_PERIPH_FAILURE;
+ 280:Core/Src/stm32f3xx_nucleo_bus.c ****     }
+ 281:Core/Src/stm32f3xx_nucleo_bus.c ****   }
+ 282:Core/Src/stm32f3xx_nucleo_bus.c ****   return ret;
+ 283:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 284:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 285:Core/Src/stm32f3xx_nucleo_bus.c **** /**
+ 286:Core/Src/stm32f3xx_nucleo_bus.c ****   * @brief  Send an amount width data through bus (Simplex)
+ 287:Core/Src/stm32f3xx_nucleo_bus.c ****   * @param  DevAddr: Device address on Bus.
+ 288:Core/Src/stm32f3xx_nucleo_bus.c ****   * @param  pData: Data pointer
+ 289:Core/Src/stm32f3xx_nucleo_bus.c ****   * @param  Length: Data length
+ 290:Core/Src/stm32f3xx_nucleo_bus.c ****   * @retval BSP status
+ 291:Core/Src/stm32f3xx_nucleo_bus.c ****   */
+ 292:Core/Src/stm32f3xx_nucleo_bus.c **** int32_t BSP_I2C1_Send(uint16_t DevAddr, uint8_t *pData, uint16_t Length) {
+ 293:Core/Src/stm32f3xx_nucleo_bus.c ****   int32_t ret = BSP_ERROR_NONE;
+ 294:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 295:Core/Src/stm32f3xx_nucleo_bus.c ****   if (HAL_I2C_Master_Transmit(&hi2c1, DevAddr, pData, Length, BUS_I2C1_POLL_TIMEOUT) != HAL_OK)
+ 296:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 297:Core/Src/stm32f3xx_nucleo_bus.c ****     if (HAL_I2C_GetError(&hi2c1) != HAL_I2C_ERROR_AF)
+ 298:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 299:Core/Src/stm32f3xx_nucleo_bus.c ****       ret = BSP_ERROR_BUS_ACKNOWLEDGE_FAILURE;
+ 300:Core/Src/stm32f3xx_nucleo_bus.c ****     }
+ 301:Core/Src/stm32f3xx_nucleo_bus.c ****     else
+ 302:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 303:Core/Src/stm32f3xx_nucleo_bus.c ****       ret =  BSP_ERROR_PERIPH_FAILURE;
+ 304:Core/Src/stm32f3xx_nucleo_bus.c ****     }
+ 305:Core/Src/stm32f3xx_nucleo_bus.c ****   }
+ 306:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 307:Core/Src/stm32f3xx_nucleo_bus.c ****   return ret;
+ 308:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 309:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 310:Core/Src/stm32f3xx_nucleo_bus.c **** /**
+ 311:Core/Src/stm32f3xx_nucleo_bus.c ****   * @brief  Receive an amount of data through a bus (Simplex)
+ 312:Core/Src/stm32f3xx_nucleo_bus.c ****   * @param  DevAddr: Device address on Bus.
+ 313:Core/Src/stm32f3xx_nucleo_bus.c ****   * @param  pData: Data pointer
+ 314:Core/Src/stm32f3xx_nucleo_bus.c ****   * @param  Length: Data length
+ 315:Core/Src/stm32f3xx_nucleo_bus.c ****   * @retval BSP status
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 7
+
+
+ 316:Core/Src/stm32f3xx_nucleo_bus.c ****   */
+ 317:Core/Src/stm32f3xx_nucleo_bus.c **** int32_t BSP_I2C1_Recv(uint16_t DevAddr, uint8_t *pData, uint16_t Length) {
+ 318:Core/Src/stm32f3xx_nucleo_bus.c ****   int32_t ret = BSP_ERROR_NONE;
+ 319:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 320:Core/Src/stm32f3xx_nucleo_bus.c ****   if (HAL_I2C_Master_Receive(&hi2c1, DevAddr, pData, Length, BUS_I2C1_POLL_TIMEOUT) != HAL_OK)
+ 321:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 322:Core/Src/stm32f3xx_nucleo_bus.c ****     if (HAL_I2C_GetError(&hi2c1) != HAL_I2C_ERROR_AF)
+ 323:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 324:Core/Src/stm32f3xx_nucleo_bus.c ****       ret = BSP_ERROR_BUS_ACKNOWLEDGE_FAILURE;
+ 325:Core/Src/stm32f3xx_nucleo_bus.c ****     }
+ 326:Core/Src/stm32f3xx_nucleo_bus.c ****     else
+ 327:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 328:Core/Src/stm32f3xx_nucleo_bus.c ****       ret =  BSP_ERROR_PERIPH_FAILURE;
+ 329:Core/Src/stm32f3xx_nucleo_bus.c ****     }
+ 330:Core/Src/stm32f3xx_nucleo_bus.c ****   }
+ 331:Core/Src/stm32f3xx_nucleo_bus.c ****   return ret;
+ 332:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 333:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 334:Core/Src/stm32f3xx_nucleo_bus.c **** #if (USE_HAL_I2C_REGISTER_CALLBACKS == 1U)
+ 335:Core/Src/stm32f3xx_nucleo_bus.c **** /**
+ 336:Core/Src/stm32f3xx_nucleo_bus.c ****   * @brief Register Default BSP I2C1 Bus Msp Callbacks
+ 337:Core/Src/stm32f3xx_nucleo_bus.c ****   * @retval BSP status
+ 338:Core/Src/stm32f3xx_nucleo_bus.c ****   */
+ 339:Core/Src/stm32f3xx_nucleo_bus.c **** int32_t BSP_I2C1_RegisterDefaultMspCallbacks (void)
+ 340:Core/Src/stm32f3xx_nucleo_bus.c **** {
+ 341:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 342:Core/Src/stm32f3xx_nucleo_bus.c ****   __HAL_I2C_RESET_HANDLE_STATE(&hi2c1);
+ 343:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 344:Core/Src/stm32f3xx_nucleo_bus.c ****   /* Register MspInit Callback */
+ 345:Core/Src/stm32f3xx_nucleo_bus.c ****   if (HAL_I2C_RegisterCallback(&hi2c1, HAL_I2C_MSPINIT_CB_ID, I2C1_MspInit)  != HAL_OK)
+ 346:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 347:Core/Src/stm32f3xx_nucleo_bus.c ****     return BSP_ERROR_PERIPH_FAILURE;
+ 348:Core/Src/stm32f3xx_nucleo_bus.c ****   }
+ 349:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 350:Core/Src/stm32f3xx_nucleo_bus.c ****   /* Register MspDeInit Callback */
+ 351:Core/Src/stm32f3xx_nucleo_bus.c ****   if (HAL_I2C_RegisterCallback(&hi2c1, HAL_I2C_MSPDEINIT_CB_ID, I2C1_MspDeInit) != HAL_OK)
+ 352:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 353:Core/Src/stm32f3xx_nucleo_bus.c ****     return BSP_ERROR_PERIPH_FAILURE;
+ 354:Core/Src/stm32f3xx_nucleo_bus.c ****   }
+ 355:Core/Src/stm32f3xx_nucleo_bus.c ****   IsI2C1MspCbValid = 1;
+ 356:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 357:Core/Src/stm32f3xx_nucleo_bus.c ****   return BSP_ERROR_NONE;
+ 358:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 359:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 360:Core/Src/stm32f3xx_nucleo_bus.c **** /**
+ 361:Core/Src/stm32f3xx_nucleo_bus.c ****   * @brief BSP I2C1 Bus Msp Callback registering
+ 362:Core/Src/stm32f3xx_nucleo_bus.c ****   * @param Callbacks     pointer to I2C1 MspInit/MspDeInit callback functions
+ 363:Core/Src/stm32f3xx_nucleo_bus.c ****   * @retval BSP status
+ 364:Core/Src/stm32f3xx_nucleo_bus.c ****   */
+ 365:Core/Src/stm32f3xx_nucleo_bus.c **** int32_t BSP_I2C1_RegisterMspCallbacks (BSP_I2C_Cb_t *Callbacks)
+ 366:Core/Src/stm32f3xx_nucleo_bus.c **** {
+ 367:Core/Src/stm32f3xx_nucleo_bus.c ****   /* Prevent unused argument(s) compilation warning */
+ 368:Core/Src/stm32f3xx_nucleo_bus.c ****   __HAL_I2C_RESET_HANDLE_STATE(&hi2c1);
+ 369:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 370:Core/Src/stm32f3xx_nucleo_bus.c ****    /* Register MspInit Callback */
+ 371:Core/Src/stm32f3xx_nucleo_bus.c ****   if (HAL_I2C_RegisterCallback(&hi2c1, HAL_I2C_MSPINIT_CB_ID, Callbacks->pMspInitCb)  != HAL_OK)
+ 372:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 8
+
+
+ 373:Core/Src/stm32f3xx_nucleo_bus.c ****     return BSP_ERROR_PERIPH_FAILURE;
+ 374:Core/Src/stm32f3xx_nucleo_bus.c ****   }
+ 375:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 376:Core/Src/stm32f3xx_nucleo_bus.c ****   /* Register MspDeInit Callback */
+ 377:Core/Src/stm32f3xx_nucleo_bus.c ****   if (HAL_I2C_RegisterCallback(&hi2c1, HAL_I2C_MSPDEINIT_CB_ID, Callbacks->pMspDeInitCb) != HAL_OK)
+ 378:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 379:Core/Src/stm32f3xx_nucleo_bus.c ****     return BSP_ERROR_PERIPH_FAILURE;
+ 380:Core/Src/stm32f3xx_nucleo_bus.c ****   }
+ 381:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 382:Core/Src/stm32f3xx_nucleo_bus.c ****   IsI2C1MspCbValid = 1;
+ 383:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 384:Core/Src/stm32f3xx_nucleo_bus.c ****   return BSP_ERROR_NONE;
+ 385:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 386:Core/Src/stm32f3xx_nucleo_bus.c **** #endif /* USE_HAL_I2C_REGISTER_CALLBACKS */
+ 387:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 388:Core/Src/stm32f3xx_nucleo_bus.c **** /**
+ 389:Core/Src/stm32f3xx_nucleo_bus.c ****   * @brief  Return system tick in ms
+ 390:Core/Src/stm32f3xx_nucleo_bus.c ****   * @retval Current HAL time base time stamp
+ 391:Core/Src/stm32f3xx_nucleo_bus.c ****   */
+ 392:Core/Src/stm32f3xx_nucleo_bus.c **** int32_t BSP_GetTick(void) {
+ 393:Core/Src/stm32f3xx_nucleo_bus.c ****   return HAL_GetTick();
+ 394:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 395:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 396:Core/Src/stm32f3xx_nucleo_bus.c **** /* I2C1 init function */
+ 397:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 398:Core/Src/stm32f3xx_nucleo_bus.c **** __weak HAL_StatusTypeDef MX_I2C1_Init(I2C_HandleTypeDef* hi2c)
+ 399:Core/Src/stm32f3xx_nucleo_bus.c **** {
+ 400:Core/Src/stm32f3xx_nucleo_bus.c ****   HAL_StatusTypeDef ret = HAL_OK;
+ 401:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 402:Core/Src/stm32f3xx_nucleo_bus.c ****   hi2c->Instance = I2C1;
+ 403:Core/Src/stm32f3xx_nucleo_bus.c ****   hi2c->Init.Timing = 0x0010020A;
+ 404:Core/Src/stm32f3xx_nucleo_bus.c ****   hi2c->Init.OwnAddress1 = 0;
+ 405:Core/Src/stm32f3xx_nucleo_bus.c ****   hi2c->Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+ 406:Core/Src/stm32f3xx_nucleo_bus.c ****   hi2c->Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+ 407:Core/Src/stm32f3xx_nucleo_bus.c ****   hi2c->Init.OwnAddress2 = 0;
+ 408:Core/Src/stm32f3xx_nucleo_bus.c ****   hi2c->Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+ 409:Core/Src/stm32f3xx_nucleo_bus.c ****   hi2c->Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+ 410:Core/Src/stm32f3xx_nucleo_bus.c ****   hi2c->Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+ 411:Core/Src/stm32f3xx_nucleo_bus.c ****   if (HAL_I2C_Init(hi2c) != HAL_OK)
+ 412:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 413:Core/Src/stm32f3xx_nucleo_bus.c ****     ret = HAL_ERROR;
+ 414:Core/Src/stm32f3xx_nucleo_bus.c ****   }
+ 415:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 416:Core/Src/stm32f3xx_nucleo_bus.c ****   if (HAL_I2CEx_ConfigAnalogFilter(hi2c, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
+ 417:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 418:Core/Src/stm32f3xx_nucleo_bus.c ****     ret = HAL_ERROR;
+ 419:Core/Src/stm32f3xx_nucleo_bus.c ****   }
+ 420:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 421:Core/Src/stm32f3xx_nucleo_bus.c ****   if (HAL_I2CEx_ConfigDigitalFilter(hi2c, 0) != HAL_OK)
+ 422:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 423:Core/Src/stm32f3xx_nucleo_bus.c ****     ret = HAL_ERROR;
+ 424:Core/Src/stm32f3xx_nucleo_bus.c ****   }
+ 425:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 426:Core/Src/stm32f3xx_nucleo_bus.c ****   return ret;
+ 427:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 428:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 429:Core/Src/stm32f3xx_nucleo_bus.c **** static void I2C1_MspInit(I2C_HandleTypeDef* i2cHandle)
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 9
+
+
+ 430:Core/Src/stm32f3xx_nucleo_bus.c **** {
+  29              		.loc 1 430 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 32
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		.loc 1 430 1 is_stmt 0 view .LVU1
+  34 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+  35              		.cfi_def_cfa_offset 28
+  36              		.cfi_offset 4, -28
+  37              		.cfi_offset 5, -24
+  38              		.cfi_offset 6, -20
+  39              		.cfi_offset 7, -16
+  40              		.cfi_offset 8, -12
+  41              		.cfi_offset 9, -8
+  42              		.cfi_offset 14, -4
+  43 0004 89B0     		sub	sp, sp, #36
+  44              		.cfi_def_cfa_offset 64
+ 431:Core/Src/stm32f3xx_nucleo_bus.c ****   GPIO_InitTypeDef GPIO_InitStruct;
+  45              		.loc 1 431 3 is_stmt 1 view .LVU2
+ 432:Core/Src/stm32f3xx_nucleo_bus.c ****   /* USER CODE BEGIN I2C1_MspInit 0 */
+ 433:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 434:Core/Src/stm32f3xx_nucleo_bus.c ****   /* USER CODE END I2C1_MspInit 0 */
+ 435:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 436:Core/Src/stm32f3xx_nucleo_bus.c ****     __HAL_RCC_GPIOB_CLK_ENABLE();
+  46              		.loc 1 436 5 view .LVU3
+  47              	.LBB2:
+  48              		.loc 1 436 5 view .LVU4
+  49              		.loc 1 436 5 view .LVU5
+  50 0006 1B4C     		ldr	r4, .L3
+  51 0008 6369     		ldr	r3, [r4, #20]
+  52 000a 43F48023 		orr	r3, r3, #262144
+  53 000e 6361     		str	r3, [r4, #20]
+  54              		.loc 1 436 5 view .LVU6
+  55 0010 6369     		ldr	r3, [r4, #20]
+  56 0012 03F48023 		and	r3, r3, #262144
+  57 0016 0193     		str	r3, [sp, #4]
+  58              		.loc 1 436 5 view .LVU7
+  59 0018 019B     		ldr	r3, [sp, #4]
+  60              	.LBE2:
+  61              		.loc 1 436 5 view .LVU8
+ 437:Core/Src/stm32f3xx_nucleo_bus.c ****     /**I2C1 GPIO Configuration
+ 438:Core/Src/stm32f3xx_nucleo_bus.c ****     PB8     ------> I2C1_SCL
+ 439:Core/Src/stm32f3xx_nucleo_bus.c ****     PB9     ------> I2C1_SDA
+ 440:Core/Src/stm32f3xx_nucleo_bus.c ****     */
+ 441:Core/Src/stm32f3xx_nucleo_bus.c ****     GPIO_InitStruct.Pin = BUS_I2C1_SCL_GPIO_PIN;
+  62              		.loc 1 441 5 view .LVU9
+  63              		.loc 1 441 25 is_stmt 0 view .LVU10
+  64 001a 4FF48073 		mov	r3, #256
+  65 001e 0393     		str	r3, [sp, #12]
+ 442:Core/Src/stm32f3xx_nucleo_bus.c ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+  66              		.loc 1 442 5 is_stmt 1 view .LVU11
+  67              		.loc 1 442 26 is_stmt 0 view .LVU12
+  68 0020 4FF01209 		mov	r9, #18
+  69 0024 CDF81090 		str	r9, [sp, #16]
+ 443:Core/Src/stm32f3xx_nucleo_bus.c ****     GPIO_InitStruct.Pull = GPIO_NOPULL;
+  70              		.loc 1 443 5 is_stmt 1 view .LVU13
+  71              		.loc 1 443 26 is_stmt 0 view .LVU14
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 10
+
+
+  72 0028 4FF00008 		mov	r8, #0
+  73 002c CDF81480 		str	r8, [sp, #20]
+ 444:Core/Src/stm32f3xx_nucleo_bus.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  74              		.loc 1 444 5 is_stmt 1 view .LVU15
+  75              		.loc 1 444 27 is_stmt 0 view .LVU16
+  76 0030 0327     		movs	r7, #3
+  77 0032 0697     		str	r7, [sp, #24]
+ 445:Core/Src/stm32f3xx_nucleo_bus.c ****     GPIO_InitStruct.Alternate = BUS_I2C1_SCL_GPIO_AF;
+  78              		.loc 1 445 5 is_stmt 1 view .LVU17
+  79              		.loc 1 445 31 is_stmt 0 view .LVU18
+  80 0034 0426     		movs	r6, #4
+  81 0036 0796     		str	r6, [sp, #28]
+ 446:Core/Src/stm32f3xx_nucleo_bus.c ****     HAL_GPIO_Init(BUS_I2C1_SCL_GPIO_PORT, &GPIO_InitStruct);
+  82              		.loc 1 446 5 is_stmt 1 view .LVU19
+  83 0038 0F4D     		ldr	r5, .L3+4
+  84 003a 03A9     		add	r1, sp, #12
+  85 003c 2846     		mov	r0, r5
+  86              	.LVL1:
+  87              		.loc 1 446 5 is_stmt 0 view .LVU20
+  88 003e FFF7FEFF 		bl	HAL_GPIO_Init
+  89              	.LVL2:
+ 447:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 448:Core/Src/stm32f3xx_nucleo_bus.c ****     GPIO_InitStruct.Pin = BUS_I2C1_SDA_GPIO_PIN;
+  90              		.loc 1 448 5 is_stmt 1 view .LVU21
+  91              		.loc 1 448 25 is_stmt 0 view .LVU22
+  92 0042 4FF40073 		mov	r3, #512
+  93 0046 0393     		str	r3, [sp, #12]
+ 449:Core/Src/stm32f3xx_nucleo_bus.c ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
+  94              		.loc 1 449 5 is_stmt 1 view .LVU23
+  95              		.loc 1 449 26 is_stmt 0 view .LVU24
+  96 0048 CDF81090 		str	r9, [sp, #16]
+ 450:Core/Src/stm32f3xx_nucleo_bus.c ****     GPIO_InitStruct.Pull = GPIO_NOPULL;
+  97              		.loc 1 450 5 is_stmt 1 view .LVU25
+  98              		.loc 1 450 26 is_stmt 0 view .LVU26
+  99 004c CDF81480 		str	r8, [sp, #20]
+ 451:Core/Src/stm32f3xx_nucleo_bus.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+ 100              		.loc 1 451 5 is_stmt 1 view .LVU27
+ 101              		.loc 1 451 27 is_stmt 0 view .LVU28
+ 102 0050 0697     		str	r7, [sp, #24]
+ 452:Core/Src/stm32f3xx_nucleo_bus.c ****     GPIO_InitStruct.Alternate = BUS_I2C1_SDA_GPIO_AF;
+ 103              		.loc 1 452 5 is_stmt 1 view .LVU29
+ 104              		.loc 1 452 31 is_stmt 0 view .LVU30
+ 105 0052 0796     		str	r6, [sp, #28]
+ 453:Core/Src/stm32f3xx_nucleo_bus.c ****     HAL_GPIO_Init(BUS_I2C1_SDA_GPIO_PORT, &GPIO_InitStruct);
+ 106              		.loc 1 453 5 is_stmt 1 view .LVU31
+ 107 0054 03A9     		add	r1, sp, #12
+ 108 0056 2846     		mov	r0, r5
+ 109 0058 FFF7FEFF 		bl	HAL_GPIO_Init
+ 110              	.LVL3:
+ 454:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 455:Core/Src/stm32f3xx_nucleo_bus.c ****     /* Peripheral clock enable */
+ 456:Core/Src/stm32f3xx_nucleo_bus.c ****     __HAL_RCC_I2C1_CLK_ENABLE();
+ 111              		.loc 1 456 5 view .LVU32
+ 112              	.LBB3:
+ 113              		.loc 1 456 5 view .LVU33
+ 114              		.loc 1 456 5 view .LVU34
+ 115 005c E369     		ldr	r3, [r4, #28]
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 11
+
+
+ 116 005e 43F40013 		orr	r3, r3, #2097152
+ 117 0062 E361     		str	r3, [r4, #28]
+ 118              		.loc 1 456 5 view .LVU35
+ 119 0064 E369     		ldr	r3, [r4, #28]
+ 120 0066 03F40013 		and	r3, r3, #2097152
+ 121 006a 0293     		str	r3, [sp, #8]
+ 122              		.loc 1 456 5 view .LVU36
+ 123 006c 029B     		ldr	r3, [sp, #8]
+ 124              	.LBE3:
+ 125              		.loc 1 456 5 view .LVU37
+ 457:Core/Src/stm32f3xx_nucleo_bus.c ****   /* USER CODE BEGIN I2C1_MspInit 1 */
+ 458:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 459:Core/Src/stm32f3xx_nucleo_bus.c ****   /* USER CODE END I2C1_MspInit 1 */
+ 460:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 126              		.loc 1 460 1 is_stmt 0 view .LVU38
+ 127 006e 09B0     		add	sp, sp, #36
+ 128              		.cfi_def_cfa_offset 28
+ 129              		@ sp needed
+ 130 0070 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 131              	.L4:
+ 132              		.align	2
+ 133              	.L3:
+ 134 0074 00100240 		.word	1073876992
+ 135 0078 00040048 		.word	1207960576
+ 136              		.cfi_endproc
+ 137              	.LFE141:
+ 139              		.section	.text.I2C1_MspDeInit,"ax",%progbits
+ 140              		.align	1
+ 141              		.syntax unified
+ 142              		.thumb
+ 143              		.thumb_func
+ 145              	I2C1_MspDeInit:
+ 146              	.LVL4:
+ 147              	.LFB142:
+ 461:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 462:Core/Src/stm32f3xx_nucleo_bus.c **** static void I2C1_MspDeInit(I2C_HandleTypeDef* i2cHandle)
+ 463:Core/Src/stm32f3xx_nucleo_bus.c **** {
+ 148              		.loc 1 463 1 is_stmt 1 view -0
+ 149              		.cfi_startproc
+ 150              		@ args = 0, pretend = 0, frame = 0
+ 151              		@ frame_needed = 0, uses_anonymous_args = 0
+ 152              		.loc 1 463 1 is_stmt 0 view .LVU40
+ 153 0000 10B5     		push	{r4, lr}
+ 154              		.cfi_def_cfa_offset 8
+ 155              		.cfi_offset 4, -8
+ 156              		.cfi_offset 14, -4
+ 464:Core/Src/stm32f3xx_nucleo_bus.c ****   /* USER CODE BEGIN I2C1_MspDeInit 0 */
+ 465:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 466:Core/Src/stm32f3xx_nucleo_bus.c ****   /* USER CODE END I2C1_MspDeInit 0 */
+ 467:Core/Src/stm32f3xx_nucleo_bus.c ****     /* Peripheral clock disable */
+ 468:Core/Src/stm32f3xx_nucleo_bus.c ****     __HAL_RCC_I2C1_CLK_DISABLE();
+ 157              		.loc 1 468 5 is_stmt 1 view .LVU41
+ 158 0002 084A     		ldr	r2, .L7
+ 159 0004 D369     		ldr	r3, [r2, #28]
+ 160 0006 23F40013 		bic	r3, r3, #2097152
+ 161 000a D361     		str	r3, [r2, #28]
+ 469:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 12
+
+
+ 470:Core/Src/stm32f3xx_nucleo_bus.c ****     /**I2C1 GPIO Configuration
+ 471:Core/Src/stm32f3xx_nucleo_bus.c ****     PB8     ------> I2C1_SCL
+ 472:Core/Src/stm32f3xx_nucleo_bus.c ****     PB9     ------> I2C1_SDA
+ 473:Core/Src/stm32f3xx_nucleo_bus.c ****     */
+ 474:Core/Src/stm32f3xx_nucleo_bus.c ****     HAL_GPIO_DeInit(BUS_I2C1_SCL_GPIO_PORT, BUS_I2C1_SCL_GPIO_PIN);
+ 162              		.loc 1 474 5 view .LVU42
+ 163 000c 064C     		ldr	r4, .L7+4
+ 164 000e 4FF48071 		mov	r1, #256
+ 165 0012 2046     		mov	r0, r4
+ 166              	.LVL5:
+ 167              		.loc 1 474 5 is_stmt 0 view .LVU43
+ 168 0014 FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 169              	.LVL6:
+ 475:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 476:Core/Src/stm32f3xx_nucleo_bus.c ****     HAL_GPIO_DeInit(BUS_I2C1_SDA_GPIO_PORT, BUS_I2C1_SDA_GPIO_PIN);
+ 170              		.loc 1 476 5 is_stmt 1 view .LVU44
+ 171 0018 4FF40071 		mov	r1, #512
+ 172 001c 2046     		mov	r0, r4
+ 173 001e FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 174              	.LVL7:
+ 477:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 478:Core/Src/stm32f3xx_nucleo_bus.c ****   /* USER CODE BEGIN I2C1_MspDeInit 1 */
+ 479:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 480:Core/Src/stm32f3xx_nucleo_bus.c ****   /* USER CODE END I2C1_MspDeInit 1 */
+ 481:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 175              		.loc 1 481 1 is_stmt 0 view .LVU45
+ 176 0022 10BD     		pop	{r4, pc}
+ 177              	.L8:
+ 178              		.align	2
+ 179              	.L7:
+ 180 0024 00100240 		.word	1073876992
+ 181 0028 00040048 		.word	1207960576
+ 182              		.cfi_endproc
+ 183              	.LFE142:
+ 185              		.section	.text.BSP_I2C1_DeInit,"ax",%progbits
+ 186              		.align	1
+ 187              		.global	BSP_I2C1_DeInit
+ 188              		.syntax unified
+ 189              		.thumb
+ 190              		.thumb_func
+ 192              	BSP_I2C1_DeInit:
+ 193              	.LFB131:
+ 140:Core/Src/stm32f3xx_nucleo_bus.c ****   int32_t ret = BSP_ERROR_NONE;
+ 194              		.loc 1 140 1 is_stmt 1 view -0
+ 195              		.cfi_startproc
+ 196              		@ args = 0, pretend = 0, frame = 0
+ 197              		@ frame_needed = 0, uses_anonymous_args = 0
+ 141:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 198              		.loc 1 141 3 view .LVU47
+ 199              	.LVL8:
+ 143:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 200              		.loc 1 143 3 view .LVU48
+ 143:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 201              		.loc 1 143 23 is_stmt 0 view .LVU49
+ 202 0000 0B4B     		ldr	r3, .L19
+ 203 0002 1B68     		ldr	r3, [r3]
+ 143:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 13
+
+
+ 204              		.loc 1 143 6 view .LVU50
+ 205 0004 7BB1     		cbz	r3, .L11
+ 145:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 206              		.loc 1 145 5 is_stmt 1 view .LVU51
+ 145:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 207              		.loc 1 145 9 is_stmt 0 view .LVU52
+ 208 0006 013B     		subs	r3, r3, #1
+ 145:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 209              		.loc 1 145 8 view .LVU53
+ 210 0008 094A     		ldr	r2, .L19
+ 211 000a 1360     		str	r3, [r2]
+ 212 000c 0BB1     		cbz	r3, .L18
+ 141:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 213              		.loc 1 141 11 view .LVU54
+ 214 000e 0020     		movs	r0, #0
+ 159:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 215              		.loc 1 159 1 view .LVU55
+ 216 0010 7047     		bx	lr
+ 217              	.L18:
+ 140:Core/Src/stm32f3xx_nucleo_bus.c ****   int32_t ret = BSP_ERROR_NONE;
+ 218              		.loc 1 140 1 view .LVU56
+ 219 0012 10B5     		push	{r4, lr}
+ 220              		.cfi_def_cfa_offset 8
+ 221              		.cfi_offset 4, -8
+ 222              		.cfi_offset 14, -4
+ 149:Core/Src/stm32f3xx_nucleo_bus.c ****   #endif
+ 223              		.loc 1 149 7 is_stmt 1 view .LVU57
+ 224 0014 074C     		ldr	r4, .L19+4
+ 225 0016 2046     		mov	r0, r4
+ 226 0018 FFF7FEFF 		bl	I2C1_MspDeInit
+ 227              	.LVL9:
+ 152:Core/Src/stm32f3xx_nucleo_bus.c ****       {
+ 228              		.loc 1 152 7 view .LVU58
+ 152:Core/Src/stm32f3xx_nucleo_bus.c ****       {
+ 229              		.loc 1 152 11 is_stmt 0 view .LVU59
+ 230 001c 2046     		mov	r0, r4
+ 231 001e FFF7FEFF 		bl	HAL_I2C_DeInit
+ 232              	.LVL10:
+ 152:Core/Src/stm32f3xx_nucleo_bus.c ****       {
+ 233              		.loc 1 152 10 view .LVU60
+ 234 0022 10B9     		cbnz	r0, .L13
+ 235              	.LVL11:
+ 236              	.L9:
+ 159:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 237              		.loc 1 159 1 view .LVU61
+ 238 0024 10BD     		pop	{r4, pc}
+ 239              	.LVL12:
+ 240              	.L11:
+ 241              		.cfi_def_cfa_offset 0
+ 242              		.cfi_restore 4
+ 243              		.cfi_restore 14
+ 141:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 244              		.loc 1 141 11 view .LVU62
+ 245 0026 0020     		movs	r0, #0
+ 246 0028 7047     		bx	lr
+ 247              	.L13:
+ 248              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 14
+
+
+ 249              		.cfi_offset 4, -8
+ 250              		.cfi_offset 14, -4
+ 154:Core/Src/stm32f3xx_nucleo_bus.c ****       }
+ 251              		.loc 1 154 13 view .LVU63
+ 252 002a 6FF00700 		mvn	r0, #7
+ 253              	.LVL13:
+ 158:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 254              		.loc 1 158 3 is_stmt 1 view .LVU64
+ 158:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 255              		.loc 1 158 10 is_stmt 0 view .LVU65
+ 256 002e F9E7     		b	.L9
+ 257              	.L20:
+ 258              		.align	2
+ 259              	.L19:
+ 260 0030 00000000 		.word	I2C1InitCounter
+ 261 0034 00000000 		.word	hi2c1
+ 262              		.cfi_endproc
+ 263              	.LFE131:
+ 265              		.section	.text.BSP_I2C1_IsReady,"ax",%progbits
+ 266              		.align	1
+ 267              		.global	BSP_I2C1_IsReady
+ 268              		.syntax unified
+ 269              		.thumb
+ 270              		.thumb_func
+ 272              	BSP_I2C1_IsReady:
+ 273              	.LVL14:
+ 274              	.LFB132:
+ 168:Core/Src/stm32f3xx_nucleo_bus.c ****   int32_t ret = BSP_ERROR_NONE;
+ 275              		.loc 1 168 1 is_stmt 1 view -0
+ 276              		.cfi_startproc
+ 277              		@ args = 0, pretend = 0, frame = 0
+ 278              		@ frame_needed = 0, uses_anonymous_args = 0
+ 168:Core/Src/stm32f3xx_nucleo_bus.c ****   int32_t ret = BSP_ERROR_NONE;
+ 279              		.loc 1 168 1 is_stmt 0 view .LVU67
+ 280 0000 08B5     		push	{r3, lr}
+ 281              		.cfi_def_cfa_offset 8
+ 282              		.cfi_offset 3, -8
+ 283              		.cfi_offset 14, -4
+ 284 0002 0A46     		mov	r2, r1
+ 169:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 285              		.loc 1 169 3 is_stmt 1 view .LVU68
+ 286              	.LVL15:
+ 171:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 287              		.loc 1 171 3 view .LVU69
+ 171:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 288              		.loc 1 171 7 is_stmt 0 view .LVU70
+ 289 0004 4FF48053 		mov	r3, #4096
+ 290 0008 0146     		mov	r1, r0
+ 291              	.LVL16:
+ 171:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 292              		.loc 1 171 7 view .LVU71
+ 293 000a 0448     		ldr	r0, .L26
+ 294              	.LVL17:
+ 171:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 295              		.loc 1 171 7 view .LVU72
+ 296 000c FFF7FEFF 		bl	HAL_I2C_IsDeviceReady
+ 297              	.LVL18:
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 15
+
+
+ 171:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 298              		.loc 1 171 6 view .LVU73
+ 299 0010 00B9     		cbnz	r0, .L25
+ 300              	.LVL19:
+ 301              	.L21:
+ 177:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 302              		.loc 1 177 1 view .LVU74
+ 303 0012 08BD     		pop	{r3, pc}
+ 304              	.LVL20:
+ 305              	.L25:
+ 173:Core/Src/stm32f3xx_nucleo_bus.c ****   }
+ 306              		.loc 1 173 9 view .LVU75
+ 307 0014 6FF00200 		mvn	r0, #2
+ 308              	.LVL21:
+ 176:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 309              		.loc 1 176 3 is_stmt 1 view .LVU76
+ 176:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 310              		.loc 1 176 10 is_stmt 0 view .LVU77
+ 311 0018 FBE7     		b	.L21
+ 312              	.L27:
+ 313 001a 00BF     		.align	2
+ 314              	.L26:
+ 315 001c 00000000 		.word	hi2c1
+ 316              		.cfi_endproc
+ 317              	.LFE132:
+ 319              		.section	.text.BSP_I2C1_WriteReg,"ax",%progbits
+ 320              		.align	1
+ 321              		.global	BSP_I2C1_WriteReg
+ 322              		.syntax unified
+ 323              		.thumb
+ 324              		.thumb_func
+ 326              	BSP_I2C1_WriteReg:
+ 327              	.LVL22:
+ 328              	.LFB133:
+ 189:Core/Src/stm32f3xx_nucleo_bus.c ****   int32_t ret = BSP_ERROR_NONE;
+ 329              		.loc 1 189 1 is_stmt 1 view -0
+ 330              		.cfi_startproc
+ 331              		@ args = 0, pretend = 0, frame = 0
+ 332              		@ frame_needed = 0, uses_anonymous_args = 0
+ 189:Core/Src/stm32f3xx_nucleo_bus.c ****   int32_t ret = BSP_ERROR_NONE;
+ 333              		.loc 1 189 1 is_stmt 0 view .LVU79
+ 334 0000 10B5     		push	{r4, lr}
+ 335              		.cfi_def_cfa_offset 8
+ 336              		.cfi_offset 4, -8
+ 337              		.cfi_offset 14, -4
+ 338 0002 84B0     		sub	sp, sp, #16
+ 339              		.cfi_def_cfa_offset 24
+ 190:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 340              		.loc 1 190 3 is_stmt 1 view .LVU80
+ 341              	.LVL23:
+ 192:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 342              		.loc 1 192 3 view .LVU81
+ 192:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 343              		.loc 1 192 7 is_stmt 0 view .LVU82
+ 344 0004 4FF48054 		mov	r4, #4096
+ 345 0008 0294     		str	r4, [sp, #8]
+ 346 000a 0193     		str	r3, [sp, #4]
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 16
+
+
+ 347 000c 0092     		str	r2, [sp]
+ 348 000e 0123     		movs	r3, #1
+ 349              	.LVL24:
+ 192:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 350              		.loc 1 192 7 view .LVU83
+ 351 0010 0A46     		mov	r2, r1
+ 352              	.LVL25:
+ 192:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 353              		.loc 1 192 7 view .LVU84
+ 354 0012 0146     		mov	r1, r0
+ 355              	.LVL26:
+ 192:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 356              		.loc 1 192 7 view .LVU85
+ 357 0014 0848     		ldr	r0, .L35
+ 358              	.LVL27:
+ 192:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 359              		.loc 1 192 7 view .LVU86
+ 360 0016 FFF7FEFF 		bl	HAL_I2C_Mem_Write
+ 361              	.LVL28:
+ 192:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 362              		.loc 1 192 6 view .LVU87
+ 363 001a 10B9     		cbnz	r0, .L33
+ 190:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 364              		.loc 1 190 11 view .LVU88
+ 365 001c 0020     		movs	r0, #0
+ 366              	.LVL29:
+ 367              	.L28:
+ 204:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 368              		.loc 1 204 1 view .LVU89
+ 369 001e 04B0     		add	sp, sp, #16
+ 370              		.cfi_remember_state
+ 371              		.cfi_def_cfa_offset 8
+ 372              		@ sp needed
+ 373 0020 10BD     		pop	{r4, pc}
+ 374              	.LVL30:
+ 375              	.L33:
+ 376              		.cfi_restore_state
+ 194:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 377              		.loc 1 194 5 is_stmt 1 view .LVU90
+ 194:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 378              		.loc 1 194 9 is_stmt 0 view .LVU91
+ 379 0022 0548     		ldr	r0, .L35
+ 380 0024 FFF7FEFF 		bl	HAL_I2C_GetError
+ 381              	.LVL31:
+ 194:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 382              		.loc 1 194 8 view .LVU92
+ 383 0028 0428     		cmp	r0, #4
+ 384 002a 02D0     		beq	.L34
+ 200:Core/Src/stm32f3xx_nucleo_bus.c ****     }
+ 385              		.loc 1 200 11 view .LVU93
+ 386 002c 6FF00300 		mvn	r0, #3
+ 387              	.LVL32:
+ 203:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 388              		.loc 1 203 3 is_stmt 1 view .LVU94
+ 203:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 389              		.loc 1 203 10 is_stmt 0 view .LVU95
+ 390 0030 F5E7     		b	.L28
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 17
+
+
+ 391              	.LVL33:
+ 392              	.L34:
+ 196:Core/Src/stm32f3xx_nucleo_bus.c ****     }
+ 393              		.loc 1 196 11 view .LVU96
+ 394 0032 6FF06500 		mvn	r0, #101
+ 395 0036 F2E7     		b	.L28
+ 396              	.L36:
+ 397              		.align	2
+ 398              	.L35:
+ 399 0038 00000000 		.word	hi2c1
+ 400              		.cfi_endproc
+ 401              	.LFE133:
+ 403              		.section	.text.BSP_I2C1_ReadReg,"ax",%progbits
+ 404              		.align	1
+ 405              		.global	BSP_I2C1_ReadReg
+ 406              		.syntax unified
+ 407              		.thumb
+ 408              		.thumb_func
+ 410              	BSP_I2C1_ReadReg:
+ 411              	.LVL34:
+ 412              	.LFB134:
+ 215:Core/Src/stm32f3xx_nucleo_bus.c ****   int32_t ret = BSP_ERROR_NONE;
+ 413              		.loc 1 215 1 is_stmt 1 view -0
+ 414              		.cfi_startproc
+ 415              		@ args = 0, pretend = 0, frame = 0
+ 416              		@ frame_needed = 0, uses_anonymous_args = 0
+ 215:Core/Src/stm32f3xx_nucleo_bus.c ****   int32_t ret = BSP_ERROR_NONE;
+ 417              		.loc 1 215 1 is_stmt 0 view .LVU98
+ 418 0000 10B5     		push	{r4, lr}
+ 419              		.cfi_def_cfa_offset 8
+ 420              		.cfi_offset 4, -8
+ 421              		.cfi_offset 14, -4
+ 422 0002 84B0     		sub	sp, sp, #16
+ 423              		.cfi_def_cfa_offset 24
+ 216:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 424              		.loc 1 216 3 is_stmt 1 view .LVU99
+ 425              	.LVL35:
+ 218:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 426              		.loc 1 218 3 view .LVU100
+ 218:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 427              		.loc 1 218 7 is_stmt 0 view .LVU101
+ 428 0004 4FF48054 		mov	r4, #4096
+ 429 0008 0294     		str	r4, [sp, #8]
+ 430 000a 0193     		str	r3, [sp, #4]
+ 431 000c 0092     		str	r2, [sp]
+ 432 000e 0123     		movs	r3, #1
+ 433              	.LVL36:
+ 218:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 434              		.loc 1 218 7 view .LVU102
+ 435 0010 0A46     		mov	r2, r1
+ 436              	.LVL37:
+ 218:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 437              		.loc 1 218 7 view .LVU103
+ 438 0012 0146     		mov	r1, r0
+ 439              	.LVL38:
+ 218:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 440              		.loc 1 218 7 view .LVU104
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 18
+
+
+ 441 0014 0848     		ldr	r0, .L44
+ 442              	.LVL39:
+ 218:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 443              		.loc 1 218 7 view .LVU105
+ 444 0016 FFF7FEFF 		bl	HAL_I2C_Mem_Read
+ 445              	.LVL40:
+ 218:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 446              		.loc 1 218 6 view .LVU106
+ 447 001a 10B9     		cbnz	r0, .L42
+ 216:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 448              		.loc 1 216 11 view .LVU107
+ 449 001c 0020     		movs	r0, #0
+ 450              	.LVL41:
+ 451              	.L37:
+ 230:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 452              		.loc 1 230 1 view .LVU108
+ 453 001e 04B0     		add	sp, sp, #16
+ 454              		.cfi_remember_state
+ 455              		.cfi_def_cfa_offset 8
+ 456              		@ sp needed
+ 457 0020 10BD     		pop	{r4, pc}
+ 458              	.LVL42:
+ 459              	.L42:
+ 460              		.cfi_restore_state
+ 220:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 461              		.loc 1 220 5 is_stmt 1 view .LVU109
+ 220:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 462              		.loc 1 220 9 is_stmt 0 view .LVU110
+ 463 0022 0548     		ldr	r0, .L44
+ 464 0024 FFF7FEFF 		bl	HAL_I2C_GetError
+ 465              	.LVL43:
+ 220:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 466              		.loc 1 220 8 view .LVU111
+ 467 0028 0428     		cmp	r0, #4
+ 468 002a 02D0     		beq	.L43
+ 226:Core/Src/stm32f3xx_nucleo_bus.c ****     }
+ 469              		.loc 1 226 11 view .LVU112
+ 470 002c 6FF00300 		mvn	r0, #3
+ 471              	.LVL44:
+ 229:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 472              		.loc 1 229 3 is_stmt 1 view .LVU113
+ 229:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 473              		.loc 1 229 10 is_stmt 0 view .LVU114
+ 474 0030 F5E7     		b	.L37
+ 475              	.LVL45:
+ 476              	.L43:
+ 222:Core/Src/stm32f3xx_nucleo_bus.c ****     }
+ 477              		.loc 1 222 11 view .LVU115
+ 478 0032 6FF06500 		mvn	r0, #101
+ 479 0036 F2E7     		b	.L37
+ 480              	.L45:
+ 481              		.align	2
+ 482              	.L44:
+ 483 0038 00000000 		.word	hi2c1
+ 484              		.cfi_endproc
+ 485              	.LFE134:
+ 487              		.section	.text.BSP_I2C1_WriteReg16,"ax",%progbits
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 19
+
+
+ 488              		.align	1
+ 489              		.global	BSP_I2C1_WriteReg16
+ 490              		.syntax unified
+ 491              		.thumb
+ 492              		.thumb_func
+ 494              	BSP_I2C1_WriteReg16:
+ 495              	.LVL46:
+ 496              	.LFB135:
+ 243:Core/Src/stm32f3xx_nucleo_bus.c ****   int32_t ret = BSP_ERROR_NONE;
+ 497              		.loc 1 243 1 is_stmt 1 view -0
+ 498              		.cfi_startproc
+ 499              		@ args = 0, pretend = 0, frame = 0
+ 500              		@ frame_needed = 0, uses_anonymous_args = 0
+ 243:Core/Src/stm32f3xx_nucleo_bus.c ****   int32_t ret = BSP_ERROR_NONE;
+ 501              		.loc 1 243 1 is_stmt 0 view .LVU117
+ 502 0000 10B5     		push	{r4, lr}
+ 503              		.cfi_def_cfa_offset 8
+ 504              		.cfi_offset 4, -8
+ 505              		.cfi_offset 14, -4
+ 506 0002 84B0     		sub	sp, sp, #16
+ 507              		.cfi_def_cfa_offset 24
+ 244:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 508              		.loc 1 244 3 is_stmt 1 view .LVU118
+ 509              	.LVL47:
+ 246:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 510              		.loc 1 246 3 view .LVU119
+ 246:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 511              		.loc 1 246 7 is_stmt 0 view .LVU120
+ 512 0004 4FF48054 		mov	r4, #4096
+ 513 0008 0294     		str	r4, [sp, #8]
+ 514 000a 0193     		str	r3, [sp, #4]
+ 515 000c 0092     		str	r2, [sp]
+ 516 000e 0223     		movs	r3, #2
+ 517              	.LVL48:
+ 246:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 518              		.loc 1 246 7 view .LVU121
+ 519 0010 0A46     		mov	r2, r1
+ 520              	.LVL49:
+ 246:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 521              		.loc 1 246 7 view .LVU122
+ 522 0012 0146     		mov	r1, r0
+ 523              	.LVL50:
+ 246:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 524              		.loc 1 246 7 view .LVU123
+ 525 0014 0848     		ldr	r0, .L53
+ 526              	.LVL51:
+ 246:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 527              		.loc 1 246 7 view .LVU124
+ 528 0016 FFF7FEFF 		bl	HAL_I2C_Mem_Write
+ 529              	.LVL52:
+ 246:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 530              		.loc 1 246 6 view .LVU125
+ 531 001a 10B9     		cbnz	r0, .L51
+ 244:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 532              		.loc 1 244 11 view .LVU126
+ 533 001c 0020     		movs	r0, #0
+ 534              	.LVL53:
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 20
+
+
+ 535              	.L46:
+ 258:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 536              		.loc 1 258 1 view .LVU127
+ 537 001e 04B0     		add	sp, sp, #16
+ 538              		.cfi_remember_state
+ 539              		.cfi_def_cfa_offset 8
+ 540              		@ sp needed
+ 541 0020 10BD     		pop	{r4, pc}
+ 542              	.LVL54:
+ 543              	.L51:
+ 544              		.cfi_restore_state
+ 248:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 545              		.loc 1 248 5 is_stmt 1 view .LVU128
+ 248:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 546              		.loc 1 248 9 is_stmt 0 view .LVU129
+ 547 0022 0548     		ldr	r0, .L53
+ 548 0024 FFF7FEFF 		bl	HAL_I2C_GetError
+ 549              	.LVL55:
+ 248:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 550              		.loc 1 248 8 view .LVU130
+ 551 0028 0428     		cmp	r0, #4
+ 552 002a 02D0     		beq	.L52
+ 254:Core/Src/stm32f3xx_nucleo_bus.c ****     }
+ 553              		.loc 1 254 11 view .LVU131
+ 554 002c 6FF00300 		mvn	r0, #3
+ 555              	.LVL56:
+ 257:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 556              		.loc 1 257 3 is_stmt 1 view .LVU132
+ 257:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 557              		.loc 1 257 10 is_stmt 0 view .LVU133
+ 558 0030 F5E7     		b	.L46
+ 559              	.LVL57:
+ 560              	.L52:
+ 250:Core/Src/stm32f3xx_nucleo_bus.c ****     }
+ 561              		.loc 1 250 11 view .LVU134
+ 562 0032 6FF06500 		mvn	r0, #101
+ 563 0036 F2E7     		b	.L46
+ 564              	.L54:
+ 565              		.align	2
+ 566              	.L53:
+ 567 0038 00000000 		.word	hi2c1
+ 568              		.cfi_endproc
+ 569              	.LFE135:
+ 571              		.section	.text.BSP_I2C1_ReadReg16,"ax",%progbits
+ 572              		.align	1
+ 573              		.global	BSP_I2C1_ReadReg16
+ 574              		.syntax unified
+ 575              		.thumb
+ 576              		.thumb_func
+ 578              	BSP_I2C1_ReadReg16:
+ 579              	.LVL58:
+ 580              	.LFB136:
+ 268:Core/Src/stm32f3xx_nucleo_bus.c ****   int32_t ret = BSP_ERROR_NONE;
+ 581              		.loc 1 268 1 is_stmt 1 view -0
+ 582              		.cfi_startproc
+ 583              		@ args = 0, pretend = 0, frame = 0
+ 584              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 21
+
+
+ 268:Core/Src/stm32f3xx_nucleo_bus.c ****   int32_t ret = BSP_ERROR_NONE;
+ 585              		.loc 1 268 1 is_stmt 0 view .LVU136
+ 586 0000 10B5     		push	{r4, lr}
+ 587              		.cfi_def_cfa_offset 8
+ 588              		.cfi_offset 4, -8
+ 589              		.cfi_offset 14, -4
+ 590 0002 84B0     		sub	sp, sp, #16
+ 591              		.cfi_def_cfa_offset 24
+ 269:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 592              		.loc 1 269 3 is_stmt 1 view .LVU137
+ 593              	.LVL59:
+ 271:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 594              		.loc 1 271 3 view .LVU138
+ 271:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 595              		.loc 1 271 7 is_stmt 0 view .LVU139
+ 596 0004 4FF48054 		mov	r4, #4096
+ 597 0008 0294     		str	r4, [sp, #8]
+ 598 000a 0193     		str	r3, [sp, #4]
+ 599 000c 0092     		str	r2, [sp]
+ 600 000e 0223     		movs	r3, #2
+ 601              	.LVL60:
+ 271:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 602              		.loc 1 271 7 view .LVU140
+ 603 0010 0A46     		mov	r2, r1
+ 604              	.LVL61:
+ 271:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 605              		.loc 1 271 7 view .LVU141
+ 606 0012 0146     		mov	r1, r0
+ 607              	.LVL62:
+ 271:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 608              		.loc 1 271 7 view .LVU142
+ 609 0014 0848     		ldr	r0, .L61
+ 610              	.LVL63:
+ 271:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 611              		.loc 1 271 7 view .LVU143
+ 612 0016 FFF7FEFF 		bl	HAL_I2C_Mem_Read
+ 613              	.LVL64:
+ 271:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 614              		.loc 1 271 6 view .LVU144
+ 615 001a 10B9     		cbnz	r0, .L60
+ 269:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 616              		.loc 1 269 11 view .LVU145
+ 617 001c 0020     		movs	r0, #0
+ 618              	.LVL65:
+ 619              	.L55:
+ 283:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 620              		.loc 1 283 1 view .LVU146
+ 621 001e 04B0     		add	sp, sp, #16
+ 622              		.cfi_remember_state
+ 623              		.cfi_def_cfa_offset 8
+ 624              		@ sp needed
+ 625 0020 10BD     		pop	{r4, pc}
+ 626              	.LVL66:
+ 627              	.L60:
+ 628              		.cfi_restore_state
+ 273:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 629              		.loc 1 273 5 is_stmt 1 view .LVU147
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 22
+
+
+ 273:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 630              		.loc 1 273 9 is_stmt 0 view .LVU148
+ 631 0022 0548     		ldr	r0, .L61
+ 632 0024 FFF7FEFF 		bl	HAL_I2C_GetError
+ 633              	.LVL67:
+ 273:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 634              		.loc 1 273 8 view .LVU149
+ 635 0028 0428     		cmp	r0, #4
+ 636 002a 02D0     		beq	.L58
+ 275:Core/Src/stm32f3xx_nucleo_bus.c ****     }
+ 637              		.loc 1 275 11 view .LVU150
+ 638 002c 6FF06500 		mvn	r0, #101
+ 639 0030 F5E7     		b	.L55
+ 640              	.L58:
+ 279:Core/Src/stm32f3xx_nucleo_bus.c ****     }
+ 641              		.loc 1 279 11 view .LVU151
+ 642 0032 6FF00300 		mvn	r0, #3
+ 643              	.LVL68:
+ 282:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 644              		.loc 1 282 3 is_stmt 1 view .LVU152
+ 282:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 645              		.loc 1 282 10 is_stmt 0 view .LVU153
+ 646 0036 F2E7     		b	.L55
+ 647              	.L62:
+ 648              		.align	2
+ 649              	.L61:
+ 650 0038 00000000 		.word	hi2c1
+ 651              		.cfi_endproc
+ 652              	.LFE136:
+ 654              		.section	.text.BSP_I2C1_Send,"ax",%progbits
+ 655              		.align	1
+ 656              		.global	BSP_I2C1_Send
+ 657              		.syntax unified
+ 658              		.thumb
+ 659              		.thumb_func
+ 661              	BSP_I2C1_Send:
+ 662              	.LVL69:
+ 663              	.LFB137:
+ 292:Core/Src/stm32f3xx_nucleo_bus.c ****   int32_t ret = BSP_ERROR_NONE;
+ 664              		.loc 1 292 74 is_stmt 1 view -0
+ 665              		.cfi_startproc
+ 666              		@ args = 0, pretend = 0, frame = 0
+ 667              		@ frame_needed = 0, uses_anonymous_args = 0
+ 292:Core/Src/stm32f3xx_nucleo_bus.c ****   int32_t ret = BSP_ERROR_NONE;
+ 668              		.loc 1 292 74 is_stmt 0 view .LVU155
+ 669 0000 00B5     		push	{lr}
+ 670              		.cfi_def_cfa_offset 4
+ 671              		.cfi_offset 14, -4
+ 672 0002 83B0     		sub	sp, sp, #12
+ 673              		.cfi_def_cfa_offset 16
+ 674 0004 1346     		mov	r3, r2
+ 293:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 675              		.loc 1 293 3 is_stmt 1 view .LVU156
+ 676              	.LVL70:
+ 295:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 677              		.loc 1 295 3 view .LVU157
+ 295:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 23
+
+
+ 678              		.loc 1 295 7 is_stmt 0 view .LVU158
+ 679 0006 4FF48052 		mov	r2, #4096
+ 680              	.LVL71:
+ 295:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 681              		.loc 1 295 7 view .LVU159
+ 682 000a 0092     		str	r2, [sp]
+ 683 000c 0A46     		mov	r2, r1
+ 684 000e 0146     		mov	r1, r0
+ 685              	.LVL72:
+ 295:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 686              		.loc 1 295 7 view .LVU160
+ 687 0010 0948     		ldr	r0, .L69
+ 688              	.LVL73:
+ 295:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 689              		.loc 1 295 7 view .LVU161
+ 690 0012 FFF7FEFF 		bl	HAL_I2C_Master_Transmit
+ 691              	.LVL74:
+ 295:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 692              		.loc 1 295 6 view .LVU162
+ 693 0016 18B9     		cbnz	r0, .L68
+ 293:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 694              		.loc 1 293 11 view .LVU163
+ 695 0018 0020     		movs	r0, #0
+ 696              	.LVL75:
+ 697              	.L63:
+ 308:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 698              		.loc 1 308 1 view .LVU164
+ 699 001a 03B0     		add	sp, sp, #12
+ 700              		.cfi_remember_state
+ 701              		.cfi_def_cfa_offset 4
+ 702              		@ sp needed
+ 703 001c 5DF804FB 		ldr	pc, [sp], #4
+ 704              	.LVL76:
+ 705              	.L68:
+ 706              		.cfi_restore_state
+ 297:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 707              		.loc 1 297 5 is_stmt 1 view .LVU165
+ 297:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 708              		.loc 1 297 9 is_stmt 0 view .LVU166
+ 709 0020 0548     		ldr	r0, .L69
+ 710 0022 FFF7FEFF 		bl	HAL_I2C_GetError
+ 711              	.LVL77:
+ 297:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 712              		.loc 1 297 8 view .LVU167
+ 713 0026 0428     		cmp	r0, #4
+ 714 0028 02D0     		beq	.L66
+ 299:Core/Src/stm32f3xx_nucleo_bus.c ****     }
+ 715              		.loc 1 299 11 view .LVU168
+ 716 002a 6FF06500 		mvn	r0, #101
+ 717 002e F4E7     		b	.L63
+ 718              	.L66:
+ 303:Core/Src/stm32f3xx_nucleo_bus.c ****     }
+ 719              		.loc 1 303 11 view .LVU169
+ 720 0030 6FF00300 		mvn	r0, #3
+ 721              	.LVL78:
+ 307:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 722              		.loc 1 307 3 is_stmt 1 view .LVU170
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 24
+
+
+ 307:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 723              		.loc 1 307 10 is_stmt 0 view .LVU171
+ 724 0034 F1E7     		b	.L63
+ 725              	.L70:
+ 726 0036 00BF     		.align	2
+ 727              	.L69:
+ 728 0038 00000000 		.word	hi2c1
+ 729              		.cfi_endproc
+ 730              	.LFE137:
+ 732              		.section	.text.BSP_I2C1_Recv,"ax",%progbits
+ 733              		.align	1
+ 734              		.global	BSP_I2C1_Recv
+ 735              		.syntax unified
+ 736              		.thumb
+ 737              		.thumb_func
+ 739              	BSP_I2C1_Recv:
+ 740              	.LVL79:
+ 741              	.LFB138:
+ 317:Core/Src/stm32f3xx_nucleo_bus.c ****   int32_t ret = BSP_ERROR_NONE;
+ 742              		.loc 1 317 74 is_stmt 1 view -0
+ 743              		.cfi_startproc
+ 744              		@ args = 0, pretend = 0, frame = 0
+ 745              		@ frame_needed = 0, uses_anonymous_args = 0
+ 317:Core/Src/stm32f3xx_nucleo_bus.c ****   int32_t ret = BSP_ERROR_NONE;
+ 746              		.loc 1 317 74 is_stmt 0 view .LVU173
+ 747 0000 00B5     		push	{lr}
+ 748              		.cfi_def_cfa_offset 4
+ 749              		.cfi_offset 14, -4
+ 750 0002 83B0     		sub	sp, sp, #12
+ 751              		.cfi_def_cfa_offset 16
+ 752 0004 1346     		mov	r3, r2
+ 318:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 753              		.loc 1 318 3 is_stmt 1 view .LVU174
+ 754              	.LVL80:
+ 320:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 755              		.loc 1 320 3 view .LVU175
+ 320:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 756              		.loc 1 320 7 is_stmt 0 view .LVU176
+ 757 0006 4FF48052 		mov	r2, #4096
+ 758              	.LVL81:
+ 320:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 759              		.loc 1 320 7 view .LVU177
+ 760 000a 0092     		str	r2, [sp]
+ 761 000c 0A46     		mov	r2, r1
+ 762 000e 0146     		mov	r1, r0
+ 763              	.LVL82:
+ 320:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 764              		.loc 1 320 7 view .LVU178
+ 765 0010 0948     		ldr	r0, .L77
+ 766              	.LVL83:
+ 320:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 767              		.loc 1 320 7 view .LVU179
+ 768 0012 FFF7FEFF 		bl	HAL_I2C_Master_Receive
+ 769              	.LVL84:
+ 320:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 770              		.loc 1 320 6 view .LVU180
+ 771 0016 18B9     		cbnz	r0, .L76
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 25
+
+
+ 318:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 772              		.loc 1 318 11 view .LVU181
+ 773 0018 0020     		movs	r0, #0
+ 774              	.LVL85:
+ 775              	.L71:
+ 332:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 776              		.loc 1 332 1 view .LVU182
+ 777 001a 03B0     		add	sp, sp, #12
+ 778              		.cfi_remember_state
+ 779              		.cfi_def_cfa_offset 4
+ 780              		@ sp needed
+ 781 001c 5DF804FB 		ldr	pc, [sp], #4
+ 782              	.LVL86:
+ 783              	.L76:
+ 784              		.cfi_restore_state
+ 322:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 785              		.loc 1 322 5 is_stmt 1 view .LVU183
+ 322:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 786              		.loc 1 322 9 is_stmt 0 view .LVU184
+ 787 0020 0548     		ldr	r0, .L77
+ 788 0022 FFF7FEFF 		bl	HAL_I2C_GetError
+ 789              	.LVL87:
+ 322:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 790              		.loc 1 322 8 view .LVU185
+ 791 0026 0428     		cmp	r0, #4
+ 792 0028 02D0     		beq	.L74
+ 324:Core/Src/stm32f3xx_nucleo_bus.c ****     }
+ 793              		.loc 1 324 11 view .LVU186
+ 794 002a 6FF06500 		mvn	r0, #101
+ 795 002e F4E7     		b	.L71
+ 796              	.L74:
+ 328:Core/Src/stm32f3xx_nucleo_bus.c ****     }
+ 797              		.loc 1 328 11 view .LVU187
+ 798 0030 6FF00300 		mvn	r0, #3
+ 799              	.LVL88:
+ 331:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 800              		.loc 1 331 3 is_stmt 1 view .LVU188
+ 331:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 801              		.loc 1 331 10 is_stmt 0 view .LVU189
+ 802 0034 F1E7     		b	.L71
+ 803              	.L78:
+ 804 0036 00BF     		.align	2
+ 805              	.L77:
+ 806 0038 00000000 		.word	hi2c1
+ 807              		.cfi_endproc
+ 808              	.LFE138:
+ 810              		.section	.text.BSP_GetTick,"ax",%progbits
+ 811              		.align	1
+ 812              		.global	BSP_GetTick
+ 813              		.syntax unified
+ 814              		.thumb
+ 815              		.thumb_func
+ 817              	BSP_GetTick:
+ 818              	.LFB139:
+ 392:Core/Src/stm32f3xx_nucleo_bus.c ****   return HAL_GetTick();
+ 819              		.loc 1 392 27 is_stmt 1 view -0
+ 820              		.cfi_startproc
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 26
+
+
+ 821              		@ args = 0, pretend = 0, frame = 0
+ 822              		@ frame_needed = 0, uses_anonymous_args = 0
+ 823 0000 08B5     		push	{r3, lr}
+ 824              		.cfi_def_cfa_offset 8
+ 825              		.cfi_offset 3, -8
+ 826              		.cfi_offset 14, -4
+ 393:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 827              		.loc 1 393 3 view .LVU191
+ 393:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 828              		.loc 1 393 10 is_stmt 0 view .LVU192
+ 829 0002 FFF7FEFF 		bl	HAL_GetTick
+ 830              	.LVL89:
+ 394:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 831              		.loc 1 394 1 view .LVU193
+ 832 0006 08BD     		pop	{r3, pc}
+ 833              		.cfi_endproc
+ 834              	.LFE139:
+ 836              		.section	.text.MX_I2C1_Init,"ax",%progbits
+ 837              		.align	1
+ 838              		.weak	MX_I2C1_Init
+ 839              		.syntax unified
+ 840              		.thumb
+ 841              		.thumb_func
+ 843              	MX_I2C1_Init:
+ 844              	.LVL90:
+ 845              	.LFB140:
+ 399:Core/Src/stm32f3xx_nucleo_bus.c ****   HAL_StatusTypeDef ret = HAL_OK;
+ 846              		.loc 1 399 1 is_stmt 1 view -0
+ 847              		.cfi_startproc
+ 848              		@ args = 0, pretend = 0, frame = 0
+ 849              		@ frame_needed = 0, uses_anonymous_args = 0
+ 399:Core/Src/stm32f3xx_nucleo_bus.c ****   HAL_StatusTypeDef ret = HAL_OK;
+ 850              		.loc 1 399 1 is_stmt 0 view .LVU195
+ 851 0000 38B5     		push	{r3, r4, r5, lr}
+ 852              		.cfi_def_cfa_offset 16
+ 853              		.cfi_offset 3, -16
+ 854              		.cfi_offset 4, -12
+ 855              		.cfi_offset 5, -8
+ 856              		.cfi_offset 14, -4
+ 857 0002 0446     		mov	r4, r0
+ 400:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 858              		.loc 1 400 3 is_stmt 1 view .LVU196
+ 859              	.LVL91:
+ 402:Core/Src/stm32f3xx_nucleo_bus.c ****   hi2c->Init.Timing = 0x0010020A;
+ 860              		.loc 1 402 3 view .LVU197
+ 402:Core/Src/stm32f3xx_nucleo_bus.c ****   hi2c->Init.Timing = 0x0010020A;
+ 861              		.loc 1 402 18 is_stmt 0 view .LVU198
+ 862 0004 0F4B     		ldr	r3, .L89
+ 863 0006 0360     		str	r3, [r0]
+ 403:Core/Src/stm32f3xx_nucleo_bus.c ****   hi2c->Init.OwnAddress1 = 0;
+ 864              		.loc 1 403 3 is_stmt 1 view .LVU199
+ 403:Core/Src/stm32f3xx_nucleo_bus.c ****   hi2c->Init.OwnAddress1 = 0;
+ 865              		.loc 1 403 21 is_stmt 0 view .LVU200
+ 866 0008 0F4B     		ldr	r3, .L89+4
+ 867 000a 4360     		str	r3, [r0, #4]
+ 404:Core/Src/stm32f3xx_nucleo_bus.c ****   hi2c->Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+ 868              		.loc 1 404 3 is_stmt 1 view .LVU201
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 27
+
+
+ 404:Core/Src/stm32f3xx_nucleo_bus.c ****   hi2c->Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+ 869              		.loc 1 404 26 is_stmt 0 view .LVU202
+ 870 000c 0023     		movs	r3, #0
+ 871 000e 8360     		str	r3, [r0, #8]
+ 405:Core/Src/stm32f3xx_nucleo_bus.c ****   hi2c->Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+ 872              		.loc 1 405 3 is_stmt 1 view .LVU203
+ 405:Core/Src/stm32f3xx_nucleo_bus.c ****   hi2c->Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+ 873              		.loc 1 405 29 is_stmt 0 view .LVU204
+ 874 0010 0122     		movs	r2, #1
+ 875 0012 C260     		str	r2, [r0, #12]
+ 406:Core/Src/stm32f3xx_nucleo_bus.c ****   hi2c->Init.OwnAddress2 = 0;
+ 876              		.loc 1 406 3 is_stmt 1 view .LVU205
+ 406:Core/Src/stm32f3xx_nucleo_bus.c ****   hi2c->Init.OwnAddress2 = 0;
+ 877              		.loc 1 406 30 is_stmt 0 view .LVU206
+ 878 0014 0361     		str	r3, [r0, #16]
+ 407:Core/Src/stm32f3xx_nucleo_bus.c ****   hi2c->Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+ 879              		.loc 1 407 3 is_stmt 1 view .LVU207
+ 407:Core/Src/stm32f3xx_nucleo_bus.c ****   hi2c->Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+ 880              		.loc 1 407 26 is_stmt 0 view .LVU208
+ 881 0016 4361     		str	r3, [r0, #20]
+ 408:Core/Src/stm32f3xx_nucleo_bus.c ****   hi2c->Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+ 882              		.loc 1 408 3 is_stmt 1 view .LVU209
+ 408:Core/Src/stm32f3xx_nucleo_bus.c ****   hi2c->Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+ 883              		.loc 1 408 31 is_stmt 0 view .LVU210
+ 884 0018 8361     		str	r3, [r0, #24]
+ 409:Core/Src/stm32f3xx_nucleo_bus.c ****   hi2c->Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+ 885              		.loc 1 409 3 is_stmt 1 view .LVU211
+ 409:Core/Src/stm32f3xx_nucleo_bus.c ****   hi2c->Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+ 886              		.loc 1 409 30 is_stmt 0 view .LVU212
+ 887 001a C361     		str	r3, [r0, #28]
+ 410:Core/Src/stm32f3xx_nucleo_bus.c ****   if (HAL_I2C_Init(hi2c) != HAL_OK)
+ 888              		.loc 1 410 3 is_stmt 1 view .LVU213
+ 410:Core/Src/stm32f3xx_nucleo_bus.c ****   if (HAL_I2C_Init(hi2c) != HAL_OK)
+ 889              		.loc 1 410 28 is_stmt 0 view .LVU214
+ 890 001c 0362     		str	r3, [r0, #32]
+ 411:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 891              		.loc 1 411 3 is_stmt 1 view .LVU215
+ 411:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 892              		.loc 1 411 7 is_stmt 0 view .LVU216
+ 893 001e FFF7FEFF 		bl	HAL_I2C_Init
+ 894              	.LVL92:
+ 411:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 895              		.loc 1 411 6 view .LVU217
+ 896 0022 0546     		mov	r5, r0
+ 897 0024 00B1     		cbz	r0, .L82
+ 413:Core/Src/stm32f3xx_nucleo_bus.c ****   }
+ 898              		.loc 1 413 9 view .LVU218
+ 899 0026 0125     		movs	r5, #1
+ 900              	.L82:
+ 901              	.LVL93:
+ 416:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 902              		.loc 1 416 3 is_stmt 1 view .LVU219
+ 416:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 903              		.loc 1 416 7 is_stmt 0 view .LVU220
+ 904 0028 0021     		movs	r1, #0
+ 905 002a 2046     		mov	r0, r4
+ 906 002c FFF7FEFF 		bl	HAL_I2CEx_ConfigAnalogFilter
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 28
+
+
+ 907              	.LVL94:
+ 416:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 908              		.loc 1 416 6 view .LVU221
+ 909 0030 00B1     		cbz	r0, .L83
+ 418:Core/Src/stm32f3xx_nucleo_bus.c ****   }
+ 910              		.loc 1 418 9 view .LVU222
+ 911 0032 0125     		movs	r5, #1
+ 912              	.LVL95:
+ 913              	.L83:
+ 421:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 914              		.loc 1 421 3 is_stmt 1 view .LVU223
+ 421:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 915              		.loc 1 421 7 is_stmt 0 view .LVU224
+ 916 0034 0021     		movs	r1, #0
+ 917 0036 2046     		mov	r0, r4
+ 918 0038 FFF7FEFF 		bl	HAL_I2CEx_ConfigDigitalFilter
+ 919              	.LVL96:
+ 421:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 920              		.loc 1 421 6 view .LVU225
+ 921 003c 00B1     		cbz	r0, .L84
+ 423:Core/Src/stm32f3xx_nucleo_bus.c ****   }
+ 922              		.loc 1 423 9 view .LVU226
+ 923 003e 0125     		movs	r5, #1
+ 924              	.LVL97:
+ 925              	.L84:
+ 426:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 926              		.loc 1 426 3 is_stmt 1 view .LVU227
+ 427:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 927              		.loc 1 427 1 is_stmt 0 view .LVU228
+ 928 0040 2846     		mov	r0, r5
+ 929 0042 38BD     		pop	{r3, r4, r5, pc}
+ 930              	.LVL98:
+ 931              	.L90:
+ 427:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 932              		.loc 1 427 1 view .LVU229
+ 933              		.align	2
+ 934              	.L89:
+ 935 0044 00540040 		.word	1073763328
+ 936 0048 0A021000 		.word	1049098
+ 937              		.cfi_endproc
+ 938              	.LFE140:
+ 940              		.section	.text.BSP_I2C1_Init,"ax",%progbits
+ 941              		.align	1
+ 942              		.global	BSP_I2C1_Init
+ 943              		.syntax unified
+ 944              		.thumb
+ 945              		.thumb_func
+ 947              	BSP_I2C1_Init:
+ 948              	.LFB130:
+  92:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 949              		.loc 1 92 1 is_stmt 1 view -0
+ 950              		.cfi_startproc
+ 951              		@ args = 0, pretend = 0, frame = 0
+ 952              		@ frame_needed = 0, uses_anonymous_args = 0
+  94:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 953              		.loc 1 94 3 view .LVU231
+ 954              	.LVL99:
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 29
+
+
+  96:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 955              		.loc 1 96 3 view .LVU232
+  96:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 956              		.loc 1 96 19 is_stmt 0 view .LVU233
+ 957 0000 124B     		ldr	r3, .L104
+ 958 0002 134A     		ldr	r2, .L104+4
+ 959 0004 1A60     		str	r2, [r3]
+  98:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 960              		.loc 1 98 3 is_stmt 1 view .LVU234
+  98:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 961              		.loc 1 98 21 is_stmt 0 view .LVU235
+ 962 0006 134A     		ldr	r2, .L104+8
+ 963 0008 1368     		ldr	r3, [r2]
+ 964 000a 591C     		adds	r1, r3, #1
+ 965 000c 1160     		str	r1, [r2]
+  98:Core/Src/stm32f3xx_nucleo_bus.c ****   {
+ 966              		.loc 1 98 5 view .LVU236
+ 967 000e 0BB1     		cbz	r3, .L101
+  94:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 968              		.loc 1 94 11 view .LVU237
+ 969 0010 0020     		movs	r0, #0
+ 133:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 970              		.loc 1 133 1 view .LVU238
+ 971 0012 7047     		bx	lr
+ 972              	.L101:
+  92:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 973              		.loc 1 92 1 view .LVU239
+ 974 0014 10B5     		push	{r4, lr}
+ 975              		.cfi_def_cfa_offset 8
+ 976              		.cfi_offset 4, -8
+ 977              		.cfi_offset 14, -4
+ 100:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 978              		.loc 1 100 5 is_stmt 1 view .LVU240
+ 100:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 979              		.loc 1 100 9 is_stmt 0 view .LVU241
+ 980 0016 0D48     		ldr	r0, .L104
+ 981 0018 FFF7FEFF 		bl	HAL_I2C_GetState
+ 982              	.LVL100:
+ 100:Core/Src/stm32f3xx_nucleo_bus.c ****     {
+ 983              		.loc 1 100 8 view .LVU242
+ 984 001c 08B1     		cbz	r0, .L102
+  94:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 985              		.loc 1 94 11 view .LVU243
+ 986 001e 0020     		movs	r0, #0
+ 987              	.L91:
+ 133:Core/Src/stm32f3xx_nucleo_bus.c **** 
+ 988              		.loc 1 133 1 view .LVU244
+ 989 0020 10BD     		pop	{r4, pc}
+ 990              	.L102:
+ 104:Core/Src/stm32f3xx_nucleo_bus.c ****     #else
+ 991              		.loc 1 104 7 is_stmt 1 view .LVU245
+ 992 0022 0A4C     		ldr	r4, .L104
+ 993 0024 2046     		mov	r0, r4
+ 994 0026 FFF7FEFF 		bl	I2C1_MspInit
+ 995              	.LVL101:
+ 114:Core/Src/stm32f3xx_nucleo_bus.c ****       {
+ 996              		.loc 1 114 7 view .LVU246
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 30
+
+
+ 117:Core/Src/stm32f3xx_nucleo_bus.c ****         {
+ 997              		.loc 1 117 9 view .LVU247
+ 117:Core/Src/stm32f3xx_nucleo_bus.c ****         {
+ 998              		.loc 1 117 12 is_stmt 0 view .LVU248
+ 999 002a 2046     		mov	r0, r4
+ 1000 002c FFF7FEFF 		bl	MX_I2C1_Init
+ 1001              	.LVL102:
+ 117:Core/Src/stm32f3xx_nucleo_bus.c ****         {
+ 1002              		.loc 1 117 11 view .LVU249
+ 1003 0030 48B9     		cbnz	r0, .L95
+ 121:Core/Src/stm32f3xx_nucleo_bus.c ****         {
+ 1004              		.loc 1 121 14 is_stmt 1 view .LVU250
+ 121:Core/Src/stm32f3xx_nucleo_bus.c ****         {
+ 1005              		.loc 1 121 17 is_stmt 0 view .LVU251
+ 1006 0032 0021     		movs	r1, #0
+ 1007 0034 2046     		mov	r0, r4
+ 1008 0036 FFF7FEFF 		bl	HAL_I2CEx_ConfigAnalogFilter
+ 1009              	.LVL103:
+ 121:Core/Src/stm32f3xx_nucleo_bus.c ****         {
+ 1010              		.loc 1 121 16 view .LVU252
+ 1011 003a 08B9     		cbnz	r0, .L103
+ 127:Core/Src/stm32f3xx_nucleo_bus.c ****         }
+ 1012              		.loc 1 127 15 view .LVU253
+ 1013 003c 0020     		movs	r0, #0
+ 132:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 1014              		.loc 1 132 3 is_stmt 1 view .LVU254
+ 132:Core/Src/stm32f3xx_nucleo_bus.c **** }
+ 1015              		.loc 1 132 10 is_stmt 0 view .LVU255
+ 1016 003e EFE7     		b	.L91
+ 1017              	.L103:
+ 123:Core/Src/stm32f3xx_nucleo_bus.c ****         }
+ 1018              		.loc 1 123 15 view .LVU256
+ 1019 0040 6FF00700 		mvn	r0, #7
+ 1020 0044 ECE7     		b	.L91
+ 1021              	.L95:
+ 119:Core/Src/stm32f3xx_nucleo_bus.c ****         }
+ 1022              		.loc 1 119 15 view .LVU257
+ 1023 0046 6FF00700 		mvn	r0, #7
+ 1024 004a E9E7     		b	.L91
+ 1025              	.L105:
+ 1026              		.align	2
+ 1027              	.L104:
+ 1028 004c 00000000 		.word	hi2c1
+ 1029 0050 00540040 		.word	1073763328
+ 1030 0054 00000000 		.word	I2C1InitCounter
+ 1031              		.cfi_endproc
+ 1032              	.LFE130:
+ 1034              		.section	.bss.I2C1InitCounter,"aw",%nobits
+ 1035              		.align	2
+ 1038              	I2C1InitCounter:
+ 1039 0000 00000000 		.space	4
+ 1040              		.global	hi2c1
+ 1041              		.section	.bss.hi2c1,"aw",%nobits
+ 1042              		.align	2
+ 1045              	hi2c1:
+ 1046 0000 00000000 		.space	84
+ 1046      00000000 
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 31
+
+
+ 1046      00000000 
+ 1046      00000000 
+ 1046      00000000 
+ 1047              		.text
+ 1048              	.Letext0:
+ 1049              		.file 2 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 1050              		.file 3 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 1051              		.file 4 "Drivers/CMSIS/Device/ST/STM32F3xx/Include/stm32f303xe.h"
+ 1052              		.file 5 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_def.h"
+ 1053              		.file 6 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_gpio.h"
+ 1054              		.file 7 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_dma.h"
+ 1055              		.file 8 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_i2c.h"
+ 1056              		.file 9 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_i2c_ex.h"
+ 1057              		.file 10 "Core/Inc/stm32f3xx_nucleo_bus.h"
+ 1058              		.file 11 "Drivers/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal.h"
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 32
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f3xx_nucleo_bus.c
+  C:\Temp\ccNkjWuM.s:21     .text.I2C1_MspInit:00000000 $t
+  C:\Temp\ccNkjWuM.s:26     .text.I2C1_MspInit:00000000 I2C1_MspInit
+  C:\Temp\ccNkjWuM.s:134    .text.I2C1_MspInit:00000074 $d
+  C:\Temp\ccNkjWuM.s:140    .text.I2C1_MspDeInit:00000000 $t
+  C:\Temp\ccNkjWuM.s:145    .text.I2C1_MspDeInit:00000000 I2C1_MspDeInit
+  C:\Temp\ccNkjWuM.s:180    .text.I2C1_MspDeInit:00000024 $d
+  C:\Temp\ccNkjWuM.s:186    .text.BSP_I2C1_DeInit:00000000 $t
+  C:\Temp\ccNkjWuM.s:192    .text.BSP_I2C1_DeInit:00000000 BSP_I2C1_DeInit
+  C:\Temp\ccNkjWuM.s:260    .text.BSP_I2C1_DeInit:00000030 $d
+  C:\Temp\ccNkjWuM.s:1038   .bss.I2C1InitCounter:00000000 I2C1InitCounter
+  C:\Temp\ccNkjWuM.s:1045   .bss.hi2c1:00000000 hi2c1
+  C:\Temp\ccNkjWuM.s:266    .text.BSP_I2C1_IsReady:00000000 $t
+  C:\Temp\ccNkjWuM.s:272    .text.BSP_I2C1_IsReady:00000000 BSP_I2C1_IsReady
+  C:\Temp\ccNkjWuM.s:315    .text.BSP_I2C1_IsReady:0000001c $d
+  C:\Temp\ccNkjWuM.s:320    .text.BSP_I2C1_WriteReg:00000000 $t
+  C:\Temp\ccNkjWuM.s:326    .text.BSP_I2C1_WriteReg:00000000 BSP_I2C1_WriteReg
+  C:\Temp\ccNkjWuM.s:399    .text.BSP_I2C1_WriteReg:00000038 $d
+  C:\Temp\ccNkjWuM.s:404    .text.BSP_I2C1_ReadReg:00000000 $t
+  C:\Temp\ccNkjWuM.s:410    .text.BSP_I2C1_ReadReg:00000000 BSP_I2C1_ReadReg
+  C:\Temp\ccNkjWuM.s:483    .text.BSP_I2C1_ReadReg:00000038 $d
+  C:\Temp\ccNkjWuM.s:488    .text.BSP_I2C1_WriteReg16:00000000 $t
+  C:\Temp\ccNkjWuM.s:494    .text.BSP_I2C1_WriteReg16:00000000 BSP_I2C1_WriteReg16
+  C:\Temp\ccNkjWuM.s:567    .text.BSP_I2C1_WriteReg16:00000038 $d
+  C:\Temp\ccNkjWuM.s:572    .text.BSP_I2C1_ReadReg16:00000000 $t
+  C:\Temp\ccNkjWuM.s:578    .text.BSP_I2C1_ReadReg16:00000000 BSP_I2C1_ReadReg16
+  C:\Temp\ccNkjWuM.s:650    .text.BSP_I2C1_ReadReg16:00000038 $d
+  C:\Temp\ccNkjWuM.s:655    .text.BSP_I2C1_Send:00000000 $t
+  C:\Temp\ccNkjWuM.s:661    .text.BSP_I2C1_Send:00000000 BSP_I2C1_Send
+  C:\Temp\ccNkjWuM.s:728    .text.BSP_I2C1_Send:00000038 $d
+  C:\Temp\ccNkjWuM.s:733    .text.BSP_I2C1_Recv:00000000 $t
+  C:\Temp\ccNkjWuM.s:739    .text.BSP_I2C1_Recv:00000000 BSP_I2C1_Recv
+  C:\Temp\ccNkjWuM.s:806    .text.BSP_I2C1_Recv:00000038 $d
+  C:\Temp\ccNkjWuM.s:811    .text.BSP_GetTick:00000000 $t
+  C:\Temp\ccNkjWuM.s:817    .text.BSP_GetTick:00000000 BSP_GetTick
+  C:\Temp\ccNkjWuM.s:837    .text.MX_I2C1_Init:00000000 $t
+  C:\Temp\ccNkjWuM.s:843    .text.MX_I2C1_Init:00000000 MX_I2C1_Init
+  C:\Temp\ccNkjWuM.s:935    .text.MX_I2C1_Init:00000044 $d
+  C:\Temp\ccNkjWuM.s:941    .text.BSP_I2C1_Init:00000000 $t
+  C:\Temp\ccNkjWuM.s:947    .text.BSP_I2C1_Init:00000000 BSP_I2C1_Init
+  C:\Temp\ccNkjWuM.s:1028   .text.BSP_I2C1_Init:0000004c $d
+  C:\Temp\ccNkjWuM.s:1035   .bss.I2C1InitCounter:00000000 $d
+  C:\Temp\ccNkjWuM.s:1042   .bss.hi2c1:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_Init
+HAL_GPIO_DeInit
+HAL_I2C_DeInit
+HAL_I2C_IsDeviceReady
+HAL_I2C_Mem_Write
+HAL_I2C_GetError
+HAL_I2C_Mem_Read
+HAL_I2C_Master_Transmit
+HAL_I2C_Master_Receive
+HAL_GetTick
+HAL_I2C_Init
+ARM GAS  C:\Temp\ccNkjWuM.s 			page 33
+
+
+HAL_I2CEx_ConfigAnalogFilter
+HAL_I2CEx_ConfigDigitalFilter
+HAL_I2C_GetState

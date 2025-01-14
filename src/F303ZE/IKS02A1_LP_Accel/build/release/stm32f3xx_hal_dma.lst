@@ -1,0 +1,779 @@
+ARM GAS  C:\Temp\ccQaBIor.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"stm32f3xx_hal_dma.c"
+  16              		.text
+  17              		.section	.text.DMA_SetConfig,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  23              	DMA_SetConfig:
+  24              		@ args = 0, pretend = 0, frame = 0
+  25              		@ frame_needed = 0, uses_anonymous_args = 0
+  26              		@ link register save eliminated.
+  27 0000 30B4     		push	{r4, r5}
+  28 0002 0124     		movs	r4, #1
+  29 0004 056C     		ldr	r5, [r0, #64]
+  30 0006 AC40     		lsls	r4, r4, r5
+  31 0008 C56B     		ldr	r5, [r0, #60]
+  32 000a 6C60     		str	r4, [r5, #4]
+  33 000c 0468     		ldr	r4, [r0]
+  34 000e 6360     		str	r3, [r4, #4]
+  35 0010 4368     		ldr	r3, [r0, #4]
+  36 0012 102B     		cmp	r3, #16
+  37 0014 05D0     		beq	.L5
+  38 0016 0368     		ldr	r3, [r0]
+  39 0018 9960     		str	r1, [r3, #8]
+  40 001a 0368     		ldr	r3, [r0]
+  41 001c DA60     		str	r2, [r3, #12]
+  42              	.L1:
+  43 001e 30BC     		pop	{r4, r5}
+  44 0020 7047     		bx	lr
+  45              	.L5:
+  46 0022 0368     		ldr	r3, [r0]
+  47 0024 9A60     		str	r2, [r3, #8]
+  48 0026 0368     		ldr	r3, [r0]
+  49 0028 D960     		str	r1, [r3, #12]
+  50 002a F8E7     		b	.L1
+  52              		.section	.text.DMA_CalcBaseAndBitshift,"ax",%progbits
+  53              		.align	1
+  54              		.syntax unified
+  55              		.thumb
+  56              		.thumb_func
+  58              	DMA_CalcBaseAndBitshift:
+  59              		@ args = 0, pretend = 0, frame = 0
+  60              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Temp\ccQaBIor.s 			page 2
+
+
+  61              		@ link register save eliminated.
+  62 0000 0268     		ldr	r2, [r0]
+  63 0002 0C4B     		ldr	r3, .L9
+  64 0004 9A42     		cmp	r2, r3
+  65 0006 0AD8     		bhi	.L7
+  66 0008 0B4B     		ldr	r3, .L9+4
+  67 000a 1344     		add	r3, r3, r2
+  68 000c 0B4A     		ldr	r2, .L9+8
+  69 000e A2FB0323 		umull	r2, r3, r2, r3
+  70 0012 1B09     		lsrs	r3, r3, #4
+  71 0014 9B00     		lsls	r3, r3, #2
+  72 0016 0364     		str	r3, [r0, #64]
+  73 0018 094B     		ldr	r3, .L9+12
+  74 001a C363     		str	r3, [r0, #60]
+  75 001c 7047     		bx	lr
+  76              	.L7:
+  77 001e 094B     		ldr	r3, .L9+16
+  78 0020 1344     		add	r3, r3, r2
+  79 0022 064A     		ldr	r2, .L9+8
+  80 0024 A2FB0323 		umull	r2, r3, r2, r3
+  81 0028 1B09     		lsrs	r3, r3, #4
+  82 002a 9B00     		lsls	r3, r3, #2
+  83 002c 0364     		str	r3, [r0, #64]
+  84 002e 064B     		ldr	r3, .L9+20
+  85 0030 C363     		str	r3, [r0, #60]
+  86 0032 7047     		bx	lr
+  87              	.L10:
+  88              		.align	2
+  89              	.L9:
+  90 0034 07040240 		.word	1073873927
+  91 0038 F8FFFDBF 		.word	-1073872904
+  92 003c CDCCCCCC 		.word	-858993459
+  93 0040 00000240 		.word	1073872896
+  94 0044 F8FBFDBF 		.word	-1073873928
+  95 0048 00040240 		.word	1073873920
+  97              		.section	.text.HAL_DMA_Init,"ax",%progbits
+  98              		.align	1
+  99              		.global	HAL_DMA_Init
+ 100              		.syntax unified
+ 101              		.thumb
+ 102              		.thumb_func
+ 104              	HAL_DMA_Init:
+ 105              		@ args = 0, pretend = 0, frame = 0
+ 106              		@ frame_needed = 0, uses_anonymous_args = 0
+ 107 0000 20B3     		cbz	r0, .L13
+ 108 0002 10B5     		push	{r4, lr}
+ 109 0004 0446     		mov	r4, r0
+ 110 0006 0223     		movs	r3, #2
+ 111 0008 80F82130 		strb	r3, [r0, #33]
+ 112 000c 0168     		ldr	r1, [r0]
+ 113 000e 0A68     		ldr	r2, [r1]
+ 114 0010 22F47F52 		bic	r2, r2, #16320
+ 115 0014 22F03002 		bic	r2, r2, #48
+ 116 0018 4368     		ldr	r3, [r0, #4]
+ 117 001a 8068     		ldr	r0, [r0, #8]
+ 118 001c 0343     		orrs	r3, r3, r0
+ 119 001e E068     		ldr	r0, [r4, #12]
+ARM GAS  C:\Temp\ccQaBIor.s 			page 3
+
+
+ 120 0020 0343     		orrs	r3, r3, r0
+ 121 0022 2069     		ldr	r0, [r4, #16]
+ 122 0024 0343     		orrs	r3, r3, r0
+ 123 0026 6069     		ldr	r0, [r4, #20]
+ 124 0028 0343     		orrs	r3, r3, r0
+ 125 002a A069     		ldr	r0, [r4, #24]
+ 126 002c 0343     		orrs	r3, r3, r0
+ 127 002e E069     		ldr	r0, [r4, #28]
+ 128 0030 0343     		orrs	r3, r3, r0
+ 129 0032 1343     		orrs	r3, r3, r2
+ 130 0034 0B60     		str	r3, [r1]
+ 131 0036 2046     		mov	r0, r4
+ 132 0038 FFF7FEFF 		bl	DMA_CalcBaseAndBitshift
+ 133 003c 0020     		movs	r0, #0
+ 134 003e A063     		str	r0, [r4, #56]
+ 135 0040 0123     		movs	r3, #1
+ 136 0042 84F82130 		strb	r3, [r4, #33]
+ 137 0046 84F82000 		strb	r0, [r4, #32]
+ 138 004a 10BD     		pop	{r4, pc}
+ 139              	.L13:
+ 140 004c 0120     		movs	r0, #1
+ 141 004e 7047     		bx	lr
+ 143              		.section	.text.HAL_DMA_DeInit,"ax",%progbits
+ 144              		.align	1
+ 145              		.global	HAL_DMA_DeInit
+ 146              		.syntax unified
+ 147              		.thumb
+ 148              		.thumb_func
+ 150              	HAL_DMA_DeInit:
+ 151              		@ args = 0, pretend = 0, frame = 0
+ 152              		@ frame_needed = 0, uses_anonymous_args = 0
+ 153 0000 08B3     		cbz	r0, .L20
+ 154 0002 38B5     		push	{r3, r4, r5, lr}
+ 155 0004 0446     		mov	r4, r0
+ 156 0006 0268     		ldr	r2, [r0]
+ 157 0008 1368     		ldr	r3, [r2]
+ 158 000a 23F00103 		bic	r3, r3, #1
+ 159 000e 1360     		str	r3, [r2]
+ 160 0010 0368     		ldr	r3, [r0]
+ 161 0012 0025     		movs	r5, #0
+ 162 0014 1D60     		str	r5, [r3]
+ 163 0016 0368     		ldr	r3, [r0]
+ 164 0018 5D60     		str	r5, [r3, #4]
+ 165 001a 0368     		ldr	r3, [r0]
+ 166 001c 9D60     		str	r5, [r3, #8]
+ 167 001e 0368     		ldr	r3, [r0]
+ 168 0020 DD60     		str	r5, [r3, #12]
+ 169 0022 FFF7FEFF 		bl	DMA_CalcBaseAndBitshift
+ 170 0026 216C     		ldr	r1, [r4, #64]
+ 171 0028 E26B     		ldr	r2, [r4, #60]
+ 172 002a 0123     		movs	r3, #1
+ 173 002c 8B40     		lsls	r3, r3, r1
+ 174 002e 5360     		str	r3, [r2, #4]
+ 175 0030 A562     		str	r5, [r4, #40]
+ 176 0032 E562     		str	r5, [r4, #44]
+ 177 0034 2563     		str	r5, [r4, #48]
+ 178 0036 6563     		str	r5, [r4, #52]
+ARM GAS  C:\Temp\ccQaBIor.s 			page 4
+
+
+ 179 0038 A563     		str	r5, [r4, #56]
+ 180 003a 84F82150 		strb	r5, [r4, #33]
+ 181 003e 84F82050 		strb	r5, [r4, #32]
+ 182 0042 2846     		mov	r0, r5
+ 183 0044 38BD     		pop	{r3, r4, r5, pc}
+ 184              	.L20:
+ 185 0046 0120     		movs	r0, #1
+ 186 0048 7047     		bx	lr
+ 188              		.section	.text.HAL_DMA_Start,"ax",%progbits
+ 189              		.align	1
+ 190              		.global	HAL_DMA_Start
+ 191              		.syntax unified
+ 192              		.thumb
+ 193              		.thumb_func
+ 195              	HAL_DMA_Start:
+ 196              		@ args = 0, pretend = 0, frame = 0
+ 197              		@ frame_needed = 0, uses_anonymous_args = 0
+ 198 0000 70B5     		push	{r4, r5, r6, lr}
+ 199 0002 0446     		mov	r4, r0
+ 200 0004 90F82000 		ldrb	r0, [r0, #32]	@ zero_extendqisi2
+ 201 0008 0128     		cmp	r0, #1
+ 202 000a 1FD0     		beq	.L28
+ 203 000c 0120     		movs	r0, #1
+ 204 000e 84F82000 		strb	r0, [r4, #32]
+ 205 0012 94F82100 		ldrb	r0, [r4, #33]	@ zero_extendqisi2
+ 206 0016 0128     		cmp	r0, #1
+ 207 0018 04D0     		beq	.L30
+ 208 001a 0023     		movs	r3, #0
+ 209 001c 84F82030 		strb	r3, [r4, #32]
+ 210 0020 0220     		movs	r0, #2
+ 211              	.L26:
+ 212 0022 70BD     		pop	{r4, r5, r6, pc}
+ 213              	.L30:
+ 214 0024 0220     		movs	r0, #2
+ 215 0026 84F82100 		strb	r0, [r4, #33]
+ 216 002a 0025     		movs	r5, #0
+ 217 002c A563     		str	r5, [r4, #56]
+ 218 002e 2668     		ldr	r6, [r4]
+ 219 0030 3068     		ldr	r0, [r6]
+ 220 0032 20F00100 		bic	r0, r0, #1
+ 221 0036 3060     		str	r0, [r6]
+ 222 0038 2046     		mov	r0, r4
+ 223 003a FFF7FEFF 		bl	DMA_SetConfig
+ 224 003e 2268     		ldr	r2, [r4]
+ 225 0040 1368     		ldr	r3, [r2]
+ 226 0042 43F00103 		orr	r3, r3, #1
+ 227 0046 1360     		str	r3, [r2]
+ 228 0048 2846     		mov	r0, r5
+ 229 004a EAE7     		b	.L26
+ 230              	.L28:
+ 231 004c 0220     		movs	r0, #2
+ 232 004e E8E7     		b	.L26
+ 234              		.section	.text.HAL_DMA_Start_IT,"ax",%progbits
+ 235              		.align	1
+ 236              		.global	HAL_DMA_Start_IT
+ 237              		.syntax unified
+ 238              		.thumb
+ARM GAS  C:\Temp\ccQaBIor.s 			page 5
+
+
+ 239              		.thumb_func
+ 241              	HAL_DMA_Start_IT:
+ 242              		@ args = 0, pretend = 0, frame = 0
+ 243              		@ frame_needed = 0, uses_anonymous_args = 0
+ 244 0000 38B5     		push	{r3, r4, r5, lr}
+ 245 0002 0446     		mov	r4, r0
+ 246 0004 90F82000 		ldrb	r0, [r0, #32]	@ zero_extendqisi2
+ 247 0008 0128     		cmp	r0, #1
+ 248 000a 31D0     		beq	.L36
+ 249 000c 0120     		movs	r0, #1
+ 250 000e 84F82000 		strb	r0, [r4, #32]
+ 251 0012 94F82100 		ldrb	r0, [r4, #33]	@ zero_extendqisi2
+ 252 0016 0128     		cmp	r0, #1
+ 253 0018 04D0     		beq	.L38
+ 254 001a 0023     		movs	r3, #0
+ 255 001c 84F82030 		strb	r3, [r4, #32]
+ 256 0020 0220     		movs	r0, #2
+ 257              	.L32:
+ 258 0022 38BD     		pop	{r3, r4, r5, pc}
+ 259              	.L38:
+ 260 0024 0220     		movs	r0, #2
+ 261 0026 84F82100 		strb	r0, [r4, #33]
+ 262 002a 0020     		movs	r0, #0
+ 263 002c A063     		str	r0, [r4, #56]
+ 264 002e 2568     		ldr	r5, [r4]
+ 265 0030 2868     		ldr	r0, [r5]
+ 266 0032 20F00100 		bic	r0, r0, #1
+ 267 0036 2860     		str	r0, [r5]
+ 268 0038 2046     		mov	r0, r4
+ 269 003a FFF7FEFF 		bl	DMA_SetConfig
+ 270 003e E36A     		ldr	r3, [r4, #44]
+ 271 0040 5BB1     		cbz	r3, .L34
+ 272 0042 2268     		ldr	r2, [r4]
+ 273 0044 1368     		ldr	r3, [r2]
+ 274 0046 43F00E03 		orr	r3, r3, #14
+ 275 004a 1360     		str	r3, [r2]
+ 276              	.L35:
+ 277 004c 2268     		ldr	r2, [r4]
+ 278 004e 1368     		ldr	r3, [r2]
+ 279 0050 43F00103 		orr	r3, r3, #1
+ 280 0054 1360     		str	r3, [r2]
+ 281 0056 0020     		movs	r0, #0
+ 282 0058 E3E7     		b	.L32
+ 283              	.L34:
+ 284 005a 2268     		ldr	r2, [r4]
+ 285 005c 1368     		ldr	r3, [r2]
+ 286 005e 43F00A03 		orr	r3, r3, #10
+ 287 0062 1360     		str	r3, [r2]
+ 288 0064 2268     		ldr	r2, [r4]
+ 289 0066 1368     		ldr	r3, [r2]
+ 290 0068 23F00403 		bic	r3, r3, #4
+ 291 006c 1360     		str	r3, [r2]
+ 292 006e EDE7     		b	.L35
+ 293              	.L36:
+ 294 0070 0220     		movs	r0, #2
+ 295 0072 D6E7     		b	.L32
+ 297              		.section	.text.HAL_DMA_Abort,"ax",%progbits
+ARM GAS  C:\Temp\ccQaBIor.s 			page 6
+
+
+ 298              		.align	1
+ 299              		.global	HAL_DMA_Abort
+ 300              		.syntax unified
+ 301              		.thumb
+ 302              		.thumb_func
+ 304              	HAL_DMA_Abort:
+ 305              		@ args = 0, pretend = 0, frame = 0
+ 306              		@ frame_needed = 0, uses_anonymous_args = 0
+ 307              		@ link register save eliminated.
+ 308 0000 0346     		mov	r3, r0
+ 309 0002 00B3     		cbz	r0, .L42
+ 310 0004 90F82120 		ldrb	r2, [r0, #33]	@ zero_extendqisi2
+ 311 0008 022A     		cmp	r2, #2
+ 312 000a 06D0     		beq	.L41
+ 313 000c 0422     		movs	r2, #4
+ 314 000e 8263     		str	r2, [r0, #56]
+ 315 0010 0022     		movs	r2, #0
+ 316 0012 80F82020 		strb	r2, [r0, #32]
+ 317 0016 0120     		movs	r0, #1
+ 318 0018 7047     		bx	lr
+ 319              	.L41:
+ 320 001a 0168     		ldr	r1, [r0]
+ 321 001c 0A68     		ldr	r2, [r1]
+ 322 001e 22F00E02 		bic	r2, r2, #14
+ 323 0022 0A60     		str	r2, [r1]
+ 324 0024 0168     		ldr	r1, [r0]
+ 325 0026 0A68     		ldr	r2, [r1]
+ 326 0028 22F00102 		bic	r2, r2, #1
+ 327 002c 0A60     		str	r2, [r1]
+ 328 002e 026C     		ldr	r2, [r0, #64]
+ 329 0030 C06B     		ldr	r0, [r0, #60]
+ 330 0032 0121     		movs	r1, #1
+ 331 0034 01FA02F2 		lsl	r2, r1, r2
+ 332 0038 4260     		str	r2, [r0, #4]
+ 333 003a 83F82110 		strb	r1, [r3, #33]
+ 334 003e 0020     		movs	r0, #0
+ 335 0040 83F82000 		strb	r0, [r3, #32]
+ 336 0044 7047     		bx	lr
+ 337              	.L42:
+ 338 0046 0120     		movs	r0, #1
+ 339 0048 7047     		bx	lr
+ 341              		.section	.text.HAL_DMA_Abort_IT,"ax",%progbits
+ 342              		.align	1
+ 343              		.global	HAL_DMA_Abort_IT
+ 344              		.syntax unified
+ 345              		.thumb
+ 346              		.thumb_func
+ 348              	HAL_DMA_Abort_IT:
+ 349              		@ args = 0, pretend = 0, frame = 0
+ 350              		@ frame_needed = 0, uses_anonymous_args = 0
+ 351 0000 08B5     		push	{r3, lr}
+ 352 0002 90F82130 		ldrb	r3, [r0, #33]	@ zero_extendqisi2
+ 353 0006 022B     		cmp	r3, #2
+ 354 0008 03D0     		beq	.L44
+ 355 000a 0423     		movs	r3, #4
+ 356 000c 8363     		str	r3, [r0, #56]
+ 357 000e 0120     		movs	r0, #1
+ARM GAS  C:\Temp\ccQaBIor.s 			page 7
+
+
+ 358              	.L45:
+ 359 0010 08BD     		pop	{r3, pc}
+ 360              	.L44:
+ 361 0012 0268     		ldr	r2, [r0]
+ 362 0014 1368     		ldr	r3, [r2]
+ 363 0016 23F00E03 		bic	r3, r3, #14
+ 364 001a 1360     		str	r3, [r2]
+ 365 001c 0268     		ldr	r2, [r0]
+ 366 001e 1368     		ldr	r3, [r2]
+ 367 0020 23F00103 		bic	r3, r3, #1
+ 368 0024 1360     		str	r3, [r2]
+ 369 0026 036C     		ldr	r3, [r0, #64]
+ 370 0028 C16B     		ldr	r1, [r0, #60]
+ 371 002a 0122     		movs	r2, #1
+ 372 002c 02FA03F3 		lsl	r3, r2, r3
+ 373 0030 4B60     		str	r3, [r1, #4]
+ 374 0032 80F82120 		strb	r2, [r0, #33]
+ 375 0036 0023     		movs	r3, #0
+ 376 0038 80F82030 		strb	r3, [r0, #32]
+ 377 003c 436B     		ldr	r3, [r0, #52]
+ 378 003e 13B1     		cbz	r3, .L46
+ 379 0040 9847     		blx	r3
+ 380 0042 0020     		movs	r0, #0
+ 381 0044 E4E7     		b	.L45
+ 382              	.L46:
+ 383 0046 0020     		movs	r0, #0
+ 384 0048 E2E7     		b	.L45
+ 386              		.section	.text.HAL_DMA_PollForTransfer,"ax",%progbits
+ 387              		.align	1
+ 388              		.global	HAL_DMA_PollForTransfer
+ 389              		.syntax unified
+ 390              		.thumb
+ 391              		.thumb_func
+ 393              	HAL_DMA_PollForTransfer:
+ 394              		@ args = 0, pretend = 0, frame = 0
+ 395              		@ frame_needed = 0, uses_anonymous_args = 0
+ 396 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+ 397 0004 0446     		mov	r4, r0
+ 398 0006 90F82130 		ldrb	r3, [r0, #33]	@ zero_extendqisi2
+ 399 000a 022B     		cmp	r3, #2
+ 400 000c 07D0     		beq	.L49
+ 401 000e 0423     		movs	r3, #4
+ 402 0010 8363     		str	r3, [r0, #56]
+ 403 0012 0023     		movs	r3, #0
+ 404 0014 80F82030 		strb	r3, [r0, #32]
+ 405 0018 0120     		movs	r0, #1
+ 406              	.L50:
+ 407 001a BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 408              	.L49:
+ 409 001e 8846     		mov	r8, r1
+ 410 0020 1646     		mov	r6, r2
+ 411 0022 0368     		ldr	r3, [r0]
+ 412 0024 1B68     		ldr	r3, [r3]
+ 413 0026 13F0200F 		tst	r3, #32
+ 414 002a 23D1     		bne	.L62
+ 415 002c 39BB     		cbnz	r1, .L52
+ 416 002e 036C     		ldr	r3, [r0, #64]
+ARM GAS  C:\Temp\ccQaBIor.s 			page 8
+
+
+ 417 0030 0227     		movs	r7, #2
+ 418 0032 9F40     		lsls	r7, r7, r3
+ 419              	.L53:
+ 420 0034 FFF7FEFF 		bl	HAL_GetTick
+ 421 0038 8146     		mov	r9, r0
+ 422              	.L56:
+ 423 003a E56B     		ldr	r5, [r4, #60]
+ 424 003c 2B68     		ldr	r3, [r5]
+ 425 003e 3B42     		tst	r3, r7
+ 426 0040 2CD1     		bne	.L63
+ 427 0042 2968     		ldr	r1, [r5]
+ 428 0044 226C     		ldr	r2, [r4, #64]
+ 429 0046 0823     		movs	r3, #8
+ 430 0048 9340     		lsls	r3, r3, r2
+ 431 004a 1942     		tst	r1, r3
+ 432 004c 1BD1     		bne	.L64
+ 433 004e B6F1FF3F 		cmp	r6, #-1
+ 434 0052 F2D0     		beq	.L56
+ 435 0054 2EB1     		cbz	r6, .L57
+ 436 0056 FFF7FEFF 		bl	HAL_GetTick
+ 437 005a A0EB0900 		sub	r0, r0, r9
+ 438 005e B042     		cmp	r0, r6
+ 439 0060 EBD9     		bls	.L56
+ 440              	.L57:
+ 441 0062 2023     		movs	r3, #32
+ 442 0064 A363     		str	r3, [r4, #56]
+ 443 0066 0120     		movs	r0, #1
+ 444 0068 84F82100 		strb	r0, [r4, #33]
+ 445 006c 0023     		movs	r3, #0
+ 446 006e 84F82030 		strb	r3, [r4, #32]
+ 447 0072 D2E7     		b	.L50
+ 448              	.L62:
+ 449 0074 4FF48073 		mov	r3, #256
+ 450 0078 8363     		str	r3, [r0, #56]
+ 451 007a 0120     		movs	r0, #1
+ 452 007c CDE7     		b	.L50
+ 453              	.L52:
+ 454 007e 036C     		ldr	r3, [r0, #64]
+ 455 0080 0427     		movs	r7, #4
+ 456 0082 9F40     		lsls	r7, r7, r3
+ 457 0084 D6E7     		b	.L53
+ 458              	.L64:
+ 459 0086 0120     		movs	r0, #1
+ 460 0088 00FA02F2 		lsl	r2, r0, r2
+ 461 008c 6A60     		str	r2, [r5, #4]
+ 462 008e A063     		str	r0, [r4, #56]
+ 463 0090 84F82100 		strb	r0, [r4, #33]
+ 464 0094 0023     		movs	r3, #0
+ 465 0096 84F82030 		strb	r3, [r4, #32]
+ 466 009a BEE7     		b	.L50
+ 467              	.L63:
+ 468 009c B8F1000F 		cmp	r8, #0
+ 469 00a0 0AD1     		bne	.L59
+ 470 00a2 226C     		ldr	r2, [r4, #64]
+ 471 00a4 0223     		movs	r3, #2
+ 472 00a6 9340     		lsls	r3, r3, r2
+ 473 00a8 6B60     		str	r3, [r5, #4]
+ARM GAS  C:\Temp\ccQaBIor.s 			page 9
+
+
+ 474 00aa 0123     		movs	r3, #1
+ 475 00ac 84F82130 		strb	r3, [r4, #33]
+ 476              	.L60:
+ 477 00b0 0020     		movs	r0, #0
+ 478 00b2 84F82000 		strb	r0, [r4, #32]
+ 479 00b6 B0E7     		b	.L50
+ 480              	.L59:
+ 481 00b8 226C     		ldr	r2, [r4, #64]
+ 482 00ba 0423     		movs	r3, #4
+ 483 00bc 9340     		lsls	r3, r3, r2
+ 484 00be 6B60     		str	r3, [r5, #4]
+ 485 00c0 F6E7     		b	.L60
+ 487              		.section	.text.HAL_DMA_IRQHandler,"ax",%progbits
+ 488              		.align	1
+ 489              		.global	HAL_DMA_IRQHandler
+ 490              		.syntax unified
+ 491              		.thumb
+ 492              		.thumb_func
+ 494              	HAL_DMA_IRQHandler:
+ 495              		@ args = 0, pretend = 0, frame = 0
+ 496              		@ frame_needed = 0, uses_anonymous_args = 0
+ 497 0000 38B5     		push	{r3, r4, r5, lr}
+ 498 0002 C36B     		ldr	r3, [r0, #60]
+ 499 0004 1A68     		ldr	r2, [r3]
+ 500 0006 0468     		ldr	r4, [r0]
+ 501 0008 2568     		ldr	r5, [r4]
+ 502 000a 016C     		ldr	r1, [r0, #64]
+ 503 000c 0423     		movs	r3, #4
+ 504 000e 8B40     		lsls	r3, r3, r1
+ 505 0010 1342     		tst	r3, r2
+ 506 0012 13D0     		beq	.L66
+ 507 0014 15F0040F 		tst	r5, #4
+ 508 0018 10D0     		beq	.L66
+ 509 001a 2368     		ldr	r3, [r4]
+ 510 001c 13F0200F 		tst	r3, #32
+ 511 0020 03D1     		bne	.L67
+ 512 0022 2368     		ldr	r3, [r4]
+ 513 0024 23F00403 		bic	r3, r3, #4
+ 514 0028 2360     		str	r3, [r4]
+ 515              	.L67:
+ 516 002a 016C     		ldr	r1, [r0, #64]
+ 517 002c C26B     		ldr	r2, [r0, #60]
+ 518 002e 0423     		movs	r3, #4
+ 519 0030 8B40     		lsls	r3, r3, r1
+ 520 0032 5360     		str	r3, [r2, #4]
+ 521 0034 C36A     		ldr	r3, [r0, #44]
+ 522 0036 03B1     		cbz	r3, .L65
+ 523 0038 9847     		blx	r3
+ 524              	.L65:
+ 525 003a 38BD     		pop	{r3, r4, r5, pc}
+ 526              	.L66:
+ 527 003c 0223     		movs	r3, #2
+ 528 003e 8B40     		lsls	r3, r3, r1
+ 529 0040 1342     		tst	r3, r2
+ 530 0042 1AD0     		beq	.L69
+ 531 0044 15F0020F 		tst	r5, #2
+ 532 0048 17D0     		beq	.L69
+ARM GAS  C:\Temp\ccQaBIor.s 			page 10
+
+
+ 533 004a 2368     		ldr	r3, [r4]
+ 534 004c 13F0200F 		tst	r3, #32
+ 535 0050 06D1     		bne	.L70
+ 536 0052 2368     		ldr	r3, [r4]
+ 537 0054 23F00A03 		bic	r3, r3, #10
+ 538 0058 2360     		str	r3, [r4]
+ 539 005a 0123     		movs	r3, #1
+ 540 005c 80F82130 		strb	r3, [r0, #33]
+ 541              	.L70:
+ 542 0060 016C     		ldr	r1, [r0, #64]
+ 543 0062 C26B     		ldr	r2, [r0, #60]
+ 544 0064 0223     		movs	r3, #2
+ 545 0066 8B40     		lsls	r3, r3, r1
+ 546 0068 5360     		str	r3, [r2, #4]
+ 547 006a 0023     		movs	r3, #0
+ 548 006c 80F82030 		strb	r3, [r0, #32]
+ 549 0070 836A     		ldr	r3, [r0, #40]
+ 550 0072 002B     		cmp	r3, #0
+ 551 0074 E1D0     		beq	.L65
+ 552 0076 9847     		blx	r3
+ 553 0078 DFE7     		b	.L65
+ 554              	.L69:
+ 555 007a 0823     		movs	r3, #8
+ 556 007c 8B40     		lsls	r3, r3, r1
+ 557 007e 1342     		tst	r3, r2
+ 558 0080 DBD0     		beq	.L65
+ 559 0082 15F0080F 		tst	r5, #8
+ 560 0086 D8D0     		beq	.L65
+ 561 0088 2368     		ldr	r3, [r4]
+ 562 008a 23F00E03 		bic	r3, r3, #14
+ 563 008e 2360     		str	r3, [r4]
+ 564 0090 026C     		ldr	r2, [r0, #64]
+ 565 0092 C16B     		ldr	r1, [r0, #60]
+ 566 0094 0123     		movs	r3, #1
+ 567 0096 03FA02F2 		lsl	r2, r3, r2
+ 568 009a 4A60     		str	r2, [r1, #4]
+ 569 009c 8363     		str	r3, [r0, #56]
+ 570 009e 80F82130 		strb	r3, [r0, #33]
+ 571 00a2 0023     		movs	r3, #0
+ 572 00a4 80F82030 		strb	r3, [r0, #32]
+ 573 00a8 036B     		ldr	r3, [r0, #48]
+ 574 00aa 002B     		cmp	r3, #0
+ 575 00ac C5D0     		beq	.L65
+ 576 00ae 9847     		blx	r3
+ 577 00b0 C3E7     		b	.L65
+ 579              		.section	.text.HAL_DMA_RegisterCallback,"ax",%progbits
+ 580              		.align	1
+ 581              		.global	HAL_DMA_RegisterCallback
+ 582              		.syntax unified
+ 583              		.thumb
+ 584              		.thumb_func
+ 586              	HAL_DMA_RegisterCallback:
+ 587              		@ args = 0, pretend = 0, frame = 0
+ 588              		@ frame_needed = 0, uses_anonymous_args = 0
+ 589              		@ link register save eliminated.
+ 590 0000 0346     		mov	r3, r0
+ 591 0002 90F82000 		ldrb	r0, [r0, #32]	@ zero_extendqisi2
+ARM GAS  C:\Temp\ccQaBIor.s 			page 11
+
+
+ 592 0006 0128     		cmp	r0, #1
+ 593 0008 1DD0     		beq	.L80
+ 594 000a 0120     		movs	r0, #1
+ 595 000c 83F82000 		strb	r0, [r3, #32]
+ 596 0010 93F82100 		ldrb	r0, [r3, #33]	@ zero_extendqisi2
+ 597 0014 0128     		cmp	r0, #1
+ 598 0016 04D0     		beq	.L83
+ 599 0018 0120     		movs	r0, #1
+ 600              	.L74:
+ 601 001a 0022     		movs	r2, #0
+ 602 001c 83F82020 		strb	r2, [r3, #32]
+ 603 0020 7047     		bx	lr
+ 604              	.L83:
+ 605 0022 0329     		cmp	r1, #3
+ 606 0024 F9D8     		bhi	.L74
+ 607 0026 DFE801F0 		tbb	[pc, r1]
+ 608              	.L76:
+ 609 002a 02       		.byte	(.L79-.L76)/2
+ 610 002b 05       		.byte	(.L78-.L76)/2
+ 611 002c 08       		.byte	(.L77-.L76)/2
+ 612 002d 0B       		.byte	(.L75-.L76)/2
+ 613              		.p2align 1
+ 614              	.L79:
+ 615 002e 9A62     		str	r2, [r3, #40]
+ 616 0030 0846     		mov	r0, r1
+ 617 0032 F2E7     		b	.L74
+ 618              	.L78:
+ 619 0034 DA62     		str	r2, [r3, #44]
+ 620 0036 0020     		movs	r0, #0
+ 621 0038 EFE7     		b	.L74
+ 622              	.L77:
+ 623 003a 1A63     		str	r2, [r3, #48]
+ 624 003c 0020     		movs	r0, #0
+ 625 003e ECE7     		b	.L74
+ 626              	.L75:
+ 627 0040 5A63     		str	r2, [r3, #52]
+ 628 0042 0020     		movs	r0, #0
+ 629 0044 E9E7     		b	.L74
+ 630              	.L80:
+ 631 0046 0220     		movs	r0, #2
+ 632 0048 7047     		bx	lr
+ 634              		.section	.text.HAL_DMA_UnRegisterCallback,"ax",%progbits
+ 635              		.align	1
+ 636              		.global	HAL_DMA_UnRegisterCallback
+ 637              		.syntax unified
+ 638              		.thumb
+ 639              		.thumb_func
+ 641              	HAL_DMA_UnRegisterCallback:
+ 642              		@ args = 0, pretend = 0, frame = 0
+ 643              		@ frame_needed = 0, uses_anonymous_args = 0
+ 644              		@ link register save eliminated.
+ 645 0000 0346     		mov	r3, r0
+ 646 0002 90F82020 		ldrb	r2, [r0, #32]	@ zero_extendqisi2
+ 647 0006 012A     		cmp	r2, #1
+ 648 0008 25D0     		beq	.L93
+ 649 000a 0122     		movs	r2, #1
+ 650 000c 80F82020 		strb	r2, [r0, #32]
+ARM GAS  C:\Temp\ccQaBIor.s 			page 12
+
+
+ 651 0010 90F82100 		ldrb	r0, [r0, #33]	@ zero_extendqisi2
+ 652 0014 9042     		cmp	r0, r2
+ 653 0016 04D0     		beq	.L96
+ 654 0018 0120     		movs	r0, #1
+ 655              	.L86:
+ 656 001a 0022     		movs	r2, #0
+ 657 001c 83F82020 		strb	r2, [r3, #32]
+ 658 0020 7047     		bx	lr
+ 659              	.L96:
+ 660 0022 0429     		cmp	r1, #4
+ 661 0024 F9D8     		bhi	.L86
+ 662 0026 DFE801F0 		tbb	[pc, r1]
+ 663              	.L88:
+ 664 002a 03       		.byte	(.L92-.L88)/2
+ 665 002b 07       		.byte	(.L91-.L88)/2
+ 666 002c 0A       		.byte	(.L90-.L88)/2
+ 667 002d 0D       		.byte	(.L89-.L88)/2
+ 668 002e 10       		.byte	(.L87-.L88)/2
+ 669 002f 00       		.p2align 1
+ 670              	.L92:
+ 671 0030 0022     		movs	r2, #0
+ 672 0032 9A62     		str	r2, [r3, #40]
+ 673 0034 0846     		mov	r0, r1
+ 674 0036 F0E7     		b	.L86
+ 675              	.L91:
+ 676 0038 0020     		movs	r0, #0
+ 677 003a D862     		str	r0, [r3, #44]
+ 678 003c EDE7     		b	.L86
+ 679              	.L90:
+ 680 003e 0020     		movs	r0, #0
+ 681 0040 1863     		str	r0, [r3, #48]
+ 682 0042 EAE7     		b	.L86
+ 683              	.L89:
+ 684 0044 0020     		movs	r0, #0
+ 685 0046 5863     		str	r0, [r3, #52]
+ 686 0048 E7E7     		b	.L86
+ 687              	.L87:
+ 688 004a 0020     		movs	r0, #0
+ 689 004c 9862     		str	r0, [r3, #40]
+ 690 004e D862     		str	r0, [r3, #44]
+ 691 0050 1863     		str	r0, [r3, #48]
+ 692 0052 5863     		str	r0, [r3, #52]
+ 693 0054 E1E7     		b	.L86
+ 694              	.L93:
+ 695 0056 0220     		movs	r0, #2
+ 696 0058 7047     		bx	lr
+ 698              		.section	.text.HAL_DMA_GetState,"ax",%progbits
+ 699              		.align	1
+ 700              		.global	HAL_DMA_GetState
+ 701              		.syntax unified
+ 702              		.thumb
+ 703              		.thumb_func
+ 705              	HAL_DMA_GetState:
+ 706              		@ args = 0, pretend = 0, frame = 0
+ 707              		@ frame_needed = 0, uses_anonymous_args = 0
+ 708              		@ link register save eliminated.
+ 709 0000 90F82100 		ldrb	r0, [r0, #33]	@ zero_extendqisi2
+ARM GAS  C:\Temp\ccQaBIor.s 			page 13
+
+
+ 710 0004 7047     		bx	lr
+ 712              		.section	.text.HAL_DMA_GetError,"ax",%progbits
+ 713              		.align	1
+ 714              		.global	HAL_DMA_GetError
+ 715              		.syntax unified
+ 716              		.thumb
+ 717              		.thumb_func
+ 719              	HAL_DMA_GetError:
+ 720              		@ args = 0, pretend = 0, frame = 0
+ 721              		@ frame_needed = 0, uses_anonymous_args = 0
+ 722              		@ link register save eliminated.
+ 723 0000 806B     		ldr	r0, [r0, #56]
+ 724 0002 7047     		bx	lr
+ 726              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccQaBIor.s 			page 14
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f3xx_hal_dma.c
+  C:\Temp\ccQaBIor.s:18     .text.DMA_SetConfig:00000000 $t
+  C:\Temp\ccQaBIor.s:23     .text.DMA_SetConfig:00000000 DMA_SetConfig
+  C:\Temp\ccQaBIor.s:53     .text.DMA_CalcBaseAndBitshift:00000000 $t
+  C:\Temp\ccQaBIor.s:58     .text.DMA_CalcBaseAndBitshift:00000000 DMA_CalcBaseAndBitshift
+  C:\Temp\ccQaBIor.s:90     .text.DMA_CalcBaseAndBitshift:00000034 $d
+  C:\Temp\ccQaBIor.s:98     .text.HAL_DMA_Init:00000000 $t
+  C:\Temp\ccQaBIor.s:104    .text.HAL_DMA_Init:00000000 HAL_DMA_Init
+  C:\Temp\ccQaBIor.s:144    .text.HAL_DMA_DeInit:00000000 $t
+  C:\Temp\ccQaBIor.s:150    .text.HAL_DMA_DeInit:00000000 HAL_DMA_DeInit
+  C:\Temp\ccQaBIor.s:189    .text.HAL_DMA_Start:00000000 $t
+  C:\Temp\ccQaBIor.s:195    .text.HAL_DMA_Start:00000000 HAL_DMA_Start
+  C:\Temp\ccQaBIor.s:235    .text.HAL_DMA_Start_IT:00000000 $t
+  C:\Temp\ccQaBIor.s:241    .text.HAL_DMA_Start_IT:00000000 HAL_DMA_Start_IT
+  C:\Temp\ccQaBIor.s:298    .text.HAL_DMA_Abort:00000000 $t
+  C:\Temp\ccQaBIor.s:304    .text.HAL_DMA_Abort:00000000 HAL_DMA_Abort
+  C:\Temp\ccQaBIor.s:342    .text.HAL_DMA_Abort_IT:00000000 $t
+  C:\Temp\ccQaBIor.s:348    .text.HAL_DMA_Abort_IT:00000000 HAL_DMA_Abort_IT
+  C:\Temp\ccQaBIor.s:387    .text.HAL_DMA_PollForTransfer:00000000 $t
+  C:\Temp\ccQaBIor.s:393    .text.HAL_DMA_PollForTransfer:00000000 HAL_DMA_PollForTransfer
+  C:\Temp\ccQaBIor.s:488    .text.HAL_DMA_IRQHandler:00000000 $t
+  C:\Temp\ccQaBIor.s:494    .text.HAL_DMA_IRQHandler:00000000 HAL_DMA_IRQHandler
+  C:\Temp\ccQaBIor.s:580    .text.HAL_DMA_RegisterCallback:00000000 $t
+  C:\Temp\ccQaBIor.s:586    .text.HAL_DMA_RegisterCallback:00000000 HAL_DMA_RegisterCallback
+  C:\Temp\ccQaBIor.s:609    .text.HAL_DMA_RegisterCallback:0000002a $d
+  C:\Temp\ccQaBIor.s:613    .text.HAL_DMA_RegisterCallback:0000002e $t
+  C:\Temp\ccQaBIor.s:635    .text.HAL_DMA_UnRegisterCallback:00000000 $t
+  C:\Temp\ccQaBIor.s:641    .text.HAL_DMA_UnRegisterCallback:00000000 HAL_DMA_UnRegisterCallback
+  C:\Temp\ccQaBIor.s:664    .text.HAL_DMA_UnRegisterCallback:0000002a $d
+  C:\Temp\ccQaBIor.s:699    .text.HAL_DMA_GetState:00000000 $t
+  C:\Temp\ccQaBIor.s:705    .text.HAL_DMA_GetState:00000000 HAL_DMA_GetState
+  C:\Temp\ccQaBIor.s:713    .text.HAL_DMA_GetError:00000000 $t
+  C:\Temp\ccQaBIor.s:719    .text.HAL_DMA_GetError:00000000 HAL_DMA_GetError
+  C:\Temp\ccQaBIor.s:669    .text.HAL_DMA_UnRegisterCallback:0000002f $d
+  C:\Temp\ccQaBIor.s:669    .text.HAL_DMA_UnRegisterCallback:00000030 $t
+
+UNDEFINED SYMBOLS
+HAL_GetTick

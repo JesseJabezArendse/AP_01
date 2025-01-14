@@ -1,0 +1,1545 @@
+ARM GAS  C:\Temp\ccpLOPWf.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"iis2mdc_reg.c"
+  16              		.text
+  17              		.section	.text.iis2mdc_read_reg,"ax",%progbits
+  18              		.align	1
+  19              		.weak	iis2mdc_read_reg
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	iis2mdc_read_reg:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 20B1     		cbz	r0, .L3
+  28 0002 10B5     		push	{r4, lr}
+  29 0004 4468     		ldr	r4, [r0, #4]
+  30 0006 C068     		ldr	r0, [r0, #12]
+  31 0008 A047     		blx	r4
+  32 000a 10BD     		pop	{r4, pc}
+  33              	.L3:
+  34 000c 4FF0FF30 		mov	r0, #-1
+  35 0010 7047     		bx	lr
+  37              		.section	.text.iis2mdc_write_reg,"ax",%progbits
+  38              		.align	1
+  39              		.weak	iis2mdc_write_reg
+  40              		.syntax unified
+  41              		.thumb
+  42              		.thumb_func
+  44              	iis2mdc_write_reg:
+  45              		@ args = 0, pretend = 0, frame = 0
+  46              		@ frame_needed = 0, uses_anonymous_args = 0
+  47 0000 20B1     		cbz	r0, .L10
+  48 0002 10B5     		push	{r4, lr}
+  49 0004 0468     		ldr	r4, [r0]
+  50 0006 C068     		ldr	r0, [r0, #12]
+  51 0008 A047     		blx	r4
+  52 000a 10BD     		pop	{r4, pc}
+  53              	.L10:
+  54 000c 4FF0FF30 		mov	r0, #-1
+  55 0010 7047     		bx	lr
+  57              		.section	.text.iis2mdc_from_lsb_to_mgauss,"ax",%progbits
+  58              		.align	1
+  59              		.global	iis2mdc_from_lsb_to_mgauss
+  60              		.syntax unified
+  61              		.thumb
+ARM GAS  C:\Temp\ccpLOPWf.s 			page 2
+
+
+  62              		.thumb_func
+  64              	iis2mdc_from_lsb_to_mgauss:
+  65              		@ args = 0, pretend = 0, frame = 0
+  66              		@ frame_needed = 0, uses_anonymous_args = 0
+  67              		@ link register save eliminated.
+  68 0000 07EE900A 		vmov	s15, r0	@ int
+  69 0004 F8EEE77A 		vcvt.f32.s32	s15, s15
+  70 0008 B7EE080A 		vmov.f32	s0, #1.5e+0
+  71 000c 27EE800A 		vmul.f32	s0, s15, s0
+  72 0010 7047     		bx	lr
+  74              		.section	.text.iis2mdc_from_lsb_to_celsius,"ax",%progbits
+  75              		.align	1
+  76              		.global	iis2mdc_from_lsb_to_celsius
+  77              		.syntax unified
+  78              		.thumb
+  79              		.thumb_func
+  81              	iis2mdc_from_lsb_to_celsius:
+  82              		@ args = 0, pretend = 0, frame = 0
+  83              		@ frame_needed = 0, uses_anonymous_args = 0
+  84              		@ link register save eliminated.
+  85 0000 07EE900A 		vmov	s15, r0	@ int
+  86 0004 F8EEE77A 		vcvt.f32.s32	s15, s15
+  87 0008 B4EE007A 		vmov.f32	s14, #1.25e-1
+  88 000c 67EE877A 		vmul.f32	s15, s15, s14
+  89 0010 B3EE090A 		vmov.f32	s0, #2.5e+1
+  90 0014 37EE800A 		vadd.f32	s0, s15, s0
+  91 0018 7047     		bx	lr
+  93              		.section	.text.iis2mdc_mag_user_offset_set,"ax",%progbits
+  94              		.align	1
+  95              		.global	iis2mdc_mag_user_offset_set
+  96              		.syntax unified
+  97              		.thumb
+  98              		.thumb_func
+ 100              	iis2mdc_mag_user_offset_set:
+ 101              		@ args = 0, pretend = 0, frame = 8
+ 102              		@ frame_needed = 0, uses_anonymous_args = 0
+ 103 0000 00B5     		push	{lr}
+ 104 0002 83B0     		sub	sp, sp, #12
+ 105 0004 B1F90030 		ldrsh	r3, [r1]
+ 106 0008 C3F30722 		ubfx	r2, r3, #8, #8
+ 107 000c 8DF80120 		strb	r2, [sp, #1]
+ 108 0010 8DF80030 		strb	r3, [sp]
+ 109 0014 B1F90230 		ldrsh	r3, [r1, #2]
+ 110 0018 C3F30722 		ubfx	r2, r3, #8, #8
+ 111 001c 8DF80320 		strb	r2, [sp, #3]
+ 112 0020 8DF80230 		strb	r3, [sp, #2]
+ 113 0024 B1F90430 		ldrsh	r3, [r1, #4]
+ 114 0028 C3F30722 		ubfx	r2, r3, #8, #8
+ 115 002c 8DF80520 		strb	r2, [sp, #5]
+ 116 0030 8DF80430 		strb	r3, [sp, #4]
+ 117 0034 0623     		movs	r3, #6
+ 118 0036 6A46     		mov	r2, sp
+ 119 0038 4521     		movs	r1, #69
+ 120 003a FFF7FEFF 		bl	iis2mdc_write_reg
+ 121 003e 03B0     		add	sp, sp, #12
+ 122              		@ sp needed
+ 123 0040 5DF804FB 		ldr	pc, [sp], #4
+ARM GAS  C:\Temp\ccpLOPWf.s 			page 3
+
+
+ 125              		.section	.text.iis2mdc_mag_user_offset_get,"ax",%progbits
+ 126              		.align	1
+ 127              		.global	iis2mdc_mag_user_offset_get
+ 128              		.syntax unified
+ 129              		.thumb
+ 130              		.thumb_func
+ 132              	iis2mdc_mag_user_offset_get:
+ 133              		@ args = 0, pretend = 0, frame = 8
+ 134              		@ frame_needed = 0, uses_anonymous_args = 0
+ 135 0000 10B5     		push	{r4, lr}
+ 136 0002 82B0     		sub	sp, sp, #8
+ 137 0004 0C46     		mov	r4, r1
+ 138 0006 0623     		movs	r3, #6
+ 139 0008 6A46     		mov	r2, sp
+ 140 000a 4521     		movs	r1, #69
+ 141 000c FFF7FEFF 		bl	iis2mdc_read_reg
+ 142 0010 9DF80120 		ldrb	r2, [sp, #1]	@ zero_extendqisi2
+ 143 0014 2280     		strh	r2, [r4]	@ movhi
+ 144 0016 9DF80030 		ldrb	r3, [sp]	@ zero_extendqisi2
+ 145 001a 03EB0223 		add	r3, r3, r2, lsl #8
+ 146 001e 2380     		strh	r3, [r4]	@ movhi
+ 147 0020 9DF80320 		ldrb	r2, [sp, #3]	@ zero_extendqisi2
+ 148 0024 6280     		strh	r2, [r4, #2]	@ movhi
+ 149 0026 9DF80230 		ldrb	r3, [sp, #2]	@ zero_extendqisi2
+ 150 002a 03EB0223 		add	r3, r3, r2, lsl #8
+ 151 002e 6380     		strh	r3, [r4, #2]	@ movhi
+ 152 0030 9DF80520 		ldrb	r2, [sp, #5]	@ zero_extendqisi2
+ 153 0034 A280     		strh	r2, [r4, #4]	@ movhi
+ 154 0036 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 155 003a 03EB0223 		add	r3, r3, r2, lsl #8
+ 156 003e A380     		strh	r3, [r4, #4]	@ movhi
+ 157 0040 02B0     		add	sp, sp, #8
+ 158              		@ sp needed
+ 159 0042 10BD     		pop	{r4, pc}
+ 161              		.section	.text.iis2mdc_operating_mode_set,"ax",%progbits
+ 162              		.align	1
+ 163              		.global	iis2mdc_operating_mode_set
+ 164              		.syntax unified
+ 165              		.thumb
+ 166              		.thumb_func
+ 168              	iis2mdc_operating_mode_set:
+ 169              		@ args = 0, pretend = 0, frame = 8
+ 170              		@ frame_needed = 0, uses_anonymous_args = 0
+ 171 0000 30B5     		push	{r4, r5, lr}
+ 172 0002 83B0     		sub	sp, sp, #12
+ 173 0004 0446     		mov	r4, r0
+ 174 0006 0D46     		mov	r5, r1
+ 175 0008 0123     		movs	r3, #1
+ 176 000a 01AA     		add	r2, sp, #4
+ 177 000c 6021     		movs	r1, #96
+ 178 000e FFF7FEFF 		bl	iis2mdc_read_reg
+ 179 0012 08B1     		cbz	r0, .L24
+ 180              	.L21:
+ 181 0014 03B0     		add	sp, sp, #12
+ 182              		@ sp needed
+ 183 0016 30BD     		pop	{r4, r5, pc}
+ 184              	.L24:
+ARM GAS  C:\Temp\ccpLOPWf.s 			page 4
+
+
+ 185 0018 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 186 001c 65F30103 		bfi	r3, r5, #0, #2
+ 187 0020 8DF80430 		strb	r3, [sp, #4]
+ 188 0024 0123     		movs	r3, #1
+ 189 0026 01AA     		add	r2, sp, #4
+ 190 0028 6021     		movs	r1, #96
+ 191 002a 2046     		mov	r0, r4
+ 192 002c FFF7FEFF 		bl	iis2mdc_write_reg
+ 193 0030 F0E7     		b	.L21
+ 195              		.section	.text.iis2mdc_operating_mode_get,"ax",%progbits
+ 196              		.align	1
+ 197              		.global	iis2mdc_operating_mode_get
+ 198              		.syntax unified
+ 199              		.thumb
+ 200              		.thumb_func
+ 202              	iis2mdc_operating_mode_get:
+ 203              		@ args = 0, pretend = 0, frame = 8
+ 204              		@ frame_needed = 0, uses_anonymous_args = 0
+ 205 0000 10B5     		push	{r4, lr}
+ 206 0002 82B0     		sub	sp, sp, #8
+ 207 0004 0C46     		mov	r4, r1
+ 208 0006 0123     		movs	r3, #1
+ 209 0008 01AA     		add	r2, sp, #4
+ 210 000a 6021     		movs	r1, #96
+ 211 000c FFF7FEFF 		bl	iis2mdc_read_reg
+ 212 0010 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 213 0014 03F00303 		and	r3, r3, #3
+ 214 0018 012B     		cmp	r3, #1
+ 215 001a 08D0     		beq	.L26
+ 216 001c 022B     		cmp	r3, #2
+ 217 001e 09D0     		beq	.L27
+ 218 0020 13B1     		cbz	r3, .L31
+ 219 0022 0023     		movs	r3, #0
+ 220 0024 2370     		strb	r3, [r4]
+ 221 0026 00E0     		b	.L25
+ 222              	.L31:
+ 223 0028 2370     		strb	r3, [r4]
+ 224              	.L25:
+ 225 002a 02B0     		add	sp, sp, #8
+ 226              		@ sp needed
+ 227 002c 10BD     		pop	{r4, pc}
+ 228              	.L26:
+ 229 002e 0123     		movs	r3, #1
+ 230 0030 2370     		strb	r3, [r4]
+ 231 0032 FAE7     		b	.L25
+ 232              	.L27:
+ 233 0034 0223     		movs	r3, #2
+ 234 0036 2370     		strb	r3, [r4]
+ 235 0038 F7E7     		b	.L25
+ 237              		.section	.text.iis2mdc_data_rate_set,"ax",%progbits
+ 238              		.align	1
+ 239              		.global	iis2mdc_data_rate_set
+ 240              		.syntax unified
+ 241              		.thumb
+ 242              		.thumb_func
+ 244              	iis2mdc_data_rate_set:
+ 245              		@ args = 0, pretend = 0, frame = 8
+ARM GAS  C:\Temp\ccpLOPWf.s 			page 5
+
+
+ 246              		@ frame_needed = 0, uses_anonymous_args = 0
+ 247 0000 30B5     		push	{r4, r5, lr}
+ 248 0002 83B0     		sub	sp, sp, #12
+ 249 0004 0446     		mov	r4, r0
+ 250 0006 0D46     		mov	r5, r1
+ 251 0008 0123     		movs	r3, #1
+ 252 000a 01AA     		add	r2, sp, #4
+ 253 000c 6021     		movs	r1, #96
+ 254 000e FFF7FEFF 		bl	iis2mdc_read_reg
+ 255 0012 08B1     		cbz	r0, .L35
+ 256              	.L32:
+ 257 0014 03B0     		add	sp, sp, #12
+ 258              		@ sp needed
+ 259 0016 30BD     		pop	{r4, r5, pc}
+ 260              	.L35:
+ 261 0018 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 262 001c 65F38303 		bfi	r3, r5, #2, #2
+ 263 0020 8DF80430 		strb	r3, [sp, #4]
+ 264 0024 0123     		movs	r3, #1
+ 265 0026 01AA     		add	r2, sp, #4
+ 266 0028 6021     		movs	r1, #96
+ 267 002a 2046     		mov	r0, r4
+ 268 002c FFF7FEFF 		bl	iis2mdc_write_reg
+ 269 0030 F0E7     		b	.L32
+ 271              		.section	.text.iis2mdc_data_rate_get,"ax",%progbits
+ 272              		.align	1
+ 273              		.global	iis2mdc_data_rate_get
+ 274              		.syntax unified
+ 275              		.thumb
+ 276              		.thumb_func
+ 278              	iis2mdc_data_rate_get:
+ 279              		@ args = 0, pretend = 0, frame = 8
+ 280              		@ frame_needed = 0, uses_anonymous_args = 0
+ 281 0000 10B5     		push	{r4, lr}
+ 282 0002 82B0     		sub	sp, sp, #8
+ 283 0004 0C46     		mov	r4, r1
+ 284 0006 0123     		movs	r3, #1
+ 285 0008 01AA     		add	r2, sp, #4
+ 286 000a 6021     		movs	r1, #96
+ 287 000c FFF7FEFF 		bl	iis2mdc_read_reg
+ 288 0010 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 289 0014 C3F38103 		ubfx	r3, r3, #2, #2
+ 290 0018 032B     		cmp	r3, #3
+ 291 001a 10D8     		bhi	.L37
+ 292 001c DFE803F0 		tbb	[pc, r3]
+ 293              	.L39:
+ 294 0020 02       		.byte	(.L42-.L39)/2
+ 295 0021 06       		.byte	(.L41-.L39)/2
+ 296 0022 09       		.byte	(.L40-.L39)/2
+ 297 0023 0C       		.byte	(.L38-.L39)/2
+ 298              		.p2align 1
+ 299              	.L42:
+ 300 0024 0023     		movs	r3, #0
+ 301 0026 2370     		strb	r3, [r4]
+ 302              	.L36:
+ 303 0028 02B0     		add	sp, sp, #8
+ 304              		@ sp needed
+ARM GAS  C:\Temp\ccpLOPWf.s 			page 6
+
+
+ 305 002a 10BD     		pop	{r4, pc}
+ 306              	.L41:
+ 307 002c 0123     		movs	r3, #1
+ 308 002e 2370     		strb	r3, [r4]
+ 309 0030 FAE7     		b	.L36
+ 310              	.L40:
+ 311 0032 0223     		movs	r3, #2
+ 312 0034 2370     		strb	r3, [r4]
+ 313 0036 F7E7     		b	.L36
+ 314              	.L38:
+ 315 0038 0323     		movs	r3, #3
+ 316 003a 2370     		strb	r3, [r4]
+ 317 003c F4E7     		b	.L36
+ 318              	.L37:
+ 319 003e 0023     		movs	r3, #0
+ 320 0040 2370     		strb	r3, [r4]
+ 321 0042 F1E7     		b	.L36
+ 323              		.section	.text.iis2mdc_power_mode_set,"ax",%progbits
+ 324              		.align	1
+ 325              		.global	iis2mdc_power_mode_set
+ 326              		.syntax unified
+ 327              		.thumb
+ 328              		.thumb_func
+ 330              	iis2mdc_power_mode_set:
+ 331              		@ args = 0, pretend = 0, frame = 8
+ 332              		@ frame_needed = 0, uses_anonymous_args = 0
+ 333 0000 30B5     		push	{r4, r5, lr}
+ 334 0002 83B0     		sub	sp, sp, #12
+ 335 0004 0446     		mov	r4, r0
+ 336 0006 0D46     		mov	r5, r1
+ 337 0008 0123     		movs	r3, #1
+ 338 000a 01AA     		add	r2, sp, #4
+ 339 000c 6021     		movs	r1, #96
+ 340 000e FFF7FEFF 		bl	iis2mdc_read_reg
+ 341 0012 08B1     		cbz	r0, .L48
+ 342              	.L45:
+ 343 0014 03B0     		add	sp, sp, #12
+ 344              		@ sp needed
+ 345 0016 30BD     		pop	{r4, r5, pc}
+ 346              	.L48:
+ 347 0018 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 348 001c 65F30413 		bfi	r3, r5, #4, #1
+ 349 0020 8DF80430 		strb	r3, [sp, #4]
+ 350 0024 0123     		movs	r3, #1
+ 351 0026 01AA     		add	r2, sp, #4
+ 352 0028 6021     		movs	r1, #96
+ 353 002a 2046     		mov	r0, r4
+ 354 002c FFF7FEFF 		bl	iis2mdc_write_reg
+ 355 0030 F0E7     		b	.L45
+ 357              		.section	.text.iis2mdc_power_mode_get,"ax",%progbits
+ 358              		.align	1
+ 359              		.global	iis2mdc_power_mode_get
+ 360              		.syntax unified
+ 361              		.thumb
+ 362              		.thumb_func
+ 364              	iis2mdc_power_mode_get:
+ 365              		@ args = 0, pretend = 0, frame = 8
+ARM GAS  C:\Temp\ccpLOPWf.s 			page 7
+
+
+ 366              		@ frame_needed = 0, uses_anonymous_args = 0
+ 367 0000 10B5     		push	{r4, lr}
+ 368 0002 82B0     		sub	sp, sp, #8
+ 369 0004 0C46     		mov	r4, r1
+ 370 0006 0123     		movs	r3, #1
+ 371 0008 01AA     		add	r2, sp, #4
+ 372 000a 6021     		movs	r1, #96
+ 373 000c FFF7FEFF 		bl	iis2mdc_read_reg
+ 374 0010 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 375 0014 C3F30012 		ubfx	r2, r3, #4, #1
+ 376 0018 13F0100F 		tst	r3, #16
+ 377 001c 03D0     		beq	.L50
+ 378 001e 32B9     		cbnz	r2, .L51
+ 379 0020 0023     		movs	r3, #0
+ 380 0022 2370     		strb	r3, [r4]
+ 381 0024 01E0     		b	.L49
+ 382              	.L50:
+ 383 0026 0023     		movs	r3, #0
+ 384 0028 2370     		strb	r3, [r4]
+ 385              	.L49:
+ 386 002a 02B0     		add	sp, sp, #8
+ 387              		@ sp needed
+ 388 002c 10BD     		pop	{r4, pc}
+ 389              	.L51:
+ 390 002e 0123     		movs	r3, #1
+ 391 0030 2370     		strb	r3, [r4]
+ 392 0032 FAE7     		b	.L49
+ 394              		.section	.text.iis2mdc_offset_temp_comp_set,"ax",%progbits
+ 395              		.align	1
+ 396              		.global	iis2mdc_offset_temp_comp_set
+ 397              		.syntax unified
+ 398              		.thumb
+ 399              		.thumb_func
+ 401              	iis2mdc_offset_temp_comp_set:
+ 402              		@ args = 0, pretend = 0, frame = 8
+ 403              		@ frame_needed = 0, uses_anonymous_args = 0
+ 404 0000 30B5     		push	{r4, r5, lr}
+ 405 0002 83B0     		sub	sp, sp, #12
+ 406 0004 0446     		mov	r4, r0
+ 407 0006 0D46     		mov	r5, r1
+ 408 0008 0123     		movs	r3, #1
+ 409 000a 01AA     		add	r2, sp, #4
+ 410 000c 6021     		movs	r1, #96
+ 411 000e FFF7FEFF 		bl	iis2mdc_read_reg
+ 412 0012 08B1     		cbz	r0, .L59
+ 413              	.L56:
+ 414 0014 03B0     		add	sp, sp, #12
+ 415              		@ sp needed
+ 416 0016 30BD     		pop	{r4, r5, pc}
+ 417              	.L59:
+ 418 0018 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 419 001c 65F3C713 		bfi	r3, r5, #7, #1
+ 420 0020 8DF80430 		strb	r3, [sp, #4]
+ 421 0024 0123     		movs	r3, #1
+ 422 0026 01AA     		add	r2, sp, #4
+ 423 0028 6021     		movs	r1, #96
+ 424 002a 2046     		mov	r0, r4
+ARM GAS  C:\Temp\ccpLOPWf.s 			page 8
+
+
+ 425 002c FFF7FEFF 		bl	iis2mdc_write_reg
+ 426 0030 F0E7     		b	.L56
+ 428              		.section	.text.iis2mdc_offset_temp_comp_get,"ax",%progbits
+ 429              		.align	1
+ 430              		.global	iis2mdc_offset_temp_comp_get
+ 431              		.syntax unified
+ 432              		.thumb
+ 433              		.thumb_func
+ 435              	iis2mdc_offset_temp_comp_get:
+ 436              		@ args = 0, pretend = 0, frame = 8
+ 437              		@ frame_needed = 0, uses_anonymous_args = 0
+ 438 0000 10B5     		push	{r4, lr}
+ 439 0002 82B0     		sub	sp, sp, #8
+ 440 0004 0C46     		mov	r4, r1
+ 441 0006 0123     		movs	r3, #1
+ 442 0008 01AA     		add	r2, sp, #4
+ 443 000a 6021     		movs	r1, #96
+ 444 000c FFF7FEFF 		bl	iis2mdc_read_reg
+ 445 0010 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 446 0014 C3F3C013 		ubfx	r3, r3, #7, #1
+ 447 0018 2370     		strb	r3, [r4]
+ 448 001a 02B0     		add	sp, sp, #8
+ 449              		@ sp needed
+ 450 001c 10BD     		pop	{r4, pc}
+ 452              		.section	.text.iis2mdc_low_pass_bandwidth_set,"ax",%progbits
+ 453              		.align	1
+ 454              		.global	iis2mdc_low_pass_bandwidth_set
+ 455              		.syntax unified
+ 456              		.thumb
+ 457              		.thumb_func
+ 459              	iis2mdc_low_pass_bandwidth_set:
+ 460              		@ args = 0, pretend = 0, frame = 8
+ 461              		@ frame_needed = 0, uses_anonymous_args = 0
+ 462 0000 30B5     		push	{r4, r5, lr}
+ 463 0002 83B0     		sub	sp, sp, #12
+ 464 0004 0446     		mov	r4, r0
+ 465 0006 0D46     		mov	r5, r1
+ 466 0008 0123     		movs	r3, #1
+ 467 000a 01AA     		add	r2, sp, #4
+ 468 000c 6121     		movs	r1, #97
+ 469 000e FFF7FEFF 		bl	iis2mdc_read_reg
+ 470 0012 08B1     		cbz	r0, .L65
+ 471              	.L62:
+ 472 0014 03B0     		add	sp, sp, #12
+ 473              		@ sp needed
+ 474 0016 30BD     		pop	{r4, r5, pc}
+ 475              	.L65:
+ 476 0018 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 477 001c 65F30003 		bfi	r3, r5, #0, #1
+ 478 0020 8DF80430 		strb	r3, [sp, #4]
+ 479 0024 0123     		movs	r3, #1
+ 480 0026 01AA     		add	r2, sp, #4
+ 481 0028 6121     		movs	r1, #97
+ 482 002a 2046     		mov	r0, r4
+ 483 002c FFF7FEFF 		bl	iis2mdc_write_reg
+ 484 0030 F0E7     		b	.L62
+ 486              		.section	.text.iis2mdc_low_pass_bandwidth_get,"ax",%progbits
+ARM GAS  C:\Temp\ccpLOPWf.s 			page 9
+
+
+ 487              		.align	1
+ 488              		.global	iis2mdc_low_pass_bandwidth_get
+ 489              		.syntax unified
+ 490              		.thumb
+ 491              		.thumb_func
+ 493              	iis2mdc_low_pass_bandwidth_get:
+ 494              		@ args = 0, pretend = 0, frame = 8
+ 495              		@ frame_needed = 0, uses_anonymous_args = 0
+ 496 0000 10B5     		push	{r4, lr}
+ 497 0002 82B0     		sub	sp, sp, #8
+ 498 0004 0C46     		mov	r4, r1
+ 499 0006 0123     		movs	r3, #1
+ 500 0008 01AA     		add	r2, sp, #4
+ 501 000a 6121     		movs	r1, #97
+ 502 000c FFF7FEFF 		bl	iis2mdc_read_reg
+ 503 0010 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 504 0014 13F00103 		ands	r3, r3, #1
+ 505 0018 03D0     		beq	.L67
+ 506 001a 33B9     		cbnz	r3, .L68
+ 507 001c 0023     		movs	r3, #0
+ 508 001e 2370     		strb	r3, [r4]
+ 509 0020 01E0     		b	.L66
+ 510              	.L67:
+ 511 0022 0023     		movs	r3, #0
+ 512 0024 2370     		strb	r3, [r4]
+ 513              	.L66:
+ 514 0026 02B0     		add	sp, sp, #8
+ 515              		@ sp needed
+ 516 0028 10BD     		pop	{r4, pc}
+ 517              	.L68:
+ 518 002a 0123     		movs	r3, #1
+ 519 002c 2370     		strb	r3, [r4]
+ 520 002e FAE7     		b	.L66
+ 522              		.section	.text.iis2mdc_set_rst_mode_set,"ax",%progbits
+ 523              		.align	1
+ 524              		.global	iis2mdc_set_rst_mode_set
+ 525              		.syntax unified
+ 526              		.thumb
+ 527              		.thumb_func
+ 529              	iis2mdc_set_rst_mode_set:
+ 530              		@ args = 0, pretend = 0, frame = 8
+ 531              		@ frame_needed = 0, uses_anonymous_args = 0
+ 532 0000 30B5     		push	{r4, r5, lr}
+ 533 0002 83B0     		sub	sp, sp, #12
+ 534 0004 0446     		mov	r4, r0
+ 535 0006 0D46     		mov	r5, r1
+ 536 0008 0123     		movs	r3, #1
+ 537 000a 01AA     		add	r2, sp, #4
+ 538 000c 6121     		movs	r1, #97
+ 539 000e FFF7FEFF 		bl	iis2mdc_read_reg
+ 540 0012 08B1     		cbz	r0, .L76
+ 541              	.L73:
+ 542 0014 03B0     		add	sp, sp, #12
+ 543              		@ sp needed
+ 544 0016 30BD     		pop	{r4, r5, pc}
+ 545              	.L76:
+ 546 0018 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ARM GAS  C:\Temp\ccpLOPWf.s 			page 10
+
+
+ 547 001c 65F34203 		bfi	r3, r5, #1, #2
+ 548 0020 8DF80430 		strb	r3, [sp, #4]
+ 549 0024 0123     		movs	r3, #1
+ 550 0026 01AA     		add	r2, sp, #4
+ 551 0028 6121     		movs	r1, #97
+ 552 002a 2046     		mov	r0, r4
+ 553 002c FFF7FEFF 		bl	iis2mdc_write_reg
+ 554 0030 F0E7     		b	.L73
+ 556              		.section	.text.iis2mdc_set_rst_mode_get,"ax",%progbits
+ 557              		.align	1
+ 558              		.global	iis2mdc_set_rst_mode_get
+ 559              		.syntax unified
+ 560              		.thumb
+ 561              		.thumb_func
+ 563              	iis2mdc_set_rst_mode_get:
+ 564              		@ args = 0, pretend = 0, frame = 8
+ 565              		@ frame_needed = 0, uses_anonymous_args = 0
+ 566 0000 10B5     		push	{r4, lr}
+ 567 0002 82B0     		sub	sp, sp, #8
+ 568 0004 0C46     		mov	r4, r1
+ 569 0006 0123     		movs	r3, #1
+ 570 0008 01AA     		add	r2, sp, #4
+ 571 000a 6121     		movs	r1, #97
+ 572 000c FFF7FEFF 		bl	iis2mdc_read_reg
+ 573 0010 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 574 0014 C3F34103 		ubfx	r3, r3, #1, #2
+ 575 0018 012B     		cmp	r3, #1
+ 576 001a 08D0     		beq	.L78
+ 577 001c 022B     		cmp	r3, #2
+ 578 001e 09D0     		beq	.L79
+ 579 0020 13B1     		cbz	r3, .L83
+ 580 0022 0023     		movs	r3, #0
+ 581 0024 2370     		strb	r3, [r4]
+ 582 0026 00E0     		b	.L77
+ 583              	.L83:
+ 584 0028 2370     		strb	r3, [r4]
+ 585              	.L77:
+ 586 002a 02B0     		add	sp, sp, #8
+ 587              		@ sp needed
+ 588 002c 10BD     		pop	{r4, pc}
+ 589              	.L78:
+ 590 002e 0123     		movs	r3, #1
+ 591 0030 2370     		strb	r3, [r4]
+ 592 0032 FAE7     		b	.L77
+ 593              	.L79:
+ 594 0034 0223     		movs	r3, #2
+ 595 0036 2370     		strb	r3, [r4]
+ 596 0038 F7E7     		b	.L77
+ 598              		.section	.text.iis2mdc_set_rst_sensor_single_set,"ax",%progbits
+ 599              		.align	1
+ 600              		.global	iis2mdc_set_rst_sensor_single_set
+ 601              		.syntax unified
+ 602              		.thumb
+ 603              		.thumb_func
+ 605              	iis2mdc_set_rst_sensor_single_set:
+ 606              		@ args = 0, pretend = 0, frame = 8
+ 607              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Temp\ccpLOPWf.s 			page 11
+
+
+ 608 0000 30B5     		push	{r4, r5, lr}
+ 609 0002 83B0     		sub	sp, sp, #12
+ 610 0004 0446     		mov	r4, r0
+ 611 0006 0D46     		mov	r5, r1
+ 612 0008 0123     		movs	r3, #1
+ 613 000a 01AA     		add	r2, sp, #4
+ 614 000c 6121     		movs	r1, #97
+ 615 000e FFF7FEFF 		bl	iis2mdc_read_reg
+ 616 0012 08B1     		cbz	r0, .L87
+ 617              	.L84:
+ 618 0014 03B0     		add	sp, sp, #12
+ 619              		@ sp needed
+ 620 0016 30BD     		pop	{r4, r5, pc}
+ 621              	.L87:
+ 622 0018 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 623 001c 65F30413 		bfi	r3, r5, #4, #1
+ 624 0020 8DF80430 		strb	r3, [sp, #4]
+ 625 0024 0123     		movs	r3, #1
+ 626 0026 01AA     		add	r2, sp, #4
+ 627 0028 6121     		movs	r1, #97
+ 628 002a 2046     		mov	r0, r4
+ 629 002c FFF7FEFF 		bl	iis2mdc_write_reg
+ 630 0030 F0E7     		b	.L84
+ 632              		.section	.text.iis2mdc_set_rst_sensor_single_get,"ax",%progbits
+ 633              		.align	1
+ 634              		.global	iis2mdc_set_rst_sensor_single_get
+ 635              		.syntax unified
+ 636              		.thumb
+ 637              		.thumb_func
+ 639              	iis2mdc_set_rst_sensor_single_get:
+ 640              		@ args = 0, pretend = 0, frame = 8
+ 641              		@ frame_needed = 0, uses_anonymous_args = 0
+ 642 0000 10B5     		push	{r4, lr}
+ 643 0002 82B0     		sub	sp, sp, #8
+ 644 0004 0C46     		mov	r4, r1
+ 645 0006 0123     		movs	r3, #1
+ 646 0008 01AA     		add	r2, sp, #4
+ 647 000a 6121     		movs	r1, #97
+ 648 000c FFF7FEFF 		bl	iis2mdc_read_reg
+ 649 0010 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 650 0014 C3F30013 		ubfx	r3, r3, #4, #1
+ 651 0018 2370     		strb	r3, [r4]
+ 652 001a 02B0     		add	sp, sp, #8
+ 653              		@ sp needed
+ 654 001c 10BD     		pop	{r4, pc}
+ 656              		.section	.text.iis2mdc_block_data_update_set,"ax",%progbits
+ 657              		.align	1
+ 658              		.global	iis2mdc_block_data_update_set
+ 659              		.syntax unified
+ 660              		.thumb
+ 661              		.thumb_func
+ 663              	iis2mdc_block_data_update_set:
+ 664              		@ args = 0, pretend = 0, frame = 8
+ 665              		@ frame_needed = 0, uses_anonymous_args = 0
+ 666 0000 30B5     		push	{r4, r5, lr}
+ 667 0002 83B0     		sub	sp, sp, #12
+ 668 0004 0446     		mov	r4, r0
+ARM GAS  C:\Temp\ccpLOPWf.s 			page 12
+
+
+ 669 0006 0D46     		mov	r5, r1
+ 670 0008 0123     		movs	r3, #1
+ 671 000a 01AA     		add	r2, sp, #4
+ 672 000c 6221     		movs	r1, #98
+ 673 000e FFF7FEFF 		bl	iis2mdc_read_reg
+ 674 0012 08B1     		cbz	r0, .L93
+ 675              	.L90:
+ 676 0014 03B0     		add	sp, sp, #12
+ 677              		@ sp needed
+ 678 0016 30BD     		pop	{r4, r5, pc}
+ 679              	.L93:
+ 680 0018 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 681 001c 65F30413 		bfi	r3, r5, #4, #1
+ 682 0020 8DF80430 		strb	r3, [sp, #4]
+ 683 0024 0123     		movs	r3, #1
+ 684 0026 01AA     		add	r2, sp, #4
+ 685 0028 6221     		movs	r1, #98
+ 686 002a 2046     		mov	r0, r4
+ 687 002c FFF7FEFF 		bl	iis2mdc_write_reg
+ 688 0030 F0E7     		b	.L90
+ 690              		.section	.text.iis2mdc_block_data_update_get,"ax",%progbits
+ 691              		.align	1
+ 692              		.global	iis2mdc_block_data_update_get
+ 693              		.syntax unified
+ 694              		.thumb
+ 695              		.thumb_func
+ 697              	iis2mdc_block_data_update_get:
+ 698              		@ args = 0, pretend = 0, frame = 8
+ 699              		@ frame_needed = 0, uses_anonymous_args = 0
+ 700 0000 10B5     		push	{r4, lr}
+ 701 0002 82B0     		sub	sp, sp, #8
+ 702 0004 0C46     		mov	r4, r1
+ 703 0006 0123     		movs	r3, #1
+ 704 0008 01AA     		add	r2, sp, #4
+ 705 000a 6221     		movs	r1, #98
+ 706 000c FFF7FEFF 		bl	iis2mdc_read_reg
+ 707 0010 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 708 0014 C3F30013 		ubfx	r3, r3, #4, #1
+ 709 0018 2370     		strb	r3, [r4]
+ 710 001a 02B0     		add	sp, sp, #8
+ 711              		@ sp needed
+ 712 001c 10BD     		pop	{r4, pc}
+ 714              		.section	.text.iis2mdc_mag_data_ready_get,"ax",%progbits
+ 715              		.align	1
+ 716              		.global	iis2mdc_mag_data_ready_get
+ 717              		.syntax unified
+ 718              		.thumb
+ 719              		.thumb_func
+ 721              	iis2mdc_mag_data_ready_get:
+ 722              		@ args = 0, pretend = 0, frame = 8
+ 723              		@ frame_needed = 0, uses_anonymous_args = 0
+ 724 0000 10B5     		push	{r4, lr}
+ 725 0002 82B0     		sub	sp, sp, #8
+ 726 0004 0C46     		mov	r4, r1
+ 727 0006 0123     		movs	r3, #1
+ 728 0008 01AA     		add	r2, sp, #4
+ 729 000a 6721     		movs	r1, #103
+ARM GAS  C:\Temp\ccpLOPWf.s 			page 13
+
+
+ 730 000c FFF7FEFF 		bl	iis2mdc_read_reg
+ 731 0010 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 732 0014 C3F3C003 		ubfx	r3, r3, #3, #1
+ 733 0018 2370     		strb	r3, [r4]
+ 734 001a 02B0     		add	sp, sp, #8
+ 735              		@ sp needed
+ 736 001c 10BD     		pop	{r4, pc}
+ 738              		.section	.text.iis2mdc_mag_data_ovr_get,"ax",%progbits
+ 739              		.align	1
+ 740              		.global	iis2mdc_mag_data_ovr_get
+ 741              		.syntax unified
+ 742              		.thumb
+ 743              		.thumb_func
+ 745              	iis2mdc_mag_data_ovr_get:
+ 746              		@ args = 0, pretend = 0, frame = 8
+ 747              		@ frame_needed = 0, uses_anonymous_args = 0
+ 748 0000 10B5     		push	{r4, lr}
+ 749 0002 82B0     		sub	sp, sp, #8
+ 750 0004 0C46     		mov	r4, r1
+ 751 0006 0123     		movs	r3, #1
+ 752 0008 01AA     		add	r2, sp, #4
+ 753 000a 6721     		movs	r1, #103
+ 754 000c FFF7FEFF 		bl	iis2mdc_read_reg
+ 755 0010 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 756 0014 C3F3C013 		ubfx	r3, r3, #7, #1
+ 757 0018 2370     		strb	r3, [r4]
+ 758 001a 02B0     		add	sp, sp, #8
+ 759              		@ sp needed
+ 760 001c 10BD     		pop	{r4, pc}
+ 762              		.section	.text.iis2mdc_magnetic_raw_get,"ax",%progbits
+ 763              		.align	1
+ 764              		.global	iis2mdc_magnetic_raw_get
+ 765              		.syntax unified
+ 766              		.thumb
+ 767              		.thumb_func
+ 769              	iis2mdc_magnetic_raw_get:
+ 770              		@ args = 0, pretend = 0, frame = 8
+ 771              		@ frame_needed = 0, uses_anonymous_args = 0
+ 772 0000 10B5     		push	{r4, lr}
+ 773 0002 82B0     		sub	sp, sp, #8
+ 774 0004 0C46     		mov	r4, r1
+ 775 0006 0623     		movs	r3, #6
+ 776 0008 6A46     		mov	r2, sp
+ 777 000a 6821     		movs	r1, #104
+ 778 000c FFF7FEFF 		bl	iis2mdc_read_reg
+ 779 0010 9DF80120 		ldrb	r2, [sp, #1]	@ zero_extendqisi2
+ 780 0014 2280     		strh	r2, [r4]	@ movhi
+ 781 0016 9DF80030 		ldrb	r3, [sp]	@ zero_extendqisi2
+ 782 001a 03EB0223 		add	r3, r3, r2, lsl #8
+ 783 001e 2380     		strh	r3, [r4]	@ movhi
+ 784 0020 9DF80320 		ldrb	r2, [sp, #3]	@ zero_extendqisi2
+ 785 0024 6280     		strh	r2, [r4, #2]	@ movhi
+ 786 0026 9DF80230 		ldrb	r3, [sp, #2]	@ zero_extendqisi2
+ 787 002a 03EB0223 		add	r3, r3, r2, lsl #8
+ 788 002e 6380     		strh	r3, [r4, #2]	@ movhi
+ 789 0030 9DF80520 		ldrb	r2, [sp, #5]	@ zero_extendqisi2
+ 790 0034 A280     		strh	r2, [r4, #4]	@ movhi
+ARM GAS  C:\Temp\ccpLOPWf.s 			page 14
+
+
+ 791 0036 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 792 003a 03EB0223 		add	r3, r3, r2, lsl #8
+ 793 003e A380     		strh	r3, [r4, #4]	@ movhi
+ 794 0040 02B0     		add	sp, sp, #8
+ 795              		@ sp needed
+ 796 0042 10BD     		pop	{r4, pc}
+ 798              		.section	.text.iis2mdc_temperature_raw_get,"ax",%progbits
+ 799              		.align	1
+ 800              		.global	iis2mdc_temperature_raw_get
+ 801              		.syntax unified
+ 802              		.thumb
+ 803              		.thumb_func
+ 805              	iis2mdc_temperature_raw_get:
+ 806              		@ args = 0, pretend = 0, frame = 8
+ 807              		@ frame_needed = 0, uses_anonymous_args = 0
+ 808 0000 10B5     		push	{r4, lr}
+ 809 0002 82B0     		sub	sp, sp, #8
+ 810 0004 0C46     		mov	r4, r1
+ 811 0006 0223     		movs	r3, #2
+ 812 0008 01AA     		add	r2, sp, #4
+ 813 000a 6E21     		movs	r1, #110
+ 814 000c FFF7FEFF 		bl	iis2mdc_read_reg
+ 815 0010 9DF80520 		ldrb	r2, [sp, #5]	@ zero_extendqisi2
+ 816 0014 2280     		strh	r2, [r4]	@ movhi
+ 817 0016 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 818 001a 03EB0223 		add	r3, r3, r2, lsl #8
+ 819 001e 2380     		strh	r3, [r4]	@ movhi
+ 820 0020 02B0     		add	sp, sp, #8
+ 821              		@ sp needed
+ 822 0022 10BD     		pop	{r4, pc}
+ 824              		.section	.text.iis2mdc_device_id_get,"ax",%progbits
+ 825              		.align	1
+ 826              		.global	iis2mdc_device_id_get
+ 827              		.syntax unified
+ 828              		.thumb
+ 829              		.thumb_func
+ 831              	iis2mdc_device_id_get:
+ 832              		@ args = 0, pretend = 0, frame = 0
+ 833              		@ frame_needed = 0, uses_anonymous_args = 0
+ 834 0000 08B5     		push	{r3, lr}
+ 835 0002 0A46     		mov	r2, r1
+ 836 0004 0123     		movs	r3, #1
+ 837 0006 4F21     		movs	r1, #79
+ 838 0008 FFF7FEFF 		bl	iis2mdc_read_reg
+ 839 000c 08BD     		pop	{r3, pc}
+ 841              		.section	.text.iis2mdc_reset_set,"ax",%progbits
+ 842              		.align	1
+ 843              		.global	iis2mdc_reset_set
+ 844              		.syntax unified
+ 845              		.thumb
+ 846              		.thumb_func
+ 848              	iis2mdc_reset_set:
+ 849              		@ args = 0, pretend = 0, frame = 8
+ 850              		@ frame_needed = 0, uses_anonymous_args = 0
+ 851 0000 30B5     		push	{r4, r5, lr}
+ 852 0002 83B0     		sub	sp, sp, #12
+ 853 0004 0446     		mov	r4, r0
+ARM GAS  C:\Temp\ccpLOPWf.s 			page 15
+
+
+ 854 0006 0D46     		mov	r5, r1
+ 855 0008 0123     		movs	r3, #1
+ 856 000a 01AA     		add	r2, sp, #4
+ 857 000c 6021     		movs	r1, #96
+ 858 000e FFF7FEFF 		bl	iis2mdc_read_reg
+ 859 0012 08B1     		cbz	r0, .L109
+ 860              	.L106:
+ 861 0014 03B0     		add	sp, sp, #12
+ 862              		@ sp needed
+ 863 0016 30BD     		pop	{r4, r5, pc}
+ 864              	.L109:
+ 865 0018 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 866 001c 65F34513 		bfi	r3, r5, #5, #1
+ 867 0020 8DF80430 		strb	r3, [sp, #4]
+ 868 0024 0123     		movs	r3, #1
+ 869 0026 01AA     		add	r2, sp, #4
+ 870 0028 6021     		movs	r1, #96
+ 871 002a 2046     		mov	r0, r4
+ 872 002c FFF7FEFF 		bl	iis2mdc_write_reg
+ 873 0030 F0E7     		b	.L106
+ 875              		.section	.text.iis2mdc_reset_get,"ax",%progbits
+ 876              		.align	1
+ 877              		.global	iis2mdc_reset_get
+ 878              		.syntax unified
+ 879              		.thumb
+ 880              		.thumb_func
+ 882              	iis2mdc_reset_get:
+ 883              		@ args = 0, pretend = 0, frame = 8
+ 884              		@ frame_needed = 0, uses_anonymous_args = 0
+ 885 0000 10B5     		push	{r4, lr}
+ 886 0002 82B0     		sub	sp, sp, #8
+ 887 0004 0C46     		mov	r4, r1
+ 888 0006 0123     		movs	r3, #1
+ 889 0008 01AA     		add	r2, sp, #4
+ 890 000a 6021     		movs	r1, #96
+ 891 000c FFF7FEFF 		bl	iis2mdc_read_reg
+ 892 0010 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 893 0014 C3F34013 		ubfx	r3, r3, #5, #1
+ 894 0018 2370     		strb	r3, [r4]
+ 895 001a 02B0     		add	sp, sp, #8
+ 896              		@ sp needed
+ 897 001c 10BD     		pop	{r4, pc}
+ 899              		.section	.text.iis2mdc_boot_set,"ax",%progbits
+ 900              		.align	1
+ 901              		.global	iis2mdc_boot_set
+ 902              		.syntax unified
+ 903              		.thumb
+ 904              		.thumb_func
+ 906              	iis2mdc_boot_set:
+ 907              		@ args = 0, pretend = 0, frame = 8
+ 908              		@ frame_needed = 0, uses_anonymous_args = 0
+ 909 0000 30B5     		push	{r4, r5, lr}
+ 910 0002 83B0     		sub	sp, sp, #12
+ 911 0004 0446     		mov	r4, r0
+ 912 0006 0D46     		mov	r5, r1
+ 913 0008 0123     		movs	r3, #1
+ 914 000a 01AA     		add	r2, sp, #4
+ARM GAS  C:\Temp\ccpLOPWf.s 			page 16
+
+
+ 915 000c 6021     		movs	r1, #96
+ 916 000e FFF7FEFF 		bl	iis2mdc_read_reg
+ 917 0012 08B1     		cbz	r0, .L115
+ 918              	.L112:
+ 919 0014 03B0     		add	sp, sp, #12
+ 920              		@ sp needed
+ 921 0016 30BD     		pop	{r4, r5, pc}
+ 922              	.L115:
+ 923 0018 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 924 001c 65F38613 		bfi	r3, r5, #6, #1
+ 925 0020 8DF80430 		strb	r3, [sp, #4]
+ 926 0024 0123     		movs	r3, #1
+ 927 0026 01AA     		add	r2, sp, #4
+ 928 0028 6021     		movs	r1, #96
+ 929 002a 2046     		mov	r0, r4
+ 930 002c FFF7FEFF 		bl	iis2mdc_write_reg
+ 931 0030 F0E7     		b	.L112
+ 933              		.section	.text.iis2mdc_boot_get,"ax",%progbits
+ 934              		.align	1
+ 935              		.global	iis2mdc_boot_get
+ 936              		.syntax unified
+ 937              		.thumb
+ 938              		.thumb_func
+ 940              	iis2mdc_boot_get:
+ 941              		@ args = 0, pretend = 0, frame = 8
+ 942              		@ frame_needed = 0, uses_anonymous_args = 0
+ 943 0000 10B5     		push	{r4, lr}
+ 944 0002 82B0     		sub	sp, sp, #8
+ 945 0004 0C46     		mov	r4, r1
+ 946 0006 0123     		movs	r3, #1
+ 947 0008 01AA     		add	r2, sp, #4
+ 948 000a 6021     		movs	r1, #96
+ 949 000c FFF7FEFF 		bl	iis2mdc_read_reg
+ 950 0010 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 951 0014 C3F38013 		ubfx	r3, r3, #6, #1
+ 952 0018 2370     		strb	r3, [r4]
+ 953 001a 02B0     		add	sp, sp, #8
+ 954              		@ sp needed
+ 955 001c 10BD     		pop	{r4, pc}
+ 957              		.section	.text.iis2mdc_self_test_set,"ax",%progbits
+ 958              		.align	1
+ 959              		.global	iis2mdc_self_test_set
+ 960              		.syntax unified
+ 961              		.thumb
+ 962              		.thumb_func
+ 964              	iis2mdc_self_test_set:
+ 965              		@ args = 0, pretend = 0, frame = 8
+ 966              		@ frame_needed = 0, uses_anonymous_args = 0
+ 967 0000 30B5     		push	{r4, r5, lr}
+ 968 0002 83B0     		sub	sp, sp, #12
+ 969 0004 0446     		mov	r4, r0
+ 970 0006 0D46     		mov	r5, r1
+ 971 0008 0123     		movs	r3, #1
+ 972 000a 01AA     		add	r2, sp, #4
+ 973 000c 6221     		movs	r1, #98
+ 974 000e FFF7FEFF 		bl	iis2mdc_read_reg
+ 975 0012 08B1     		cbz	r0, .L121
+ARM GAS  C:\Temp\ccpLOPWf.s 			page 17
+
+
+ 976              	.L118:
+ 977 0014 03B0     		add	sp, sp, #12
+ 978              		@ sp needed
+ 979 0016 30BD     		pop	{r4, r5, pc}
+ 980              	.L121:
+ 981 0018 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 982 001c 65F34103 		bfi	r3, r5, #1, #1
+ 983 0020 8DF80430 		strb	r3, [sp, #4]
+ 984 0024 0123     		movs	r3, #1
+ 985 0026 01AA     		add	r2, sp, #4
+ 986 0028 6221     		movs	r1, #98
+ 987 002a 2046     		mov	r0, r4
+ 988 002c FFF7FEFF 		bl	iis2mdc_write_reg
+ 989 0030 F0E7     		b	.L118
+ 991              		.section	.text.iis2mdc_self_test_get,"ax",%progbits
+ 992              		.align	1
+ 993              		.global	iis2mdc_self_test_get
+ 994              		.syntax unified
+ 995              		.thumb
+ 996              		.thumb_func
+ 998              	iis2mdc_self_test_get:
+ 999              		@ args = 0, pretend = 0, frame = 8
+ 1000              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1001 0000 10B5     		push	{r4, lr}
+ 1002 0002 82B0     		sub	sp, sp, #8
+ 1003 0004 0C46     		mov	r4, r1
+ 1004 0006 0123     		movs	r3, #1
+ 1005 0008 01AA     		add	r2, sp, #4
+ 1006 000a 6221     		movs	r1, #98
+ 1007 000c FFF7FEFF 		bl	iis2mdc_read_reg
+ 1008 0010 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 1009 0014 C3F34003 		ubfx	r3, r3, #1, #1
+ 1010 0018 2370     		strb	r3, [r4]
+ 1011 001a 02B0     		add	sp, sp, #8
+ 1012              		@ sp needed
+ 1013 001c 10BD     		pop	{r4, pc}
+ 1015              		.section	.text.iis2mdc_data_format_set,"ax",%progbits
+ 1016              		.align	1
+ 1017              		.global	iis2mdc_data_format_set
+ 1018              		.syntax unified
+ 1019              		.thumb
+ 1020              		.thumb_func
+ 1022              	iis2mdc_data_format_set:
+ 1023              		@ args = 0, pretend = 0, frame = 8
+ 1024              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1025 0000 30B5     		push	{r4, r5, lr}
+ 1026 0002 83B0     		sub	sp, sp, #12
+ 1027 0004 0446     		mov	r4, r0
+ 1028 0006 0D46     		mov	r5, r1
+ 1029 0008 0123     		movs	r3, #1
+ 1030 000a 01AA     		add	r2, sp, #4
+ 1031 000c 6221     		movs	r1, #98
+ 1032 000e FFF7FEFF 		bl	iis2mdc_read_reg
+ 1033 0012 08B1     		cbz	r0, .L127
+ 1034              	.L124:
+ 1035 0014 03B0     		add	sp, sp, #12
+ 1036              		@ sp needed
+ARM GAS  C:\Temp\ccpLOPWf.s 			page 18
+
+
+ 1037 0016 30BD     		pop	{r4, r5, pc}
+ 1038              	.L127:
+ 1039 0018 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 1040 001c 65F3C303 		bfi	r3, r5, #3, #1
+ 1041 0020 8DF80430 		strb	r3, [sp, #4]
+ 1042 0024 0123     		movs	r3, #1
+ 1043 0026 01AA     		add	r2, sp, #4
+ 1044 0028 6221     		movs	r1, #98
+ 1045 002a 2046     		mov	r0, r4
+ 1046 002c FFF7FEFF 		bl	iis2mdc_write_reg
+ 1047 0030 F0E7     		b	.L124
+ 1049              		.section	.text.iis2mdc_data_format_get,"ax",%progbits
+ 1050              		.align	1
+ 1051              		.global	iis2mdc_data_format_get
+ 1052              		.syntax unified
+ 1053              		.thumb
+ 1054              		.thumb_func
+ 1056              	iis2mdc_data_format_get:
+ 1057              		@ args = 0, pretend = 0, frame = 8
+ 1058              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1059 0000 10B5     		push	{r4, lr}
+ 1060 0002 82B0     		sub	sp, sp, #8
+ 1061 0004 0C46     		mov	r4, r1
+ 1062 0006 0123     		movs	r3, #1
+ 1063 0008 01AA     		add	r2, sp, #4
+ 1064 000a 6221     		movs	r1, #98
+ 1065 000c FFF7FEFF 		bl	iis2mdc_read_reg
+ 1066 0010 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 1067 0014 C3F3C002 		ubfx	r2, r3, #3, #1
+ 1068 0018 13F0080F 		tst	r3, #8
+ 1069 001c 03D0     		beq	.L129
+ 1070 001e 32B9     		cbnz	r2, .L130
+ 1071 0020 0023     		movs	r3, #0
+ 1072 0022 2370     		strb	r3, [r4]
+ 1073 0024 01E0     		b	.L128
+ 1074              	.L129:
+ 1075 0026 0023     		movs	r3, #0
+ 1076 0028 2370     		strb	r3, [r4]
+ 1077              	.L128:
+ 1078 002a 02B0     		add	sp, sp, #8
+ 1079              		@ sp needed
+ 1080 002c 10BD     		pop	{r4, pc}
+ 1081              	.L130:
+ 1082 002e 0123     		movs	r3, #1
+ 1083 0030 2370     		strb	r3, [r4]
+ 1084 0032 FAE7     		b	.L128
+ 1086              		.section	.text.iis2mdc_status_get,"ax",%progbits
+ 1087              		.align	1
+ 1088              		.global	iis2mdc_status_get
+ 1089              		.syntax unified
+ 1090              		.thumb
+ 1091              		.thumb_func
+ 1093              	iis2mdc_status_get:
+ 1094              		@ args = 0, pretend = 0, frame = 0
+ 1095              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1096 0000 08B5     		push	{r3, lr}
+ 1097 0002 0A46     		mov	r2, r1
+ARM GAS  C:\Temp\ccpLOPWf.s 			page 19
+
+
+ 1098 0004 0123     		movs	r3, #1
+ 1099 0006 6721     		movs	r1, #103
+ 1100 0008 FFF7FEFF 		bl	iis2mdc_read_reg
+ 1101 000c 08BD     		pop	{r3, pc}
+ 1103              		.section	.text.iis2mdc_offset_int_conf_set,"ax",%progbits
+ 1104              		.align	1
+ 1105              		.global	iis2mdc_offset_int_conf_set
+ 1106              		.syntax unified
+ 1107              		.thumb
+ 1108              		.thumb_func
+ 1110              	iis2mdc_offset_int_conf_set:
+ 1111              		@ args = 0, pretend = 0, frame = 8
+ 1112              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1113 0000 30B5     		push	{r4, r5, lr}
+ 1114 0002 83B0     		sub	sp, sp, #12
+ 1115 0004 0446     		mov	r4, r0
+ 1116 0006 0D46     		mov	r5, r1
+ 1117 0008 0123     		movs	r3, #1
+ 1118 000a 01AA     		add	r2, sp, #4
+ 1119 000c 6121     		movs	r1, #97
+ 1120 000e FFF7FEFF 		bl	iis2mdc_read_reg
+ 1121 0012 08B1     		cbz	r0, .L140
+ 1122              	.L137:
+ 1123 0014 03B0     		add	sp, sp, #12
+ 1124              		@ sp needed
+ 1125 0016 30BD     		pop	{r4, r5, pc}
+ 1126              	.L140:
+ 1127 0018 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 1128 001c 65F3C303 		bfi	r3, r5, #3, #1
+ 1129 0020 8DF80430 		strb	r3, [sp, #4]
+ 1130 0024 0123     		movs	r3, #1
+ 1131 0026 01AA     		add	r2, sp, #4
+ 1132 0028 6121     		movs	r1, #97
+ 1133 002a 2046     		mov	r0, r4
+ 1134 002c FFF7FEFF 		bl	iis2mdc_write_reg
+ 1135 0030 F0E7     		b	.L137
+ 1137              		.section	.text.iis2mdc_offset_int_conf_get,"ax",%progbits
+ 1138              		.align	1
+ 1139              		.global	iis2mdc_offset_int_conf_get
+ 1140              		.syntax unified
+ 1141              		.thumb
+ 1142              		.thumb_func
+ 1144              	iis2mdc_offset_int_conf_get:
+ 1145              		@ args = 0, pretend = 0, frame = 8
+ 1146              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1147 0000 10B5     		push	{r4, lr}
+ 1148 0002 82B0     		sub	sp, sp, #8
+ 1149 0004 0C46     		mov	r4, r1
+ 1150 0006 0123     		movs	r3, #1
+ 1151 0008 01AA     		add	r2, sp, #4
+ 1152 000a 6121     		movs	r1, #97
+ 1153 000c FFF7FEFF 		bl	iis2mdc_read_reg
+ 1154 0010 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 1155 0014 C3F3C002 		ubfx	r2, r3, #3, #1
+ 1156 0018 13F0080F 		tst	r3, #8
+ 1157 001c 03D0     		beq	.L142
+ 1158 001e 32B9     		cbnz	r2, .L143
+ARM GAS  C:\Temp\ccpLOPWf.s 			page 20
+
+
+ 1159 0020 0023     		movs	r3, #0
+ 1160 0022 2370     		strb	r3, [r4]
+ 1161 0024 01E0     		b	.L141
+ 1162              	.L142:
+ 1163 0026 0023     		movs	r3, #0
+ 1164 0028 2370     		strb	r3, [r4]
+ 1165              	.L141:
+ 1166 002a 02B0     		add	sp, sp, #8
+ 1167              		@ sp needed
+ 1168 002c 10BD     		pop	{r4, pc}
+ 1169              	.L143:
+ 1170 002e 0123     		movs	r3, #1
+ 1171 0030 2370     		strb	r3, [r4]
+ 1172 0032 FAE7     		b	.L141
+ 1174              		.section	.text.iis2mdc_drdy_on_pin_set,"ax",%progbits
+ 1175              		.align	1
+ 1176              		.global	iis2mdc_drdy_on_pin_set
+ 1177              		.syntax unified
+ 1178              		.thumb
+ 1179              		.thumb_func
+ 1181              	iis2mdc_drdy_on_pin_set:
+ 1182              		@ args = 0, pretend = 0, frame = 8
+ 1183              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1184 0000 30B5     		push	{r4, r5, lr}
+ 1185 0002 83B0     		sub	sp, sp, #12
+ 1186 0004 0446     		mov	r4, r0
+ 1187 0006 0D46     		mov	r5, r1
+ 1188 0008 0123     		movs	r3, #1
+ 1189 000a 01AA     		add	r2, sp, #4
+ 1190 000c 6221     		movs	r1, #98
+ 1191 000e FFF7FEFF 		bl	iis2mdc_read_reg
+ 1192 0012 08B1     		cbz	r0, .L151
+ 1193              	.L148:
+ 1194 0014 03B0     		add	sp, sp, #12
+ 1195              		@ sp needed
+ 1196 0016 30BD     		pop	{r4, r5, pc}
+ 1197              	.L151:
+ 1198 0018 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 1199 001c 65F30003 		bfi	r3, r5, #0, #1
+ 1200 0020 8DF80430 		strb	r3, [sp, #4]
+ 1201 0024 0123     		movs	r3, #1
+ 1202 0026 01AA     		add	r2, sp, #4
+ 1203 0028 6221     		movs	r1, #98
+ 1204 002a 2046     		mov	r0, r4
+ 1205 002c FFF7FEFF 		bl	iis2mdc_write_reg
+ 1206 0030 F0E7     		b	.L148
+ 1208              		.section	.text.iis2mdc_drdy_on_pin_get,"ax",%progbits
+ 1209              		.align	1
+ 1210              		.global	iis2mdc_drdy_on_pin_get
+ 1211              		.syntax unified
+ 1212              		.thumb
+ 1213              		.thumb_func
+ 1215              	iis2mdc_drdy_on_pin_get:
+ 1216              		@ args = 0, pretend = 0, frame = 8
+ 1217              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1218 0000 10B5     		push	{r4, lr}
+ 1219 0002 82B0     		sub	sp, sp, #8
+ARM GAS  C:\Temp\ccpLOPWf.s 			page 21
+
+
+ 1220 0004 0C46     		mov	r4, r1
+ 1221 0006 0123     		movs	r3, #1
+ 1222 0008 01AA     		add	r2, sp, #4
+ 1223 000a 6221     		movs	r1, #98
+ 1224 000c FFF7FEFF 		bl	iis2mdc_read_reg
+ 1225 0010 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 1226 0014 C3F30003 		ubfx	r3, r3, #0, #1
+ 1227 0018 2370     		strb	r3, [r4]
+ 1228 001a 02B0     		add	sp, sp, #8
+ 1229              		@ sp needed
+ 1230 001c 10BD     		pop	{r4, pc}
+ 1232              		.section	.text.iis2mdc_int_on_pin_set,"ax",%progbits
+ 1233              		.align	1
+ 1234              		.global	iis2mdc_int_on_pin_set
+ 1235              		.syntax unified
+ 1236              		.thumb
+ 1237              		.thumb_func
+ 1239              	iis2mdc_int_on_pin_set:
+ 1240              		@ args = 0, pretend = 0, frame = 8
+ 1241              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1242 0000 30B5     		push	{r4, r5, lr}
+ 1243 0002 83B0     		sub	sp, sp, #12
+ 1244 0004 0446     		mov	r4, r0
+ 1245 0006 0D46     		mov	r5, r1
+ 1246 0008 0123     		movs	r3, #1
+ 1247 000a 01AA     		add	r2, sp, #4
+ 1248 000c 6221     		movs	r1, #98
+ 1249 000e FFF7FEFF 		bl	iis2mdc_read_reg
+ 1250 0012 08B1     		cbz	r0, .L157
+ 1251              	.L154:
+ 1252 0014 03B0     		add	sp, sp, #12
+ 1253              		@ sp needed
+ 1254 0016 30BD     		pop	{r4, r5, pc}
+ 1255              	.L157:
+ 1256 0018 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 1257 001c 65F38613 		bfi	r3, r5, #6, #1
+ 1258 0020 8DF80430 		strb	r3, [sp, #4]
+ 1259 0024 0123     		movs	r3, #1
+ 1260 0026 01AA     		add	r2, sp, #4
+ 1261 0028 6221     		movs	r1, #98
+ 1262 002a 2046     		mov	r0, r4
+ 1263 002c FFF7FEFF 		bl	iis2mdc_write_reg
+ 1264 0030 F0E7     		b	.L154
+ 1266              		.section	.text.iis2mdc_int_on_pin_get,"ax",%progbits
+ 1267              		.align	1
+ 1268              		.global	iis2mdc_int_on_pin_get
+ 1269              		.syntax unified
+ 1270              		.thumb
+ 1271              		.thumb_func
+ 1273              	iis2mdc_int_on_pin_get:
+ 1274              		@ args = 0, pretend = 0, frame = 8
+ 1275              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1276 0000 10B5     		push	{r4, lr}
+ 1277 0002 82B0     		sub	sp, sp, #8
+ 1278 0004 0C46     		mov	r4, r1
+ 1279 0006 0123     		movs	r3, #1
+ 1280 0008 01AA     		add	r2, sp, #4
+ARM GAS  C:\Temp\ccpLOPWf.s 			page 22
+
+
+ 1281 000a 6221     		movs	r1, #98
+ 1282 000c FFF7FEFF 		bl	iis2mdc_read_reg
+ 1283 0010 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 1284 0014 C3F38013 		ubfx	r3, r3, #6, #1
+ 1285 0018 2370     		strb	r3, [r4]
+ 1286 001a 02B0     		add	sp, sp, #8
+ 1287              		@ sp needed
+ 1288 001c 10BD     		pop	{r4, pc}
+ 1290              		.section	.text.iis2mdc_int_gen_conf_set,"ax",%progbits
+ 1291              		.align	1
+ 1292              		.global	iis2mdc_int_gen_conf_set
+ 1293              		.syntax unified
+ 1294              		.thumb
+ 1295              		.thumb_func
+ 1297              	iis2mdc_int_gen_conf_set:
+ 1298              		@ args = 0, pretend = 0, frame = 0
+ 1299              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1300 0000 08B5     		push	{r3, lr}
+ 1301 0002 0A46     		mov	r2, r1
+ 1302 0004 0123     		movs	r3, #1
+ 1303 0006 6321     		movs	r1, #99
+ 1304 0008 FFF7FEFF 		bl	iis2mdc_write_reg
+ 1305 000c 08BD     		pop	{r3, pc}
+ 1307              		.section	.text.iis2mdc_int_gen_conf_get,"ax",%progbits
+ 1308              		.align	1
+ 1309              		.global	iis2mdc_int_gen_conf_get
+ 1310              		.syntax unified
+ 1311              		.thumb
+ 1312              		.thumb_func
+ 1314              	iis2mdc_int_gen_conf_get:
+ 1315              		@ args = 0, pretend = 0, frame = 0
+ 1316              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1317 0000 08B5     		push	{r3, lr}
+ 1318 0002 0A46     		mov	r2, r1
+ 1319 0004 0123     		movs	r3, #1
+ 1320 0006 6321     		movs	r1, #99
+ 1321 0008 FFF7FEFF 		bl	iis2mdc_read_reg
+ 1322 000c 08BD     		pop	{r3, pc}
+ 1324              		.section	.text.iis2mdc_int_gen_source_get,"ax",%progbits
+ 1325              		.align	1
+ 1326              		.global	iis2mdc_int_gen_source_get
+ 1327              		.syntax unified
+ 1328              		.thumb
+ 1329              		.thumb_func
+ 1331              	iis2mdc_int_gen_source_get:
+ 1332              		@ args = 0, pretend = 0, frame = 0
+ 1333              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1334 0000 08B5     		push	{r3, lr}
+ 1335 0002 0A46     		mov	r2, r1
+ 1336 0004 0123     		movs	r3, #1
+ 1337 0006 6421     		movs	r1, #100
+ 1338 0008 FFF7FEFF 		bl	iis2mdc_read_reg
+ 1339 000c 08BD     		pop	{r3, pc}
+ 1341              		.section	.text.iis2mdc_int_gen_threshold_set,"ax",%progbits
+ 1342              		.align	1
+ 1343              		.global	iis2mdc_int_gen_threshold_set
+ 1344              		.syntax unified
+ARM GAS  C:\Temp\ccpLOPWf.s 			page 23
+
+
+ 1345              		.thumb
+ 1346              		.thumb_func
+ 1348              	iis2mdc_int_gen_threshold_set:
+ 1349              		@ args = 0, pretend = 0, frame = 8
+ 1350              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1351 0000 00B5     		push	{lr}
+ 1352 0002 83B0     		sub	sp, sp, #12
+ 1353 0004 C1F30723 		ubfx	r3, r1, #8, #8
+ 1354 0008 8DF80530 		strb	r3, [sp, #5]
+ 1355 000c 8DF80410 		strb	r1, [sp, #4]
+ 1356 0010 0223     		movs	r3, #2
+ 1357 0012 01AA     		add	r2, sp, #4
+ 1358 0014 6521     		movs	r1, #101
+ 1359 0016 FFF7FEFF 		bl	iis2mdc_write_reg
+ 1360 001a 03B0     		add	sp, sp, #12
+ 1361              		@ sp needed
+ 1362 001c 5DF804FB 		ldr	pc, [sp], #4
+ 1364              		.section	.text.iis2mdc_int_gen_threshold_get,"ax",%progbits
+ 1365              		.align	1
+ 1366              		.global	iis2mdc_int_gen_threshold_get
+ 1367              		.syntax unified
+ 1368              		.thumb
+ 1369              		.thumb_func
+ 1371              	iis2mdc_int_gen_threshold_get:
+ 1372              		@ args = 0, pretend = 0, frame = 8
+ 1373              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1374 0000 10B5     		push	{r4, lr}
+ 1375 0002 82B0     		sub	sp, sp, #8
+ 1376 0004 0C46     		mov	r4, r1
+ 1377 0006 0223     		movs	r3, #2
+ 1378 0008 01AA     		add	r2, sp, #4
+ 1379 000a 6521     		movs	r1, #101
+ 1380 000c FFF7FEFF 		bl	iis2mdc_read_reg
+ 1381 0010 9DF80520 		ldrb	r2, [sp, #5]	@ zero_extendqisi2
+ 1382 0014 2280     		strh	r2, [r4]	@ movhi
+ 1383 0016 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 1384 001a 03EB0223 		add	r3, r3, r2, lsl #8
+ 1385 001e 2380     		strh	r3, [r4]	@ movhi
+ 1386 0020 02B0     		add	sp, sp, #8
+ 1387              		@ sp needed
+ 1388 0022 10BD     		pop	{r4, pc}
+ 1390              		.section	.text.iis2mdc_i2c_interface_set,"ax",%progbits
+ 1391              		.align	1
+ 1392              		.global	iis2mdc_i2c_interface_set
+ 1393              		.syntax unified
+ 1394              		.thumb
+ 1395              		.thumb_func
+ 1397              	iis2mdc_i2c_interface_set:
+ 1398              		@ args = 0, pretend = 0, frame = 8
+ 1399              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1400 0000 30B5     		push	{r4, r5, lr}
+ 1401 0002 83B0     		sub	sp, sp, #12
+ 1402 0004 0446     		mov	r4, r0
+ 1403 0006 0D46     		mov	r5, r1
+ 1404 0008 0123     		movs	r3, #1
+ 1405 000a 01AA     		add	r2, sp, #4
+ 1406 000c 6221     		movs	r1, #98
+ARM GAS  C:\Temp\ccpLOPWf.s 			page 24
+
+
+ 1407 000e FFF7FEFF 		bl	iis2mdc_read_reg
+ 1408 0012 08B1     		cbz	r0, .L173
+ 1409              	.L170:
+ 1410 0014 03B0     		add	sp, sp, #12
+ 1411              		@ sp needed
+ 1412 0016 30BD     		pop	{r4, r5, pc}
+ 1413              	.L173:
+ 1414 0018 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 1415 001c 65F34513 		bfi	r3, r5, #5, #1
+ 1416 0020 8DF80430 		strb	r3, [sp, #4]
+ 1417 0024 0123     		movs	r3, #1
+ 1418 0026 01AA     		add	r2, sp, #4
+ 1419 0028 6221     		movs	r1, #98
+ 1420 002a 2046     		mov	r0, r4
+ 1421 002c FFF7FEFF 		bl	iis2mdc_write_reg
+ 1422 0030 F0E7     		b	.L170
+ 1424              		.section	.text.iis2mdc_i2c_interface_get,"ax",%progbits
+ 1425              		.align	1
+ 1426              		.global	iis2mdc_i2c_interface_get
+ 1427              		.syntax unified
+ 1428              		.thumb
+ 1429              		.thumb_func
+ 1431              	iis2mdc_i2c_interface_get:
+ 1432              		@ args = 0, pretend = 0, frame = 8
+ 1433              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1434 0000 10B5     		push	{r4, lr}
+ 1435 0002 82B0     		sub	sp, sp, #8
+ 1436 0004 0C46     		mov	r4, r1
+ 1437 0006 0123     		movs	r3, #1
+ 1438 0008 01AA     		add	r2, sp, #4
+ 1439 000a 6221     		movs	r1, #98
+ 1440 000c FFF7FEFF 		bl	iis2mdc_read_reg
+ 1441 0010 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 1442 0014 C3F34012 		ubfx	r2, r3, #5, #1
+ 1443 0018 13F0200F 		tst	r3, #32
+ 1444 001c 03D0     		beq	.L175
+ 1445 001e 32B9     		cbnz	r2, .L176
+ 1446 0020 0023     		movs	r3, #0
+ 1447 0022 2370     		strb	r3, [r4]
+ 1448 0024 01E0     		b	.L174
+ 1449              	.L175:
+ 1450 0026 0023     		movs	r3, #0
+ 1451 0028 2370     		strb	r3, [r4]
+ 1452              	.L174:
+ 1453 002a 02B0     		add	sp, sp, #8
+ 1454              		@ sp needed
+ 1455 002c 10BD     		pop	{r4, pc}
+ 1456              	.L176:
+ 1457 002e 0123     		movs	r3, #1
+ 1458 0030 2370     		strb	r3, [r4]
+ 1459 0032 FAE7     		b	.L174
+ 1461              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccpLOPWf.s 			page 25
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 iis2mdc_reg.c
+  C:\Temp\ccpLOPWf.s:18     .text.iis2mdc_read_reg:00000000 $t
+  C:\Temp\ccpLOPWf.s:24     .text.iis2mdc_read_reg:00000000 iis2mdc_read_reg
+  C:\Temp\ccpLOPWf.s:38     .text.iis2mdc_write_reg:00000000 $t
+  C:\Temp\ccpLOPWf.s:44     .text.iis2mdc_write_reg:00000000 iis2mdc_write_reg
+  C:\Temp\ccpLOPWf.s:58     .text.iis2mdc_from_lsb_to_mgauss:00000000 $t
+  C:\Temp\ccpLOPWf.s:64     .text.iis2mdc_from_lsb_to_mgauss:00000000 iis2mdc_from_lsb_to_mgauss
+  C:\Temp\ccpLOPWf.s:75     .text.iis2mdc_from_lsb_to_celsius:00000000 $t
+  C:\Temp\ccpLOPWf.s:81     .text.iis2mdc_from_lsb_to_celsius:00000000 iis2mdc_from_lsb_to_celsius
+  C:\Temp\ccpLOPWf.s:94     .text.iis2mdc_mag_user_offset_set:00000000 $t
+  C:\Temp\ccpLOPWf.s:100    .text.iis2mdc_mag_user_offset_set:00000000 iis2mdc_mag_user_offset_set
+  C:\Temp\ccpLOPWf.s:126    .text.iis2mdc_mag_user_offset_get:00000000 $t
+  C:\Temp\ccpLOPWf.s:132    .text.iis2mdc_mag_user_offset_get:00000000 iis2mdc_mag_user_offset_get
+  C:\Temp\ccpLOPWf.s:162    .text.iis2mdc_operating_mode_set:00000000 $t
+  C:\Temp\ccpLOPWf.s:168    .text.iis2mdc_operating_mode_set:00000000 iis2mdc_operating_mode_set
+  C:\Temp\ccpLOPWf.s:196    .text.iis2mdc_operating_mode_get:00000000 $t
+  C:\Temp\ccpLOPWf.s:202    .text.iis2mdc_operating_mode_get:00000000 iis2mdc_operating_mode_get
+  C:\Temp\ccpLOPWf.s:238    .text.iis2mdc_data_rate_set:00000000 $t
+  C:\Temp\ccpLOPWf.s:244    .text.iis2mdc_data_rate_set:00000000 iis2mdc_data_rate_set
+  C:\Temp\ccpLOPWf.s:272    .text.iis2mdc_data_rate_get:00000000 $t
+  C:\Temp\ccpLOPWf.s:278    .text.iis2mdc_data_rate_get:00000000 iis2mdc_data_rate_get
+  C:\Temp\ccpLOPWf.s:294    .text.iis2mdc_data_rate_get:00000020 $d
+  C:\Temp\ccpLOPWf.s:298    .text.iis2mdc_data_rate_get:00000024 $t
+  C:\Temp\ccpLOPWf.s:324    .text.iis2mdc_power_mode_set:00000000 $t
+  C:\Temp\ccpLOPWf.s:330    .text.iis2mdc_power_mode_set:00000000 iis2mdc_power_mode_set
+  C:\Temp\ccpLOPWf.s:358    .text.iis2mdc_power_mode_get:00000000 $t
+  C:\Temp\ccpLOPWf.s:364    .text.iis2mdc_power_mode_get:00000000 iis2mdc_power_mode_get
+  C:\Temp\ccpLOPWf.s:395    .text.iis2mdc_offset_temp_comp_set:00000000 $t
+  C:\Temp\ccpLOPWf.s:401    .text.iis2mdc_offset_temp_comp_set:00000000 iis2mdc_offset_temp_comp_set
+  C:\Temp\ccpLOPWf.s:429    .text.iis2mdc_offset_temp_comp_get:00000000 $t
+  C:\Temp\ccpLOPWf.s:435    .text.iis2mdc_offset_temp_comp_get:00000000 iis2mdc_offset_temp_comp_get
+  C:\Temp\ccpLOPWf.s:453    .text.iis2mdc_low_pass_bandwidth_set:00000000 $t
+  C:\Temp\ccpLOPWf.s:459    .text.iis2mdc_low_pass_bandwidth_set:00000000 iis2mdc_low_pass_bandwidth_set
+  C:\Temp\ccpLOPWf.s:487    .text.iis2mdc_low_pass_bandwidth_get:00000000 $t
+  C:\Temp\ccpLOPWf.s:493    .text.iis2mdc_low_pass_bandwidth_get:00000000 iis2mdc_low_pass_bandwidth_get
+  C:\Temp\ccpLOPWf.s:523    .text.iis2mdc_set_rst_mode_set:00000000 $t
+  C:\Temp\ccpLOPWf.s:529    .text.iis2mdc_set_rst_mode_set:00000000 iis2mdc_set_rst_mode_set
+  C:\Temp\ccpLOPWf.s:557    .text.iis2mdc_set_rst_mode_get:00000000 $t
+  C:\Temp\ccpLOPWf.s:563    .text.iis2mdc_set_rst_mode_get:00000000 iis2mdc_set_rst_mode_get
+  C:\Temp\ccpLOPWf.s:599    .text.iis2mdc_set_rst_sensor_single_set:00000000 $t
+  C:\Temp\ccpLOPWf.s:605    .text.iis2mdc_set_rst_sensor_single_set:00000000 iis2mdc_set_rst_sensor_single_set
+  C:\Temp\ccpLOPWf.s:633    .text.iis2mdc_set_rst_sensor_single_get:00000000 $t
+  C:\Temp\ccpLOPWf.s:639    .text.iis2mdc_set_rst_sensor_single_get:00000000 iis2mdc_set_rst_sensor_single_get
+  C:\Temp\ccpLOPWf.s:657    .text.iis2mdc_block_data_update_set:00000000 $t
+  C:\Temp\ccpLOPWf.s:663    .text.iis2mdc_block_data_update_set:00000000 iis2mdc_block_data_update_set
+  C:\Temp\ccpLOPWf.s:691    .text.iis2mdc_block_data_update_get:00000000 $t
+  C:\Temp\ccpLOPWf.s:697    .text.iis2mdc_block_data_update_get:00000000 iis2mdc_block_data_update_get
+  C:\Temp\ccpLOPWf.s:715    .text.iis2mdc_mag_data_ready_get:00000000 $t
+  C:\Temp\ccpLOPWf.s:721    .text.iis2mdc_mag_data_ready_get:00000000 iis2mdc_mag_data_ready_get
+  C:\Temp\ccpLOPWf.s:739    .text.iis2mdc_mag_data_ovr_get:00000000 $t
+  C:\Temp\ccpLOPWf.s:745    .text.iis2mdc_mag_data_ovr_get:00000000 iis2mdc_mag_data_ovr_get
+  C:\Temp\ccpLOPWf.s:763    .text.iis2mdc_magnetic_raw_get:00000000 $t
+  C:\Temp\ccpLOPWf.s:769    .text.iis2mdc_magnetic_raw_get:00000000 iis2mdc_magnetic_raw_get
+  C:\Temp\ccpLOPWf.s:799    .text.iis2mdc_temperature_raw_get:00000000 $t
+  C:\Temp\ccpLOPWf.s:805    .text.iis2mdc_temperature_raw_get:00000000 iis2mdc_temperature_raw_get
+  C:\Temp\ccpLOPWf.s:825    .text.iis2mdc_device_id_get:00000000 $t
+ARM GAS  C:\Temp\ccpLOPWf.s 			page 26
+
+
+  C:\Temp\ccpLOPWf.s:831    .text.iis2mdc_device_id_get:00000000 iis2mdc_device_id_get
+  C:\Temp\ccpLOPWf.s:842    .text.iis2mdc_reset_set:00000000 $t
+  C:\Temp\ccpLOPWf.s:848    .text.iis2mdc_reset_set:00000000 iis2mdc_reset_set
+  C:\Temp\ccpLOPWf.s:876    .text.iis2mdc_reset_get:00000000 $t
+  C:\Temp\ccpLOPWf.s:882    .text.iis2mdc_reset_get:00000000 iis2mdc_reset_get
+  C:\Temp\ccpLOPWf.s:900    .text.iis2mdc_boot_set:00000000 $t
+  C:\Temp\ccpLOPWf.s:906    .text.iis2mdc_boot_set:00000000 iis2mdc_boot_set
+  C:\Temp\ccpLOPWf.s:934    .text.iis2mdc_boot_get:00000000 $t
+  C:\Temp\ccpLOPWf.s:940    .text.iis2mdc_boot_get:00000000 iis2mdc_boot_get
+  C:\Temp\ccpLOPWf.s:958    .text.iis2mdc_self_test_set:00000000 $t
+  C:\Temp\ccpLOPWf.s:964    .text.iis2mdc_self_test_set:00000000 iis2mdc_self_test_set
+  C:\Temp\ccpLOPWf.s:992    .text.iis2mdc_self_test_get:00000000 $t
+  C:\Temp\ccpLOPWf.s:998    .text.iis2mdc_self_test_get:00000000 iis2mdc_self_test_get
+  C:\Temp\ccpLOPWf.s:1016   .text.iis2mdc_data_format_set:00000000 $t
+  C:\Temp\ccpLOPWf.s:1022   .text.iis2mdc_data_format_set:00000000 iis2mdc_data_format_set
+  C:\Temp\ccpLOPWf.s:1050   .text.iis2mdc_data_format_get:00000000 $t
+  C:\Temp\ccpLOPWf.s:1056   .text.iis2mdc_data_format_get:00000000 iis2mdc_data_format_get
+  C:\Temp\ccpLOPWf.s:1087   .text.iis2mdc_status_get:00000000 $t
+  C:\Temp\ccpLOPWf.s:1093   .text.iis2mdc_status_get:00000000 iis2mdc_status_get
+  C:\Temp\ccpLOPWf.s:1104   .text.iis2mdc_offset_int_conf_set:00000000 $t
+  C:\Temp\ccpLOPWf.s:1110   .text.iis2mdc_offset_int_conf_set:00000000 iis2mdc_offset_int_conf_set
+  C:\Temp\ccpLOPWf.s:1138   .text.iis2mdc_offset_int_conf_get:00000000 $t
+  C:\Temp\ccpLOPWf.s:1144   .text.iis2mdc_offset_int_conf_get:00000000 iis2mdc_offset_int_conf_get
+  C:\Temp\ccpLOPWf.s:1175   .text.iis2mdc_drdy_on_pin_set:00000000 $t
+  C:\Temp\ccpLOPWf.s:1181   .text.iis2mdc_drdy_on_pin_set:00000000 iis2mdc_drdy_on_pin_set
+  C:\Temp\ccpLOPWf.s:1209   .text.iis2mdc_drdy_on_pin_get:00000000 $t
+  C:\Temp\ccpLOPWf.s:1215   .text.iis2mdc_drdy_on_pin_get:00000000 iis2mdc_drdy_on_pin_get
+  C:\Temp\ccpLOPWf.s:1233   .text.iis2mdc_int_on_pin_set:00000000 $t
+  C:\Temp\ccpLOPWf.s:1239   .text.iis2mdc_int_on_pin_set:00000000 iis2mdc_int_on_pin_set
+  C:\Temp\ccpLOPWf.s:1267   .text.iis2mdc_int_on_pin_get:00000000 $t
+  C:\Temp\ccpLOPWf.s:1273   .text.iis2mdc_int_on_pin_get:00000000 iis2mdc_int_on_pin_get
+  C:\Temp\ccpLOPWf.s:1291   .text.iis2mdc_int_gen_conf_set:00000000 $t
+  C:\Temp\ccpLOPWf.s:1297   .text.iis2mdc_int_gen_conf_set:00000000 iis2mdc_int_gen_conf_set
+  C:\Temp\ccpLOPWf.s:1308   .text.iis2mdc_int_gen_conf_get:00000000 $t
+  C:\Temp\ccpLOPWf.s:1314   .text.iis2mdc_int_gen_conf_get:00000000 iis2mdc_int_gen_conf_get
+  C:\Temp\ccpLOPWf.s:1325   .text.iis2mdc_int_gen_source_get:00000000 $t
+  C:\Temp\ccpLOPWf.s:1331   .text.iis2mdc_int_gen_source_get:00000000 iis2mdc_int_gen_source_get
+  C:\Temp\ccpLOPWf.s:1342   .text.iis2mdc_int_gen_threshold_set:00000000 $t
+  C:\Temp\ccpLOPWf.s:1348   .text.iis2mdc_int_gen_threshold_set:00000000 iis2mdc_int_gen_threshold_set
+  C:\Temp\ccpLOPWf.s:1365   .text.iis2mdc_int_gen_threshold_get:00000000 $t
+  C:\Temp\ccpLOPWf.s:1371   .text.iis2mdc_int_gen_threshold_get:00000000 iis2mdc_int_gen_threshold_get
+  C:\Temp\ccpLOPWf.s:1391   .text.iis2mdc_i2c_interface_set:00000000 $t
+  C:\Temp\ccpLOPWf.s:1397   .text.iis2mdc_i2c_interface_set:00000000 iis2mdc_i2c_interface_set
+  C:\Temp\ccpLOPWf.s:1425   .text.iis2mdc_i2c_interface_get:00000000 $t
+  C:\Temp\ccpLOPWf.s:1431   .text.iis2mdc_i2c_interface_get:00000000 iis2mdc_i2c_interface_get
+
+NO UNDEFINED SYMBOLS

@@ -1,0 +1,189 @@
+ARM GAS  C:\Temp\ccU2Et2B.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"stm32f3xx_hal_pwr_ex.c"
+  16              		.text
+  17              		.section	.text.HAL_PWR_ConfigPVD,"ax",%progbits
+  18              		.align	1
+  19              		.global	HAL_PWR_ConfigPVD
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	HAL_PWR_ConfigPVD:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27              		@ link register save eliminated.
+  28 0000 1E4A     		ldr	r2, .L6
+  29 0002 1368     		ldr	r3, [r2]
+  30 0004 23F0E003 		bic	r3, r3, #224
+  31 0008 0168     		ldr	r1, [r0]
+  32 000a 0B43     		orrs	r3, r3, r1
+  33 000c 1360     		str	r3, [r2]
+  34 000e 1C4B     		ldr	r3, .L6+4
+  35 0010 5A68     		ldr	r2, [r3, #4]
+  36 0012 22F48032 		bic	r2, r2, #65536
+  37 0016 5A60     		str	r2, [r3, #4]
+  38 0018 1A68     		ldr	r2, [r3]
+  39 001a 22F48032 		bic	r2, r2, #65536
+  40 001e 1A60     		str	r2, [r3]
+  41 0020 9A68     		ldr	r2, [r3, #8]
+  42 0022 22F48032 		bic	r2, r2, #65536
+  43 0026 9A60     		str	r2, [r3, #8]
+  44 0028 DA68     		ldr	r2, [r3, #12]
+  45 002a 22F48032 		bic	r2, r2, #65536
+  46 002e DA60     		str	r2, [r3, #12]
+  47 0030 4368     		ldr	r3, [r0, #4]
+  48 0032 13F4803F 		tst	r3, #65536
+  49 0036 04D0     		beq	.L2
+  50 0038 114A     		ldr	r2, .L6+4
+  51 003a 1368     		ldr	r3, [r2]
+  52 003c 43F48033 		orr	r3, r3, #65536
+  53 0040 1360     		str	r3, [r2]
+  54              	.L2:
+  55 0042 4368     		ldr	r3, [r0, #4]
+  56 0044 13F4003F 		tst	r3, #131072
+  57 0048 04D0     		beq	.L3
+  58 004a 0D4A     		ldr	r2, .L6+4
+ARM GAS  C:\Temp\ccU2Et2B.s 			page 2
+
+
+  59 004c 5368     		ldr	r3, [r2, #4]
+  60 004e 43F48033 		orr	r3, r3, #65536
+  61 0052 5360     		str	r3, [r2, #4]
+  62              	.L3:
+  63 0054 4368     		ldr	r3, [r0, #4]
+  64 0056 13F0010F 		tst	r3, #1
+  65 005a 04D0     		beq	.L4
+  66 005c 084A     		ldr	r2, .L6+4
+  67 005e 9368     		ldr	r3, [r2, #8]
+  68 0060 43F48033 		orr	r3, r3, #65536
+  69 0064 9360     		str	r3, [r2, #8]
+  70              	.L4:
+  71 0066 4368     		ldr	r3, [r0, #4]
+  72 0068 13F0020F 		tst	r3, #2
+  73 006c 04D0     		beq	.L1
+  74 006e 044A     		ldr	r2, .L6+4
+  75 0070 D368     		ldr	r3, [r2, #12]
+  76 0072 43F48033 		orr	r3, r3, #65536
+  77 0076 D360     		str	r3, [r2, #12]
+  78              	.L1:
+  79 0078 7047     		bx	lr
+  80              	.L7:
+  81 007a 00BF     		.align	2
+  82              	.L6:
+  83 007c 00700040 		.word	1073770496
+  84 0080 00040140 		.word	1073808384
+  86              		.section	.text.HAL_PWR_EnablePVD,"ax",%progbits
+  87              		.align	1
+  88              		.global	HAL_PWR_EnablePVD
+  89              		.syntax unified
+  90              		.thumb
+  91              		.thumb_func
+  93              	HAL_PWR_EnablePVD:
+  94              		@ args = 0, pretend = 0, frame = 0
+  95              		@ frame_needed = 0, uses_anonymous_args = 0
+  96              		@ link register save eliminated.
+  97 0000 024A     		ldr	r2, .L9
+  98 0002 1368     		ldr	r3, [r2]
+  99 0004 43F01003 		orr	r3, r3, #16
+ 100 0008 1360     		str	r3, [r2]
+ 101 000a 7047     		bx	lr
+ 102              	.L10:
+ 103              		.align	2
+ 104              	.L9:
+ 105 000c 00700040 		.word	1073770496
+ 107              		.section	.text.HAL_PWR_DisablePVD,"ax",%progbits
+ 108              		.align	1
+ 109              		.global	HAL_PWR_DisablePVD
+ 110              		.syntax unified
+ 111              		.thumb
+ 112              		.thumb_func
+ 114              	HAL_PWR_DisablePVD:
+ 115              		@ args = 0, pretend = 0, frame = 0
+ 116              		@ frame_needed = 0, uses_anonymous_args = 0
+ 117              		@ link register save eliminated.
+ 118 0000 024A     		ldr	r2, .L12
+ 119 0002 1368     		ldr	r3, [r2]
+ARM GAS  C:\Temp\ccU2Et2B.s 			page 3
+
+
+ 120 0004 23F01003 		bic	r3, r3, #16
+ 121 0008 1360     		str	r3, [r2]
+ 122 000a 7047     		bx	lr
+ 123              	.L13:
+ 124              		.align	2
+ 125              	.L12:
+ 126 000c 00700040 		.word	1073770496
+ 128              		.section	.text.HAL_PWR_PVDCallback,"ax",%progbits
+ 129              		.align	1
+ 130              		.weak	HAL_PWR_PVDCallback
+ 131              		.syntax unified
+ 132              		.thumb
+ 133              		.thumb_func
+ 135              	HAL_PWR_PVDCallback:
+ 136              		@ args = 0, pretend = 0, frame = 0
+ 137              		@ frame_needed = 0, uses_anonymous_args = 0
+ 138              		@ link register save eliminated.
+ 139 0000 7047     		bx	lr
+ 141              		.section	.text.HAL_PWR_PVD_IRQHandler,"ax",%progbits
+ 142              		.align	1
+ 143              		.global	HAL_PWR_PVD_IRQHandler
+ 144              		.syntax unified
+ 145              		.thumb
+ 146              		.thumb_func
+ 148              	HAL_PWR_PVD_IRQHandler:
+ 149              		@ args = 0, pretend = 0, frame = 0
+ 150              		@ frame_needed = 0, uses_anonymous_args = 0
+ 151 0000 08B5     		push	{r3, lr}
+ 152 0002 064B     		ldr	r3, .L19
+ 153 0004 5B69     		ldr	r3, [r3, #20]
+ 154 0006 13F4803F 		tst	r3, #65536
+ 155 000a 00D1     		bne	.L18
+ 156              	.L15:
+ 157 000c 08BD     		pop	{r3, pc}
+ 158              	.L18:
+ 159 000e FFF7FEFF 		bl	HAL_PWR_PVDCallback
+ 160 0012 024B     		ldr	r3, .L19
+ 161 0014 4FF48032 		mov	r2, #65536
+ 162 0018 5A61     		str	r2, [r3, #20]
+ 163 001a F7E7     		b	.L15
+ 164              	.L20:
+ 165              		.align	2
+ 166              	.L19:
+ 167 001c 00040140 		.word	1073808384
+ 169              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccU2Et2B.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f3xx_hal_pwr_ex.c
+  C:\Temp\ccU2Et2B.s:18     .text.HAL_PWR_ConfigPVD:00000000 $t
+  C:\Temp\ccU2Et2B.s:24     .text.HAL_PWR_ConfigPVD:00000000 HAL_PWR_ConfigPVD
+  C:\Temp\ccU2Et2B.s:83     .text.HAL_PWR_ConfigPVD:0000007c $d
+  C:\Temp\ccU2Et2B.s:87     .text.HAL_PWR_EnablePVD:00000000 $t
+  C:\Temp\ccU2Et2B.s:93     .text.HAL_PWR_EnablePVD:00000000 HAL_PWR_EnablePVD
+  C:\Temp\ccU2Et2B.s:105    .text.HAL_PWR_EnablePVD:0000000c $d
+  C:\Temp\ccU2Et2B.s:108    .text.HAL_PWR_DisablePVD:00000000 $t
+  C:\Temp\ccU2Et2B.s:114    .text.HAL_PWR_DisablePVD:00000000 HAL_PWR_DisablePVD
+  C:\Temp\ccU2Et2B.s:126    .text.HAL_PWR_DisablePVD:0000000c $d
+  C:\Temp\ccU2Et2B.s:129    .text.HAL_PWR_PVDCallback:00000000 $t
+  C:\Temp\ccU2Et2B.s:135    .text.HAL_PWR_PVDCallback:00000000 HAL_PWR_PVDCallback
+  C:\Temp\ccU2Et2B.s:142    .text.HAL_PWR_PVD_IRQHandler:00000000 $t
+  C:\Temp\ccU2Et2B.s:148    .text.HAL_PWR_PVD_IRQHandler:00000000 HAL_PWR_PVD_IRQHandler
+  C:\Temp\ccU2Et2B.s:167    .text.HAL_PWR_PVD_IRQHandler:0000001c $d
+
+NO UNDEFINED SYMBOLS

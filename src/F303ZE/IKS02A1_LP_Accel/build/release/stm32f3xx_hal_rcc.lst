@@ -1,0 +1,1781 @@
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"stm32f3xx_hal_rcc.c"
+  16              		.text
+  17              		.section	.text.HAL_RCC_DeInit,"ax",%progbits
+  18              		.align	1
+  19              		.global	HAL_RCC_DeInit
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	HAL_RCC_DeInit:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 38B5     		push	{r3, r4, r5, lr}
+  28 0002 364A     		ldr	r2, .L18
+  29 0004 1368     		ldr	r3, [r2]
+  30 0006 43F00103 		orr	r3, r3, #1
+  31 000a 1360     		str	r3, [r2]
+  32 000c FFF7FEFF 		bl	HAL_GetTick
+  33 0010 0446     		mov	r4, r0
+  34              	.L2:
+  35 0012 324B     		ldr	r3, .L18
+  36 0014 1B68     		ldr	r3, [r3]
+  37 0016 13F0020F 		tst	r3, #2
+  38 001a 07D1     		bne	.L14
+  39 001c FFF7FEFF 		bl	HAL_GetTick
+  40 0020 001B     		subs	r0, r0, r4
+  41 0022 0228     		cmp	r0, #2
+  42 0024 F5D9     		bls	.L2
+  43 0026 0324     		movs	r4, #3
+  44              	.L3:
+  45 0028 2046     		mov	r0, r4
+  46 002a 38BD     		pop	{r3, r4, r5, pc}
+  47              	.L14:
+  48 002c 2B4A     		ldr	r2, .L18
+  49 002e 1368     		ldr	r3, [r2]
+  50 0030 23F0F803 		bic	r3, r3, #248
+  51 0034 43F08003 		orr	r3, r3, #128
+  52 0038 1360     		str	r3, [r2]
+  53 003a 5168     		ldr	r1, [r2, #4]
+  54 003c 284B     		ldr	r3, .L18+4
+  55 003e 0B40     		ands	r3, r3, r1
+  56 0040 5360     		str	r3, [r2, #4]
+  57 0042 FFF7FEFF 		bl	HAL_GetTick
+  58 0046 0446     		mov	r4, r0
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 2
+
+
+  59              	.L5:
+  60 0048 244B     		ldr	r3, .L18
+  61 004a 5B68     		ldr	r3, [r3, #4]
+  62 004c 13F00C0F 		tst	r3, #12
+  63 0050 08D0     		beq	.L15
+  64 0052 FFF7FEFF 		bl	HAL_GetTick
+  65 0056 001B     		subs	r0, r0, r4
+  66 0058 41F28833 		movw	r3, #5000
+  67 005c 9842     		cmp	r0, r3
+  68 005e F3D9     		bls	.L5
+  69 0060 0324     		movs	r4, #3
+  70 0062 E1E7     		b	.L3
+  71              	.L15:
+  72 0064 1F4B     		ldr	r3, .L18+8
+  73 0066 204A     		ldr	r2, .L18+12
+  74 0068 1A60     		str	r2, [r3]
+  75 006a 204B     		ldr	r3, .L18+16
+  76 006c 1868     		ldr	r0, [r3]
+  77 006e FFF7FEFF 		bl	HAL_InitTick
+  78 0072 0446     		mov	r4, r0
+  79 0074 08B1     		cbz	r0, .L16
+  80 0076 0124     		movs	r4, #1
+  81 0078 D6E7     		b	.L3
+  82              	.L16:
+  83 007a 184A     		ldr	r2, .L18
+  84 007c 1368     		ldr	r3, [r2]
+  85 007e 23F08473 		bic	r3, r3, #17301504
+  86 0082 23F48033 		bic	r3, r3, #65536
+  87 0086 1360     		str	r3, [r2]
+  88 0088 1368     		ldr	r3, [r2]
+  89 008a 23F48023 		bic	r3, r3, #262144
+  90 008e 1360     		str	r3, [r2]
+  91 0090 FFF7FEFF 		bl	HAL_GetTick
+  92 0094 0546     		mov	r5, r0
+  93              	.L7:
+  94 0096 114B     		ldr	r3, .L18
+  95 0098 1B68     		ldr	r3, [r3]
+  96 009a 13F0007F 		tst	r3, #33554432
+  97 009e 06D0     		beq	.L17
+  98 00a0 FFF7FEFF 		bl	HAL_GetTick
+  99 00a4 401B     		subs	r0, r0, r5
+ 100 00a6 0228     		cmp	r0, #2
+ 101 00a8 F5D9     		bls	.L7
+ 102 00aa 0324     		movs	r4, #3
+ 103 00ac BCE7     		b	.L3
+ 104              	.L17:
+ 105 00ae 0B4B     		ldr	r3, .L18
+ 106 00b0 0022     		movs	r2, #0
+ 107 00b2 5A60     		str	r2, [r3, #4]
+ 108 00b4 DA62     		str	r2, [r3, #44]
+ 109 00b6 1A63     		str	r2, [r3, #48]
+ 110 00b8 9968     		ldr	r1, [r3, #8]
+ 111 00ba 41F41F01 		orr	r1, r1, #10420224
+ 112 00be 9960     		str	r1, [r3, #8]
+ 113 00c0 9A60     		str	r2, [r3, #8]
+ 114 00c2 4FF08072 		mov	r2, #16777216
+ 115              		.syntax unified
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 3
+
+
+ 116              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 117 00c6 92FAA2F2 		rbit r2, r2
+ 118              	@ 0 "" 2
+ 119              		.thumb
+ 120              		.syntax unified
+ 121 00ca B2FA82F2 		clz	r2, r2
+ 122 00ce 084B     		ldr	r3, .L18+20
+ 123 00d0 1344     		add	r3, r3, r2
+ 124 00d2 9B00     		lsls	r3, r3, #2
+ 125 00d4 0122     		movs	r2, #1
+ 126 00d6 1A60     		str	r2, [r3]
+ 127 00d8 A6E7     		b	.L3
+ 128              	.L19:
+ 129 00da 00BF     		.align	2
+ 130              	.L18:
+ 131 00dc 00100240 		.word	1073876992
+ 132 00e0 0CC0FFF8 		.word	-117456884
+ 133 00e4 00000000 		.word	SystemCoreClock
+ 134 00e8 00127A00 		.word	8000000
+ 135 00ec 00000000 		.word	uwTickPrio
+ 136 00f0 20819010 		.word	277905696
+ 138              		.section	.text.HAL_RCC_OscConfig,"ax",%progbits
+ 139              		.align	1
+ 140              		.global	HAL_RCC_OscConfig
+ 141              		.syntax unified
+ 142              		.thumb
+ 143              		.thumb_func
+ 145              	HAL_RCC_OscConfig:
+ 146              		@ args = 0, pretend = 0, frame = 8
+ 147              		@ frame_needed = 0, uses_anonymous_args = 0
+ 148 0000 0028     		cmp	r0, #0
+ 149 0002 00F00883 		beq	.L94
+ 150 0006 70B5     		push	{r4, r5, r6, lr}
+ 151 0008 82B0     		sub	sp, sp, #8
+ 152 000a 0446     		mov	r4, r0
+ 153 000c 0368     		ldr	r3, [r0]
+ 154 000e 13F0010F 		tst	r3, #1
+ 155 0012 3DD0     		beq	.L22
+ 156 0014 B24B     		ldr	r3, .L133
+ 157 0016 5B68     		ldr	r3, [r3, #4]
+ 158 0018 03F00C03 		and	r3, r3, #12
+ 159 001c 042B     		cmp	r3, #4
+ 160 001e 20D0     		beq	.L23
+ 161 0020 AF4B     		ldr	r3, .L133
+ 162 0022 5B68     		ldr	r3, [r3, #4]
+ 163 0024 03F00C03 		and	r3, r3, #12
+ 164 0028 082B     		cmp	r3, #8
+ 165 002a 13D0     		beq	.L119
+ 166              	.L24:
+ 167 002c 6368     		ldr	r3, [r4, #4]
+ 168 002e B3F5803F 		cmp	r3, #65536
+ 169 0032 6AD0     		beq	.L120
+ 170 0034 002B     		cmp	r3, #0
+ 171 0036 40F08D80 		bne	.L29
+ 172 003a 03F18043 		add	r3, r3, #1073741824
+ 173 003e 03F50433 		add	r3, r3, #135168
+ 174 0042 1A68     		ldr	r2, [r3]
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 4
+
+
+ 175 0044 22F48032 		bic	r2, r2, #65536
+ 176 0048 1A60     		str	r2, [r3]
+ 177 004a 1A68     		ldr	r2, [r3]
+ 178 004c 22F48022 		bic	r2, r2, #262144
+ 179 0050 1A60     		str	r2, [r3]
+ 180 0052 5FE0     		b	.L28
+ 181              	.L119:
+ 182 0054 A24B     		ldr	r3, .L133
+ 183 0056 5B68     		ldr	r3, [r3, #4]
+ 184 0058 03F4C033 		and	r3, r3, #98304
+ 185 005c B3F5803F 		cmp	r3, #65536
+ 186 0060 E4D1     		bne	.L24
+ 187              	.L23:
+ 188 0062 4FF40033 		mov	r3, #131072
+ 189              		.syntax unified
+ 190              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 191 0066 93FAA3F3 		rbit r3, r3
+ 192              	@ 0 "" 2
+ 193              		.thumb
+ 194              		.syntax unified
+ 195 006a 9D4B     		ldr	r3, .L133
+ 196 006c 1968     		ldr	r1, [r3]
+ 197 006e 4FF40033 		mov	r3, #131072
+ 198              		.syntax unified
+ 199              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 200 0072 93FAA3F3 		rbit r3, r3
+ 201              	@ 0 "" 2
+ 202              		.thumb
+ 203              		.syntax unified
+ 204 0076 B3FA83F3 		clz	r3, r3
+ 205 007a 03F01F03 		and	r3, r3, #31
+ 206 007e 0122     		movs	r2, #1
+ 207 0080 02FA03F3 		lsl	r3, r2, r3
+ 208 0084 0B42     		tst	r3, r1
+ 209 0086 03D0     		beq	.L22
+ 210 0088 6368     		ldr	r3, [r4, #4]
+ 211 008a 002B     		cmp	r3, #0
+ 212 008c 00F0C582 		beq	.L121
+ 213              	.L22:
+ 214 0090 2368     		ldr	r3, [r4]
+ 215 0092 13F0020F 		tst	r3, #2
+ 216 0096 00F0BF80 		beq	.L40
+ 217 009a 914B     		ldr	r3, .L133
+ 218 009c 5B68     		ldr	r3, [r3, #4]
+ 219 009e 13F00C0F 		tst	r3, #12
+ 220 00a2 00F09780 		beq	.L41
+ 221 00a6 8E4B     		ldr	r3, .L133
+ 222 00a8 5B68     		ldr	r3, [r3, #4]
+ 223 00aa 03F00C03 		and	r3, r3, #12
+ 224 00ae 082B     		cmp	r3, #8
+ 225 00b0 00F08880 		beq	.L122
+ 226              	.L42:
+ 227 00b4 E368     		ldr	r3, [r4, #12]
+ 228 00b6 002B     		cmp	r3, #0
+ 229 00b8 00F0EB80 		beq	.L46
+ 230 00bc 0122     		movs	r2, #1
+ 231              		.syntax unified
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 5
+
+
+ 232              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 233 00be 92FAA2F3 		rbit r3, r2
+ 234              	@ 0 "" 2
+ 235              		.thumb
+ 236              		.syntax unified
+ 237 00c2 B3FA83F3 		clz	r3, r3
+ 238 00c6 03F18453 		add	r3, r3, #276824064
+ 239 00ca 03F58413 		add	r3, r3, #1081344
+ 240 00ce 9B00     		lsls	r3, r3, #2
+ 241 00d0 1A60     		str	r2, [r3]
+ 242 00d2 FFF7FEFF 		bl	HAL_GetTick
+ 243 00d6 0546     		mov	r5, r0
+ 244              	.L47:
+ 245 00d8 0223     		movs	r3, #2
+ 246              		.syntax unified
+ 247              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 248 00da 93FAA3F3 		rbit r3, r3
+ 249              	@ 0 "" 2
+ 250              		.thumb
+ 251              		.syntax unified
+ 252 00de 804B     		ldr	r3, .L133
+ 253 00e0 1968     		ldr	r1, [r3]
+ 254 00e2 0223     		movs	r3, #2
+ 255              		.syntax unified
+ 256              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 257 00e4 93FAA3F3 		rbit r3, r3
+ 258              	@ 0 "" 2
+ 259              		.thumb
+ 260              		.syntax unified
+ 261 00e8 B3FA83F3 		clz	r3, r3
+ 262 00ec 03F01F03 		and	r3, r3, #31
+ 263 00f0 0122     		movs	r2, #1
+ 264 00f2 02FA03F3 		lsl	r3, r2, r3
+ 265 00f6 0B42     		tst	r3, r1
+ 266 00f8 40F0BD80 		bne	.L123
+ 267 00fc FFF7FEFF 		bl	HAL_GetTick
+ 268 0100 401B     		subs	r0, r0, r5
+ 269 0102 0228     		cmp	r0, #2
+ 270 0104 E8D9     		bls	.L47
+ 271 0106 0320     		movs	r0, #3
+ 272 0108 90E2     		b	.L21
+ 273              	.L120:
+ 274 010a 754A     		ldr	r2, .L133
+ 275 010c 1368     		ldr	r3, [r2]
+ 276 010e 43F48033 		orr	r3, r3, #65536
+ 277 0112 1360     		str	r3, [r2]
+ 278              	.L28:
+ 279 0114 6368     		ldr	r3, [r4, #4]
+ 280 0116 002B     		cmp	r3, #0
+ 281 0118 36D0     		beq	.L31
+ 282 011a FFF7FEFF 		bl	HAL_GetTick
+ 283 011e 0546     		mov	r5, r0
+ 284              	.L32:
+ 285 0120 4FF40033 		mov	r3, #131072
+ 286              		.syntax unified
+ 287              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 288 0124 93FAA3F3 		rbit r3, r3
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 6
+
+
+ 289              	@ 0 "" 2
+ 290              		.thumb
+ 291              		.syntax unified
+ 292 0128 6D4B     		ldr	r3, .L133
+ 293 012a 1968     		ldr	r1, [r3]
+ 294 012c 4FF40033 		mov	r3, #131072
+ 295              		.syntax unified
+ 296              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 297 0130 93FAA3F3 		rbit r3, r3
+ 298              	@ 0 "" 2
+ 299              		.thumb
+ 300              		.syntax unified
+ 301 0134 B3FA83F3 		clz	r3, r3
+ 302 0138 03F01F03 		and	r3, r3, #31
+ 303 013c 0122     		movs	r2, #1
+ 304 013e 02FA03F3 		lsl	r3, r2, r3
+ 305 0142 0B42     		tst	r3, r1
+ 306 0144 A4D1     		bne	.L22
+ 307 0146 FFF7FEFF 		bl	HAL_GetTick
+ 308 014a 401B     		subs	r0, r0, r5
+ 309 014c 6428     		cmp	r0, #100
+ 310 014e E7D9     		bls	.L32
+ 311 0150 0320     		movs	r0, #3
+ 312 0152 6BE2     		b	.L21
+ 313              	.L29:
+ 314 0154 B3F5A02F 		cmp	r3, #327680
+ 315 0158 09D0     		beq	.L124
+ 316 015a 614B     		ldr	r3, .L133
+ 317 015c 1A68     		ldr	r2, [r3]
+ 318 015e 22F48032 		bic	r2, r2, #65536
+ 319 0162 1A60     		str	r2, [r3]
+ 320 0164 1A68     		ldr	r2, [r3]
+ 321 0166 22F48022 		bic	r2, r2, #262144
+ 322 016a 1A60     		str	r2, [r3]
+ 323 016c D2E7     		b	.L28
+ 324              	.L124:
+ 325 016e 03F18043 		add	r3, r3, #1073741824
+ 326 0172 A3F53C33 		sub	r3, r3, #192512
+ 327 0176 1A68     		ldr	r2, [r3]
+ 328 0178 42F48022 		orr	r2, r2, #262144
+ 329 017c 1A60     		str	r2, [r3]
+ 330 017e 1A68     		ldr	r2, [r3]
+ 331 0180 42F48032 		orr	r2, r2, #65536
+ 332 0184 1A60     		str	r2, [r3]
+ 333 0186 C5E7     		b	.L28
+ 334              	.L31:
+ 335 0188 FFF7FEFF 		bl	HAL_GetTick
+ 336 018c 0546     		mov	r5, r0
+ 337              	.L36:
+ 338 018e 4FF40033 		mov	r3, #131072
+ 339              		.syntax unified
+ 340              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 341 0192 93FAA3F3 		rbit r3, r3
+ 342              	@ 0 "" 2
+ 343              		.thumb
+ 344              		.syntax unified
+ 345 0196 524B     		ldr	r3, .L133
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 7
+
+
+ 346 0198 1968     		ldr	r1, [r3]
+ 347 019a 4FF40033 		mov	r3, #131072
+ 348              		.syntax unified
+ 349              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 350 019e 93FAA3F3 		rbit r3, r3
+ 351              	@ 0 "" 2
+ 352              		.thumb
+ 353              		.syntax unified
+ 354 01a2 B3FA83F3 		clz	r3, r3
+ 355 01a6 03F01F03 		and	r3, r3, #31
+ 356 01aa 0122     		movs	r2, #1
+ 357 01ac 02FA03F3 		lsl	r3, r2, r3
+ 358 01b0 0B42     		tst	r3, r1
+ 359 01b2 3FF46DAF 		beq	.L22
+ 360 01b6 FFF7FEFF 		bl	HAL_GetTick
+ 361 01ba 401B     		subs	r0, r0, r5
+ 362 01bc 6428     		cmp	r0, #100
+ 363 01be E6D9     		bls	.L36
+ 364 01c0 0320     		movs	r0, #3
+ 365 01c2 33E2     		b	.L21
+ 366              	.L122:
+ 367 01c4 464B     		ldr	r3, .L133
+ 368 01c6 5B68     		ldr	r3, [r3, #4]
+ 369 01c8 03F4C033 		and	r3, r3, #98304
+ 370 01cc B3F5004F 		cmp	r3, #32768
+ 371 01d0 7FF470AF 		bne	.L42
+ 372              	.L41:
+ 373 01d4 0223     		movs	r3, #2
+ 374              		.syntax unified
+ 375              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 376 01d6 93FAA3F3 		rbit r3, r3
+ 377              	@ 0 "" 2
+ 378              		.thumb
+ 379              		.syntax unified
+ 380 01da 414B     		ldr	r3, .L133
+ 381 01dc 1968     		ldr	r1, [r3]
+ 382 01de 0223     		movs	r3, #2
+ 383              		.syntax unified
+ 384              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 385 01e0 93FAA3F3 		rbit r3, r3
+ 386              	@ 0 "" 2
+ 387              		.thumb
+ 388              		.syntax unified
+ 389 01e4 B3FA83F3 		clz	r3, r3
+ 390 01e8 03F01F03 		and	r3, r3, #31
+ 391 01ec 0122     		movs	r2, #1
+ 392 01ee 02FA03F3 		lsl	r3, r2, r3
+ 393 01f2 0B42     		tst	r3, r1
+ 394 01f4 03D0     		beq	.L45
+ 395 01f6 E368     		ldr	r3, [r4, #12]
+ 396 01f8 9342     		cmp	r3, r2
+ 397 01fa 40F01082 		bne	.L98
+ 398              	.L45:
+ 399 01fe 3848     		ldr	r0, .L133
+ 400 0200 0368     		ldr	r3, [r0]
+ 401 0202 23F0F803 		bic	r3, r3, #248
+ 402 0206 2169     		ldr	r1, [r4, #16]
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 8
+
+
+ 403 0208 F822     		movs	r2, #248
+ 404              		.syntax unified
+ 405              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 406 020a 92FAA2F2 		rbit r2, r2
+ 407              	@ 0 "" 2
+ 408              		.thumb
+ 409              		.syntax unified
+ 410 020e B2FA82F2 		clz	r2, r2
+ 411 0212 9140     		lsls	r1, r1, r2
+ 412 0214 0B43     		orrs	r3, r3, r1
+ 413 0216 0360     		str	r3, [r0]
+ 414              	.L40:
+ 415 0218 2368     		ldr	r3, [r4]
+ 416 021a 13F0080F 		tst	r3, #8
+ 417 021e 00F08B80 		beq	.L55
+ 418 0222 6369     		ldr	r3, [r4, #20]
+ 419 0224 002B     		cmp	r3, #0
+ 420 0226 5FD0     		beq	.L56
+ 421 0228 0121     		movs	r1, #1
+ 422              		.syntax unified
+ 423              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 424 022a 91FAA1F2 		rbit r2, r1
+ 425              	@ 0 "" 2
+ 426              		.thumb
+ 427              		.syntax unified
+ 428 022e B2FA82F2 		clz	r2, r2
+ 429 0232 2C4B     		ldr	r3, .L133+4
+ 430 0234 1344     		add	r3, r3, r2
+ 431 0236 9B00     		lsls	r3, r3, #2
+ 432 0238 1960     		str	r1, [r3]
+ 433 023a FFF7FEFF 		bl	HAL_GetTick
+ 434 023e 0546     		mov	r5, r0
+ 435              	.L57:
+ 436 0240 0223     		movs	r3, #2
+ 437              		.syntax unified
+ 438              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 439 0242 93FAA3F2 		rbit r2, r3
+ 440              	@ 0 "" 2
+ 441              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 442 0246 93FAA3F2 		rbit r2, r3
+ 443              	@ 0 "" 2
+ 444              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 445 024a 93FAA3F2 		rbit r2, r3
+ 446              	@ 0 "" 2
+ 447              		.thumb
+ 448              		.syntax unified
+ 449 024e 244A     		ldr	r2, .L133
+ 450 0250 516A     		ldr	r1, [r2, #36]
+ 451              		.syntax unified
+ 452              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 453 0252 93FAA3F3 		rbit r3, r3
+ 454              	@ 0 "" 2
+ 455              		.thumb
+ 456              		.syntax unified
+ 457 0256 B3FA83F3 		clz	r3, r3
+ 458 025a 03F01F03 		and	r3, r3, #31
+ 459 025e 0122     		movs	r2, #1
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 9
+
+
+ 460 0260 02FA03F3 		lsl	r3, r2, r3
+ 461 0264 0B42     		tst	r3, r1
+ 462 0266 67D1     		bne	.L55
+ 463 0268 FFF7FEFF 		bl	HAL_GetTick
+ 464 026c 401B     		subs	r0, r0, r5
+ 465 026e 0228     		cmp	r0, #2
+ 466 0270 E6D9     		bls	.L57
+ 467 0272 0320     		movs	r0, #3
+ 468 0274 DAE1     		b	.L21
+ 469              	.L123:
+ 470 0276 1A48     		ldr	r0, .L133
+ 471 0278 0368     		ldr	r3, [r0]
+ 472 027a 23F0F803 		bic	r3, r3, #248
+ 473 027e 2169     		ldr	r1, [r4, #16]
+ 474 0280 F822     		movs	r2, #248
+ 475              		.syntax unified
+ 476              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 477 0282 92FAA2F2 		rbit r2, r2
+ 478              	@ 0 "" 2
+ 479              		.thumb
+ 480              		.syntax unified
+ 481 0286 B2FA82F2 		clz	r2, r2
+ 482 028a 9140     		lsls	r1, r1, r2
+ 483 028c 0B43     		orrs	r3, r3, r1
+ 484 028e 0360     		str	r3, [r0]
+ 485 0290 C2E7     		b	.L40
+ 486              	.L46:
+ 487 0292 0123     		movs	r3, #1
+ 488              		.syntax unified
+ 489              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 490 0294 93FAA3F3 		rbit r3, r3
+ 491              	@ 0 "" 2
+ 492              		.thumb
+ 493              		.syntax unified
+ 494 0298 B3FA83F3 		clz	r3, r3
+ 495 029c 03F18453 		add	r3, r3, #276824064
+ 496 02a0 03F58413 		add	r3, r3, #1081344
+ 497 02a4 9B00     		lsls	r3, r3, #2
+ 498 02a6 0022     		movs	r2, #0
+ 499 02a8 1A60     		str	r2, [r3]
+ 500 02aa FFF7FEFF 		bl	HAL_GetTick
+ 501 02ae 0546     		mov	r5, r0
+ 502              	.L51:
+ 503 02b0 0223     		movs	r3, #2
+ 504              		.syntax unified
+ 505              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 506 02b2 93FAA3F3 		rbit r3, r3
+ 507              	@ 0 "" 2
+ 508              		.thumb
+ 509              		.syntax unified
+ 510 02b6 0A4B     		ldr	r3, .L133
+ 511 02b8 1968     		ldr	r1, [r3]
+ 512 02ba 0223     		movs	r3, #2
+ 513              		.syntax unified
+ 514              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 515 02bc 93FAA3F3 		rbit r3, r3
+ 516              	@ 0 "" 2
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 10
+
+
+ 517              		.thumb
+ 518              		.syntax unified
+ 519 02c0 B3FA83F3 		clz	r3, r3
+ 520 02c4 03F01F03 		and	r3, r3, #31
+ 521 02c8 0122     		movs	r2, #1
+ 522 02ca 02FA03F3 		lsl	r3, r2, r3
+ 523 02ce 0B42     		tst	r3, r1
+ 524 02d0 A2D0     		beq	.L40
+ 525 02d2 FFF7FEFF 		bl	HAL_GetTick
+ 526 02d6 401B     		subs	r0, r0, r5
+ 527 02d8 0228     		cmp	r0, #2
+ 528 02da E9D9     		bls	.L51
+ 529 02dc 0320     		movs	r0, #3
+ 530 02de A5E1     		b	.L21
+ 531              	.L134:
+ 532              		.align	2
+ 533              	.L133:
+ 534 02e0 00100240 		.word	1073876992
+ 535 02e4 20819010 		.word	277905696
+ 536              	.L56:
+ 537 02e8 0122     		movs	r2, #1
+ 538              		.syntax unified
+ 539              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 540 02ea 92FAA2F2 		rbit r2, r2
+ 541              	@ 0 "" 2
+ 542              		.thumb
+ 543              		.syntax unified
+ 544 02ee B2FA82F2 		clz	r2, r2
+ 545 02f2 9C4B     		ldr	r3, .L135
+ 546 02f4 1344     		add	r3, r3, r2
+ 547 02f6 9B00     		lsls	r3, r3, #2
+ 548 02f8 0022     		movs	r2, #0
+ 549 02fa 1A60     		str	r2, [r3]
+ 550 02fc FFF7FEFF 		bl	HAL_GetTick
+ 551 0300 0546     		mov	r5, r0
+ 552              	.L59:
+ 553 0302 0223     		movs	r3, #2
+ 554              		.syntax unified
+ 555              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 556 0304 93FAA3F2 		rbit r2, r3
+ 557              	@ 0 "" 2
+ 558              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 559 0308 93FAA3F2 		rbit r2, r3
+ 560              	@ 0 "" 2
+ 561              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 562 030c 93FAA3F2 		rbit r2, r3
+ 563              	@ 0 "" 2
+ 564              		.thumb
+ 565              		.syntax unified
+ 566 0310 954A     		ldr	r2, .L135+4
+ 567 0312 516A     		ldr	r1, [r2, #36]
+ 568              		.syntax unified
+ 569              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 570 0314 93FAA3F3 		rbit r3, r3
+ 571              	@ 0 "" 2
+ 572              		.thumb
+ 573              		.syntax unified
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 11
+
+
+ 574 0318 B3FA83F3 		clz	r3, r3
+ 575 031c 03F01F03 		and	r3, r3, #31
+ 576 0320 0122     		movs	r2, #1
+ 577 0322 02FA03F3 		lsl	r3, r2, r3
+ 578 0326 0B42     		tst	r3, r1
+ 579 0328 06D0     		beq	.L55
+ 580 032a FFF7FEFF 		bl	HAL_GetTick
+ 581 032e 401B     		subs	r0, r0, r5
+ 582 0330 0228     		cmp	r0, #2
+ 583 0332 E6D9     		bls	.L59
+ 584 0334 0320     		movs	r0, #3
+ 585 0336 79E1     		b	.L21
+ 586              	.L55:
+ 587 0338 2368     		ldr	r3, [r4]
+ 588 033a 13F0040F 		tst	r3, #4
+ 589 033e 00F0A980 		beq	.L61
+ 590 0342 894B     		ldr	r3, .L135+4
+ 591 0344 DB69     		ldr	r3, [r3, #28]
+ 592 0346 13F0805F 		tst	r3, #268435456
+ 593 034a 20D1     		bne	.L103
+ 594 034c 864B     		ldr	r3, .L135+4
+ 595 034e DA69     		ldr	r2, [r3, #28]
+ 596 0350 42F08052 		orr	r2, r2, #268435456
+ 597 0354 DA61     		str	r2, [r3, #28]
+ 598 0356 DB69     		ldr	r3, [r3, #28]
+ 599 0358 03F08053 		and	r3, r3, #268435456
+ 600 035c 0193     		str	r3, [sp, #4]
+ 601 035e 019B     		ldr	r3, [sp, #4]
+ 602 0360 0125     		movs	r5, #1
+ 603              	.L62:
+ 604 0362 824B     		ldr	r3, .L135+8
+ 605 0364 1B68     		ldr	r3, [r3]
+ 606 0366 13F4807F 		tst	r3, #256
+ 607 036a 12D0     		beq	.L125
+ 608              	.L63:
+ 609 036c A368     		ldr	r3, [r4, #8]
+ 610 036e 012B     		cmp	r3, #1
+ 611 0370 23D0     		beq	.L126
+ 612 0372 73BB     		cbnz	r3, .L68
+ 613 0374 03F18043 		add	r3, r3, #1073741824
+ 614 0378 03F50433 		add	r3, r3, #135168
+ 615 037c 1A6A     		ldr	r2, [r3, #32]
+ 616 037e 22F00102 		bic	r2, r2, #1
+ 617 0382 1A62     		str	r2, [r3, #32]
+ 618 0384 1A6A     		ldr	r2, [r3, #32]
+ 619 0386 22F00402 		bic	r2, r2, #4
+ 620 038a 1A62     		str	r2, [r3, #32]
+ 621 038c 1AE0     		b	.L67
+ 622              	.L103:
+ 623 038e 0025     		movs	r5, #0
+ 624 0390 E7E7     		b	.L62
+ 625              	.L125:
+ 626 0392 764A     		ldr	r2, .L135+8
+ 627 0394 1368     		ldr	r3, [r2]
+ 628 0396 43F48073 		orr	r3, r3, #256
+ 629 039a 1360     		str	r3, [r2]
+ 630 039c FFF7FEFF 		bl	HAL_GetTick
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 12
+
+
+ 631 03a0 0646     		mov	r6, r0
+ 632              	.L64:
+ 633 03a2 724B     		ldr	r3, .L135+8
+ 634 03a4 1B68     		ldr	r3, [r3]
+ 635 03a6 13F4807F 		tst	r3, #256
+ 636 03aa DFD1     		bne	.L63
+ 637 03ac FFF7FEFF 		bl	HAL_GetTick
+ 638 03b0 801B     		subs	r0, r0, r6
+ 639 03b2 6428     		cmp	r0, #100
+ 640 03b4 F5D9     		bls	.L64
+ 641 03b6 0320     		movs	r0, #3
+ 642 03b8 38E1     		b	.L21
+ 643              	.L126:
+ 644 03ba 6B4A     		ldr	r2, .L135+4
+ 645 03bc 136A     		ldr	r3, [r2, #32]
+ 646 03be 43F00103 		orr	r3, r3, #1
+ 647 03c2 1362     		str	r3, [r2, #32]
+ 648              	.L67:
+ 649 03c4 A368     		ldr	r3, [r4, #8]
+ 650 03c6 002B     		cmp	r3, #0
+ 651 03c8 3CD0     		beq	.L70
+ 652 03ca FFF7FEFF 		bl	HAL_GetTick
+ 653 03ce 0646     		mov	r6, r0
+ 654 03d0 2EE0     		b	.L71
+ 655              	.L68:
+ 656 03d2 052B     		cmp	r3, #5
+ 657 03d4 09D0     		beq	.L127
+ 658 03d6 644B     		ldr	r3, .L135+4
+ 659 03d8 1A6A     		ldr	r2, [r3, #32]
+ 660 03da 22F00102 		bic	r2, r2, #1
+ 661 03de 1A62     		str	r2, [r3, #32]
+ 662 03e0 1A6A     		ldr	r2, [r3, #32]
+ 663 03e2 22F00402 		bic	r2, r2, #4
+ 664 03e6 1A62     		str	r2, [r3, #32]
+ 665 03e8 ECE7     		b	.L67
+ 666              	.L127:
+ 667 03ea 5F4B     		ldr	r3, .L135+4
+ 668 03ec 1A6A     		ldr	r2, [r3, #32]
+ 669 03ee 42F00402 		orr	r2, r2, #4
+ 670 03f2 1A62     		str	r2, [r3, #32]
+ 671 03f4 1A6A     		ldr	r2, [r3, #32]
+ 672 03f6 42F00102 		orr	r2, r2, #1
+ 673 03fa 1A62     		str	r2, [r3, #32]
+ 674 03fc E2E7     		b	.L67
+ 675              	.L72:
+ 676 03fe 0223     		movs	r3, #2
+ 677              		.syntax unified
+ 678              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 679 0400 93FAA3F3 		rbit r3, r3
+ 680              	@ 0 "" 2
+ 681              		.thumb
+ 682              		.syntax unified
+ 683 0404 584B     		ldr	r3, .L135+4
+ 684 0406 596A     		ldr	r1, [r3, #36]
+ 685              	.L73:
+ 686 0408 0223     		movs	r3, #2
+ 687              		.syntax unified
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 13
+
+
+ 688              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 689 040a 93FAA3F3 		rbit r3, r3
+ 690              	@ 0 "" 2
+ 691              		.thumb
+ 692              		.syntax unified
+ 693 040e B3FA83F3 		clz	r3, r3
+ 694 0412 03F01F03 		and	r3, r3, #31
+ 695 0416 0122     		movs	r2, #1
+ 696 0418 02FA03F3 		lsl	r3, r2, r3
+ 697 041c 1942     		tst	r1, r3
+ 698 041e 38D1     		bne	.L75
+ 699 0420 FFF7FEFF 		bl	HAL_GetTick
+ 700 0424 801B     		subs	r0, r0, r6
+ 701 0426 41F28833 		movw	r3, #5000
+ 702 042a 9842     		cmp	r0, r3
+ 703 042c 00F2F980 		bhi	.L105
+ 704              	.L71:
+ 705 0430 0223     		movs	r3, #2
+ 706              		.syntax unified
+ 707              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 708 0432 93FAA3F2 		rbit r2, r3
+ 709              	@ 0 "" 2
+ 710              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 711 0436 93FAA3F3 		rbit r3, r3
+ 712              	@ 0 "" 2
+ 713              		.thumb
+ 714              		.syntax unified
+ 715 043a 002B     		cmp	r3, #0
+ 716 043c DFD0     		beq	.L72
+ 717 043e 4A4B     		ldr	r3, .L135+4
+ 718 0440 196A     		ldr	r1, [r3, #32]
+ 719 0442 E1E7     		b	.L73
+ 720              	.L70:
+ 721 0444 FFF7FEFF 		bl	HAL_GetTick
+ 722 0448 0646     		mov	r6, r0
+ 723 044a 18E0     		b	.L76
+ 724              	.L77:
+ 725 044c 0223     		movs	r3, #2
+ 726              		.syntax unified
+ 727              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 728 044e 93FAA3F3 		rbit r3, r3
+ 729              	@ 0 "" 2
+ 730              		.thumb
+ 731              		.syntax unified
+ 732 0452 454B     		ldr	r3, .L135+4
+ 733 0454 596A     		ldr	r1, [r3, #36]
+ 734              	.L78:
+ 735 0456 0223     		movs	r3, #2
+ 736              		.syntax unified
+ 737              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 738 0458 93FAA3F3 		rbit r3, r3
+ 739              	@ 0 "" 2
+ 740              		.thumb
+ 741              		.syntax unified
+ 742 045c B3FA83F3 		clz	r3, r3
+ 743 0460 03F01F03 		and	r3, r3, #31
+ 744 0464 0122     		movs	r2, #1
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 14
+
+
+ 745 0466 02FA03F3 		lsl	r3, r2, r3
+ 746 046a 1942     		tst	r1, r3
+ 747 046c 11D0     		beq	.L75
+ 748 046e FFF7FEFF 		bl	HAL_GetTick
+ 749 0472 801B     		subs	r0, r0, r6
+ 750 0474 41F28833 		movw	r3, #5000
+ 751 0478 9842     		cmp	r0, r3
+ 752 047a 00F2D480 		bhi	.L106
+ 753              	.L76:
+ 754 047e 0223     		movs	r3, #2
+ 755              		.syntax unified
+ 756              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 757 0480 93FAA3F2 		rbit r2, r3
+ 758              	@ 0 "" 2
+ 759              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 760 0484 93FAA3F3 		rbit r3, r3
+ 761              	@ 0 "" 2
+ 762              		.thumb
+ 763              		.syntax unified
+ 764 0488 002B     		cmp	r3, #0
+ 765 048a DFD0     		beq	.L77
+ 766 048c 364B     		ldr	r3, .L135+4
+ 767 048e 196A     		ldr	r1, [r3, #32]
+ 768 0490 E1E7     		b	.L78
+ 769              	.L75:
+ 770 0492 B5BB     		cbnz	r5, .L128
+ 771              	.L61:
+ 772 0494 A369     		ldr	r3, [r4, #24]
+ 773 0496 002B     		cmp	r3, #0
+ 774 0498 00F0C780 		beq	.L107
+ 775 049c 324A     		ldr	r2, .L135+4
+ 776 049e 5268     		ldr	r2, [r2, #4]
+ 777 04a0 02F00C02 		and	r2, r2, #12
+ 778 04a4 082A     		cmp	r2, #8
+ 779 04a6 00F0A080 		beq	.L80
+ 780 04aa 022B     		cmp	r3, #2
+ 781 04ac 2FD0     		beq	.L129
+ 782 04ae 4FF08073 		mov	r3, #16777216
+ 783              		.syntax unified
+ 784              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 785 04b2 93FAA3F3 		rbit r3, r3
+ 786              	@ 0 "" 2
+ 787              		.thumb
+ 788              		.syntax unified
+ 789 04b6 B3FA83F3 		clz	r3, r3
+ 790 04ba 03F18453 		add	r3, r3, #276824064
+ 791 04be 03F58413 		add	r3, r3, #1081344
+ 792 04c2 9B00     		lsls	r3, r3, #2
+ 793 04c4 0022     		movs	r2, #0
+ 794 04c6 1A60     		str	r2, [r3]
+ 795 04c8 FFF7FEFF 		bl	HAL_GetTick
+ 796 04cc 0446     		mov	r4, r0
+ 797              	.L90:
+ 798 04ce 4FF00073 		mov	r3, #33554432
+ 799              		.syntax unified
+ 800              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 801 04d2 93FAA3F3 		rbit r3, r3
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 15
+
+
+ 802              	@ 0 "" 2
+ 803              		.thumb
+ 804              		.syntax unified
+ 805 04d6 244B     		ldr	r3, .L135+4
+ 806 04d8 1968     		ldr	r1, [r3]
+ 807 04da 4FF00073 		mov	r3, #33554432
+ 808              		.syntax unified
+ 809              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 810 04de 93FAA3F3 		rbit r3, r3
+ 811              	@ 0 "" 2
+ 812              		.thumb
+ 813              		.syntax unified
+ 814 04e2 B3FA83F3 		clz	r3, r3
+ 815 04e6 03F01F03 		and	r3, r3, #31
+ 816 04ea 0122     		movs	r2, #1
+ 817 04ec 02FA03F3 		lsl	r3, r2, r3
+ 818 04f0 1942     		tst	r1, r3
+ 819 04f2 78D0     		beq	.L130
+ 820 04f4 FFF7FEFF 		bl	HAL_GetTick
+ 821 04f8 001B     		subs	r0, r0, r4
+ 822 04fa 0228     		cmp	r0, #2
+ 823 04fc E7D9     		bls	.L90
+ 824 04fe 0320     		movs	r0, #3
+ 825 0500 94E0     		b	.L21
+ 826              	.L128:
+ 827 0502 194A     		ldr	r2, .L135+4
+ 828 0504 D369     		ldr	r3, [r2, #28]
+ 829 0506 23F08053 		bic	r3, r3, #268435456
+ 830 050a D361     		str	r3, [r2, #28]
+ 831 050c C2E7     		b	.L61
+ 832              	.L129:
+ 833 050e 4FF08073 		mov	r3, #16777216
+ 834              		.syntax unified
+ 835              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 836 0512 93FAA3F3 		rbit r3, r3
+ 837              	@ 0 "" 2
+ 838              		.thumb
+ 839              		.syntax unified
+ 840 0516 B3FA83F3 		clz	r3, r3
+ 841 051a 03F18453 		add	r3, r3, #276824064
+ 842 051e 03F58413 		add	r3, r3, #1081344
+ 843 0522 9B00     		lsls	r3, r3, #2
+ 844 0524 0022     		movs	r2, #0
+ 845 0526 1A60     		str	r2, [r3]
+ 846 0528 FFF7FEFF 		bl	HAL_GetTick
+ 847 052c 0546     		mov	r5, r0
+ 848              	.L82:
+ 849 052e 4FF00073 		mov	r3, #33554432
+ 850              		.syntax unified
+ 851              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 852 0532 93FAA3F3 		rbit r3, r3
+ 853              	@ 0 "" 2
+ 854              		.thumb
+ 855              		.syntax unified
+ 856 0536 0C4B     		ldr	r3, .L135+4
+ 857 0538 1968     		ldr	r1, [r3]
+ 858 053a 4FF00073 		mov	r3, #33554432
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 16
+
+
+ 859              		.syntax unified
+ 860              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 861 053e 93FAA3F3 		rbit r3, r3
+ 862              	@ 0 "" 2
+ 863              		.thumb
+ 864              		.syntax unified
+ 865 0542 B3FA83F3 		clz	r3, r3
+ 866 0546 03F01F03 		and	r3, r3, #31
+ 867 054a 0122     		movs	r2, #1
+ 868 054c 02FA03F3 		lsl	r3, r2, r3
+ 869 0550 1942     		tst	r1, r3
+ 870 0552 0DD0     		beq	.L131
+ 871 0554 FFF7FEFF 		bl	HAL_GetTick
+ 872 0558 401B     		subs	r0, r0, r5
+ 873 055a 0228     		cmp	r0, #2
+ 874 055c E7D9     		bls	.L82
+ 875 055e 0320     		movs	r0, #3
+ 876 0560 64E0     		b	.L21
+ 877              	.L136:
+ 878 0562 00BF     		.align	2
+ 879              	.L135:
+ 880 0564 20819010 		.word	277905696
+ 881 0568 00100240 		.word	1073876992
+ 882 056c 00700040 		.word	1073770496
+ 883              	.L131:
+ 884 0570 334A     		ldr	r2, .L137
+ 885 0572 D36A     		ldr	r3, [r2, #44]
+ 886 0574 23F00F03 		bic	r3, r3, #15
+ 887 0578 616A     		ldr	r1, [r4, #36]
+ 888 057a 0B43     		orrs	r3, r3, r1
+ 889 057c D362     		str	r3, [r2, #44]
+ 890 057e 5368     		ldr	r3, [r2, #4]
+ 891 0580 23F47613 		bic	r3, r3, #4030464
+ 892 0584 216A     		ldr	r1, [r4, #32]
+ 893 0586 E069     		ldr	r0, [r4, #28]
+ 894 0588 0143     		orrs	r1, r1, r0
+ 895 058a 0B43     		orrs	r3, r3, r1
+ 896 058c 5360     		str	r3, [r2, #4]
+ 897 058e 4FF08073 		mov	r3, #16777216
+ 898              		.syntax unified
+ 899              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 900 0592 93FAA3F3 		rbit r3, r3
+ 901              	@ 0 "" 2
+ 902              		.thumb
+ 903              		.syntax unified
+ 904 0596 B3FA83F3 		clz	r3, r3
+ 905 059a 03F18453 		add	r3, r3, #276824064
+ 906 059e 03F58413 		add	r3, r3, #1081344
+ 907 05a2 9B00     		lsls	r3, r3, #2
+ 908 05a4 0122     		movs	r2, #1
+ 909 05a6 1A60     		str	r2, [r3]
+ 910 05a8 FFF7FEFF 		bl	HAL_GetTick
+ 911 05ac 0446     		mov	r4, r0
+ 912              	.L86:
+ 913 05ae 4FF00073 		mov	r3, #33554432
+ 914              		.syntax unified
+ 915              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 17
+
+
+ 916 05b2 93FAA3F3 		rbit r3, r3
+ 917              	@ 0 "" 2
+ 918              		.thumb
+ 919              		.syntax unified
+ 920 05b6 224B     		ldr	r3, .L137
+ 921 05b8 1968     		ldr	r1, [r3]
+ 922 05ba 4FF00073 		mov	r3, #33554432
+ 923              		.syntax unified
+ 924              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 925 05be 93FAA3F3 		rbit r3, r3
+ 926              	@ 0 "" 2
+ 927              		.thumb
+ 928              		.syntax unified
+ 929 05c2 B3FA83F3 		clz	r3, r3
+ 930 05c6 03F01F03 		and	r3, r3, #31
+ 931 05ca 0122     		movs	r2, #1
+ 932 05cc 02FA03F3 		lsl	r3, r2, r3
+ 933 05d0 1942     		tst	r1, r3
+ 934 05d2 06D1     		bne	.L132
+ 935 05d4 FFF7FEFF 		bl	HAL_GetTick
+ 936 05d8 001B     		subs	r0, r0, r4
+ 937 05da 0228     		cmp	r0, #2
+ 938 05dc E7D9     		bls	.L86
+ 939 05de 0320     		movs	r0, #3
+ 940 05e0 24E0     		b	.L21
+ 941              	.L132:
+ 942 05e2 0020     		movs	r0, #0
+ 943 05e4 22E0     		b	.L21
+ 944              	.L130:
+ 945 05e6 0020     		movs	r0, #0
+ 946 05e8 20E0     		b	.L21
+ 947              	.L80:
+ 948 05ea 012B     		cmp	r3, #1
+ 949 05ec 20D0     		beq	.L111
+ 950 05ee 144A     		ldr	r2, .L137
+ 951 05f0 5368     		ldr	r3, [r2, #4]
+ 952 05f2 D06A     		ldr	r0, [r2, #44]
+ 953 05f4 03F4C031 		and	r1, r3, #98304
+ 954 05f8 E269     		ldr	r2, [r4, #28]
+ 955 05fa 9142     		cmp	r1, r2
+ 956 05fc 1AD1     		bne	.L112
+ 957 05fe 03F47013 		and	r3, r3, #3932160
+ 958 0602 226A     		ldr	r2, [r4, #32]
+ 959 0604 9342     		cmp	r3, r2
+ 960 0606 17D1     		bne	.L113
+ 961 0608 00F00F00 		and	r0, r0, #15
+ 962 060c 636A     		ldr	r3, [r4, #36]
+ 963 060e 9842     		cmp	r0, r3
+ 964 0610 14D1     		bne	.L114
+ 965 0612 0020     		movs	r0, #0
+ 966 0614 0AE0     		b	.L21
+ 967              	.L94:
+ 968 0616 0120     		movs	r0, #1
+ 969 0618 7047     		bx	lr
+ 970              	.L121:
+ 971 061a 0120     		movs	r0, #1
+ 972 061c 06E0     		b	.L21
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 18
+
+
+ 973              	.L98:
+ 974 061e 0120     		movs	r0, #1
+ 975 0620 04E0     		b	.L21
+ 976              	.L105:
+ 977 0622 0320     		movs	r0, #3
+ 978 0624 02E0     		b	.L21
+ 979              	.L106:
+ 980 0626 0320     		movs	r0, #3
+ 981 0628 00E0     		b	.L21
+ 982              	.L107:
+ 983 062a 0020     		movs	r0, #0
+ 984              	.L21:
+ 985 062c 02B0     		add	sp, sp, #8
+ 986              		@ sp needed
+ 987 062e 70BD     		pop	{r4, r5, r6, pc}
+ 988              	.L111:
+ 989 0630 0120     		movs	r0, #1
+ 990 0632 FBE7     		b	.L21
+ 991              	.L112:
+ 992 0634 0120     		movs	r0, #1
+ 993 0636 F9E7     		b	.L21
+ 994              	.L113:
+ 995 0638 0120     		movs	r0, #1
+ 996 063a F7E7     		b	.L21
+ 997              	.L114:
+ 998 063c 0120     		movs	r0, #1
+ 999 063e F5E7     		b	.L21
+ 1000              	.L138:
+ 1001              		.align	2
+ 1002              	.L137:
+ 1003 0640 00100240 		.word	1073876992
+ 1005              		.section	.text.HAL_RCC_MCOConfig,"ax",%progbits
+ 1006              		.align	1
+ 1007              		.global	HAL_RCC_MCOConfig
+ 1008              		.syntax unified
+ 1009              		.thumb
+ 1010              		.thumb_func
+ 1012              	HAL_RCC_MCOConfig:
+ 1013              		@ args = 0, pretend = 0, frame = 24
+ 1014              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1015 0000 70B5     		push	{r4, r5, r6, lr}
+ 1016 0002 86B0     		sub	sp, sp, #24
+ 1017 0004 0D46     		mov	r5, r1
+ 1018 0006 1646     		mov	r6, r2
+ 1019 0008 0223     		movs	r3, #2
+ 1020 000a 0293     		str	r3, [sp, #8]
+ 1021 000c 0323     		movs	r3, #3
+ 1022 000e 0493     		str	r3, [sp, #16]
+ 1023 0010 0023     		movs	r3, #0
+ 1024 0012 0393     		str	r3, [sp, #12]
+ 1025 0014 4FF48072 		mov	r2, #256
+ 1026 0018 0192     		str	r2, [sp, #4]
+ 1027 001a 0593     		str	r3, [sp, #20]
+ 1028 001c 0B4C     		ldr	r4, .L141
+ 1029 001e 6369     		ldr	r3, [r4, #20]
+ 1030 0020 43F40033 		orr	r3, r3, #131072
+ 1031 0024 6361     		str	r3, [r4, #20]
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 19
+
+
+ 1032 0026 6369     		ldr	r3, [r4, #20]
+ 1033 0028 03F40033 		and	r3, r3, #131072
+ 1034 002c 0093     		str	r3, [sp]
+ 1035 002e 009B     		ldr	r3, [sp]
+ 1036 0030 01A9     		add	r1, sp, #4
+ 1037 0032 4FF09040 		mov	r0, #1207959552
+ 1038 0036 FFF7FEFF 		bl	HAL_GPIO_Init
+ 1039 003a 6368     		ldr	r3, [r4, #4]
+ 1040 003c 23F0EE43 		bic	r3, r3, #1996488704
+ 1041 0040 3543     		orrs	r5, r5, r6
+ 1042 0042 2B43     		orrs	r3, r3, r5
+ 1043 0044 6360     		str	r3, [r4, #4]
+ 1044 0046 06B0     		add	sp, sp, #24
+ 1045              		@ sp needed
+ 1046 0048 70BD     		pop	{r4, r5, r6, pc}
+ 1047              	.L142:
+ 1048 004a 00BF     		.align	2
+ 1049              	.L141:
+ 1050 004c 00100240 		.word	1073876992
+ 1052              		.section	.text.HAL_RCC_EnableCSS,"ax",%progbits
+ 1053              		.align	1
+ 1054              		.global	HAL_RCC_EnableCSS
+ 1055              		.syntax unified
+ 1056              		.thumb
+ 1057              		.thumb_func
+ 1059              	HAL_RCC_EnableCSS:
+ 1060              		@ args = 0, pretend = 0, frame = 0
+ 1061              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1062              		@ link register save eliminated.
+ 1063 0000 4FF40023 		mov	r3, #524288
+ 1064              		.syntax unified
+ 1065              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 1066 0004 93FAA3F3 		rbit r3, r3
+ 1067              	@ 0 "" 2
+ 1068              		.thumb
+ 1069              		.syntax unified
+ 1070 0008 B3FA83F3 		clz	r3, r3
+ 1071 000c 03F18453 		add	r3, r3, #276824064
+ 1072 0010 03F58413 		add	r3, r3, #1081344
+ 1073 0014 9B00     		lsls	r3, r3, #2
+ 1074 0016 0122     		movs	r2, #1
+ 1075 0018 1A60     		str	r2, [r3]
+ 1076 001a 7047     		bx	lr
+ 1078              		.section	.text.HAL_RCC_DisableCSS,"ax",%progbits
+ 1079              		.align	1
+ 1080              		.global	HAL_RCC_DisableCSS
+ 1081              		.syntax unified
+ 1082              		.thumb
+ 1083              		.thumb_func
+ 1085              	HAL_RCC_DisableCSS:
+ 1086              		@ args = 0, pretend = 0, frame = 0
+ 1087              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1088              		@ link register save eliminated.
+ 1089 0000 4FF40023 		mov	r3, #524288
+ 1090              		.syntax unified
+ 1091              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 1092 0004 93FAA3F3 		rbit r3, r3
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 20
+
+
+ 1093              	@ 0 "" 2
+ 1094              		.thumb
+ 1095              		.syntax unified
+ 1096 0008 B3FA83F3 		clz	r3, r3
+ 1097 000c 03F18453 		add	r3, r3, #276824064
+ 1098 0010 03F58413 		add	r3, r3, #1081344
+ 1099 0014 9B00     		lsls	r3, r3, #2
+ 1100 0016 0022     		movs	r2, #0
+ 1101 0018 1A60     		str	r2, [r3]
+ 1102 001a 7047     		bx	lr
+ 1104              		.section	.text.HAL_RCC_GetSysClockFreq,"ax",%progbits
+ 1105              		.align	1
+ 1106              		.global	HAL_RCC_GetSysClockFreq
+ 1107              		.syntax unified
+ 1108              		.thumb
+ 1109              		.thumb_func
+ 1111              	HAL_RCC_GetSysClockFreq:
+ 1112              		@ args = 0, pretend = 0, frame = 0
+ 1113              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1114              		@ link register save eliminated.
+ 1115 0000 104B     		ldr	r3, .L150
+ 1116 0002 5B68     		ldr	r3, [r3, #4]
+ 1117 0004 03F00C02 		and	r2, r3, #12
+ 1118 0008 082A     		cmp	r2, #8
+ 1119 000a 01D0     		beq	.L149
+ 1120 000c 0E48     		ldr	r0, .L150+4
+ 1121 000e 7047     		bx	lr
+ 1122              	.L149:
+ 1123 0010 C3F38342 		ubfx	r2, r3, #18, #4
+ 1124 0014 0D49     		ldr	r1, .L150+8
+ 1125 0016 885C     		ldrb	r0, [r1, r2]	@ zero_extendqisi2
+ 1126 0018 0A4A     		ldr	r2, .L150
+ 1127 001a D26A     		ldr	r2, [r2, #44]
+ 1128 001c 02F00F02 		and	r2, r2, #15
+ 1129 0020 0B49     		ldr	r1, .L150+12
+ 1130 0022 8A5C     		ldrb	r2, [r1, r2]	@ zero_extendqisi2
+ 1131 0024 13F4803F 		tst	r3, #65536
+ 1132 0028 05D0     		beq	.L147
+ 1133 002a 074B     		ldr	r3, .L150+4
+ 1134 002c B3FBF2F3 		udiv	r3, r3, r2
+ 1135 0030 03FB00F0 		mul	r0, r3, r0
+ 1136 0034 7047     		bx	lr
+ 1137              	.L147:
+ 1138 0036 044B     		ldr	r3, .L150+4
+ 1139 0038 B3FBF2F3 		udiv	r3, r3, r2
+ 1140 003c 03FB00F0 		mul	r0, r3, r0
+ 1141 0040 7047     		bx	lr
+ 1142              	.L151:
+ 1143 0042 00BF     		.align	2
+ 1144              	.L150:
+ 1145 0044 00100240 		.word	1073876992
+ 1146 0048 00127A00 		.word	8000000
+ 1147 004c 00000000 		.word	aPLLMULFactorTable
+ 1148 0050 00000000 		.word	aPredivFactorTable
+ 1150              		.section	.text.HAL_RCC_ClockConfig,"ax",%progbits
+ 1151              		.align	1
+ 1152              		.global	HAL_RCC_ClockConfig
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 21
+
+
+ 1153              		.syntax unified
+ 1154              		.thumb
+ 1155              		.thumb_func
+ 1157              	HAL_RCC_ClockConfig:
+ 1158              		@ args = 0, pretend = 0, frame = 0
+ 1159              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1160 0000 0028     		cmp	r0, #0
+ 1161 0002 00F0BE80 		beq	.L171
+ 1162 0006 70B5     		push	{r4, r5, r6, lr}
+ 1163 0008 0D46     		mov	r5, r1
+ 1164 000a 0446     		mov	r4, r0
+ 1165 000c 614B     		ldr	r3, .L184
+ 1166 000e 1B68     		ldr	r3, [r3]
+ 1167 0010 03F00703 		and	r3, r3, #7
+ 1168 0014 8B42     		cmp	r3, r1
+ 1169 0016 0BD2     		bcs	.L154
+ 1170 0018 5E4A     		ldr	r2, .L184
+ 1171 001a 1368     		ldr	r3, [r2]
+ 1172 001c 23F00703 		bic	r3, r3, #7
+ 1173 0020 0B43     		orrs	r3, r3, r1
+ 1174 0022 1360     		str	r3, [r2]
+ 1175 0024 1368     		ldr	r3, [r2]
+ 1176 0026 03F00703 		and	r3, r3, #7
+ 1177 002a 8B42     		cmp	r3, r1
+ 1178 002c 40F0AB80 		bne	.L172
+ 1179              	.L154:
+ 1180 0030 2368     		ldr	r3, [r4]
+ 1181 0032 13F0020F 		tst	r3, #2
+ 1182 0036 06D0     		beq	.L155
+ 1183 0038 574A     		ldr	r2, .L184+4
+ 1184 003a 5368     		ldr	r3, [r2, #4]
+ 1185 003c 23F0F003 		bic	r3, r3, #240
+ 1186 0040 A168     		ldr	r1, [r4, #8]
+ 1187 0042 0B43     		orrs	r3, r3, r1
+ 1188 0044 5360     		str	r3, [r2, #4]
+ 1189              	.L155:
+ 1190 0046 2368     		ldr	r3, [r4]
+ 1191 0048 13F0010F 		tst	r3, #1
+ 1192 004c 5AD0     		beq	.L156
+ 1193 004e 6368     		ldr	r3, [r4, #4]
+ 1194 0050 012B     		cmp	r3, #1
+ 1195 0052 2DD0     		beq	.L182
+ 1196 0054 022B     		cmp	r3, #2
+ 1197 0056 40D0     		beq	.L183
+ 1198 0058 0222     		movs	r2, #2
+ 1199              		.syntax unified
+ 1200              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 1201 005a 92FAA2F2 		rbit r2, r2
+ 1202              	@ 0 "" 2
+ 1203              		.thumb
+ 1204              		.syntax unified
+ 1205 005e 4E4A     		ldr	r2, .L184+4
+ 1206 0060 1068     		ldr	r0, [r2]
+ 1207 0062 0222     		movs	r2, #2
+ 1208              		.syntax unified
+ 1209              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 1210 0064 92FAA2F2 		rbit r2, r2
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 22
+
+
+ 1211              	@ 0 "" 2
+ 1212              		.thumb
+ 1213              		.syntax unified
+ 1214 0068 B2FA82F2 		clz	r2, r2
+ 1215 006c 02F01F02 		and	r2, r2, #31
+ 1216 0070 0121     		movs	r1, #1
+ 1217 0072 01FA02F2 		lsl	r2, r1, r2
+ 1218 0076 1042     		tst	r0, r2
+ 1219 0078 00F08780 		beq	.L175
+ 1220              	.L160:
+ 1221 007c 4649     		ldr	r1, .L184+4
+ 1222 007e 4A68     		ldr	r2, [r1, #4]
+ 1223 0080 22F00302 		bic	r2, r2, #3
+ 1224 0084 1343     		orrs	r3, r3, r2
+ 1225 0086 4B60     		str	r3, [r1, #4]
+ 1226 0088 FFF7FEFF 		bl	HAL_GetTick
+ 1227 008c 0646     		mov	r6, r0
+ 1228              	.L166:
+ 1229 008e 424B     		ldr	r3, .L184+4
+ 1230 0090 5B68     		ldr	r3, [r3, #4]
+ 1231 0092 03F00C03 		and	r3, r3, #12
+ 1232 0096 6268     		ldr	r2, [r4, #4]
+ 1233 0098 B3EB820F 		cmp	r3, r2, lsl #2
+ 1234 009c 32D0     		beq	.L156
+ 1235 009e FFF7FEFF 		bl	HAL_GetTick
+ 1236 00a2 801B     		subs	r0, r0, r6
+ 1237 00a4 41F28833 		movw	r3, #5000
+ 1238 00a8 9842     		cmp	r0, r3
+ 1239 00aa F0D9     		bls	.L166
+ 1240 00ac 0320     		movs	r0, #3
+ 1241 00ae 67E0     		b	.L153
+ 1242              	.L182:
+ 1243 00b0 4FF40032 		mov	r2, #131072
+ 1244              		.syntax unified
+ 1245              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 1246 00b4 92FAA2F2 		rbit r2, r2
+ 1247              	@ 0 "" 2
+ 1248              		.thumb
+ 1249              		.syntax unified
+ 1250 00b8 374A     		ldr	r2, .L184+4
+ 1251 00ba 1068     		ldr	r0, [r2]
+ 1252 00bc 4FF40032 		mov	r2, #131072
+ 1253              		.syntax unified
+ 1254              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 1255 00c0 92FAA2F2 		rbit r2, r2
+ 1256              	@ 0 "" 2
+ 1257              		.thumb
+ 1258              		.syntax unified
+ 1259 00c4 B2FA82F2 		clz	r2, r2
+ 1260 00c8 02F01F02 		and	r2, r2, #31
+ 1261 00cc 0121     		movs	r1, #1
+ 1262 00ce 01FA02F2 		lsl	r2, r1, r2
+ 1263 00d2 0242     		tst	r2, r0
+ 1264 00d4 D2D1     		bne	.L160
+ 1265 00d6 0120     		movs	r0, #1
+ 1266 00d8 52E0     		b	.L153
+ 1267              	.L183:
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 23
+
+
+ 1268 00da 4FF00072 		mov	r2, #33554432
+ 1269              		.syntax unified
+ 1270              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 1271 00de 92FAA2F2 		rbit r2, r2
+ 1272              	@ 0 "" 2
+ 1273              		.thumb
+ 1274              		.syntax unified
+ 1275 00e2 2D4A     		ldr	r2, .L184+4
+ 1276 00e4 1068     		ldr	r0, [r2]
+ 1277 00e6 4FF00072 		mov	r2, #33554432
+ 1278              		.syntax unified
+ 1279              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 1280 00ea 92FAA2F2 		rbit r2, r2
+ 1281              	@ 0 "" 2
+ 1282              		.thumb
+ 1283              		.syntax unified
+ 1284 00ee B2FA82F2 		clz	r2, r2
+ 1285 00f2 02F01F02 		and	r2, r2, #31
+ 1286 00f6 0121     		movs	r1, #1
+ 1287 00f8 01FA02F2 		lsl	r2, r1, r2
+ 1288 00fc 1042     		tst	r0, r2
+ 1289 00fe BDD1     		bne	.L160
+ 1290 0100 0120     		movs	r0, #1
+ 1291 0102 3DE0     		b	.L153
+ 1292              	.L156:
+ 1293 0104 234B     		ldr	r3, .L184
+ 1294 0106 1B68     		ldr	r3, [r3]
+ 1295 0108 03F00703 		and	r3, r3, #7
+ 1296 010c AB42     		cmp	r3, r5
+ 1297 010e 0AD9     		bls	.L168
+ 1298 0110 204A     		ldr	r2, .L184
+ 1299 0112 1368     		ldr	r3, [r2]
+ 1300 0114 23F00703 		bic	r3, r3, #7
+ 1301 0118 2B43     		orrs	r3, r3, r5
+ 1302 011a 1360     		str	r3, [r2]
+ 1303 011c 1368     		ldr	r3, [r2]
+ 1304 011e 03F00703 		and	r3, r3, #7
+ 1305 0122 AB42     		cmp	r3, r5
+ 1306 0124 33D1     		bne	.L177
+ 1307              	.L168:
+ 1308 0126 2368     		ldr	r3, [r4]
+ 1309 0128 13F0040F 		tst	r3, #4
+ 1310 012c 06D0     		beq	.L169
+ 1311 012e 1A4A     		ldr	r2, .L184+4
+ 1312 0130 5368     		ldr	r3, [r2, #4]
+ 1313 0132 23F4E063 		bic	r3, r3, #1792
+ 1314 0136 E168     		ldr	r1, [r4, #12]
+ 1315 0138 0B43     		orrs	r3, r3, r1
+ 1316 013a 5360     		str	r3, [r2, #4]
+ 1317              	.L169:
+ 1318 013c 2368     		ldr	r3, [r4]
+ 1319 013e 13F0080F 		tst	r3, #8
+ 1320 0142 07D0     		beq	.L170
+ 1321 0144 144A     		ldr	r2, .L184+4
+ 1322 0146 5368     		ldr	r3, [r2, #4]
+ 1323 0148 23F46053 		bic	r3, r3, #14336
+ 1324 014c 2169     		ldr	r1, [r4, #16]
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 24
+
+
+ 1325 014e 43EAC103 		orr	r3, r3, r1, lsl #3
+ 1326 0152 5360     		str	r3, [r2, #4]
+ 1327              	.L170:
+ 1328 0154 FFF7FEFF 		bl	HAL_RCC_GetSysClockFreq
+ 1329 0158 0F4B     		ldr	r3, .L184+4
+ 1330 015a 5B68     		ldr	r3, [r3, #4]
+ 1331 015c 03F0F003 		and	r3, r3, #240
+ 1332 0160 F022     		movs	r2, #240
+ 1333              		.syntax unified
+ 1334              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 1335 0162 92FAA2F2 		rbit r2, r2
+ 1336              	@ 0 "" 2
+ 1337              		.thumb
+ 1338              		.syntax unified
+ 1339 0166 B2FA82F2 		clz	r2, r2
+ 1340 016a D340     		lsrs	r3, r3, r2
+ 1341 016c 0B4A     		ldr	r2, .L184+8
+ 1342 016e D35C     		ldrb	r3, [r2, r3]	@ zero_extendqisi2
+ 1343 0170 D840     		lsrs	r0, r0, r3
+ 1344 0172 0B4B     		ldr	r3, .L184+12
+ 1345 0174 1860     		str	r0, [r3]
+ 1346 0176 0B4B     		ldr	r3, .L184+16
+ 1347 0178 1868     		ldr	r0, [r3]
+ 1348 017a FFF7FEFF 		bl	HAL_InitTick
+ 1349 017e 0020     		movs	r0, #0
+ 1350              	.L153:
+ 1351 0180 70BD     		pop	{r4, r5, r6, pc}
+ 1352              	.L171:
+ 1353 0182 0120     		movs	r0, #1
+ 1354 0184 7047     		bx	lr
+ 1355              	.L172:
+ 1356 0186 0120     		movs	r0, #1
+ 1357 0188 FAE7     		b	.L153
+ 1358              	.L175:
+ 1359 018a 0120     		movs	r0, #1
+ 1360 018c F8E7     		b	.L153
+ 1361              	.L177:
+ 1362 018e 0120     		movs	r0, #1
+ 1363 0190 F6E7     		b	.L153
+ 1364              	.L185:
+ 1365 0192 00BF     		.align	2
+ 1366              	.L184:
+ 1367 0194 00200240 		.word	1073881088
+ 1368 0198 00100240 		.word	1073876992
+ 1369 019c 00000000 		.word	AHBPrescTable
+ 1370 01a0 00000000 		.word	SystemCoreClock
+ 1371 01a4 00000000 		.word	uwTickPrio
+ 1373              		.section	.text.HAL_RCC_GetHCLKFreq,"ax",%progbits
+ 1374              		.align	1
+ 1375              		.global	HAL_RCC_GetHCLKFreq
+ 1376              		.syntax unified
+ 1377              		.thumb
+ 1378              		.thumb_func
+ 1380              	HAL_RCC_GetHCLKFreq:
+ 1381              		@ args = 0, pretend = 0, frame = 0
+ 1382              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1383              		@ link register save eliminated.
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 25
+
+
+ 1384 0000 014B     		ldr	r3, .L187
+ 1385 0002 1868     		ldr	r0, [r3]
+ 1386 0004 7047     		bx	lr
+ 1387              	.L188:
+ 1388 0006 00BF     		.align	2
+ 1389              	.L187:
+ 1390 0008 00000000 		.word	SystemCoreClock
+ 1392              		.section	.text.HAL_RCC_GetPCLK1Freq,"ax",%progbits
+ 1393              		.align	1
+ 1394              		.global	HAL_RCC_GetPCLK1Freq
+ 1395              		.syntax unified
+ 1396              		.thumb
+ 1397              		.thumb_func
+ 1399              	HAL_RCC_GetPCLK1Freq:
+ 1400              		@ args = 0, pretend = 0, frame = 0
+ 1401              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1402 0000 08B5     		push	{r3, lr}
+ 1403 0002 FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
+ 1404 0006 074B     		ldr	r3, .L191
+ 1405 0008 5B68     		ldr	r3, [r3, #4]
+ 1406 000a 03F4E063 		and	r3, r3, #1792
+ 1407 000e 4FF4E062 		mov	r2, #1792
+ 1408              		.syntax unified
+ 1409              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 1410 0012 92FAA2F2 		rbit r2, r2
+ 1411              	@ 0 "" 2
+ 1412              		.thumb
+ 1413              		.syntax unified
+ 1414 0016 B2FA82F2 		clz	r2, r2
+ 1415 001a D340     		lsrs	r3, r3, r2
+ 1416 001c 024A     		ldr	r2, .L191+4
+ 1417 001e D35C     		ldrb	r3, [r2, r3]	@ zero_extendqisi2
+ 1418 0020 D840     		lsrs	r0, r0, r3
+ 1419 0022 08BD     		pop	{r3, pc}
+ 1420              	.L192:
+ 1421              		.align	2
+ 1422              	.L191:
+ 1423 0024 00100240 		.word	1073876992
+ 1424 0028 00000000 		.word	APBPrescTable
+ 1426              		.section	.text.HAL_RCC_GetPCLK2Freq,"ax",%progbits
+ 1427              		.align	1
+ 1428              		.global	HAL_RCC_GetPCLK2Freq
+ 1429              		.syntax unified
+ 1430              		.thumb
+ 1431              		.thumb_func
+ 1433              	HAL_RCC_GetPCLK2Freq:
+ 1434              		@ args = 0, pretend = 0, frame = 0
+ 1435              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1436 0000 08B5     		push	{r3, lr}
+ 1437 0002 FFF7FEFF 		bl	HAL_RCC_GetHCLKFreq
+ 1438 0006 074B     		ldr	r3, .L195
+ 1439 0008 5B68     		ldr	r3, [r3, #4]
+ 1440 000a 03F46053 		and	r3, r3, #14336
+ 1441 000e 4FF46052 		mov	r2, #14336
+ 1442              		.syntax unified
+ 1443              	@ 988 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 1444 0012 92FAA2F2 		rbit r2, r2
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 26
+
+
+ 1445              	@ 0 "" 2
+ 1446              		.thumb
+ 1447              		.syntax unified
+ 1448 0016 B2FA82F2 		clz	r2, r2
+ 1449 001a D340     		lsrs	r3, r3, r2
+ 1450 001c 024A     		ldr	r2, .L195+4
+ 1451 001e D35C     		ldrb	r3, [r2, r3]	@ zero_extendqisi2
+ 1452 0020 D840     		lsrs	r0, r0, r3
+ 1453 0022 08BD     		pop	{r3, pc}
+ 1454              	.L196:
+ 1455              		.align	2
+ 1456              	.L195:
+ 1457 0024 00100240 		.word	1073876992
+ 1458 0028 00000000 		.word	APBPrescTable
+ 1460              		.section	.text.HAL_RCC_GetOscConfig,"ax",%progbits
+ 1461              		.align	1
+ 1462              		.global	HAL_RCC_GetOscConfig
+ 1463              		.syntax unified
+ 1464              		.thumb
+ 1465              		.thumb_func
+ 1467              	HAL_RCC_GetOscConfig:
+ 1468              		@ args = 0, pretend = 0, frame = 0
+ 1469              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1470              		@ link register save eliminated.
+ 1471 0000 0F23     		movs	r3, #15
+ 1472 0002 0360     		str	r3, [r0]
+ 1473 0004 2A4B     		ldr	r3, .L210
+ 1474 0006 1B68     		ldr	r3, [r3]
+ 1475 0008 13F4802F 		tst	r3, #262144
+ 1476 000c 30D0     		beq	.L198
+ 1477 000e 4FF4A023 		mov	r3, #327680
+ 1478 0012 4360     		str	r3, [r0, #4]
+ 1479              	.L199:
+ 1480 0014 264B     		ldr	r3, .L210
+ 1481 0016 1B68     		ldr	r3, [r3]
+ 1482 0018 13F0010F 		tst	r3, #1
+ 1483 001c 34D0     		beq	.L201
+ 1484 001e 0123     		movs	r3, #1
+ 1485 0020 C360     		str	r3, [r0, #12]
+ 1486              	.L202:
+ 1487 0022 234A     		ldr	r2, .L210
+ 1488 0024 1368     		ldr	r3, [r2]
+ 1489 0026 C3F3C403 		ubfx	r3, r3, #3, #5
+ 1490 002a 0361     		str	r3, [r0, #16]
+ 1491 002c 136A     		ldr	r3, [r2, #32]
+ 1492 002e 13F0040F 		tst	r3, #4
+ 1493 0032 2CD0     		beq	.L203
+ 1494 0034 0523     		movs	r3, #5
+ 1495 0036 8360     		str	r3, [r0, #8]
+ 1496              	.L204:
+ 1497 0038 1D4B     		ldr	r3, .L210
+ 1498 003a 5B6A     		ldr	r3, [r3, #36]
+ 1499 003c 13F0010F 		tst	r3, #1
+ 1500 0040 30D0     		beq	.L206
+ 1501 0042 0123     		movs	r3, #1
+ 1502 0044 4361     		str	r3, [r0, #20]
+ 1503              	.L207:
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 27
+
+
+ 1504 0046 1A4B     		ldr	r3, .L210
+ 1505 0048 1B68     		ldr	r3, [r3]
+ 1506 004a 13F0807F 		tst	r3, #16777216
+ 1507 004e 2CD0     		beq	.L208
+ 1508 0050 0223     		movs	r3, #2
+ 1509 0052 8361     		str	r3, [r0, #24]
+ 1510              	.L209:
+ 1511 0054 164B     		ldr	r3, .L210
+ 1512 0056 5A68     		ldr	r2, [r3, #4]
+ 1513 0058 02F4C032 		and	r2, r2, #98304
+ 1514 005c C261     		str	r2, [r0, #28]
+ 1515 005e 5A68     		ldr	r2, [r3, #4]
+ 1516 0060 02F47012 		and	r2, r2, #3932160
+ 1517 0064 0262     		str	r2, [r0, #32]
+ 1518 0066 DB6A     		ldr	r3, [r3, #44]
+ 1519 0068 03F00F03 		and	r3, r3, #15
+ 1520 006c 4362     		str	r3, [r0, #36]
+ 1521 006e 7047     		bx	lr
+ 1522              	.L198:
+ 1523 0070 0F4B     		ldr	r3, .L210
+ 1524 0072 1B68     		ldr	r3, [r3]
+ 1525 0074 13F4803F 		tst	r3, #65536
+ 1526 0078 03D0     		beq	.L200
+ 1527 007a 4FF48033 		mov	r3, #65536
+ 1528 007e 4360     		str	r3, [r0, #4]
+ 1529 0080 C8E7     		b	.L199
+ 1530              	.L200:
+ 1531 0082 0023     		movs	r3, #0
+ 1532 0084 4360     		str	r3, [r0, #4]
+ 1533 0086 C5E7     		b	.L199
+ 1534              	.L201:
+ 1535 0088 0023     		movs	r3, #0
+ 1536 008a C360     		str	r3, [r0, #12]
+ 1537 008c C9E7     		b	.L202
+ 1538              	.L203:
+ 1539 008e 084B     		ldr	r3, .L210
+ 1540 0090 1B6A     		ldr	r3, [r3, #32]
+ 1541 0092 13F0010F 		tst	r3, #1
+ 1542 0096 02D0     		beq	.L205
+ 1543 0098 0123     		movs	r3, #1
+ 1544 009a 8360     		str	r3, [r0, #8]
+ 1545 009c CCE7     		b	.L204
+ 1546              	.L205:
+ 1547 009e 0023     		movs	r3, #0
+ 1548 00a0 8360     		str	r3, [r0, #8]
+ 1549 00a2 C9E7     		b	.L204
+ 1550              	.L206:
+ 1551 00a4 0023     		movs	r3, #0
+ 1552 00a6 4361     		str	r3, [r0, #20]
+ 1553 00a8 CDE7     		b	.L207
+ 1554              	.L208:
+ 1555 00aa 0123     		movs	r3, #1
+ 1556 00ac 8361     		str	r3, [r0, #24]
+ 1557 00ae D1E7     		b	.L209
+ 1558              	.L211:
+ 1559              		.align	2
+ 1560              	.L210:
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 28
+
+
+ 1561 00b0 00100240 		.word	1073876992
+ 1563              		.section	.text.HAL_RCC_GetClockConfig,"ax",%progbits
+ 1564              		.align	1
+ 1565              		.global	HAL_RCC_GetClockConfig
+ 1566              		.syntax unified
+ 1567              		.thumb
+ 1568              		.thumb_func
+ 1570              	HAL_RCC_GetClockConfig:
+ 1571              		@ args = 0, pretend = 0, frame = 0
+ 1572              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1573              		@ link register save eliminated.
+ 1574 0000 0F23     		movs	r3, #15
+ 1575 0002 0360     		str	r3, [r0]
+ 1576 0004 0B4B     		ldr	r3, .L213
+ 1577 0006 5A68     		ldr	r2, [r3, #4]
+ 1578 0008 02F00302 		and	r2, r2, #3
+ 1579 000c 4260     		str	r2, [r0, #4]
+ 1580 000e 5A68     		ldr	r2, [r3, #4]
+ 1581 0010 02F0F002 		and	r2, r2, #240
+ 1582 0014 8260     		str	r2, [r0, #8]
+ 1583 0016 5A68     		ldr	r2, [r3, #4]
+ 1584 0018 02F4E062 		and	r2, r2, #1792
+ 1585 001c C260     		str	r2, [r0, #12]
+ 1586 001e 5B68     		ldr	r3, [r3, #4]
+ 1587 0020 DB08     		lsrs	r3, r3, #3
+ 1588 0022 03F4E063 		and	r3, r3, #1792
+ 1589 0026 0361     		str	r3, [r0, #16]
+ 1590 0028 034B     		ldr	r3, .L213+4
+ 1591 002a 1B68     		ldr	r3, [r3]
+ 1592 002c 03F00703 		and	r3, r3, #7
+ 1593 0030 0B60     		str	r3, [r1]
+ 1594 0032 7047     		bx	lr
+ 1595              	.L214:
+ 1596              		.align	2
+ 1597              	.L213:
+ 1598 0034 00100240 		.word	1073876992
+ 1599 0038 00200240 		.word	1073881088
+ 1601              		.section	.text.HAL_RCC_CSSCallback,"ax",%progbits
+ 1602              		.align	1
+ 1603              		.weak	HAL_RCC_CSSCallback
+ 1604              		.syntax unified
+ 1605              		.thumb
+ 1606              		.thumb_func
+ 1608              	HAL_RCC_CSSCallback:
+ 1609              		@ args = 0, pretend = 0, frame = 0
+ 1610              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1611              		@ link register save eliminated.
+ 1612 0000 7047     		bx	lr
+ 1614              		.section	.text.HAL_RCC_NMI_IRQHandler,"ax",%progbits
+ 1615              		.align	1
+ 1616              		.global	HAL_RCC_NMI_IRQHandler
+ 1617              		.syntax unified
+ 1618              		.thumb
+ 1619              		.thumb_func
+ 1621              	HAL_RCC_NMI_IRQHandler:
+ 1622              		@ args = 0, pretend = 0, frame = 0
+ 1623              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 29
+
+
+ 1624 0000 08B5     		push	{r3, lr}
+ 1625 0002 064B     		ldr	r3, .L220
+ 1626 0004 9B68     		ldr	r3, [r3, #8]
+ 1627 0006 13F0800F 		tst	r3, #128
+ 1628 000a 00D1     		bne	.L219
+ 1629              	.L216:
+ 1630 000c 08BD     		pop	{r3, pc}
+ 1631              	.L219:
+ 1632 000e FFF7FEFF 		bl	HAL_RCC_CSSCallback
+ 1633 0012 024B     		ldr	r3, .L220
+ 1634 0014 8022     		movs	r2, #128
+ 1635 0016 9A72     		strb	r2, [r3, #10]
+ 1636 0018 F8E7     		b	.L216
+ 1637              	.L221:
+ 1638 001a 00BF     		.align	2
+ 1639              	.L220:
+ 1640 001c 00100240 		.word	1073876992
+ 1642              		.section	.rodata.aPredivFactorTable,"a"
+ 1643              		.align	2
+ 1646              	aPredivFactorTable:
+ 1647 0000 01020304 		.ascii	"\001\002\003\004\005\006\007\010\011\012\013\014\015"
+ 1647      05060708 
+ 1647      090A0B0C 
+ 1647      0D
+ 1648 000d 0E0F10   		.ascii	"\016\017\020"
+ 1649              		.section	.rodata.aPLLMULFactorTable,"a"
+ 1650              		.align	2
+ 1653              	aPLLMULFactorTable:
+ 1654 0000 02030405 		.ascii	"\002\003\004\005\006\007\010\011\012\013\014\015\016"
+ 1654      06070809 
+ 1654      0A0B0C0D 
+ 1654      0E
+ 1655 000d 0F1010   		.ascii	"\017\020\020"
+ 1656              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 30
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f3xx_hal_rcc.c
+  C:\Temp\ccwcS6K0.s:18     .text.HAL_RCC_DeInit:00000000 $t
+  C:\Temp\ccwcS6K0.s:24     .text.HAL_RCC_DeInit:00000000 HAL_RCC_DeInit
+  C:\Temp\ccwcS6K0.s:131    .text.HAL_RCC_DeInit:000000dc $d
+  C:\Temp\ccwcS6K0.s:139    .text.HAL_RCC_OscConfig:00000000 $t
+  C:\Temp\ccwcS6K0.s:145    .text.HAL_RCC_OscConfig:00000000 HAL_RCC_OscConfig
+  C:\Temp\ccwcS6K0.s:534    .text.HAL_RCC_OscConfig:000002e0 $d
+  C:\Temp\ccwcS6K0.s:537    .text.HAL_RCC_OscConfig:000002e8 $t
+  C:\Temp\ccwcS6K0.s:880    .text.HAL_RCC_OscConfig:00000564 $d
+  C:\Temp\ccwcS6K0.s:884    .text.HAL_RCC_OscConfig:00000570 $t
+  C:\Temp\ccwcS6K0.s:1003   .text.HAL_RCC_OscConfig:00000640 $d
+  C:\Temp\ccwcS6K0.s:1006   .text.HAL_RCC_MCOConfig:00000000 $t
+  C:\Temp\ccwcS6K0.s:1012   .text.HAL_RCC_MCOConfig:00000000 HAL_RCC_MCOConfig
+  C:\Temp\ccwcS6K0.s:1050   .text.HAL_RCC_MCOConfig:0000004c $d
+  C:\Temp\ccwcS6K0.s:1053   .text.HAL_RCC_EnableCSS:00000000 $t
+  C:\Temp\ccwcS6K0.s:1059   .text.HAL_RCC_EnableCSS:00000000 HAL_RCC_EnableCSS
+  C:\Temp\ccwcS6K0.s:1079   .text.HAL_RCC_DisableCSS:00000000 $t
+  C:\Temp\ccwcS6K0.s:1085   .text.HAL_RCC_DisableCSS:00000000 HAL_RCC_DisableCSS
+  C:\Temp\ccwcS6K0.s:1105   .text.HAL_RCC_GetSysClockFreq:00000000 $t
+  C:\Temp\ccwcS6K0.s:1111   .text.HAL_RCC_GetSysClockFreq:00000000 HAL_RCC_GetSysClockFreq
+  C:\Temp\ccwcS6K0.s:1145   .text.HAL_RCC_GetSysClockFreq:00000044 $d
+  C:\Temp\ccwcS6K0.s:1653   .rodata.aPLLMULFactorTable:00000000 aPLLMULFactorTable
+  C:\Temp\ccwcS6K0.s:1646   .rodata.aPredivFactorTable:00000000 aPredivFactorTable
+  C:\Temp\ccwcS6K0.s:1151   .text.HAL_RCC_ClockConfig:00000000 $t
+  C:\Temp\ccwcS6K0.s:1157   .text.HAL_RCC_ClockConfig:00000000 HAL_RCC_ClockConfig
+  C:\Temp\ccwcS6K0.s:1367   .text.HAL_RCC_ClockConfig:00000194 $d
+  C:\Temp\ccwcS6K0.s:1374   .text.HAL_RCC_GetHCLKFreq:00000000 $t
+  C:\Temp\ccwcS6K0.s:1380   .text.HAL_RCC_GetHCLKFreq:00000000 HAL_RCC_GetHCLKFreq
+  C:\Temp\ccwcS6K0.s:1390   .text.HAL_RCC_GetHCLKFreq:00000008 $d
+  C:\Temp\ccwcS6K0.s:1393   .text.HAL_RCC_GetPCLK1Freq:00000000 $t
+  C:\Temp\ccwcS6K0.s:1399   .text.HAL_RCC_GetPCLK1Freq:00000000 HAL_RCC_GetPCLK1Freq
+  C:\Temp\ccwcS6K0.s:1423   .text.HAL_RCC_GetPCLK1Freq:00000024 $d
+  C:\Temp\ccwcS6K0.s:1427   .text.HAL_RCC_GetPCLK2Freq:00000000 $t
+  C:\Temp\ccwcS6K0.s:1433   .text.HAL_RCC_GetPCLK2Freq:00000000 HAL_RCC_GetPCLK2Freq
+  C:\Temp\ccwcS6K0.s:1457   .text.HAL_RCC_GetPCLK2Freq:00000024 $d
+  C:\Temp\ccwcS6K0.s:1461   .text.HAL_RCC_GetOscConfig:00000000 $t
+  C:\Temp\ccwcS6K0.s:1467   .text.HAL_RCC_GetOscConfig:00000000 HAL_RCC_GetOscConfig
+  C:\Temp\ccwcS6K0.s:1561   .text.HAL_RCC_GetOscConfig:000000b0 $d
+  C:\Temp\ccwcS6K0.s:1564   .text.HAL_RCC_GetClockConfig:00000000 $t
+  C:\Temp\ccwcS6K0.s:1570   .text.HAL_RCC_GetClockConfig:00000000 HAL_RCC_GetClockConfig
+  C:\Temp\ccwcS6K0.s:1598   .text.HAL_RCC_GetClockConfig:00000034 $d
+  C:\Temp\ccwcS6K0.s:1602   .text.HAL_RCC_CSSCallback:00000000 $t
+  C:\Temp\ccwcS6K0.s:1608   .text.HAL_RCC_CSSCallback:00000000 HAL_RCC_CSSCallback
+  C:\Temp\ccwcS6K0.s:1615   .text.HAL_RCC_NMI_IRQHandler:00000000 $t
+  C:\Temp\ccwcS6K0.s:1621   .text.HAL_RCC_NMI_IRQHandler:00000000 HAL_RCC_NMI_IRQHandler
+  C:\Temp\ccwcS6K0.s:1640   .text.HAL_RCC_NMI_IRQHandler:0000001c $d
+  C:\Temp\ccwcS6K0.s:1643   .rodata.aPredivFactorTable:00000000 $d
+  C:\Temp\ccwcS6K0.s:1650   .rodata.aPLLMULFactorTable:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_GetTick
+HAL_InitTick
+SystemCoreClock
+uwTickPrio
+HAL_GPIO_Init
+AHBPrescTable
+ARM GAS  C:\Temp\ccwcS6K0.s 			page 31
+
+
+APBPrescTable
