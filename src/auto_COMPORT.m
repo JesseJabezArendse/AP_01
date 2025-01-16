@@ -16,25 +16,47 @@ function STLINK_COMPORT = auto_COMPORT()
             STLINK_COMPORT = auto_COMPORT_mac();
         end
     elseif isempty(savedCOMPort)
-        options = serialportlist;
-        % If no matching device was found, prompt the user to select a port
-        [selection, ok] = listdlg(...
-            'PromptString', 'Select the ST-Link COM Port:', ...
-            'SelectionMode', 'single', ...
-            'ListString', options, ...
-            'Name', 'Select COM Port');
+        serialPorts = serialportlist;
+
+% Create a figure for the dropdown menu
+        fig = uifigure('Name', 'Select COM Port', 'Position', [500, 500, 300, 150]);
         
-        % Handle user response
-        if ok
-            STLINK_COMPORT = options{selection};
-            disp(['Selected ST-Link COM Port: ', STLINK_COMPORT]);
-            savedCOMPort = STLINK_COMPORT;
-        else
-            error('No COM port selected. Aborting.');
-        end
+        % Use HTML-style formatting for line breaks
+        uilabel(fig, ...
+            'Text', 'Select the ST-Link COM Port:', ...
+            'Position', [20, 100, 260, 50], ...
+            'HorizontalAlignment', 'center', ...
+            'Interpreter', 'html'); % Enable HTML interpreter for line breaks
+
+        % Create the dropdown menu
+        dropdown = uidropdown(fig, ...
+            'Items', serialPorts, ...
+            'Position', [20, 60, 260, 22], ...
+            'Value', serialPorts{1});
+
+        % Create an OK button
+        btn = uibutton(fig, ...
+            'Text', 'OK', ...
+            'Position', [100, 20, 100, 30], ...
+            'ButtonPushedFcn', @(btn, event) uiresume(fig));
+
+        % Wait for user to select
+        uiwait(fig);
+
+        % Retrieve the selected COM port
+        STLINK_COMPORT = dropdown.Value;
+        disp(['Selected ST-Link COM Port: ', STLINK_COMPORT]);
+
+        % Save the selected COM port in the persistent variable
+        savedCOMPort = STLINK_COMPORT;
+
+        % Close the figure
+        delete(fig);
+
+    % If STLINK_COMPORT already exists in the base workspace and is not empty, return it
     else
-        % Use the saved persistent COM port
         STLINK_COMPORT = savedCOMPort;
-        disp(['ST-Link COM Port already set to: ', STLINK_COMPORT]);
+        disp(['ST-Link COM Port already set to: ', STLINK_COMPORT, ', if this is incorrect, delete the STLINK_COMPORT Workspace variable']);
+        return;
     end
 end
