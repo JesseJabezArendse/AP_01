@@ -1,7 +1,7 @@
 function auto_program_win(filename)
     drives = getdrives('-nofloppy');
     num_drives = size(drives,2);
-    for i = length(drives)
+    for i = linspace(1,num_drives,num_drives)
         drive_letter = drives{i};
         drive_name = DriveName(drive_letter(1));
         if drive_name(end-5:end) == 'F411RE' % found the STM Drag and Drop Programming

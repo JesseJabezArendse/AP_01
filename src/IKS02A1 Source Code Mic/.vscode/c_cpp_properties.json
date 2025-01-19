@@ -1,24 +1,121 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
 {
-  "configurations": [
-    {
-      "name": "STM32",
-      "includePath": [
-        "Core/Inc",
-        "Drivers/CMSIS/DSP/Include",
-        "Drivers/CMSIS/DSP/Include/dsp",
-        "Drivers/CMSIS/Device/ST/STM32F4xx/Include",
-        "Drivers/CMSIS/Include",
-        "Drivers/STM32F4xx_HAL_Driver/Inc",
-        "Drivers/STM32F4xx_HAL_Driver/Inc/Legacy",
-        "Middlewares/ST/STM32_Audio/Addons/PDM/Inc",
-        "PDM2PCM/App"
-      ],
-      "defines": [
-        "STM32F411xE",
-        "USE_HAL_DRIVER"
-      ],
-      "compilerPath": "C:\\USERS\\JESSEJABEZARENDSE\\APPDATA\\ROAMING\\CODE\\USER\\GLOBALSTORAGE\\BMD.STM32-FOR-VSCODE\\@XPACK-DEV-TOOLS\\ARM-NONE-EABI-GCC\\12.3.1-1.2.1\\.CONTENT\\BIN\\ARM-NONE-EABI-GCC.EXE"
-    }
-  ],
-  "version": 4
+    "configurations": [
+        {
+            "name": "PlatformIO",
+            "includePath": [
+                "C:/Users/JesseJabezArendse/Documents/PlatformIO/Projects/IMP34DT05_stm32duino/include",
+                "C:/Users/JesseJabezArendse/Documents/PlatformIO/Projects/IMP34DT05_stm32duino/src",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/cores/arduino/avr",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32/LL",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32/usb",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32/OpenAMP",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32/usb/hid",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32/usb/cdc",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/system/Drivers/STM32F4xx_HAL_Driver/Inc",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/system/Drivers/STM32F4xx_HAL_Driver/Src",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/system/STM32F4xx",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/system/Middlewares/ST/STM32_USB_Device_Library/Core/Inc",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/system/Middlewares/ST/STM32_USB_Device_Library/Core/Src",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/system/Middlewares/OpenAMP",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/system/Middlewares/OpenAMP/open-amp/lib/include",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/system/Middlewares/OpenAMP/libmetal/lib/include",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/system/Middlewares/OpenAMP/virtual_driver",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-cmsis/CMSIS/Core/Include",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/system/Drivers/CMSIS/Device/ST/STM32F4xx/Include",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/system/Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/gcc",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-cmsis/CMSIS/DSP/Include",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-cmsis/CMSIS/DSP/PrivateInclude",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/cores/arduino",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/variants/STM32F4xx/F411R(C-E)T",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/libraries/CMSIS_DSP/src",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/libraries/EEPROM/src",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/libraries/IWatchdog/src",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/libraries/Keyboard/src",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/libraries/Mouse/src",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/libraries/RGB_LED_TLC59731/src",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/libraries/SPI/src",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/libraries/Servo/src",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/libraries/SoftwareSerial/src",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/libraries/SrcWrapper/src",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/libraries/SubGhz/src",
+                "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/libraries/Wire/src",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "C:/Users/JesseJabezArendse/Documents/PlatformIO/Projects/IMP34DT05_stm32duino/include",
+                    "C:/Users/JesseJabezArendse/Documents/PlatformIO/Projects/IMP34DT05_stm32duino/src",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/cores/arduino/avr",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32/LL",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32/usb",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32/OpenAMP",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32/usb/hid",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32/usb/cdc",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/system/Drivers/STM32F4xx_HAL_Driver/Inc",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/system/Drivers/STM32F4xx_HAL_Driver/Src",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/system/STM32F4xx",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/system/Middlewares/ST/STM32_USB_Device_Library/Core/Inc",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/system/Middlewares/ST/STM32_USB_Device_Library/Core/Src",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/system/Middlewares/OpenAMP",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/system/Middlewares/OpenAMP/open-amp/lib/include",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/system/Middlewares/OpenAMP/libmetal/lib/include",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/system/Middlewares/OpenAMP/virtual_driver",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-cmsis/CMSIS/Core/Include",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/system/Drivers/CMSIS/Device/ST/STM32F4xx/Include",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/system/Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/gcc",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-cmsis/CMSIS/DSP/Include",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-cmsis/CMSIS/DSP/PrivateInclude",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/cores/arduino",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/variants/STM32F4xx/F411R(C-E)T",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/libraries/CMSIS_DSP/src",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/libraries/EEPROM/src",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/libraries/IWatchdog/src",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/libraries/Keyboard/src",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/libraries/Mouse/src",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/libraries/RGB_LED_TLC59731/src",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/libraries/SPI/src",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/libraries/Servo/src",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/libraries/SoftwareSerial/src",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/libraries/SrcWrapper/src",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/libraries/SubGhz/src",
+                    "C:/Users/JesseJabezArendse/.platformio/packages/framework-arduinoststm32/libraries/Wire/src",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=60116",
+                "STM32F411xE",
+                "STM32F4xx",
+                "ARDUINO=10808",
+                "ARDUINO_ARCH_STM32",
+                "NDEBUG",
+                "ARDUINO_NUCLEO_F411RE",
+                "BOARD_NAME=\"NUCLEO_F411RE\"",
+                "HAL_UART_MODULE_ENABLED",
+                "USE_FULL_LL_DRIVER",
+                "VARIANT_H=\"variant_NUCLEO_F411RE.h\"",
+                "VECT_TAB_OFFSET=0x0",
+                ""
+            ],
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "compilerPath": "C:/Users/JesseJabezArendse/.platformio/packages/toolchain-gccarmnoneeabi/bin/arm-none-eabi-gcc.exe",
+            "compilerArgs": [
+                "-mcpu=cortex-m4",
+                "-mthumb",
+                "-mfpu=fpv4-sp-d16",
+                "-mfloat-abi=hard",
+                ""
+            ]
+        }
+    ],
+    "version": 4
 }
