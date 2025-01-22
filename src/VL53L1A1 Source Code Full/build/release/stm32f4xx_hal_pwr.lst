@@ -1,4 +1,4 @@
-ARM GAS  C:\Temp\ccZJsDuM.s 			page 1
+ARM GAS  C:\Temp\ccJm91J7.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Temp\ccZJsDuM.s 			page 1
   58 000c 0193     		str	r3, [sp, #4]
   59 000e 019B     		ldr	r3, [sp, #4]
   60 0010 02B0     		add	sp, sp, #8
-ARM GAS  C:\Temp\ccZJsDuM.s 			page 2
+ARM GAS  C:\Temp\ccJm91J7.s 			page 2
 
 
   61              		@ sp needed
@@ -118,7 +118,7 @@ ARM GAS  C:\Temp\ccZJsDuM.s 			page 1
  119 001a 22F48032 		bic	r2, r2, #65536
  120 001e 1A60     		str	r2, [r3]
  121 0020 9A68     		ldr	r2, [r3, #8]
-ARM GAS  C:\Temp\ccZJsDuM.s 			page 3
+ARM GAS  C:\Temp\ccJm91J7.s 			page 3
 
 
  122 0022 22F48032 		bic	r2, r2, #65536
@@ -178,7 +178,7 @@ ARM GAS  C:\Temp\ccZJsDuM.s 			page 1
  178 0002 0122     		movs	r2, #1
  179 0004 1A61     		str	r2, [r3, #16]
  180 0006 7047     		bx	lr
-ARM GAS  C:\Temp\ccZJsDuM.s 			page 4
+ARM GAS  C:\Temp\ccJm91J7.s 			page 4
 
 
  181              	.L21:
@@ -238,7 +238,7 @@ ARM GAS  C:\Temp\ccZJsDuM.s 			page 1
  241 0008 5360     		str	r3, [r2, #4]
  242 000a 7047     		bx	lr
  243              	.L30:
-ARM GAS  C:\Temp\ccZJsDuM.s 			page 5
+ARM GAS  C:\Temp\ccJm91J7.s 			page 5
 
 
  244              		.align	2
@@ -298,7 +298,7 @@ ARM GAS  C:\Temp\ccZJsDuM.s 			page 1
  301              		.thumb
  302              		.thumb_func
  304              	HAL_PWR_EnterSTOPMode:
-ARM GAS  C:\Temp\ccZJsDuM.s 			page 6
+ARM GAS  C:\Temp\ccJm91J7.s 			page 6
 
 
  305              		@ args = 0, pretend = 0, frame = 0
@@ -358,7 +358,7 @@ ARM GAS  C:\Temp\ccZJsDuM.s 			page 1
  360              		.syntax unified
  361              		.thumb
  362              		.thumb_func
-ARM GAS  C:\Temp\ccZJsDuM.s 			page 7
+ARM GAS  C:\Temp\ccJm91J7.s 			page 7
 
 
  364              	HAL_PWR_EnterSTANDBYMode:
@@ -418,7 +418,7 @@ ARM GAS  C:\Temp\ccZJsDuM.s 			page 1
  422 0014 4FF48032 		mov	r2, #65536
  423 0018 5A61     		str	r2, [r3, #20]
  424 001a F7E7     		b	.L49
-ARM GAS  C:\Temp\ccZJsDuM.s 			page 8
+ARM GAS  C:\Temp\ccJm91J7.s 			page 8
 
 
  425              	.L54:
@@ -478,7 +478,7 @@ ARM GAS  C:\Temp\ccZJsDuM.s 			page 1
  485 0004 43F01003 		orr	r3, r3, #16
  486 0008 1361     		str	r3, [r2, #16]
  487 000a 7047     		bx	lr
-ARM GAS  C:\Temp\ccZJsDuM.s 			page 9
+ARM GAS  C:\Temp\ccJm91J7.s 			page 9
 
 
  488              	.L63:
@@ -505,60 +505,60 @@ ARM GAS  C:\Temp\ccZJsDuM.s 			page 1
  511              	.L65:
  512 000c 00ED00E0 		.word	-536810240
  514              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
-ARM GAS  C:\Temp\ccZJsDuM.s 			page 10
+ARM GAS  C:\Temp\ccJm91J7.s 			page 10
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_hal_pwr.c
-  C:\Temp\ccZJsDuM.s:18     .text.HAL_PWR_DeInit:00000000 $t
-  C:\Temp\ccZJsDuM.s:24     .text.HAL_PWR_DeInit:00000000 HAL_PWR_DeInit
-  C:\Temp\ccZJsDuM.s:39     .text.HAL_PWR_DeInit:00000014 $d
-  C:\Temp\ccZJsDuM.s:42     .text.HAL_PWR_EnableBkUpAccess:00000000 $t
-  C:\Temp\ccZJsDuM.s:48     .text.HAL_PWR_EnableBkUpAccess:00000000 HAL_PWR_EnableBkUpAccess
-  C:\Temp\ccZJsDuM.s:66     .text.HAL_PWR_EnableBkUpAccess:00000014 $d
-  C:\Temp\ccZJsDuM.s:70     .text.HAL_PWR_DisableBkUpAccess:00000000 $t
-  C:\Temp\ccZJsDuM.s:76     .text.HAL_PWR_DisableBkUpAccess:00000000 HAL_PWR_DisableBkUpAccess
-  C:\Temp\ccZJsDuM.s:94     .text.HAL_PWR_DisableBkUpAccess:00000014 $d
-  C:\Temp\ccZJsDuM.s:98     .text.HAL_PWR_ConfigPVD:00000000 $t
-  C:\Temp\ccZJsDuM.s:104    .text.HAL_PWR_ConfigPVD:00000000 HAL_PWR_ConfigPVD
-  C:\Temp\ccZJsDuM.s:163    .text.HAL_PWR_ConfigPVD:0000007c $d
-  C:\Temp\ccZJsDuM.s:167    .text.HAL_PWR_EnablePVD:00000000 $t
-  C:\Temp\ccZJsDuM.s:173    .text.HAL_PWR_EnablePVD:00000000 HAL_PWR_EnablePVD
-  C:\Temp\ccZJsDuM.s:184    .text.HAL_PWR_EnablePVD:00000008 $d
-  C:\Temp\ccZJsDuM.s:187    .text.HAL_PWR_DisablePVD:00000000 $t
-  C:\Temp\ccZJsDuM.s:193    .text.HAL_PWR_DisablePVD:00000000 HAL_PWR_DisablePVD
-  C:\Temp\ccZJsDuM.s:204    .text.HAL_PWR_DisablePVD:00000008 $d
-  C:\Temp\ccZJsDuM.s:207    .text.HAL_PWR_EnableWakeUpPin:00000000 $t
-  C:\Temp\ccZJsDuM.s:213    .text.HAL_PWR_EnableWakeUpPin:00000000 HAL_PWR_EnableWakeUpPin
-  C:\Temp\ccZJsDuM.s:225    .text.HAL_PWR_EnableWakeUpPin:0000000c $d
-  C:\Temp\ccZJsDuM.s:228    .text.HAL_PWR_DisableWakeUpPin:00000000 $t
-  C:\Temp\ccZJsDuM.s:234    .text.HAL_PWR_DisableWakeUpPin:00000000 HAL_PWR_DisableWakeUpPin
-  C:\Temp\ccZJsDuM.s:246    .text.HAL_PWR_DisableWakeUpPin:0000000c $d
-  C:\Temp\ccZJsDuM.s:249    .text.HAL_PWR_EnterSLEEPMode:00000000 $t
-  C:\Temp\ccZJsDuM.s:255    .text.HAL_PWR_EnterSLEEPMode:00000000 HAL_PWR_EnterSLEEPMode
-  C:\Temp\ccZJsDuM.s:295    .text.HAL_PWR_EnterSLEEPMode:00000020 $d
-  C:\Temp\ccZJsDuM.s:298    .text.HAL_PWR_EnterSTOPMode:00000000 $t
-  C:\Temp\ccZJsDuM.s:304    .text.HAL_PWR_EnterSTOPMode:00000000 HAL_PWR_EnterSTOPMode
-  C:\Temp\ccZJsDuM.s:354    .text.HAL_PWR_EnterSTOPMode:00000034 $d
-  C:\Temp\ccZJsDuM.s:358    .text.HAL_PWR_EnterSTANDBYMode:00000000 $t
-  C:\Temp\ccZJsDuM.s:364    .text.HAL_PWR_EnterSTANDBYMode:00000000 HAL_PWR_EnterSTANDBYMode
-  C:\Temp\ccZJsDuM.s:386    .text.HAL_PWR_EnterSTANDBYMode:00000018 $d
-  C:\Temp\ccZJsDuM.s:390    .text.HAL_PWR_PVDCallback:00000000 $t
-  C:\Temp\ccZJsDuM.s:396    .text.HAL_PWR_PVDCallback:00000000 HAL_PWR_PVDCallback
-  C:\Temp\ccZJsDuM.s:403    .text.HAL_PWR_PVD_IRQHandler:00000000 $t
-  C:\Temp\ccZJsDuM.s:409    .text.HAL_PWR_PVD_IRQHandler:00000000 HAL_PWR_PVD_IRQHandler
-  C:\Temp\ccZJsDuM.s:428    .text.HAL_PWR_PVD_IRQHandler:0000001c $d
-  C:\Temp\ccZJsDuM.s:431    .text.HAL_PWR_EnableSleepOnExit:00000000 $t
-  C:\Temp\ccZJsDuM.s:437    .text.HAL_PWR_EnableSleepOnExit:00000000 HAL_PWR_EnableSleepOnExit
-  C:\Temp\ccZJsDuM.s:449    .text.HAL_PWR_EnableSleepOnExit:0000000c $d
-  C:\Temp\ccZJsDuM.s:452    .text.HAL_PWR_DisableSleepOnExit:00000000 $t
-  C:\Temp\ccZJsDuM.s:458    .text.HAL_PWR_DisableSleepOnExit:00000000 HAL_PWR_DisableSleepOnExit
-  C:\Temp\ccZJsDuM.s:470    .text.HAL_PWR_DisableSleepOnExit:0000000c $d
-  C:\Temp\ccZJsDuM.s:473    .text.HAL_PWR_EnableSEVOnPend:00000000 $t
-  C:\Temp\ccZJsDuM.s:479    .text.HAL_PWR_EnableSEVOnPend:00000000 HAL_PWR_EnableSEVOnPend
-  C:\Temp\ccZJsDuM.s:491    .text.HAL_PWR_EnableSEVOnPend:0000000c $d
-  C:\Temp\ccZJsDuM.s:494    .text.HAL_PWR_DisableSEVOnPend:00000000 $t
-  C:\Temp\ccZJsDuM.s:500    .text.HAL_PWR_DisableSEVOnPend:00000000 HAL_PWR_DisableSEVOnPend
-  C:\Temp\ccZJsDuM.s:512    .text.HAL_PWR_DisableSEVOnPend:0000000c $d
+  C:\Temp\ccJm91J7.s:18     .text.HAL_PWR_DeInit:00000000 $t
+  C:\Temp\ccJm91J7.s:24     .text.HAL_PWR_DeInit:00000000 HAL_PWR_DeInit
+  C:\Temp\ccJm91J7.s:39     .text.HAL_PWR_DeInit:00000014 $d
+  C:\Temp\ccJm91J7.s:42     .text.HAL_PWR_EnableBkUpAccess:00000000 $t
+  C:\Temp\ccJm91J7.s:48     .text.HAL_PWR_EnableBkUpAccess:00000000 HAL_PWR_EnableBkUpAccess
+  C:\Temp\ccJm91J7.s:66     .text.HAL_PWR_EnableBkUpAccess:00000014 $d
+  C:\Temp\ccJm91J7.s:70     .text.HAL_PWR_DisableBkUpAccess:00000000 $t
+  C:\Temp\ccJm91J7.s:76     .text.HAL_PWR_DisableBkUpAccess:00000000 HAL_PWR_DisableBkUpAccess
+  C:\Temp\ccJm91J7.s:94     .text.HAL_PWR_DisableBkUpAccess:00000014 $d
+  C:\Temp\ccJm91J7.s:98     .text.HAL_PWR_ConfigPVD:00000000 $t
+  C:\Temp\ccJm91J7.s:104    .text.HAL_PWR_ConfigPVD:00000000 HAL_PWR_ConfigPVD
+  C:\Temp\ccJm91J7.s:163    .text.HAL_PWR_ConfigPVD:0000007c $d
+  C:\Temp\ccJm91J7.s:167    .text.HAL_PWR_EnablePVD:00000000 $t
+  C:\Temp\ccJm91J7.s:173    .text.HAL_PWR_EnablePVD:00000000 HAL_PWR_EnablePVD
+  C:\Temp\ccJm91J7.s:184    .text.HAL_PWR_EnablePVD:00000008 $d
+  C:\Temp\ccJm91J7.s:187    .text.HAL_PWR_DisablePVD:00000000 $t
+  C:\Temp\ccJm91J7.s:193    .text.HAL_PWR_DisablePVD:00000000 HAL_PWR_DisablePVD
+  C:\Temp\ccJm91J7.s:204    .text.HAL_PWR_DisablePVD:00000008 $d
+  C:\Temp\ccJm91J7.s:207    .text.HAL_PWR_EnableWakeUpPin:00000000 $t
+  C:\Temp\ccJm91J7.s:213    .text.HAL_PWR_EnableWakeUpPin:00000000 HAL_PWR_EnableWakeUpPin
+  C:\Temp\ccJm91J7.s:225    .text.HAL_PWR_EnableWakeUpPin:0000000c $d
+  C:\Temp\ccJm91J7.s:228    .text.HAL_PWR_DisableWakeUpPin:00000000 $t
+  C:\Temp\ccJm91J7.s:234    .text.HAL_PWR_DisableWakeUpPin:00000000 HAL_PWR_DisableWakeUpPin
+  C:\Temp\ccJm91J7.s:246    .text.HAL_PWR_DisableWakeUpPin:0000000c $d
+  C:\Temp\ccJm91J7.s:249    .text.HAL_PWR_EnterSLEEPMode:00000000 $t
+  C:\Temp\ccJm91J7.s:255    .text.HAL_PWR_EnterSLEEPMode:00000000 HAL_PWR_EnterSLEEPMode
+  C:\Temp\ccJm91J7.s:295    .text.HAL_PWR_EnterSLEEPMode:00000020 $d
+  C:\Temp\ccJm91J7.s:298    .text.HAL_PWR_EnterSTOPMode:00000000 $t
+  C:\Temp\ccJm91J7.s:304    .text.HAL_PWR_EnterSTOPMode:00000000 HAL_PWR_EnterSTOPMode
+  C:\Temp\ccJm91J7.s:354    .text.HAL_PWR_EnterSTOPMode:00000034 $d
+  C:\Temp\ccJm91J7.s:358    .text.HAL_PWR_EnterSTANDBYMode:00000000 $t
+  C:\Temp\ccJm91J7.s:364    .text.HAL_PWR_EnterSTANDBYMode:00000000 HAL_PWR_EnterSTANDBYMode
+  C:\Temp\ccJm91J7.s:386    .text.HAL_PWR_EnterSTANDBYMode:00000018 $d
+  C:\Temp\ccJm91J7.s:390    .text.HAL_PWR_PVDCallback:00000000 $t
+  C:\Temp\ccJm91J7.s:396    .text.HAL_PWR_PVDCallback:00000000 HAL_PWR_PVDCallback
+  C:\Temp\ccJm91J7.s:403    .text.HAL_PWR_PVD_IRQHandler:00000000 $t
+  C:\Temp\ccJm91J7.s:409    .text.HAL_PWR_PVD_IRQHandler:00000000 HAL_PWR_PVD_IRQHandler
+  C:\Temp\ccJm91J7.s:428    .text.HAL_PWR_PVD_IRQHandler:0000001c $d
+  C:\Temp\ccJm91J7.s:431    .text.HAL_PWR_EnableSleepOnExit:00000000 $t
+  C:\Temp\ccJm91J7.s:437    .text.HAL_PWR_EnableSleepOnExit:00000000 HAL_PWR_EnableSleepOnExit
+  C:\Temp\ccJm91J7.s:449    .text.HAL_PWR_EnableSleepOnExit:0000000c $d
+  C:\Temp\ccJm91J7.s:452    .text.HAL_PWR_DisableSleepOnExit:00000000 $t
+  C:\Temp\ccJm91J7.s:458    .text.HAL_PWR_DisableSleepOnExit:00000000 HAL_PWR_DisableSleepOnExit
+  C:\Temp\ccJm91J7.s:470    .text.HAL_PWR_DisableSleepOnExit:0000000c $d
+  C:\Temp\ccJm91J7.s:473    .text.HAL_PWR_EnableSEVOnPend:00000000 $t
+  C:\Temp\ccJm91J7.s:479    .text.HAL_PWR_EnableSEVOnPend:00000000 HAL_PWR_EnableSEVOnPend
+  C:\Temp\ccJm91J7.s:491    .text.HAL_PWR_EnableSEVOnPend:0000000c $d
+  C:\Temp\ccJm91J7.s:494    .text.HAL_PWR_DisableSEVOnPend:00000000 $t
+  C:\Temp\ccJm91J7.s:500    .text.HAL_PWR_DisableSEVOnPend:00000000 HAL_PWR_DisableSEVOnPend
+  C:\Temp\ccJm91J7.s:512    .text.HAL_PWR_DisableSEVOnPend:0000000c $d
 
 NO UNDEFINED SYMBOLS

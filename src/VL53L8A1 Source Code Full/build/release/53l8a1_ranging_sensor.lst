@@ -1,0 +1,745 @@
+ARM GAS  C:\Temp\ccqPaIEm.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"53l8a1_ranging_sensor.c"
+  16              		.text
+  17              		.section	.text.VL53L8CX_Probe,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  23              	VL53L8CX_Probe:
+  24              		@ args = 0, pretend = 0, frame = 32
+  25              		@ frame_needed = 0, uses_anonymous_args = 0
+  26 0000 30B5     		push	{r4, r5, lr}
+  27 0002 89B0     		sub	sp, sp, #36
+  28 0004 0446     		mov	r4, r0
+  29 0006 5223     		movs	r3, #82
+  30 0008 ADF81030 		strh	r3, [sp, #16]	@ movhi
+  31 000c 224B     		ldr	r3, .L9
+  32 000e 0293     		str	r3, [sp, #8]
+  33 0010 224B     		ldr	r3, .L9+4
+  34 0012 0393     		str	r3, [sp, #12]
+  35 0014 224B     		ldr	r3, .L9+8
+  36 0016 0593     		str	r3, [sp, #20]
+  37 0018 224B     		ldr	r3, .L9+12
+  38 001a 0693     		str	r3, [sp, #24]
+  39 001c 224B     		ldr	r3, .L9+16
+  40 001e 0793     		str	r3, [sp, #28]
+  41 0020 4FF42E63 		mov	r3, #2784
+  42 0024 214D     		ldr	r5, .L9+20
+  43 0026 03FB0055 		mla	r5, r3, r0, r5
+  44 002a 02A9     		add	r1, sp, #8
+  45 002c 2846     		mov	r0, r5
+  46 002e FFF7FEFF 		bl	VL53L8CX_RegisterBusIO
+  47 0032 28BB     		cbnz	r0, .L3
+  48 0034 1E4B     		ldr	r3, .L9+24
+  49 0036 1F4A     		ldr	r2, .L9+28
+  50 0038 1A60     		str	r2, [r3]
+  51 003a 1F4B     		ldr	r3, .L9+32
+  52 003c 43F82450 		str	r5, [r3, r4, lsl #2]
+  53 0040 01A9     		add	r1, sp, #4
+  54 0042 2846     		mov	r0, r5
+  55 0044 FFF7FEFF 		bl	VL53L8CX_ReadID
+  56 0048 E8B9     		cbnz	r0, .L4
+  57 004a 019A     		ldr	r2, [sp, #4]
+  58 004c 4FF20C03 		movw	r3, #61452
+ARM GAS  C:\Temp\ccqPaIEm.s 			page 2
+
+
+  59 0050 9A42     		cmp	r2, r3
+  60 0052 1BD1     		bne	.L5
+  61 0054 164B     		ldr	r3, .L9+24
+  62 0056 1B68     		ldr	r3, [r3]
+  63 0058 1B68     		ldr	r3, [r3]
+  64 005a 174A     		ldr	r2, .L9+32
+  65 005c 52F82400 		ldr	r0, [r2, r4, lsl #2]
+  66 0060 9847     		blx	r3
+  67 0062 B0B9     		cbnz	r0, .L6
+  68 0064 124B     		ldr	r3, .L9+24
+  69 0066 1B68     		ldr	r3, [r3]
+  70 0068 DB68     		ldr	r3, [r3, #12]
+  71 006a 1449     		ldr	r1, .L9+36
+  72 006c 124A     		ldr	r2, .L9+32
+  73 006e 52F82400 		ldr	r0, [r2, r4, lsl #2]
+  74 0072 9847     		blx	r3
+  75 0074 08B9     		cbnz	r0, .L8
+  76              	.L1:
+  77 0076 09B0     		add	sp, sp, #36
+  78              		@ sp needed
+  79 0078 30BD     		pop	{r4, r5, pc}
+  80              	.L8:
+  81 007a 6FF00400 		mvn	r0, #4
+  82 007e FAE7     		b	.L1
+  83              	.L3:
+  84 0080 6FF00400 		mvn	r0, #4
+  85 0084 F7E7     		b	.L1
+  86              	.L4:
+  87 0086 6FF00400 		mvn	r0, #4
+  88 008a F4E7     		b	.L1
+  89              	.L5:
+  90 008c 6FF00600 		mvn	r0, #6
+  91 0090 F1E7     		b	.L1
+  92              	.L6:
+  93 0092 6FF00400 		mvn	r0, #4
+  94 0096 EEE7     		b	.L1
+  95              	.L10:
+  96              		.align	2
+  97              	.L9:
+  98 0098 00000000 		.word	BSP_I2C1_Init
+  99 009c 00000000 		.word	BSP_I2C1_DeInit
+ 100 00a0 00000000 		.word	BSP_I2C1_WriteReg16
+ 101 00a4 00000000 		.word	BSP_I2C1_ReadReg16
+ 102 00a8 00000000 		.word	BSP_GetTick
+ 103 00ac 00000000 		.word	VL53L8CXObj.0
+ 104 00b0 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 105 00b4 00000000 		.word	VL53L8CX_RANGING_SENSOR_Driver
+ 106 00b8 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 107 00bc 00000000 		.word	VL53L8A1_RANGING_SENSOR_Cap
+ 109              		.section	.text.VL53L8A1_RANGING_SENSOR_Init,"ax",%progbits
+ 110              		.align	1
+ 111              		.global	VL53L8A1_RANGING_SENSOR_Init
+ 112              		.syntax unified
+ 113              		.thumb
+ 114              		.thumb_func
+ 116              	VL53L8A1_RANGING_SENSOR_Init:
+ 117              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Temp\ccqPaIEm.s 			page 3
+
+
+ 118              		@ frame_needed = 0, uses_anonymous_args = 0
+ 119 0000 0228     		cmp	r0, #2
+ 120 0002 03D8     		bhi	.L13
+ 121 0004 08B5     		push	{r3, lr}
+ 122 0006 FFF7FEFF 		bl	VL53L8CX_Probe
+ 123 000a 08BD     		pop	{r3, pc}
+ 124              	.L13:
+ 125 000c 6FF00100 		mvn	r0, #1
+ 126 0010 7047     		bx	lr
+ 128              		.section	.text.VL53L8A1_RANGING_SENSOR_DeInit,"ax",%progbits
+ 129              		.align	1
+ 130              		.global	VL53L8A1_RANGING_SENSOR_DeInit
+ 131              		.syntax unified
+ 132              		.thumb
+ 133              		.thumb_func
+ 135              	VL53L8A1_RANGING_SENSOR_DeInit:
+ 136              		@ args = 0, pretend = 0, frame = 0
+ 137              		@ frame_needed = 0, uses_anonymous_args = 0
+ 138 0000 0228     		cmp	r0, #2
+ 139 0002 0ED8     		bhi	.L20
+ 140 0004 08B5     		push	{r3, lr}
+ 141 0006 084B     		ldr	r3, .L27
+ 142 0008 1B68     		ldr	r3, [r3]
+ 143 000a 5B68     		ldr	r3, [r3, #4]
+ 144 000c 074A     		ldr	r2, .L27+4
+ 145 000e 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 146 0012 9847     		blx	r3
+ 147 0014 0028     		cmp	r0, #0
+ 148 0016 01DB     		blt	.L26
+ 149 0018 0020     		movs	r0, #0
+ 150              	.L18:
+ 151 001a 08BD     		pop	{r3, pc}
+ 152              	.L26:
+ 153 001c 6FF00400 		mvn	r0, #4
+ 154 0020 FBE7     		b	.L18
+ 155              	.L20:
+ 156 0022 6FF00100 		mvn	r0, #1
+ 157 0026 7047     		bx	lr
+ 158              	.L28:
+ 159              		.align	2
+ 160              	.L27:
+ 161 0028 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 162 002c 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 164              		.section	.text.VL53L8A1_RANGING_SENSOR_ReadID,"ax",%progbits
+ 165              		.align	1
+ 166              		.global	VL53L8A1_RANGING_SENSOR_ReadID
+ 167              		.syntax unified
+ 168              		.thumb
+ 169              		.thumb_func
+ 171              	VL53L8A1_RANGING_SENSOR_ReadID:
+ 172              		@ args = 0, pretend = 0, frame = 0
+ 173              		@ frame_needed = 0, uses_anonymous_args = 0
+ 174 0000 0228     		cmp	r0, #2
+ 175 0002 0ED8     		bhi	.L31
+ 176 0004 08B5     		push	{r3, lr}
+ 177 0006 084B     		ldr	r3, .L38
+ 178 0008 1B68     		ldr	r3, [r3]
+ARM GAS  C:\Temp\ccqPaIEm.s 			page 4
+
+
+ 179 000a 9B68     		ldr	r3, [r3, #8]
+ 180 000c 074A     		ldr	r2, .L38+4
+ 181 000e 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 182 0012 9847     		blx	r3
+ 183 0014 0028     		cmp	r0, #0
+ 184 0016 01DB     		blt	.L37
+ 185 0018 0020     		movs	r0, #0
+ 186              	.L29:
+ 187 001a 08BD     		pop	{r3, pc}
+ 188              	.L37:
+ 189 001c 6FF00400 		mvn	r0, #4
+ 190 0020 FBE7     		b	.L29
+ 191              	.L31:
+ 192 0022 6FF00100 		mvn	r0, #1
+ 193 0026 7047     		bx	lr
+ 194              	.L39:
+ 195              		.align	2
+ 196              	.L38:
+ 197 0028 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 198 002c 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 200              		.section	.text.VL53L8A1_RANGING_SENSOR_GetCapabilities,"ax",%progbits
+ 201              		.align	1
+ 202              		.global	VL53L8A1_RANGING_SENSOR_GetCapabilities
+ 203              		.syntax unified
+ 204              		.thumb
+ 205              		.thumb_func
+ 207              	VL53L8A1_RANGING_SENSOR_GetCapabilities:
+ 208              		@ args = 0, pretend = 0, frame = 0
+ 209              		@ frame_needed = 0, uses_anonymous_args = 0
+ 210 0000 0228     		cmp	r0, #2
+ 211 0002 0ED8     		bhi	.L42
+ 212 0004 08B5     		push	{r3, lr}
+ 213 0006 084B     		ldr	r3, .L49
+ 214 0008 1B68     		ldr	r3, [r3]
+ 215 000a DB68     		ldr	r3, [r3, #12]
+ 216 000c 074A     		ldr	r2, .L49+4
+ 217 000e 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 218 0012 9847     		blx	r3
+ 219 0014 0028     		cmp	r0, #0
+ 220 0016 01DB     		blt	.L48
+ 221 0018 0020     		movs	r0, #0
+ 222              	.L40:
+ 223 001a 08BD     		pop	{r3, pc}
+ 224              	.L48:
+ 225 001c 6FF00400 		mvn	r0, #4
+ 226 0020 FBE7     		b	.L40
+ 227              	.L42:
+ 228 0022 6FF00100 		mvn	r0, #1
+ 229 0026 7047     		bx	lr
+ 230              	.L50:
+ 231              		.align	2
+ 232              	.L49:
+ 233 0028 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 234 002c 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 236              		.section	.text.VL53L8A1_RANGING_SENSOR_ConfigProfile,"ax",%progbits
+ 237              		.align	1
+ 238              		.global	VL53L8A1_RANGING_SENSOR_ConfigProfile
+ARM GAS  C:\Temp\ccqPaIEm.s 			page 5
+
+
+ 239              		.syntax unified
+ 240              		.thumb
+ 241              		.thumb_func
+ 243              	VL53L8A1_RANGING_SENSOR_ConfigProfile:
+ 244              		@ args = 0, pretend = 0, frame = 0
+ 245              		@ frame_needed = 0, uses_anonymous_args = 0
+ 246 0000 0228     		cmp	r0, #2
+ 247 0002 0ED8     		bhi	.L53
+ 248 0004 08B5     		push	{r3, lr}
+ 249 0006 084B     		ldr	r3, .L60
+ 250 0008 1B68     		ldr	r3, [r3]
+ 251 000a 1B69     		ldr	r3, [r3, #16]
+ 252 000c 074A     		ldr	r2, .L60+4
+ 253 000e 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 254 0012 9847     		blx	r3
+ 255 0014 0028     		cmp	r0, #0
+ 256 0016 01DB     		blt	.L59
+ 257 0018 0020     		movs	r0, #0
+ 258              	.L51:
+ 259 001a 08BD     		pop	{r3, pc}
+ 260              	.L59:
+ 261 001c 6FF00400 		mvn	r0, #4
+ 262 0020 FBE7     		b	.L51
+ 263              	.L53:
+ 264 0022 6FF00100 		mvn	r0, #1
+ 265 0026 7047     		bx	lr
+ 266              	.L61:
+ 267              		.align	2
+ 268              	.L60:
+ 269 0028 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 270 002c 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 272              		.section	.text.VL53L8A1_RANGING_SENSOR_ConfigROI,"ax",%progbits
+ 273              		.align	1
+ 274              		.global	VL53L8A1_RANGING_SENSOR_ConfigROI
+ 275              		.syntax unified
+ 276              		.thumb
+ 277              		.thumb_func
+ 279              	VL53L8A1_RANGING_SENSOR_ConfigROI:
+ 280              		@ args = 0, pretend = 0, frame = 0
+ 281              		@ frame_needed = 0, uses_anonymous_args = 0
+ 282 0000 0228     		cmp	r0, #2
+ 283 0002 11D8     		bhi	.L64
+ 284 0004 08B5     		push	{r3, lr}
+ 285 0006 0B4B     		ldr	r3, .L72
+ 286 0008 9B68     		ldr	r3, [r3, #8]
+ 287 000a 83B1     		cbz	r3, .L65
+ 288 000c 0A4B     		ldr	r3, .L72+4
+ 289 000e 1B68     		ldr	r3, [r3]
+ 290 0010 5B69     		ldr	r3, [r3, #20]
+ 291 0012 0A4A     		ldr	r2, .L72+8
+ 292 0014 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 293 0018 9847     		blx	r3
+ 294 001a 0028     		cmp	r0, #0
+ 295 001c 01DB     		blt	.L71
+ 296 001e 0020     		movs	r0, #0
+ 297              	.L62:
+ 298 0020 08BD     		pop	{r3, pc}
+ARM GAS  C:\Temp\ccqPaIEm.s 			page 6
+
+
+ 299              	.L71:
+ 300 0022 6FF00400 		mvn	r0, #4
+ 301 0026 FBE7     		b	.L62
+ 302              	.L64:
+ 303 0028 6FF00100 		mvn	r0, #1
+ 304 002c 7047     		bx	lr
+ 305              	.L65:
+ 306 002e 6FF00A00 		mvn	r0, #10
+ 307 0032 F5E7     		b	.L62
+ 308              	.L73:
+ 309              		.align	2
+ 310              	.L72:
+ 311 0034 00000000 		.word	VL53L8A1_RANGING_SENSOR_Cap
+ 312 0038 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 313 003c 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 315              		.section	.text.VL53L8A1_RANGING_SENSOR_ConfigIT,"ax",%progbits
+ 316              		.align	1
+ 317              		.global	VL53L8A1_RANGING_SENSOR_ConfigIT
+ 318              		.syntax unified
+ 319              		.thumb
+ 320              		.thumb_func
+ 322              	VL53L8A1_RANGING_SENSOR_ConfigIT:
+ 323              		@ args = 0, pretend = 0, frame = 0
+ 324              		@ frame_needed = 0, uses_anonymous_args = 0
+ 325 0000 0228     		cmp	r0, #2
+ 326 0002 0ED8     		bhi	.L76
+ 327 0004 08B5     		push	{r3, lr}
+ 328 0006 084B     		ldr	r3, .L83
+ 329 0008 1B68     		ldr	r3, [r3]
+ 330 000a 9B69     		ldr	r3, [r3, #24]
+ 331 000c 074A     		ldr	r2, .L83+4
+ 332 000e 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 333 0012 9847     		blx	r3
+ 334 0014 0028     		cmp	r0, #0
+ 335 0016 01DB     		blt	.L82
+ 336 0018 0020     		movs	r0, #0
+ 337              	.L74:
+ 338 001a 08BD     		pop	{r3, pc}
+ 339              	.L82:
+ 340 001c 6FF00400 		mvn	r0, #4
+ 341 0020 FBE7     		b	.L74
+ 342              	.L76:
+ 343 0022 6FF00100 		mvn	r0, #1
+ 344 0026 7047     		bx	lr
+ 345              	.L84:
+ 346              		.align	2
+ 347              	.L83:
+ 348 0028 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 349 002c 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 351              		.section	.text.VL53L8A1_RANGING_SENSOR_GetDistance,"ax",%progbits
+ 352              		.align	1
+ 353              		.global	VL53L8A1_RANGING_SENSOR_GetDistance
+ 354              		.syntax unified
+ 355              		.thumb
+ 356              		.thumb_func
+ 358              	VL53L8A1_RANGING_SENSOR_GetDistance:
+ 359              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Temp\ccqPaIEm.s 			page 7
+
+
+ 360              		@ frame_needed = 0, uses_anonymous_args = 0
+ 361 0000 0228     		cmp	r0, #2
+ 362 0002 0ED8     		bhi	.L87
+ 363 0004 08B5     		push	{r3, lr}
+ 364 0006 084B     		ldr	r3, .L94
+ 365 0008 1B68     		ldr	r3, [r3]
+ 366 000a DB69     		ldr	r3, [r3, #28]
+ 367 000c 074A     		ldr	r2, .L94+4
+ 368 000e 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 369 0012 9847     		blx	r3
+ 370 0014 0028     		cmp	r0, #0
+ 371 0016 01DB     		blt	.L93
+ 372 0018 0020     		movs	r0, #0
+ 373              	.L85:
+ 374 001a 08BD     		pop	{r3, pc}
+ 375              	.L93:
+ 376 001c 6FF00400 		mvn	r0, #4
+ 377 0020 FBE7     		b	.L85
+ 378              	.L87:
+ 379 0022 6FF00100 		mvn	r0, #1
+ 380 0026 7047     		bx	lr
+ 381              	.L95:
+ 382              		.align	2
+ 383              	.L94:
+ 384 0028 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 385 002c 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 387              		.section	.text.VL53L8A1_RANGING_SENSOR_Start,"ax",%progbits
+ 388              		.align	1
+ 389              		.global	VL53L8A1_RANGING_SENSOR_Start
+ 390              		.syntax unified
+ 391              		.thumb
+ 392              		.thumb_func
+ 394              	VL53L8A1_RANGING_SENSOR_Start:
+ 395              		@ args = 0, pretend = 0, frame = 0
+ 396              		@ frame_needed = 0, uses_anonymous_args = 0
+ 397 0000 0228     		cmp	r0, #2
+ 398 0002 0ED8     		bhi	.L98
+ 399 0004 08B5     		push	{r3, lr}
+ 400 0006 084B     		ldr	r3, .L105
+ 401 0008 1B68     		ldr	r3, [r3]
+ 402 000a 1B6A     		ldr	r3, [r3, #32]
+ 403 000c 074A     		ldr	r2, .L105+4
+ 404 000e 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 405 0012 9847     		blx	r3
+ 406 0014 0028     		cmp	r0, #0
+ 407 0016 01DB     		blt	.L104
+ 408 0018 0020     		movs	r0, #0
+ 409              	.L96:
+ 410 001a 08BD     		pop	{r3, pc}
+ 411              	.L104:
+ 412 001c 6FF00400 		mvn	r0, #4
+ 413 0020 FBE7     		b	.L96
+ 414              	.L98:
+ 415 0022 6FF00100 		mvn	r0, #1
+ 416 0026 7047     		bx	lr
+ 417              	.L106:
+ 418              		.align	2
+ARM GAS  C:\Temp\ccqPaIEm.s 			page 8
+
+
+ 419              	.L105:
+ 420 0028 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 421 002c 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 423              		.section	.text.VL53L8A1_RANGING_SENSOR_Stop,"ax",%progbits
+ 424              		.align	1
+ 425              		.global	VL53L8A1_RANGING_SENSOR_Stop
+ 426              		.syntax unified
+ 427              		.thumb
+ 428              		.thumb_func
+ 430              	VL53L8A1_RANGING_SENSOR_Stop:
+ 431              		@ args = 0, pretend = 0, frame = 0
+ 432              		@ frame_needed = 0, uses_anonymous_args = 0
+ 433 0000 0228     		cmp	r0, #2
+ 434 0002 0ED8     		bhi	.L109
+ 435 0004 08B5     		push	{r3, lr}
+ 436 0006 084B     		ldr	r3, .L116
+ 437 0008 1B68     		ldr	r3, [r3]
+ 438 000a 5B6A     		ldr	r3, [r3, #36]
+ 439 000c 074A     		ldr	r2, .L116+4
+ 440 000e 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 441 0012 9847     		blx	r3
+ 442 0014 0028     		cmp	r0, #0
+ 443 0016 01DB     		blt	.L115
+ 444 0018 0020     		movs	r0, #0
+ 445              	.L107:
+ 446 001a 08BD     		pop	{r3, pc}
+ 447              	.L115:
+ 448 001c 6FF00400 		mvn	r0, #4
+ 449 0020 FBE7     		b	.L107
+ 450              	.L109:
+ 451 0022 6FF00100 		mvn	r0, #1
+ 452 0026 7047     		bx	lr
+ 453              	.L117:
+ 454              		.align	2
+ 455              	.L116:
+ 456 0028 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 457 002c 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 459              		.section	.text.VL53L8A1_RANGING_SENSOR_SetAddress,"ax",%progbits
+ 460              		.align	1
+ 461              		.global	VL53L8A1_RANGING_SENSOR_SetAddress
+ 462              		.syntax unified
+ 463              		.thumb
+ 464              		.thumb_func
+ 466              	VL53L8A1_RANGING_SENSOR_SetAddress:
+ 467              		@ args = 0, pretend = 0, frame = 0
+ 468              		@ frame_needed = 0, uses_anonymous_args = 0
+ 469 0000 0228     		cmp	r0, #2
+ 470 0002 0ED8     		bhi	.L120
+ 471 0004 08B5     		push	{r3, lr}
+ 472 0006 084B     		ldr	r3, .L127
+ 473 0008 1B68     		ldr	r3, [r3]
+ 474 000a 9B6A     		ldr	r3, [r3, #40]
+ 475 000c 074A     		ldr	r2, .L127+4
+ 476 000e 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 477 0012 9847     		blx	r3
+ 478 0014 0028     		cmp	r0, #0
+ 479 0016 01DB     		blt	.L126
+ARM GAS  C:\Temp\ccqPaIEm.s 			page 9
+
+
+ 480 0018 0020     		movs	r0, #0
+ 481              	.L118:
+ 482 001a 08BD     		pop	{r3, pc}
+ 483              	.L126:
+ 484 001c 6FF00400 		mvn	r0, #4
+ 485 0020 FBE7     		b	.L118
+ 486              	.L120:
+ 487 0022 6FF00100 		mvn	r0, #1
+ 488 0026 7047     		bx	lr
+ 489              	.L128:
+ 490              		.align	2
+ 491              	.L127:
+ 492 0028 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 493 002c 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 495              		.section	.text.VL53L8A1_RANGING_SENSOR_GetAddress,"ax",%progbits
+ 496              		.align	1
+ 497              		.global	VL53L8A1_RANGING_SENSOR_GetAddress
+ 498              		.syntax unified
+ 499              		.thumb
+ 500              		.thumb_func
+ 502              	VL53L8A1_RANGING_SENSOR_GetAddress:
+ 503              		@ args = 0, pretend = 0, frame = 0
+ 504              		@ frame_needed = 0, uses_anonymous_args = 0
+ 505 0000 0228     		cmp	r0, #2
+ 506 0002 0ED8     		bhi	.L131
+ 507 0004 08B5     		push	{r3, lr}
+ 508 0006 084B     		ldr	r3, .L138
+ 509 0008 1B68     		ldr	r3, [r3]
+ 510 000a DB6A     		ldr	r3, [r3, #44]
+ 511 000c 074A     		ldr	r2, .L138+4
+ 512 000e 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 513 0012 9847     		blx	r3
+ 514 0014 0028     		cmp	r0, #0
+ 515 0016 01DB     		blt	.L137
+ 516 0018 0020     		movs	r0, #0
+ 517              	.L129:
+ 518 001a 08BD     		pop	{r3, pc}
+ 519              	.L137:
+ 520 001c 6FF00400 		mvn	r0, #4
+ 521 0020 FBE7     		b	.L129
+ 522              	.L131:
+ 523 0022 6FF00100 		mvn	r0, #1
+ 524 0026 7047     		bx	lr
+ 525              	.L139:
+ 526              		.align	2
+ 527              	.L138:
+ 528 0028 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 529 002c 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 531              		.section	.text.VL53L8A1_RANGING_SENSOR_SetPowerMode,"ax",%progbits
+ 532              		.align	1
+ 533              		.global	VL53L8A1_RANGING_SENSOR_SetPowerMode
+ 534              		.syntax unified
+ 535              		.thumb
+ 536              		.thumb_func
+ 538              	VL53L8A1_RANGING_SENSOR_SetPowerMode:
+ 539              		@ args = 0, pretend = 0, frame = 0
+ 540              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Temp\ccqPaIEm.s 			page 10
+
+
+ 541 0000 0228     		cmp	r0, #2
+ 542 0002 11D8     		bhi	.L142
+ 543 0004 0129     		cmp	r1, #1
+ 544 0006 12D8     		bhi	.L143
+ 545 0008 08B5     		push	{r3, lr}
+ 546 000a 0A4B     		ldr	r3, .L150
+ 547 000c 1B68     		ldr	r3, [r3]
+ 548 000e 1B6B     		ldr	r3, [r3, #48]
+ 549 0010 C9B2     		uxtb	r1, r1
+ 550 0012 094A     		ldr	r2, .L150+4
+ 551 0014 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 552 0018 9847     		blx	r3
+ 553 001a 0028     		cmp	r0, #0
+ 554 001c 01DB     		blt	.L149
+ 555 001e 0020     		movs	r0, #0
+ 556              	.L140:
+ 557 0020 08BD     		pop	{r3, pc}
+ 558              	.L149:
+ 559 0022 6FF00400 		mvn	r0, #4
+ 560 0026 FBE7     		b	.L140
+ 561              	.L142:
+ 562 0028 6FF00100 		mvn	r0, #1
+ 563 002c 7047     		bx	lr
+ 564              	.L143:
+ 565 002e 6FF00100 		mvn	r0, #1
+ 566 0032 7047     		bx	lr
+ 567              	.L151:
+ 568              		.align	2
+ 569              	.L150:
+ 570 0034 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 571 0038 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 573              		.section	.text.VL53L8A1_RANGING_SENSOR_GetPowerMode,"ax",%progbits
+ 574              		.align	1
+ 575              		.global	VL53L8A1_RANGING_SENSOR_GetPowerMode
+ 576              		.syntax unified
+ 577              		.thumb
+ 578              		.thumb_func
+ 580              	VL53L8A1_RANGING_SENSOR_GetPowerMode:
+ 581              		@ args = 0, pretend = 0, frame = 0
+ 582              		@ frame_needed = 0, uses_anonymous_args = 0
+ 583 0000 0228     		cmp	r0, #2
+ 584 0002 0ED8     		bhi	.L154
+ 585 0004 08B5     		push	{r3, lr}
+ 586 0006 084B     		ldr	r3, .L161
+ 587 0008 1B68     		ldr	r3, [r3]
+ 588 000a 5B6B     		ldr	r3, [r3, #52]
+ 589 000c 074A     		ldr	r2, .L161+4
+ 590 000e 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 591 0012 9847     		blx	r3
+ 592 0014 0028     		cmp	r0, #0
+ 593 0016 01DB     		blt	.L160
+ 594 0018 0020     		movs	r0, #0
+ 595              	.L152:
+ 596 001a 08BD     		pop	{r3, pc}
+ 597              	.L160:
+ 598 001c 6FF00400 		mvn	r0, #4
+ 599 0020 FBE7     		b	.L152
+ARM GAS  C:\Temp\ccqPaIEm.s 			page 11
+
+
+ 600              	.L154:
+ 601 0022 6FF00100 		mvn	r0, #1
+ 602 0026 7047     		bx	lr
+ 603              	.L162:
+ 604              		.align	2
+ 605              	.L161:
+ 606 0028 00000000 		.word	VL53L8A1_RANGING_SENSOR_Drv
+ 607 002c 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 609              		.section	.text.VL53L8A1_RANGING_SENSOR_XTalkCalibration,"ax",%progbits
+ 610              		.align	1
+ 611              		.global	VL53L8A1_RANGING_SENSOR_XTalkCalibration
+ 612              		.syntax unified
+ 613              		.thumb
+ 614              		.thumb_func
+ 616              	VL53L8A1_RANGING_SENSOR_XTalkCalibration:
+ 617              		@ args = 0, pretend = 0, frame = 0
+ 618              		@ frame_needed = 0, uses_anonymous_args = 0
+ 619 0000 0228     		cmp	r0, #2
+ 620 0002 0CD8     		bhi	.L165
+ 621 0004 08B5     		push	{r3, lr}
+ 622 0006 074B     		ldr	r3, .L172
+ 623 0008 53F82000 		ldr	r0, [r3, r0, lsl #2]
+ 624 000c FFF7FEFF 		bl	VL53L8CX_XTalkCalibration
+ 625 0010 0028     		cmp	r0, #0
+ 626 0012 01DB     		blt	.L171
+ 627 0014 0020     		movs	r0, #0
+ 628              	.L163:
+ 629 0016 08BD     		pop	{r3, pc}
+ 630              	.L171:
+ 631 0018 6FF00400 		mvn	r0, #4
+ 632 001c FBE7     		b	.L163
+ 633              	.L165:
+ 634 001e 6FF00100 		mvn	r0, #1
+ 635 0022 7047     		bx	lr
+ 636              	.L173:
+ 637              		.align	2
+ 638              	.L172:
+ 639 0024 00000000 		.word	VL53L8A1_RANGING_SENSOR_CompObj
+ 641              		.section	.bss.VL53L8CXObj.0,"aw",%nobits
+ 642              		.align	2
+ 645              	VL53L8CXObj.0:
+ 646 0000 00000000 		.space	8352
+ 646      00000000 
+ 646      00000000 
+ 646      00000000 
+ 646      00000000 
+ 647              		.section	.bss.VL53L8A1_RANGING_SENSOR_Cap,"aw",%nobits
+ 648              		.align	2
+ 651              	VL53L8A1_RANGING_SENSOR_Cap:
+ 652 0000 00000000 		.space	16
+ 652      00000000 
+ 652      00000000 
+ 652      00000000 
+ 653              		.section	.bss.VL53L8A1_RANGING_SENSOR_Drv,"aw",%nobits
+ 654              		.align	2
+ 657              	VL53L8A1_RANGING_SENSOR_Drv:
+ 658 0000 00000000 		.space	4
+ARM GAS  C:\Temp\ccqPaIEm.s 			page 12
+
+
+ 659              		.global	VL53L8A1_RANGING_SENSOR_CompObj
+ 660              		.section	.bss.VL53L8A1_RANGING_SENSOR_CompObj,"aw",%nobits
+ 661              		.align	2
+ 664              	VL53L8A1_RANGING_SENSOR_CompObj:
+ 665 0000 00000000 		.space	12
+ 665      00000000 
+ 665      00000000 
+ 666              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccqPaIEm.s 			page 13
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 53l8a1_ranging_sensor.c
+  C:\Temp\ccqPaIEm.s:18     .text.VL53L8CX_Probe:00000000 $t
+  C:\Temp\ccqPaIEm.s:23     .text.VL53L8CX_Probe:00000000 VL53L8CX_Probe
+  C:\Temp\ccqPaIEm.s:98     .text.VL53L8CX_Probe:00000098 $d
+  C:\Temp\ccqPaIEm.s:645    .bss.VL53L8CXObj.0:00000000 VL53L8CXObj.0
+  C:\Temp\ccqPaIEm.s:657    .bss.VL53L8A1_RANGING_SENSOR_Drv:00000000 VL53L8A1_RANGING_SENSOR_Drv
+  C:\Temp\ccqPaIEm.s:664    .bss.VL53L8A1_RANGING_SENSOR_CompObj:00000000 VL53L8A1_RANGING_SENSOR_CompObj
+  C:\Temp\ccqPaIEm.s:651    .bss.VL53L8A1_RANGING_SENSOR_Cap:00000000 VL53L8A1_RANGING_SENSOR_Cap
+  C:\Temp\ccqPaIEm.s:110    .text.VL53L8A1_RANGING_SENSOR_Init:00000000 $t
+  C:\Temp\ccqPaIEm.s:116    .text.VL53L8A1_RANGING_SENSOR_Init:00000000 VL53L8A1_RANGING_SENSOR_Init
+  C:\Temp\ccqPaIEm.s:129    .text.VL53L8A1_RANGING_SENSOR_DeInit:00000000 $t
+  C:\Temp\ccqPaIEm.s:135    .text.VL53L8A1_RANGING_SENSOR_DeInit:00000000 VL53L8A1_RANGING_SENSOR_DeInit
+  C:\Temp\ccqPaIEm.s:161    .text.VL53L8A1_RANGING_SENSOR_DeInit:00000028 $d
+  C:\Temp\ccqPaIEm.s:165    .text.VL53L8A1_RANGING_SENSOR_ReadID:00000000 $t
+  C:\Temp\ccqPaIEm.s:171    .text.VL53L8A1_RANGING_SENSOR_ReadID:00000000 VL53L8A1_RANGING_SENSOR_ReadID
+  C:\Temp\ccqPaIEm.s:197    .text.VL53L8A1_RANGING_SENSOR_ReadID:00000028 $d
+  C:\Temp\ccqPaIEm.s:201    .text.VL53L8A1_RANGING_SENSOR_GetCapabilities:00000000 $t
+  C:\Temp\ccqPaIEm.s:207    .text.VL53L8A1_RANGING_SENSOR_GetCapabilities:00000000 VL53L8A1_RANGING_SENSOR_GetCapabilities
+  C:\Temp\ccqPaIEm.s:233    .text.VL53L8A1_RANGING_SENSOR_GetCapabilities:00000028 $d
+  C:\Temp\ccqPaIEm.s:237    .text.VL53L8A1_RANGING_SENSOR_ConfigProfile:00000000 $t
+  C:\Temp\ccqPaIEm.s:243    .text.VL53L8A1_RANGING_SENSOR_ConfigProfile:00000000 VL53L8A1_RANGING_SENSOR_ConfigProfile
+  C:\Temp\ccqPaIEm.s:269    .text.VL53L8A1_RANGING_SENSOR_ConfigProfile:00000028 $d
+  C:\Temp\ccqPaIEm.s:273    .text.VL53L8A1_RANGING_SENSOR_ConfigROI:00000000 $t
+  C:\Temp\ccqPaIEm.s:279    .text.VL53L8A1_RANGING_SENSOR_ConfigROI:00000000 VL53L8A1_RANGING_SENSOR_ConfigROI
+  C:\Temp\ccqPaIEm.s:311    .text.VL53L8A1_RANGING_SENSOR_ConfigROI:00000034 $d
+  C:\Temp\ccqPaIEm.s:316    .text.VL53L8A1_RANGING_SENSOR_ConfigIT:00000000 $t
+  C:\Temp\ccqPaIEm.s:322    .text.VL53L8A1_RANGING_SENSOR_ConfigIT:00000000 VL53L8A1_RANGING_SENSOR_ConfigIT
+  C:\Temp\ccqPaIEm.s:348    .text.VL53L8A1_RANGING_SENSOR_ConfigIT:00000028 $d
+  C:\Temp\ccqPaIEm.s:352    .text.VL53L8A1_RANGING_SENSOR_GetDistance:00000000 $t
+  C:\Temp\ccqPaIEm.s:358    .text.VL53L8A1_RANGING_SENSOR_GetDistance:00000000 VL53L8A1_RANGING_SENSOR_GetDistance
+  C:\Temp\ccqPaIEm.s:384    .text.VL53L8A1_RANGING_SENSOR_GetDistance:00000028 $d
+  C:\Temp\ccqPaIEm.s:388    .text.VL53L8A1_RANGING_SENSOR_Start:00000000 $t
+  C:\Temp\ccqPaIEm.s:394    .text.VL53L8A1_RANGING_SENSOR_Start:00000000 VL53L8A1_RANGING_SENSOR_Start
+  C:\Temp\ccqPaIEm.s:420    .text.VL53L8A1_RANGING_SENSOR_Start:00000028 $d
+  C:\Temp\ccqPaIEm.s:424    .text.VL53L8A1_RANGING_SENSOR_Stop:00000000 $t
+  C:\Temp\ccqPaIEm.s:430    .text.VL53L8A1_RANGING_SENSOR_Stop:00000000 VL53L8A1_RANGING_SENSOR_Stop
+  C:\Temp\ccqPaIEm.s:456    .text.VL53L8A1_RANGING_SENSOR_Stop:00000028 $d
+  C:\Temp\ccqPaIEm.s:460    .text.VL53L8A1_RANGING_SENSOR_SetAddress:00000000 $t
+  C:\Temp\ccqPaIEm.s:466    .text.VL53L8A1_RANGING_SENSOR_SetAddress:00000000 VL53L8A1_RANGING_SENSOR_SetAddress
+  C:\Temp\ccqPaIEm.s:492    .text.VL53L8A1_RANGING_SENSOR_SetAddress:00000028 $d
+  C:\Temp\ccqPaIEm.s:496    .text.VL53L8A1_RANGING_SENSOR_GetAddress:00000000 $t
+  C:\Temp\ccqPaIEm.s:502    .text.VL53L8A1_RANGING_SENSOR_GetAddress:00000000 VL53L8A1_RANGING_SENSOR_GetAddress
+  C:\Temp\ccqPaIEm.s:528    .text.VL53L8A1_RANGING_SENSOR_GetAddress:00000028 $d
+  C:\Temp\ccqPaIEm.s:532    .text.VL53L8A1_RANGING_SENSOR_SetPowerMode:00000000 $t
+  C:\Temp\ccqPaIEm.s:538    .text.VL53L8A1_RANGING_SENSOR_SetPowerMode:00000000 VL53L8A1_RANGING_SENSOR_SetPowerMode
+  C:\Temp\ccqPaIEm.s:570    .text.VL53L8A1_RANGING_SENSOR_SetPowerMode:00000034 $d
+  C:\Temp\ccqPaIEm.s:574    .text.VL53L8A1_RANGING_SENSOR_GetPowerMode:00000000 $t
+  C:\Temp\ccqPaIEm.s:580    .text.VL53L8A1_RANGING_SENSOR_GetPowerMode:00000000 VL53L8A1_RANGING_SENSOR_GetPowerMode
+  C:\Temp\ccqPaIEm.s:606    .text.VL53L8A1_RANGING_SENSOR_GetPowerMode:00000028 $d
+  C:\Temp\ccqPaIEm.s:610    .text.VL53L8A1_RANGING_SENSOR_XTalkCalibration:00000000 $t
+  C:\Temp\ccqPaIEm.s:616    .text.VL53L8A1_RANGING_SENSOR_XTalkCalibration:00000000 VL53L8A1_RANGING_SENSOR_XTalkCalibration
+  C:\Temp\ccqPaIEm.s:639    .text.VL53L8A1_RANGING_SENSOR_XTalkCalibration:00000024 $d
+  C:\Temp\ccqPaIEm.s:642    .bss.VL53L8CXObj.0:00000000 $d
+  C:\Temp\ccqPaIEm.s:648    .bss.VL53L8A1_RANGING_SENSOR_Cap:00000000 $d
+  C:\Temp\ccqPaIEm.s:654    .bss.VL53L8A1_RANGING_SENSOR_Drv:00000000 $d
+  C:\Temp\ccqPaIEm.s:661    .bss.VL53L8A1_RANGING_SENSOR_CompObj:00000000 $d
+ARM GAS  C:\Temp\ccqPaIEm.s 			page 14
+
+
+
+UNDEFINED SYMBOLS
+VL53L8CX_RegisterBusIO
+VL53L8CX_ReadID
+BSP_I2C1_Init
+BSP_I2C1_DeInit
+BSP_I2C1_WriteReg16
+BSP_I2C1_ReadReg16
+BSP_GetTick
+VL53L8CX_RANGING_SENSOR_Driver
+VL53L8CX_XTalkCalibration

@@ -1,0 +1,804 @@
+ARM GAS  C:\Temp\ccFBc3to.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"VL53L1A1_Simulink.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Core/Src/VL53L1A1_Simulink.c"
+  20              		.section	.rodata.initVL53L1A1.str1.4,"aMS",%progbits,1
+  21              		.align	2
+  22              	.LC0:
+  23 0000 564C3533 		.ascii	"VL53L1X Model_ID: %X \012\000"
+  23      4C315820 
+  23      4D6F6465 
+  23      6C5F4944 
+  23      3A202558 
+  24 0017 00       		.align	2
+  25              	.LC1:
+  26 0018 564C3533 		.ascii	"VL53L1X Module_Type: %X \012\000"
+  26      4C315820 
+  26      4D6F6475 
+  26      6C655F54 
+  26      7970653A 
+  27 0032 0000     		.align	2
+  28              	.LC2:
+  29 0034 564C3533 		.ascii	"VL53L1X: %X \012\000"
+  29      4C31583A 
+  29      20255820 
+  29      0A00
+  30 0042 0000     		.align	2
+  31              	.LC3:
+  32 0044 564C3533 		.ascii	"VL53L1X Initialized and Calibrated\000"
+  32      4C315820 
+  32      496E6974 
+  32      69616C69 
+  32      7A656420 
+  33              		.section	.text.initVL53L1A1,"ax",%progbits
+  34              		.align	1
+  35              		.global	initVL53L1A1
+  36              		.syntax unified
+  37              		.thumb
+  38              		.thumb_func
+  40              	initVL53L1A1:
+  41              	.LVL0:
+  42              	.LFB137:
+   1:Core/Src/VL53L1A1_Simulink.c **** ///////////////////////////////////////////////////////////
+ARM GAS  C:\Temp\ccFBc3to.s 			page 2
+
+
+   2:Core/Src/VL53L1A1_Simulink.c **** // Project : STM32 Nucleo + VL53L1A1
+   3:Core/Src/VL53L1A1_Simulink.c **** // Abbreviation : AP_01
+   4:Core/Src/VL53L1A1_Simulink.c **** // Microcontroller: STM32 Nucleo F411RE
+   5:Core/Src/VL53L1A1_Simulink.c **** // Made For : Dr. Amir Patel
+   6:Core/Src/VL53L1A1_Simulink.c **** // @author: Jesse Jabez Arendse
+   7:Core/Src/VL53L1A1_Simulink.c **** // @modified: 20/01/2025
+   8:Core/Src/VL53L1A1_Simulink.c **** ///////////////////////////////////////////////////////////
+   9:Core/Src/VL53L1A1_Simulink.c **** 
+  10:Core/Src/VL53L1A1_Simulink.c **** 
+  11:Core/Src/VL53L1A1_Simulink.c **** // Includes ///////////////////////////////////////////////
+  12:Core/Src/VL53L1A1_Simulink.c **** #include "main.h"
+  13:Core/Src/VL53L1A1_Simulink.c **** 
+  14:Core/Src/VL53L1A1_Simulink.c **** #include "stdio.h"
+  15:Core/Src/VL53L1A1_Simulink.c **** #include <stdint.h>
+  16:Core/Src/VL53L1A1_Simulink.c **** #include <string.h>  // For memcpy
+  17:Core/Src/VL53L1A1_Simulink.c **** #include <stdio.h>
+  18:Core/Src/VL53L1A1_Simulink.c **** 
+  19:Core/Src/VL53L1A1_Simulink.c **** #include "VL53L1X_api.h"
+  20:Core/Src/VL53L1A1_Simulink.c **** #include "X-NUCLEO-53L1A1.h"
+  21:Core/Src/VL53L1A1_Simulink.c **** #include <VL53L1A1_Simulink.h>
+  22:Core/Src/VL53L1A1_Simulink.c **** 
+  23:Core/Src/VL53L1A1_Simulink.c **** #define VL53L1X_POWER_ON  1
+  24:Core/Src/VL53L1A1_Simulink.c **** #define VL53L1X_POWER_OFF 0
+  25:Core/Src/VL53L1A1_Simulink.c **** 
+  26:Core/Src/VL53L1A1_Simulink.c **** #define TIMING_BUDGET (30U) /* 16 ms < TimingBudget < 500 ms */
+  27:Core/Src/VL53L1A1_Simulink.c **** #define POLLING_PERIOD (250U) /* refresh rate for polling mode (ms, shall be consistent with Timing
+  28:Core/Src/VL53L1A1_Simulink.c **** 
+  29:Core/Src/VL53L1A1_Simulink.c **** 
+  30:Core/Src/VL53L1A1_Simulink.c **** extern VL53L1_Result TOF_left_result;
+  31:Core/Src/VL53L1A1_Simulink.c **** extern VL53L1_Result TOF_centre_result;
+  32:Core/Src/VL53L1A1_Simulink.c **** extern VL53L1_Result TOF_right_result;
+  33:Core/Src/VL53L1A1_Simulink.c **** 
+  34:Core/Src/VL53L1A1_Simulink.c **** uint16_t VL53L1_address_default = 0x52;
+  35:Core/Src/VL53L1A1_Simulink.c **** 
+  36:Core/Src/VL53L1A1_Simulink.c **** uint8_t RangeStatus;
+  37:Core/Src/VL53L1A1_Simulink.c **** uint8_t dataReady;
+  38:Core/Src/VL53L1A1_Simulink.c **** 
+  39:Core/Src/VL53L1A1_Simulink.c **** extern int32_t tof_fsr;
+  40:Core/Src/VL53L1A1_Simulink.c **** extern float tof_odr;
+  41:Core/Src/VL53L1A1_Simulink.c **** extern uint16_t rangingProfile;
+  42:Core/Src/VL53L1A1_Simulink.c **** extern uint16_t timingBudget;
+  43:Core/Src/VL53L1A1_Simulink.c **** extern uint32_t pollingPeriod;
+  44:Core/Src/VL53L1A1_Simulink.c **** 
+  45:Core/Src/VL53L1A1_Simulink.c **** ROI_X = 4;
+  46:Core/Src/VL53L1A1_Simulink.c **** ROI_Y = 4;
+  47:Core/Src/VL53L1A1_Simulink.c **** 
+  48:Core/Src/VL53L1A1_Simulink.c **** uint16_t Distance;
+  49:Core/Src/VL53L1A1_Simulink.c **** uint16_t SignalRate;
+  50:Core/Src/VL53L1A1_Simulink.c **** uint16_t AmbientRate;
+  51:Core/Src/VL53L1A1_Simulink.c **** uint16_t SpadNum; 
+  52:Core/Src/VL53L1A1_Simulink.c **** 
+  53:Core/Src/VL53L1A1_Simulink.c **** extern uint32_t counter;
+  54:Core/Src/VL53L1A1_Simulink.c **** extern UART_HandleTypeDef huart2;
+  55:Core/Src/VL53L1A1_Simulink.c **** 
+  56:Core/Src/VL53L1A1_Simulink.c **** 
+  57:Core/Src/VL53L1A1_Simulink.c **** // Functions /////////////////////////////////////////////
+  58:Core/Src/VL53L1A1_Simulink.c **** 
+ARM GAS  C:\Temp\ccFBc3to.s 			page 3
+
+
+  59:Core/Src/VL53L1A1_Simulink.c **** void initVL53L1A1(int ToFNumber, uint8_t newToFAddress){
+  43              		.loc 1 59 56 view -0
+  44              		.cfi_startproc
+  45              		@ args = 0, pretend = 0, frame = 56
+  46              		@ frame_needed = 0, uses_anonymous_args = 0
+  47              		.loc 1 59 56 is_stmt 0 view .LVU1
+  48 0000 70B5     		push	{r4, r5, r6, lr}
+  49              		.cfi_def_cfa_offset 16
+  50              		.cfi_offset 4, -16
+  51              		.cfi_offset 5, -12
+  52              		.cfi_offset 6, -8
+  53              		.cfi_offset 14, -4
+  54 0002 8EB0     		sub	sp, sp, #56
+  55              		.cfi_def_cfa_offset 72
+  56 0004 0446     		mov	r4, r0
+  57 0006 0D46     		mov	r5, r1
+  60:Core/Src/VL53L1A1_Simulink.c ****   int status = 0;
+  58              		.loc 1 60 3 is_stmt 1 view .LVU2
+  59              	.LVL1:
+  61:Core/Src/VL53L1A1_Simulink.c ****   uint8_t buffer[50];
+  60              		.loc 1 61 3 view .LVU3
+  62:Core/Src/VL53L1A1_Simulink.c **** 
+  63:Core/Src/VL53L1A1_Simulink.c ****   uint8_t byteData, sensorState=0;
+  61              		.loc 1 63 3 view .LVU4
+  62              		.loc 1 63 21 is_stmt 0 view .LVU5
+  63 0008 0021     		movs	r1, #0
+  64              	.LVL2:
+  65              		.loc 1 63 21 view .LVU6
+  66 000a 8DF80210 		strb	r1, [sp, #2]
+  64:Core/Src/VL53L1A1_Simulink.c ****   uint16_t wordData;
+  67              		.loc 1 64 3 is_stmt 1 view .LVU7
+  65:Core/Src/VL53L1A1_Simulink.c ****   status = XNUCLEO53L1A1_ResetId(ToFNumber, VL53L1X_POWER_OFF); // Reset ToF sensor
+  68              		.loc 1 65 3 view .LVU8
+  69              		.loc 1 65 12 is_stmt 0 view .LVU9
+  70 000e FFF7FEFF 		bl	XNUCLEO53L1A1_ResetId
+  71              	.LVL3:
+  66:Core/Src/VL53L1A1_Simulink.c ****   HAL_Delay(2);
+  72              		.loc 1 66 3 is_stmt 1 view .LVU10
+  73 0012 0220     		movs	r0, #2
+  74 0014 FFF7FEFF 		bl	HAL_Delay
+  75              	.LVL4:
+  67:Core/Src/VL53L1A1_Simulink.c ****   status = XNUCLEO53L1A1_ResetId(ToFNumber, VL53L1X_POWER_ON); // Reset ToF sensor
+  76              		.loc 1 67 3 view .LVU11
+  77              		.loc 1 67 12 is_stmt 0 view .LVU12
+  78 0018 0121     		movs	r1, #1
+  79 001a 2046     		mov	r0, r4
+  80 001c FFF7FEFF 		bl	XNUCLEO53L1A1_ResetId
+  81              	.LVL5:
+  68:Core/Src/VL53L1A1_Simulink.c ****   HAL_Delay(2);
+  82              		.loc 1 68 3 is_stmt 1 view .LVU13
+  83 0020 0220     		movs	r0, #2
+  84 0022 FFF7FEFF 		bl	HAL_Delay
+  85              	.LVL6:
+  69:Core/Src/VL53L1A1_Simulink.c **** 
+  70:Core/Src/VL53L1A1_Simulink.c **** 
+  71:Core/Src/VL53L1A1_Simulink.c **** /* Those basic I2C read functions can be used to check your own I2C functions */
+  72:Core/Src/VL53L1A1_Simulink.c ****   status = VL53L1_RdByte(VL53L1_address_default, 0x010F, &byteData);
+ARM GAS  C:\Temp\ccFBc3to.s 			page 4
+
+
+  86              		.loc 1 72 3 view .LVU14
+  87              		.loc 1 72 12 is_stmt 0 view .LVU15
+  88 0026 424E     		ldr	r6, .L7
+  89 0028 0DF10302 		add	r2, sp, #3
+  90 002c 40F20F11 		movw	r1, #271
+  91 0030 3088     		ldrh	r0, [r6]
+  92 0032 FFF7FEFF 		bl	VL53L1_RdByte
+  93              	.LVL7:
+  73:Core/Src/VL53L1A1_Simulink.c ****   sprintf(buffer, "VL53L1X Model_ID: %X \n", byteData);
+  94              		.loc 1 73 3 is_stmt 1 view .LVU16
+  95 0036 9DF80320 		ldrb	r2, [sp, #3]	@ zero_extendqisi2
+  96 003a 3E49     		ldr	r1, .L7+4
+  97 003c 01A8     		add	r0, sp, #4
+  98 003e FFF7FEFF 		bl	sprintf
+  99              	.LVL8:
+  74:Core/Src/VL53L1A1_Simulink.c ****   HAL_UART_Transmit(&huart2 , buffer, sizeof(buffer) , HAL_MAX_DELAY);
+ 100              		.loc 1 74 3 view .LVU17
+ 101 0042 3D4C     		ldr	r4, .L7+8
+ 102              	.LVL9:
+ 103              		.loc 1 74 3 is_stmt 0 view .LVU18
+ 104 0044 4FF0FF33 		mov	r3, #-1
+ 105 0048 3222     		movs	r2, #50
+ 106 004a 01A9     		add	r1, sp, #4
+ 107 004c 2046     		mov	r0, r4
+ 108 004e FFF7FEFF 		bl	HAL_UART_Transmit
+ 109              	.LVL10:
+  75:Core/Src/VL53L1A1_Simulink.c **** 
+  76:Core/Src/VL53L1A1_Simulink.c ****   status = VL53L1_RdByte(VL53L1_address_default, 0x0110, &byteData);
+ 110              		.loc 1 76 3 is_stmt 1 view .LVU19
+ 111              		.loc 1 76 12 is_stmt 0 view .LVU20
+ 112 0052 0DF10302 		add	r2, sp, #3
+ 113 0056 4FF48871 		mov	r1, #272
+ 114 005a 3088     		ldrh	r0, [r6]
+ 115 005c FFF7FEFF 		bl	VL53L1_RdByte
+ 116              	.LVL11:
+  77:Core/Src/VL53L1A1_Simulink.c ****   sprintf(buffer, "VL53L1X Module_Type: %X \n", byteData);
+ 117              		.loc 1 77 3 is_stmt 1 view .LVU21
+ 118 0060 9DF80320 		ldrb	r2, [sp, #3]	@ zero_extendqisi2
+ 119 0064 3549     		ldr	r1, .L7+12
+ 120 0066 01A8     		add	r0, sp, #4
+ 121 0068 FFF7FEFF 		bl	sprintf
+ 122              	.LVL12:
+  78:Core/Src/VL53L1A1_Simulink.c ****   HAL_UART_Transmit(&huart2 , buffer, sizeof(buffer) , HAL_MAX_DELAY);
+ 123              		.loc 1 78 3 view .LVU22
+ 124 006c 4FF0FF33 		mov	r3, #-1
+ 125 0070 3222     		movs	r2, #50
+ 126 0072 01A9     		add	r1, sp, #4
+ 127 0074 2046     		mov	r0, r4
+ 128 0076 FFF7FEFF 		bl	HAL_UART_Transmit
+ 129              	.LVL13:
+  79:Core/Src/VL53L1A1_Simulink.c **** 
+  80:Core/Src/VL53L1A1_Simulink.c ****   status = VL53L1_RdWord(VL53L1_address_default, 0x010F, &wordData);
+ 130              		.loc 1 80 3 view .LVU23
+ 131              		.loc 1 80 12 is_stmt 0 view .LVU24
+ 132 007a 6A46     		mov	r2, sp
+ 133 007c 40F20F11 		movw	r1, #271
+ 134 0080 3088     		ldrh	r0, [r6]
+ARM GAS  C:\Temp\ccFBc3to.s 			page 5
+
+
+ 135 0082 FFF7FEFF 		bl	VL53L1_RdWord
+ 136              	.LVL14:
+  81:Core/Src/VL53L1A1_Simulink.c ****   sprintf(buffer, "VL53L1X: %X \n", wordData);
+ 137              		.loc 1 81 3 is_stmt 1 view .LVU25
+ 138 0086 BDF80020 		ldrh	r2, [sp]
+ 139 008a 2D49     		ldr	r1, .L7+16
+ 140 008c 01A8     		add	r0, sp, #4
+ 141 008e FFF7FEFF 		bl	sprintf
+ 142              	.LVL15:
+  82:Core/Src/VL53L1A1_Simulink.c ****   HAL_UART_Transmit(&huart2 , buffer, sizeof(buffer) , HAL_MAX_DELAY);
+ 143              		.loc 1 82 3 view .LVU26
+ 144 0092 4FF0FF33 		mov	r3, #-1
+ 145 0096 3222     		movs	r2, #50
+ 146 0098 01A9     		add	r1, sp, #4
+ 147 009a 2046     		mov	r0, r4
+ 148 009c FFF7FEFF 		bl	HAL_UART_Transmit
+ 149              	.LVL16:
+  83:Core/Src/VL53L1A1_Simulink.c **** 
+  84:Core/Src/VL53L1A1_Simulink.c ****   while(sensorState==0){
+ 150              		.loc 1 84 3 view .LVU27
+ 151              		.loc 1 84 8 is_stmt 0 view .LVU28
+ 152 00a0 08E0     		b	.L2
+ 153              	.L3:
+  85:Core/Src/VL53L1A1_Simulink.c **** 		status = VL53L1X_BootState(VL53L1_address_default, &sensorState);
+ 154              		.loc 1 85 3 is_stmt 1 view .LVU29
+ 155              		.loc 1 85 12 is_stmt 0 view .LVU30
+ 156 00a2 0DF10201 		add	r1, sp, #2
+ 157 00a6 224B     		ldr	r3, .L7
+ 158 00a8 1888     		ldrh	r0, [r3]
+ 159 00aa FFF7FEFF 		bl	VL53L1X_BootState
+ 160              	.LVL17:
+  86:Core/Src/VL53L1A1_Simulink.c **** 	  HAL_Delay(2);
+ 161              		.loc 1 86 4 is_stmt 1 view .LVU31
+ 162 00ae 0220     		movs	r0, #2
+ 163 00b0 FFF7FEFF 		bl	HAL_Delay
+ 164              	.LVL18:
+ 165              	.L2:
+  84:Core/Src/VL53L1A1_Simulink.c **** 		status = VL53L1X_BootState(VL53L1_address_default, &sensorState);
+ 166              		.loc 1 84 20 view .LVU32
+ 167 00b4 9DF80230 		ldrb	r3, [sp, #2]	@ zero_extendqisi2
+ 168 00b8 002B     		cmp	r3, #0
+ 169 00ba F2D0     		beq	.L3
+  87:Core/Src/VL53L1A1_Simulink.c ****   }
+  88:Core/Src/VL53L1A1_Simulink.c ****   sprintf(buffer, "VL53L1X Model_ID: %X \n", byteData);
+ 170              		.loc 1 88 3 view .LVU33
+ 171 00bc 9DF80320 		ldrb	r2, [sp, #3]	@ zero_extendqisi2
+ 172 00c0 1C49     		ldr	r1, .L7+4
+ 173 00c2 01A8     		add	r0, sp, #4
+ 174 00c4 FFF7FEFF 		bl	sprintf
+ 175              	.LVL19:
+  89:Core/Src/VL53L1A1_Simulink.c ****   HAL_UART_Transmit(&huart2 , buffer, sizeof(buffer) , HAL_MAX_DELAY);
+ 176              		.loc 1 89 3 view .LVU34
+ 177 00c8 4FF0FF33 		mov	r3, #-1
+ 178 00cc 3222     		movs	r2, #50
+ 179 00ce 01A9     		add	r1, sp, #4
+ 180 00d0 1948     		ldr	r0, .L7+8
+ 181 00d2 FFF7FEFF 		bl	HAL_UART_Transmit
+ARM GAS  C:\Temp\ccFBc3to.s 			page 6
+
+
+ 182              	.LVL20:
+  90:Core/Src/VL53L1A1_Simulink.c **** 
+  91:Core/Src/VL53L1A1_Simulink.c ****     /* This function must to be called to initialize the sensor with the default setting  */
+  92:Core/Src/VL53L1A1_Simulink.c ****   status = VL53L1X_SensorInit(VL53L1_address_default);
+ 183              		.loc 1 92 3 view .LVU35
+ 184              		.loc 1 92 12 is_stmt 0 view .LVU36
+ 185 00d6 164C     		ldr	r4, .L7
+ 186 00d8 2088     		ldrh	r0, [r4]
+ 187 00da FFF7FEFF 		bl	VL53L1X_SensorInit
+ 188              	.LVL21:
+  93:Core/Src/VL53L1A1_Simulink.c **** 
+  94:Core/Src/VL53L1A1_Simulink.c ****   /* Optional functions to be used to change the main ranging parameters according the application 
+  95:Core/Src/VL53L1A1_Simulink.c **** 
+  96:Core/Src/VL53L1A1_Simulink.c ****   status = VL53L1X_SetDistanceMode(VL53L1_address_default, rangingProfile); /* 1=short, 2=long */
+ 189              		.loc 1 96 3 is_stmt 1 view .LVU37
+ 190              		.loc 1 96 12 is_stmt 0 view .LVU38
+ 191 00de 194B     		ldr	r3, .L7+20
+ 192 00e0 1988     		ldrh	r1, [r3]
+ 193 00e2 2088     		ldrh	r0, [r4]
+ 194 00e4 FFF7FEFF 		bl	VL53L1X_SetDistanceMode
+ 195              	.LVL22:
+  97:Core/Src/VL53L1A1_Simulink.c **** 
+  98:Core/Src/VL53L1A1_Simulink.c ****   status = VL53L1X_SetTimingBudgetInMs(VL53L1_address_default, timingBudget); /* in ms possible val
+ 196              		.loc 1 98 3 is_stmt 1 view .LVU39
+ 197              		.loc 1 98 12 is_stmt 0 view .LVU40
+ 198 00e8 174B     		ldr	r3, .L7+24
+ 199 00ea 1988     		ldrh	r1, [r3]
+ 200 00ec 2088     		ldrh	r0, [r4]
+ 201 00ee FFF7FEFF 		bl	VL53L1X_SetTimingBudgetInMs
+ 202              	.LVL23:
+  99:Core/Src/VL53L1A1_Simulink.c ****   status = VL53L1X_SetInterMeasurementInMs(VL53L1_address_default, pollingPeriod); /* in ms, IM mus
+ 203              		.loc 1 99 3 is_stmt 1 view .LVU41
+ 204              		.loc 1 99 12 is_stmt 0 view .LVU42
+ 205 00f2 164B     		ldr	r3, .L7+28
+ 206 00f4 1968     		ldr	r1, [r3]
+ 207 00f6 2088     		ldrh	r0, [r4]
+ 208 00f8 FFF7FEFF 		bl	VL53L1X_SetInterMeasurementInMs
+ 209              	.LVL24:
+ 100:Core/Src/VL53L1A1_Simulink.c **** 
+ 101:Core/Src/VL53L1A1_Simulink.c ****   status = VL53L1X_SetROI(VL53L1_address_default, ROI_X, ROI_Y); /* minimum ROI 4,4 */
+ 210              		.loc 1 101 3 is_stmt 1 view .LVU43
+ 211              		.loc 1 101 12 is_stmt 0 view .LVU44
+ 212 00fc 144B     		ldr	r3, .L7+32
+ 213 00fe 1A88     		ldrh	r2, [r3]
+ 214 0100 144B     		ldr	r3, .L7+36
+ 215 0102 1988     		ldrh	r1, [r3]
+ 216 0104 2088     		ldrh	r0, [r4]
+ 217 0106 FFF7FEFF 		bl	VL53L1X_SetROI
+ 218              	.LVL25:
+ 102:Core/Src/VL53L1A1_Simulink.c ****   status = VL53L1X_StartRanging(VL53L1_address_default);   /* This function has to be called to ena
+ 219              		.loc 1 102 3 is_stmt 1 view .LVU45
+ 220              		.loc 1 102 12 is_stmt 0 view .LVU46
+ 221 010a 2088     		ldrh	r0, [r4]
+ 222 010c FFF7FEFF 		bl	VL53L1X_StartRanging
+ 223              	.LVL26:
+ 103:Core/Src/VL53L1A1_Simulink.c ****   status =  VL53L1X_SetI2CAddress(VL53L1_address_default, newToFAddress);
+ 224              		.loc 1 103 3 is_stmt 1 view .LVU47
+ARM GAS  C:\Temp\ccFBc3to.s 			page 7
+
+
+ 225              		.loc 1 103 13 is_stmt 0 view .LVU48
+ 226 0110 2946     		mov	r1, r5
+ 227 0112 2088     		ldrh	r0, [r4]
+ 228 0114 FFF7FEFF 		bl	VL53L1X_SetI2CAddress
+ 229              	.LVL27:
+ 104:Core/Src/VL53L1A1_Simulink.c ****   if (status == 0){
+ 230              		.loc 1 104 3 is_stmt 1 view .LVU49
+ 231              		.loc 1 104 6 is_stmt 0 view .LVU50
+ 232 0118 08B1     		cbz	r0, .L6
+ 233              	.LVL28:
+ 234              	.L1:
+ 105:Core/Src/VL53L1A1_Simulink.c ****     HAL_UART_Transmit(&huart2 , "VL53L1X Initialized and Calibrated", sizeof("VL53L1X Initialized a
+ 106:Core/Src/VL53L1A1_Simulink.c ****   }
+ 107:Core/Src/VL53L1A1_Simulink.c **** }
+ 235              		.loc 1 107 1 view .LVU51
+ 236 011a 0EB0     		add	sp, sp, #56
+ 237              		.cfi_remember_state
+ 238              		.cfi_def_cfa_offset 16
+ 239              		@ sp needed
+ 240 011c 70BD     		pop	{r4, r5, r6, pc}
+ 241              	.LVL29:
+ 242              	.L6:
+ 243              		.cfi_restore_state
+ 105:Core/Src/VL53L1A1_Simulink.c ****     HAL_UART_Transmit(&huart2 , "VL53L1X Initialized and Calibrated", sizeof("VL53L1X Initialized a
+ 244              		.loc 1 105 5 is_stmt 1 view .LVU52
+ 245 011e 4FF0FF33 		mov	r3, #-1
+ 246 0122 2322     		movs	r2, #35
+ 247 0124 0C49     		ldr	r1, .L7+40
+ 248 0126 0448     		ldr	r0, .L7+8
+ 249              	.LVL30:
+ 105:Core/Src/VL53L1A1_Simulink.c ****     HAL_UART_Transmit(&huart2 , "VL53L1X Initialized and Calibrated", sizeof("VL53L1X Initialized a
+ 250              		.loc 1 105 5 is_stmt 0 view .LVU53
+ 251 0128 FFF7FEFF 		bl	HAL_UART_Transmit
+ 252              	.LVL31:
+ 253              		.loc 1 107 1 view .LVU54
+ 254 012c F5E7     		b	.L1
+ 255              	.L8:
+ 256 012e 00BF     		.align	2
+ 257              	.L7:
+ 258 0130 00000000 		.word	VL53L1_address_default
+ 259 0134 00000000 		.word	.LC0
+ 260 0138 00000000 		.word	huart2
+ 261 013c 18000000 		.word	.LC1
+ 262 0140 34000000 		.word	.LC2
+ 263 0144 00000000 		.word	rangingProfile
+ 264 0148 00000000 		.word	timingBudget
+ 265 014c 00000000 		.word	pollingPeriod
+ 266 0150 00000000 		.word	ROI_Y
+ 267 0154 00000000 		.word	ROI_X
+ 268 0158 44000000 		.word	.LC3
+ 269              		.cfi_endproc
+ 270              	.LFE137:
+ 272              		.section	.text.getVL53L1A1,"ax",%progbits
+ 273              		.align	1
+ 274              		.global	getVL53L1A1
+ 275              		.syntax unified
+ 276              		.thumb
+ARM GAS  C:\Temp\ccFBc3to.s 			page 8
+
+
+ 277              		.thumb_func
+ 279              	getVL53L1A1:
+ 280              	.LVL32:
+ 281              	.LFB138:
+ 108:Core/Src/VL53L1A1_Simulink.c **** 
+ 109:Core/Src/VL53L1A1_Simulink.c **** void getVL53L1A1(VL53L1_Result* TOF_result){
+ 282              		.loc 1 109 44 is_stmt 1 view -0
+ 283              		.cfi_startproc
+ 284              		@ args = 0, pretend = 0, frame = 0
+ 285              		@ frame_needed = 0, uses_anonymous_args = 0
+ 286              		.loc 1 109 44 is_stmt 0 view .LVU56
+ 287 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 288              		.cfi_def_cfa_offset 24
+ 289              		.cfi_offset 4, -24
+ 290              		.cfi_offset 5, -20
+ 291              		.cfi_offset 6, -16
+ 292              		.cfi_offset 7, -12
+ 293              		.cfi_offset 8, -8
+ 294              		.cfi_offset 14, -4
+ 295 0004 0446     		mov	r4, r0
+ 110:Core/Src/VL53L1A1_Simulink.c ****     int status = 0;
+ 296              		.loc 1 110 5 is_stmt 1 view .LVU57
+ 297              	.LVL33:
+ 111:Core/Src/VL53L1A1_Simulink.c ****     uint8_t buffer[150];
+ 298              		.loc 1 111 5 view .LVU58
+ 112:Core/Src/VL53L1A1_Simulink.c **** 
+ 113:Core/Src/VL53L1A1_Simulink.c ****     while (dataReady == 0){
+ 299              		.loc 1 113 5 view .LVU59
+ 300              		.loc 1 113 11 is_stmt 0 view .LVU60
+ 301 0006 06E0     		b	.L10
+ 302              	.LVL34:
+ 303              	.L11:
+ 114:Core/Src/VL53L1A1_Simulink.c **** 		  status = VL53L1X_CheckForDataReady(TOF_result->Address, &dataReady);
+ 304              		.loc 1 114 5 is_stmt 1 view .LVU61
+ 305              		.loc 1 114 14 is_stmt 0 view .LVU62
+ 306 0008 1F49     		ldr	r1, .L13
+ 307 000a 2088     		ldrh	r0, [r4]
+ 308 000c FFF7FEFF 		bl	VL53L1X_CheckForDataReady
+ 309              	.LVL35:
+ 115:Core/Src/VL53L1A1_Simulink.c ****           HAL_Delay(2);
+ 310              		.loc 1 115 11 is_stmt 1 view .LVU63
+ 311 0010 0220     		movs	r0, #2
+ 312 0012 FFF7FEFF 		bl	HAL_Delay
+ 313              	.LVL36:
+ 314              	.L10:
+ 113:Core/Src/VL53L1A1_Simulink.c **** 		  status = VL53L1X_CheckForDataReady(TOF_result->Address, &dataReady);
+ 315              		.loc 1 113 22 view .LVU64
+ 316 0016 1C4B     		ldr	r3, .L13
+ 317 0018 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 318 001a 002B     		cmp	r3, #0
+ 319 001c F4D0     		beq	.L11
+ 116:Core/Src/VL53L1A1_Simulink.c **** 	}
+ 117:Core/Src/VL53L1A1_Simulink.c **** 	dataReady = 0;
+ 320              		.loc 1 117 2 view .LVU65
+ 321              		.loc 1 117 12 is_stmt 0 view .LVU66
+ 322 001e 1A4B     		ldr	r3, .L13
+ 323 0020 0022     		movs	r2, #0
+ARM GAS  C:\Temp\ccFBc3to.s 			page 9
+
+
+ 324 0022 1A70     		strb	r2, [r3]
+ 118:Core/Src/VL53L1A1_Simulink.c **** 	status = VL53L1X_GetRangeStatus(TOF_result->Address, &RangeStatus);
+ 325              		.loc 1 118 2 is_stmt 1 view .LVU67
+ 326              		.loc 1 118 11 is_stmt 0 view .LVU68
+ 327 0024 194F     		ldr	r7, .L13+4
+ 328 0026 3946     		mov	r1, r7
+ 329 0028 2088     		ldrh	r0, [r4]
+ 330 002a FFF7FEFF 		bl	VL53L1X_GetRangeStatus
+ 331              	.LVL37:
+ 119:Core/Src/VL53L1A1_Simulink.c **** 	status = VL53L1X_GetDistance(TOF_result->Address, &Distance);
+ 332              		.loc 1 119 2 is_stmt 1 view .LVU69
+ 333              		.loc 1 119 11 is_stmt 0 view .LVU70
+ 334 002e DFF86C80 		ldr	r8, .L13+20
+ 335 0032 4146     		mov	r1, r8
+ 336 0034 2088     		ldrh	r0, [r4]
+ 337 0036 FFF7FEFF 		bl	VL53L1X_GetDistance
+ 338              	.LVL38:
+ 120:Core/Src/VL53L1A1_Simulink.c **** 	status = VL53L1X_GetSignalRate(TOF_result->Address, &SignalRate);
+ 339              		.loc 1 120 2 is_stmt 1 view .LVU71
+ 340              		.loc 1 120 11 is_stmt 0 view .LVU72
+ 341 003a 154D     		ldr	r5, .L13+8
+ 342 003c 2946     		mov	r1, r5
+ 343 003e 2088     		ldrh	r0, [r4]
+ 344 0040 FFF7FEFF 		bl	VL53L1X_GetSignalRate
+ 345              	.LVL39:
+ 121:Core/Src/VL53L1A1_Simulink.c **** 	status = VL53L1X_GetAmbientRate(TOF_result->Address, &AmbientRate);
+ 346              		.loc 1 121 2 is_stmt 1 view .LVU73
+ 347              		.loc 1 121 11 is_stmt 0 view .LVU74
+ 348 0044 134E     		ldr	r6, .L13+12
+ 349 0046 3146     		mov	r1, r6
+ 350 0048 2088     		ldrh	r0, [r4]
+ 351 004a FFF7FEFF 		bl	VL53L1X_GetAmbientRate
+ 352              	.LVL40:
+ 122:Core/Src/VL53L1A1_Simulink.c **** 	status = VL53L1X_GetSpadNb(TOF_result->Address, &SpadNum);
+ 353              		.loc 1 122 2 is_stmt 1 view .LVU75
+ 354              		.loc 1 122 11 is_stmt 0 view .LVU76
+ 355 004e 1249     		ldr	r1, .L13+16
+ 356 0050 2088     		ldrh	r0, [r4]
+ 357 0052 FFF7FEFF 		bl	VL53L1X_GetSpadNb
+ 358              	.LVL41:
+ 123:Core/Src/VL53L1A1_Simulink.c **** 	status = VL53L1X_ClearInterrupt(TOF_result->Address); /* clear interrupt has to be called to enabl
+ 359              		.loc 1 123 2 is_stmt 1 view .LVU77
+ 360              		.loc 1 123 11 is_stmt 0 view .LVU78
+ 361 0056 2088     		ldrh	r0, [r4]
+ 362 0058 FFF7FEFF 		bl	VL53L1X_ClearInterrupt
+ 363              	.LVL42:
+ 124:Core/Src/VL53L1A1_Simulink.c ****     
+ 125:Core/Src/VL53L1A1_Simulink.c ****   TOF_result->Distance = Distance;
+ 364              		.loc 1 125 3 is_stmt 1 view .LVU79
+ 365              		.loc 1 125 24 is_stmt 0 view .LVU80
+ 366 005c B8F80030 		ldrh	r3, [r8]
+ 367 0060 6360     		str	r3, [r4, #4]
+ 126:Core/Src/VL53L1A1_Simulink.c ****   TOF_result->Status = RangeStatus;
+ 368              		.loc 1 126 3 is_stmt 1 view .LVU81
+ 369              		.loc 1 126 22 is_stmt 0 view .LVU82
+ 370 0062 3B78     		ldrb	r3, [r7]	@ zero_extendqisi2
+ 371 0064 A360     		str	r3, [r4, #8]
+ARM GAS  C:\Temp\ccFBc3to.s 			page 10
+
+
+ 127:Core/Src/VL53L1A1_Simulink.c ****   TOF_result->Ambient = AmbientRate;
+ 372              		.loc 1 127 3 is_stmt 1 view .LVU83
+ 373              		.loc 1 127 23 is_stmt 0 view .LVU84
+ 374 0066 3388     		ldrh	r3, [r6]
+ 375 0068 07EE903A 		vmov	s15, r3	@ int
+ 376 006c F8EE677A 		vcvt.f32.u32	s15, s15
+ 377 0070 C4ED037A 		vstr.32	s15, [r4, #12]
+ 128:Core/Src/VL53L1A1_Simulink.c ****   TOF_result->Signal = SignalRate;
+ 378              		.loc 1 128 3 is_stmt 1 view .LVU85
+ 379              		.loc 1 128 22 is_stmt 0 view .LVU86
+ 380 0074 2B88     		ldrh	r3, [r5]
+ 381 0076 07EE903A 		vmov	s15, r3	@ int
+ 382 007a F8EE677A 		vcvt.f32.u32	s15, s15
+ 383 007e C4ED047A 		vstr.32	s15, [r4, #16]
+ 129:Core/Src/VL53L1A1_Simulink.c **** 
+ 130:Core/Src/VL53L1A1_Simulink.c ****     // sprintf(buffer, "Distance: %d \n", TOF_result.Distance);
+ 131:Core/Src/VL53L1A1_Simulink.c **** }
+ 384              		.loc 1 131 1 view .LVU87
+ 385 0082 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 386              	.LVL43:
+ 387              	.L14:
+ 388              		.loc 1 131 1 view .LVU88
+ 389 0086 00BF     		.align	2
+ 390              	.L13:
+ 391 0088 00000000 		.word	dataReady
+ 392 008c 00000000 		.word	RangeStatus
+ 393 0090 00000000 		.word	SignalRate
+ 394 0094 00000000 		.word	AmbientRate
+ 395 0098 00000000 		.word	SpadNum
+ 396 009c 00000000 		.word	Distance
+ 397              		.cfi_endproc
+ 398              	.LFE138:
+ 400              		.section	.text.bytesToFloat,"ax",%progbits
+ 401              		.align	1
+ 402              		.weak	bytesToFloat
+ 403              		.syntax unified
+ 404              		.thumb
+ 405              		.thumb_func
+ 407              	bytesToFloat:
+ 408              	.LVL44:
+ 409              	.LFB139:
+ 132:Core/Src/VL53L1A1_Simulink.c **** 
+ 133:Core/Src/VL53L1A1_Simulink.c **** __weak bytesToFloat(uint8_t byte1 , uint8_t byte2 , uint8_t byte3 , uint8_t byte4) {
+ 410              		.loc 1 133 84 is_stmt 1 view -0
+ 411              		.cfi_startproc
+ 412              		@ args = 0, pretend = 0, frame = 8
+ 413              		@ frame_needed = 0, uses_anonymous_args = 0
+ 414              		@ link register save eliminated.
+ 415              		.loc 1 133 84 is_stmt 0 view .LVU90
+ 416 0000 82B0     		sub	sp, sp, #8
+ 417              		.cfi_def_cfa_offset 8
+ 134:Core/Src/VL53L1A1_Simulink.c ****     float result;
+ 418              		.loc 1 134 5 is_stmt 1 view .LVU91
+ 135:Core/Src/VL53L1A1_Simulink.c ****     uint8_t bytes[4] = {byte1,byte2,byte3,byte4};
+ 419              		.loc 1 135 5 view .LVU92
+ 420              		.loc 1 135 13 is_stmt 0 view .LVU93
+ 421 0002 8DF80400 		strb	r0, [sp, #4]
+ARM GAS  C:\Temp\ccFBc3to.s 			page 11
+
+
+ 422 0006 8DF80510 		strb	r1, [sp, #5]
+ 423 000a 8DF80620 		strb	r2, [sp, #6]
+ 424 000e 8DF80730 		strb	r3, [sp, #7]
+ 136:Core/Src/VL53L1A1_Simulink.c **** 
+ 137:Core/Src/VL53L1A1_Simulink.c ****     // Use memcpy to copy the 4 bytes into a float (this preserves the binary representation)
+ 138:Core/Src/VL53L1A1_Simulink.c ****     memcpy(&result, bytes, sizeof(float));
+ 425              		.loc 1 138 5 is_stmt 1 view .LVU94
+ 139:Core/Src/VL53L1A1_Simulink.c **** 
+ 140:Core/Src/VL53L1A1_Simulink.c ****     return result;
+ 426              		.loc 1 140 5 view .LVU95
+ 141:Core/Src/VL53L1A1_Simulink.c **** }
+ 427              		.loc 1 141 1 is_stmt 0 view .LVU96
+ 428 0012 DDED017A 		vldr.32	s15, [sp, #4]
+ 429 0016 FDEEE77A 		vcvt.s32.f32	s15, s15
+ 430 001a 17EE900A 		vmov	r0, s15	@ int
+ 431              	.LVL45:
+ 432              		.loc 1 141 1 view .LVU97
+ 433 001e 02B0     		add	sp, sp, #8
+ 434              		.cfi_def_cfa_offset 0
+ 435              	.LVL46:
+ 436              		.loc 1 141 1 view .LVU98
+ 437              		@ sp needed
+ 438 0020 7047     		bx	lr
+ 439              		.cfi_endproc
+ 440              	.LFE139:
+ 442              		.section	.text.bytesToInt32,"ax",%progbits
+ 443              		.align	1
+ 444              		.weak	bytesToInt32
+ 445              		.syntax unified
+ 446              		.thumb
+ 447              		.thumb_func
+ 449              	bytesToInt32:
+ 450              	.LVL47:
+ 451              	.LFB140:
+ 142:Core/Src/VL53L1A1_Simulink.c **** 
+ 143:Core/Src/VL53L1A1_Simulink.c **** __weak int32_t bytesToInt32(uint8_t byte1 , uint8_t byte2 , uint8_t byte3 , uint8_t byte4)  {
+ 452              		.loc 1 143 93 is_stmt 1 view -0
+ 453              		.cfi_startproc
+ 454              		@ args = 0, pretend = 0, frame = 8
+ 455              		@ frame_needed = 0, uses_anonymous_args = 0
+ 456              		@ link register save eliminated.
+ 457              		.loc 1 143 93 is_stmt 0 view .LVU100
+ 458 0000 82B0     		sub	sp, sp, #8
+ 459              		.cfi_def_cfa_offset 8
+ 144:Core/Src/VL53L1A1_Simulink.c ****     int32_t result;
+ 460              		.loc 1 144 5 is_stmt 1 view .LVU101
+ 145:Core/Src/VL53L1A1_Simulink.c ****     uint8_t bytes[4] = {byte1,byte2,byte3,byte4};
+ 461              		.loc 1 145 5 view .LVU102
+ 462              		.loc 1 145 13 is_stmt 0 view .LVU103
+ 463 0002 8DF80400 		strb	r0, [sp, #4]
+ 464 0006 8DF80510 		strb	r1, [sp, #5]
+ 465 000a 8DF80620 		strb	r2, [sp, #6]
+ 466 000e 8DF80730 		strb	r3, [sp, #7]
+ 146:Core/Src/VL53L1A1_Simulink.c **** 
+ 147:Core/Src/VL53L1A1_Simulink.c ****     // Use memcpy to copy the 4 bytes into a int32_t (this preserves the binary representation)
+ 148:Core/Src/VL53L1A1_Simulink.c ****     memcpy(&result, bytes, sizeof(int32_t));
+ 467              		.loc 1 148 5 is_stmt 1 view .LVU104
+ARM GAS  C:\Temp\ccFBc3to.s 			page 12
+
+
+ 468              	.LVL48:
+ 149:Core/Src/VL53L1A1_Simulink.c **** 
+ 150:Core/Src/VL53L1A1_Simulink.c ****     return result;
+ 469              		.loc 1 150 5 view .LVU105
+ 151:Core/Src/VL53L1A1_Simulink.c **** }
+ 470              		.loc 1 151 1 is_stmt 0 view .LVU106
+ 471 0012 0198     		ldr	r0, [sp, #4]
+ 472              	.LVL49:
+ 473              		.loc 1 151 1 view .LVU107
+ 474 0014 02B0     		add	sp, sp, #8
+ 475              		.cfi_def_cfa_offset 0
+ 476              	.LVL50:
+ 477              		.loc 1 151 1 view .LVU108
+ 478              		@ sp needed
+ 479 0016 7047     		bx	lr
+ 480              		.cfi_endproc
+ 481              	.LFE140:
+ 483              		.global	SpadNum
+ 484              		.section	.bss.SpadNum,"aw",%nobits
+ 485              		.align	1
+ 488              	SpadNum:
+ 489 0000 0000     		.space	2
+ 490              		.global	AmbientRate
+ 491              		.section	.bss.AmbientRate,"aw",%nobits
+ 492              		.align	1
+ 495              	AmbientRate:
+ 496 0000 0000     		.space	2
+ 497              		.global	SignalRate
+ 498              		.section	.bss.SignalRate,"aw",%nobits
+ 499              		.align	1
+ 502              	SignalRate:
+ 503 0000 0000     		.space	2
+ 504              		.global	Distance
+ 505              		.section	.bss.Distance,"aw",%nobits
+ 506              		.align	1
+ 509              	Distance:
+ 510 0000 0000     		.space	2
+ 511              		.global	ROI_Y
+ 512              		.section	.data.ROI_Y,"aw"
+ 513              		.align	2
+ 516              	ROI_Y:
+ 517 0000 04000000 		.word	4
+ 518              		.global	ROI_X
+ 519              		.section	.data.ROI_X,"aw"
+ 520              		.align	2
+ 523              	ROI_X:
+ 524 0000 04000000 		.word	4
+ 525              		.global	dataReady
+ 526              		.section	.bss.dataReady,"aw",%nobits
+ 529              	dataReady:
+ 530 0000 00       		.space	1
+ 531              		.global	RangeStatus
+ 532              		.section	.bss.RangeStatus,"aw",%nobits
+ 535              	RangeStatus:
+ 536 0000 00       		.space	1
+ 537              		.global	VL53L1_address_default
+ 538              		.section	.data.VL53L1_address_default,"aw"
+ARM GAS  C:\Temp\ccFBc3to.s 			page 13
+
+
+ 539              		.align	1
+ 542              	VL53L1_address_default:
+ 543 0000 5200     		.short	82
+ 544              		.text
+ 545              	.Letext0:
+ 546              		.file 2 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 547              		.file 3 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 548              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f411xe.h"
+ 549              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 550              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 551              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h"
+ 552              		.file 8 "Core/Inc/VL53L1X_api.h"
+ 553              		.file 9 "Core/Inc/VL53L1A1_Simulink.h"
+ 554              		.file 10 "Core/Inc/vl53l1_platform.h"
+ 555              		.file 11 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for
+ 556              		.file 12 "Core/Inc/X-NUCLEO-53L1A1.h"
+ 557              		.file 13 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ARM GAS  C:\Temp\ccFBc3to.s 			page 14
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 VL53L1A1_Simulink.c
+  C:\Temp\ccFBc3to.s:21     .rodata.initVL53L1A1.str1.4:00000000 $d
+  C:\Temp\ccFBc3to.s:34     .text.initVL53L1A1:00000000 $t
+  C:\Temp\ccFBc3to.s:40     .text.initVL53L1A1:00000000 initVL53L1A1
+  C:\Temp\ccFBc3to.s:258    .text.initVL53L1A1:00000130 $d
+  C:\Temp\ccFBc3to.s:542    .data.VL53L1_address_default:00000000 VL53L1_address_default
+  C:\Temp\ccFBc3to.s:516    .data.ROI_Y:00000000 ROI_Y
+  C:\Temp\ccFBc3to.s:523    .data.ROI_X:00000000 ROI_X
+  C:\Temp\ccFBc3to.s:273    .text.getVL53L1A1:00000000 $t
+  C:\Temp\ccFBc3to.s:279    .text.getVL53L1A1:00000000 getVL53L1A1
+  C:\Temp\ccFBc3to.s:391    .text.getVL53L1A1:00000088 $d
+  C:\Temp\ccFBc3to.s:529    .bss.dataReady:00000000 dataReady
+  C:\Temp\ccFBc3to.s:535    .bss.RangeStatus:00000000 RangeStatus
+  C:\Temp\ccFBc3to.s:502    .bss.SignalRate:00000000 SignalRate
+  C:\Temp\ccFBc3to.s:495    .bss.AmbientRate:00000000 AmbientRate
+  C:\Temp\ccFBc3to.s:488    .bss.SpadNum:00000000 SpadNum
+  C:\Temp\ccFBc3to.s:509    .bss.Distance:00000000 Distance
+  C:\Temp\ccFBc3to.s:401    .text.bytesToFloat:00000000 $t
+  C:\Temp\ccFBc3to.s:407    .text.bytesToFloat:00000000 bytesToFloat
+  C:\Temp\ccFBc3to.s:443    .text.bytesToInt32:00000000 $t
+  C:\Temp\ccFBc3to.s:449    .text.bytesToInt32:00000000 bytesToInt32
+  C:\Temp\ccFBc3to.s:485    .bss.SpadNum:00000000 $d
+  C:\Temp\ccFBc3to.s:492    .bss.AmbientRate:00000000 $d
+  C:\Temp\ccFBc3to.s:499    .bss.SignalRate:00000000 $d
+  C:\Temp\ccFBc3to.s:506    .bss.Distance:00000000 $d
+  C:\Temp\ccFBc3to.s:513    .data.ROI_Y:00000000 $d
+  C:\Temp\ccFBc3to.s:520    .data.ROI_X:00000000 $d
+  C:\Temp\ccFBc3to.s:530    .bss.dataReady:00000000 $d
+  C:\Temp\ccFBc3to.s:536    .bss.RangeStatus:00000000 $d
+  C:\Temp\ccFBc3to.s:539    .data.VL53L1_address_default:00000000 $d
+
+UNDEFINED SYMBOLS
+XNUCLEO53L1A1_ResetId
+HAL_Delay
+VL53L1_RdByte
+sprintf
+HAL_UART_Transmit
+VL53L1_RdWord
+VL53L1X_BootState
+VL53L1X_SensorInit
+VL53L1X_SetDistanceMode
+VL53L1X_SetTimingBudgetInMs
+VL53L1X_SetInterMeasurementInMs
+VL53L1X_SetROI
+VL53L1X_StartRanging
+VL53L1X_SetI2CAddress
+huart2
+rangingProfile
+timingBudget
+pollingPeriod
+VL53L1X_CheckForDataReady
+VL53L1X_GetRangeStatus
+VL53L1X_GetDistance
+VL53L1X_GetSignalRate
+VL53L1X_GetAmbientRate
+VL53L1X_GetSpadNb
+ARM GAS  C:\Temp\ccFBc3to.s 			page 15
+
+
+VL53L1X_ClearInterrupt

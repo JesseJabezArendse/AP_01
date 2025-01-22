@@ -77,6 +77,9 @@ endif
 C_SOURCES =  \
 Core/Src/IKS02A1_Simulink.c \
 Core/Src/VL53L1A1_Simulink.c \
+Core/Src/VL53L1X_api.c \
+Core/Src/VL53L1X_calibration.c \
+Core/Src/X-NUCLEO-53L1A1.c \
 Core/Src/main.c \
 Core/Src/stm32f4xx_hal_msp.c \
 Core/Src/stm32f4xx_it.c \
@@ -84,41 +87,13 @@ Core/Src/stm32f4xx_nucleo_bus.c \
 Core/Src/syscalls.c \
 Core/Src/sysmem.c \
 Core/Src/system_stm32f4xx.c \
-Drivers/BSP/53L1A2/53l1a2.c \
-Drivers/BSP/53L1A2/53l1a2_ranging_sensor.c \
+Core/Src/vl53l1_platform.c \
 Drivers/BSP/Components/iis2dlpc/iis2dlpc.c \
 Drivers/BSP/Components/iis2dlpc/iis2dlpc_reg.c \
 Drivers/BSP/Components/iis2mdc/iis2mdc.c \
 Drivers/BSP/Components/iis2mdc/iis2mdc_reg.c \
 Drivers/BSP/Components/ism330dhcx/ism330dhcx.c \
 Drivers/BSP/Components/ism330dhcx/ism330dhcx_reg.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_calibration.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_core.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_preset_modes.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_core.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_core_support.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_algos_gen3.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_algos_gen4.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_char.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_funcs.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_nvm.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_nvm_debug.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_register_funcs.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_silicon_core.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_wait.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_xtalk.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c \
-Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c \
-Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c \
-Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_log.c \
-Drivers/BSP/Components/vl53l1cb/vl53l1cb.c \
 Drivers/BSP/IKS02A1/iks02a1_motion_sensors.c \
 Drivers/BSP/IKS02A1/iks02a1_motion_sensors_ex.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
@@ -141,7 +116,7 @@ Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
 
 
-CPP_SOURCES = \
+CXX_SOURCES = \
 
 
 # ASM sources
@@ -179,6 +154,16 @@ endif
 HEX = $(CP) -O ihex
 BIN = $(CP) -O binary -S
 LSS = $(DP) -h -S
+
+
+REMOVE_DIRECTORY_COMMAND = rm -fR
+mkdir_function = mkdir -p $(1)
+ifeq ($(OS),Windows_NT)
+  convert_to_windows_path = $(strip $(subst /,\,$(patsubst %/,%,$(1))))
+  REMOVE_DIRECTORY_COMMAND = cmd /c rd /s /q
+  mkdir_function = cmd /e:on /c if not exist $(call convert_to_windows_path,$(1)) md $(call convert_to_windows_path,$(1))
+endif
+
 
 # Flash and debug tools
 # Default is openocd however will be gotten from the env file when existing
@@ -222,20 +207,15 @@ AS_INCLUDES = \
 # C includes
 C_INCLUDES =  \
 -ICore/Inc \
--IDrivers/BSP/53L1A2 \
 -IDrivers/BSP/Components/Common \
 -IDrivers/BSP/Components/iis2dlpc \
 -IDrivers/BSP/Components/iis2mdc \
 -IDrivers/BSP/Components/ism330dhcx \
--IDrivers/BSP/Components/vl53l1cb \
--IDrivers/BSP/Components/vl53l1cb/modules \
--IDrivers/BSP/Components/vl53l1cb/porting \
 -IDrivers/BSP/IKS02A1 \
 -IDrivers/CMSIS/Device/ST/STM32F4xx/Include \
 -IDrivers/CMSIS/Include \
 -IDrivers/STM32F4xx_HAL_Driver/Inc \
 -IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy \
--ITOF/Target \
 -IX-CUBE-MEMS1/Target
 
 
@@ -281,20 +261,12 @@ LDFLAGS = $(MCU) $(ADDITIONALLDFLAGS) -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$
 #######################################
 # build the application
 #######################################
-add_release_directory = $(sort $(addprefix $(RELEASE_DIRECTORY)/,$(addsuffix .$(2),$(basename $(subst ../,parent,$(1))))))
-
-REMOVE_DIRECTORY_COMMAND = rm -fR
-mkdir_function = mkdir -p $(1)
-ifeq ($(OS),Windows_NT)
-  convert_to_windows_path = $(strip $(subst /,\,$(patsubst %/,%,$(1))))
-  REMOVE_DIRECTORY_COMMAND = cmd /c rd /s /q
-  mkdir_function = cmd /e:on /c md $(call convert_to_windows_path,$(1))
-endif
+add_release_directory = $(sort $(addprefix $(RELEASE_DIRECTORY)/,$(addsuffix .$(2),$(basename $(notdir $(1))))))
 
 
 
 OBJECTS = $(call add_release_directory,$(C_SOURCES),o)
-OBJECTS += $(call add_release_directory,$(CPP_SOURCES),o)
+OBJECTS += $(call add_release_directory,$(CXX_SOURCES),o)
 OBJECTS += $(call add_release_directory,$(ASM_SOURCES),o)
 vpath %.c $(sort $(dir $(C_SOURCES)))
 vpath %.cc $(sort $(dir $(CXX_SOURCES)))
@@ -307,82 +279,81 @@ vpath %.CPP $(sort $(dir $(CXX_SOURCES)))
 vpath %.s $(sort $(dir $(ASM_SOURCES)))
 vpath %.S $(sort $(dir $(ASM_SOURCES)))
 
-# the tree of folders which needs to be present based on the object files
-BUILD_TREE = $(sort $(dir $(OBJECTS)))
-
-# C build
-$(RELEASE_DIRECTORY)/%.o: %.c STM32Make.make | $(BUILD_TREE)
-	$(CC) -c $(CFLAGS) $< -o $@
-
-# C++ build 
-$(RELEASE_DIRECTORY)/%.o: %.cc STM32Make.make | $(BUILD_TREE)
-	$(CXX) -c $(CXXFLAGS) $< -o $@
-
-$(RELEASE_DIRECTORY)/%.o: %.cp STM32Make.make | $(BUILD_TREE)
-	$(CXX) -c $(CXXFLAGS) $< -o $@
-
-$(RELEASE_DIRECTORY)/%.o: %.cxx STM32Make.make | $(BUILD_TREE)
-	$(CXX) -c $(CXXFLAGS) $< -o $@
-
-$(RELEASE_DIRECTORY)/%.o: %.cpp STM32Make.make | $(BUILD_TREE)
-	$(CXX) -c $(CXXFLAGS) $< -o $@
-
-$(RELEASE_DIRECTORY)/%.o: %.c++ STM32Make.make | $(BUILD_TREE)
-	$(CXX) -c $(CXXFLAGS) $< -o $@
-
-$(RELEASE_DIRECTORY)/%.o: %.C STM32Make.make | $(BUILD_TREE)
-	$(CXX) -c $(CXXFLAGS) $< -o $@
-
-$(RELEASE_DIRECTORY)/%.o: %.CPP STM32Make.make | $(BUILD_TREE)
-	$(CXX) -c $(CXXFLAGS) $< -o $@
-
-#Assembly build
-$(RELEASE_DIRECTORY)/%.o: %.s STM32Make.make | $(BUILD_TREE)
-	$(AS) -c $(ASFLAGS) $< -o $@
-
-$(RELEASE_DIRECTORY)/%.o: %.S STM32Make.make | $(BUILD_TREE)
-	$(AS) -c $(ASFLAGS) $< -o $@
-
-$(RELEASE_DIRECTORY)/%.o: %.sx STM32Make.make | $(BUILD_TREE)
-	$(AS) -c $(ASFLAGS) $< -o $@
-
-$(BUILD_DIRECTORY)/$(TARGET).elf: $(OBJECTS) STM32Make.make | $(BUILD_DIRECTORY)
-	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
-	$(SZ) $@
-
-$(BUILD_DIRECTORY)/%.hex: $(BUILD_DIRECTORY)/%.elf | $(BUILD_DIRECTORY)
-	$(HEX) $< $@
-
-$(BUILD_DIRECTORY)/%.bin: $(BUILD_DIRECTORY)/%.elf | $(BUILD_DIRECTORY)
-	$(BIN) $< $@
-
-$(BUILD_DIRECTORY)/%.lss: $(BUILD_DIRECTORY)/%.elf | $(BUILD_DIRECTORY)
-	$(LSS) $< > $@
-
-$(BUILD_DIRECTORY):
-	$(call mkdir_function, $@)
-
-$(BUILD_TREE):
-	$(call mkdir_function, $@)
-
 #######################################
 # all
 #######################################
+# note needs to be located as the first rule to be the default build rule
 # default action: build all
-all:
-	$(BUILD_DIRECTORY)/$(TARGET).elf 
-	$(BUILD_DIRECTORY)/$(TARGET).hex 
-	$(BUILD_DIRECTORY)/$(TARGET).bin 
-	$(BUILD_DIRECTORY)/$(TARGET).lss 
+all: $(RELEASE_DIRECTORY)/$(TARGET).elf $(RELEASE_DIRECTORY)/$(TARGET).hex $(RELEASE_DIRECTORY)/$(TARGET).bin $(RELEASE_DIRECTORY)/$(TARGET).lss 
 
 
-flash: $(BUILD_DIRECTORY)/$(TARGET).elf
-	"$(OPENOCD)" -f ./openocd.cfg -c "program $(BUILD_DIRECTORY)/$(TARGET).elf verify reset exit"
+# C build
+$(RELEASE_DIRECTORY)/%.o: %.c STM32Make.make | $(RELEASE_DIRECTORY)
+	$(CC) -c $(CFLAGS) $< -o $@
+
+# C++ build 
+$(RELEASE_DIRECTORY)/%.o: %.cc STM32Make.make | $(RELEASE_DIRECTORY)
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+
+$(RELEASE_DIRECTORY)/%.o: %.cp STM32Make.make | $(RELEASE_DIRECTORY)
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+
+$(RELEASE_DIRECTORY)/%.o: %.cxx STM32Make.make | $(RELEASE_DIRECTORY)
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+
+$(RELEASE_DIRECTORY)/%.o: %.cpp STM32Make.make | $(RELEASE_DIRECTORY)
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+
+$(RELEASE_DIRECTORY)/%.o: %.c++ STM32Make.make | $(RELEASE_DIRECTORY)
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+
+$(RELEASE_DIRECTORY)/%.o: %.C STM32Make.make | $(RELEASE_DIRECTORY)
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+
+$(RELEASE_DIRECTORY)/%.o: %.CPP STM32Make.make | $(RELEASE_DIRECTORY)
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+
+#Assembly build
+$(RELEASE_DIRECTORY)/%.o: %.s STM32Make.make | $(RELEASE_DIRECTORY)
+	$(AS) -c $(ASFLAGS) $< -o $@
+
+$(RELEASE_DIRECTORY)/%.o: %.S STM32Make.make | $(RELEASE_DIRECTORY)
+	$(AS) -c $(ASFLAGS) $< -o $@
+
+$(RELEASE_DIRECTORY)/%.o: %.sx STM32Make.make | $(RELEASE_DIRECTORY)
+	$(AS) -c $(ASFLAGS) $< -o $@
+
+$(RELEASE_DIRECTORY)/$(TARGET).elf: $(OBJECTS) STM32Make.make | $(RELEASE_DIRECTORY)
+	@echo $(OBJECTS) > $@.in
+	$(CC) @$@.in $(LDFLAGS) -o $@
+	$(SZ) $@
+
+$(RELEASE_DIRECTORY)/%.hex: $(RELEASE_DIRECTORY)/%.elf | $(RELEASE_DIRECTORY)
+	$(HEX) $< $@
+
+$(RELEASE_DIRECTORY)/%.bin: $(RELEASE_DIRECTORY)/%.elf | $(RELEASE_DIRECTORY)
+	$(BIN) $< $@
+
+$(RELEASE_DIRECTORY)/%.lss: $(RELEASE_DIRECTORY)/%.elf | $(RELEASE_DIRECTORY)
+	$(LSS) $< > $@
+
+$(RELEASE_DIRECTORY):
+	$(call mkdir_function, $@)
+
+$(BUILD_DIRECTORY): | $(RELEASE_DIRECTORY)
+	$(call mkdir_function, $@)
+
+
+#######################################
+# flash
+#######################################
+flash: all
+	"$(OPENOCD)" -f ./openocd.cfg -c "program $(RELEASE_DIRECTORY)/$(TARGET).elf verify reset exit"
 
 #######################################
 # erase
 #######################################
-erase: $(BUILD_DIRECTORY)/$(TARGET).elf
+erase: all
 	"$(OPENOCD)" -f ./openocd.cfg -c "init; reset halt; stm32f4x mass_erase 0; exit"
 
 #######################################
@@ -399,6 +370,6 @@ clean:
 #######################################
 # dependencies
 #######################################
--include $(wildcard $(BUILD_DIRECTORY)/*.d)
+-include $(wildcard $(RELEASE_DIRECTORY)/*.d)
 
 # *** EOF ***

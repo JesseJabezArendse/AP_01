@@ -22,8 +22,6 @@
 #include "stm32f4xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "53l1a2_ranging_sensor.h"
-#include "53l1a2_conf.h"
 #include "VL53L1A1_Simulink.h"
 /* USER CODE END Includes */
 
@@ -64,7 +62,7 @@ extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim3;
 extern DMA_HandleTypeDef hdma_usart2_tx;
 /* USER CODE BEGIN EV */
-extern RANGING_SENSOR_Result_t TOF_centre;
+
 extern uint8_t clearToSend;
 extern uint8_t clearToGetL1;
 extern int32_t counter;
@@ -216,7 +214,7 @@ void SysTick_Handler(void)
 void EXTI4_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI4_IRQn 0 */
-  // VL53L1A2_RANGING_SENSOR_GetDistance(INSTANCE_TOF_CENTRE , &TOF_centre );
+
   /* USER CODE END EXTI4_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(L1_INT_Pin);
   /* USER CODE BEGIN EXTI4_IRQn 1 */

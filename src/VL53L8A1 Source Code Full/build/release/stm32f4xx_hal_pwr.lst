@@ -1,0 +1,683 @@
+ARM GAS  C:\Temp\ccLXveTd.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"stm32f4xx_hal_pwr.c"
+  16              		.text
+  17              		.section	.text.HAL_PWR_DeInit,"ax",%progbits
+  18              		.align	1
+  19              		.global	HAL_PWR_DeInit
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	HAL_PWR_DeInit:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27              		@ link register save eliminated.
+  28 0000 044B     		ldr	r3, .L2
+  29 0002 1A6A     		ldr	r2, [r3, #32]
+  30 0004 42F08052 		orr	r2, r2, #268435456
+  31 0008 1A62     		str	r2, [r3, #32]
+  32 000a 1A6A     		ldr	r2, [r3, #32]
+  33 000c 22F08052 		bic	r2, r2, #268435456
+  34 0010 1A62     		str	r2, [r3, #32]
+  35 0012 7047     		bx	lr
+  36              	.L3:
+  37              		.align	2
+  38              	.L2:
+  39 0014 00380240 		.word	1073887232
+  41              		.section	.text.HAL_PWR_EnableBkUpAccess,"ax",%progbits
+  42              		.align	1
+  43              		.global	HAL_PWR_EnableBkUpAccess
+  44              		.syntax unified
+  45              		.thumb
+  46              		.thumb_func
+  48              	HAL_PWR_EnableBkUpAccess:
+  49              		@ args = 0, pretend = 0, frame = 8
+  50              		@ frame_needed = 0, uses_anonymous_args = 0
+  51              		@ link register save eliminated.
+  52 0000 82B0     		sub	sp, sp, #8
+  53 0002 044B     		ldr	r3, .L6
+  54 0004 0122     		movs	r2, #1
+  55 0006 1A62     		str	r2, [r3, #32]
+  56 0008 034B     		ldr	r3, .L6+4
+  57 000a 1B68     		ldr	r3, [r3]
+  58 000c 0193     		str	r3, [sp, #4]
+  59 000e 019B     		ldr	r3, [sp, #4]
+  60 0010 02B0     		add	sp, sp, #8
+ARM GAS  C:\Temp\ccLXveTd.s 			page 2
+
+
+  61              		@ sp needed
+  62 0012 7047     		bx	lr
+  63              	.L7:
+  64              		.align	2
+  65              	.L6:
+  66 0014 00000E42 		.word	1108213760
+  67 0018 00700040 		.word	1073770496
+  69              		.section	.text.HAL_PWR_DisableBkUpAccess,"ax",%progbits
+  70              		.align	1
+  71              		.global	HAL_PWR_DisableBkUpAccess
+  72              		.syntax unified
+  73              		.thumb
+  74              		.thumb_func
+  76              	HAL_PWR_DisableBkUpAccess:
+  77              		@ args = 0, pretend = 0, frame = 8
+  78              		@ frame_needed = 0, uses_anonymous_args = 0
+  79              		@ link register save eliminated.
+  80 0000 82B0     		sub	sp, sp, #8
+  81 0002 044B     		ldr	r3, .L10
+  82 0004 0022     		movs	r2, #0
+  83 0006 1A62     		str	r2, [r3, #32]
+  84 0008 034B     		ldr	r3, .L10+4
+  85 000a 1B68     		ldr	r3, [r3]
+  86 000c 0193     		str	r3, [sp, #4]
+  87 000e 019B     		ldr	r3, [sp, #4]
+  88 0010 02B0     		add	sp, sp, #8
+  89              		@ sp needed
+  90 0012 7047     		bx	lr
+  91              	.L11:
+  92              		.align	2
+  93              	.L10:
+  94 0014 00000E42 		.word	1108213760
+  95 0018 00700040 		.word	1073770496
+  97              		.section	.rodata.HAL_PWR_ConfigPVD.str1.4,"aMS",%progbits,1
+  98              		.align	2
+  99              	.LC0:
+ 100 0000 44726976 		.ascii	"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr."
+ 100      6572732F 
+ 100      53544D33 
+ 100      32463478 
+ 100      785F4841 
+ 101 0033 6300     		.ascii	"c\000"
+ 102              		.section	.text.HAL_PWR_ConfigPVD,"ax",%progbits
+ 103              		.align	1
+ 104              		.global	HAL_PWR_ConfigPVD
+ 105              		.syntax unified
+ 106              		.thumb
+ 107              		.thumb_func
+ 109              	HAL_PWR_ConfigPVD:
+ 110              		@ args = 0, pretend = 0, frame = 0
+ 111              		@ frame_needed = 0, uses_anonymous_args = 0
+ 112 0000 10B5     		push	{r4, lr}
+ 113 0002 0446     		mov	r4, r0
+ 114 0004 0368     		ldr	r3, [r0]
+ 115 0006 6BB1     		cbz	r3, .L13
+ 116 0008 202B     		cmp	r3, #32
+ 117 000a 0BD0     		beq	.L13
+ARM GAS  C:\Temp\ccLXveTd.s 			page 3
+
+
+ 118 000c 402B     		cmp	r3, #64
+ 119 000e 09D0     		beq	.L13
+ 120 0010 602B     		cmp	r3, #96
+ 121 0012 07D0     		beq	.L13
+ 122 0014 802B     		cmp	r3, #128
+ 123 0016 05D0     		beq	.L13
+ 124 0018 A02B     		cmp	r3, #160
+ 125 001a 03D0     		beq	.L13
+ 126 001c C02B     		cmp	r3, #192
+ 127 001e 01D0     		beq	.L13
+ 128 0020 E02B     		cmp	r3, #224
+ 129 0022 48D1     		bne	.L20
+ 130              	.L13:
+ 131 0024 6368     		ldr	r3, [r4, #4]
+ 132 0026 A3F10112 		sub	r2, r3, #65537
+ 133 002a 022A     		cmp	r2, #2
+ 134 002c 06D9     		bls	.L14
+ 135 002e A3F50032 		sub	r2, r3, #131072
+ 136 0032 013A     		subs	r2, r2, #1
+ 137 0034 022A     		cmp	r2, #2
+ 138 0036 01D9     		bls	.L14
+ 139 0038 002B     		cmp	r3, #0
+ 140 003a 42D1     		bne	.L21
+ 141              	.L14:
+ 142 003c 244A     		ldr	r2, .L22
+ 143 003e 1368     		ldr	r3, [r2]
+ 144 0040 23F0E003 		bic	r3, r3, #224
+ 145 0044 2168     		ldr	r1, [r4]
+ 146 0046 0B43     		orrs	r3, r3, r1
+ 147 0048 1360     		str	r3, [r2]
+ 148 004a 224B     		ldr	r3, .L22+4
+ 149 004c 5A68     		ldr	r2, [r3, #4]
+ 150 004e 22F48032 		bic	r2, r2, #65536
+ 151 0052 5A60     		str	r2, [r3, #4]
+ 152 0054 1A68     		ldr	r2, [r3]
+ 153 0056 22F48032 		bic	r2, r2, #65536
+ 154 005a 1A60     		str	r2, [r3]
+ 155 005c 9A68     		ldr	r2, [r3, #8]
+ 156 005e 22F48032 		bic	r2, r2, #65536
+ 157 0062 9A60     		str	r2, [r3, #8]
+ 158 0064 DA68     		ldr	r2, [r3, #12]
+ 159 0066 22F48032 		bic	r2, r2, #65536
+ 160 006a DA60     		str	r2, [r3, #12]
+ 161 006c 6368     		ldr	r3, [r4, #4]
+ 162 006e 13F4803F 		tst	r3, #65536
+ 163 0072 04D0     		beq	.L15
+ 164 0074 174A     		ldr	r2, .L22+4
+ 165 0076 1368     		ldr	r3, [r2]
+ 166 0078 43F48033 		orr	r3, r3, #65536
+ 167 007c 1360     		str	r3, [r2]
+ 168              	.L15:
+ 169 007e 6368     		ldr	r3, [r4, #4]
+ 170 0080 13F4003F 		tst	r3, #131072
+ 171 0084 04D0     		beq	.L16
+ 172 0086 134A     		ldr	r2, .L22+4
+ 173 0088 5368     		ldr	r3, [r2, #4]
+ 174 008a 43F48033 		orr	r3, r3, #65536
+ARM GAS  C:\Temp\ccLXveTd.s 			page 4
+
+
+ 175 008e 5360     		str	r3, [r2, #4]
+ 176              	.L16:
+ 177 0090 6368     		ldr	r3, [r4, #4]
+ 178 0092 13F0010F 		tst	r3, #1
+ 179 0096 04D0     		beq	.L17
+ 180 0098 0E4A     		ldr	r2, .L22+4
+ 181 009a 9368     		ldr	r3, [r2, #8]
+ 182 009c 43F48033 		orr	r3, r3, #65536
+ 183 00a0 9360     		str	r3, [r2, #8]
+ 184              	.L17:
+ 185 00a2 6368     		ldr	r3, [r4, #4]
+ 186 00a4 13F0020F 		tst	r3, #2
+ 187 00a8 04D0     		beq	.L12
+ 188 00aa 0A4A     		ldr	r2, .L22+4
+ 189 00ac D368     		ldr	r3, [r2, #12]
+ 190 00ae 43F48033 		orr	r3, r3, #65536
+ 191 00b2 D360     		str	r3, [r2, #12]
+ 192              	.L12:
+ 193 00b4 10BD     		pop	{r4, pc}
+ 194              	.L20:
+ 195 00b6 4FF48B71 		mov	r1, #278
+ 196 00ba 0748     		ldr	r0, .L22+8
+ 197 00bc FFF7FEFF 		bl	assert_failed
+ 198 00c0 B0E7     		b	.L13
+ 199              	.L21:
+ 200 00c2 40F21711 		movw	r1, #279
+ 201 00c6 0448     		ldr	r0, .L22+8
+ 202 00c8 FFF7FEFF 		bl	assert_failed
+ 203 00cc B6E7     		b	.L14
+ 204              	.L23:
+ 205 00ce 00BF     		.align	2
+ 206              	.L22:
+ 207 00d0 00700040 		.word	1073770496
+ 208 00d4 003C0140 		.word	1073822720
+ 209 00d8 00000000 		.word	.LC0
+ 211              		.section	.text.HAL_PWR_EnablePVD,"ax",%progbits
+ 212              		.align	1
+ 213              		.global	HAL_PWR_EnablePVD
+ 214              		.syntax unified
+ 215              		.thumb
+ 216              		.thumb_func
+ 218              	HAL_PWR_EnablePVD:
+ 219              		@ args = 0, pretend = 0, frame = 0
+ 220              		@ frame_needed = 0, uses_anonymous_args = 0
+ 221              		@ link register save eliminated.
+ 222 0000 014B     		ldr	r3, .L25
+ 223 0002 0122     		movs	r2, #1
+ 224 0004 1A61     		str	r2, [r3, #16]
+ 225 0006 7047     		bx	lr
+ 226              	.L26:
+ 227              		.align	2
+ 228              	.L25:
+ 229 0008 00000E42 		.word	1108213760
+ 231              		.section	.text.HAL_PWR_DisablePVD,"ax",%progbits
+ 232              		.align	1
+ 233              		.global	HAL_PWR_DisablePVD
+ 234              		.syntax unified
+ARM GAS  C:\Temp\ccLXveTd.s 			page 5
+
+
+ 235              		.thumb
+ 236              		.thumb_func
+ 238              	HAL_PWR_DisablePVD:
+ 239              		@ args = 0, pretend = 0, frame = 0
+ 240              		@ frame_needed = 0, uses_anonymous_args = 0
+ 241              		@ link register save eliminated.
+ 242 0000 014B     		ldr	r3, .L28
+ 243 0002 0022     		movs	r2, #0
+ 244 0004 1A61     		str	r2, [r3, #16]
+ 245 0006 7047     		bx	lr
+ 246              	.L29:
+ 247              		.align	2
+ 248              	.L28:
+ 249 0008 00000E42 		.word	1108213760
+ 251              		.section	.text.HAL_PWR_EnableWakeUpPin,"ax",%progbits
+ 252              		.align	1
+ 253              		.global	HAL_PWR_EnableWakeUpPin
+ 254              		.syntax unified
+ 255              		.thumb
+ 256              		.thumb_func
+ 258              	HAL_PWR_EnableWakeUpPin:
+ 259              		@ args = 0, pretend = 0, frame = 0
+ 260              		@ frame_needed = 0, uses_anonymous_args = 0
+ 261 0000 10B5     		push	{r4, lr}
+ 262 0002 0446     		mov	r4, r0
+ 263 0004 B0F5807F 		cmp	r0, #256
+ 264 0008 04D1     		bne	.L33
+ 265              	.L31:
+ 266 000a 054A     		ldr	r2, .L34
+ 267 000c 5368     		ldr	r3, [r2, #4]
+ 268 000e 2343     		orrs	r3, r3, r4
+ 269 0010 5360     		str	r3, [r2, #4]
+ 270 0012 10BD     		pop	{r4, pc}
+ 271              	.L33:
+ 272 0014 4FF4AC71 		mov	r1, #344
+ 273 0018 0248     		ldr	r0, .L34+4
+ 274 001a FFF7FEFF 		bl	assert_failed
+ 275 001e F4E7     		b	.L31
+ 276              	.L35:
+ 277              		.align	2
+ 278              	.L34:
+ 279 0020 00700040 		.word	1073770496
+ 280 0024 00000000 		.word	.LC0
+ 282              		.section	.text.HAL_PWR_DisableWakeUpPin,"ax",%progbits
+ 283              		.align	1
+ 284              		.global	HAL_PWR_DisableWakeUpPin
+ 285              		.syntax unified
+ 286              		.thumb
+ 287              		.thumb_func
+ 289              	HAL_PWR_DisableWakeUpPin:
+ 290              		@ args = 0, pretend = 0, frame = 0
+ 291              		@ frame_needed = 0, uses_anonymous_args = 0
+ 292 0000 10B5     		push	{r4, lr}
+ 293 0002 0446     		mov	r4, r0
+ 294 0004 B0F5807F 		cmp	r0, #256
+ 295 0008 05D1     		bne	.L39
+ 296              	.L37:
+ARM GAS  C:\Temp\ccLXveTd.s 			page 6
+
+
+ 297 000a 064A     		ldr	r2, .L40
+ 298 000c 5368     		ldr	r3, [r2, #4]
+ 299 000e 23EA0403 		bic	r3, r3, r4
+ 300 0012 5360     		str	r3, [r2, #4]
+ 301 0014 10BD     		pop	{r4, pc}
+ 302              	.L39:
+ 303 0016 4FF4B571 		mov	r1, #362
+ 304 001a 0348     		ldr	r0, .L40+4
+ 305 001c FFF7FEFF 		bl	assert_failed
+ 306 0020 F3E7     		b	.L37
+ 307              	.L41:
+ 308 0022 00BF     		.align	2
+ 309              	.L40:
+ 310 0024 00700040 		.word	1073770496
+ 311 0028 00000000 		.word	.LC0
+ 313              		.section	.text.HAL_PWR_EnterSLEEPMode,"ax",%progbits
+ 314              		.align	1
+ 315              		.global	HAL_PWR_EnterSLEEPMode
+ 316              		.syntax unified
+ 317              		.thumb
+ 318              		.thumb_func
+ 320              	HAL_PWR_EnterSLEEPMode:
+ 321              		@ args = 0, pretend = 0, frame = 0
+ 322              		@ frame_needed = 0, uses_anonymous_args = 0
+ 323 0000 10B5     		push	{r4, lr}
+ 324 0002 0C46     		mov	r4, r1
+ 325 0004 0128     		cmp	r0, #1
+ 326 0006 10D8     		bhi	.L49
+ 327              	.L43:
+ 328 0008 631E     		subs	r3, r4, #1
+ 329 000a DBB2     		uxtb	r3, r3
+ 330 000c 022B     		cmp	r3, #2
+ 331 000e 12D8     		bhi	.L50
+ 332              	.L44:
+ 333 0010 0D4A     		ldr	r2, .L52
+ 334 0012 1369     		ldr	r3, [r2, #16]
+ 335 0014 23F00403 		bic	r3, r3, #4
+ 336 0018 1361     		str	r3, [r2, #16]
+ 337 001a 012C     		cmp	r4, #1
+ 338 001c 11D0     		beq	.L51
+ 339 001e 032C     		cmp	r4, #3
+ 340 0020 01D0     		beq	.L47
+ 341              		.syntax unified
+ 342              	@ 414 "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c" 1
+ 343 0022 40BF     		sev
+ 344              	@ 0 "" 2
+ 345              	@ 415 "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c" 1
+ 346 0024 20BF     		wfe
+ 347              	@ 0 "" 2
+ 348              		.thumb
+ 349              		.syntax unified
+ 350              	.L47:
+ 351              		.syntax unified
+ 352              	@ 419 "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c" 1
+ 353 0026 20BF     		wfe
+ 354              	@ 0 "" 2
+ 355              		.thumb
+ARM GAS  C:\Temp\ccLXveTd.s 			page 7
+
+
+ 356              		.syntax unified
+ 357              	.L42:
+ 358 0028 10BD     		pop	{r4, pc}
+ 359              	.L49:
+ 360 002a 40F28D11 		movw	r1, #397
+ 361 002e 0748     		ldr	r0, .L52+4
+ 362 0030 FFF7FEFF 		bl	assert_failed
+ 363 0034 E8E7     		b	.L43
+ 364              	.L50:
+ 365 0036 4FF4C771 		mov	r1, #398
+ 366 003a 0448     		ldr	r0, .L52+4
+ 367 003c FFF7FEFF 		bl	assert_failed
+ 368 0040 E6E7     		b	.L44
+ 369              	.L51:
+ 370              		.syntax unified
+ 371              	@ 407 "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c" 1
+ 372 0042 30BF     		wfi
+ 373              	@ 0 "" 2
+ 374              		.thumb
+ 375              		.syntax unified
+ 376 0044 F0E7     		b	.L42
+ 377              	.L53:
+ 378 0046 00BF     		.align	2
+ 379              	.L52:
+ 380 0048 00ED00E0 		.word	-536810240
+ 381 004c 00000000 		.word	.LC0
+ 383              		.section	.text.HAL_PWR_EnterSTOPMode,"ax",%progbits
+ 384              		.align	1
+ 385              		.global	HAL_PWR_EnterSTOPMode
+ 386              		.syntax unified
+ 387              		.thumb
+ 388              		.thumb_func
+ 390              	HAL_PWR_EnterSTOPMode:
+ 391              		@ args = 0, pretend = 0, frame = 0
+ 392              		@ frame_needed = 0, uses_anonymous_args = 0
+ 393 0000 38B5     		push	{r3, r4, r5, lr}
+ 394 0002 0546     		mov	r5, r0
+ 395 0004 0C46     		mov	r4, r1
+ 396 0006 0128     		cmp	r0, #1
+ 397 0008 1BD8     		bhi	.L61
+ 398              	.L55:
+ 399 000a 631E     		subs	r3, r4, #1
+ 400 000c DBB2     		uxtb	r3, r3
+ 401 000e 022B     		cmp	r3, #2
+ 402 0010 1DD8     		bhi	.L62
+ 403              	.L56:
+ 404 0012 134A     		ldr	r2, .L64
+ 405 0014 1368     		ldr	r3, [r2]
+ 406 0016 23F00303 		bic	r3, r3, #3
+ 407 001a 2B43     		orrs	r3, r3, r5
+ 408 001c 1360     		str	r3, [r2]
+ 409 001e 114A     		ldr	r2, .L64+4
+ 410 0020 1369     		ldr	r3, [r2, #16]
+ 411 0022 43F00403 		orr	r3, r3, #4
+ 412 0026 1361     		str	r3, [r2, #16]
+ 413 0028 012C     		cmp	r4, #1
+ 414 002a 16D0     		beq	.L63
+ARM GAS  C:\Temp\ccLXveTd.s 			page 8
+
+
+ 415 002c 032C     		cmp	r4, #3
+ 416 002e 01D0     		beq	.L59
+ 417              		.syntax unified
+ 418              	@ 468 "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c" 1
+ 419 0030 40BF     		sev
+ 420              	@ 0 "" 2
+ 421              	@ 469 "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c" 1
+ 422 0032 20BF     		wfe
+ 423              	@ 0 "" 2
+ 424              		.thumb
+ 425              		.syntax unified
+ 426              	.L59:
+ 427              		.syntax unified
+ 428              	@ 472 "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c" 1
+ 429 0034 20BF     		wfe
+ 430              	@ 0 "" 2
+ 431              		.thumb
+ 432              		.syntax unified
+ 433              	.L58:
+ 434 0036 0B4A     		ldr	r2, .L64+4
+ 435 0038 1369     		ldr	r3, [r2, #16]
+ 436 003a 23F00403 		bic	r3, r3, #4
+ 437 003e 1361     		str	r3, [r2, #16]
+ 438 0040 38BD     		pop	{r3, r4, r5, pc}
+ 439              	.L61:
+ 440 0042 4FF4E071 		mov	r1, #448
+ 441 0046 0848     		ldr	r0, .L64+8
+ 442 0048 FFF7FEFF 		bl	assert_failed
+ 443 004c DDE7     		b	.L55
+ 444              	.L62:
+ 445 004e 40F2C111 		movw	r1, #449
+ 446 0052 0548     		ldr	r0, .L64+8
+ 447 0054 FFF7FEFF 		bl	assert_failed
+ 448 0058 DBE7     		b	.L56
+ 449              	.L63:
+ 450              		.syntax unified
+ 451              	@ 461 "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c" 1
+ 452 005a 30BF     		wfi
+ 453              	@ 0 "" 2
+ 454              		.thumb
+ 455              		.syntax unified
+ 456 005c EBE7     		b	.L58
+ 457              	.L65:
+ 458 005e 00BF     		.align	2
+ 459              	.L64:
+ 460 0060 00700040 		.word	1073770496
+ 461 0064 00ED00E0 		.word	-536810240
+ 462 0068 00000000 		.word	.LC0
+ 464              		.section	.text.HAL_PWR_EnterSTANDBYMode,"ax",%progbits
+ 465              		.align	1
+ 466              		.global	HAL_PWR_EnterSTANDBYMode
+ 467              		.syntax unified
+ 468              		.thumb
+ 469              		.thumb_func
+ 471              	HAL_PWR_EnterSTANDBYMode:
+ 472              		@ args = 0, pretend = 0, frame = 0
+ 473              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Temp\ccLXveTd.s 			page 9
+
+
+ 474              		@ link register save eliminated.
+ 475 0000 054A     		ldr	r2, .L67
+ 476 0002 1368     		ldr	r3, [r2]
+ 477 0004 43F00203 		orr	r3, r3, #2
+ 478 0008 1360     		str	r3, [r2]
+ 479 000a 044A     		ldr	r2, .L67+4
+ 480 000c 1369     		ldr	r3, [r2, #16]
+ 481 000e 43F00403 		orr	r3, r3, #4
+ 482 0012 1361     		str	r3, [r2, #16]
+ 483              		.syntax unified
+ 484              	@ 501 "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c" 1
+ 485 0014 30BF     		wfi
+ 486              	@ 0 "" 2
+ 487              		.thumb
+ 488              		.syntax unified
+ 489 0016 7047     		bx	lr
+ 490              	.L68:
+ 491              		.align	2
+ 492              	.L67:
+ 493 0018 00700040 		.word	1073770496
+ 494 001c 00ED00E0 		.word	-536810240
+ 496              		.section	.text.HAL_PWR_PVDCallback,"ax",%progbits
+ 497              		.align	1
+ 498              		.weak	HAL_PWR_PVDCallback
+ 499              		.syntax unified
+ 500              		.thumb
+ 501              		.thumb_func
+ 503              	HAL_PWR_PVDCallback:
+ 504              		@ args = 0, pretend = 0, frame = 0
+ 505              		@ frame_needed = 0, uses_anonymous_args = 0
+ 506              		@ link register save eliminated.
+ 507 0000 7047     		bx	lr
+ 509              		.section	.text.HAL_PWR_PVD_IRQHandler,"ax",%progbits
+ 510              		.align	1
+ 511              		.global	HAL_PWR_PVD_IRQHandler
+ 512              		.syntax unified
+ 513              		.thumb
+ 514              		.thumb_func
+ 516              	HAL_PWR_PVD_IRQHandler:
+ 517              		@ args = 0, pretend = 0, frame = 0
+ 518              		@ frame_needed = 0, uses_anonymous_args = 0
+ 519 0000 08B5     		push	{r3, lr}
+ 520 0002 064B     		ldr	r3, .L74
+ 521 0004 5B69     		ldr	r3, [r3, #20]
+ 522 0006 13F4803F 		tst	r3, #65536
+ 523 000a 00D1     		bne	.L73
+ 524              	.L70:
+ 525 000c 08BD     		pop	{r3, pc}
+ 526              	.L73:
+ 527 000e FFF7FEFF 		bl	HAL_PWR_PVDCallback
+ 528 0012 024B     		ldr	r3, .L74
+ 529 0014 4FF48032 		mov	r2, #65536
+ 530 0018 5A61     		str	r2, [r3, #20]
+ 531 001a F7E7     		b	.L70
+ 532              	.L75:
+ 533              		.align	2
+ 534              	.L74:
+ARM GAS  C:\Temp\ccLXveTd.s 			page 10
+
+
+ 535 001c 003C0140 		.word	1073822720
+ 537              		.section	.text.HAL_PWR_EnableSleepOnExit,"ax",%progbits
+ 538              		.align	1
+ 539              		.global	HAL_PWR_EnableSleepOnExit
+ 540              		.syntax unified
+ 541              		.thumb
+ 542              		.thumb_func
+ 544              	HAL_PWR_EnableSleepOnExit:
+ 545              		@ args = 0, pretend = 0, frame = 0
+ 546              		@ frame_needed = 0, uses_anonymous_args = 0
+ 547              		@ link register save eliminated.
+ 548 0000 024A     		ldr	r2, .L77
+ 549 0002 1369     		ldr	r3, [r2, #16]
+ 550 0004 43F00203 		orr	r3, r3, #2
+ 551 0008 1361     		str	r3, [r2, #16]
+ 552 000a 7047     		bx	lr
+ 553              	.L78:
+ 554              		.align	2
+ 555              	.L77:
+ 556 000c 00ED00E0 		.word	-536810240
+ 558              		.section	.text.HAL_PWR_DisableSleepOnExit,"ax",%progbits
+ 559              		.align	1
+ 560              		.global	HAL_PWR_DisableSleepOnExit
+ 561              		.syntax unified
+ 562              		.thumb
+ 563              		.thumb_func
+ 565              	HAL_PWR_DisableSleepOnExit:
+ 566              		@ args = 0, pretend = 0, frame = 0
+ 567              		@ frame_needed = 0, uses_anonymous_args = 0
+ 568              		@ link register save eliminated.
+ 569 0000 024A     		ldr	r2, .L80
+ 570 0002 1369     		ldr	r3, [r2, #16]
+ 571 0004 23F00203 		bic	r3, r3, #2
+ 572 0008 1361     		str	r3, [r2, #16]
+ 573 000a 7047     		bx	lr
+ 574              	.L81:
+ 575              		.align	2
+ 576              	.L80:
+ 577 000c 00ED00E0 		.word	-536810240
+ 579              		.section	.text.HAL_PWR_EnableSEVOnPend,"ax",%progbits
+ 580              		.align	1
+ 581              		.global	HAL_PWR_EnableSEVOnPend
+ 582              		.syntax unified
+ 583              		.thumb
+ 584              		.thumb_func
+ 586              	HAL_PWR_EnableSEVOnPend:
+ 587              		@ args = 0, pretend = 0, frame = 0
+ 588              		@ frame_needed = 0, uses_anonymous_args = 0
+ 589              		@ link register save eliminated.
+ 590 0000 024A     		ldr	r2, .L83
+ 591 0002 1369     		ldr	r3, [r2, #16]
+ 592 0004 43F01003 		orr	r3, r3, #16
+ 593 0008 1361     		str	r3, [r2, #16]
+ 594 000a 7047     		bx	lr
+ 595              	.L84:
+ 596              		.align	2
+ 597              	.L83:
+ARM GAS  C:\Temp\ccLXveTd.s 			page 11
+
+
+ 598 000c 00ED00E0 		.word	-536810240
+ 600              		.section	.text.HAL_PWR_DisableSEVOnPend,"ax",%progbits
+ 601              		.align	1
+ 602              		.global	HAL_PWR_DisableSEVOnPend
+ 603              		.syntax unified
+ 604              		.thumb
+ 605              		.thumb_func
+ 607              	HAL_PWR_DisableSEVOnPend:
+ 608              		@ args = 0, pretend = 0, frame = 0
+ 609              		@ frame_needed = 0, uses_anonymous_args = 0
+ 610              		@ link register save eliminated.
+ 611 0000 024A     		ldr	r2, .L86
+ 612 0002 1369     		ldr	r3, [r2, #16]
+ 613 0004 23F01003 		bic	r3, r3, #16
+ 614 0008 1361     		str	r3, [r2, #16]
+ 615 000a 7047     		bx	lr
+ 616              	.L87:
+ 617              		.align	2
+ 618              	.L86:
+ 619 000c 00ED00E0 		.word	-536810240
+ 621              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccLXveTd.s 			page 12
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f4xx_hal_pwr.c
+  C:\Temp\ccLXveTd.s:18     .text.HAL_PWR_DeInit:00000000 $t
+  C:\Temp\ccLXveTd.s:24     .text.HAL_PWR_DeInit:00000000 HAL_PWR_DeInit
+  C:\Temp\ccLXveTd.s:39     .text.HAL_PWR_DeInit:00000014 $d
+  C:\Temp\ccLXveTd.s:42     .text.HAL_PWR_EnableBkUpAccess:00000000 $t
+  C:\Temp\ccLXveTd.s:48     .text.HAL_PWR_EnableBkUpAccess:00000000 HAL_PWR_EnableBkUpAccess
+  C:\Temp\ccLXveTd.s:66     .text.HAL_PWR_EnableBkUpAccess:00000014 $d
+  C:\Temp\ccLXveTd.s:70     .text.HAL_PWR_DisableBkUpAccess:00000000 $t
+  C:\Temp\ccLXveTd.s:76     .text.HAL_PWR_DisableBkUpAccess:00000000 HAL_PWR_DisableBkUpAccess
+  C:\Temp\ccLXveTd.s:94     .text.HAL_PWR_DisableBkUpAccess:00000014 $d
+  C:\Temp\ccLXveTd.s:98     .rodata.HAL_PWR_ConfigPVD.str1.4:00000000 $d
+  C:\Temp\ccLXveTd.s:103    .text.HAL_PWR_ConfigPVD:00000000 $t
+  C:\Temp\ccLXveTd.s:109    .text.HAL_PWR_ConfigPVD:00000000 HAL_PWR_ConfigPVD
+  C:\Temp\ccLXveTd.s:207    .text.HAL_PWR_ConfigPVD:000000d0 $d
+  C:\Temp\ccLXveTd.s:212    .text.HAL_PWR_EnablePVD:00000000 $t
+  C:\Temp\ccLXveTd.s:218    .text.HAL_PWR_EnablePVD:00000000 HAL_PWR_EnablePVD
+  C:\Temp\ccLXveTd.s:229    .text.HAL_PWR_EnablePVD:00000008 $d
+  C:\Temp\ccLXveTd.s:232    .text.HAL_PWR_DisablePVD:00000000 $t
+  C:\Temp\ccLXveTd.s:238    .text.HAL_PWR_DisablePVD:00000000 HAL_PWR_DisablePVD
+  C:\Temp\ccLXveTd.s:249    .text.HAL_PWR_DisablePVD:00000008 $d
+  C:\Temp\ccLXveTd.s:252    .text.HAL_PWR_EnableWakeUpPin:00000000 $t
+  C:\Temp\ccLXveTd.s:258    .text.HAL_PWR_EnableWakeUpPin:00000000 HAL_PWR_EnableWakeUpPin
+  C:\Temp\ccLXveTd.s:279    .text.HAL_PWR_EnableWakeUpPin:00000020 $d
+  C:\Temp\ccLXveTd.s:283    .text.HAL_PWR_DisableWakeUpPin:00000000 $t
+  C:\Temp\ccLXveTd.s:289    .text.HAL_PWR_DisableWakeUpPin:00000000 HAL_PWR_DisableWakeUpPin
+  C:\Temp\ccLXveTd.s:310    .text.HAL_PWR_DisableWakeUpPin:00000024 $d
+  C:\Temp\ccLXveTd.s:314    .text.HAL_PWR_EnterSLEEPMode:00000000 $t
+  C:\Temp\ccLXveTd.s:320    .text.HAL_PWR_EnterSLEEPMode:00000000 HAL_PWR_EnterSLEEPMode
+  C:\Temp\ccLXveTd.s:380    .text.HAL_PWR_EnterSLEEPMode:00000048 $d
+  C:\Temp\ccLXveTd.s:384    .text.HAL_PWR_EnterSTOPMode:00000000 $t
+  C:\Temp\ccLXveTd.s:390    .text.HAL_PWR_EnterSTOPMode:00000000 HAL_PWR_EnterSTOPMode
+  C:\Temp\ccLXveTd.s:460    .text.HAL_PWR_EnterSTOPMode:00000060 $d
+  C:\Temp\ccLXveTd.s:465    .text.HAL_PWR_EnterSTANDBYMode:00000000 $t
+  C:\Temp\ccLXveTd.s:471    .text.HAL_PWR_EnterSTANDBYMode:00000000 HAL_PWR_EnterSTANDBYMode
+  C:\Temp\ccLXveTd.s:493    .text.HAL_PWR_EnterSTANDBYMode:00000018 $d
+  C:\Temp\ccLXveTd.s:497    .text.HAL_PWR_PVDCallback:00000000 $t
+  C:\Temp\ccLXveTd.s:503    .text.HAL_PWR_PVDCallback:00000000 HAL_PWR_PVDCallback
+  C:\Temp\ccLXveTd.s:510    .text.HAL_PWR_PVD_IRQHandler:00000000 $t
+  C:\Temp\ccLXveTd.s:516    .text.HAL_PWR_PVD_IRQHandler:00000000 HAL_PWR_PVD_IRQHandler
+  C:\Temp\ccLXveTd.s:535    .text.HAL_PWR_PVD_IRQHandler:0000001c $d
+  C:\Temp\ccLXveTd.s:538    .text.HAL_PWR_EnableSleepOnExit:00000000 $t
+  C:\Temp\ccLXveTd.s:544    .text.HAL_PWR_EnableSleepOnExit:00000000 HAL_PWR_EnableSleepOnExit
+  C:\Temp\ccLXveTd.s:556    .text.HAL_PWR_EnableSleepOnExit:0000000c $d
+  C:\Temp\ccLXveTd.s:559    .text.HAL_PWR_DisableSleepOnExit:00000000 $t
+  C:\Temp\ccLXveTd.s:565    .text.HAL_PWR_DisableSleepOnExit:00000000 HAL_PWR_DisableSleepOnExit
+  C:\Temp\ccLXveTd.s:577    .text.HAL_PWR_DisableSleepOnExit:0000000c $d
+  C:\Temp\ccLXveTd.s:580    .text.HAL_PWR_EnableSEVOnPend:00000000 $t
+  C:\Temp\ccLXveTd.s:586    .text.HAL_PWR_EnableSEVOnPend:00000000 HAL_PWR_EnableSEVOnPend
+  C:\Temp\ccLXveTd.s:598    .text.HAL_PWR_EnableSEVOnPend:0000000c $d
+  C:\Temp\ccLXveTd.s:601    .text.HAL_PWR_DisableSEVOnPend:00000000 $t
+  C:\Temp\ccLXveTd.s:607    .text.HAL_PWR_DisableSEVOnPend:00000000 HAL_PWR_DisableSEVOnPend
+  C:\Temp\ccLXveTd.s:619    .text.HAL_PWR_DisableSEVOnPend:0000000c $d
+
+UNDEFINED SYMBOLS
+assert_failed

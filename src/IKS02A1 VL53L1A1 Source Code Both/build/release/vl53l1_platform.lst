@@ -1,0 +1,625 @@
+ARM GAS  C:\Temp\ccOvZ7ev.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"vl53l1_platform.c"
+  16              		.text
+  17              		.section	.text._I2CWrite,"ax",%progbits
+  18              		.align	1
+  19              		.global	_I2CWrite
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	_I2CWrite:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 00B5     		push	{lr}
+  28 0002 83B0     		sub	sp, sp, #12
+  29 0004 02F10A03 		add	r3, r2, #10
+  30 0008 0093     		str	r3, [sp]
+  31 000a 93B2     		uxth	r3, r2
+  32 000c 0A46     		mov	r2, r1
+  33 000e 0146     		mov	r1, r0
+  34 0010 0248     		ldr	r0, .L3
+  35 0012 FFF7FEFF 		bl	HAL_I2C_Master_Transmit
+  36 0016 03B0     		add	sp, sp, #12
+  37              		@ sp needed
+  38 0018 5DF804FB 		ldr	pc, [sp], #4
+  39              	.L4:
+  40              		.align	2
+  41              	.L3:
+  42 001c 00000000 		.word	XNUCLEO53L1A1_hi2c
+  44              		.section	.text._I2CRead,"ax",%progbits
+  45              		.align	1
+  46              		.global	_I2CRead
+  47              		.syntax unified
+  48              		.thumb
+  49              		.thumb_func
+  51              	_I2CRead:
+  52              		@ args = 0, pretend = 0, frame = 0
+  53              		@ frame_needed = 0, uses_anonymous_args = 0
+  54 0000 00B5     		push	{lr}
+  55 0002 83B0     		sub	sp, sp, #12
+  56 0004 02F10A03 		add	r3, r2, #10
+  57 0008 0093     		str	r3, [sp]
+  58 000a 93B2     		uxth	r3, r2
+  59 000c 0A46     		mov	r2, r1
+  60 000e 40F00101 		orr	r1, r0, #1
+ARM GAS  C:\Temp\ccOvZ7ev.s 			page 2
+
+
+  61 0012 0348     		ldr	r0, .L7
+  62 0014 FFF7FEFF 		bl	HAL_I2C_Master_Receive
+  63 0018 03B0     		add	sp, sp, #12
+  64              		@ sp needed
+  65 001a 5DF804FB 		ldr	pc, [sp], #4
+  66              	.L8:
+  67 001e 00BF     		.align	2
+  68              	.L7:
+  69 0020 00000000 		.word	XNUCLEO53L1A1_hi2c
+  71              		.section	.text.VL53L1_WriteMulti,"ax",%progbits
+  72              		.align	1
+  73              		.global	VL53L1_WriteMulti
+  74              		.syntax unified
+  75              		.thumb
+  76              		.thumb_func
+  78              	VL53L1_WriteMulti:
+  79              		@ args = 0, pretend = 0, frame = 0
+  80              		@ frame_needed = 0, uses_anonymous_args = 0
+  81 0000 FF2B     		cmp	r3, #255
+  82 0002 15D8     		bhi	.L11
+  83 0004 70B5     		push	{r4, r5, r6, lr}
+  84 0006 0646     		mov	r6, r0
+  85 0008 8C46     		mov	ip, r1
+  86 000a 1146     		mov	r1, r2
+  87 000c 1C46     		mov	r4, r3
+  88 000e 0B4D     		ldr	r5, .L17
+  89 0010 4FEA1C23 		lsr	r3, ip, #8
+  90 0014 2B70     		strb	r3, [r5]
+  91 0016 85F801C0 		strb	ip, [r5, #1]
+  92 001a 2246     		mov	r2, r4
+  93 001c A81C     		adds	r0, r5, #2
+  94 001e FFF7FEFF 		bl	memcpy
+  95 0022 A21C     		adds	r2, r4, #2
+  96 0024 2946     		mov	r1, r5
+  97 0026 3046     		mov	r0, r6
+  98 0028 FFF7FEFF 		bl	_I2CWrite
+  99 002c 18B9     		cbnz	r0, .L12
+ 100              	.L10:
+ 101 002e 70BD     		pop	{r4, r5, r6, pc}
+ 102              	.L11:
+ 103 0030 6FF00300 		mvn	r0, #3
+ 104 0034 7047     		bx	lr
+ 105              	.L12:
+ 106 0036 6FF00C00 		mvn	r0, #12
+ 107 003a F8E7     		b	.L10
+ 108              	.L18:
+ 109              		.align	2
+ 110              	.L17:
+ 111 003c 00000000 		.word	_I2CBuffer
+ 113              		.section	.text.VL53L1_ReadMulti,"ax",%progbits
+ 114              		.align	1
+ 115              		.global	VL53L1_ReadMulti
+ 116              		.syntax unified
+ 117              		.thumb
+ 118              		.thumb_func
+ 120              	VL53L1_ReadMulti:
+ 121              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Temp\ccOvZ7ev.s 			page 3
+
+
+ 122              		@ frame_needed = 0, uses_anonymous_args = 0
+ 123 0000 70B5     		push	{r4, r5, r6, lr}
+ 124 0002 0446     		mov	r4, r0
+ 125 0004 8C46     		mov	ip, r1
+ 126 0006 1546     		mov	r5, r2
+ 127 0008 1E46     		mov	r6, r3
+ 128 000a 0B49     		ldr	r1, .L24
+ 129 000c 4FEA1C23 		lsr	r3, ip, #8
+ 130 0010 0B70     		strb	r3, [r1]
+ 131 0012 81F801C0 		strb	ip, [r1, #1]
+ 132 0016 0222     		movs	r2, #2
+ 133 0018 FFF7FEFF 		bl	_I2CWrite
+ 134 001c 30B9     		cbnz	r0, .L21
+ 135 001e 3246     		mov	r2, r6
+ 136 0020 2946     		mov	r1, r5
+ 137 0022 2046     		mov	r0, r4
+ 138 0024 FFF7FEFF 		bl	_I2CRead
+ 139 0028 18B9     		cbnz	r0, .L22
+ 140              	.L20:
+ 141 002a 70BD     		pop	{r4, r5, r6, pc}
+ 142              	.L21:
+ 143 002c 6FF00C00 		mvn	r0, #12
+ 144 0030 FBE7     		b	.L20
+ 145              	.L22:
+ 146 0032 6FF00C00 		mvn	r0, #12
+ 147 0036 F8E7     		b	.L20
+ 148              	.L25:
+ 149              		.align	2
+ 150              	.L24:
+ 151 0038 00000000 		.word	_I2CBuffer
+ 153              		.section	.text.VL53L1_WrByte,"ax",%progbits
+ 154              		.align	1
+ 155              		.global	VL53L1_WrByte
+ 156              		.syntax unified
+ 157              		.thumb
+ 158              		.thumb_func
+ 160              	VL53L1_WrByte:
+ 161              		@ args = 0, pretend = 0, frame = 0
+ 162              		@ frame_needed = 0, uses_anonymous_args = 0
+ 163 0000 08B5     		push	{r3, lr}
+ 164 0002 0B46     		mov	r3, r1
+ 165 0004 0749     		ldr	r1, .L31
+ 166 0006 4FEA132C 		lsr	ip, r3, #8
+ 167 000a 81F800C0 		strb	ip, [r1]
+ 168 000e 4B70     		strb	r3, [r1, #1]
+ 169 0010 8A70     		strb	r2, [r1, #2]
+ 170 0012 0322     		movs	r2, #3
+ 171 0014 FFF7FEFF 		bl	_I2CWrite
+ 172 0018 00B9     		cbnz	r0, .L30
+ 173              	.L27:
+ 174 001a 08BD     		pop	{r3, pc}
+ 175              	.L30:
+ 176 001c 6FF00C00 		mvn	r0, #12
+ 177 0020 FBE7     		b	.L27
+ 178              	.L32:
+ 179 0022 00BF     		.align	2
+ 180              	.L31:
+ARM GAS  C:\Temp\ccOvZ7ev.s 			page 4
+
+
+ 181 0024 00000000 		.word	_I2CBuffer
+ 183              		.section	.text.VL53L1_WrWord,"ax",%progbits
+ 184              		.align	1
+ 185              		.global	VL53L1_WrWord
+ 186              		.syntax unified
+ 187              		.thumb
+ 188              		.thumb_func
+ 190              	VL53L1_WrWord:
+ 191              		@ args = 0, pretend = 0, frame = 0
+ 192              		@ frame_needed = 0, uses_anonymous_args = 0
+ 193 0000 08B5     		push	{r3, lr}
+ 194 0002 0B46     		mov	r3, r1
+ 195 0004 0849     		ldr	r1, .L38
+ 196 0006 4FEA132C 		lsr	ip, r3, #8
+ 197 000a 81F800C0 		strb	ip, [r1]
+ 198 000e 4B70     		strb	r3, [r1, #1]
+ 199 0010 130A     		lsrs	r3, r2, #8
+ 200 0012 8B70     		strb	r3, [r1, #2]
+ 201 0014 CA70     		strb	r2, [r1, #3]
+ 202 0016 0422     		movs	r2, #4
+ 203 0018 FFF7FEFF 		bl	_I2CWrite
+ 204 001c 00B9     		cbnz	r0, .L37
+ 205              	.L34:
+ 206 001e 08BD     		pop	{r3, pc}
+ 207              	.L37:
+ 208 0020 6FF00C00 		mvn	r0, #12
+ 209 0024 FBE7     		b	.L34
+ 210              	.L39:
+ 211 0026 00BF     		.align	2
+ 212              	.L38:
+ 213 0028 00000000 		.word	_I2CBuffer
+ 215              		.section	.text.VL53L1_WrDWord,"ax",%progbits
+ 216              		.align	1
+ 217              		.global	VL53L1_WrDWord
+ 218              		.syntax unified
+ 219              		.thumb
+ 220              		.thumb_func
+ 222              	VL53L1_WrDWord:
+ 223              		@ args = 0, pretend = 0, frame = 0
+ 224              		@ frame_needed = 0, uses_anonymous_args = 0
+ 225 0000 08B5     		push	{r3, lr}
+ 226 0002 0B46     		mov	r3, r1
+ 227 0004 0A49     		ldr	r1, .L45
+ 228 0006 4FEA132C 		lsr	ip, r3, #8
+ 229 000a 81F800C0 		strb	ip, [r1]
+ 230 000e 4B70     		strb	r3, [r1, #1]
+ 231 0010 130E     		lsrs	r3, r2, #24
+ 232 0012 8B70     		strb	r3, [r1, #2]
+ 233 0014 130C     		lsrs	r3, r2, #16
+ 234 0016 CB70     		strb	r3, [r1, #3]
+ 235 0018 130A     		lsrs	r3, r2, #8
+ 236 001a 0B71     		strb	r3, [r1, #4]
+ 237 001c 4A71     		strb	r2, [r1, #5]
+ 238 001e 0622     		movs	r2, #6
+ 239 0020 FFF7FEFF 		bl	_I2CWrite
+ 240 0024 00B9     		cbnz	r0, .L44
+ 241              	.L41:
+ARM GAS  C:\Temp\ccOvZ7ev.s 			page 5
+
+
+ 242 0026 08BD     		pop	{r3, pc}
+ 243              	.L44:
+ 244 0028 6FF00C00 		mvn	r0, #12
+ 245 002c FBE7     		b	.L41
+ 246              	.L46:
+ 247 002e 00BF     		.align	2
+ 248              	.L45:
+ 249 0030 00000000 		.word	_I2CBuffer
+ 251              		.section	.text.VL53L1_RdByte,"ax",%progbits
+ 252              		.align	1
+ 253              		.global	VL53L1_RdByte
+ 254              		.syntax unified
+ 255              		.thumb
+ 256              		.thumb_func
+ 258              	VL53L1_RdByte:
+ 259              		@ args = 0, pretend = 0, frame = 0
+ 260              		@ frame_needed = 0, uses_anonymous_args = 0
+ 261 0000 38B5     		push	{r3, r4, r5, lr}
+ 262 0002 0446     		mov	r4, r0
+ 263 0004 0B46     		mov	r3, r1
+ 264 0006 1546     		mov	r5, r2
+ 265 0008 0A49     		ldr	r1, .L52
+ 266 000a 1A0A     		lsrs	r2, r3, #8
+ 267 000c 0A70     		strb	r2, [r1]
+ 268 000e 4B70     		strb	r3, [r1, #1]
+ 269 0010 0222     		movs	r2, #2
+ 270 0012 FFF7FEFF 		bl	_I2CWrite
+ 271 0016 30B9     		cbnz	r0, .L49
+ 272 0018 0122     		movs	r2, #1
+ 273 001a 2946     		mov	r1, r5
+ 274 001c 2046     		mov	r0, r4
+ 275 001e FFF7FEFF 		bl	_I2CRead
+ 276 0022 18B9     		cbnz	r0, .L50
+ 277              	.L48:
+ 278 0024 38BD     		pop	{r3, r4, r5, pc}
+ 279              	.L49:
+ 280 0026 6FF00C00 		mvn	r0, #12
+ 281 002a FBE7     		b	.L48
+ 282              	.L50:
+ 283 002c 6FF00C00 		mvn	r0, #12
+ 284 0030 F8E7     		b	.L48
+ 285              	.L53:
+ 286 0032 00BF     		.align	2
+ 287              	.L52:
+ 288 0034 00000000 		.word	_I2CBuffer
+ 290              		.section	.text.VL53L1_UpdateByte,"ax",%progbits
+ 291              		.align	1
+ 292              		.global	VL53L1_UpdateByte
+ 293              		.syntax unified
+ 294              		.thumb
+ 295              		.thumb_func
+ 297              	VL53L1_UpdateByte:
+ 298              		@ args = 0, pretend = 0, frame = 8
+ 299              		@ frame_needed = 0, uses_anonymous_args = 0
+ 300 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 301 0002 83B0     		sub	sp, sp, #12
+ 302 0004 0646     		mov	r6, r0
+ARM GAS  C:\Temp\ccOvZ7ev.s 			page 6
+
+
+ 303 0006 0F46     		mov	r7, r1
+ 304 0008 1546     		mov	r5, r2
+ 305 000a 1C46     		mov	r4, r3
+ 306 000c 0DF10702 		add	r2, sp, #7
+ 307 0010 FFF7FEFF 		bl	VL53L1_RdByte
+ 308 0014 08B1     		cbz	r0, .L57
+ 309              	.L55:
+ 310 0016 03B0     		add	sp, sp, #12
+ 311              		@ sp needed
+ 312 0018 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 313              	.L57:
+ 314 001a 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 315 001e 05EA0302 		and	r2, r5, r3
+ 316 0022 2243     		orrs	r2, r2, r4
+ 317 0024 8DF80720 		strb	r2, [sp, #7]
+ 318 0028 3946     		mov	r1, r7
+ 319 002a 3046     		mov	r0, r6
+ 320 002c FFF7FEFF 		bl	VL53L1_WrByte
+ 321 0030 F1E7     		b	.L55
+ 323              		.section	.text.VL53L1_RdWord,"ax",%progbits
+ 324              		.align	1
+ 325              		.global	VL53L1_RdWord
+ 326              		.syntax unified
+ 327              		.thumb
+ 328              		.thumb_func
+ 330              	VL53L1_RdWord:
+ 331              		@ args = 0, pretend = 0, frame = 0
+ 332              		@ frame_needed = 0, uses_anonymous_args = 0
+ 333 0000 38B5     		push	{r3, r4, r5, lr}
+ 334 0002 0446     		mov	r4, r0
+ 335 0004 0B46     		mov	r3, r1
+ 336 0006 1546     		mov	r5, r2
+ 337 0008 0D49     		ldr	r1, .L63
+ 338 000a 1A0A     		lsrs	r2, r3, #8
+ 339 000c 0A70     		strb	r2, [r1]
+ 340 000e 4B70     		strb	r3, [r1, #1]
+ 341 0010 0222     		movs	r2, #2
+ 342 0012 FFF7FEFF 		bl	_I2CWrite
+ 343 0016 60B9     		cbnz	r0, .L60
+ 344 0018 0222     		movs	r2, #2
+ 345 001a 0949     		ldr	r1, .L63
+ 346 001c 2046     		mov	r0, r4
+ 347 001e FFF7FEFF 		bl	_I2CRead
+ 348 0022 48B9     		cbnz	r0, .L61
+ 349 0024 064B     		ldr	r3, .L63
+ 350 0026 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 351 0028 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 352 002a 03EB0223 		add	r3, r3, r2, lsl #8
+ 353 002e 2B80     		strh	r3, [r5]	@ movhi
+ 354              	.L59:
+ 355 0030 38BD     		pop	{r3, r4, r5, pc}
+ 356              	.L60:
+ 357 0032 6FF00C00 		mvn	r0, #12
+ 358 0036 FBE7     		b	.L59
+ 359              	.L61:
+ 360 0038 6FF00C00 		mvn	r0, #12
+ 361 003c F8E7     		b	.L59
+ARM GAS  C:\Temp\ccOvZ7ev.s 			page 7
+
+
+ 362              	.L64:
+ 363 003e 00BF     		.align	2
+ 364              	.L63:
+ 365 0040 00000000 		.word	_I2CBuffer
+ 367              		.section	.text.VL53L1_RdDWord,"ax",%progbits
+ 368              		.align	1
+ 369              		.global	VL53L1_RdDWord
+ 370              		.syntax unified
+ 371              		.thumb
+ 372              		.thumb_func
+ 374              	VL53L1_RdDWord:
+ 375              		@ args = 0, pretend = 0, frame = 0
+ 376              		@ frame_needed = 0, uses_anonymous_args = 0
+ 377 0000 38B5     		push	{r3, r4, r5, lr}
+ 378 0002 0546     		mov	r5, r0
+ 379 0004 0B46     		mov	r3, r1
+ 380 0006 1446     		mov	r4, r2
+ 381 0008 1049     		ldr	r1, .L70
+ 382 000a 1A0A     		lsrs	r2, r3, #8
+ 383 000c 0A70     		strb	r2, [r1]
+ 384 000e 4B70     		strb	r3, [r1, #1]
+ 385 0010 0222     		movs	r2, #2
+ 386 0012 FFF7FEFF 		bl	_I2CWrite
+ 387 0016 90B9     		cbnz	r0, .L67
+ 388 0018 0422     		movs	r2, #4
+ 389 001a 0C49     		ldr	r1, .L70
+ 390 001c 2846     		mov	r0, r5
+ 391 001e FFF7FEFF 		bl	_I2CRead
+ 392 0022 78B9     		cbnz	r0, .L68
+ 393 0024 0949     		ldr	r1, .L70
+ 394 0026 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
+ 395 0028 4B78     		ldrb	r3, [r1, #1]	@ zero_extendqisi2
+ 396 002a 1B04     		lsls	r3, r3, #16
+ 397 002c 03EB0263 		add	r3, r3, r2, lsl #24
+ 398 0030 8A78     		ldrb	r2, [r1, #2]	@ zero_extendqisi2
+ 399 0032 03EB0223 		add	r3, r3, r2, lsl #8
+ 400 0036 CA78     		ldrb	r2, [r1, #3]	@ zero_extendqisi2
+ 401 0038 1344     		add	r3, r3, r2
+ 402 003a 2360     		str	r3, [r4]
+ 403              	.L66:
+ 404 003c 38BD     		pop	{r3, r4, r5, pc}
+ 405              	.L67:
+ 406 003e 6FF00C00 		mvn	r0, #12
+ 407 0042 FBE7     		b	.L66
+ 408              	.L68:
+ 409 0044 6FF00C00 		mvn	r0, #12
+ 410 0048 F8E7     		b	.L66
+ 411              	.L71:
+ 412 004a 00BF     		.align	2
+ 413              	.L70:
+ 414 004c 00000000 		.word	_I2CBuffer
+ 416              		.section	.text.VL53L1_GetTickCount,"ax",%progbits
+ 417              		.align	1
+ 418              		.global	VL53L1_GetTickCount
+ 419              		.syntax unified
+ 420              		.thumb
+ 421              		.thumb_func
+ARM GAS  C:\Temp\ccOvZ7ev.s 			page 8
+
+
+ 423              	VL53L1_GetTickCount:
+ 424              		@ args = 0, pretend = 0, frame = 0
+ 425              		@ frame_needed = 0, uses_anonymous_args = 0
+ 426              		@ link register save eliminated.
+ 427 0000 0346     		mov	r3, r0
+ 428 0002 0020     		movs	r0, #0
+ 429 0004 1860     		str	r0, [r3]
+ 430 0006 7047     		bx	lr
+ 432              		.section	.text.VL53L1_GetTimerFrequency,"ax",%progbits
+ 433              		.align	1
+ 434              		.global	VL53L1_GetTimerFrequency
+ 435              		.syntax unified
+ 436              		.thumb
+ 437              		.thumb_func
+ 439              	VL53L1_GetTimerFrequency:
+ 440              		@ args = 0, pretend = 0, frame = 0
+ 441              		@ frame_needed = 0, uses_anonymous_args = 0
+ 442              		@ link register save eliminated.
+ 443 0000 0346     		mov	r3, r0
+ 444 0002 0020     		movs	r0, #0
+ 445 0004 1860     		str	r0, [r3]
+ 446 0006 7047     		bx	lr
+ 448              		.section	.text.VL53L1_WaitMs,"ax",%progbits
+ 449              		.align	1
+ 450              		.global	VL53L1_WaitMs
+ 451              		.syntax unified
+ 452              		.thumb
+ 453              		.thumb_func
+ 455              	VL53L1_WaitMs:
+ 456              		@ args = 0, pretend = 0, frame = 0
+ 457              		@ frame_needed = 0, uses_anonymous_args = 0
+ 458 0000 08B5     		push	{r3, lr}
+ 459 0002 0846     		mov	r0, r1
+ 460 0004 FFF7FEFF 		bl	HAL_Delay
+ 461 0008 0020     		movs	r0, #0
+ 462 000a 08BD     		pop	{r3, pc}
+ 464              		.section	.text.VL53L1_WaitUs,"ax",%progbits
+ 465              		.align	1
+ 466              		.global	VL53L1_WaitUs
+ 467              		.syntax unified
+ 468              		.thumb
+ 469              		.thumb_func
+ 471              	VL53L1_WaitUs:
+ 472              		@ args = 0, pretend = 0, frame = 0
+ 473              		@ frame_needed = 0, uses_anonymous_args = 0
+ 474 0000 08B5     		push	{r3, lr}
+ 475 0002 0548     		ldr	r0, .L78
+ 476 0004 80FB0130 		smull	r3, r0, r0, r1
+ 477 0008 C917     		asrs	r1, r1, #31
+ 478 000a C1EBA010 		rsb	r0, r1, r0, asr #6
+ 479 000e FFF7FEFF 		bl	HAL_Delay
+ 480 0012 0020     		movs	r0, #0
+ 481 0014 08BD     		pop	{r3, pc}
+ 482              	.L79:
+ 483 0016 00BF     		.align	2
+ 484              	.L78:
+ 485 0018 D34D6210 		.word	274877907
+ARM GAS  C:\Temp\ccOvZ7ev.s 			page 9
+
+
+ 487              		.section	.text.VL53L1_WaitValueMaskEx,"ax",%progbits
+ 488              		.align	1
+ 489              		.global	VL53L1_WaitValueMaskEx
+ 490              		.syntax unified
+ 491              		.thumb
+ 492              		.thumb_func
+ 494              	VL53L1_WaitValueMaskEx:
+ 495              		@ args = 8, pretend = 0, frame = 16
+ 496              		@ frame_needed = 0, uses_anonymous_args = 0
+ 497 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 498 0004 85B0     		sub	sp, sp, #20
+ 499 0006 0646     		mov	r6, r0
+ 500 0008 0F46     		mov	r7, r1
+ 501 000a 9146     		mov	r9, r2
+ 502 000c 9846     		mov	r8, r3
+ 503 000e 9DF838A0 		ldrb	r10, [sp, #56]	@ zero_extendqisi2
+ 504 0012 DDF83CB0 		ldr	fp, [sp, #60]
+ 505 0016 0024     		movs	r4, #0
+ 506 0018 0394     		str	r4, [sp, #12]
+ 507 001a 0294     		str	r4, [sp, #8]
+ 508 001c 8DF80740 		strb	r4, [sp, #7]
+ 509 0020 03A8     		add	r0, sp, #12
+ 510 0022 FFF7FEFF 		bl	VL53L1_GetTickCount
+ 511 0026 2546     		mov	r5, r4
+ 512 0028 2346     		mov	r3, r4
+ 513 002a 07E0     		b	.L81
+ 514              	.L90:
+ 515 002c 0125     		movs	r5, #1
+ 516 002e 16E0     		b	.L82
+ 517              	.L83:
+ 518 0030 02A8     		add	r0, sp, #8
+ 519 0032 FFF7FEFF 		bl	VL53L1_GetTickCount
+ 520 0036 029B     		ldr	r3, [sp, #8]
+ 521 0038 039A     		ldr	r2, [sp, #12]
+ 522 003a 9B1A     		subs	r3, r3, r2
+ 523              	.L81:
+ 524 003c E4B9     		cbnz	r4, .L84
+ 525 003e BB42     		cmp	r3, r7
+ 526 0040 1AD2     		bcs	.L84
+ 527 0042 CDB9     		cbnz	r5, .L84
+ 528 0044 0DF10702 		add	r2, sp, #7
+ 529 0048 4946     		mov	r1, r9
+ 530 004a 3046     		mov	r0, r6
+ 531 004c FFF7FEFF 		bl	VL53L1_RdByte
+ 532 0050 0446     		mov	r4, r0
+ 533 0052 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 534 0056 0AEA0303 		and	r3, r10, r3
+ 535 005a 4345     		cmp	r3, r8
+ 536 005c E6D0     		beq	.L90
+ 537              	.L82:
+ 538 005e 002C     		cmp	r4, #0
+ 539 0060 E6D1     		bne	.L83
+ 540 0062 002D     		cmp	r5, #0
+ 541 0064 E4D1     		bne	.L83
+ 542 0066 BBF1000F 		cmp	fp, #0
+ 543 006a E1D0     		beq	.L83
+ 544 006c 5946     		mov	r1, fp
+ARM GAS  C:\Temp\ccOvZ7ev.s 			page 10
+
+
+ 545 006e 3046     		mov	r0, r6
+ 546 0070 FFF7FEFF 		bl	VL53L1_WaitMs
+ 547 0074 0446     		mov	r4, r0
+ 548 0076 DBE7     		b	.L83
+ 549              	.L84:
+ 550 0078 05B9     		cbnz	r5, .L86
+ 551 007a 1CB1     		cbz	r4, .L91
+ 552              	.L86:
+ 553 007c 2046     		mov	r0, r4
+ 554 007e 05B0     		add	sp, sp, #20
+ 555              		@ sp needed
+ 556 0080 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 557              	.L91:
+ 558 0084 6FF00604 		mvn	r4, #6
+ 559 0088 F8E7     		b	.L86
+ 561              		.global	_I2CBuffer
+ 562              		.section	.bss._I2CBuffer,"aw",%nobits
+ 563              		.align	2
+ 566              	_I2CBuffer:
+ 567 0000 00000000 		.space	256
+ 567      00000000 
+ 567      00000000 
+ 567      00000000 
+ 567      00000000 
+ 568              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccOvZ7ev.s 			page 11
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 vl53l1_platform.c
+  C:\Temp\ccOvZ7ev.s:18     .text._I2CWrite:00000000 $t
+  C:\Temp\ccOvZ7ev.s:24     .text._I2CWrite:00000000 _I2CWrite
+  C:\Temp\ccOvZ7ev.s:42     .text._I2CWrite:0000001c $d
+  C:\Temp\ccOvZ7ev.s:45     .text._I2CRead:00000000 $t
+  C:\Temp\ccOvZ7ev.s:51     .text._I2CRead:00000000 _I2CRead
+  C:\Temp\ccOvZ7ev.s:69     .text._I2CRead:00000020 $d
+  C:\Temp\ccOvZ7ev.s:72     .text.VL53L1_WriteMulti:00000000 $t
+  C:\Temp\ccOvZ7ev.s:78     .text.VL53L1_WriteMulti:00000000 VL53L1_WriteMulti
+  C:\Temp\ccOvZ7ev.s:111    .text.VL53L1_WriteMulti:0000003c $d
+  C:\Temp\ccOvZ7ev.s:566    .bss._I2CBuffer:00000000 _I2CBuffer
+  C:\Temp\ccOvZ7ev.s:114    .text.VL53L1_ReadMulti:00000000 $t
+  C:\Temp\ccOvZ7ev.s:120    .text.VL53L1_ReadMulti:00000000 VL53L1_ReadMulti
+  C:\Temp\ccOvZ7ev.s:151    .text.VL53L1_ReadMulti:00000038 $d
+  C:\Temp\ccOvZ7ev.s:154    .text.VL53L1_WrByte:00000000 $t
+  C:\Temp\ccOvZ7ev.s:160    .text.VL53L1_WrByte:00000000 VL53L1_WrByte
+  C:\Temp\ccOvZ7ev.s:181    .text.VL53L1_WrByte:00000024 $d
+  C:\Temp\ccOvZ7ev.s:184    .text.VL53L1_WrWord:00000000 $t
+  C:\Temp\ccOvZ7ev.s:190    .text.VL53L1_WrWord:00000000 VL53L1_WrWord
+  C:\Temp\ccOvZ7ev.s:213    .text.VL53L1_WrWord:00000028 $d
+  C:\Temp\ccOvZ7ev.s:216    .text.VL53L1_WrDWord:00000000 $t
+  C:\Temp\ccOvZ7ev.s:222    .text.VL53L1_WrDWord:00000000 VL53L1_WrDWord
+  C:\Temp\ccOvZ7ev.s:249    .text.VL53L1_WrDWord:00000030 $d
+  C:\Temp\ccOvZ7ev.s:252    .text.VL53L1_RdByte:00000000 $t
+  C:\Temp\ccOvZ7ev.s:258    .text.VL53L1_RdByte:00000000 VL53L1_RdByte
+  C:\Temp\ccOvZ7ev.s:288    .text.VL53L1_RdByte:00000034 $d
+  C:\Temp\ccOvZ7ev.s:291    .text.VL53L1_UpdateByte:00000000 $t
+  C:\Temp\ccOvZ7ev.s:297    .text.VL53L1_UpdateByte:00000000 VL53L1_UpdateByte
+  C:\Temp\ccOvZ7ev.s:324    .text.VL53L1_RdWord:00000000 $t
+  C:\Temp\ccOvZ7ev.s:330    .text.VL53L1_RdWord:00000000 VL53L1_RdWord
+  C:\Temp\ccOvZ7ev.s:365    .text.VL53L1_RdWord:00000040 $d
+  C:\Temp\ccOvZ7ev.s:368    .text.VL53L1_RdDWord:00000000 $t
+  C:\Temp\ccOvZ7ev.s:374    .text.VL53L1_RdDWord:00000000 VL53L1_RdDWord
+  C:\Temp\ccOvZ7ev.s:414    .text.VL53L1_RdDWord:0000004c $d
+  C:\Temp\ccOvZ7ev.s:417    .text.VL53L1_GetTickCount:00000000 $t
+  C:\Temp\ccOvZ7ev.s:423    .text.VL53L1_GetTickCount:00000000 VL53L1_GetTickCount
+  C:\Temp\ccOvZ7ev.s:433    .text.VL53L1_GetTimerFrequency:00000000 $t
+  C:\Temp\ccOvZ7ev.s:439    .text.VL53L1_GetTimerFrequency:00000000 VL53L1_GetTimerFrequency
+  C:\Temp\ccOvZ7ev.s:449    .text.VL53L1_WaitMs:00000000 $t
+  C:\Temp\ccOvZ7ev.s:455    .text.VL53L1_WaitMs:00000000 VL53L1_WaitMs
+  C:\Temp\ccOvZ7ev.s:465    .text.VL53L1_WaitUs:00000000 $t
+  C:\Temp\ccOvZ7ev.s:471    .text.VL53L1_WaitUs:00000000 VL53L1_WaitUs
+  C:\Temp\ccOvZ7ev.s:485    .text.VL53L1_WaitUs:00000018 $d
+  C:\Temp\ccOvZ7ev.s:488    .text.VL53L1_WaitValueMaskEx:00000000 $t
+  C:\Temp\ccOvZ7ev.s:494    .text.VL53L1_WaitValueMaskEx:00000000 VL53L1_WaitValueMaskEx
+  C:\Temp\ccOvZ7ev.s:563    .bss._I2CBuffer:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_I2C_Master_Transmit
+XNUCLEO53L1A1_hi2c
+HAL_I2C_Master_Receive
+memcpy
+HAL_Delay

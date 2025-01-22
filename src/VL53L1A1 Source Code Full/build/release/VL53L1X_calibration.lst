@@ -1,0 +1,252 @@
+ARM GAS  C:\Temp\cckstyS4.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"VL53L1X_calibration.c"
+  16              		.text
+  17              		.section	.text.VL53L1X_CalibrateOffset,"ax",%progbits
+  18              		.align	1
+  19              		.global	VL53L1X_CalibrateOffset
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	VL53L1X_CalibrateOffset:
+  25              		@ args = 0, pretend = 0, frame = 8
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+  28 0004 83B0     		sub	sp, sp, #12
+  29 0006 0546     		mov	r5, r0
+  30 0008 0F46     		mov	r7, r1
+  31 000a 9046     		mov	r8, r2
+  32 000c 0022     		movs	r2, #0
+  33 000e 1E21     		movs	r1, #30
+  34 0010 FFF7FEFF 		bl	VL53L1_WrWord
+  35 0014 0446     		mov	r4, r0
+  36 0016 0022     		movs	r2, #0
+  37 0018 2021     		movs	r1, #32
+  38 001a 2846     		mov	r0, r5
+  39 001c FFF7FEFF 		bl	VL53L1_WrWord
+  40 0020 0443     		orrs	r4, r4, r0
+  41 0022 64B2     		sxtb	r4, r4
+  42 0024 0022     		movs	r2, #0
+  43 0026 2221     		movs	r1, #34
+  44 0028 2846     		mov	r0, r5
+  45 002a FFF7FEFF 		bl	VL53L1_WrWord
+  46 002e 0443     		orrs	r4, r4, r0
+  47 0030 64B2     		sxtb	r4, r4
+  48 0032 2846     		mov	r0, r5
+  49 0034 FFF7FEFF 		bl	VL53L1X_StartRanging
+  50 0038 0443     		orrs	r4, r4, r0
+  51 003a 64B2     		sxtb	r4, r4
+  52 003c 0026     		movs	r6, #0
+  53 003e B146     		mov	r9, r6
+  54 0040 1DE0     		b	.L2
+  55              	.L4:
+  56 0042 0DF10701 		add	r1, sp, #7
+  57 0046 2846     		mov	r0, r5
+  58 0048 FFF7FEFF 		bl	VL53L1X_CheckForDataReady
+ARM GAS  C:\Temp\cckstyS4.s 			page 2
+
+
+  59 004c 2043     		orrs	r0, r0, r4
+  60 004e 44B2     		sxtb	r4, r0
+  61              	.L3:
+  62 0050 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+  63 0054 002B     		cmp	r3, #0
+  64 0056 F4D0     		beq	.L4
+  65 0058 01A9     		add	r1, sp, #4
+  66 005a 2846     		mov	r0, r5
+  67 005c FFF7FEFF 		bl	VL53L1X_GetDistance
+  68 0060 0443     		orrs	r4, r4, r0
+  69 0062 64B2     		sxtb	r4, r4
+  70 0064 2846     		mov	r0, r5
+  71 0066 FFF7FEFF 		bl	VL53L1X_ClearInterrupt
+  72 006a 0443     		orrs	r4, r4, r0
+  73 006c 64B2     		sxtb	r4, r4
+  74 006e BDF80430 		ldrh	r3, [sp, #4]
+  75 0072 3344     		add	r3, r3, r6
+  76 0074 1EB2     		sxth	r6, r3
+  77 0076 09F10109 		add	r9, r9, #1
+  78 007a 5FFA89F9 		uxtb	r9, r9
+  79              	.L2:
+  80 007e B9F1310F 		cmp	r9, #49
+  81 0082 03D8     		bhi	.L7
+  82 0084 0023     		movs	r3, #0
+  83 0086 8DF80730 		strb	r3, [sp, #7]
+  84 008a E1E7     		b	.L3
+  85              	.L7:
+  86 008c 2846     		mov	r0, r5
+  87 008e FFF7FEFF 		bl	VL53L1X_StopRanging
+  88 0092 0443     		orrs	r4, r4, r0
+  89 0094 64B2     		sxtb	r4, r4
+  90 0096 0B4A     		ldr	r2, .L8
+  91 0098 82FB0632 		smull	r3, r2, r2, r6
+  92 009c F317     		asrs	r3, r6, #31
+  93 009e C3EB2213 		rsb	r3, r3, r2, asr #4
+  94 00a2 1BB2     		sxth	r3, r3
+  95 00a4 FF1A     		subs	r7, r7, r3
+  96 00a6 BAB2     		uxth	r2, r7
+  97 00a8 A8F80070 		strh	r7, [r8]	@ movhi
+  98 00ac 9200     		lsls	r2, r2, #2
+  99 00ae 92B2     		uxth	r2, r2
+ 100 00b0 1E21     		movs	r1, #30
+ 101 00b2 2846     		mov	r0, r5
+ 102 00b4 FFF7FEFF 		bl	VL53L1_WrWord
+ 103 00b8 2043     		orrs	r0, r0, r4
+ 104 00ba 40B2     		sxtb	r0, r0
+ 105 00bc 03B0     		add	sp, sp, #12
+ 106              		@ sp needed
+ 107 00be BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 108              	.L9:
+ 109 00c2 00BF     		.align	2
+ 110              	.L8:
+ 111 00c4 1F85EB51 		.word	1374389535
+ 113              		.section	.text.VL53L1X_CalibrateXtalk,"ax",%progbits
+ 114              		.align	1
+ 115              		.global	VL53L1X_CalibrateXtalk
+ 116              		.syntax unified
+ARM GAS  C:\Temp\cckstyS4.s 			page 3
+
+
+ 117              		.thumb
+ 118              		.thumb_func
+ 120              	VL53L1X_CalibrateXtalk:
+ 121              		@ args = 0, pretend = 0, frame = 8
+ 122              		@ frame_needed = 0, uses_anonymous_args = 0
+ 123 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 124 0002 2DED048B 		vpush.64	{d8, d9}
+ 125 0006 83B0     		sub	sp, sp, #12
+ 126 0008 0446     		mov	r4, r0
+ 127 000a 09EE901A 		vmov	s19, r1	@ int
+ 128 000e 1646     		mov	r6, r2
+ 129 0010 0025     		movs	r5, #0
+ 130 0012 ADF80450 		strh	r5, [sp, #4]	@ movhi
+ 131 0016 2A46     		mov	r2, r5
+ 132 0018 1621     		movs	r1, #22
+ 133 001a FFF7FEFF 		bl	VL53L1_WrWord
+ 134 001e 0746     		mov	r7, r0
+ 135 0020 2046     		mov	r0, r4
+ 136 0022 FFF7FEFF 		bl	VL53L1X_StartRanging
+ 137 0026 0743     		orrs	r7, r7, r0
+ 138 0028 7FB2     		sxtb	r7, r7
+ 139 002a 9FED3A8A 		vldr.32	s16, .L17
+ 140 002e B0EE489A 		vmov.f32	s18, s16
+ 141 0032 F0EE488A 		vmov.f32	s17, s16
+ 142 0036 33E0     		b	.L11
+ 143              	.L13:
+ 144 0038 0DF10701 		add	r1, sp, #7
+ 145 003c 2046     		mov	r0, r4
+ 146 003e FFF7FEFF 		bl	VL53L1X_CheckForDataReady
+ 147              	.L12:
+ 148 0042 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 149 0046 002B     		cmp	r3, #0
+ 150 0048 F6D0     		beq	.L13
+ 151 004a 6946     		mov	r1, sp
+ 152 004c 2046     		mov	r0, r4
+ 153 004e FFF7FEFF 		bl	VL53L1X_GetSignalRate
+ 154 0052 01A9     		add	r1, sp, #4
+ 155 0054 2046     		mov	r0, r4
+ 156 0056 FFF7FEFF 		bl	VL53L1X_GetDistance
+ 157 005a 2046     		mov	r0, r4
+ 158 005c FFF7FEFF 		bl	VL53L1X_ClearInterrupt
+ 159 0060 BDF80430 		ldrh	r3, [sp, #4]
+ 160 0064 07EE903A 		vmov	s15, r3	@ int
+ 161 0068 F8EEE77A 		vcvt.f32.s32	s15, s15
+ 162 006c 39EE279A 		vadd.f32	s18, s18, s15
+ 163 0070 0DF10201 		add	r1, sp, #2
+ 164 0074 2046     		mov	r0, r4
+ 165 0076 FFF7FEFF 		bl	VL53L1X_GetSpadNb
+ 166 007a 0746     		mov	r7, r0
+ 167 007c BDF80230 		ldrh	r3, [sp, #2]
+ 168 0080 07EE903A 		vmov	s15, r3	@ int
+ 169 0084 F8EEE77A 		vcvt.f32.s32	s15, s15
+ 170 0088 38EE278A 		vadd.f32	s16, s16, s15
+ 171 008c BDF80030 		ldrh	r3, [sp]
+ 172 0090 07EE903A 		vmov	s15, r3	@ int
+ 173 0094 F8EEE77A 		vcvt.f32.s32	s15, s15
+ 174 0098 78EEA78A 		vadd.f32	s17, s17, s15
+ARM GAS  C:\Temp\cckstyS4.s 			page 4
+
+
+ 175 009c 0135     		adds	r5, r5, #1
+ 176 009e EDB2     		uxtb	r5, r5
+ 177              	.L11:
+ 178 00a0 312D     		cmp	r5, #49
+ 179 00a2 03D8     		bhi	.L16
+ 180 00a4 0023     		movs	r3, #0
+ 181 00a6 8DF80730 		strb	r3, [sp, #7]
+ 182 00aa CAE7     		b	.L12
+ 183              	.L16:
+ 184 00ac 2046     		mov	r0, r4
+ 185 00ae FFF7FEFF 		bl	VL53L1X_StopRanging
+ 186 00b2 3843     		orrs	r0, r0, r7
+ 187 00b4 45B2     		sxtb	r5, r0
+ 188 00b6 DFED187A 		vldr.32	s15, .L17+4
+ 189 00ba C9EE275A 		vdiv.f32	s11, s18, s15
+ 190 00be C8EE276A 		vdiv.f32	s13, s16, s15
+ 191 00c2 88EEA77A 		vdiv.f32	s14, s17, s15
+ 192 00c6 F8EEE97A 		vcvt.f32.s32	s15, s19
+ 193 00ca 85EEA76A 		vdiv.f32	s12, s11, s15
+ 194 00ce F7EE007A 		vmov.f32	s15, #1.0e+0
+ 195 00d2 77EEC67A 		vsub.f32	s15, s15, s12
+ 196 00d6 67EE877A 		vmul.f32	s15, s15, s14
+ 197 00da 9FED107A 		vldr.32	s14, .L17+8
+ 198 00de 67EE877A 		vmul.f32	s15, s15, s14
+ 199 00e2 87EEA67A 		vdiv.f32	s14, s15, s13
+ 200 00e6 FCEEC77A 		vcvt.u32.f32	s15, s14
+ 201 00ea 17EE903A 		vmov	r3, s15	@ int
+ 202 00ee 9AB2     		uxth	r2, r3
+ 203 00f0 4FF47A73 		mov	r3, #1000
+ 204 00f4 02FB03F3 		mul	r3, r2, r3
+ 205 00f8 C3F34F23 		ubfx	r3, r3, #9, #16
+ 206 00fc 3380     		strh	r3, [r6]	@ movhi
+ 207 00fe 1621     		movs	r1, #22
+ 208 0100 2046     		mov	r0, r4
+ 209 0102 FFF7FEFF 		bl	VL53L1_WrWord
+ 210 0106 2843     		orrs	r0, r0, r5
+ 211 0108 40B2     		sxtb	r0, r0
+ 212 010a 03B0     		add	sp, sp, #12
+ 213              		@ sp needed
+ 214 010c BDEC048B 		vldm	sp!, {d8-d9}
+ 215 0110 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 216              	.L18:
+ 217 0112 00BF     		.align	2
+ 218              	.L17:
+ 219 0114 00000000 		.word	0
+ 220 0118 00004842 		.word	1112014848
+ 221 011c 00000044 		.word	1140850688
+ 223              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\cckstyS4.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 VL53L1X_calibration.c
+  C:\Temp\cckstyS4.s:18     .text.VL53L1X_CalibrateOffset:00000000 $t
+  C:\Temp\cckstyS4.s:24     .text.VL53L1X_CalibrateOffset:00000000 VL53L1X_CalibrateOffset
+  C:\Temp\cckstyS4.s:111    .text.VL53L1X_CalibrateOffset:000000c4 $d
+  C:\Temp\cckstyS4.s:114    .text.VL53L1X_CalibrateXtalk:00000000 $t
+  C:\Temp\cckstyS4.s:120    .text.VL53L1X_CalibrateXtalk:00000000 VL53L1X_CalibrateXtalk
+  C:\Temp\cckstyS4.s:219    .text.VL53L1X_CalibrateXtalk:00000114 $d
+
+UNDEFINED SYMBOLS
+VL53L1_WrWord
+VL53L1X_StartRanging
+VL53L1X_CheckForDataReady
+VL53L1X_GetDistance
+VL53L1X_ClearInterrupt
+VL53L1X_StopRanging
+VL53L1X_GetSignalRate
+VL53L1X_GetSpadNb

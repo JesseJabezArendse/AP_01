@@ -1,0 +1,641 @@
+ARM GAS  C:\Temp\cc3rVQwr.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"VL53L1X_calibration.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Core/Src/VL53L1X_calibration.c"
+  20              		.section	.text.VL53L1X_CalibrateOffset,"ax",%progbits
+  21              		.align	1
+  22              		.global	VL53L1X_CalibrateOffset
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	VL53L1X_CalibrateOffset:
+  28              	.LVL0:
+  29              	.LFB3:
+   1:Core/Src/VL53L1X_calibration.c **** /**
+   2:Core/Src/VL53L1X_calibration.c ****   *
+   3:Core/Src/VL53L1X_calibration.c ****   * Copyright (c) 2023 STMicroelectronics.
+   4:Core/Src/VL53L1X_calibration.c ****   * All rights reserved.
+   5:Core/Src/VL53L1X_calibration.c ****   *
+   6:Core/Src/VL53L1X_calibration.c ****   * This software is licensed under terms that can be found in the LICENSE file
+   7:Core/Src/VL53L1X_calibration.c ****   * in the root directory of this software component.
+   8:Core/Src/VL53L1X_calibration.c ****   * If no LICENSE file comes with this software, it is provided AS-IS.
+   9:Core/Src/VL53L1X_calibration.c ****   *
+  10:Core/Src/VL53L1X_calibration.c ****   ******************************************************************************
+  11:Core/Src/VL53L1X_calibration.c ****   */
+  12:Core/Src/VL53L1X_calibration.c **** 
+  13:Core/Src/VL53L1X_calibration.c **** /**
+  14:Core/Src/VL53L1X_calibration.c ****  * @file  vl53l1x_calibration.c
+  15:Core/Src/VL53L1X_calibration.c ****  * @brief Calibration functions implementation
+  16:Core/Src/VL53L1X_calibration.c ****  */
+  17:Core/Src/VL53L1X_calibration.c **** #include "VL53L1X_api.h"
+  18:Core/Src/VL53L1X_calibration.c **** #include "VL53L1X_calibration.h"
+  19:Core/Src/VL53L1X_calibration.c **** 
+  20:Core/Src/VL53L1X_calibration.c **** #define ALGO__PART_TO_PART_RANGE_OFFSET_MM	0x001E
+  21:Core/Src/VL53L1X_calibration.c **** #define MM_CONFIG__INNER_OFFSET_MM			0x0020
+  22:Core/Src/VL53L1X_calibration.c **** #define MM_CONFIG__OUTER_OFFSET_MM 			0x0022
+  23:Core/Src/VL53L1X_calibration.c **** 
+  24:Core/Src/VL53L1X_calibration.c **** int8_t VL53L1X_CalibrateOffset(uint16_t dev, uint16_t TargetDistInMm, int16_t *offset)
+  25:Core/Src/VL53L1X_calibration.c **** {
+  30              		.loc 1 25 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 8
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Temp\cc3rVQwr.s 			page 2
+
+
+  34              		.loc 1 25 1 is_stmt 0 view .LVU1
+  35 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+  36              		.cfi_def_cfa_offset 28
+  37              		.cfi_offset 4, -28
+  38              		.cfi_offset 5, -24
+  39              		.cfi_offset 6, -20
+  40              		.cfi_offset 7, -16
+  41              		.cfi_offset 8, -12
+  42              		.cfi_offset 9, -8
+  43              		.cfi_offset 14, -4
+  44 0004 83B0     		sub	sp, sp, #12
+  45              		.cfi_def_cfa_offset 40
+  46 0006 0546     		mov	r5, r0
+  47 0008 0F46     		mov	r7, r1
+  48 000a 9046     		mov	r8, r2
+  26:Core/Src/VL53L1X_calibration.c **** 	uint8_t i, tmp;
+  49              		.loc 1 26 2 is_stmt 1 view .LVU2
+  27:Core/Src/VL53L1X_calibration.c **** 	int16_t AverageDistance = 0;
+  50              		.loc 1 27 2 view .LVU3
+  51              	.LVL1:
+  28:Core/Src/VL53L1X_calibration.c **** 	uint16_t distance;
+  52              		.loc 1 28 2 view .LVU4
+  29:Core/Src/VL53L1X_calibration.c **** 	VL53L1X_ERROR status = 0;
+  53              		.loc 1 29 2 view .LVU5
+  30:Core/Src/VL53L1X_calibration.c **** 
+  31:Core/Src/VL53L1X_calibration.c **** 	status |= VL53L1_WrWord(dev, ALGO__PART_TO_PART_RANGE_OFFSET_MM, 0x0);
+  54              		.loc 1 31 2 view .LVU6
+  55              		.loc 1 31 12 is_stmt 0 view .LVU7
+  56 000c 0022     		movs	r2, #0
+  57              	.LVL2:
+  58              		.loc 1 31 12 view .LVU8
+  59 000e 1E21     		movs	r1, #30
+  60              	.LVL3:
+  61              		.loc 1 31 12 view .LVU9
+  62 0010 FFF7FEFF 		bl	VL53L1_WrWord
+  63              	.LVL4:
+  64              		.loc 1 31 12 view .LVU10
+  65 0014 0446     		mov	r4, r0
+  66              	.LVL5:
+  32:Core/Src/VL53L1X_calibration.c **** 	status |= VL53L1_WrWord(dev, MM_CONFIG__INNER_OFFSET_MM, 0x0);
+  67              		.loc 1 32 2 is_stmt 1 view .LVU11
+  68              		.loc 1 32 12 is_stmt 0 view .LVU12
+  69 0016 0022     		movs	r2, #0
+  70 0018 2021     		movs	r1, #32
+  71 001a 2846     		mov	r0, r5
+  72 001c FFF7FEFF 		bl	VL53L1_WrWord
+  73              	.LVL6:
+  74              		.loc 1 32 9 view .LVU13
+  75 0020 0443     		orrs	r4, r4, r0
+  76              	.LVL7:
+  77              		.loc 1 32 9 view .LVU14
+  78 0022 64B2     		sxtb	r4, r4
+  79              	.LVL8:
+  33:Core/Src/VL53L1X_calibration.c **** 	status |= VL53L1_WrWord(dev, MM_CONFIG__OUTER_OFFSET_MM, 0x0);
+  80              		.loc 1 33 2 is_stmt 1 view .LVU15
+  81              		.loc 1 33 12 is_stmt 0 view .LVU16
+  82 0024 0022     		movs	r2, #0
+ARM GAS  C:\Temp\cc3rVQwr.s 			page 3
+
+
+  83 0026 2221     		movs	r1, #34
+  84 0028 2846     		mov	r0, r5
+  85 002a FFF7FEFF 		bl	VL53L1_WrWord
+  86              	.LVL9:
+  87              		.loc 1 33 9 view .LVU17
+  88 002e 0443     		orrs	r4, r4, r0
+  89              	.LVL10:
+  90              		.loc 1 33 9 view .LVU18
+  91 0030 64B2     		sxtb	r4, r4
+  92              	.LVL11:
+  34:Core/Src/VL53L1X_calibration.c **** 	status |= VL53L1X_StartRanging(dev);	/* Enable VL53L1X sensor */
+  93              		.loc 1 34 2 is_stmt 1 view .LVU19
+  94              		.loc 1 34 12 is_stmt 0 view .LVU20
+  95 0032 2846     		mov	r0, r5
+  96 0034 FFF7FEFF 		bl	VL53L1X_StartRanging
+  97              	.LVL12:
+  98              		.loc 1 34 9 view .LVU21
+  99 0038 0443     		orrs	r4, r4, r0
+ 100              	.LVL13:
+ 101              		.loc 1 34 9 view .LVU22
+ 102 003a 64B2     		sxtb	r4, r4
+ 103              	.LVL14:
+  35:Core/Src/VL53L1X_calibration.c **** 	for (i = 0; i < 50; i++) {
+ 104              		.loc 1 35 2 is_stmt 1 view .LVU23
+  27:Core/Src/VL53L1X_calibration.c **** 	uint16_t distance;
+ 105              		.loc 1 27 10 is_stmt 0 view .LVU24
+ 106 003c 0026     		movs	r6, #0
+ 107              		.loc 1 35 9 view .LVU25
+ 108 003e B146     		mov	r9, r6
+ 109              		.loc 1 35 2 view .LVU26
+ 110 0040 1DE0     		b	.L2
+ 111              	.LVL15:
+ 112              	.L4:
+  36:Core/Src/VL53L1X_calibration.c **** 		tmp = 0;
+  37:Core/Src/VL53L1X_calibration.c **** 		while (tmp == 0){
+  38:Core/Src/VL53L1X_calibration.c **** 			status |= VL53L1X_CheckForDataReady(dev, &tmp);
+ 113              		.loc 1 38 4 is_stmt 1 view .LVU27
+ 114              		.loc 1 38 14 is_stmt 0 view .LVU28
+ 115 0042 0DF10701 		add	r1, sp, #7
+ 116 0046 2846     		mov	r0, r5
+ 117 0048 FFF7FEFF 		bl	VL53L1X_CheckForDataReady
+ 118              	.LVL16:
+ 119              		.loc 1 38 11 view .LVU29
+ 120 004c 2043     		orrs	r0, r0, r4
+ 121 004e 44B2     		sxtb	r4, r0
+ 122              	.LVL17:
+ 123              	.L3:
+  37:Core/Src/VL53L1X_calibration.c **** 			status |= VL53L1X_CheckForDataReady(dev, &tmp);
+ 124              		.loc 1 37 14 is_stmt 1 view .LVU30
+ 125 0050 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 126 0054 002B     		cmp	r3, #0
+ 127 0056 F4D0     		beq	.L4
+  39:Core/Src/VL53L1X_calibration.c **** 		}
+  40:Core/Src/VL53L1X_calibration.c **** 		status |= VL53L1X_GetDistance(dev, &distance);
+ 128              		.loc 1 40 3 discriminator 2 view .LVU31
+ 129              		.loc 1 40 13 is_stmt 0 discriminator 2 view .LVU32
+ 130 0058 01A9     		add	r1, sp, #4
+ARM GAS  C:\Temp\cc3rVQwr.s 			page 4
+
+
+ 131 005a 2846     		mov	r0, r5
+ 132 005c FFF7FEFF 		bl	VL53L1X_GetDistance
+ 133              	.LVL18:
+ 134              		.loc 1 40 10 discriminator 2 view .LVU33
+ 135 0060 0443     		orrs	r4, r4, r0
+ 136              	.LVL19:
+ 137              		.loc 1 40 10 discriminator 2 view .LVU34
+ 138 0062 64B2     		sxtb	r4, r4
+ 139              	.LVL20:
+  41:Core/Src/VL53L1X_calibration.c **** 		status |= VL53L1X_ClearInterrupt(dev);
+ 140              		.loc 1 41 3 is_stmt 1 discriminator 2 view .LVU35
+ 141              		.loc 1 41 13 is_stmt 0 discriminator 2 view .LVU36
+ 142 0064 2846     		mov	r0, r5
+ 143 0066 FFF7FEFF 		bl	VL53L1X_ClearInterrupt
+ 144              	.LVL21:
+ 145              		.loc 1 41 10 discriminator 2 view .LVU37
+ 146 006a 0443     		orrs	r4, r4, r0
+ 147              	.LVL22:
+ 148              		.loc 1 41 10 discriminator 2 view .LVU38
+ 149 006c 64B2     		sxtb	r4, r4
+ 150              	.LVL23:
+  42:Core/Src/VL53L1X_calibration.c **** 		AverageDistance = AverageDistance + distance;
+ 151              		.loc 1 42 3 is_stmt 1 discriminator 2 view .LVU39
+ 152              		.loc 1 42 37 is_stmt 0 discriminator 2 view .LVU40
+ 153 006e BDF80430 		ldrh	r3, [sp, #4]
+ 154 0072 3344     		add	r3, r3, r6
+ 155              		.loc 1 42 19 discriminator 2 view .LVU41
+ 156 0074 1EB2     		sxth	r6, r3
+ 157              	.LVL24:
+  35:Core/Src/VL53L1X_calibration.c **** 		tmp = 0;
+ 158              		.loc 1 35 23 is_stmt 1 discriminator 2 view .LVU42
+ 159 0076 09F10109 		add	r9, r9, #1
+ 160              	.LVL25:
+  35:Core/Src/VL53L1X_calibration.c **** 		tmp = 0;
+ 161              		.loc 1 35 23 is_stmt 0 discriminator 2 view .LVU43
+ 162 007a 5FFA89F9 		uxtb	r9, r9
+ 163              	.LVL26:
+ 164              	.L2:
+  35:Core/Src/VL53L1X_calibration.c **** 		tmp = 0;
+ 165              		.loc 1 35 16 is_stmt 1 discriminator 1 view .LVU44
+ 166 007e B9F1310F 		cmp	r9, #49
+ 167 0082 03D8     		bhi	.L7
+  36:Core/Src/VL53L1X_calibration.c **** 		while (tmp == 0){
+ 168              		.loc 1 36 3 view .LVU45
+  36:Core/Src/VL53L1X_calibration.c **** 		while (tmp == 0){
+ 169              		.loc 1 36 7 is_stmt 0 view .LVU46
+ 170 0084 0023     		movs	r3, #0
+ 171 0086 8DF80730 		strb	r3, [sp, #7]
+  37:Core/Src/VL53L1X_calibration.c **** 			status |= VL53L1X_CheckForDataReady(dev, &tmp);
+ 172              		.loc 1 37 3 is_stmt 1 view .LVU47
+  37:Core/Src/VL53L1X_calibration.c **** 			status |= VL53L1X_CheckForDataReady(dev, &tmp);
+ 173              		.loc 1 37 9 is_stmt 0 view .LVU48
+ 174 008a E1E7     		b	.L3
+ 175              	.L7:
+  43:Core/Src/VL53L1X_calibration.c **** 	}
+  44:Core/Src/VL53L1X_calibration.c **** 	status |= VL53L1X_StopRanging(dev);
+ 176              		.loc 1 44 2 is_stmt 1 view .LVU49
+ARM GAS  C:\Temp\cc3rVQwr.s 			page 5
+
+
+ 177              		.loc 1 44 12 is_stmt 0 view .LVU50
+ 178 008c 2846     		mov	r0, r5
+ 179 008e FFF7FEFF 		bl	VL53L1X_StopRanging
+ 180              	.LVL27:
+ 181              		.loc 1 44 9 view .LVU51
+ 182 0092 0443     		orrs	r4, r4, r0
+ 183              	.LVL28:
+ 184              		.loc 1 44 9 view .LVU52
+ 185 0094 64B2     		sxtb	r4, r4
+ 186              	.LVL29:
+  45:Core/Src/VL53L1X_calibration.c **** 	AverageDistance = AverageDistance / 50;
+ 187              		.loc 1 45 2 is_stmt 1 view .LVU53
+ 188              		.loc 1 45 18 is_stmt 0 view .LVU54
+ 189 0096 0B4A     		ldr	r2, .L8
+ 190 0098 82FB0632 		smull	r3, r2, r2, r6
+ 191 009c F317     		asrs	r3, r6, #31
+ 192 009e C3EB2213 		rsb	r3, r3, r2, asr #4
+ 193 00a2 1BB2     		sxth	r3, r3
+ 194              	.LVL30:
+  46:Core/Src/VL53L1X_calibration.c **** 	*offset = TargetDistInMm - AverageDistance;
+ 195              		.loc 1 46 2 is_stmt 1 view .LVU55
+ 196              		.loc 1 46 27 is_stmt 0 view .LVU56
+ 197 00a4 FF1A     		subs	r7, r7, r3
+ 198 00a6 BAB2     		uxth	r2, r7
+ 199              		.loc 1 46 10 view .LVU57
+ 200 00a8 A8F80070 		strh	r7, [r8]	@ movhi
+  47:Core/Src/VL53L1X_calibration.c **** 	status |= VL53L1_WrWord(dev, ALGO__PART_TO_PART_RANGE_OFFSET_MM, *offset*4);
+ 201              		.loc 1 47 2 is_stmt 1 view .LVU58
+ 202              		.loc 1 47 12 is_stmt 0 view .LVU59
+ 203 00ac 9200     		lsls	r2, r2, #2
+ 204 00ae 92B2     		uxth	r2, r2
+ 205 00b0 1E21     		movs	r1, #30
+ 206 00b2 2846     		mov	r0, r5
+ 207 00b4 FFF7FEFF 		bl	VL53L1_WrWord
+ 208              	.LVL31:
+ 209              		.loc 1 47 9 view .LVU60
+ 210 00b8 2043     		orrs	r0, r0, r4
+ 211              	.LVL32:
+  48:Core/Src/VL53L1X_calibration.c **** 	return status;
+ 212              		.loc 1 48 2 is_stmt 1 view .LVU61
+  49:Core/Src/VL53L1X_calibration.c **** }
+ 213              		.loc 1 49 1 is_stmt 0 view .LVU62
+ 214 00ba 40B2     		sxtb	r0, r0
+ 215              		.loc 1 49 1 view .LVU63
+ 216 00bc 03B0     		add	sp, sp, #12
+ 217              		.cfi_def_cfa_offset 28
+ 218              		@ sp needed
+ 219 00be BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 220              	.LVL33:
+ 221              	.L9:
+ 222              		.loc 1 49 1 view .LVU64
+ 223 00c2 00BF     		.align	2
+ 224              	.L8:
+ 225 00c4 1F85EB51 		.word	1374389535
+ 226              		.cfi_endproc
+ 227              	.LFE3:
+ 229              		.section	.text.VL53L1X_CalibrateXtalk,"ax",%progbits
+ARM GAS  C:\Temp\cc3rVQwr.s 			page 6
+
+
+ 230              		.align	1
+ 231              		.global	VL53L1X_CalibrateXtalk
+ 232              		.syntax unified
+ 233              		.thumb
+ 234              		.thumb_func
+ 236              	VL53L1X_CalibrateXtalk:
+ 237              	.LVL34:
+ 238              	.LFB4:
+  50:Core/Src/VL53L1X_calibration.c **** 
+  51:Core/Src/VL53L1X_calibration.c **** int8_t VL53L1X_CalibrateXtalk(uint16_t dev, uint16_t TargetDistInMm, uint16_t *xtalk)
+  52:Core/Src/VL53L1X_calibration.c **** {
+ 239              		.loc 1 52 1 is_stmt 1 view -0
+ 240              		.cfi_startproc
+ 241              		@ args = 0, pretend = 0, frame = 8
+ 242              		@ frame_needed = 0, uses_anonymous_args = 0
+ 243              		.loc 1 52 1 is_stmt 0 view .LVU66
+ 244 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 245              		.cfi_def_cfa_offset 20
+ 246              		.cfi_offset 4, -20
+ 247              		.cfi_offset 5, -16
+ 248              		.cfi_offset 6, -12
+ 249              		.cfi_offset 7, -8
+ 250              		.cfi_offset 14, -4
+ 251 0002 2DED048B 		vpush.64	{d8, d9}
+ 252              		.cfi_def_cfa_offset 36
+ 253              		.cfi_offset 80, -36
+ 254              		.cfi_offset 81, -32
+ 255              		.cfi_offset 82, -28
+ 256              		.cfi_offset 83, -24
+ 257 0006 83B0     		sub	sp, sp, #12
+ 258              		.cfi_def_cfa_offset 48
+ 259 0008 0446     		mov	r4, r0
+ 260 000a 09EE901A 		vmov	s19, r1	@ int
+ 261 000e 1646     		mov	r6, r2
+  53:Core/Src/VL53L1X_calibration.c **** 	uint8_t i, tmp;
+ 262              		.loc 1 53 2 is_stmt 1 view .LVU67
+  54:Core/Src/VL53L1X_calibration.c **** 	float AverageSignalRate = 0;
+ 263              		.loc 1 54 2 view .LVU68
+ 264              	.LVL35:
+  55:Core/Src/VL53L1X_calibration.c **** 	float AverageDistance = 0;
+ 265              		.loc 1 55 2 view .LVU69
+  56:Core/Src/VL53L1X_calibration.c **** 	float AverageSpadNb = 0;
+ 266              		.loc 1 56 2 view .LVU70
+  57:Core/Src/VL53L1X_calibration.c **** 	uint16_t distance = 0, spadNum;
+ 267              		.loc 1 57 2 view .LVU71
+ 268              		.loc 1 57 11 is_stmt 0 view .LVU72
+ 269 0010 0025     		movs	r5, #0
+ 270 0012 ADF80450 		strh	r5, [sp, #4]	@ movhi
+  58:Core/Src/VL53L1X_calibration.c **** 	uint16_t sr;
+ 271              		.loc 1 58 2 is_stmt 1 view .LVU73
+  59:Core/Src/VL53L1X_calibration.c **** 	VL53L1X_ERROR status = 0;
+ 272              		.loc 1 59 2 view .LVU74
+ 273              	.LVL36:
+  60:Core/Src/VL53L1X_calibration.c **** 	uint32_t calXtalk;
+ 274              		.loc 1 60 2 view .LVU75
+  61:Core/Src/VL53L1X_calibration.c **** 
+  62:Core/Src/VL53L1X_calibration.c **** 	status |= VL53L1_WrWord(dev, 0x0016,0);
+ARM GAS  C:\Temp\cc3rVQwr.s 			page 7
+
+
+ 275              		.loc 1 62 2 view .LVU76
+ 276              		.loc 1 62 12 is_stmt 0 view .LVU77
+ 277 0016 2A46     		mov	r2, r5
+ 278              	.LVL37:
+ 279              		.loc 1 62 12 view .LVU78
+ 280 0018 1621     		movs	r1, #22
+ 281              	.LVL38:
+ 282              		.loc 1 62 12 view .LVU79
+ 283 001a FFF7FEFF 		bl	VL53L1_WrWord
+ 284              	.LVL39:
+ 285              		.loc 1 62 12 view .LVU80
+ 286 001e 0746     		mov	r7, r0
+ 287              	.LVL40:
+  63:Core/Src/VL53L1X_calibration.c **** 	status |= VL53L1X_StartRanging(dev);
+ 288              		.loc 1 63 2 is_stmt 1 view .LVU81
+ 289              		.loc 1 63 12 is_stmt 0 view .LVU82
+ 290 0020 2046     		mov	r0, r4
+ 291 0022 FFF7FEFF 		bl	VL53L1X_StartRanging
+ 292              	.LVL41:
+ 293              		.loc 1 63 9 view .LVU83
+ 294 0026 0743     		orrs	r7, r7, r0
+ 295              	.LVL42:
+ 296              		.loc 1 63 9 view .LVU84
+ 297 0028 7FB2     		sxtb	r7, r7
+ 298              	.LVL43:
+  64:Core/Src/VL53L1X_calibration.c **** 	for (i = 0; i < 50; i++) {
+ 299              		.loc 1 64 2 is_stmt 1 view .LVU85
+  56:Core/Src/VL53L1X_calibration.c **** 	uint16_t distance = 0, spadNum;
+ 300              		.loc 1 56 8 is_stmt 0 view .LVU86
+ 301 002a 9FED3A8A 		vldr.32	s16, .L17
+  55:Core/Src/VL53L1X_calibration.c **** 	float AverageSpadNb = 0;
+ 302              		.loc 1 55 8 view .LVU87
+ 303 002e B0EE489A 		vmov.f32	s18, s16
+  54:Core/Src/VL53L1X_calibration.c **** 	float AverageDistance = 0;
+ 304              		.loc 1 54 8 view .LVU88
+ 305 0032 F0EE488A 		vmov.f32	s17, s16
+ 306              		.loc 1 64 2 view .LVU89
+ 307 0036 33E0     		b	.L11
+ 308              	.LVL44:
+ 309              	.L13:
+  65:Core/Src/VL53L1X_calibration.c **** 		tmp = 0;
+  66:Core/Src/VL53L1X_calibration.c **** 		while (tmp == 0){
+  67:Core/Src/VL53L1X_calibration.c **** 			status |= VL53L1X_CheckForDataReady(dev, &tmp);
+ 310              		.loc 1 67 4 is_stmt 1 view .LVU90
+ 311              		.loc 1 67 14 is_stmt 0 view .LVU91
+ 312 0038 0DF10701 		add	r1, sp, #7
+ 313 003c 2046     		mov	r0, r4
+ 314 003e FFF7FEFF 		bl	VL53L1X_CheckForDataReady
+ 315              	.LVL45:
+ 316              	.L12:
+  66:Core/Src/VL53L1X_calibration.c **** 			status |= VL53L1X_CheckForDataReady(dev, &tmp);
+ 317              		.loc 1 66 14 is_stmt 1 view .LVU92
+ 318 0042 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 319 0046 002B     		cmp	r3, #0
+ 320 0048 F6D0     		beq	.L13
+  68:Core/Src/VL53L1X_calibration.c **** 		}
+  69:Core/Src/VL53L1X_calibration.c **** 		status |= VL53L1X_GetSignalRate(dev, &sr);
+ARM GAS  C:\Temp\cc3rVQwr.s 			page 8
+
+
+ 321              		.loc 1 69 3 discriminator 2 view .LVU93
+ 322              		.loc 1 69 13 is_stmt 0 discriminator 2 view .LVU94
+ 323 004a 6946     		mov	r1, sp
+ 324 004c 2046     		mov	r0, r4
+ 325 004e FFF7FEFF 		bl	VL53L1X_GetSignalRate
+ 326              	.LVL46:
+  70:Core/Src/VL53L1X_calibration.c **** 		status |= VL53L1X_GetDistance(dev, &distance);
+ 327              		.loc 1 70 3 is_stmt 1 discriminator 2 view .LVU95
+ 328              		.loc 1 70 13 is_stmt 0 discriminator 2 view .LVU96
+ 329 0052 01A9     		add	r1, sp, #4
+ 330 0054 2046     		mov	r0, r4
+ 331 0056 FFF7FEFF 		bl	VL53L1X_GetDistance
+ 332              	.LVL47:
+  71:Core/Src/VL53L1X_calibration.c **** 		status |= VL53L1X_ClearInterrupt(dev);
+ 333              		.loc 1 71 3 is_stmt 1 discriminator 2 view .LVU97
+ 334              		.loc 1 71 13 is_stmt 0 discriminator 2 view .LVU98
+ 335 005a 2046     		mov	r0, r4
+ 336 005c FFF7FEFF 		bl	VL53L1X_ClearInterrupt
+ 337              	.LVL48:
+  72:Core/Src/VL53L1X_calibration.c **** 		AverageDistance = AverageDistance + distance;
+ 338              		.loc 1 72 3 is_stmt 1 discriminator 2 view .LVU99
+ 339              		.loc 1 72 37 is_stmt 0 discriminator 2 view .LVU100
+ 340 0060 BDF80430 		ldrh	r3, [sp, #4]
+ 341 0064 07EE903A 		vmov	s15, r3	@ int
+ 342 0068 F8EEE77A 		vcvt.f32.s32	s15, s15
+ 343              		.loc 1 72 19 discriminator 2 view .LVU101
+ 344 006c 39EE279A 		vadd.f32	s18, s18, s15
+ 345              	.LVL49:
+  73:Core/Src/VL53L1X_calibration.c **** 		status = VL53L1X_GetSpadNb(dev, &spadNum);
+ 346              		.loc 1 73 3 is_stmt 1 discriminator 2 view .LVU102
+ 347              		.loc 1 73 12 is_stmt 0 discriminator 2 view .LVU103
+ 348 0070 0DF10201 		add	r1, sp, #2
+ 349 0074 2046     		mov	r0, r4
+ 350 0076 FFF7FEFF 		bl	VL53L1X_GetSpadNb
+ 351              	.LVL50:
+ 352 007a 0746     		mov	r7, r0
+ 353              	.LVL51:
+  74:Core/Src/VL53L1X_calibration.c **** 		AverageSpadNb = AverageSpadNb + spadNum;
+ 354              		.loc 1 74 3 is_stmt 1 discriminator 2 view .LVU104
+ 355              		.loc 1 74 33 is_stmt 0 discriminator 2 view .LVU105
+ 356 007c BDF80230 		ldrh	r3, [sp, #2]
+ 357 0080 07EE903A 		vmov	s15, r3	@ int
+ 358 0084 F8EEE77A 		vcvt.f32.s32	s15, s15
+ 359              		.loc 1 74 17 discriminator 2 view .LVU106
+ 360 0088 38EE278A 		vadd.f32	s16, s16, s15
+ 361              	.LVL52:
+  75:Core/Src/VL53L1X_calibration.c **** 		AverageSignalRate =
+ 362              		.loc 1 75 3 is_stmt 1 discriminator 2 view .LVU107
+  76:Core/Src/VL53L1X_calibration.c **** 		    AverageSignalRate + sr;
+ 363              		.loc 1 76 25 is_stmt 0 discriminator 2 view .LVU108
+ 364 008c BDF80030 		ldrh	r3, [sp]
+ 365 0090 07EE903A 		vmov	s15, r3	@ int
+ 366 0094 F8EEE77A 		vcvt.f32.s32	s15, s15
+  75:Core/Src/VL53L1X_calibration.c **** 		AverageSignalRate =
+ 367              		.loc 1 75 21 discriminator 2 view .LVU109
+ 368 0098 78EEA78A 		vadd.f32	s17, s17, s15
+ 369              	.LVL53:
+ARM GAS  C:\Temp\cc3rVQwr.s 			page 9
+
+
+  64:Core/Src/VL53L1X_calibration.c **** 		tmp = 0;
+ 370              		.loc 1 64 23 is_stmt 1 discriminator 2 view .LVU110
+ 371 009c 0135     		adds	r5, r5, #1
+ 372              	.LVL54:
+  64:Core/Src/VL53L1X_calibration.c **** 		tmp = 0;
+ 373              		.loc 1 64 23 is_stmt 0 discriminator 2 view .LVU111
+ 374 009e EDB2     		uxtb	r5, r5
+ 375              	.LVL55:
+ 376              	.L11:
+  64:Core/Src/VL53L1X_calibration.c **** 		tmp = 0;
+ 377              		.loc 1 64 16 is_stmt 1 discriminator 1 view .LVU112
+ 378 00a0 312D     		cmp	r5, #49
+ 379 00a2 03D8     		bhi	.L16
+  65:Core/Src/VL53L1X_calibration.c **** 		while (tmp == 0){
+ 380              		.loc 1 65 3 view .LVU113
+  65:Core/Src/VL53L1X_calibration.c **** 		while (tmp == 0){
+ 381              		.loc 1 65 7 is_stmt 0 view .LVU114
+ 382 00a4 0023     		movs	r3, #0
+ 383 00a6 8DF80730 		strb	r3, [sp, #7]
+  66:Core/Src/VL53L1X_calibration.c **** 			status |= VL53L1X_CheckForDataReady(dev, &tmp);
+ 384              		.loc 1 66 3 is_stmt 1 view .LVU115
+  66:Core/Src/VL53L1X_calibration.c **** 			status |= VL53L1X_CheckForDataReady(dev, &tmp);
+ 385              		.loc 1 66 9 is_stmt 0 view .LVU116
+ 386 00aa CAE7     		b	.L12
+ 387              	.L16:
+  77:Core/Src/VL53L1X_calibration.c **** 	}
+  78:Core/Src/VL53L1X_calibration.c **** 	status |= VL53L1X_StopRanging(dev);
+ 388              		.loc 1 78 2 is_stmt 1 view .LVU117
+ 389              		.loc 1 78 12 is_stmt 0 view .LVU118
+ 390 00ac 2046     		mov	r0, r4
+ 391 00ae FFF7FEFF 		bl	VL53L1X_StopRanging
+ 392              	.LVL56:
+ 393              		.loc 1 78 9 view .LVU119
+ 394 00b2 3843     		orrs	r0, r0, r7
+ 395 00b4 45B2     		sxtb	r5, r0
+ 396              	.LVL57:
+  79:Core/Src/VL53L1X_calibration.c **** 	AverageDistance = AverageDistance / 50;
+ 397              		.loc 1 79 2 is_stmt 1 view .LVU120
+ 398              		.loc 1 79 18 is_stmt 0 view .LVU121
+ 399 00b6 DFED187A 		vldr.32	s15, .L17+4
+ 400 00ba C9EE275A 		vdiv.f32	s11, s18, s15
+ 401              	.LVL58:
+  80:Core/Src/VL53L1X_calibration.c **** 	AverageSpadNb = AverageSpadNb / 50;
+ 402              		.loc 1 80 2 is_stmt 1 view .LVU122
+ 403              		.loc 1 80 16 is_stmt 0 view .LVU123
+ 404 00be C8EE276A 		vdiv.f32	s13, s16, s15
+ 405              	.LVL59:
+  81:Core/Src/VL53L1X_calibration.c **** 	AverageSignalRate = AverageSignalRate / 50;
+ 406              		.loc 1 81 2 is_stmt 1 view .LVU124
+ 407              		.loc 1 81 20 is_stmt 0 view .LVU125
+ 408 00c2 88EEA77A 		vdiv.f32	s14, s17, s15
+ 409              	.LVL60:
+  82:Core/Src/VL53L1X_calibration.c **** 	/* Calculate Xtalk value */
+  83:Core/Src/VL53L1X_calibration.c **** 	calXtalk = (uint16_t)(512*(AverageSignalRate*(1-(AverageDistance/TargetDistInMm)))/AverageSpadNb);
+ 410              		.loc 1 83 2 is_stmt 1 view .LVU126
+ 411              		.loc 1 83 66 is_stmt 0 view .LVU127
+ 412 00c6 F8EEE97A 		vcvt.f32.s32	s15, s19
+ARM GAS  C:\Temp\cc3rVQwr.s 			page 10
+
+
+ 413 00ca 85EEA76A 		vdiv.f32	s12, s11, s15
+ 414              		.loc 1 83 49 view .LVU128
+ 415 00ce F7EE007A 		vmov.f32	s15, #1.0e+0
+ 416 00d2 77EEC67A 		vsub.f32	s15, s15, s12
+ 417              		.loc 1 83 46 view .LVU129
+ 418 00d6 67EE877A 		vmul.f32	s15, s15, s14
+ 419              		.loc 1 83 27 view .LVU130
+ 420 00da 9FED107A 		vldr.32	s14, .L17+8
+ 421              	.LVL61:
+ 422              		.loc 1 83 27 view .LVU131
+ 423 00de 67EE877A 		vmul.f32	s15, s15, s14
+ 424              		.loc 1 83 84 view .LVU132
+ 425 00e2 87EEA67A 		vdiv.f32	s14, s15, s13
+ 426              		.loc 1 83 13 view .LVU133
+ 427 00e6 FCEEC77A 		vcvt.u32.f32	s15, s14
+ 428 00ea 17EE903A 		vmov	r3, s15	@ int
+ 429 00ee 9AB2     		uxth	r2, r3
+ 430              	.LVL62:
+  84:Core/Src/VL53L1X_calibration.c **** 	if(calXtalk  > 0xffff)
+ 431              		.loc 1 84 2 is_stmt 1 view .LVU134
+  85:Core/Src/VL53L1X_calibration.c **** 		calXtalk = 0xffff;
+  86:Core/Src/VL53L1X_calibration.c **** 	*xtalk = (uint16_t)((calXtalk*1000)>>9);
+ 432              		.loc 1 86 2 view .LVU135
+ 433              		.loc 1 86 31 is_stmt 0 view .LVU136
+ 434 00f0 4FF47A73 		mov	r3, #1000
+ 435 00f4 02FB03F3 		mul	r3, r2, r3
+ 436              		.loc 1 86 11 view .LVU137
+ 437 00f8 C3F34F23 		ubfx	r3, r3, #9, #16
+ 438              		.loc 1 86 9 view .LVU138
+ 439 00fc 3380     		strh	r3, [r6]	@ movhi
+  87:Core/Src/VL53L1X_calibration.c **** 	status |= VL53L1_WrWord(dev, 0x0016, (uint16_t)calXtalk);
+ 440              		.loc 1 87 2 is_stmt 1 view .LVU139
+ 441              		.loc 1 87 12 is_stmt 0 view .LVU140
+ 442 00fe 1621     		movs	r1, #22
+ 443 0100 2046     		mov	r0, r4
+ 444 0102 FFF7FEFF 		bl	VL53L1_WrWord
+ 445              	.LVL63:
+ 446              		.loc 1 87 9 view .LVU141
+ 447 0106 2843     		orrs	r0, r0, r5
+ 448              	.LVL64:
+  88:Core/Src/VL53L1X_calibration.c **** 	return status;
+ 449              		.loc 1 88 2 is_stmt 1 view .LVU142
+  89:Core/Src/VL53L1X_calibration.c **** }
+ 450              		.loc 1 89 1 is_stmt 0 view .LVU143
+ 451 0108 40B2     		sxtb	r0, r0
+ 452              		.loc 1 89 1 view .LVU144
+ 453 010a 03B0     		add	sp, sp, #12
+ 454              		.cfi_def_cfa_offset 36
+ 455              		@ sp needed
+ 456 010c BDEC048B 		vldm	sp!, {d8-d9}
+ 457              		.cfi_restore 82
+ 458              		.cfi_restore 83
+ 459              		.cfi_restore 80
+ 460              		.cfi_restore 81
+ 461              		.cfi_def_cfa_offset 20
+ 462              	.LVL65:
+ 463              		.loc 1 89 1 view .LVU145
+ARM GAS  C:\Temp\cc3rVQwr.s 			page 11
+
+
+ 464 0110 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 465              	.LVL66:
+ 466              	.L18:
+ 467              		.loc 1 89 1 view .LVU146
+ 468 0112 00BF     		.align	2
+ 469              	.L17:
+ 470 0114 00000000 		.word	0
+ 471 0118 00004842 		.word	1112014848
+ 472 011c 00000044 		.word	1140850688
+ 473              		.cfi_endproc
+ 474              	.LFE4:
+ 476              		.text
+ 477              	.Letext0:
+ 478              		.file 2 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 479              		.file 3 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 480              		.file 4 "Core/Inc/VL53L1X_api.h"
+ 481              		.file 5 "Core/Inc/vl53l1_platform.h"
+ARM GAS  C:\Temp\cc3rVQwr.s 			page 12
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 VL53L1X_calibration.c
+  C:\Temp\cc3rVQwr.s:21     .text.VL53L1X_CalibrateOffset:00000000 $t
+  C:\Temp\cc3rVQwr.s:27     .text.VL53L1X_CalibrateOffset:00000000 VL53L1X_CalibrateOffset
+  C:\Temp\cc3rVQwr.s:225    .text.VL53L1X_CalibrateOffset:000000c4 $d
+  C:\Temp\cc3rVQwr.s:230    .text.VL53L1X_CalibrateXtalk:00000000 $t
+  C:\Temp\cc3rVQwr.s:236    .text.VL53L1X_CalibrateXtalk:00000000 VL53L1X_CalibrateXtalk
+  C:\Temp\cc3rVQwr.s:470    .text.VL53L1X_CalibrateXtalk:00000114 $d
+
+UNDEFINED SYMBOLS
+VL53L1_WrWord
+VL53L1X_StartRanging
+VL53L1X_CheckForDataReady
+VL53L1X_GetDistance
+VL53L1X_ClearInterrupt
+VL53L1X_StopRanging
+VL53L1X_GetSignalRate
+VL53L1X_GetSpadNb

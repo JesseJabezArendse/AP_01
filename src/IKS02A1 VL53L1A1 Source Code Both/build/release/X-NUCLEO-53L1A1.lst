@@ -1,0 +1,982 @@
+ARM GAS  C:\Temp\ccSNmUJV.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"X-NUCLEO-53L1A1.c"
+  16              		.text
+  17              		.section	.text._I2cFailRecover,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  23              	_I2cFailRecover:
+  24              		@ args = 0, pretend = 0, frame = 32
+  25              		@ frame_needed = 0, uses_anonymous_args = 0
+  26 0000 70B5     		push	{r4, r5, r6, lr}
+  27 0002 88B0     		sub	sp, sp, #32
+  28 0004 0026     		movs	r6, #0
+  29 0006 0196     		str	r6, [sp, #4]
+  30 0008 424B     		ldr	r3, .L11
+  31 000a 1A6B     		ldr	r2, [r3, #48]
+  32 000c 42F00202 		orr	r2, r2, #2
+  33 0010 1A63     		str	r2, [r3, #48]
+  34 0012 1B6B     		ldr	r3, [r3, #48]
+  35 0014 03F00203 		and	r3, r3, #2
+  36 0018 0193     		str	r3, [sp, #4]
+  37 001a 019B     		ldr	r3, [sp, #4]
+  38 001c 3E4C     		ldr	r4, .L11+4
+  39 001e 0122     		movs	r2, #1
+  40 0020 4FF48071 		mov	r1, #256
+  41 0024 2046     		mov	r0, r4
+  42 0026 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  43 002a 0122     		movs	r2, #1
+  44 002c 4FF40071 		mov	r1, #512
+  45 0030 2046     		mov	r0, r4
+  46 0032 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  47 0036 4FF44073 		mov	r3, #768
+  48 003a 0393     		str	r3, [sp, #12]
+  49 003c 1123     		movs	r3, #17
+  50 003e 0493     		str	r3, [sp, #16]
+  51 0040 0123     		movs	r3, #1
+  52 0042 0593     		str	r3, [sp, #20]
+  53 0044 03A9     		add	r1, sp, #12
+  54 0046 2046     		mov	r0, r4
+  55 0048 FFF7FEFF 		bl	HAL_GPIO_Init
+  56 004c 1FE0     		b	.L5
+  57              	.L3:
+  58 004e 324D     		ldr	r5, .L11+4
+ARM GAS  C:\Temp\ccSNmUJV.s 			page 2
+
+
+  59 0050 0022     		movs	r2, #0
+  60 0052 4FF48071 		mov	r1, #256
+  61 0056 2846     		mov	r0, r5
+  62 0058 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  63 005c 0120     		movs	r0, #1
+  64 005e FFF7FEFF 		bl	HAL_Delay
+  65 0062 0122     		movs	r2, #1
+  66 0064 4FF48071 		mov	r1, #256
+  67 0068 2846     		mov	r0, r5
+  68 006a FFF7FEFF 		bl	HAL_GPIO_WritePin
+  69 006e 0120     		movs	r0, #1
+  70 0070 FFF7FEFF 		bl	HAL_Delay
+  71 0074 0134     		adds	r4, r4, #1
+  72              	.L2:
+  73 0076 092C     		cmp	r4, #9
+  74 0078 E9DD     		ble	.L3
+  75 007a 4FF40071 		mov	r1, #512
+  76 007e 2648     		ldr	r0, .L11+4
+  77 0080 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+  78 0084 28B9     		cbnz	r0, .L4
+  79 0086 731C     		adds	r3, r6, #1
+  80 0088 062E     		cmp	r6, #6
+  81 008a 02DC     		bgt	.L4
+  82 008c 1E46     		mov	r6, r3
+  83              	.L5:
+  84 008e 0024     		movs	r4, #0
+  85 0090 F1E7     		b	.L2
+  86              	.L4:
+  87 0092 4FF40071 		mov	r1, #512
+  88 0096 2048     		ldr	r0, .L11+4
+  89 0098 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+  90 009c 08B1     		cbz	r0, .L10
+  91 009e 08B0     		add	sp, sp, #32
+  92              		@ sp needed
+  93 00a0 70BD     		pop	{r4, r5, r6, pc}
+  94              	.L10:
+  95 00a2 0021     		movs	r1, #0
+  96 00a4 0291     		str	r1, [sp, #8]
+  97 00a6 1B4B     		ldr	r3, .L11
+  98 00a8 1A6B     		ldr	r2, [r3, #48]
+  99 00aa 42F00102 		orr	r2, r2, #1
+ 100 00ae 1A63     		str	r2, [r3, #48]
+ 101 00b0 1B6B     		ldr	r3, [r3, #48]
+ 102 00b2 03F00103 		and	r3, r3, #1
+ 103 00b6 0293     		str	r3, [sp, #8]
+ 104 00b8 029B     		ldr	r3, [sp, #8]
+ 105 00ba 2023     		movs	r3, #32
+ 106 00bc 0393     		str	r3, [sp, #12]
+ 107 00be 0123     		movs	r3, #1
+ 108 00c0 0493     		str	r3, [sp, #16]
+ 109 00c2 0591     		str	r1, [sp, #20]
+ 110 00c4 03A9     		add	r1, sp, #12
+ 111 00c6 1548     		ldr	r0, .L11+8
+ 112 00c8 FFF7FEFF 		bl	HAL_GPIO_Init
+ 113              	.L7:
+ 114 00cc 134C     		ldr	r4, .L11+8
+ 115 00ce 0122     		movs	r2, #1
+ARM GAS  C:\Temp\ccSNmUJV.s 			page 3
+
+
+ 116 00d0 2021     		movs	r1, #32
+ 117 00d2 2046     		mov	r0, r4
+ 118 00d4 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 119 00d8 2120     		movs	r0, #33
+ 120 00da FFF7FEFF 		bl	HAL_Delay
+ 121 00de 0022     		movs	r2, #0
+ 122 00e0 2021     		movs	r1, #32
+ 123 00e2 2046     		mov	r0, r4
+ 124 00e4 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 125 00e8 2120     		movs	r0, #33
+ 126 00ea FFF7FEFF 		bl	HAL_Delay
+ 127 00ee 0122     		movs	r2, #1
+ 128 00f0 2021     		movs	r1, #32
+ 129 00f2 2046     		mov	r0, r4
+ 130 00f4 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 131 00f8 2120     		movs	r0, #33
+ 132 00fa FFF7FEFF 		bl	HAL_Delay
+ 133 00fe 0022     		movs	r2, #0
+ 134 0100 2021     		movs	r1, #32
+ 135 0102 2046     		mov	r0, r4
+ 136 0104 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 137 0108 4FF42570 		mov	r0, #660
+ 138 010c FFF7FEFF 		bl	HAL_Delay
+ 139 0110 DCE7     		b	.L7
+ 140              	.L12:
+ 141 0112 00BF     		.align	2
+ 142              	.L11:
+ 143 0114 00380240 		.word	1073887232
+ 144 0118 00040240 		.word	1073873920
+ 145 011c 00000240 		.word	1073872896
+ 147              		.section	.text._ExpanderRd,"ax",%progbits
+ 148              		.align	1
+ 149              		.syntax unified
+ 150              		.thumb
+ 151              		.thumb_func
+ 153              	_ExpanderRd:
+ 154              		@ args = 0, pretend = 0, frame = 8
+ 155              		@ frame_needed = 0, uses_anonymous_args = 0
+ 156 0000 70B5     		push	{r4, r5, r6, lr}
+ 157 0002 84B0     		sub	sp, sp, #16
+ 158 0004 1646     		mov	r6, r2
+ 159 0006 1D46     		mov	r5, r3
+ 160 0008 8DF80F10 		strb	r1, [sp, #15]
+ 161 000c 84B2     		uxth	r4, r0
+ 162 000e 6421     		movs	r1, #100
+ 163 0010 0091     		str	r1, [sp]
+ 164 0012 0123     		movs	r3, #1
+ 165 0014 0DF10F02 		add	r2, sp, #15
+ 166 0018 2146     		mov	r1, r4
+ 167 001a 0848     		ldr	r0, .L17
+ 168 001c FFF7FEFF 		bl	HAL_I2C_Master_Transmit
+ 169 0020 08B1     		cbz	r0, .L16
+ 170              	.L13:
+ 171 0022 04B0     		add	sp, sp, #16
+ 172              		@ sp needed
+ 173 0024 70BD     		pop	{r4, r5, r6, pc}
+ 174              	.L16:
+ARM GAS  C:\Temp\ccSNmUJV.s 			page 4
+
+
+ 175 0026 6423     		movs	r3, #100
+ 176 0028 05FB03F3 		mul	r3, r5, r3
+ 177 002c 0093     		str	r3, [sp]
+ 178 002e ABB2     		uxth	r3, r5
+ 179 0030 3246     		mov	r2, r6
+ 180 0032 2146     		mov	r1, r4
+ 181 0034 0148     		ldr	r0, .L17
+ 182 0036 FFF7FEFF 		bl	HAL_I2C_Master_Receive
+ 183 003a F2E7     		b	.L13
+ 184              	.L18:
+ 185              		.align	2
+ 186              	.L17:
+ 187 003c 00000000 		.word	XNUCLEO53L1A1_hi2c
+ 189              		.section	.text._ExpanderWR,"ax",%progbits
+ 190              		.align	1
+ 191              		.syntax unified
+ 192              		.thumb
+ 193              		.thumb_func
+ 195              	_ExpanderWR:
+ 196              		@ args = 0, pretend = 0, frame = 16
+ 197              		@ frame_needed = 0, uses_anonymous_args = 0
+ 198 0000 30B5     		push	{r4, r5, lr}
+ 199 0002 87B0     		sub	sp, sp, #28
+ 200 0004 0546     		mov	r5, r0
+ 201 0006 0846     		mov	r0, r1
+ 202 0008 1146     		mov	r1, r2
+ 203 000a 1C46     		mov	r4, r3
+ 204 000c 8DF80800 		strb	r0, [sp, #8]
+ 205 0010 1A46     		mov	r2, r3
+ 206 0012 0DF10900 		add	r0, sp, #9
+ 207 0016 FFF7FEFF 		bl	memcpy
+ 208 001a 631C     		adds	r3, r4, #1
+ 209 001c 6422     		movs	r2, #100
+ 210 001e 0092     		str	r2, [sp]
+ 211 0020 9BB2     		uxth	r3, r3
+ 212 0022 02AA     		add	r2, sp, #8
+ 213 0024 A9B2     		uxth	r1, r5
+ 214 0026 0248     		ldr	r0, .L21
+ 215 0028 FFF7FEFF 		bl	HAL_I2C_Master_Transmit
+ 216 002c 07B0     		add	sp, sp, #28
+ 217              		@ sp needed
+ 218 002e 30BD     		pop	{r4, r5, pc}
+ 219              	.L22:
+ 220              		.align	2
+ 221              	.L21:
+ 222 0030 00000000 		.word	XNUCLEO53L1A1_hi2c
+ 224              		.section	.text._ExpandersSetAllIO,"ax",%progbits
+ 225              		.align	1
+ 226              		.syntax unified
+ 227              		.thumb
+ 228              		.thumb_func
+ 230              	_ExpandersSetAllIO:
+ 231              		@ args = 0, pretend = 0, frame = 0
+ 232              		@ frame_needed = 0, uses_anonymous_args = 0
+ 233 0000 08B5     		push	{r3, lr}
+ 234 0002 0223     		movs	r3, #2
+ 235 0004 064A     		ldr	r2, .L27
+ARM GAS  C:\Temp\ccSNmUJV.s 			page 5
+
+
+ 236 0006 1221     		movs	r1, #18
+ 237 0008 8620     		movs	r0, #134
+ 238 000a FFF7FEFF 		bl	_ExpanderWR
+ 239 000e 00B1     		cbz	r0, .L26
+ 240              	.L23:
+ 241 0010 08BD     		pop	{r3, pc}
+ 242              	.L26:
+ 243 0012 0223     		movs	r3, #2
+ 244 0014 034A     		ldr	r2, .L27+4
+ 245 0016 1221     		movs	r1, #18
+ 246 0018 8420     		movs	r0, #132
+ 247 001a FFF7FEFF 		bl	_ExpanderWR
+ 248              	.L24:
+ 249 001e F7E7     		b	.L23
+ 250              	.L28:
+ 251              		.align	2
+ 252              	.L27:
+ 253 0020 00000000 		.word	CurIOVal
+ 254 0024 02000000 		.word	CurIOVal+2
+ 256              		.section	.text.XNUCLEO53L1A1_I2C1Configure,"ax",%progbits
+ 257              		.align	1
+ 258              		.global	XNUCLEO53L1A1_I2C1Configure
+ 259              		.syntax unified
+ 260              		.thumb
+ 261              		.thumb_func
+ 263              	XNUCLEO53L1A1_I2C1Configure:
+ 264              		@ args = 0, pretend = 0, frame = 32
+ 265              		@ frame_needed = 0, uses_anonymous_args = 0
+ 266 0000 10B5     		push	{r4, lr}
+ 267 0002 88B0     		sub	sp, sp, #32
+ 268 0004 FFF7FEFF 		bl	_I2cFailRecover
+ 269 0008 0024     		movs	r4, #0
+ 270 000a 0194     		str	r4, [sp, #4]
+ 271 000c 194B     		ldr	r3, .L31
+ 272 000e 1A6B     		ldr	r2, [r3, #48]
+ 273 0010 42F00202 		orr	r2, r2, #2
+ 274 0014 1A63     		str	r2, [r3, #48]
+ 275 0016 1A6B     		ldr	r2, [r3, #48]
+ 276 0018 02F00202 		and	r2, r2, #2
+ 277 001c 0192     		str	r2, [sp, #4]
+ 278 001e 019A     		ldr	r2, [sp, #4]
+ 279 0020 0294     		str	r4, [sp, #8]
+ 280 0022 1A6C     		ldr	r2, [r3, #64]
+ 281 0024 42F40012 		orr	r2, r2, #2097152
+ 282 0028 1A64     		str	r2, [r3, #64]
+ 283 002a 1B6C     		ldr	r3, [r3, #64]
+ 284 002c 03F40013 		and	r3, r3, #2097152
+ 285 0030 0293     		str	r3, [sp, #8]
+ 286 0032 029B     		ldr	r3, [sp, #8]
+ 287 0034 4FF44073 		mov	r3, #768
+ 288 0038 0393     		str	r3, [sp, #12]
+ 289 003a 1223     		movs	r3, #18
+ 290 003c 0493     		str	r3, [sp, #16]
+ 291 003e 0594     		str	r4, [sp, #20]
+ 292 0040 0694     		str	r4, [sp, #24]
+ 293 0042 0423     		movs	r3, #4
+ 294 0044 0793     		str	r3, [sp, #28]
+ARM GAS  C:\Temp\ccSNmUJV.s 			page 6
+
+
+ 295 0046 03A9     		add	r1, sp, #12
+ 296 0048 0B48     		ldr	r0, .L31+4
+ 297 004a FFF7FEFF 		bl	HAL_GPIO_Init
+ 298 004e 0B48     		ldr	r0, .L31+8
+ 299 0050 0B4B     		ldr	r3, .L31+12
+ 300 0052 0360     		str	r3, [r0]
+ 301 0054 0B4B     		ldr	r3, .L31+16
+ 302 0056 4360     		str	r3, [r0, #4]
+ 303 0058 8460     		str	r4, [r0, #8]
+ 304 005a C460     		str	r4, [r0, #12]
+ 305 005c 4FF48043 		mov	r3, #16384
+ 306 0060 0361     		str	r3, [r0, #16]
+ 307 0062 4461     		str	r4, [r0, #20]
+ 308 0064 8461     		str	r4, [r0, #24]
+ 309 0066 C461     		str	r4, [r0, #28]
+ 310 0068 0462     		str	r4, [r0, #32]
+ 311 006a FFF7FEFF 		bl	HAL_I2C_Init
+ 312 006e 08B0     		add	sp, sp, #32
+ 313              		@ sp needed
+ 314 0070 10BD     		pop	{r4, pc}
+ 315              	.L32:
+ 316 0072 00BF     		.align	2
+ 317              	.L31:
+ 318 0074 00380240 		.word	1073887232
+ 319 0078 00040240 		.word	1073873920
+ 320 007c 00000000 		.word	XNUCLEO53L1A1_hi2c
+ 321 0080 00540040 		.word	1073763328
+ 322 0084 801A0600 		.word	400000
+ 324              		.section	.text.XNUCLEO53L1A1_SetIntrStateId,"ax",%progbits
+ 325              		.align	1
+ 326              		.global	XNUCLEO53L1A1_SetIntrStateId
+ 327              		.syntax unified
+ 328              		.thumb
+ 329              		.thumb_func
+ 331              	XNUCLEO53L1A1_SetIntrStateId:
+ 332              		@ args = 0, pretend = 0, frame = 0
+ 333              		@ frame_needed = 0, uses_anonymous_args = 0
+ 334 0000 70B5     		push	{r4, r5, r6, lr}
+ 335 0002 0546     		mov	r5, r0
+ 336 0004 6329     		cmp	r1, #99
+ 337 0006 20D0     		beq	.L38
+ 338 0008 07DC     		bgt	.L35
+ 339 000a 0129     		cmp	r1, #1
+ 340 000c 20D0     		beq	.L39
+ 341 000e 0229     		cmp	r1, #2
+ 342 0010 21D0     		beq	.L40
+ 343 0012 21B3     		cbz	r1, .L41
+ 344 0014 4FF0FF30 		mov	r0, #-1
+ 345              	.L33:
+ 346 0018 70BD     		pop	{r4, r5, r6, pc}
+ 347              	.L35:
+ 348 001a 6C29     		cmp	r1, #108
+ 349 001c 22D0     		beq	.L42
+ 350 001e 7229     		cmp	r1, #114
+ 351 0020 33D1     		bne	.L43
+ 352 0022 4FF48066 		mov	r6, #1024
+ 353 0026 2824     		movs	r4, #40
+ARM GAS  C:\Temp\ccSNmUJV.s 			page 7
+
+
+ 354              	.L34:
+ 355 0028 FDB1     		cbz	r5, .L37
+ 356 002a 194B     		ldr	r3, .L45
+ 357 002c 5E61     		str	r6, [r3, #20]
+ 358 002e 04F01F01 		and	r1, r4, #31
+ 359 0032 6309     		lsrs	r3, r4, #5
+ 360 0034 0122     		movs	r2, #1
+ 361 0036 8A40     		lsls	r2, r2, r1
+ 362 0038 6033     		adds	r3, r3, #96
+ 363 003a 1649     		ldr	r1, .L45+4
+ 364 003c 41F82320 		str	r2, [r1, r3, lsl #2]
+ 365 0040 2046     		mov	r0, r4
+ 366 0042 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 367 0046 0020     		movs	r0, #0
+ 368 0048 E6E7     		b	.L33
+ 369              	.L38:
+ 370 004a 1026     		movs	r6, #16
+ 371 004c 0A24     		movs	r4, #10
+ 372 004e EBE7     		b	.L34
+ 373              	.L39:
+ 374 0050 1026     		movs	r6, #16
+ 375 0052 0A24     		movs	r4, #10
+ 376 0054 E8E7     		b	.L34
+ 377              	.L40:
+ 378 0056 4FF48066 		mov	r6, #1024
+ 379 005a 2824     		movs	r4, #40
+ 380 005c E4E7     		b	.L34
+ 381              	.L41:
+ 382 005e 8026     		movs	r6, #128
+ 383 0060 1724     		movs	r4, #23
+ 384 0062 E1E7     		b	.L34
+ 385              	.L42:
+ 386 0064 8026     		movs	r6, #128
+ 387 0066 1724     		movs	r4, #23
+ 388 0068 DEE7     		b	.L34
+ 389              	.L37:
+ 390 006a 2046     		mov	r0, r4
+ 391 006c FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 392 0070 074B     		ldr	r3, .L45
+ 393 0072 5E61     		str	r6, [r3, #20]
+ 394 0074 04F01F02 		and	r2, r4, #31
+ 395 0078 6409     		lsrs	r4, r4, #5
+ 396 007a 0123     		movs	r3, #1
+ 397 007c 9340     		lsls	r3, r3, r2
+ 398 007e 6034     		adds	r4, r4, #96
+ 399 0080 044A     		ldr	r2, .L45+4
+ 400 0082 42F82430 		str	r3, [r2, r4, lsl #2]
+ 401 0086 2846     		mov	r0, r5
+ 402 0088 C6E7     		b	.L33
+ 403              	.L43:
+ 404 008a 4FF0FF30 		mov	r0, #-1
+ 405              	.L36:
+ 406 008e C3E7     		b	.L33
+ 407              	.L46:
+ 408              		.align	2
+ 409              	.L45:
+ 410 0090 003C0140 		.word	1073822720
+ARM GAS  C:\Temp\ccSNmUJV.s 			page 8
+
+
+ 411 0094 00E100E0 		.word	-536813312
+ 413              		.section	.text.XNUCLEO53L1A1_Init,"ax",%progbits
+ 414              		.align	1
+ 415              		.global	XNUCLEO53L1A1_Init
+ 416              		.syntax unified
+ 417              		.thumb
+ 418              		.thumb_func
+ 420              	XNUCLEO53L1A1_Init:
+ 421              		@ args = 0, pretend = 0, frame = 8
+ 422              		@ frame_needed = 0, uses_anonymous_args = 0
+ 423 0000 00B5     		push	{lr}
+ 424 0002 83B0     		sub	sp, sp, #12
+ 425 0004 FFF7FEFF 		bl	XNUCLEO53L1A1_I2C1Configure
+ 426 0008 0223     		movs	r3, #2
+ 427 000a 01AA     		add	r2, sp, #4
+ 428 000c 0021     		movs	r1, #0
+ 429 000e 8620     		movs	r0, #134
+ 430 0010 FFF7FEFF 		bl	_ExpanderRd
+ 431 0014 30B9     		cbnz	r0, .L47
+ 432 0016 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 433 001a 1BB9     		cbnz	r3, .L47
+ 434 001c 9DF80530 		ldrb	r3, [sp, #5]	@ zero_extendqisi2
+ 435 0020 162B     		cmp	r3, #22
+ 436 0022 02D0     		beq	.L50
+ 437              	.L47:
+ 438 0024 03B0     		add	sp, sp, #12
+ 439              		@ sp needed
+ 440 0026 5DF804FB 		ldr	pc, [sp], #4
+ 441              	.L50:
+ 442 002a 0223     		movs	r3, #2
+ 443 002c 01AA     		add	r2, sp, #4
+ 444 002e 0021     		movs	r1, #0
+ 445 0030 8420     		movs	r0, #132
+ 446 0032 FFF7FEFF 		bl	_ExpanderRd
+ 447 0036 0028     		cmp	r0, #0
+ 448 0038 F4D1     		bne	.L47
+ 449 003a 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 450 003e 002B     		cmp	r3, #0
+ 451 0040 F0D1     		bne	.L47
+ 452 0042 9DF80530 		ldrb	r3, [sp, #5]	@ zero_extendqisi2
+ 453 0046 162B     		cmp	r3, #22
+ 454 0048 ECD1     		bne	.L47
+ 455 004a 124B     		ldr	r3, .L51
+ 456 004c 0022     		movs	r2, #0
+ 457 004e 1A60     		str	r2, [r3]
+ 458 0050 FF23     		movs	r3, #255
+ 459 0052 8DF80430 		strb	r3, [sp, #4]
+ 460 0056 8DF80530 		strb	r3, [sp, #5]
+ 461 005a 0223     		movs	r3, #2
+ 462 005c 01AA     		add	r2, sp, #4
+ 463 005e 1421     		movs	r1, #20
+ 464 0060 8620     		movs	r0, #134
+ 465 0062 FFF7FEFF 		bl	_ExpanderWR
+ 466 0066 0028     		cmp	r0, #0
+ 467 0068 DCD1     		bne	.L47
+ 468 006a FF23     		movs	r3, #255
+ 469 006c 8DF80430 		strb	r3, [sp, #4]
+ARM GAS  C:\Temp\ccSNmUJV.s 			page 9
+
+
+ 470 0070 BF23     		movs	r3, #191
+ 471 0072 8DF80530 		strb	r3, [sp, #5]
+ 472 0076 0223     		movs	r3, #2
+ 473 0078 01AA     		add	r2, sp, #4
+ 474 007a 1421     		movs	r1, #20
+ 475 007c 8420     		movs	r0, #132
+ 476 007e FFF7FEFF 		bl	_ExpanderWR
+ 477 0082 0028     		cmp	r0, #0
+ 478 0084 CED1     		bne	.L47
+ 479 0086 034B     		ldr	r3, .L51
+ 480 0088 6FF0C022 		mvn	r2, #-1073692672
+ 481 008c 1A60     		str	r2, [r3]
+ 482 008e FFF7FEFF 		bl	_ExpandersSetAllIO
+ 483              	.L48:
+ 484 0092 C7E7     		b	.L47
+ 485              	.L52:
+ 486              		.align	2
+ 487              	.L51:
+ 488 0094 00000000 		.word	CurIOVal
+ 490              		.section	.text.XNUCLEO53L1A1_GetPB1,"ax",%progbits
+ 491              		.align	1
+ 492              		.global	XNUCLEO53L1A1_GetPB1
+ 493              		.syntax unified
+ 494              		.thumb
+ 495              		.thumb_func
+ 497              	XNUCLEO53L1A1_GetPB1:
+ 498              		@ args = 0, pretend = 0, frame = 8
+ 499              		@ frame_needed = 0, uses_anonymous_args = 0
+ 500 0000 10B5     		push	{r4, lr}
+ 501 0002 82B0     		sub	sp, sp, #8
+ 502 0004 0446     		mov	r4, r0
+ 503 0006 0123     		movs	r3, #1
+ 504 0008 0DF10702 		add	r2, sp, #7
+ 505 000c 1121     		movs	r1, #17
+ 506 000e 8420     		movs	r0, #132
+ 507 0010 FFF7FEFF 		bl	_ExpanderRd
+ 508 0014 48B9     		cbnz	r0, .L54
+ 509 0016 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 510 001a 03F04003 		and	r3, r3, #64
+ 511 001e 8DF80730 		strb	r3, [sp, #7]
+ 512 0022 3BB1     		cbz	r3, .L55
+ 513 0024 0123     		movs	r3, #1
+ 514 0026 8DF80730 		strb	r3, [sp, #7]
+ 515              	.L54:
+ 516 002a 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 517 002e 2360     		str	r3, [r4]
+ 518 0030 02B0     		add	sp, sp, #8
+ 519              		@ sp needed
+ 520 0032 10BD     		pop	{r4, pc}
+ 521              	.L55:
+ 522 0034 0023     		movs	r3, #0
+ 523 0036 8DF80730 		strb	r3, [sp, #7]
+ 524 003a F6E7     		b	.L54
+ 526              		.section	.text.XNUCLEO53L1A1_ResetId,"ax",%progbits
+ 527              		.align	1
+ 528              		.global	XNUCLEO53L1A1_ResetId
+ 529              		.syntax unified
+ARM GAS  C:\Temp\ccSNmUJV.s 			page 10
+
+
+ 530              		.thumb
+ 531              		.thumb_func
+ 533              	XNUCLEO53L1A1_ResetId:
+ 534              		@ args = 0, pretend = 0, frame = 0
+ 535              		@ frame_needed = 0, uses_anonymous_args = 0
+ 536 0000 08B5     		push	{r3, lr}
+ 537 0002 6328     		cmp	r0, #99
+ 538 0004 1FD0     		beq	.L58
+ 539 0006 07DC     		bgt	.L59
+ 540 0008 0128     		cmp	r0, #1
+ 541 000a 1CD0     		beq	.L58
+ 542 000c 0228     		cmp	r0, #2
+ 543 000e 07D0     		beq	.L60
+ 544 0010 48B3     		cbz	r0, .L61
+ 545 0012 4FF0FF30 		mov	r0, #-1
+ 546              	.L57:
+ 547 0016 08BD     		pop	{r3, pc}
+ 548              	.L59:
+ 549 0018 6C28     		cmp	r0, #108
+ 550 001a 24D0     		beq	.L61
+ 551 001c 7228     		cmp	r0, #114
+ 552 001e 0FD1     		bne	.L67
+ 553              	.L60:
+ 554 0020 194A     		ldr	r2, .L68
+ 555 0022 5378     		ldrb	r3, [r2, #1]	@ zero_extendqisi2
+ 556 0024 03F07F03 		and	r3, r3, #127
+ 557 0028 5370     		strb	r3, [r2, #1]
+ 558 002a 11B1     		cbz	r1, .L65
+ 559 002c 63F07F03 		orn	r3, r3, #127
+ 560 0030 5370     		strb	r3, [r2, #1]
+ 561              	.L65:
+ 562 0032 0123     		movs	r3, #1
+ 563 0034 154A     		ldr	r2, .L68+4
+ 564 0036 1321     		movs	r1, #19
+ 565 0038 8620     		movs	r0, #134
+ 566 003a FFF7FEFF 		bl	_ExpanderWR
+ 567              	.L62:
+ 568 003e EAE7     		b	.L57
+ 569              	.L67:
+ 570 0040 4FF0FF30 		mov	r0, #-1
+ 571 0044 E7E7     		b	.L57
+ 572              	.L58:
+ 573 0046 104A     		ldr	r2, .L68
+ 574 0048 D378     		ldrb	r3, [r2, #3]	@ zero_extendqisi2
+ 575 004a 03F07F03 		and	r3, r3, #127
+ 576 004e D370     		strb	r3, [r2, #3]
+ 577 0050 11B1     		cbz	r1, .L63
+ 578 0052 63F07F03 		orn	r3, r3, #127
+ 579 0056 D370     		strb	r3, [r2, #3]
+ 580              	.L63:
+ 581 0058 0123     		movs	r3, #1
+ 582 005a 0D4A     		ldr	r2, .L68+8
+ 583 005c 1321     		movs	r1, #19
+ 584 005e 8420     		movs	r0, #132
+ 585 0060 FFF7FEFF 		bl	_ExpanderWR
+ 586 0064 D7E7     		b	.L57
+ 587              	.L61:
+ARM GAS  C:\Temp\ccSNmUJV.s 			page 11
+
+
+ 588 0066 084A     		ldr	r2, .L68
+ 589 0068 5378     		ldrb	r3, [r2, #1]	@ zero_extendqisi2
+ 590 006a 03F0BF03 		and	r3, r3, #191
+ 591 006e 5370     		strb	r3, [r2, #1]
+ 592 0070 11B1     		cbz	r1, .L64
+ 593 0072 43F04003 		orr	r3, r3, #64
+ 594 0076 5370     		strb	r3, [r2, #1]
+ 595              	.L64:
+ 596 0078 0123     		movs	r3, #1
+ 597 007a 044A     		ldr	r2, .L68+4
+ 598 007c 1321     		movs	r1, #19
+ 599 007e 8620     		movs	r0, #134
+ 600 0080 FFF7FEFF 		bl	_ExpanderWR
+ 601 0084 C7E7     		b	.L57
+ 602              	.L69:
+ 603 0086 00BF     		.align	2
+ 604              	.L68:
+ 605 0088 00000000 		.word	CurIOVal
+ 606 008c 01000000 		.word	CurIOVal+1
+ 607 0090 03000000 		.word	CurIOVal+3
+ 609              		.section	.text.VL53L1A1_EXTI_IOConfigure,"ax",%progbits
+ 610              		.align	1
+ 611              		.global	VL53L1A1_EXTI_IOConfigure
+ 612              		.syntax unified
+ 613              		.thumb
+ 614              		.thumb_func
+ 616              	VL53L1A1_EXTI_IOConfigure:
+ 617              		@ args = 0, pretend = 0, frame = 32
+ 618              		@ frame_needed = 0, uses_anonymous_args = 0
+ 619 0000 70B5     		push	{r4, r5, r6, lr}
+ 620 0002 88B0     		sub	sp, sp, #32
+ 621 0004 0D46     		mov	r5, r1
+ 622 0006 1446     		mov	r4, r2
+ 623 0008 4FF48813 		mov	r3, #1114112
+ 624 000c 0493     		str	r3, [sp, #16]
+ 625 000e 0123     		movs	r3, #1
+ 626 0010 0593     		str	r3, [sp, #20]
+ 627 0012 0228     		cmp	r0, #2
+ 628 0014 3ED0     		beq	.L71
+ 629 0016 1EDC     		bgt	.L72
+ 630 0018 08B3     		cbz	r0, .L73
+ 631 001a 9842     		cmp	r0, r3
+ 632 001c 19D1     		bne	.L70
+ 633              	.L74:
+ 634 001e 0020     		movs	r0, #0
+ 635 0020 0090     		str	r0, [sp]
+ 636 0022 2A4B     		ldr	r3, .L77
+ 637 0024 1A6B     		ldr	r2, [r3, #48]
+ 638 0026 42F00102 		orr	r2, r2, #1
+ 639 002a 1A63     		str	r2, [r3, #48]
+ 640 002c 1B6B     		ldr	r3, [r3, #48]
+ 641 002e 03F00103 		and	r3, r3, #1
+ 642 0032 0093     		str	r3, [sp]
+ 643 0034 009B     		ldr	r3, [sp]
+ 644 0036 1026     		movs	r6, #16
+ 645 0038 0396     		str	r6, [sp, #12]
+ 646 003a 0121     		movs	r1, #1
+ARM GAS  C:\Temp\ccSNmUJV.s 			page 12
+
+
+ 647 003c FFF7FEFF 		bl	XNUCLEO53L1A1_SetIntrStateId
+ 648 0040 03A9     		add	r1, sp, #12
+ 649 0042 2348     		ldr	r0, .L77+4
+ 650 0044 FFF7FEFF 		bl	HAL_GPIO_Init
+ 651 0048 2246     		mov	r2, r4
+ 652 004a 2946     		mov	r1, r5
+ 653 004c 3046     		mov	r0, r6
+ 654 004e FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 655              	.L70:
+ 656 0052 08B0     		add	sp, sp, #32
+ 657              		@ sp needed
+ 658 0054 70BD     		pop	{r4, r5, r6, pc}
+ 659              	.L72:
+ 660 0056 6328     		cmp	r0, #99
+ 661 0058 E1D0     		beq	.L74
+ 662 005a 6C28     		cmp	r0, #108
+ 663 005c F9D1     		bne	.L70
+ 664              	.L73:
+ 665 005e 0020     		movs	r0, #0
+ 666 0060 0190     		str	r0, [sp, #4]
+ 667 0062 1A4B     		ldr	r3, .L77
+ 668 0064 1A6B     		ldr	r2, [r3, #48]
+ 669 0066 42F00402 		orr	r2, r2, #4
+ 670 006a 1A63     		str	r2, [r3, #48]
+ 671 006c 1B6B     		ldr	r3, [r3, #48]
+ 672 006e 03F00403 		and	r3, r3, #4
+ 673 0072 0193     		str	r3, [sp, #4]
+ 674 0074 019B     		ldr	r3, [sp, #4]
+ 675 0076 0146     		mov	r1, r0
+ 676 0078 FFF7FEFF 		bl	XNUCLEO53L1A1_SetIntrStateId
+ 677 007c 8023     		movs	r3, #128
+ 678 007e 0393     		str	r3, [sp, #12]
+ 679 0080 03A9     		add	r1, sp, #12
+ 680 0082 1448     		ldr	r0, .L77+8
+ 681 0084 FFF7FEFF 		bl	HAL_GPIO_Init
+ 682 0088 2246     		mov	r2, r4
+ 683 008a 2946     		mov	r1, r5
+ 684 008c 1720     		movs	r0, #23
+ 685 008e FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 686 0092 DEE7     		b	.L70
+ 687              	.L71:
+ 688 0094 0020     		movs	r0, #0
+ 689 0096 0290     		str	r0, [sp, #8]
+ 690 0098 0C4B     		ldr	r3, .L77
+ 691 009a 1A6B     		ldr	r2, [r3, #48]
+ 692 009c 42F00102 		orr	r2, r2, #1
+ 693 00a0 1A63     		str	r2, [r3, #48]
+ 694 00a2 1B6B     		ldr	r3, [r3, #48]
+ 695 00a4 03F00103 		and	r3, r3, #1
+ 696 00a8 0293     		str	r3, [sp, #8]
+ 697 00aa 029B     		ldr	r3, [sp, #8]
+ 698 00ac 0221     		movs	r1, #2
+ 699 00ae FFF7FEFF 		bl	XNUCLEO53L1A1_SetIntrStateId
+ 700 00b2 4FF48063 		mov	r3, #1024
+ 701 00b6 0393     		str	r3, [sp, #12]
+ 702 00b8 03A9     		add	r1, sp, #12
+ 703 00ba 0548     		ldr	r0, .L77+4
+ARM GAS  C:\Temp\ccSNmUJV.s 			page 13
+
+
+ 704 00bc FFF7FEFF 		bl	HAL_GPIO_Init
+ 705 00c0 2246     		mov	r2, r4
+ 706 00c2 2946     		mov	r1, r5
+ 707 00c4 2820     		movs	r0, #40
+ 708 00c6 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 709 00ca C2E7     		b	.L70
+ 710              	.L78:
+ 711              		.align	2
+ 712              	.L77:
+ 713 00cc 00380240 		.word	1073887232
+ 714 00d0 00000240 		.word	1073872896
+ 715 00d4 00080240 		.word	1073874944
+ 717              		.section	.text.VL53L1A1_EXTI_IOUnconfigure,"ax",%progbits
+ 718              		.align	1
+ 719              		.global	VL53L1A1_EXTI_IOUnconfigure
+ 720              		.syntax unified
+ 721              		.thumb
+ 722              		.thumb_func
+ 724              	VL53L1A1_EXTI_IOUnconfigure:
+ 725              		@ args = 0, pretend = 0, frame = 0
+ 726              		@ frame_needed = 0, uses_anonymous_args = 0
+ 727 0000 08B5     		push	{r3, lr}
+ 728 0002 6328     		cmp	r0, #99
+ 729 0004 14D0     		beq	.L80
+ 730 0006 05DC     		bgt	.L81
+ 731 0008 0128     		cmp	r0, #1
+ 732 000a 11D0     		beq	.L80
+ 733 000c 0228     		cmp	r0, #2
+ 734 000e 05D0     		beq	.L82
+ 735 0010 B0B1     		cbz	r0, .L83
+ 736              	.L79:
+ 737 0012 08BD     		pop	{r3, pc}
+ 738              	.L81:
+ 739 0014 6C28     		cmp	r0, #108
+ 740 0016 13D0     		beq	.L83
+ 741 0018 7228     		cmp	r0, #114
+ 742 001a FAD1     		bne	.L79
+ 743              	.L82:
+ 744 001c 4FF48061 		mov	r1, #1024
+ 745 0020 0B48     		ldr	r0, .L86
+ 746 0022 FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 747 0026 0B4B     		ldr	r3, .L86+4
+ 748 0028 4FF48062 		mov	r2, #1024
+ 749 002c 5A61     		str	r2, [r3, #20]
+ 750 002e F0E7     		b	.L79
+ 751              	.L80:
+ 752 0030 1021     		movs	r1, #16
+ 753 0032 0748     		ldr	r0, .L86
+ 754 0034 FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 755 0038 064B     		ldr	r3, .L86+4
+ 756 003a 1022     		movs	r2, #16
+ 757 003c 5A61     		str	r2, [r3, #20]
+ 758 003e E8E7     		b	.L79
+ 759              	.L83:
+ 760 0040 8021     		movs	r1, #128
+ 761 0042 0548     		ldr	r0, .L86+8
+ 762 0044 FFF7FEFF 		bl	HAL_GPIO_DeInit
+ARM GAS  C:\Temp\ccSNmUJV.s 			page 14
+
+
+ 763 0048 024B     		ldr	r3, .L86+4
+ 764 004a 8022     		movs	r2, #128
+ 765 004c 5A61     		str	r2, [r3, #20]
+ 766 004e E0E7     		b	.L79
+ 767              	.L87:
+ 768              		.align	2
+ 769              	.L86:
+ 770 0050 00000240 		.word	1073872896
+ 771 0054 003C0140 		.word	1073822720
+ 772 0058 00080240 		.word	1073874944
+ 774              		.section	.text.XNUCLEO53L1A1_SetDisplayString,"ax",%progbits
+ 775              		.align	1
+ 776              		.global	XNUCLEO53L1A1_SetDisplayString
+ 777              		.syntax unified
+ 778              		.thumb
+ 779              		.thumb_func
+ 781              	XNUCLEO53L1A1_SetDisplayString:
+ 782              		@ args = 0, pretend = 0, frame = 0
+ 783              		@ frame_needed = 0, uses_anonymous_args = 0
+ 784 0000 38B5     		push	{r3, r4, r5, lr}
+ 785 0002 0023     		movs	r3, #0
+ 786 0004 14E0     		b	.L89
+ 787              	.L91:
+ 788 0006 1549     		ldr	r1, .L95
+ 789 0008 8A5C     		ldrb	r2, [r1, r2]	@ zero_extendqisi2
+ 790 000a D243     		mvns	r2, r2
+ 791 000c 02F07F02 		and	r2, r2, #127
+ 792 0010 1349     		ldr	r1, .L95+4
+ 793 0012 51F82350 		ldr	r5, [r1, r3, lsl #2]
+ 794 0016 134C     		ldr	r4, .L95+8
+ 795 0018 2168     		ldr	r1, [r4]
+ 796 001a 4FF07F0C 		mov	ip, #127
+ 797 001e 0CFA05FC 		lsl	ip, ip, r5
+ 798 0022 21EA0C01 		bic	r1, r1, ip
+ 799 0026 2160     		str	r1, [r4]
+ 800 0028 AA40     		lsls	r2, r2, r5
+ 801 002a 1143     		orrs	r1, r1, r2
+ 802 002c 2160     		str	r1, [r4]
+ 803 002e 0133     		adds	r3, r3, #1
+ 804              	.L89:
+ 805 0030 032B     		cmp	r3, #3
+ 806 0032 0DDC     		bgt	.L92
+ 807 0034 C25C     		ldrb	r2, [r0, r3]	@ zero_extendqisi2
+ 808 0036 002A     		cmp	r2, #0
+ 809 0038 E5D1     		bne	.L91
+ 810 003a 09E0     		b	.L92
+ 811              	.L93:
+ 812 003c 084A     		ldr	r2, .L95+4
+ 813 003e 52F82340 		ldr	r4, [r2, r3, lsl #2]
+ 814 0042 0848     		ldr	r0, .L95+8
+ 815 0044 0268     		ldr	r2, [r0]
+ 816 0046 7F21     		movs	r1, #127
+ 817 0048 A140     		lsls	r1, r1, r4
+ 818 004a 0A43     		orrs	r2, r2, r1
+ 819 004c 0260     		str	r2, [r0]
+ 820 004e 0133     		adds	r3, r3, #1
+ 821              	.L92:
+ARM GAS  C:\Temp\ccSNmUJV.s 			page 15
+
+
+ 822 0050 032B     		cmp	r3, #3
+ 823 0052 F3DD     		ble	.L93
+ 824 0054 FFF7FEFF 		bl	_ExpandersSetAllIO
+ 825 0058 38BD     		pop	{r3, r4, r5, pc}
+ 826              	.L96:
+ 827 005a 00BF     		.align	2
+ 828              	.L95:
+ 829 005c 00000000 		.word	ascii_to_display_lut
+ 830 0060 00000000 		.word	DisplayBitPos
+ 831 0064 00000000 		.word	CurIOVal
+ 833              		.section	.rodata.ascii_to_display_lut,"a"
+ 834              		.align	2
+ 837              	ascii_to_display_lut:
+ 838 0000 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000\000\000"
+ 838      00000000 
+ 838      00000000 
+ 838      00
+ 839 000d 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000\000\000"
+ 839      00000000 
+ 839      00000000 
+ 839      00
+ 840 001a 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000\000\000"
+ 840      00000000 
+ 840      00000000 
+ 840      00
+ 841 0027 0000007F 		.ascii	"\000\000\000\177\000\000\004\000\000{`=|f^_h\177~\000"
+ 841      00000400 
+ 841      007B603D 
+ 841      7C665E5F 
+ 841      687F7E00 
+ 842 003b 00001400 		.ascii	"\000\000\024\000-\030oW\033\000\037\017~g`qg\023IE{"
+ 842      2D186F57 
+ 842      1B001F0F 
+ 842      7E676071 
+ 842      67134945 
+ 843 0050 2F2F055E 		.ascii	"//\005^\027sQ2gv=\033\000x\010\020\000UW\025u?\017~"
+ 843      17735132 
+ 843      67763D1B 
+ 843      00780810 
+ 843      00555715 
+ 844 0068 47017147 		.ascii	"G\001qG\021IEU/n\005^\027sQ2gv=\000\000\000\034\000"
+ 844      11494555 
+ 844      2F6E055E 
+ 844      17735132 
+ 844      67763D00 
+ 845 0080 00000000 		.space	128
+ 845      00000000 
+ 845      00000000 
+ 845      00000000 
+ 845      00000000 
+ 846              		.section	.rodata.DisplayBitPos,"a"
+ 847              		.align	2
+ 850              	DisplayBitPos:
+ 851 0000 00000000 		.word	0
+ 852 0004 07000000 		.word	7
+ 853 0008 10000000 		.word	16
+ 854 000c 17000000 		.word	23
+ARM GAS  C:\Temp\ccSNmUJV.s 			page 16
+
+
+ 855              		.section	.bss.CurIOVal,"aw",%nobits
+ 856              		.align	2
+ 859              	CurIOVal:
+ 860 0000 00000000 		.space	4
+ 861              		.global	XNUCLEO53L1A1_hi2c
+ 862              		.section	.bss.XNUCLEO53L1A1_hi2c,"aw",%nobits
+ 863              		.align	2
+ 866              	XNUCLEO53L1A1_hi2c:
+ 867 0000 00000000 		.space	84
+ 867      00000000 
+ 867      00000000 
+ 867      00000000 
+ 867      00000000 
+ 868              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccSNmUJV.s 			page 17
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 X-NUCLEO-53L1A1.c
+  C:\Temp\ccSNmUJV.s:18     .text._I2cFailRecover:00000000 $t
+  C:\Temp\ccSNmUJV.s:23     .text._I2cFailRecover:00000000 _I2cFailRecover
+  C:\Temp\ccSNmUJV.s:143    .text._I2cFailRecover:00000114 $d
+  C:\Temp\ccSNmUJV.s:148    .text._ExpanderRd:00000000 $t
+  C:\Temp\ccSNmUJV.s:153    .text._ExpanderRd:00000000 _ExpanderRd
+  C:\Temp\ccSNmUJV.s:187    .text._ExpanderRd:0000003c $d
+  C:\Temp\ccSNmUJV.s:866    .bss.XNUCLEO53L1A1_hi2c:00000000 XNUCLEO53L1A1_hi2c
+  C:\Temp\ccSNmUJV.s:190    .text._ExpanderWR:00000000 $t
+  C:\Temp\ccSNmUJV.s:195    .text._ExpanderWR:00000000 _ExpanderWR
+  C:\Temp\ccSNmUJV.s:222    .text._ExpanderWR:00000030 $d
+  C:\Temp\ccSNmUJV.s:225    .text._ExpandersSetAllIO:00000000 $t
+  C:\Temp\ccSNmUJV.s:230    .text._ExpandersSetAllIO:00000000 _ExpandersSetAllIO
+  C:\Temp\ccSNmUJV.s:253    .text._ExpandersSetAllIO:00000020 $d
+  C:\Temp\ccSNmUJV.s:859    .bss.CurIOVal:00000000 CurIOVal
+  C:\Temp\ccSNmUJV.s:257    .text.XNUCLEO53L1A1_I2C1Configure:00000000 $t
+  C:\Temp\ccSNmUJV.s:263    .text.XNUCLEO53L1A1_I2C1Configure:00000000 XNUCLEO53L1A1_I2C1Configure
+  C:\Temp\ccSNmUJV.s:318    .text.XNUCLEO53L1A1_I2C1Configure:00000074 $d
+  C:\Temp\ccSNmUJV.s:325    .text.XNUCLEO53L1A1_SetIntrStateId:00000000 $t
+  C:\Temp\ccSNmUJV.s:331    .text.XNUCLEO53L1A1_SetIntrStateId:00000000 XNUCLEO53L1A1_SetIntrStateId
+  C:\Temp\ccSNmUJV.s:410    .text.XNUCLEO53L1A1_SetIntrStateId:00000090 $d
+  C:\Temp\ccSNmUJV.s:414    .text.XNUCLEO53L1A1_Init:00000000 $t
+  C:\Temp\ccSNmUJV.s:420    .text.XNUCLEO53L1A1_Init:00000000 XNUCLEO53L1A1_Init
+  C:\Temp\ccSNmUJV.s:488    .text.XNUCLEO53L1A1_Init:00000094 $d
+  C:\Temp\ccSNmUJV.s:491    .text.XNUCLEO53L1A1_GetPB1:00000000 $t
+  C:\Temp\ccSNmUJV.s:497    .text.XNUCLEO53L1A1_GetPB1:00000000 XNUCLEO53L1A1_GetPB1
+  C:\Temp\ccSNmUJV.s:527    .text.XNUCLEO53L1A1_ResetId:00000000 $t
+  C:\Temp\ccSNmUJV.s:533    .text.XNUCLEO53L1A1_ResetId:00000000 XNUCLEO53L1A1_ResetId
+  C:\Temp\ccSNmUJV.s:605    .text.XNUCLEO53L1A1_ResetId:00000088 $d
+  C:\Temp\ccSNmUJV.s:610    .text.VL53L1A1_EXTI_IOConfigure:00000000 $t
+  C:\Temp\ccSNmUJV.s:616    .text.VL53L1A1_EXTI_IOConfigure:00000000 VL53L1A1_EXTI_IOConfigure
+  C:\Temp\ccSNmUJV.s:713    .text.VL53L1A1_EXTI_IOConfigure:000000cc $d
+  C:\Temp\ccSNmUJV.s:718    .text.VL53L1A1_EXTI_IOUnconfigure:00000000 $t
+  C:\Temp\ccSNmUJV.s:724    .text.VL53L1A1_EXTI_IOUnconfigure:00000000 VL53L1A1_EXTI_IOUnconfigure
+  C:\Temp\ccSNmUJV.s:770    .text.VL53L1A1_EXTI_IOUnconfigure:00000050 $d
+  C:\Temp\ccSNmUJV.s:775    .text.XNUCLEO53L1A1_SetDisplayString:00000000 $t
+  C:\Temp\ccSNmUJV.s:781    .text.XNUCLEO53L1A1_SetDisplayString:00000000 XNUCLEO53L1A1_SetDisplayString
+  C:\Temp\ccSNmUJV.s:829    .text.XNUCLEO53L1A1_SetDisplayString:0000005c $d
+  C:\Temp\ccSNmUJV.s:837    .rodata.ascii_to_display_lut:00000000 ascii_to_display_lut
+  C:\Temp\ccSNmUJV.s:850    .rodata.DisplayBitPos:00000000 DisplayBitPos
+  C:\Temp\ccSNmUJV.s:834    .rodata.ascii_to_display_lut:00000000 $d
+  C:\Temp\ccSNmUJV.s:847    .rodata.DisplayBitPos:00000000 $d
+  C:\Temp\ccSNmUJV.s:856    .bss.CurIOVal:00000000 $d
+  C:\Temp\ccSNmUJV.s:863    .bss.XNUCLEO53L1A1_hi2c:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_WritePin
+HAL_GPIO_Init
+HAL_Delay
+HAL_GPIO_ReadPin
+HAL_I2C_Master_Transmit
+HAL_I2C_Master_Receive
+memcpy
+HAL_I2C_Init
+HAL_NVIC_EnableIRQ
+HAL_NVIC_DisableIRQ
+ARM GAS  C:\Temp\ccSNmUJV.s 			page 18
+
+
+HAL_NVIC_SetPriority
+HAL_GPIO_DeInit

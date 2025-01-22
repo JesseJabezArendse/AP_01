@@ -1,0 +1,1310 @@
+ARM GAS  C:\Temp\ccGtNbs2.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"iks02a1_motion_sensors.c"
+  16              		.text
+  17              		.section	.text.ISM330DHCX_0_Probe,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  23              	ISM330DHCX_0_Probe:
+  24              		@ args = 0, pretend = 0, frame = 64
+  25              		@ frame_needed = 0, uses_anonymous_args = 0
+  26 0000 70B5     		push	{r4, r5, r6, lr}
+  27 0002 90B0     		sub	sp, sp, #64
+  28 0004 0446     		mov	r4, r0
+  29 0006 0023     		movs	r3, #0
+  30 0008 0A93     		str	r3, [sp, #40]
+  31 000a D723     		movs	r3, #215
+  32 000c 8DF82C30 		strb	r3, [sp, #44]
+  33 0010 394B     		ldr	r3, .L16
+  34 0012 0893     		str	r3, [sp, #32]
+  35 0014 394B     		ldr	r3, .L16+4
+  36 0016 0993     		str	r3, [sp, #36]
+  37 0018 394B     		ldr	r3, .L16+8
+  38 001a 0D93     		str	r3, [sp, #52]
+  39 001c 394B     		ldr	r3, .L16+12
+  40 001e 0C93     		str	r3, [sp, #48]
+  41 0020 394B     		ldr	r3, .L16+16
+  42 0022 0E93     		str	r3, [sp, #56]
+  43 0024 394B     		ldr	r3, .L16+20
+  44 0026 0F93     		str	r3, [sp, #60]
+  45 0028 08A9     		add	r1, sp, #32
+  46 002a 3948     		ldr	r0, .L16+24
+  47 002c FFF7FEFF 		bl	ISM330DHCX_RegisterBusIO
+  48 0030 0028     		cmp	r0, #0
+  49 0032 52D1     		bne	.L5
+  50 0034 0021     		movs	r1, #0
+  51 0036 3648     		ldr	r0, .L16+24
+  52 0038 FFF7FEFF 		bl	ISM330DHCX_Set_Mem_Bank
+  53 003c 0028     		cmp	r0, #0
+  54 003e 4FD1     		bne	.L6
+  55 0040 0DF11F01 		add	r1, sp, #31
+  56 0044 3248     		ldr	r0, .L16+24
+  57 0046 FFF7FEFF 		bl	ISM330DHCX_ReadID
+  58 004a 0646     		mov	r6, r0
+ARM GAS  C:\Temp\ccGtNbs2.s 			page 2
+
+
+  59 004c 0028     		cmp	r0, #0
+  60 004e 4AD1     		bne	.L7
+  61 0050 9DF81F30 		ldrb	r3, [sp, #31]	@ zero_extendqisi2
+  62 0054 6B2B     		cmp	r3, #107
+  63 0056 49D1     		bne	.L8
+  64 0058 2D4D     		ldr	r5, .L16+24
+  65 005a 6946     		mov	r1, sp
+  66 005c 2846     		mov	r0, r5
+  67 005e FFF7FEFF 		bl	ISM330DHCX_GetCapabilities
+  68 0062 9DF80120 		ldrb	r2, [sp, #1]	@ zero_extendqisi2
+  69 0066 9DF80030 		ldrb	r3, [sp]	@ zero_extendqisi2
+  70 006a 42EA4303 		orr	r3, r2, r3, lsl #1
+  71 006e 9DF80210 		ldrb	r1, [sp, #2]	@ zero_extendqisi2
+  72 0072 43EA8103 		orr	r3, r3, r1, lsl #2
+  73 0076 2749     		ldr	r1, .L16+28
+  74 0078 0B60     		str	r3, [r1]
+  75 007a 274B     		ldr	r3, .L16+32
+  76 007c 1D60     		str	r5, [r3]
+  77 007e 274B     		ldr	r3, .L16+36
+  78 0080 2749     		ldr	r1, .L16+40
+  79 0082 1960     		str	r1, [r3]
+  80 0084 14F0010F 		tst	r4, #1
+  81 0088 01D0     		beq	.L3
+  82 008a 012A     		cmp	r2, #1
+  83 008c 0CD0     		beq	.L13
+  84              	.L3:
+  85 008e 14F0020F 		tst	r4, #2
+  86 0092 03D0     		beq	.L4
+  87 0094 9DF80030 		ldrb	r3, [sp]	@ zero_extendqisi2
+  88 0098 012B     		cmp	r3, #1
+  89 009a 10D0     		beq	.L14
+  90              	.L4:
+  91 009c 14F0040F 		tst	r4, #4
+  92 00a0 27D1     		bne	.L15
+  93              	.L1:
+  94 00a2 3046     		mov	r0, r6
+  95 00a4 10B0     		add	sp, sp, #64
+  96              		@ sp needed
+  97 00a6 70BD     		pop	{r4, r5, r6, pc}
+  98              	.L13:
+  99 00a8 1E4B     		ldr	r3, .L16+44
+ 100 00aa 1F4A     		ldr	r2, .L16+48
+ 101 00ac 1A60     		str	r2, [r3]
+ 102 00ae 0B68     		ldr	r3, [r1]
+ 103 00b0 2846     		mov	r0, r5
+ 104 00b2 9847     		blx	r3
+ 105 00b4 0028     		cmp	r0, #0
+ 106 00b6 EAD0     		beq	.L3
+ 107 00b8 6FF00406 		mvn	r6, #4
+ 108 00bc F1E7     		b	.L1
+ 109              	.L14:
+ 110 00be 194B     		ldr	r3, .L16+44
+ 111 00c0 1A4A     		ldr	r2, .L16+52
+ 112 00c2 5A60     		str	r2, [r3, #4]
+ 113 00c4 154B     		ldr	r3, .L16+36
+ 114 00c6 1B68     		ldr	r3, [r3]
+ 115 00c8 1B68     		ldr	r3, [r3]
+ARM GAS  C:\Temp\ccGtNbs2.s 			page 3
+
+
+ 116 00ca 134A     		ldr	r2, .L16+32
+ 117 00cc 1068     		ldr	r0, [r2]
+ 118 00ce 9847     		blx	r3
+ 119 00d0 0028     		cmp	r0, #0
+ 120 00d2 E3D0     		beq	.L4
+ 121 00d4 6FF00406 		mvn	r6, #4
+ 122 00d8 E3E7     		b	.L1
+ 123              	.L5:
+ 124 00da 6FF00606 		mvn	r6, #6
+ 125 00de E0E7     		b	.L1
+ 126              	.L6:
+ 127 00e0 6FF00606 		mvn	r6, #6
+ 128 00e4 DDE7     		b	.L1
+ 129              	.L7:
+ 130 00e6 6FF00606 		mvn	r6, #6
+ 131 00ea DAE7     		b	.L1
+ 132              	.L8:
+ 133 00ec 6FF00606 		mvn	r6, #6
+ 134 00f0 D7E7     		b	.L1
+ 135              	.L15:
+ 136 00f2 6FF00406 		mvn	r6, #4
+ 137 00f6 D4E7     		b	.L1
+ 138              	.L17:
+ 139              		.align	2
+ 140              	.L16:
+ 141 00f8 00000000 		.word	BSP_I2C1_Init
+ 142 00fc 00000000 		.word	BSP_I2C1_DeInit
+ 143 0100 00000000 		.word	BSP_I2C1_ReadReg
+ 144 0104 00000000 		.word	BSP_I2C1_WriteReg
+ 145 0108 00000000 		.word	BSP_GetTick
+ 146 010c 00000000 		.word	HAL_Delay
+ 147 0110 00000000 		.word	ism330dhcx_obj_0.2
+ 148 0114 00000000 		.word	MotionCtx
+ 149 0118 00000000 		.word	MotionCompObj
+ 150 011c 00000000 		.word	MotionDrv
+ 151 0120 00000000 		.word	ISM330DHCX_COMMON_Driver
+ 152 0124 00000000 		.word	MotionFuncDrv
+ 153 0128 00000000 		.word	ISM330DHCX_GYRO_Driver
+ 154 012c 00000000 		.word	ISM330DHCX_ACC_Driver
+ 156              		.section	.text.IIS2DLPC_0_Probe,"ax",%progbits
+ 157              		.align	1
+ 158              		.syntax unified
+ 159              		.thumb
+ 160              		.thumb_func
+ 162              	IIS2DLPC_0_Probe:
+ 163              		@ args = 0, pretend = 0, frame = 64
+ 164              		@ frame_needed = 0, uses_anonymous_args = 0
+ 165 0000 70B5     		push	{r4, r5, r6, lr}
+ 166 0002 90B0     		sub	sp, sp, #64
+ 167 0004 0446     		mov	r4, r0
+ 168 0006 0023     		movs	r3, #0
+ 169 0008 0A93     		str	r3, [sp, #40]
+ 170 000a 3323     		movs	r3, #51
+ 171 000c 8DF82C30 		strb	r3, [sp, #44]
+ 172 0010 304B     		ldr	r3, .L32
+ 173 0012 0893     		str	r3, [sp, #32]
+ 174 0014 304B     		ldr	r3, .L32+4
+ARM GAS  C:\Temp\ccGtNbs2.s 			page 4
+
+
+ 175 0016 0993     		str	r3, [sp, #36]
+ 176 0018 304B     		ldr	r3, .L32+8
+ 177 001a 0D93     		str	r3, [sp, #52]
+ 178 001c 304B     		ldr	r3, .L32+12
+ 179 001e 0C93     		str	r3, [sp, #48]
+ 180 0020 304B     		ldr	r3, .L32+16
+ 181 0022 0E93     		str	r3, [sp, #56]
+ 182 0024 304B     		ldr	r3, .L32+20
+ 183 0026 0F93     		str	r3, [sp, #60]
+ 184 0028 08A9     		add	r1, sp, #32
+ 185 002a 3048     		ldr	r0, .L32+24
+ 186 002c FFF7FEFF 		bl	IIS2DLPC_RegisterBusIO
+ 187 0030 0028     		cmp	r0, #0
+ 188 0032 42D1     		bne	.L23
+ 189 0034 0DF11F01 		add	r1, sp, #31
+ 190 0038 2C48     		ldr	r0, .L32+24
+ 191 003a FFF7FEFF 		bl	IIS2DLPC_ReadID
+ 192 003e 0546     		mov	r5, r0
+ 193 0040 0028     		cmp	r0, #0
+ 194 0042 3DD1     		bne	.L24
+ 195 0044 9DF81F30 		ldrb	r3, [sp, #31]	@ zero_extendqisi2
+ 196 0048 442B     		cmp	r3, #68
+ 197 004a 3CD1     		bne	.L25
+ 198 004c 274E     		ldr	r6, .L32+24
+ 199 004e 6946     		mov	r1, sp
+ 200 0050 3046     		mov	r0, r6
+ 201 0052 FFF7FEFF 		bl	IIS2DLPC_GetCapabilities
+ 202 0056 9DF80120 		ldrb	r2, [sp, #1]	@ zero_extendqisi2
+ 203 005a 9DF80010 		ldrb	r1, [sp]	@ zero_extendqisi2
+ 204 005e 42EA4103 		orr	r3, r2, r1, lsl #1
+ 205 0062 9DF80200 		ldrb	r0, [sp, #2]	@ zero_extendqisi2
+ 206 0066 43EA8003 		orr	r3, r3, r0, lsl #2
+ 207 006a 2148     		ldr	r0, .L32+28
+ 208 006c 4360     		str	r3, [r0, #4]
+ 209 006e 214B     		ldr	r3, .L32+32
+ 210 0070 5E60     		str	r6, [r3, #4]
+ 211 0072 214B     		ldr	r3, .L32+36
+ 212 0074 2148     		ldr	r0, .L32+40
+ 213 0076 5860     		str	r0, [r3, #4]
+ 214 0078 14F0010F 		tst	r4, #1
+ 215 007c 01D0     		beq	.L20
+ 216 007e 012A     		cmp	r2, #1
+ 217 0080 18D0     		beq	.L26
+ 218              	.L20:
+ 219 0082 14F0020F 		tst	r4, #2
+ 220 0086 01D0     		beq	.L21
+ 221 0088 0129     		cmp	r1, #1
+ 222 008a 06D0     		beq	.L30
+ 223              	.L21:
+ 224 008c 15B9     		cbnz	r5, .L18
+ 225              	.L22:
+ 226 008e 14F0040F 		tst	r4, #4
+ 227 0092 1BD1     		bne	.L31
+ 228              	.L18:
+ 229 0094 2846     		mov	r0, r5
+ 230 0096 10B0     		add	sp, sp, #64
+ 231              		@ sp needed
+ARM GAS  C:\Temp\ccGtNbs2.s 			page 5
+
+
+ 232 0098 70BD     		pop	{r4, r5, r6, pc}
+ 233              	.L30:
+ 234 009a 194B     		ldr	r3, .L32+44
+ 235 009c 194A     		ldr	r2, .L32+48
+ 236 009e 1A61     		str	r2, [r3, #16]
+ 237 00a0 164B     		ldr	r3, .L32+40
+ 238 00a2 1B68     		ldr	r3, [r3]
+ 239 00a4 1148     		ldr	r0, .L32+24
+ 240 00a6 9847     		blx	r3
+ 241 00a8 0546     		mov	r5, r0
+ 242 00aa 0028     		cmp	r0, #0
+ 243 00ac EFD0     		beq	.L22
+ 244 00ae 6FF00405 		mvn	r5, #4
+ 245 00b2 EFE7     		b	.L18
+ 246              	.L26:
+ 247 00b4 6FF00405 		mvn	r5, #4
+ 248 00b8 E8E7     		b	.L21
+ 249              	.L23:
+ 250 00ba 6FF00605 		mvn	r5, #6
+ 251 00be E9E7     		b	.L18
+ 252              	.L24:
+ 253 00c0 6FF00605 		mvn	r5, #6
+ 254 00c4 E6E7     		b	.L18
+ 255              	.L25:
+ 256 00c6 6FF00605 		mvn	r5, #6
+ 257 00ca E3E7     		b	.L18
+ 258              	.L31:
+ 259 00cc 6FF00405 		mvn	r5, #4
+ 260 00d0 E0E7     		b	.L18
+ 261              	.L33:
+ 262 00d2 00BF     		.align	2
+ 263              	.L32:
+ 264 00d4 00000000 		.word	BSP_I2C1_Init
+ 265 00d8 00000000 		.word	BSP_I2C1_DeInit
+ 266 00dc 00000000 		.word	BSP_I2C1_ReadReg
+ 267 00e0 00000000 		.word	BSP_I2C1_WriteReg
+ 268 00e4 00000000 		.word	BSP_GetTick
+ 269 00e8 00000000 		.word	HAL_Delay
+ 270 00ec 00000000 		.word	iis2dlpc_obj_0.1
+ 271 00f0 00000000 		.word	MotionCtx
+ 272 00f4 00000000 		.word	MotionCompObj
+ 273 00f8 00000000 		.word	MotionDrv
+ 274 00fc 00000000 		.word	IIS2DLPC_COMMON_Driver
+ 275 0100 00000000 		.word	MotionFuncDrv
+ 276 0104 00000000 		.word	IIS2DLPC_ACC_Driver
+ 278              		.section	.text.IIS2MDC_0_Probe,"ax",%progbits
+ 279              		.align	1
+ 280              		.syntax unified
+ 281              		.thumb
+ 282              		.thumb_func
+ 284              	IIS2MDC_0_Probe:
+ 285              		@ args = 0, pretend = 0, frame = 64
+ 286              		@ frame_needed = 0, uses_anonymous_args = 0
+ 287 0000 70B5     		push	{r4, r5, r6, lr}
+ 288 0002 90B0     		sub	sp, sp, #64
+ 289 0004 0446     		mov	r4, r0
+ 290 0006 0023     		movs	r3, #0
+ARM GAS  C:\Temp\ccGtNbs2.s 			page 6
+
+
+ 291 0008 0A93     		str	r3, [sp, #40]
+ 292 000a 3D23     		movs	r3, #61
+ 293 000c 8DF82C30 		strb	r3, [sp, #44]
+ 294 0010 2F4B     		ldr	r3, .L46
+ 295 0012 0893     		str	r3, [sp, #32]
+ 296 0014 2F4B     		ldr	r3, .L46+4
+ 297 0016 0993     		str	r3, [sp, #36]
+ 298 0018 2F4B     		ldr	r3, .L46+8
+ 299 001a 0D93     		str	r3, [sp, #52]
+ 300 001c 2F4B     		ldr	r3, .L46+12
+ 301 001e 0C93     		str	r3, [sp, #48]
+ 302 0020 2F4B     		ldr	r3, .L46+16
+ 303 0022 0E93     		str	r3, [sp, #56]
+ 304 0024 2F4B     		ldr	r3, .L46+20
+ 305 0026 0F93     		str	r3, [sp, #60]
+ 306 0028 08A9     		add	r1, sp, #32
+ 307 002a 2F48     		ldr	r0, .L46+24
+ 308 002c FFF7FEFF 		bl	IIS2MDC_RegisterBusIO
+ 309 0030 0028     		cmp	r0, #0
+ 310 0032 41D1     		bne	.L38
+ 311 0034 0DF11F01 		add	r1, sp, #31
+ 312 0038 2B48     		ldr	r0, .L46+24
+ 313 003a FFF7FEFF 		bl	IIS2MDC_ReadID
+ 314 003e 0546     		mov	r5, r0
+ 315 0040 0028     		cmp	r0, #0
+ 316 0042 3CD1     		bne	.L39
+ 317 0044 9DF81F30 		ldrb	r3, [sp, #31]	@ zero_extendqisi2
+ 318 0048 402B     		cmp	r3, #64
+ 319 004a 3BD1     		bne	.L40
+ 320 004c 264E     		ldr	r6, .L46+24
+ 321 004e 6946     		mov	r1, sp
+ 322 0050 3046     		mov	r0, r6
+ 323 0052 FFF7FEFF 		bl	IIS2MDC_GetCapabilities
+ 324 0056 9DF80120 		ldrb	r2, [sp, #1]	@ zero_extendqisi2
+ 325 005a 9DF80010 		ldrb	r1, [sp]	@ zero_extendqisi2
+ 326 005e 42EA4103 		orr	r3, r2, r1, lsl #1
+ 327 0062 9DF80200 		ldrb	r0, [sp, #2]	@ zero_extendqisi2
+ 328 0066 43EA8003 		orr	r3, r3, r0, lsl #2
+ 329 006a 2048     		ldr	r0, .L46+28
+ 330 006c 8360     		str	r3, [r0, #8]
+ 331 006e 204B     		ldr	r3, .L46+32
+ 332 0070 9E60     		str	r6, [r3, #8]
+ 333 0072 204B     		ldr	r3, .L46+36
+ 334 0074 2048     		ldr	r0, .L46+40
+ 335 0076 9860     		str	r0, [r3, #8]
+ 336 0078 14F0010F 		tst	r4, #1
+ 337 007c 01D0     		beq	.L36
+ 338 007e 012A     		cmp	r2, #1
+ 339 0080 14D0     		beq	.L41
+ 340              	.L36:
+ 341 0082 14F0020F 		tst	r4, #2
+ 342 0086 01D0     		beq	.L37
+ 343 0088 0129     		cmp	r1, #1
+ 344 008a 1ED0     		beq	.L44
+ 345              	.L37:
+ 346 008c 5DB9     		cbnz	r5, .L34
+ 347 008e 14F0040F 		tst	r4, #4
+ARM GAS  C:\Temp\ccGtNbs2.s 			page 7
+
+
+ 348 0092 08D0     		beq	.L34
+ 349 0094 194B     		ldr	r3, .L46+44
+ 350 0096 1A4A     		ldr	r2, .L46+48
+ 351 0098 1A62     		str	r2, [r3, #32]
+ 352 009a 174B     		ldr	r3, .L46+40
+ 353 009c 1B68     		ldr	r3, [r3]
+ 354 009e 1248     		ldr	r0, .L46+24
+ 355 00a0 9847     		blx	r3
+ 356 00a2 0546     		mov	r5, r0
+ 357 00a4 28B9     		cbnz	r0, .L45
+ 358              	.L34:
+ 359 00a6 2846     		mov	r0, r5
+ 360 00a8 10B0     		add	sp, sp, #64
+ 361              		@ sp needed
+ 362 00aa 70BD     		pop	{r4, r5, r6, pc}
+ 363              	.L41:
+ 364 00ac 6FF00405 		mvn	r5, #4
+ 365 00b0 ECE7     		b	.L37
+ 366              	.L45:
+ 367 00b2 6FF00405 		mvn	r5, #4
+ 368 00b6 F6E7     		b	.L34
+ 369              	.L38:
+ 370 00b8 6FF00605 		mvn	r5, #6
+ 371 00bc F3E7     		b	.L34
+ 372              	.L39:
+ 373 00be 6FF00605 		mvn	r5, #6
+ 374 00c2 F0E7     		b	.L34
+ 375              	.L40:
+ 376 00c4 6FF00605 		mvn	r5, #6
+ 377 00c8 EDE7     		b	.L34
+ 378              	.L44:
+ 379 00ca 6FF00405 		mvn	r5, #4
+ 380 00ce EAE7     		b	.L34
+ 381              	.L47:
+ 382              		.align	2
+ 383              	.L46:
+ 384 00d0 00000000 		.word	BSP_I2C1_Init
+ 385 00d4 00000000 		.word	BSP_I2C1_DeInit
+ 386 00d8 00000000 		.word	BSP_I2C1_ReadReg
+ 387 00dc 00000000 		.word	BSP_I2C1_WriteReg
+ 388 00e0 00000000 		.word	BSP_GetTick
+ 389 00e4 00000000 		.word	HAL_Delay
+ 390 00e8 00000000 		.word	iis2mdc_obj_0.0
+ 391 00ec 00000000 		.word	MotionCtx
+ 392 00f0 00000000 		.word	MotionCompObj
+ 393 00f4 00000000 		.word	MotionDrv
+ 394 00f8 00000000 		.word	IIS2MDC_COMMON_Driver
+ 395 00fc 00000000 		.word	MotionFuncDrv
+ 396 0100 00000000 		.word	IIS2MDC_MAG_Driver
+ 398              		.section	.text.IKS02A1_MOTION_SENSOR_Init,"ax",%progbits
+ 399              		.align	1
+ 400              		.global	IKS02A1_MOTION_SENSOR_Init
+ 401              		.syntax unified
+ 402              		.thumb
+ 403              		.thumb_func
+ 405              	IKS02A1_MOTION_SENSOR_Init:
+ 406              		@ args = 0, pretend = 0, frame = 32
+ARM GAS  C:\Temp\ccGtNbs2.s 			page 8
+
+
+ 407              		@ frame_needed = 0, uses_anonymous_args = 0
+ 408 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 409 0004 88B0     		sub	sp, sp, #32
+ 410 0006 0446     		mov	r4, r0
+ 411 0008 0F46     		mov	r7, r1
+ 412 000a 0128     		cmp	r0, #1
+ 413 000c 30D0     		beq	.L49
+ 414 000e 0228     		cmp	r0, #2
+ 415 0010 55D0     		beq	.L50
+ 416 0012 10B1     		cbz	r0, .L74
+ 417 0014 6FF00100 		mvn	r0, #1
+ 418 0018 95E0     		b	.L48
+ 419              	.L74:
+ 420 001a 0846     		mov	r0, r1
+ 421 001c FFF7FEFF 		bl	ISM330DHCX_0_Probe
+ 422 0020 0028     		cmp	r0, #0
+ 423 0022 40F09380 		bne	.L63
+ 424 0026 524B     		ldr	r3, .L80
+ 425 0028 53F82430 		ldr	r3, [r3, r4, lsl #2]
+ 426 002c DB68     		ldr	r3, [r3, #12]
+ 427 002e 01A9     		add	r1, sp, #4
+ 428 0030 504A     		ldr	r2, .L80+4
+ 429 0032 52F82400 		ldr	r0, [r2, r4, lsl #2]
+ 430 0036 9847     		blx	r3
+ 431 0038 0028     		cmp	r0, #0
+ 432 003a 40F08A80 		bne	.L64
+ 433 003e 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 434 0042 012B     		cmp	r3, #1
+ 435 0044 0BD0     		beq	.L65
+ 436 0046 A046     		mov	r8, r4
+ 437              	.L52:
+ 438 0048 9DF80530 		ldrb	r3, [sp, #5]	@ zero_extendqisi2
+ 439 004c 012B     		cmp	r3, #1
+ 440 004e 09D0     		beq	.L75
+ 441              	.L53:
+ 442 0050 9DF80630 		ldrb	r3, [sp, #6]	@ zero_extendqisi2
+ 443 0054 012B     		cmp	r3, #1
+ 444 0056 08D0     		beq	.L76
+ 445              	.L54:
+ 446 0058 0026     		movs	r6, #0
+ 447 005a 0125     		movs	r5, #1
+ 448 005c 57E0     		b	.L59
+ 449              	.L65:
+ 450 005e 4FF00208 		mov	r8, #2
+ 451 0062 F1E7     		b	.L52
+ 452              	.L75:
+ 453 0064 48F00108 		orr	r8, r8, #1
+ 454 0068 F2E7     		b	.L53
+ 455              	.L76:
+ 456 006a 48F00408 		orr	r8, r8, #4
+ 457 006e F3E7     		b	.L54
+ 458              	.L49:
+ 459 0070 0846     		mov	r0, r1
+ 460 0072 FFF7FEFF 		bl	IIS2DLPC_0_Probe
+ 461 0076 0028     		cmp	r0, #0
+ 462 0078 6ED1     		bne	.L66
+ 463 007a 3D4B     		ldr	r3, .L80
+ARM GAS  C:\Temp\ccGtNbs2.s 			page 9
+
+
+ 464 007c 53F82430 		ldr	r3, [r3, r4, lsl #2]
+ 465 0080 DB68     		ldr	r3, [r3, #12]
+ 466 0082 01A9     		add	r1, sp, #4
+ 467 0084 3B4A     		ldr	r2, .L80+4
+ 468 0086 52F82400 		ldr	r0, [r2, r4, lsl #2]
+ 469 008a 9847     		blx	r3
+ 470 008c 0028     		cmp	r0, #0
+ 471 008e 66D1     		bne	.L67
+ 472 0090 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 473 0094 012B     		cmp	r3, #1
+ 474 0096 0CD0     		beq	.L68
+ 475 0098 4FF00008 		mov	r8, #0
+ 476              	.L55:
+ 477 009c 9DF80530 		ldrb	r3, [sp, #5]	@ zero_extendqisi2
+ 478 00a0 012B     		cmp	r3, #1
+ 479 00a2 09D0     		beq	.L77
+ 480              	.L56:
+ 481 00a4 9DF80630 		ldrb	r3, [sp, #6]	@ zero_extendqisi2
+ 482 00a8 012B     		cmp	r3, #1
+ 483 00aa D5D1     		bne	.L54
+ 484 00ac 48F00408 		orr	r8, r8, #4
+ 485 00b0 D2E7     		b	.L54
+ 486              	.L68:
+ 487 00b2 4FF00208 		mov	r8, #2
+ 488 00b6 F1E7     		b	.L55
+ 489              	.L77:
+ 490 00b8 48F00108 		orr	r8, r8, #1
+ 491 00bc F2E7     		b	.L56
+ 492              	.L50:
+ 493 00be 0846     		mov	r0, r1
+ 494 00c0 FFF7FEFF 		bl	IIS2MDC_0_Probe
+ 495 00c4 0028     		cmp	r0, #0
+ 496 00c6 4DD1     		bne	.L69
+ 497 00c8 294B     		ldr	r3, .L80
+ 498 00ca 53F82430 		ldr	r3, [r3, r4, lsl #2]
+ 499 00ce DB68     		ldr	r3, [r3, #12]
+ 500 00d0 01A9     		add	r1, sp, #4
+ 501 00d2 284A     		ldr	r2, .L80+4
+ 502 00d4 52F82400 		ldr	r0, [r2, r4, lsl #2]
+ 503 00d8 9847     		blx	r3
+ 504 00da 0028     		cmp	r0, #0
+ 505 00dc 45D1     		bne	.L70
+ 506 00de 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 507 00e2 012B     		cmp	r3, #1
+ 508 00e4 0CD0     		beq	.L71
+ 509 00e6 4FF00008 		mov	r8, #0
+ 510              	.L57:
+ 511 00ea 9DF80530 		ldrb	r3, [sp, #5]	@ zero_extendqisi2
+ 512 00ee 012B     		cmp	r3, #1
+ 513 00f0 08D0     		beq	.L78
+ 514              	.L58:
+ 515 00f2 9DF80630 		ldrb	r3, [sp, #6]	@ zero_extendqisi2
+ 516 00f6 012B     		cmp	r3, #1
+ 517 00f8 AED1     		bne	.L54
+ 518 00fa 48F00408 		orr	r8, r8, #4
+ 519 00fe ABE7     		b	.L54
+ 520              	.L71:
+ARM GAS  C:\Temp\ccGtNbs2.s 			page 10
+
+
+ 521 0100 A046     		mov	r8, r4
+ 522 0102 F2E7     		b	.L57
+ 523              	.L78:
+ 524 0104 48F00108 		orr	r8, r8, #1
+ 525 0108 F3E7     		b	.L58
+ 526              	.L60:
+ 527 010a 6D00     		lsls	r5, r5, #1
+ 528 010c 0136     		adds	r6, r6, #1
+ 529              	.L59:
+ 530 010e 022E     		cmp	r6, #2
+ 531 0110 18D8     		bhi	.L79
+ 532 0112 35EA0703 		bics	r3, r5, r7
+ 533 0116 F8D1     		bne	.L60
+ 534 0118 35EA0803 		bics	r3, r5, r8
+ 535 011c F5D1     		bne	.L60
+ 536 011e 164B     		ldr	r3, .L80+8
+ 537 0120 53F82520 		ldr	r2, [r3, r5, lsl #2]
+ 538 0124 04EB4403 		add	r3, r4, r4, lsl #1
+ 539 0128 1344     		add	r3, r3, r2
+ 540 012a 144A     		ldr	r2, .L80+12
+ 541 012c 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 542 0130 1B68     		ldr	r3, [r3]
+ 543 0132 104A     		ldr	r2, .L80+4
+ 544 0134 52F82400 		ldr	r0, [r2, r4, lsl #2]
+ 545 0138 9847     		blx	r3
+ 546 013a 0028     		cmp	r0, #0
+ 547 013c E5D0     		beq	.L60
+ 548 013e 6FF00400 		mvn	r0, #4
+ 549 0142 00E0     		b	.L48
+ 550              	.L79:
+ 551 0144 0020     		movs	r0, #0
+ 552              	.L48:
+ 553 0146 08B0     		add	sp, sp, #32
+ 554              		@ sp needed
+ 555 0148 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 556              	.L63:
+ 557 014c 4FF0FF30 		mov	r0, #-1
+ 558 0150 F9E7     		b	.L48
+ 559              	.L64:
+ 560 0152 6FF00600 		mvn	r0, #6
+ 561 0156 F6E7     		b	.L48
+ 562              	.L66:
+ 563 0158 4FF0FF30 		mov	r0, #-1
+ 564 015c F3E7     		b	.L48
+ 565              	.L67:
+ 566 015e 6FF00600 		mvn	r0, #6
+ 567 0162 F0E7     		b	.L48
+ 568              	.L69:
+ 569 0164 4FF0FF30 		mov	r0, #-1
+ 570 0168 EDE7     		b	.L48
+ 571              	.L70:
+ 572 016a 6FF00600 		mvn	r0, #6
+ 573 016e EAE7     		b	.L48
+ 574              	.L81:
+ 575              		.align	2
+ 576              	.L80:
+ 577 0170 00000000 		.word	MotionDrv
+ARM GAS  C:\Temp\ccGtNbs2.s 			page 11
+
+
+ 578 0174 00000000 		.word	MotionCompObj
+ 579 0178 00000000 		.word	FunctionIndex
+ 580 017c 00000000 		.word	MotionFuncDrv
+ 582              		.section	.text.IKS02A1_MOTION_SENSOR_DeInit,"ax",%progbits
+ 583              		.align	1
+ 584              		.global	IKS02A1_MOTION_SENSOR_DeInit
+ 585              		.syntax unified
+ 586              		.thumb
+ 587              		.thumb_func
+ 589              	IKS02A1_MOTION_SENSOR_DeInit:
+ 590              		@ args = 0, pretend = 0, frame = 0
+ 591              		@ frame_needed = 0, uses_anonymous_args = 0
+ 592 0000 0228     		cmp	r0, #2
+ 593 0002 0DD8     		bhi	.L84
+ 594 0004 08B5     		push	{r3, lr}
+ 595 0006 084B     		ldr	r3, .L90
+ 596 0008 53F82030 		ldr	r3, [r3, r0, lsl #2]
+ 597 000c 5B68     		ldr	r3, [r3, #4]
+ 598 000e 074A     		ldr	r2, .L90+4
+ 599 0010 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 600 0014 9847     		blx	r3
+ 601 0016 00B9     		cbnz	r0, .L89
+ 602              	.L82:
+ 603 0018 08BD     		pop	{r3, pc}
+ 604              	.L89:
+ 605 001a 6FF00400 		mvn	r0, #4
+ 606 001e FBE7     		b	.L82
+ 607              	.L84:
+ 608 0020 6FF00100 		mvn	r0, #1
+ 609 0024 7047     		bx	lr
+ 610              	.L91:
+ 611 0026 00BF     		.align	2
+ 612              	.L90:
+ 613 0028 00000000 		.word	MotionDrv
+ 614 002c 00000000 		.word	MotionCompObj
+ 616              		.section	.text.IKS02A1_MOTION_SENSOR_GetCapabilities,"ax",%progbits
+ 617              		.align	1
+ 618              		.global	IKS02A1_MOTION_SENSOR_GetCapabilities
+ 619              		.syntax unified
+ 620              		.thumb
+ 621              		.thumb_func
+ 623              	IKS02A1_MOTION_SENSOR_GetCapabilities:
+ 624              		@ args = 0, pretend = 0, frame = 0
+ 625              		@ frame_needed = 0, uses_anonymous_args = 0
+ 626 0000 0228     		cmp	r0, #2
+ 627 0002 0DD8     		bhi	.L94
+ 628 0004 08B5     		push	{r3, lr}
+ 629 0006 084B     		ldr	r3, .L100
+ 630 0008 53F82030 		ldr	r3, [r3, r0, lsl #2]
+ 631 000c DB68     		ldr	r3, [r3, #12]
+ 632 000e 074A     		ldr	r2, .L100+4
+ 633 0010 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 634 0014 9847     		blx	r3
+ 635 0016 00B9     		cbnz	r0, .L99
+ 636              	.L92:
+ 637 0018 08BD     		pop	{r3, pc}
+ 638              	.L99:
+ARM GAS  C:\Temp\ccGtNbs2.s 			page 12
+
+
+ 639 001a 6FF00600 		mvn	r0, #6
+ 640 001e FBE7     		b	.L92
+ 641              	.L94:
+ 642 0020 6FF00100 		mvn	r0, #1
+ 643 0024 7047     		bx	lr
+ 644              	.L101:
+ 645 0026 00BF     		.align	2
+ 646              	.L100:
+ 647 0028 00000000 		.word	MotionDrv
+ 648 002c 00000000 		.word	MotionCompObj
+ 650              		.section	.text.IKS02A1_MOTION_SENSOR_ReadID,"ax",%progbits
+ 651              		.align	1
+ 652              		.global	IKS02A1_MOTION_SENSOR_ReadID
+ 653              		.syntax unified
+ 654              		.thumb
+ 655              		.thumb_func
+ 657              	IKS02A1_MOTION_SENSOR_ReadID:
+ 658              		@ args = 0, pretend = 0, frame = 0
+ 659              		@ frame_needed = 0, uses_anonymous_args = 0
+ 660 0000 0228     		cmp	r0, #2
+ 661 0002 0DD8     		bhi	.L104
+ 662 0004 08B5     		push	{r3, lr}
+ 663 0006 084B     		ldr	r3, .L110
+ 664 0008 53F82030 		ldr	r3, [r3, r0, lsl #2]
+ 665 000c 9B68     		ldr	r3, [r3, #8]
+ 666 000e 074A     		ldr	r2, .L110+4
+ 667 0010 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 668 0014 9847     		blx	r3
+ 669 0016 00B9     		cbnz	r0, .L109
+ 670              	.L102:
+ 671 0018 08BD     		pop	{r3, pc}
+ 672              	.L109:
+ 673 001a 6FF00600 		mvn	r0, #6
+ 674 001e FBE7     		b	.L102
+ 675              	.L104:
+ 676 0020 6FF00100 		mvn	r0, #1
+ 677 0024 7047     		bx	lr
+ 678              	.L111:
+ 679 0026 00BF     		.align	2
+ 680              	.L110:
+ 681 0028 00000000 		.word	MotionDrv
+ 682 002c 00000000 		.word	MotionCompObj
+ 684              		.section	.text.IKS02A1_MOTION_SENSOR_Enable,"ax",%progbits
+ 685              		.align	1
+ 686              		.global	IKS02A1_MOTION_SENSOR_Enable
+ 687              		.syntax unified
+ 688              		.thumb
+ 689              		.thumb_func
+ 691              	IKS02A1_MOTION_SENSOR_Enable:
+ 692              		@ args = 0, pretend = 0, frame = 0
+ 693              		@ frame_needed = 0, uses_anonymous_args = 0
+ 694 0000 0228     		cmp	r0, #2
+ 695 0002 19D8     		bhi	.L114
+ 696 0004 08B5     		push	{r3, lr}
+ 697 0006 0F4B     		ldr	r3, .L121
+ 698 0008 53F82030 		ldr	r3, [r3, r0, lsl #2]
+ 699 000c 31EA0303 		bics	r3, r1, r3
+ARM GAS  C:\Temp\ccGtNbs2.s 			page 13
+
+
+ 700 0010 15D1     		bne	.L115
+ 701 0012 0D4B     		ldr	r3, .L121+4
+ 702 0014 53F82120 		ldr	r2, [r3, r1, lsl #2]
+ 703 0018 00EB4003 		add	r3, r0, r0, lsl #1
+ 704 001c 1344     		add	r3, r3, r2
+ 705 001e 0B4A     		ldr	r2, .L121+8
+ 706 0020 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 707 0024 1B68     		ldr	r3, [r3]
+ 708 0026 0A4A     		ldr	r2, .L121+12
+ 709 0028 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 710 002c 9847     		blx	r3
+ 711 002e 00B9     		cbnz	r0, .L120
+ 712              	.L112:
+ 713 0030 08BD     		pop	{r3, pc}
+ 714              	.L120:
+ 715 0032 6FF00400 		mvn	r0, #4
+ 716 0036 FBE7     		b	.L112
+ 717              	.L114:
+ 718 0038 6FF00100 		mvn	r0, #1
+ 719 003c 7047     		bx	lr
+ 720              	.L115:
+ 721 003e 6FF00100 		mvn	r0, #1
+ 722 0042 F5E7     		b	.L112
+ 723              	.L122:
+ 724              		.align	2
+ 725              	.L121:
+ 726 0044 00000000 		.word	MotionCtx
+ 727 0048 00000000 		.word	FunctionIndex
+ 728 004c 00000000 		.word	MotionFuncDrv
+ 729 0050 00000000 		.word	MotionCompObj
+ 731              		.section	.text.IKS02A1_MOTION_SENSOR_Disable,"ax",%progbits
+ 732              		.align	1
+ 733              		.global	IKS02A1_MOTION_SENSOR_Disable
+ 734              		.syntax unified
+ 735              		.thumb
+ 736              		.thumb_func
+ 738              	IKS02A1_MOTION_SENSOR_Disable:
+ 739              		@ args = 0, pretend = 0, frame = 0
+ 740              		@ frame_needed = 0, uses_anonymous_args = 0
+ 741 0000 0228     		cmp	r0, #2
+ 742 0002 19D8     		bhi	.L125
+ 743 0004 08B5     		push	{r3, lr}
+ 744 0006 0F4B     		ldr	r3, .L132
+ 745 0008 53F82030 		ldr	r3, [r3, r0, lsl #2]
+ 746 000c 31EA0303 		bics	r3, r1, r3
+ 747 0010 15D1     		bne	.L126
+ 748 0012 0D4B     		ldr	r3, .L132+4
+ 749 0014 53F82120 		ldr	r2, [r3, r1, lsl #2]
+ 750 0018 00EB4003 		add	r3, r0, r0, lsl #1
+ 751 001c 1344     		add	r3, r3, r2
+ 752 001e 0B4A     		ldr	r2, .L132+8
+ 753 0020 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 754 0024 5B68     		ldr	r3, [r3, #4]
+ 755 0026 0A4A     		ldr	r2, .L132+12
+ 756 0028 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 757 002c 9847     		blx	r3
+ 758 002e 00B9     		cbnz	r0, .L131
+ARM GAS  C:\Temp\ccGtNbs2.s 			page 14
+
+
+ 759              	.L123:
+ 760 0030 08BD     		pop	{r3, pc}
+ 761              	.L131:
+ 762 0032 6FF00400 		mvn	r0, #4
+ 763 0036 FBE7     		b	.L123
+ 764              	.L125:
+ 765 0038 6FF00100 		mvn	r0, #1
+ 766 003c 7047     		bx	lr
+ 767              	.L126:
+ 768 003e 6FF00100 		mvn	r0, #1
+ 769 0042 F5E7     		b	.L123
+ 770              	.L133:
+ 771              		.align	2
+ 772              	.L132:
+ 773 0044 00000000 		.word	MotionCtx
+ 774 0048 00000000 		.word	FunctionIndex
+ 775 004c 00000000 		.word	MotionFuncDrv
+ 776 0050 00000000 		.word	MotionCompObj
+ 778              		.section	.text.IKS02A1_MOTION_SENSOR_GetAxes,"ax",%progbits
+ 779              		.align	1
+ 780              		.global	IKS02A1_MOTION_SENSOR_GetAxes
+ 781              		.syntax unified
+ 782              		.thumb
+ 783              		.thumb_func
+ 785              	IKS02A1_MOTION_SENSOR_GetAxes:
+ 786              		@ args = 0, pretend = 0, frame = 0
+ 787              		@ frame_needed = 0, uses_anonymous_args = 0
+ 788 0000 0228     		cmp	r0, #2
+ 789 0002 1BD8     		bhi	.L136
+ 790 0004 08B5     		push	{r3, lr}
+ 791 0006 0B46     		mov	r3, r1
+ 792 0008 1146     		mov	r1, r2
+ 793 000a 0F4A     		ldr	r2, .L143
+ 794 000c 52F82020 		ldr	r2, [r2, r0, lsl #2]
+ 795 0010 33EA0202 		bics	r2, r3, r2
+ 796 0014 15D1     		bne	.L137
+ 797 0016 0D4A     		ldr	r2, .L143+4
+ 798 0018 52F82320 		ldr	r2, [r2, r3, lsl #2]
+ 799 001c 00EB4003 		add	r3, r0, r0, lsl #1
+ 800 0020 1344     		add	r3, r3, r2
+ 801 0022 0B4A     		ldr	r2, .L143+8
+ 802 0024 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 803 0028 DB69     		ldr	r3, [r3, #28]
+ 804 002a 0A4A     		ldr	r2, .L143+12
+ 805 002c 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 806 0030 9847     		blx	r3
+ 807 0032 00B9     		cbnz	r0, .L142
+ 808              	.L134:
+ 809 0034 08BD     		pop	{r3, pc}
+ 810              	.L142:
+ 811 0036 6FF00400 		mvn	r0, #4
+ 812 003a FBE7     		b	.L134
+ 813              	.L136:
+ 814 003c 6FF00100 		mvn	r0, #1
+ 815 0040 7047     		bx	lr
+ 816              	.L137:
+ 817 0042 6FF00100 		mvn	r0, #1
+ARM GAS  C:\Temp\ccGtNbs2.s 			page 15
+
+
+ 818 0046 F5E7     		b	.L134
+ 819              	.L144:
+ 820              		.align	2
+ 821              	.L143:
+ 822 0048 00000000 		.word	MotionCtx
+ 823 004c 00000000 		.word	FunctionIndex
+ 824 0050 00000000 		.word	MotionFuncDrv
+ 825 0054 00000000 		.word	MotionCompObj
+ 827              		.section	.text.IKS02A1_MOTION_SENSOR_GetAxesRaw,"ax",%progbits
+ 828              		.align	1
+ 829              		.global	IKS02A1_MOTION_SENSOR_GetAxesRaw
+ 830              		.syntax unified
+ 831              		.thumb
+ 832              		.thumb_func
+ 834              	IKS02A1_MOTION_SENSOR_GetAxesRaw:
+ 835              		@ args = 0, pretend = 0, frame = 0
+ 836              		@ frame_needed = 0, uses_anonymous_args = 0
+ 837 0000 0228     		cmp	r0, #2
+ 838 0002 1BD8     		bhi	.L147
+ 839 0004 08B5     		push	{r3, lr}
+ 840 0006 0B46     		mov	r3, r1
+ 841 0008 1146     		mov	r1, r2
+ 842 000a 0F4A     		ldr	r2, .L154
+ 843 000c 52F82020 		ldr	r2, [r2, r0, lsl #2]
+ 844 0010 33EA0202 		bics	r2, r3, r2
+ 845 0014 15D1     		bne	.L148
+ 846 0016 0D4A     		ldr	r2, .L154+4
+ 847 0018 52F82320 		ldr	r2, [r2, r3, lsl #2]
+ 848 001c 00EB4003 		add	r3, r0, r0, lsl #1
+ 849 0020 1344     		add	r3, r3, r2
+ 850 0022 0B4A     		ldr	r2, .L154+8
+ 851 0024 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 852 0028 1B6A     		ldr	r3, [r3, #32]
+ 853 002a 0A4A     		ldr	r2, .L154+12
+ 854 002c 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 855 0030 9847     		blx	r3
+ 856 0032 00B9     		cbnz	r0, .L153
+ 857              	.L145:
+ 858 0034 08BD     		pop	{r3, pc}
+ 859              	.L153:
+ 860 0036 6FF00400 		mvn	r0, #4
+ 861 003a FBE7     		b	.L145
+ 862              	.L147:
+ 863 003c 6FF00100 		mvn	r0, #1
+ 864 0040 7047     		bx	lr
+ 865              	.L148:
+ 866 0042 6FF00100 		mvn	r0, #1
+ 867 0046 F5E7     		b	.L145
+ 868              	.L155:
+ 869              		.align	2
+ 870              	.L154:
+ 871 0048 00000000 		.word	MotionCtx
+ 872 004c 00000000 		.word	FunctionIndex
+ 873 0050 00000000 		.word	MotionFuncDrv
+ 874 0054 00000000 		.word	MotionCompObj
+ 876              		.section	.text.IKS02A1_MOTION_SENSOR_GetSensitivity,"ax",%progbits
+ 877              		.align	1
+ARM GAS  C:\Temp\ccGtNbs2.s 			page 16
+
+
+ 878              		.global	IKS02A1_MOTION_SENSOR_GetSensitivity
+ 879              		.syntax unified
+ 880              		.thumb
+ 881              		.thumb_func
+ 883              	IKS02A1_MOTION_SENSOR_GetSensitivity:
+ 884              		@ args = 0, pretend = 0, frame = 0
+ 885              		@ frame_needed = 0, uses_anonymous_args = 0
+ 886 0000 0228     		cmp	r0, #2
+ 887 0002 1BD8     		bhi	.L158
+ 888 0004 08B5     		push	{r3, lr}
+ 889 0006 0B46     		mov	r3, r1
+ 890 0008 1146     		mov	r1, r2
+ 891 000a 0F4A     		ldr	r2, .L165
+ 892 000c 52F82020 		ldr	r2, [r2, r0, lsl #2]
+ 893 0010 33EA0202 		bics	r2, r3, r2
+ 894 0014 15D1     		bne	.L159
+ 895 0016 0D4A     		ldr	r2, .L165+4
+ 896 0018 52F82320 		ldr	r2, [r2, r3, lsl #2]
+ 897 001c 00EB4003 		add	r3, r0, r0, lsl #1
+ 898 0020 1344     		add	r3, r3, r2
+ 899 0022 0B4A     		ldr	r2, .L165+8
+ 900 0024 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 901 0028 9B68     		ldr	r3, [r3, #8]
+ 902 002a 0A4A     		ldr	r2, .L165+12
+ 903 002c 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 904 0030 9847     		blx	r3
+ 905 0032 00B9     		cbnz	r0, .L164
+ 906              	.L156:
+ 907 0034 08BD     		pop	{r3, pc}
+ 908              	.L164:
+ 909 0036 6FF00400 		mvn	r0, #4
+ 910 003a FBE7     		b	.L156
+ 911              	.L158:
+ 912 003c 6FF00100 		mvn	r0, #1
+ 913 0040 7047     		bx	lr
+ 914              	.L159:
+ 915 0042 6FF00100 		mvn	r0, #1
+ 916 0046 F5E7     		b	.L156
+ 917              	.L166:
+ 918              		.align	2
+ 919              	.L165:
+ 920 0048 00000000 		.word	MotionCtx
+ 921 004c 00000000 		.word	FunctionIndex
+ 922 0050 00000000 		.word	MotionFuncDrv
+ 923 0054 00000000 		.word	MotionCompObj
+ 925              		.section	.text.IKS02A1_MOTION_SENSOR_GetOutputDataRate,"ax",%progbits
+ 926              		.align	1
+ 927              		.global	IKS02A1_MOTION_SENSOR_GetOutputDataRate
+ 928              		.syntax unified
+ 929              		.thumb
+ 930              		.thumb_func
+ 932              	IKS02A1_MOTION_SENSOR_GetOutputDataRate:
+ 933              		@ args = 0, pretend = 0, frame = 0
+ 934              		@ frame_needed = 0, uses_anonymous_args = 0
+ 935 0000 0228     		cmp	r0, #2
+ 936 0002 1BD8     		bhi	.L169
+ 937 0004 08B5     		push	{r3, lr}
+ARM GAS  C:\Temp\ccGtNbs2.s 			page 17
+
+
+ 938 0006 0B46     		mov	r3, r1
+ 939 0008 1146     		mov	r1, r2
+ 940 000a 0F4A     		ldr	r2, .L176
+ 941 000c 52F82020 		ldr	r2, [r2, r0, lsl #2]
+ 942 0010 33EA0202 		bics	r2, r3, r2
+ 943 0014 15D1     		bne	.L170
+ 944 0016 0D4A     		ldr	r2, .L176+4
+ 945 0018 52F82320 		ldr	r2, [r2, r3, lsl #2]
+ 946 001c 00EB4003 		add	r3, r0, r0, lsl #1
+ 947 0020 1344     		add	r3, r3, r2
+ 948 0022 0B4A     		ldr	r2, .L176+8
+ 949 0024 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 950 0028 DB68     		ldr	r3, [r3, #12]
+ 951 002a 0A4A     		ldr	r2, .L176+12
+ 952 002c 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 953 0030 9847     		blx	r3
+ 954 0032 00B9     		cbnz	r0, .L175
+ 955              	.L167:
+ 956 0034 08BD     		pop	{r3, pc}
+ 957              	.L175:
+ 958 0036 6FF00400 		mvn	r0, #4
+ 959 003a FBE7     		b	.L167
+ 960              	.L169:
+ 961 003c 6FF00100 		mvn	r0, #1
+ 962 0040 7047     		bx	lr
+ 963              	.L170:
+ 964 0042 6FF00100 		mvn	r0, #1
+ 965 0046 F5E7     		b	.L167
+ 966              	.L177:
+ 967              		.align	2
+ 968              	.L176:
+ 969 0048 00000000 		.word	MotionCtx
+ 970 004c 00000000 		.word	FunctionIndex
+ 971 0050 00000000 		.word	MotionFuncDrv
+ 972 0054 00000000 		.word	MotionCompObj
+ 974              		.section	.text.IKS02A1_MOTION_SENSOR_GetFullScale,"ax",%progbits
+ 975              		.align	1
+ 976              		.global	IKS02A1_MOTION_SENSOR_GetFullScale
+ 977              		.syntax unified
+ 978              		.thumb
+ 979              		.thumb_func
+ 981              	IKS02A1_MOTION_SENSOR_GetFullScale:
+ 982              		@ args = 0, pretend = 0, frame = 0
+ 983              		@ frame_needed = 0, uses_anonymous_args = 0
+ 984 0000 0228     		cmp	r0, #2
+ 985 0002 1BD8     		bhi	.L180
+ 986 0004 08B5     		push	{r3, lr}
+ 987 0006 0B46     		mov	r3, r1
+ 988 0008 1146     		mov	r1, r2
+ 989 000a 0F4A     		ldr	r2, .L187
+ 990 000c 52F82020 		ldr	r2, [r2, r0, lsl #2]
+ 991 0010 33EA0202 		bics	r2, r3, r2
+ 992 0014 15D1     		bne	.L181
+ 993 0016 0D4A     		ldr	r2, .L187+4
+ 994 0018 52F82320 		ldr	r2, [r2, r3, lsl #2]
+ 995 001c 00EB4003 		add	r3, r0, r0, lsl #1
+ 996 0020 1344     		add	r3, r3, r2
+ARM GAS  C:\Temp\ccGtNbs2.s 			page 18
+
+
+ 997 0022 0B4A     		ldr	r2, .L187+8
+ 998 0024 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 999 0028 5B69     		ldr	r3, [r3, #20]
+ 1000 002a 0A4A     		ldr	r2, .L187+12
+ 1001 002c 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 1002 0030 9847     		blx	r3
+ 1003 0032 00B9     		cbnz	r0, .L186
+ 1004              	.L178:
+ 1005 0034 08BD     		pop	{r3, pc}
+ 1006              	.L186:
+ 1007 0036 6FF00400 		mvn	r0, #4
+ 1008 003a FBE7     		b	.L178
+ 1009              	.L180:
+ 1010 003c 6FF00100 		mvn	r0, #1
+ 1011 0040 7047     		bx	lr
+ 1012              	.L181:
+ 1013 0042 6FF00100 		mvn	r0, #1
+ 1014 0046 F5E7     		b	.L178
+ 1015              	.L188:
+ 1016              		.align	2
+ 1017              	.L187:
+ 1018 0048 00000000 		.word	MotionCtx
+ 1019 004c 00000000 		.word	FunctionIndex
+ 1020 0050 00000000 		.word	MotionFuncDrv
+ 1021 0054 00000000 		.word	MotionCompObj
+ 1023              		.section	.text.IKS02A1_MOTION_SENSOR_SetOutputDataRate,"ax",%progbits
+ 1024              		.align	1
+ 1025              		.global	IKS02A1_MOTION_SENSOR_SetOutputDataRate
+ 1026              		.syntax unified
+ 1027              		.thumb
+ 1028              		.thumb_func
+ 1030              	IKS02A1_MOTION_SENSOR_SetOutputDataRate:
+ 1031              		@ args = 0, pretend = 0, frame = 0
+ 1032              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1033 0000 0228     		cmp	r0, #2
+ 1034 0002 19D8     		bhi	.L191
+ 1035 0004 08B5     		push	{r3, lr}
+ 1036 0006 0F4B     		ldr	r3, .L198
+ 1037 0008 53F82030 		ldr	r3, [r3, r0, lsl #2]
+ 1038 000c 31EA0303 		bics	r3, r1, r3
+ 1039 0010 15D1     		bne	.L192
+ 1040 0012 0D4B     		ldr	r3, .L198+4
+ 1041 0014 53F82120 		ldr	r2, [r3, r1, lsl #2]
+ 1042 0018 00EB4003 		add	r3, r0, r0, lsl #1
+ 1043 001c 1344     		add	r3, r3, r2
+ 1044 001e 0B4A     		ldr	r2, .L198+8
+ 1045 0020 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 1046 0024 1B69     		ldr	r3, [r3, #16]
+ 1047 0026 0A4A     		ldr	r2, .L198+12
+ 1048 0028 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 1049 002c 9847     		blx	r3
+ 1050 002e 00B9     		cbnz	r0, .L197
+ 1051              	.L189:
+ 1052 0030 08BD     		pop	{r3, pc}
+ 1053              	.L197:
+ 1054 0032 6FF00400 		mvn	r0, #4
+ 1055 0036 FBE7     		b	.L189
+ARM GAS  C:\Temp\ccGtNbs2.s 			page 19
+
+
+ 1056              	.L191:
+ 1057 0038 6FF00100 		mvn	r0, #1
+ 1058 003c 7047     		bx	lr
+ 1059              	.L192:
+ 1060 003e 6FF00100 		mvn	r0, #1
+ 1061 0042 F5E7     		b	.L189
+ 1062              	.L199:
+ 1063              		.align	2
+ 1064              	.L198:
+ 1065 0044 00000000 		.word	MotionCtx
+ 1066 0048 00000000 		.word	FunctionIndex
+ 1067 004c 00000000 		.word	MotionFuncDrv
+ 1068 0050 00000000 		.word	MotionCompObj
+ 1070              		.section	.text.IKS02A1_MOTION_SENSOR_SetFullScale,"ax",%progbits
+ 1071              		.align	1
+ 1072              		.global	IKS02A1_MOTION_SENSOR_SetFullScale
+ 1073              		.syntax unified
+ 1074              		.thumb
+ 1075              		.thumb_func
+ 1077              	IKS02A1_MOTION_SENSOR_SetFullScale:
+ 1078              		@ args = 0, pretend = 0, frame = 0
+ 1079              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1080 0000 0228     		cmp	r0, #2
+ 1081 0002 1BD8     		bhi	.L202
+ 1082 0004 08B5     		push	{r3, lr}
+ 1083 0006 0B46     		mov	r3, r1
+ 1084 0008 1146     		mov	r1, r2
+ 1085 000a 0F4A     		ldr	r2, .L209
+ 1086 000c 52F82020 		ldr	r2, [r2, r0, lsl #2]
+ 1087 0010 33EA0202 		bics	r2, r3, r2
+ 1088 0014 15D1     		bne	.L203
+ 1089 0016 0D4A     		ldr	r2, .L209+4
+ 1090 0018 52F82320 		ldr	r2, [r2, r3, lsl #2]
+ 1091 001c 00EB4003 		add	r3, r0, r0, lsl #1
+ 1092 0020 1344     		add	r3, r3, r2
+ 1093 0022 0B4A     		ldr	r2, .L209+8
+ 1094 0024 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 1095 0028 9B69     		ldr	r3, [r3, #24]
+ 1096 002a 0A4A     		ldr	r2, .L209+12
+ 1097 002c 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 1098 0030 9847     		blx	r3
+ 1099 0032 00B9     		cbnz	r0, .L208
+ 1100              	.L200:
+ 1101 0034 08BD     		pop	{r3, pc}
+ 1102              	.L208:
+ 1103 0036 6FF00400 		mvn	r0, #4
+ 1104 003a FBE7     		b	.L200
+ 1105              	.L202:
+ 1106 003c 6FF00100 		mvn	r0, #1
+ 1107 0040 7047     		bx	lr
+ 1108              	.L203:
+ 1109 0042 6FF00100 		mvn	r0, #1
+ 1110 0046 F5E7     		b	.L200
+ 1111              	.L210:
+ 1112              		.align	2
+ 1113              	.L209:
+ 1114 0048 00000000 		.word	MotionCtx
+ARM GAS  C:\Temp\ccGtNbs2.s 			page 20
+
+
+ 1115 004c 00000000 		.word	FunctionIndex
+ 1116 0050 00000000 		.word	MotionFuncDrv
+ 1117 0054 00000000 		.word	MotionCompObj
+ 1119              		.section	.bss.iis2mdc_obj_0.0,"aw",%nobits
+ 1120              		.align	2
+ 1123              	iis2mdc_obj_0.0:
+ 1124 0000 00000000 		.space	52
+ 1124      00000000 
+ 1124      00000000 
+ 1124      00000000 
+ 1124      00000000 
+ 1125              		.section	.bss.iis2dlpc_obj_0.1,"aw",%nobits
+ 1126              		.align	2
+ 1129              	iis2dlpc_obj_0.1:
+ 1130 0000 00000000 		.space	60
+ 1130      00000000 
+ 1130      00000000 
+ 1130      00000000 
+ 1130      00000000 
+ 1131              		.section	.bss.ism330dhcx_obj_0.2,"aw",%nobits
+ 1132              		.align	2
+ 1135              	ism330dhcx_obj_0.2:
+ 1136 0000 00000000 		.space	56
+ 1136      00000000 
+ 1136      00000000 
+ 1136      00000000 
+ 1136      00000000 
+ 1137              		.section	.bss.MotionCtx,"aw",%nobits
+ 1138              		.align	2
+ 1141              	MotionCtx:
+ 1142 0000 00000000 		.space	12
+ 1142      00000000 
+ 1142      00000000 
+ 1143              		.section	.bss.MotionDrv,"aw",%nobits
+ 1144              		.align	2
+ 1147              	MotionDrv:
+ 1148 0000 00000000 		.space	12
+ 1148      00000000 
+ 1148      00000000 
+ 1149              		.section	.bss.MotionFuncDrv,"aw",%nobits
+ 1150              		.align	2
+ 1153              	MotionFuncDrv:
+ 1154 0000 00000000 		.space	36
+ 1154      00000000 
+ 1154      00000000 
+ 1154      00000000 
+ 1154      00000000 
+ 1155              		.section	.rodata.FunctionIndex,"a"
+ 1156              		.align	2
+ 1159              	FunctionIndex:
+ 1160 0000 00000000 		.word	0
+ 1161 0004 00000000 		.word	0
+ 1162 0008 01000000 		.word	1
+ 1163 000c 01000000 		.word	1
+ 1164 0010 02000000 		.word	2
+ 1165 0014 02000000 		.word	2
+ 1166 0018 02000000 		.word	2
+ARM GAS  C:\Temp\ccGtNbs2.s 			page 21
+
+
+ 1167 001c 02000000 		.word	2
+ 1168 0020 03000000 		.word	3
+ 1169              		.global	MotionCompObj
+ 1170              		.section	.bss.MotionCompObj,"aw",%nobits
+ 1171              		.align	2
+ 1174              	MotionCompObj:
+ 1175 0000 00000000 		.space	12
+ 1175      00000000 
+ 1175      00000000 
+ 1176              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccGtNbs2.s 			page 22
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 iks02a1_motion_sensors.c
+  C:\Temp\ccGtNbs2.s:18     .text.ISM330DHCX_0_Probe:00000000 $t
+  C:\Temp\ccGtNbs2.s:23     .text.ISM330DHCX_0_Probe:00000000 ISM330DHCX_0_Probe
+  C:\Temp\ccGtNbs2.s:141    .text.ISM330DHCX_0_Probe:000000f8 $d
+  C:\Temp\ccGtNbs2.s:1135   .bss.ism330dhcx_obj_0.2:00000000 ism330dhcx_obj_0.2
+  C:\Temp\ccGtNbs2.s:1141   .bss.MotionCtx:00000000 MotionCtx
+  C:\Temp\ccGtNbs2.s:1174   .bss.MotionCompObj:00000000 MotionCompObj
+  C:\Temp\ccGtNbs2.s:1147   .bss.MotionDrv:00000000 MotionDrv
+  C:\Temp\ccGtNbs2.s:1153   .bss.MotionFuncDrv:00000000 MotionFuncDrv
+  C:\Temp\ccGtNbs2.s:157    .text.IIS2DLPC_0_Probe:00000000 $t
+  C:\Temp\ccGtNbs2.s:162    .text.IIS2DLPC_0_Probe:00000000 IIS2DLPC_0_Probe
+  C:\Temp\ccGtNbs2.s:264    .text.IIS2DLPC_0_Probe:000000d4 $d
+  C:\Temp\ccGtNbs2.s:1129   .bss.iis2dlpc_obj_0.1:00000000 iis2dlpc_obj_0.1
+  C:\Temp\ccGtNbs2.s:279    .text.IIS2MDC_0_Probe:00000000 $t
+  C:\Temp\ccGtNbs2.s:284    .text.IIS2MDC_0_Probe:00000000 IIS2MDC_0_Probe
+  C:\Temp\ccGtNbs2.s:384    .text.IIS2MDC_0_Probe:000000d0 $d
+  C:\Temp\ccGtNbs2.s:1123   .bss.iis2mdc_obj_0.0:00000000 iis2mdc_obj_0.0
+  C:\Temp\ccGtNbs2.s:399    .text.IKS02A1_MOTION_SENSOR_Init:00000000 $t
+  C:\Temp\ccGtNbs2.s:405    .text.IKS02A1_MOTION_SENSOR_Init:00000000 IKS02A1_MOTION_SENSOR_Init
+  C:\Temp\ccGtNbs2.s:577    .text.IKS02A1_MOTION_SENSOR_Init:00000170 $d
+  C:\Temp\ccGtNbs2.s:1159   .rodata.FunctionIndex:00000000 FunctionIndex
+  C:\Temp\ccGtNbs2.s:583    .text.IKS02A1_MOTION_SENSOR_DeInit:00000000 $t
+  C:\Temp\ccGtNbs2.s:589    .text.IKS02A1_MOTION_SENSOR_DeInit:00000000 IKS02A1_MOTION_SENSOR_DeInit
+  C:\Temp\ccGtNbs2.s:613    .text.IKS02A1_MOTION_SENSOR_DeInit:00000028 $d
+  C:\Temp\ccGtNbs2.s:617    .text.IKS02A1_MOTION_SENSOR_GetCapabilities:00000000 $t
+  C:\Temp\ccGtNbs2.s:623    .text.IKS02A1_MOTION_SENSOR_GetCapabilities:00000000 IKS02A1_MOTION_SENSOR_GetCapabilities
+  C:\Temp\ccGtNbs2.s:647    .text.IKS02A1_MOTION_SENSOR_GetCapabilities:00000028 $d
+  C:\Temp\ccGtNbs2.s:651    .text.IKS02A1_MOTION_SENSOR_ReadID:00000000 $t
+  C:\Temp\ccGtNbs2.s:657    .text.IKS02A1_MOTION_SENSOR_ReadID:00000000 IKS02A1_MOTION_SENSOR_ReadID
+  C:\Temp\ccGtNbs2.s:681    .text.IKS02A1_MOTION_SENSOR_ReadID:00000028 $d
+  C:\Temp\ccGtNbs2.s:685    .text.IKS02A1_MOTION_SENSOR_Enable:00000000 $t
+  C:\Temp\ccGtNbs2.s:691    .text.IKS02A1_MOTION_SENSOR_Enable:00000000 IKS02A1_MOTION_SENSOR_Enable
+  C:\Temp\ccGtNbs2.s:726    .text.IKS02A1_MOTION_SENSOR_Enable:00000044 $d
+  C:\Temp\ccGtNbs2.s:732    .text.IKS02A1_MOTION_SENSOR_Disable:00000000 $t
+  C:\Temp\ccGtNbs2.s:738    .text.IKS02A1_MOTION_SENSOR_Disable:00000000 IKS02A1_MOTION_SENSOR_Disable
+  C:\Temp\ccGtNbs2.s:773    .text.IKS02A1_MOTION_SENSOR_Disable:00000044 $d
+  C:\Temp\ccGtNbs2.s:779    .text.IKS02A1_MOTION_SENSOR_GetAxes:00000000 $t
+  C:\Temp\ccGtNbs2.s:785    .text.IKS02A1_MOTION_SENSOR_GetAxes:00000000 IKS02A1_MOTION_SENSOR_GetAxes
+  C:\Temp\ccGtNbs2.s:822    .text.IKS02A1_MOTION_SENSOR_GetAxes:00000048 $d
+  C:\Temp\ccGtNbs2.s:828    .text.IKS02A1_MOTION_SENSOR_GetAxesRaw:00000000 $t
+  C:\Temp\ccGtNbs2.s:834    .text.IKS02A1_MOTION_SENSOR_GetAxesRaw:00000000 IKS02A1_MOTION_SENSOR_GetAxesRaw
+  C:\Temp\ccGtNbs2.s:871    .text.IKS02A1_MOTION_SENSOR_GetAxesRaw:00000048 $d
+  C:\Temp\ccGtNbs2.s:877    .text.IKS02A1_MOTION_SENSOR_GetSensitivity:00000000 $t
+  C:\Temp\ccGtNbs2.s:883    .text.IKS02A1_MOTION_SENSOR_GetSensitivity:00000000 IKS02A1_MOTION_SENSOR_GetSensitivity
+  C:\Temp\ccGtNbs2.s:920    .text.IKS02A1_MOTION_SENSOR_GetSensitivity:00000048 $d
+  C:\Temp\ccGtNbs2.s:926    .text.IKS02A1_MOTION_SENSOR_GetOutputDataRate:00000000 $t
+  C:\Temp\ccGtNbs2.s:932    .text.IKS02A1_MOTION_SENSOR_GetOutputDataRate:00000000 IKS02A1_MOTION_SENSOR_GetOutputDataRate
+  C:\Temp\ccGtNbs2.s:969    .text.IKS02A1_MOTION_SENSOR_GetOutputDataRate:00000048 $d
+  C:\Temp\ccGtNbs2.s:975    .text.IKS02A1_MOTION_SENSOR_GetFullScale:00000000 $t
+  C:\Temp\ccGtNbs2.s:981    .text.IKS02A1_MOTION_SENSOR_GetFullScale:00000000 IKS02A1_MOTION_SENSOR_GetFullScale
+  C:\Temp\ccGtNbs2.s:1018   .text.IKS02A1_MOTION_SENSOR_GetFullScale:00000048 $d
+  C:\Temp\ccGtNbs2.s:1024   .text.IKS02A1_MOTION_SENSOR_SetOutputDataRate:00000000 $t
+  C:\Temp\ccGtNbs2.s:1030   .text.IKS02A1_MOTION_SENSOR_SetOutputDataRate:00000000 IKS02A1_MOTION_SENSOR_SetOutputDataRate
+  C:\Temp\ccGtNbs2.s:1065   .text.IKS02A1_MOTION_SENSOR_SetOutputDataRate:00000044 $d
+  C:\Temp\ccGtNbs2.s:1071   .text.IKS02A1_MOTION_SENSOR_SetFullScale:00000000 $t
+  C:\Temp\ccGtNbs2.s:1077   .text.IKS02A1_MOTION_SENSOR_SetFullScale:00000000 IKS02A1_MOTION_SENSOR_SetFullScale
+ARM GAS  C:\Temp\ccGtNbs2.s 			page 23
+
+
+  C:\Temp\ccGtNbs2.s:1114   .text.IKS02A1_MOTION_SENSOR_SetFullScale:00000048 $d
+  C:\Temp\ccGtNbs2.s:1120   .bss.iis2mdc_obj_0.0:00000000 $d
+  C:\Temp\ccGtNbs2.s:1126   .bss.iis2dlpc_obj_0.1:00000000 $d
+  C:\Temp\ccGtNbs2.s:1132   .bss.ism330dhcx_obj_0.2:00000000 $d
+  C:\Temp\ccGtNbs2.s:1138   .bss.MotionCtx:00000000 $d
+  C:\Temp\ccGtNbs2.s:1144   .bss.MotionDrv:00000000 $d
+  C:\Temp\ccGtNbs2.s:1150   .bss.MotionFuncDrv:00000000 $d
+  C:\Temp\ccGtNbs2.s:1156   .rodata.FunctionIndex:00000000 $d
+  C:\Temp\ccGtNbs2.s:1171   .bss.MotionCompObj:00000000 $d
+
+UNDEFINED SYMBOLS
+ISM330DHCX_RegisterBusIO
+ISM330DHCX_Set_Mem_Bank
+ISM330DHCX_ReadID
+ISM330DHCX_GetCapabilities
+BSP_I2C1_Init
+BSP_I2C1_DeInit
+BSP_I2C1_ReadReg
+BSP_I2C1_WriteReg
+BSP_GetTick
+HAL_Delay
+ISM330DHCX_COMMON_Driver
+ISM330DHCX_GYRO_Driver
+ISM330DHCX_ACC_Driver
+IIS2DLPC_RegisterBusIO
+IIS2DLPC_ReadID
+IIS2DLPC_GetCapabilities
+IIS2DLPC_COMMON_Driver
+IIS2DLPC_ACC_Driver
+IIS2MDC_RegisterBusIO
+IIS2MDC_ReadID
+IIS2MDC_GetCapabilities
+IIS2MDC_COMMON_Driver
+IIS2MDC_MAG_Driver

@@ -1,4 +1,4 @@
-ARM GAS  C:\Temp\ccD5G9GX.s 			page 1
+ARM GAS  C:\Temp\cc5JILpk.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Temp\ccD5G9GX.s 			page 1
   58 000a 1A7D     		ldrb	r2, [r3, #20]	@ zero_extendqisi2
   59 000c 0243     		orrs	r2, r2, r0
   60 000e 1A75     		strb	r2, [r3, #20]
-ARM GAS  C:\Temp\ccD5G9GX.s 			page 2
+ARM GAS  C:\Temp\cc5JILpk.s 			page 2
 
 
   61 0010 0020     		movs	r0, #0
@@ -118,7 +118,7 @@ ARM GAS  C:\Temp\ccD5G9GX.s 			page 1
  121 000a 587D     		ldrb	r0, [r3, #21]	@ zero_extendqisi2
  122 000c C0B2     		uxtb	r0, r0
  123 000e AA28     		cmp	r0, #170
-ARM GAS  C:\Temp\ccD5G9GX.s 			page 3
+ARM GAS  C:\Temp\cc5JILpk.s 			page 3
 
 
  124 0010 00D0     		beq	.L14
@@ -178,7 +178,7 @@ ARM GAS  C:\Temp\ccD5G9GX.s 			page 1
  184              	FLASH_OB_DisableWRP:
  185              		@ args = 0, pretend = 0, frame = 0
  186              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Temp\ccD5G9GX.s 			page 4
+ARM GAS  C:\Temp\cc5JILpk.s 			page 4
 
 
  187 0000 10B5     		push	{r4, lr}
@@ -238,7 +238,7 @@ ARM GAS  C:\Temp\ccD5G9GX.s 			page 1
  245 0014 3B7D     		ldrb	r3, [r7, #20]	@ zero_extendqisi2
  246 0016 03F01F03 		and	r3, r3, #31
  247 001a 43EA0601 		orr	r1, r3, r6
-ARM GAS  C:\Temp\ccD5G9GX.s 			page 5
+ARM GAS  C:\Temp\cc5JILpk.s 			page 5
 
 
  248 001e 41EA0502 		orr	r2, r1, r5
@@ -298,7 +298,7 @@ ARM GAS  C:\Temp\ccD5G9GX.s 			page 1
  306              	.L50:
  307              		.align	2
  308              	.L49:
-ARM GAS  C:\Temp\ccD5G9GX.s 			page 6
+ARM GAS  C:\Temp\cc5JILpk.s 			page 6
 
 
  309 001c 003C0240 		.word	1073888256
@@ -358,7 +358,7 @@ ARM GAS  C:\Temp\ccD5G9GX.s 			page 1
  365 0056 207C     		ldrb	r0, [r4, #16]	@ zero_extendqisi2
  366 0058 FFF7FEFF 		bl	FLASH_OB_RDP_LevelConfig
  367 005c EFE7     		b	.L55
-ARM GAS  C:\Temp\ccD5G9GX.s 			page 7
+ARM GAS  C:\Temp\cc5JILpk.s 			page 7
 
 
  368              	.L66:
@@ -418,7 +418,7 @@ ARM GAS  C:\Temp\ccD5G9GX.s 			page 1
  426 000c 012B     		cmp	r3, #1
  427 000e 03D0     		beq	.L77
  428 0010 0089     		ldrh	r0, [r0, #8]
-ARM GAS  C:\Temp\ccD5G9GX.s 			page 8
+ARM GAS  C:\Temp\cc5JILpk.s 			page 8
 
 
  429 0012 FFF7FEFF 		bl	FLASH_OB_DisablePCROP
@@ -478,7 +478,7 @@ ARM GAS  C:\Temp\ccD5G9GX.s 			page 1
  489              	HAL_FLASHEx_OB_DeSelectPCROP:
  490              		@ args = 0, pretend = 0, frame = 0
  491              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Temp\ccD5G9GX.s 			page 9
+ARM GAS  C:\Temp\cc5JILpk.s 			page 9
 
 
  492              		@ link register save eliminated.
@@ -538,7 +538,7 @@ ARM GAS  C:\Temp\ccD5G9GX.s 			page 1
  548              	.L92:
  549 0048 003C0240 		.word	1073888256
  551              		.section	.text.HAL_FLASHEx_Erase_IT,"ax",%progbits
-ARM GAS  C:\Temp\ccD5G9GX.s 			page 10
+ARM GAS  C:\Temp\cc5JILpk.s 			page 10
 
 
  552              		.align	1
@@ -598,7 +598,7 @@ ARM GAS  C:\Temp\ccD5G9GX.s 			page 1
  608              		.thumb_func
  610              	FLASH_FlushCaches:
  611              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  C:\Temp\ccD5G9GX.s 			page 11
+ARM GAS  C:\Temp\cc5JILpk.s 			page 11
 
 
  612              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -658,7 +658,7 @@ ARM GAS  C:\Temp\ccD5G9GX.s 			page 1
  668 0004 1B7E     		ldrb	r3, [r3, #24]	@ zero_extendqisi2
  669 0006 012B     		cmp	r3, #1
  670 0008 3ED0     		beq	.L114
-ARM GAS  C:\Temp\ccD5G9GX.s 			page 12
+ARM GAS  C:\Temp\cc5JILpk.s 			page 12
 
 
  671 000a 0446     		mov	r4, r0
@@ -718,7 +718,7 @@ ARM GAS  C:\Temp\ccD5G9GX.s 			page 1
  725              	.L107:
  726 0084 3846     		mov	r0, r7
  727 0086 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
-ARM GAS  C:\Temp\ccD5G9GX.s 			page 13
+ARM GAS  C:\Temp\cc5JILpk.s 			page 13
 
 
  728              	.L114:
@@ -730,78 +730,78 @@ ARM GAS  C:\Temp\ccD5G9GX.s 			page 1
  734 008c 00000000 		.word	pFlash
  735 0090 003C0240 		.word	1073888256
  737              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
-ARM GAS  C:\Temp\ccD5G9GX.s 			page 14
+ARM GAS  C:\Temp\cc5JILpk.s 			page 14
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_hal_flash_ex.c
-  C:\Temp\ccD5G9GX.s:18     .text.FLASH_MassErase:00000000 $t
-  C:\Temp\ccD5G9GX.s:23     .text.FLASH_MassErase:00000000 FLASH_MassErase
-  C:\Temp\ccD5G9GX.s:42     .text.FLASH_MassErase:00000020 $d
-  C:\Temp\ccD5G9GX.s:45     .text.FLASH_OB_BOR_LevelConfig:00000000 $t
-  C:\Temp\ccD5G9GX.s:50     .text.FLASH_OB_BOR_LevelConfig:00000000 FLASH_OB_BOR_LevelConfig
-  C:\Temp\ccD5G9GX.s:66     .text.FLASH_OB_BOR_LevelConfig:00000014 $d
-  C:\Temp\ccD5G9GX.s:69     .text.FLASH_OB_GetUser:00000000 $t
-  C:\Temp\ccD5G9GX.s:74     .text.FLASH_OB_GetUser:00000000 FLASH_OB_GetUser
-  C:\Temp\ccD5G9GX.s:85     .text.FLASH_OB_GetUser:0000000c $d
-  C:\Temp\ccD5G9GX.s:88     .text.FLASH_OB_GetWRP:00000000 $t
-  C:\Temp\ccD5G9GX.s:93     .text.FLASH_OB_GetWRP:00000000 FLASH_OB_GetWRP
-  C:\Temp\ccD5G9GX.s:104    .text.FLASH_OB_GetWRP:00000008 $d
-  C:\Temp\ccD5G9GX.s:107    .text.FLASH_OB_GetRDP:00000000 $t
-  C:\Temp\ccD5G9GX.s:112    .text.FLASH_OB_GetRDP:00000000 FLASH_OB_GetRDP
-  C:\Temp\ccD5G9GX.s:131    .text.FLASH_OB_GetRDP:00000018 $d
-  C:\Temp\ccD5G9GX.s:134    .text.FLASH_OB_GetBOR:00000000 $t
-  C:\Temp\ccD5G9GX.s:139    .text.FLASH_OB_GetBOR:00000000 FLASH_OB_GetBOR
-  C:\Temp\ccD5G9GX.s:150    .text.FLASH_OB_GetBOR:0000000c $d
-  C:\Temp\ccD5G9GX.s:153    .text.FLASH_OB_EnableWRP:00000000 $t
-  C:\Temp\ccD5G9GX.s:158    .text.FLASH_OB_EnableWRP:00000000 FLASH_OB_EnableWRP
-  C:\Temp\ccD5G9GX.s:176    .text.FLASH_OB_EnableWRP:0000001c $d
-  C:\Temp\ccD5G9GX.s:179    .text.FLASH_OB_DisableWRP:00000000 $t
-  C:\Temp\ccD5G9GX.s:184    .text.FLASH_OB_DisableWRP:00000000 FLASH_OB_DisableWRP
-  C:\Temp\ccD5G9GX.s:203    .text.FLASH_OB_DisableWRP:0000001c $d
-  C:\Temp\ccD5G9GX.s:206    .text.FLASH_OB_RDP_LevelConfig:00000000 $t
-  C:\Temp\ccD5G9GX.s:211    .text.FLASH_OB_RDP_LevelConfig:00000000 FLASH_OB_RDP_LevelConfig
-  C:\Temp\ccD5G9GX.s:226    .text.FLASH_OB_RDP_LevelConfig:00000014 $d
-  C:\Temp\ccD5G9GX.s:229    .text.FLASH_OB_UserConfig:00000000 $t
-  C:\Temp\ccD5G9GX.s:234    .text.FLASH_OB_UserConfig:00000000 FLASH_OB_UserConfig
-  C:\Temp\ccD5G9GX.s:256    .text.FLASH_OB_UserConfig:00000028 $d
-  C:\Temp\ccD5G9GX.s:259    .text.FLASH_OB_EnablePCROP:00000000 $t
-  C:\Temp\ccD5G9GX.s:264    .text.FLASH_OB_EnablePCROP:00000000 FLASH_OB_EnablePCROP
-  C:\Temp\ccD5G9GX.s:283    .text.FLASH_OB_EnablePCROP:0000001c $d
-  C:\Temp\ccD5G9GX.s:286    .text.FLASH_OB_DisablePCROP:00000000 $t
-  C:\Temp\ccD5G9GX.s:291    .text.FLASH_OB_DisablePCROP:00000000 FLASH_OB_DisablePCROP
-  C:\Temp\ccD5G9GX.s:309    .text.FLASH_OB_DisablePCROP:0000001c $d
-  C:\Temp\ccD5G9GX.s:312    .text.HAL_FLASHEx_OBProgram:00000000 $t
-  C:\Temp\ccD5G9GX.s:318    .text.HAL_FLASHEx_OBProgram:00000000 HAL_FLASHEx_OBProgram
-  C:\Temp\ccD5G9GX.s:385    .text.HAL_FLASHEx_OBProgram:00000080 $d
-  C:\Temp\ccD5G9GX.s:388    .text.HAL_FLASHEx_OBGetConfig:00000000 $t
-  C:\Temp\ccD5G9GX.s:394    .text.HAL_FLASHEx_OBGetConfig:00000000 HAL_FLASHEx_OBGetConfig
-  C:\Temp\ccD5G9GX.s:412    .text.HAL_FLASHEx_AdvOBProgram:00000000 $t
-  C:\Temp\ccD5G9GX.s:418    .text.HAL_FLASHEx_AdvOBProgram:00000000 HAL_FLASHEx_AdvOBProgram
-  C:\Temp\ccD5G9GX.s:441    .text.HAL_FLASHEx_AdvOBGetConfig:00000000 $t
-  C:\Temp\ccD5G9GX.s:447    .text.HAL_FLASHEx_AdvOBGetConfig:00000000 HAL_FLASHEx_AdvOBGetConfig
-  C:\Temp\ccD5G9GX.s:458    .text.HAL_FLASHEx_AdvOBGetConfig:00000008 $d
-  C:\Temp\ccD5G9GX.s:461    .text.HAL_FLASHEx_OB_SelectPCROP:00000000 $t
-  C:\Temp\ccD5G9GX.s:467    .text.HAL_FLASHEx_OB_SelectPCROP:00000000 HAL_FLASHEx_OB_SelectPCROP
-  C:\Temp\ccD5G9GX.s:480    .text.HAL_FLASHEx_OB_SelectPCROP:00000010 $d
-  C:\Temp\ccD5G9GX.s:483    .text.HAL_FLASHEx_OB_DeSelectPCROP:00000000 $t
-  C:\Temp\ccD5G9GX.s:489    .text.HAL_FLASHEx_OB_DeSelectPCROP:00000000 HAL_FLASHEx_OB_DeSelectPCROP
-  C:\Temp\ccD5G9GX.s:502    .text.HAL_FLASHEx_OB_DeSelectPCROP:00000010 $d
-  C:\Temp\ccD5G9GX.s:505    .text.FLASH_Erase_Sector:00000000 $t
-  C:\Temp\ccD5G9GX.s:511    .text.FLASH_Erase_Sector:00000000 FLASH_Erase_Sector
-  C:\Temp\ccD5G9GX.s:549    .text.FLASH_Erase_Sector:00000048 $d
-ARM GAS  C:\Temp\ccD5G9GX.s 			page 15
+  C:\Temp\cc5JILpk.s:18     .text.FLASH_MassErase:00000000 $t
+  C:\Temp\cc5JILpk.s:23     .text.FLASH_MassErase:00000000 FLASH_MassErase
+  C:\Temp\cc5JILpk.s:42     .text.FLASH_MassErase:00000020 $d
+  C:\Temp\cc5JILpk.s:45     .text.FLASH_OB_BOR_LevelConfig:00000000 $t
+  C:\Temp\cc5JILpk.s:50     .text.FLASH_OB_BOR_LevelConfig:00000000 FLASH_OB_BOR_LevelConfig
+  C:\Temp\cc5JILpk.s:66     .text.FLASH_OB_BOR_LevelConfig:00000014 $d
+  C:\Temp\cc5JILpk.s:69     .text.FLASH_OB_GetUser:00000000 $t
+  C:\Temp\cc5JILpk.s:74     .text.FLASH_OB_GetUser:00000000 FLASH_OB_GetUser
+  C:\Temp\cc5JILpk.s:85     .text.FLASH_OB_GetUser:0000000c $d
+  C:\Temp\cc5JILpk.s:88     .text.FLASH_OB_GetWRP:00000000 $t
+  C:\Temp\cc5JILpk.s:93     .text.FLASH_OB_GetWRP:00000000 FLASH_OB_GetWRP
+  C:\Temp\cc5JILpk.s:104    .text.FLASH_OB_GetWRP:00000008 $d
+  C:\Temp\cc5JILpk.s:107    .text.FLASH_OB_GetRDP:00000000 $t
+  C:\Temp\cc5JILpk.s:112    .text.FLASH_OB_GetRDP:00000000 FLASH_OB_GetRDP
+  C:\Temp\cc5JILpk.s:131    .text.FLASH_OB_GetRDP:00000018 $d
+  C:\Temp\cc5JILpk.s:134    .text.FLASH_OB_GetBOR:00000000 $t
+  C:\Temp\cc5JILpk.s:139    .text.FLASH_OB_GetBOR:00000000 FLASH_OB_GetBOR
+  C:\Temp\cc5JILpk.s:150    .text.FLASH_OB_GetBOR:0000000c $d
+  C:\Temp\cc5JILpk.s:153    .text.FLASH_OB_EnableWRP:00000000 $t
+  C:\Temp\cc5JILpk.s:158    .text.FLASH_OB_EnableWRP:00000000 FLASH_OB_EnableWRP
+  C:\Temp\cc5JILpk.s:176    .text.FLASH_OB_EnableWRP:0000001c $d
+  C:\Temp\cc5JILpk.s:179    .text.FLASH_OB_DisableWRP:00000000 $t
+  C:\Temp\cc5JILpk.s:184    .text.FLASH_OB_DisableWRP:00000000 FLASH_OB_DisableWRP
+  C:\Temp\cc5JILpk.s:203    .text.FLASH_OB_DisableWRP:0000001c $d
+  C:\Temp\cc5JILpk.s:206    .text.FLASH_OB_RDP_LevelConfig:00000000 $t
+  C:\Temp\cc5JILpk.s:211    .text.FLASH_OB_RDP_LevelConfig:00000000 FLASH_OB_RDP_LevelConfig
+  C:\Temp\cc5JILpk.s:226    .text.FLASH_OB_RDP_LevelConfig:00000014 $d
+  C:\Temp\cc5JILpk.s:229    .text.FLASH_OB_UserConfig:00000000 $t
+  C:\Temp\cc5JILpk.s:234    .text.FLASH_OB_UserConfig:00000000 FLASH_OB_UserConfig
+  C:\Temp\cc5JILpk.s:256    .text.FLASH_OB_UserConfig:00000028 $d
+  C:\Temp\cc5JILpk.s:259    .text.FLASH_OB_EnablePCROP:00000000 $t
+  C:\Temp\cc5JILpk.s:264    .text.FLASH_OB_EnablePCROP:00000000 FLASH_OB_EnablePCROP
+  C:\Temp\cc5JILpk.s:283    .text.FLASH_OB_EnablePCROP:0000001c $d
+  C:\Temp\cc5JILpk.s:286    .text.FLASH_OB_DisablePCROP:00000000 $t
+  C:\Temp\cc5JILpk.s:291    .text.FLASH_OB_DisablePCROP:00000000 FLASH_OB_DisablePCROP
+  C:\Temp\cc5JILpk.s:309    .text.FLASH_OB_DisablePCROP:0000001c $d
+  C:\Temp\cc5JILpk.s:312    .text.HAL_FLASHEx_OBProgram:00000000 $t
+  C:\Temp\cc5JILpk.s:318    .text.HAL_FLASHEx_OBProgram:00000000 HAL_FLASHEx_OBProgram
+  C:\Temp\cc5JILpk.s:385    .text.HAL_FLASHEx_OBProgram:00000080 $d
+  C:\Temp\cc5JILpk.s:388    .text.HAL_FLASHEx_OBGetConfig:00000000 $t
+  C:\Temp\cc5JILpk.s:394    .text.HAL_FLASHEx_OBGetConfig:00000000 HAL_FLASHEx_OBGetConfig
+  C:\Temp\cc5JILpk.s:412    .text.HAL_FLASHEx_AdvOBProgram:00000000 $t
+  C:\Temp\cc5JILpk.s:418    .text.HAL_FLASHEx_AdvOBProgram:00000000 HAL_FLASHEx_AdvOBProgram
+  C:\Temp\cc5JILpk.s:441    .text.HAL_FLASHEx_AdvOBGetConfig:00000000 $t
+  C:\Temp\cc5JILpk.s:447    .text.HAL_FLASHEx_AdvOBGetConfig:00000000 HAL_FLASHEx_AdvOBGetConfig
+  C:\Temp\cc5JILpk.s:458    .text.HAL_FLASHEx_AdvOBGetConfig:00000008 $d
+  C:\Temp\cc5JILpk.s:461    .text.HAL_FLASHEx_OB_SelectPCROP:00000000 $t
+  C:\Temp\cc5JILpk.s:467    .text.HAL_FLASHEx_OB_SelectPCROP:00000000 HAL_FLASHEx_OB_SelectPCROP
+  C:\Temp\cc5JILpk.s:480    .text.HAL_FLASHEx_OB_SelectPCROP:00000010 $d
+  C:\Temp\cc5JILpk.s:483    .text.HAL_FLASHEx_OB_DeSelectPCROP:00000000 $t
+  C:\Temp\cc5JILpk.s:489    .text.HAL_FLASHEx_OB_DeSelectPCROP:00000000 HAL_FLASHEx_OB_DeSelectPCROP
+  C:\Temp\cc5JILpk.s:502    .text.HAL_FLASHEx_OB_DeSelectPCROP:00000010 $d
+  C:\Temp\cc5JILpk.s:505    .text.FLASH_Erase_Sector:00000000 $t
+  C:\Temp\cc5JILpk.s:511    .text.FLASH_Erase_Sector:00000000 FLASH_Erase_Sector
+  C:\Temp\cc5JILpk.s:549    .text.FLASH_Erase_Sector:00000048 $d
+ARM GAS  C:\Temp\cc5JILpk.s 			page 15
 
 
-  C:\Temp\ccD5G9GX.s:552    .text.HAL_FLASHEx_Erase_IT:00000000 $t
-  C:\Temp\ccD5G9GX.s:558    .text.HAL_FLASHEx_Erase_IT:00000000 HAL_FLASHEx_Erase_IT
-  C:\Temp\ccD5G9GX.s:600    .text.HAL_FLASHEx_Erase_IT:0000004c $d
-  C:\Temp\ccD5G9GX.s:604    .text.FLASH_FlushCaches:00000000 $t
-  C:\Temp\ccD5G9GX.s:610    .text.FLASH_FlushCaches:00000000 FLASH_FlushCaches
-  C:\Temp\ccD5G9GX.s:654    .text.FLASH_FlushCaches:0000005c $d
-  C:\Temp\ccD5G9GX.s:657    .text.HAL_FLASHEx_Erase:00000000 $t
-  C:\Temp\ccD5G9GX.s:663    .text.HAL_FLASHEx_Erase:00000000 HAL_FLASHEx_Erase
-  C:\Temp\ccD5G9GX.s:734    .text.HAL_FLASHEx_Erase:0000008c $d
+  C:\Temp\cc5JILpk.s:552    .text.HAL_FLASHEx_Erase_IT:00000000 $t
+  C:\Temp\cc5JILpk.s:558    .text.HAL_FLASHEx_Erase_IT:00000000 HAL_FLASHEx_Erase_IT
+  C:\Temp\cc5JILpk.s:600    .text.HAL_FLASHEx_Erase_IT:0000004c $d
+  C:\Temp\cc5JILpk.s:604    .text.FLASH_FlushCaches:00000000 $t
+  C:\Temp\cc5JILpk.s:610    .text.FLASH_FlushCaches:00000000 FLASH_FlushCaches
+  C:\Temp\cc5JILpk.s:654    .text.FLASH_FlushCaches:0000005c $d
+  C:\Temp\cc5JILpk.s:657    .text.HAL_FLASHEx_Erase:00000000 $t
+  C:\Temp\cc5JILpk.s:663    .text.HAL_FLASHEx_Erase:00000000 HAL_FLASHEx_Erase
+  C:\Temp\cc5JILpk.s:734    .text.HAL_FLASHEx_Erase:0000008c $d
 
 UNDEFINED SYMBOLS
 FLASH_WaitForLastOperation

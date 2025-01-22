@@ -1,0 +1,824 @@
+ARM GAS  C:\Temp\cc5nynqi.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"stm32f4xx_hal_rcc_ex.c"
+  16              		.text
+  17              		.section	.rodata.HAL_RCCEx_PeriphCLKConfig.str1.4,"aMS",%progbits,1
+  18              		.align	2
+  19              	.LC0:
+  20 0000 44726976 		.ascii	"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_"
+  20      6572732F 
+  20      53544D33 
+  20      32463478 
+  20      785F4841 
+  21 0033 65782E63 		.ascii	"ex.c\000"
+  21      00
+  22              		.section	.text.HAL_RCCEx_PeriphCLKConfig,"ax",%progbits
+  23              		.align	1
+  24              		.global	HAL_RCCEx_PeriphCLKConfig
+  25              		.syntax unified
+  26              		.thumb
+  27              		.thumb_func
+  29              	HAL_RCCEx_PeriphCLKConfig:
+  30              		@ args = 0, pretend = 0, frame = 8
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 30B5     		push	{r4, r5, lr}
+  33 0002 83B0     		sub	sp, sp, #12
+  34 0004 0446     		mov	r4, r0
+  35 0006 0368     		ldr	r3, [r0]
+  36 0008 013B     		subs	r3, r3, #1
+  37 000a 0E2B     		cmp	r3, #14
+  38 000c 23D8     		bhi	.L27
+  39              	.L2:
+  40 000e 2368     		ldr	r3, [r4]
+  41 0010 13F0050F 		tst	r3, #5
+  42 0014 53D0     		beq	.L3
+  43 0016 E368     		ldr	r3, [r4, #12]
+  44 0018 023B     		subs	r3, r3, #2
+  45 001a 052B     		cmp	r3, #5
+  46 001c 21D8     		bhi	.L28
+  47              	.L4:
+  48 001e A368     		ldr	r3, [r4, #8]
+  49 0020 323B     		subs	r3, r3, #50
+  50 0022 B3F5BF7F 		cmp	r3, #382
+  51 0026 22D8     		bhi	.L29
+  52              	.L5:
+  53 0028 6368     		ldr	r3, [r4, #4]
+ARM GAS  C:\Temp\cc5nynqi.s 			page 2
+
+
+  54 002a 023B     		subs	r3, r3, #2
+  55 002c 3D2B     		cmp	r3, #61
+  56 002e 24D8     		bhi	.L30
+  57              	.L6:
+  58 0030 A14B     		ldr	r3, .L36
+  59 0032 0022     		movs	r2, #0
+  60 0034 9A66     		str	r2, [r3, #104]
+  61 0036 FFF7FEFF 		bl	HAL_GetTick
+  62 003a 0546     		mov	r5, r0
+  63              	.L7:
+  64 003c 9F4B     		ldr	r3, .L36+4
+  65 003e 1B68     		ldr	r3, [r3]
+  66 0040 13F0006F 		tst	r3, #134217728
+  67 0044 1FD0     		beq	.L31
+  68 0046 FFF7FEFF 		bl	HAL_GetTick
+  69 004a 431B     		subs	r3, r0, r5
+  70 004c 022B     		cmp	r3, #2
+  71 004e F5D9     		bls	.L7
+  72 0050 0320     		movs	r0, #3
+  73              	.L8:
+  74 0052 03B0     		add	sp, sp, #12
+  75              		@ sp needed
+  76 0054 30BD     		pop	{r4, r5, pc}
+  77              	.L27:
+  78 0056 40F6FD11 		movw	r1, #2557
+  79 005a 9948     		ldr	r0, .L36+8
+  80 005c FFF7FEFF 		bl	assert_failed
+  81 0060 D5E7     		b	.L2
+  82              	.L28:
+  83 0062 40F60421 		movw	r1, #2564
+  84 0066 9648     		ldr	r0, .L36+8
+  85 0068 FFF7FEFF 		bl	assert_failed
+  86 006c D7E7     		b	.L4
+  87              	.L29:
+  88 006e 40F60521 		movw	r1, #2565
+  89 0072 9348     		ldr	r0, .L36+8
+  90 0074 FFF7FEFF 		bl	assert_failed
+  91 0078 D6E7     		b	.L5
+  92              	.L30:
+  93 007a 40F60721 		movw	r1, #2567
+  94 007e 9048     		ldr	r0, .L36+8
+  95 0080 FFF7FEFF 		bl	assert_failed
+  96 0084 D4E7     		b	.L6
+  97              	.L31:
+  98 0086 6368     		ldr	r3, [r4, #4]
+  99 0088 A268     		ldr	r2, [r4, #8]
+ 100 008a 43EA8213 		orr	r3, r3, r2, lsl #6
+ 101 008e E268     		ldr	r2, [r4, #12]
+ 102 0090 43EA0273 		orr	r3, r3, r2, lsl #28
+ 103 0094 894A     		ldr	r2, .L36+4
+ 104 0096 C2F88430 		str	r3, [r2, #132]
+ 105 009a 874B     		ldr	r3, .L36
+ 106 009c 0122     		movs	r2, #1
+ 107 009e 9A66     		str	r2, [r3, #104]
+ 108 00a0 FFF7FEFF 		bl	HAL_GetTick
+ 109 00a4 0546     		mov	r5, r0
+ 110              	.L10:
+ARM GAS  C:\Temp\cc5nynqi.s 			page 3
+
+
+ 111 00a6 854B     		ldr	r3, .L36+4
+ 112 00a8 1B68     		ldr	r3, [r3]
+ 113 00aa 13F0006F 		tst	r3, #134217728
+ 114 00ae 06D1     		bne	.L3
+ 115 00b0 FFF7FEFF 		bl	HAL_GetTick
+ 116 00b4 401B     		subs	r0, r0, r5
+ 117 00b6 0228     		cmp	r0, #2
+ 118 00b8 F5D9     		bls	.L10
+ 119 00ba 0320     		movs	r0, #3
+ 120 00bc C9E7     		b	.L8
+ 121              	.L3:
+ 122 00be 2368     		ldr	r3, [r4]
+ 123 00c0 13F0020F 		tst	r3, #2
+ 124 00c4 00F0D080 		beq	.L12
+ 125 00c8 2369     		ldr	r3, [r4, #16]
+ 126 00ca B3F5807F 		cmp	r3, #256
+ 127 00ce 79D0     		beq	.L13
+ 128 00d0 B3F5007F 		cmp	r3, #512
+ 129 00d4 76D0     		beq	.L13
+ 130 00d6 7B4A     		ldr	r2, .L36+12
+ 131 00d8 9342     		cmp	r3, r2
+ 132 00da 73D0     		beq	.L13
+ 133 00dc 02F58032 		add	r2, r2, #65536
+ 134 00e0 9342     		cmp	r3, r2
+ 135 00e2 6FD0     		beq	.L13
+ 136 00e4 02F58032 		add	r2, r2, #65536
+ 137 00e8 9342     		cmp	r3, r2
+ 138 00ea 6BD0     		beq	.L13
+ 139 00ec 02F58032 		add	r2, r2, #65536
+ 140 00f0 9342     		cmp	r3, r2
+ 141 00f2 67D0     		beq	.L13
+ 142 00f4 02F58032 		add	r2, r2, #65536
+ 143 00f8 9342     		cmp	r3, r2
+ 144 00fa 63D0     		beq	.L13
+ 145 00fc 02F58032 		add	r2, r2, #65536
+ 146 0100 9342     		cmp	r3, r2
+ 147 0102 5FD0     		beq	.L13
+ 148 0104 02F58032 		add	r2, r2, #65536
+ 149 0108 9342     		cmp	r3, r2
+ 150 010a 5BD0     		beq	.L13
+ 151 010c 02F58032 		add	r2, r2, #65536
+ 152 0110 9342     		cmp	r3, r2
+ 153 0112 57D0     		beq	.L13
+ 154 0114 02F58032 		add	r2, r2, #65536
+ 155 0118 9342     		cmp	r3, r2
+ 156 011a 53D0     		beq	.L13
+ 157 011c 02F58032 		add	r2, r2, #65536
+ 158 0120 9342     		cmp	r3, r2
+ 159 0122 4FD0     		beq	.L13
+ 160 0124 02F58032 		add	r2, r2, #65536
+ 161 0128 9342     		cmp	r3, r2
+ 162 012a 4BD0     		beq	.L13
+ 163 012c 02F58032 		add	r2, r2, #65536
+ 164 0130 9342     		cmp	r3, r2
+ 165 0132 47D0     		beq	.L13
+ 166 0134 02F58032 		add	r2, r2, #65536
+ 167 0138 9342     		cmp	r3, r2
+ARM GAS  C:\Temp\cc5nynqi.s 			page 4
+
+
+ 168 013a 43D0     		beq	.L13
+ 169 013c 02F58032 		add	r2, r2, #65536
+ 170 0140 9342     		cmp	r3, r2
+ 171 0142 3FD0     		beq	.L13
+ 172 0144 02F58032 		add	r2, r2, #65536
+ 173 0148 9342     		cmp	r3, r2
+ 174 014a 3BD0     		beq	.L13
+ 175 014c 02F58032 		add	r2, r2, #65536
+ 176 0150 9342     		cmp	r3, r2
+ 177 0152 37D0     		beq	.L13
+ 178 0154 02F58032 		add	r2, r2, #65536
+ 179 0158 9342     		cmp	r3, r2
+ 180 015a 33D0     		beq	.L13
+ 181 015c 02F58032 		add	r2, r2, #65536
+ 182 0160 9342     		cmp	r3, r2
+ 183 0162 2FD0     		beq	.L13
+ 184 0164 02F58032 		add	r2, r2, #65536
+ 185 0168 9342     		cmp	r3, r2
+ 186 016a 2BD0     		beq	.L13
+ 187 016c 02F58032 		add	r2, r2, #65536
+ 188 0170 9342     		cmp	r3, r2
+ 189 0172 27D0     		beq	.L13
+ 190 0174 02F58032 		add	r2, r2, #65536
+ 191 0178 9342     		cmp	r3, r2
+ 192 017a 23D0     		beq	.L13
+ 193 017c 02F58032 		add	r2, r2, #65536
+ 194 0180 9342     		cmp	r3, r2
+ 195 0182 1FD0     		beq	.L13
+ 196 0184 02F58032 		add	r2, r2, #65536
+ 197 0188 9342     		cmp	r3, r2
+ 198 018a 1BD0     		beq	.L13
+ 199 018c 02F58032 		add	r2, r2, #65536
+ 200 0190 9342     		cmp	r3, r2
+ 201 0192 17D0     		beq	.L13
+ 202 0194 02F58032 		add	r2, r2, #65536
+ 203 0198 9342     		cmp	r3, r2
+ 204 019a 13D0     		beq	.L13
+ 205 019c 02F58032 		add	r2, r2, #65536
+ 206 01a0 9342     		cmp	r3, r2
+ 207 01a2 0FD0     		beq	.L13
+ 208 01a4 02F58032 		add	r2, r2, #65536
+ 209 01a8 9342     		cmp	r3, r2
+ 210 01aa 0BD0     		beq	.L13
+ 211 01ac 02F58032 		add	r2, r2, #65536
+ 212 01b0 9342     		cmp	r3, r2
+ 213 01b2 07D0     		beq	.L13
+ 214 01b4 02F58032 		add	r2, r2, #65536
+ 215 01b8 9342     		cmp	r3, r2
+ 216 01ba 03D0     		beq	.L13
+ 217 01bc 02F58032 		add	r2, r2, #65536
+ 218 01c0 9342     		cmp	r3, r2
+ 219 01c2 1FD1     		bne	.L32
+ 220              	.L13:
+ 221 01c4 0023     		movs	r3, #0
+ 222 01c6 0193     		str	r3, [sp, #4]
+ 223 01c8 3C4B     		ldr	r3, .L36+4
+ 224 01ca 1A6C     		ldr	r2, [r3, #64]
+ARM GAS  C:\Temp\cc5nynqi.s 			page 5
+
+
+ 225 01cc 42F08052 		orr	r2, r2, #268435456
+ 226 01d0 1A64     		str	r2, [r3, #64]
+ 227 01d2 1B6C     		ldr	r3, [r3, #64]
+ 228 01d4 03F08053 		and	r3, r3, #268435456
+ 229 01d8 0193     		str	r3, [sp, #4]
+ 230 01da 019B     		ldr	r3, [sp, #4]
+ 231 01dc 3A4A     		ldr	r2, .L36+16
+ 232 01de 1368     		ldr	r3, [r2]
+ 233 01e0 43F48073 		orr	r3, r3, #256
+ 234 01e4 1360     		str	r3, [r2]
+ 235 01e6 FFF7FEFF 		bl	HAL_GetTick
+ 236 01ea 0546     		mov	r5, r0
+ 237              	.L14:
+ 238 01ec 364B     		ldr	r3, .L36+16
+ 239 01ee 1B68     		ldr	r3, [r3]
+ 240 01f0 13F4807F 		tst	r3, #256
+ 241 01f4 0CD1     		bne	.L33
+ 242 01f6 FFF7FEFF 		bl	HAL_GetTick
+ 243 01fa 431B     		subs	r3, r0, r5
+ 244 01fc 022B     		cmp	r3, #2
+ 245 01fe F5D9     		bls	.L14
+ 246 0200 0320     		movs	r0, #3
+ 247 0202 26E7     		b	.L8
+ 248              	.L32:
+ 249 0204 40F63721 		movw	r1, #2615
+ 250 0208 2D48     		ldr	r0, .L36+8
+ 251 020a FFF7FEFF 		bl	assert_failed
+ 252 020e D9E7     		b	.L13
+ 253              	.L33:
+ 254 0210 2A4B     		ldr	r3, .L36+4
+ 255 0212 1B6F     		ldr	r3, [r3, #112]
+ 256 0214 13F44073 		ands	r3, r3, #768
+ 257 0218 14D0     		beq	.L16
+ 258 021a 2269     		ldr	r2, [r4, #16]
+ 259 021c 02F44072 		and	r2, r2, #768
+ 260 0220 9A42     		cmp	r2, r3
+ 261 0222 0FD0     		beq	.L16
+ 262 0224 254B     		ldr	r3, .L36+4
+ 263 0226 1A6F     		ldr	r2, [r3, #112]
+ 264 0228 22F44072 		bic	r2, r2, #768
+ 265 022c 2249     		ldr	r1, .L36
+ 266 022e 0120     		movs	r0, #1
+ 267 0230 C1F8400E 		str	r0, [r1, #3648]
+ 268 0234 0020     		movs	r0, #0
+ 269 0236 C1F8400E 		str	r0, [r1, #3648]
+ 270 023a 1A67     		str	r2, [r3, #112]
+ 271 023c 1B6F     		ldr	r3, [r3, #112]
+ 272 023e 13F0010F 		tst	r3, #1
+ 273 0242 1BD1     		bne	.L34
+ 274              	.L16:
+ 275 0244 2369     		ldr	r3, [r4, #16]
+ 276 0246 03F44072 		and	r2, r3, #768
+ 277 024a B2F5407F 		cmp	r2, #768
+ 278 024e 26D0     		beq	.L35
+ 279 0250 1A4A     		ldr	r2, .L36+4
+ 280 0252 9368     		ldr	r3, [r2, #8]
+ 281 0254 23F4F813 		bic	r3, r3, #2031616
+ARM GAS  C:\Temp\cc5nynqi.s 			page 6
+
+
+ 282 0258 9360     		str	r3, [r2, #8]
+ 283              	.L20:
+ 284 025a 1849     		ldr	r1, .L36+4
+ 285 025c 0B6F     		ldr	r3, [r1, #112]
+ 286 025e 2269     		ldr	r2, [r4, #16]
+ 287 0260 C2F30B02 		ubfx	r2, r2, #0, #12
+ 288 0264 1343     		orrs	r3, r3, r2
+ 289 0266 0B67     		str	r3, [r1, #112]
+ 290              	.L12:
+ 291 0268 2368     		ldr	r3, [r4]
+ 292 026a 13F0080F 		tst	r3, #8
+ 293 026e 21D0     		beq	.L25
+ 294 0270 227D     		ldrb	r2, [r4, #20]	@ zero_extendqisi2
+ 295 0272 164B     		ldr	r3, .L36+20
+ 296 0274 C3F8E021 		str	r2, [r3, #480]
+ 297 0278 0020     		movs	r0, #0
+ 298 027a EAE6     		b	.L8
+ 299              	.L34:
+ 300 027c FFF7FEFF 		bl	HAL_GetTick
+ 301 0280 0546     		mov	r5, r0
+ 302              	.L17:
+ 303 0282 0E4B     		ldr	r3, .L36+4
+ 304 0284 1B6F     		ldr	r3, [r3, #112]
+ 305 0286 13F0020F 		tst	r3, #2
+ 306 028a DBD1     		bne	.L16
+ 307 028c FFF7FEFF 		bl	HAL_GetTick
+ 308 0290 401B     		subs	r0, r0, r5
+ 309 0292 41F28833 		movw	r3, #5000
+ 310 0296 9842     		cmp	r0, r3
+ 311 0298 F3D9     		bls	.L17
+ 312 029a 0320     		movs	r0, #3
+ 313 029c D9E6     		b	.L8
+ 314              	.L35:
+ 315 029e 0749     		ldr	r1, .L36+4
+ 316 02a0 8A68     		ldr	r2, [r1, #8]
+ 317 02a2 22F4F812 		bic	r2, r2, #2031616
+ 318 02a6 23F07043 		bic	r3, r3, #-268435456
+ 319 02aa 23F44073 		bic	r3, r3, #768
+ 320 02ae 1343     		orrs	r3, r3, r2
+ 321 02b0 8B60     		str	r3, [r1, #8]
+ 322 02b2 D2E7     		b	.L20
+ 323              	.L25:
+ 324 02b4 0020     		movs	r0, #0
+ 325 02b6 CCE6     		b	.L8
+ 326              	.L37:
+ 327              		.align	2
+ 328              	.L36:
+ 329 02b8 00004742 		.word	1111949312
+ 330 02bc 00380240 		.word	1073887232
+ 331 02c0 00000000 		.word	.LC0
+ 332 02c4 00030200 		.word	131840
+ 333 02c8 00700040 		.word	1073770496
+ 334 02cc 00104742 		.word	1111953408
+ 336              		.section	.text.HAL_RCCEx_GetPeriphCLKConfig,"ax",%progbits
+ 337              		.align	1
+ 338              		.global	HAL_RCCEx_GetPeriphCLKConfig
+ 339              		.syntax unified
+ARM GAS  C:\Temp\cc5nynqi.s 			page 7
+
+
+ 340              		.thumb
+ 341              		.thumb_func
+ 343              	HAL_RCCEx_GetPeriphCLKConfig:
+ 344              		@ args = 0, pretend = 0, frame = 0
+ 345              		@ frame_needed = 0, uses_anonymous_args = 0
+ 346              		@ link register save eliminated.
+ 347 0000 0323     		movs	r3, #3
+ 348 0002 0360     		str	r3, [r0]
+ 349 0004 114B     		ldr	r3, .L41
+ 350 0006 D3F88420 		ldr	r2, [r3, #132]
+ 351 000a C2F38812 		ubfx	r2, r2, #6, #9
+ 352 000e 8260     		str	r2, [r0, #8]
+ 353 0010 D3F88420 		ldr	r2, [r3, #132]
+ 354 0014 C2F30272 		ubfx	r2, r2, #28, #3
+ 355 0018 C260     		str	r2, [r0, #12]
+ 356 001a D3F88420 		ldr	r2, [r3, #132]
+ 357 001e 02F03F02 		and	r2, r2, #63
+ 358 0022 4260     		str	r2, [r0, #4]
+ 359 0024 9968     		ldr	r1, [r3, #8]
+ 360 0026 01F4F811 		and	r1, r1, #2031616
+ 361 002a 1A6F     		ldr	r2, [r3, #112]
+ 362 002c 02F44072 		and	r2, r2, #768
+ 363 0030 0A43     		orrs	r2, r2, r1
+ 364 0032 0261     		str	r2, [r0, #16]
+ 365 0034 D3F88C30 		ldr	r3, [r3, #140]
+ 366 0038 13F0807F 		tst	r3, #16777216
+ 367 003c 02D1     		bne	.L39
+ 368 003e 0023     		movs	r3, #0
+ 369 0040 0375     		strb	r3, [r0, #20]
+ 370 0042 7047     		bx	lr
+ 371              	.L39:
+ 372 0044 0123     		movs	r3, #1
+ 373 0046 0375     		strb	r3, [r0, #20]
+ 374 0048 7047     		bx	lr
+ 375              	.L42:
+ 376 004a 00BF     		.align	2
+ 377              	.L41:
+ 378 004c 00380240 		.word	1073887232
+ 380              		.section	.text.HAL_RCCEx_GetPeriphCLKFreq,"ax",%progbits
+ 381              		.align	1
+ 382              		.global	HAL_RCCEx_GetPeriphCLKFreq
+ 383              		.syntax unified
+ 384              		.thumb
+ 385              		.thumb_func
+ 387              	HAL_RCCEx_GetPeriphCLKFreq:
+ 388              		@ args = 0, pretend = 0, frame = 0
+ 389              		@ frame_needed = 0, uses_anonymous_args = 0
+ 390              		@ link register save eliminated.
+ 391 0000 0128     		cmp	r0, #1
+ 392 0002 01D0     		beq	.L50
+ 393 0004 0020     		movs	r0, #0
+ 394 0006 7047     		bx	lr
+ 395              	.L50:
+ 396 0008 164B     		ldr	r3, .L51
+ 397 000a 9B68     		ldr	r3, [r3, #8]
+ 398 000c 13F40003 		ands	r3, r3, #8388608
+ 399 0010 02D0     		beq	.L45
+ARM GAS  C:\Temp\cc5nynqi.s 			page 8
+
+
+ 400 0012 2BB3     		cbz	r3, .L49
+ 401 0014 1448     		ldr	r0, .L51+4
+ 402 0016 7047     		bx	lr
+ 403              	.L45:
+ 404 0018 124B     		ldr	r3, .L51
+ 405 001a 5B68     		ldr	r3, [r3, #4]
+ 406 001c 13F4800F 		tst	r3, #4194304
+ 407 0020 15D0     		beq	.L46
+ 408 0022 104B     		ldr	r3, .L51
+ 409 0024 D3F88420 		ldr	r2, [r3, #132]
+ 410 0028 02F03F02 		and	r2, r2, #63
+ 411 002c 0F4B     		ldr	r3, .L51+8
+ 412 002e B3FBF2F3 		udiv	r3, r3, r2
+ 413              	.L47:
+ 414 0032 0C4A     		ldr	r2, .L51
+ 415 0034 D2F88400 		ldr	r0, [r2, #132]
+ 416 0038 C0F38810 		ubfx	r0, r0, #6, #9
+ 417 003c 03FB00F0 		mul	r0, r3, r0
+ 418 0040 D2F88430 		ldr	r3, [r2, #132]
+ 419 0044 C3F30273 		ubfx	r3, r3, #28, #3
+ 420 0048 B0FBF3F0 		udiv	r0, r0, r3
+ 421 004c 7047     		bx	lr
+ 422              	.L46:
+ 423 004e 054B     		ldr	r3, .L51
+ 424 0050 D3F88420 		ldr	r2, [r3, #132]
+ 425 0054 02F03F02 		and	r2, r2, #63
+ 426 0058 054B     		ldr	r3, .L51+12
+ 427 005a B3FBF2F3 		udiv	r3, r3, r2
+ 428 005e E8E7     		b	.L47
+ 429              	.L49:
+ 430 0060 0020     		movs	r0, #0
+ 431 0062 7047     		bx	lr
+ 432              	.L52:
+ 433              		.align	2
+ 434              	.L51:
+ 435 0064 00380240 		.word	1073887232
+ 436 0068 0080BB00 		.word	12288000
+ 437 006c 00127A00 		.word	8000000
+ 438 0070 0024F400 		.word	16000000
+ 440              		.section	.text.HAL_RCCEx_SelectLSEMode,"ax",%progbits
+ 441              		.align	1
+ 442              		.global	HAL_RCCEx_SelectLSEMode
+ 443              		.syntax unified
+ 444              		.thumb
+ 445              		.thumb_func
+ 447              	HAL_RCCEx_SelectLSEMode:
+ 448              		@ args = 0, pretend = 0, frame = 0
+ 449              		@ frame_needed = 0, uses_anonymous_args = 0
+ 450 0000 10B5     		push	{r4, lr}
+ 451 0002 0446     		mov	r4, r0
+ 452 0004 0128     		cmp	r0, #1
+ 453 0006 07D8     		bhi	.L58
+ 454              	.L54:
+ 455 0008 012C     		cmp	r4, #1
+ 456 000a 0BD0     		beq	.L59
+ 457 000c 084A     		ldr	r2, .L60
+ 458 000e 136F     		ldr	r3, [r2, #112]
+ARM GAS  C:\Temp\cc5nynqi.s 			page 9
+
+
+ 459 0010 23F00803 		bic	r3, r3, #8
+ 460 0014 1367     		str	r3, [r2, #112]
+ 461              	.L53:
+ 462 0016 10BD     		pop	{r4, pc}
+ 463              	.L58:
+ 464 0018 40F6FC21 		movw	r1, #2812
+ 465 001c 0548     		ldr	r0, .L60+4
+ 466 001e FFF7FEFF 		bl	assert_failed
+ 467 0022 F1E7     		b	.L54
+ 468              	.L59:
+ 469 0024 024A     		ldr	r2, .L60
+ 470 0026 136F     		ldr	r3, [r2, #112]
+ 471 0028 43F00803 		orr	r3, r3, #8
+ 472 002c 1367     		str	r3, [r2, #112]
+ 473 002e F2E7     		b	.L53
+ 474              	.L61:
+ 475              		.align	2
+ 476              	.L60:
+ 477 0030 00380240 		.word	1073887232
+ 478 0034 00000000 		.word	.LC0
+ 480              		.section	.text.HAL_RCCEx_EnablePLLI2S,"ax",%progbits
+ 481              		.align	1
+ 482              		.global	HAL_RCCEx_EnablePLLI2S
+ 483              		.syntax unified
+ 484              		.thumb
+ 485              		.thumb_func
+ 487              	HAL_RCCEx_EnablePLLI2S:
+ 488              		@ args = 0, pretend = 0, frame = 0
+ 489              		@ frame_needed = 0, uses_anonymous_args = 0
+ 490 0000 38B5     		push	{r3, r4, r5, lr}
+ 491 0002 0546     		mov	r5, r0
+ 492 0004 4368     		ldr	r3, [r0, #4]
+ 493 0006 323B     		subs	r3, r3, #50
+ 494 0008 B3F5BF7F 		cmp	r3, #382
+ 495 000c 19D8     		bhi	.L74
+ 496              	.L63:
+ 497 000e AB68     		ldr	r3, [r5, #8]
+ 498 0010 023B     		subs	r3, r3, #2
+ 499 0012 052B     		cmp	r3, #5
+ 500 0014 1BD8     		bhi	.L75
+ 501              	.L64:
+ 502 0016 2B68     		ldr	r3, [r5]
+ 503 0018 023B     		subs	r3, r3, #2
+ 504 001a 3D2B     		cmp	r3, #61
+ 505 001c 1DD8     		bhi	.L76
+ 506              	.L65:
+ 507 001e 214B     		ldr	r3, .L79
+ 508 0020 0022     		movs	r2, #0
+ 509 0022 9A66     		str	r2, [r3, #104]
+ 510 0024 FFF7FEFF 		bl	HAL_GetTick
+ 511 0028 0446     		mov	r4, r0
+ 512              	.L66:
+ 513 002a 1F4B     		ldr	r3, .L79+4
+ 514 002c 1B68     		ldr	r3, [r3]
+ 515 002e 13F0006F 		tst	r3, #134217728
+ 516 0032 18D0     		beq	.L77
+ 517 0034 FFF7FEFF 		bl	HAL_GetTick
+ARM GAS  C:\Temp\cc5nynqi.s 			page 10
+
+
+ 518 0038 001B     		subs	r0, r0, r4
+ 519 003a 0228     		cmp	r0, #2
+ 520 003c F5D9     		bls	.L66
+ 521 003e 0320     		movs	r0, #3
+ 522              	.L67:
+ 523 0040 38BD     		pop	{r3, r4, r5, pc}
+ 524              	.L74:
+ 525 0042 40F62331 		movw	r1, #2851
+ 526 0046 1948     		ldr	r0, .L79+8
+ 527 0048 FFF7FEFF 		bl	assert_failed
+ 528 004c DFE7     		b	.L63
+ 529              	.L75:
+ 530 004e 40F62431 		movw	r1, #2852
+ 531 0052 1648     		ldr	r0, .L79+8
+ 532 0054 FFF7FEFF 		bl	assert_failed
+ 533 0058 DDE7     		b	.L64
+ 534              	.L76:
+ 535 005a 40F62631 		movw	r1, #2854
+ 536 005e 1348     		ldr	r0, .L79+8
+ 537 0060 FFF7FEFF 		bl	assert_failed
+ 538 0064 DBE7     		b	.L65
+ 539              	.L77:
+ 540 0066 2B68     		ldr	r3, [r5]
+ 541 0068 6A68     		ldr	r2, [r5, #4]
+ 542 006a 43EA8213 		orr	r3, r3, r2, lsl #6
+ 543 006e AA68     		ldr	r2, [r5, #8]
+ 544 0070 43EA0273 		orr	r3, r3, r2, lsl #28
+ 545 0074 0C4A     		ldr	r2, .L79+4
+ 546 0076 C2F88430 		str	r3, [r2, #132]
+ 547 007a 0A4B     		ldr	r3, .L79
+ 548 007c 0122     		movs	r2, #1
+ 549 007e 9A66     		str	r2, [r3, #104]
+ 550 0080 FFF7FEFF 		bl	HAL_GetTick
+ 551 0084 0446     		mov	r4, r0
+ 552              	.L69:
+ 553 0086 084B     		ldr	r3, .L79+4
+ 554 0088 1B68     		ldr	r3, [r3]
+ 555 008a 13F0006F 		tst	r3, #134217728
+ 556 008e 06D1     		bne	.L78
+ 557 0090 FFF7FEFF 		bl	HAL_GetTick
+ 558 0094 001B     		subs	r0, r0, r4
+ 559 0096 0228     		cmp	r0, #2
+ 560 0098 F5D9     		bls	.L69
+ 561 009a 0320     		movs	r0, #3
+ 562 009c D0E7     		b	.L67
+ 563              	.L78:
+ 564 009e 0020     		movs	r0, #0
+ 565 00a0 CEE7     		b	.L67
+ 566              	.L80:
+ 567 00a2 00BF     		.align	2
+ 568              	.L79:
+ 569 00a4 00004742 		.word	1111949312
+ 570 00a8 00380240 		.word	1073887232
+ 571 00ac 00000000 		.word	.LC0
+ 573              		.section	.text.HAL_RCCEx_DisablePLLI2S,"ax",%progbits
+ 574              		.align	1
+ 575              		.global	HAL_RCCEx_DisablePLLI2S
+ARM GAS  C:\Temp\cc5nynqi.s 			page 11
+
+
+ 576              		.syntax unified
+ 577              		.thumb
+ 578              		.thumb_func
+ 580              	HAL_RCCEx_DisablePLLI2S:
+ 581              		@ args = 0, pretend = 0, frame = 0
+ 582              		@ frame_needed = 0, uses_anonymous_args = 0
+ 583 0000 10B5     		push	{r4, lr}
+ 584 0002 0A4B     		ldr	r3, .L88
+ 585 0004 0022     		movs	r2, #0
+ 586 0006 9A66     		str	r2, [r3, #104]
+ 587 0008 FFF7FEFF 		bl	HAL_GetTick
+ 588 000c 0446     		mov	r4, r0
+ 589              	.L82:
+ 590 000e 084B     		ldr	r3, .L88+4
+ 591 0010 1B68     		ldr	r3, [r3]
+ 592 0012 13F0006F 		tst	r3, #134217728
+ 593 0016 06D0     		beq	.L87
+ 594 0018 FFF7FEFF 		bl	HAL_GetTick
+ 595 001c 001B     		subs	r0, r0, r4
+ 596 001e 0228     		cmp	r0, #2
+ 597 0020 F5D9     		bls	.L82
+ 598 0022 0320     		movs	r0, #3
+ 599 0024 00E0     		b	.L83
+ 600              	.L87:
+ 601 0026 0020     		movs	r0, #0
+ 602              	.L83:
+ 603 0028 10BD     		pop	{r4, pc}
+ 604              	.L89:
+ 605 002a 00BF     		.align	2
+ 606              	.L88:
+ 607 002c 00004742 		.word	1111949312
+ 608 0030 00380240 		.word	1073887232
+ 610              		.section	.text.HAL_RCC_DeInit,"ax",%progbits
+ 611              		.align	1
+ 612              		.global	HAL_RCC_DeInit
+ 613              		.syntax unified
+ 614              		.thumb
+ 615              		.thumb_func
+ 617              	HAL_RCC_DeInit:
+ 618              		@ args = 0, pretend = 0, frame = 0
+ 619              		@ frame_needed = 0, uses_anonymous_args = 0
+ 620 0000 38B5     		push	{r3, r4, r5, lr}
+ 621 0002 FFF7FEFF 		bl	HAL_GetTick
+ 622 0006 0446     		mov	r4, r0
+ 623 0008 474A     		ldr	r2, .L113
+ 624 000a 1368     		ldr	r3, [r2]
+ 625 000c 43F00103 		orr	r3, r3, #1
+ 626 0010 1360     		str	r3, [r2]
+ 627              	.L91:
+ 628 0012 454B     		ldr	r3, .L113
+ 629 0014 1B68     		ldr	r3, [r3]
+ 630 0016 13F0020F 		tst	r3, #2
+ 631 001a 06D1     		bne	.L108
+ 632 001c FFF7FEFF 		bl	HAL_GetTick
+ 633 0020 001B     		subs	r0, r0, r4
+ 634 0022 0228     		cmp	r0, #2
+ 635 0024 F5D9     		bls	.L91
+ARM GAS  C:\Temp\cc5nynqi.s 			page 12
+
+
+ 636 0026 0320     		movs	r0, #3
+ 637              	.L92:
+ 638 0028 38BD     		pop	{r3, r4, r5, pc}
+ 639              	.L108:
+ 640 002a 3F4D     		ldr	r5, .L113
+ 641 002c 2B68     		ldr	r3, [r5]
+ 642 002e 43F08003 		orr	r3, r3, #128
+ 643 0032 2B60     		str	r3, [r5]
+ 644 0034 FFF7FEFF 		bl	HAL_GetTick
+ 645 0038 0446     		mov	r4, r0
+ 646 003a 0023     		movs	r3, #0
+ 647 003c AB60     		str	r3, [r5, #8]
+ 648              	.L94:
+ 649 003e 3A4B     		ldr	r3, .L113
+ 650 0040 9B68     		ldr	r3, [r3, #8]
+ 651 0042 13F00C0F 		tst	r3, #12
+ 652 0046 08D0     		beq	.L109
+ 653 0048 FFF7FEFF 		bl	HAL_GetTick
+ 654 004c 001B     		subs	r0, r0, r4
+ 655 004e 41F28833 		movw	r3, #5000
+ 656 0052 9842     		cmp	r0, r3
+ 657 0054 F3D9     		bls	.L94
+ 658 0056 0320     		movs	r0, #3
+ 659 0058 E6E7     		b	.L92
+ 660              	.L109:
+ 661 005a FFF7FEFF 		bl	HAL_GetTick
+ 662 005e 0446     		mov	r4, r0
+ 663 0060 314A     		ldr	r2, .L113
+ 664 0062 1368     		ldr	r3, [r2]
+ 665 0064 23F45023 		bic	r3, r3, #851968
+ 666 0068 1360     		str	r3, [r2]
+ 667              	.L96:
+ 668 006a 2F4B     		ldr	r3, .L113
+ 669 006c 1B68     		ldr	r3, [r3]
+ 670 006e 13F4003F 		tst	r3, #131072
+ 671 0072 06D0     		beq	.L110
+ 672 0074 FFF7FEFF 		bl	HAL_GetTick
+ 673 0078 001B     		subs	r0, r0, r4
+ 674 007a 6428     		cmp	r0, #100
+ 675 007c F5D9     		bls	.L96
+ 676 007e 0320     		movs	r0, #3
+ 677 0080 D2E7     		b	.L92
+ 678              	.L110:
+ 679 0082 FFF7FEFF 		bl	HAL_GetTick
+ 680 0086 0446     		mov	r4, r0
+ 681 0088 274A     		ldr	r2, .L113
+ 682 008a 1368     		ldr	r3, [r2]
+ 683 008c 23F08073 		bic	r3, r3, #16777216
+ 684 0090 1360     		str	r3, [r2]
+ 685              	.L98:
+ 686 0092 254B     		ldr	r3, .L113
+ 687 0094 1B68     		ldr	r3, [r3]
+ 688 0096 13F0007F 		tst	r3, #33554432
+ 689 009a 06D0     		beq	.L111
+ 690 009c FFF7FEFF 		bl	HAL_GetTick
+ 691 00a0 001B     		subs	r0, r0, r4
+ 692 00a2 0228     		cmp	r0, #2
+ARM GAS  C:\Temp\cc5nynqi.s 			page 13
+
+
+ 693 00a4 F5D9     		bls	.L98
+ 694 00a6 0320     		movs	r0, #3
+ 695 00a8 BEE7     		b	.L92
+ 696              	.L111:
+ 697 00aa FFF7FEFF 		bl	HAL_GetTick
+ 698 00ae 0446     		mov	r4, r0
+ 699 00b0 1D4A     		ldr	r2, .L113
+ 700 00b2 1368     		ldr	r3, [r2]
+ 701 00b4 23F08063 		bic	r3, r3, #67108864
+ 702 00b8 1360     		str	r3, [r2]
+ 703              	.L100:
+ 704 00ba 1B4B     		ldr	r3, .L113
+ 705 00bc 1B68     		ldr	r3, [r3]
+ 706 00be 13F0006F 		tst	r3, #134217728
+ 707 00c2 06D0     		beq	.L112
+ 708 00c4 FFF7FEFF 		bl	HAL_GetTick
+ 709 00c8 001B     		subs	r0, r0, r4
+ 710 00ca 0228     		cmp	r0, #2
+ 711 00cc F5D9     		bls	.L100
+ 712 00ce 0320     		movs	r0, #3
+ 713 00d0 AAE7     		b	.L92
+ 714              	.L112:
+ 715 00d2 154B     		ldr	r3, .L113
+ 716 00d4 154A     		ldr	r2, .L113+4
+ 717 00d6 5A60     		str	r2, [r3, #4]
+ 718 00d8 02F1E052 		add	r2, r2, #469762048
+ 719 00dc C3F88420 		str	r2, [r3, #132]
+ 720 00e0 DA68     		ldr	r2, [r3, #12]
+ 721 00e2 22F4F852 		bic	r2, r2, #7936
+ 722 00e6 DA60     		str	r2, [r3, #12]
+ 723 00e8 DA68     		ldr	r2, [r3, #12]
+ 724 00ea 22F40052 		bic	r2, r2, #8192
+ 725 00ee DA60     		str	r2, [r3, #12]
+ 726 00f0 DA68     		ldr	r2, [r3, #12]
+ 727 00f2 42F41F02 		orr	r2, r2, #10420224
+ 728 00f6 DA60     		str	r2, [r3, #12]
+ 729 00f8 DA68     		ldr	r2, [r3, #12]
+ 730 00fa 42F40012 		orr	r2, r2, #2097152
+ 731 00fe DA60     		str	r2, [r3, #12]
+ 732 0100 5A6F     		ldr	r2, [r3, #116]
+ 733 0102 22F00102 		bic	r2, r2, #1
+ 734 0106 5A67     		str	r2, [r3, #116]
+ 735 0108 5A6F     		ldr	r2, [r3, #116]
+ 736 010a 42F08072 		orr	r2, r2, #16777216
+ 737 010e 5A67     		str	r2, [r3, #116]
+ 738 0110 074B     		ldr	r3, .L113+8
+ 739 0112 084A     		ldr	r2, .L113+12
+ 740 0114 1A60     		str	r2, [r3]
+ 741 0116 084B     		ldr	r3, .L113+16
+ 742 0118 1868     		ldr	r0, [r3]
+ 743 011a FFF7FEFF 		bl	HAL_InitTick
+ 744 011e 0028     		cmp	r0, #0
+ 745 0120 82D0     		beq	.L92
+ 746 0122 0120     		movs	r0, #1
+ 747 0124 80E7     		b	.L92
+ 748              	.L114:
+ 749 0126 00BF     		.align	2
+ARM GAS  C:\Temp\cc5nynqi.s 			page 14
+
+
+ 750              	.L113:
+ 751 0128 00380240 		.word	1073887232
+ 752 012c 10300004 		.word	67121168
+ 753 0130 00000000 		.word	SystemCoreClock
+ 754 0134 0024F400 		.word	16000000
+ 755 0138 00000000 		.word	uwTickPrio
+ 757              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\cc5nynqi.s 			page 15
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f4xx_hal_rcc_ex.c
+  C:\Temp\cc5nynqi.s:18     .rodata.HAL_RCCEx_PeriphCLKConfig.str1.4:00000000 $d
+  C:\Temp\cc5nynqi.s:23     .text.HAL_RCCEx_PeriphCLKConfig:00000000 $t
+  C:\Temp\cc5nynqi.s:29     .text.HAL_RCCEx_PeriphCLKConfig:00000000 HAL_RCCEx_PeriphCLKConfig
+  C:\Temp\cc5nynqi.s:329    .text.HAL_RCCEx_PeriphCLKConfig:000002b8 $d
+  C:\Temp\cc5nynqi.s:337    .text.HAL_RCCEx_GetPeriphCLKConfig:00000000 $t
+  C:\Temp\cc5nynqi.s:343    .text.HAL_RCCEx_GetPeriphCLKConfig:00000000 HAL_RCCEx_GetPeriphCLKConfig
+  C:\Temp\cc5nynqi.s:378    .text.HAL_RCCEx_GetPeriphCLKConfig:0000004c $d
+  C:\Temp\cc5nynqi.s:381    .text.HAL_RCCEx_GetPeriphCLKFreq:00000000 $t
+  C:\Temp\cc5nynqi.s:387    .text.HAL_RCCEx_GetPeriphCLKFreq:00000000 HAL_RCCEx_GetPeriphCLKFreq
+  C:\Temp\cc5nynqi.s:435    .text.HAL_RCCEx_GetPeriphCLKFreq:00000064 $d
+  C:\Temp\cc5nynqi.s:441    .text.HAL_RCCEx_SelectLSEMode:00000000 $t
+  C:\Temp\cc5nynqi.s:447    .text.HAL_RCCEx_SelectLSEMode:00000000 HAL_RCCEx_SelectLSEMode
+  C:\Temp\cc5nynqi.s:477    .text.HAL_RCCEx_SelectLSEMode:00000030 $d
+  C:\Temp\cc5nynqi.s:481    .text.HAL_RCCEx_EnablePLLI2S:00000000 $t
+  C:\Temp\cc5nynqi.s:487    .text.HAL_RCCEx_EnablePLLI2S:00000000 HAL_RCCEx_EnablePLLI2S
+  C:\Temp\cc5nynqi.s:569    .text.HAL_RCCEx_EnablePLLI2S:000000a4 $d
+  C:\Temp\cc5nynqi.s:574    .text.HAL_RCCEx_DisablePLLI2S:00000000 $t
+  C:\Temp\cc5nynqi.s:580    .text.HAL_RCCEx_DisablePLLI2S:00000000 HAL_RCCEx_DisablePLLI2S
+  C:\Temp\cc5nynqi.s:607    .text.HAL_RCCEx_DisablePLLI2S:0000002c $d
+  C:\Temp\cc5nynqi.s:611    .text.HAL_RCC_DeInit:00000000 $t
+  C:\Temp\cc5nynqi.s:617    .text.HAL_RCC_DeInit:00000000 HAL_RCC_DeInit
+  C:\Temp\cc5nynqi.s:751    .text.HAL_RCC_DeInit:00000128 $d
+
+UNDEFINED SYMBOLS
+HAL_GetTick
+assert_failed
+HAL_InitTick
+SystemCoreClock
+uwTickPrio

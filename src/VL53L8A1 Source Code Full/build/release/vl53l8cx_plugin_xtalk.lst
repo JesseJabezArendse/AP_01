@@ -1,0 +1,1067 @@
+ARM GAS  C:\Temp\ccmOjQIz.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"vl53l8cx_plugin_xtalk.c"
+  16              		.text
+  17              		.section	.text._vl53l8cx_poll_for_answer,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  23              	_vl53l8cx_poll_for_answer:
+  24              		@ args = 0, pretend = 0, frame = 0
+  25              		@ frame_needed = 0, uses_anonymous_args = 0
+  26 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+  27 0004 0546     		mov	r5, r0
+  28 0006 0F46     		mov	r7, r1
+  29 0008 9046     		mov	r8, r2
+  30 000a 0026     		movs	r6, #0
+  31 000c 3446     		mov	r4, r6
+  32              	.L5:
+  33 000e 0423     		movs	r3, #4
+  34 0010 05F5A262 		add	r2, r5, #1296
+  35 0014 3946     		mov	r1, r7
+  36 0016 2846     		mov	r0, r5
+  37 0018 FFF7FEFF 		bl	VL53L8CX_RdMulti
+  38 001c 0443     		orrs	r4, r4, r0
+  39 001e E4B2     		uxtb	r4, r4
+  40 0020 0A21     		movs	r1, #10
+  41 0022 2846     		mov	r0, r5
+  42 0024 FFF7FEFF 		bl	VL53L8CX_WaitMs
+  43 0028 0443     		orrs	r4, r4, r0
+  44 002a E4B2     		uxtb	r4, r4
+  45 002c C72E     		cmp	r6, #199
+  46 002e 0AD8     		bhi	.L2
+  47 0030 95F81235 		ldrb	r3, [r5, #1298]	@ zero_extendqisi2
+  48 0034 7E2B     		cmp	r3, #126
+  49 0036 06D8     		bhi	.L2
+  50 0038 0136     		adds	r6, r6, #1
+  51 003a F6B2     		uxtb	r6, r6
+  52 003c 95F81135 		ldrb	r3, [r5, #1297]	@ zero_extendqisi2
+  53 0040 4345     		cmp	r3, r8
+  54 0042 E4D1     		bne	.L5
+  55 0044 01E0     		b	.L4
+  56              	.L2:
+  57 0046 44F04204 		orr	r4, r4, #66
+  58              	.L4:
+ARM GAS  C:\Temp\ccmOjQIz.s 			page 2
+
+
+  59 004a 2046     		mov	r0, r4
+  60 004c BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+  62              		.section	.text._vl53l8cx_program_output_config,"ax",%progbits
+  63              		.align	1
+  64              		.syntax unified
+  65              		.thumb
+  66              		.thumb_func
+  68              	_vl53l8cx_program_output_config:
+  69              		@ args = 0, pretend = 0, frame = 96
+  70              		@ frame_needed = 0, uses_anonymous_args = 0
+  71 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  72 0002 99B0     		sub	sp, sp, #100
+  73 0004 0546     		mov	r5, r0
+  74 0006 0024     		movs	r4, #0
+  75 0008 1594     		str	r4, [sp, #84]
+  76 000a 1694     		str	r4, [sp, #88]
+  77 000c 0DF15F01 		add	r1, sp, #95
+  78 0010 FFF7FEFF 		bl	vl53l8cx_get_resolution
+  79 0014 0646     		mov	r6, r0
+  80 0016 6C61     		str	r4, [r5, #20]
+  81 0018 404F     		ldr	r7, .L17
+  82 001a 0DF1440C 		add	ip, sp, #68
+  83 001e 97E80F00 		ldm	r7, {r0, r1, r2, r3}
+  84 0022 8CE80F00 		stm	ip, {r0, r1, r2, r3}
+  85 0026 4422     		movs	r2, #68
+  86 0028 07F11001 		add	r1, r7, #16
+  87 002c 6846     		mov	r0, sp
+  88 002e FFF7FEFF 		bl	memcpy
+  89 0032 13E0     		b	.L8
+  90              	.L11:
+  91 0034 9DF85F00 		ldrb	r0, [sp, #95]	@ zero_extendqisi2
+  92 0038 3DF80210 		ldrh	r1, [sp, r2]
+  93 003c 60F30F11 		bfi	r1, r0, #4, #12
+  94 0040 2DF80210 		strh	r1, [sp, r2]	@ movhi
+  95 0044 3BE0     		b	.L12
+  96              	.L10:
+  97 0046 6B69     		ldr	r3, [r5, #20]
+  98 0048 3DF80220 		ldrh	r2, [sp, r2]
+  99 004c C2F30B12 		ubfx	r2, r2, #4, #12
+ 100 0050 1344     		add	r3, r3, r2
+ 101 0052 6B61     		str	r3, [r5, #20]
+ 102              	.L13:
+ 103 0054 6B69     		ldr	r3, [r5, #20]
+ 104 0056 0433     		adds	r3, r3, #4
+ 105 0058 6B61     		str	r3, [r5, #20]
+ 106              	.L9:
+ 107 005a 0134     		adds	r4, r4, #1
+ 108              	.L8:
+ 109 005c 102C     		cmp	r4, #16
+ 110 005e 37D8     		bhi	.L16
+ 111 0060 18AB     		add	r3, sp, #96
+ 112 0062 03EB8403 		add	r3, r3, r4, lsl #2
+ 113 0066 53F8603C 		ldr	r3, [r3, #-96]
+ 114 006a 002B     		cmp	r3, #0
+ 115 006c F5D0     		beq	.L9
+ 116 006e 6309     		lsrs	r3, r4, #5
+ 117 0070 18AA     		add	r2, sp, #96
+ARM GAS  C:\Temp\ccmOjQIz.s 			page 3
+
+
+ 118 0072 02EB8303 		add	r3, r2, r3, lsl #2
+ 119 0076 53F81C3C 		ldr	r3, [r3, #-28]
+ 120 007a 04F01F02 		and	r2, r4, #31
+ 121 007e D340     		lsrs	r3, r3, r2
+ 122 0080 13F0010F 		tst	r3, #1
+ 123 0084 E9D0     		beq	.L9
+ 124 0086 A200     		lsls	r2, r4, #2
+ 125 0088 0DEB8401 		add	r1, sp, r4, lsl #2
+ 126 008c 1DF82430 		ldrb	r3, [sp, r4, lsl #2]	@ zero_extendqisi2
+ 127 0090 13F00F0F 		tst	r3, #15
+ 128 0094 D7D0     		beq	.L10
+ 129 0096 03F00F03 		and	r3, r3, #15
+ 130 009a 0C2B     		cmp	r3, #12
+ 131 009c D3D8     		bhi	.L10
+ 132 009e 4988     		ldrh	r1, [r1, #2]
+ 133 00a0 A1F5A941 		sub	r1, r1, #21632
+ 134 00a4 5039     		subs	r1, r1, #80
+ 135 00a6 89B2     		uxth	r1, r1
+ 136 00a8 B1F5707F 		cmp	r1, #960
+ 137 00ac C2D2     		bcs	.L11
+ 138 00ae 9DF85F00 		ldrb	r0, [sp, #95]	@ zero_extendqisi2
+ 139 00b2 3DF80210 		ldrh	r1, [sp, r2]
+ 140 00b6 60F30F11 		bfi	r1, r0, #4, #12
+ 141 00ba 2DF80210 		strh	r1, [sp, r2]	@ movhi
+ 142              	.L12:
+ 143 00be 6969     		ldr	r1, [r5, #20]
+ 144 00c0 3DF80220 		ldrh	r2, [sp, r2]
+ 145 00c4 C2F30B12 		ubfx	r2, r2, #4, #12
+ 146 00c8 02FB0311 		mla	r1, r2, r3, r1
+ 147 00cc 6961     		str	r1, [r5, #20]
+ 148 00ce C1E7     		b	.L13
+ 149              	.L16:
+ 150 00d0 6B69     		ldr	r3, [r5, #20]
+ 151 00d2 1833     		adds	r3, r3, #24
+ 152 00d4 6B61     		str	r3, [r5, #20]
+ 153 00d6 4423     		movs	r3, #68
+ 154 00d8 4DF68012 		movw	r2, #55680
+ 155 00dc 6946     		mov	r1, sp
+ 156 00de 2846     		mov	r0, r5
+ 157 00e0 FFF7FEFF 		bl	vl53l8cx_dci_write_data
+ 158 00e4 0643     		orrs	r6, r6, r0
+ 159 00e6 F6B2     		uxtb	r6, r6
+ 160 00e8 6B69     		ldr	r3, [r5, #20]
+ 161 00ea 1593     		str	r3, [sp, #84]
+ 162 00ec 0134     		adds	r4, r4, #1
+ 163 00ee 1694     		str	r4, [sp, #88]
+ 164 00f0 0823     		movs	r3, #8
+ 165 00f2 4DF66812 		movw	r2, #55656
+ 166 00f6 15A9     		add	r1, sp, #84
+ 167 00f8 2846     		mov	r0, r5
+ 168 00fa FFF7FEFF 		bl	vl53l8cx_dci_write_data
+ 169 00fe 46EA0004 		orr	r4, r6, r0
+ 170 0102 E4B2     		uxtb	r4, r4
+ 171 0104 1023     		movs	r3, #16
+ 172 0106 4DF67012 		movw	r2, #55664
+ 173 010a 11A9     		add	r1, sp, #68
+ 174 010c 2846     		mov	r0, r5
+ARM GAS  C:\Temp\ccmOjQIz.s 			page 4
+
+
+ 175 010e FFF7FEFF 		bl	vl53l8cx_dci_write_data
+ 176 0112 2043     		orrs	r0, r0, r4
+ 177 0114 C0B2     		uxtb	r0, r0
+ 178 0116 19B0     		add	sp, sp, #100
+ 179              		@ sp needed
+ 180 0118 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 181              	.L18:
+ 182 011a 00BF     		.align	2
+ 183              	.L17:
+ 184 011c 00000000 		.word	.LANCHOR0
+ 186              		.section	.text.vl53l8cx_get_caldata_xtalk,"ax",%progbits
+ 187              		.align	1
+ 188              		.global	vl53l8cx_get_caldata_xtalk
+ 189              		.syntax unified
+ 190              		.thumb
+ 191              		.thumb_func
+ 193              	vl53l8cx_get_caldata_xtalk:
+ 194              		@ args = 0, pretend = 0, frame = 16
+ 195              		@ frame_needed = 0, uses_anonymous_args = 0
+ 196 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+ 197 0004 84B0     		sub	sp, sp, #16
+ 198 0006 0546     		mov	r5, r0
+ 199 0008 0F46     		mov	r7, r1
+ 200 000a DFF8A090 		ldr	r9, .L21
+ 201 000e 01AE     		add	r6, sp, #4
+ 202 0010 09F15403 		add	r3, r9, #84
+ 203 0014 93E80300 		ldm	r3, {r0, r1}
+ 204 0018 86E80300 		stm	r6, {r0, r1}
+ 205 001c 0DF10F01 		add	r1, sp, #15
+ 206 0020 2846     		mov	r0, r5
+ 207 0022 FFF7FEFF 		bl	vl53l8cx_get_resolution
+ 208 0026 0446     		mov	r4, r0
+ 209 0028 4021     		movs	r1, #64
+ 210 002a 2846     		mov	r0, r5
+ 211 002c FFF7FEFF 		bl	vl53l8cx_set_resolution
+ 212 0030 0443     		orrs	r4, r4, r0
+ 213 0032 E4B2     		uxtb	r4, r4
+ 214 0034 05F5A268 		add	r8, r5, #1296
+ 215 0038 4FF0480A 		mov	r10, #72
+ 216 003c 5246     		mov	r2, r10
+ 217 003e 09F15C01 		add	r1, r9, #92
+ 218 0042 4046     		mov	r0, r8
+ 219 0044 FFF7FEFF 		bl	memcpy
+ 220 0048 5346     		mov	r3, r10
+ 221 004a 4246     		mov	r2, r8
+ 222 004c 42F6B871 		movw	r1, #12216
+ 223 0050 2846     		mov	r0, r5
+ 224 0052 FFF7FEFF 		bl	VL53L8CX_WrMulti
+ 225 0056 0443     		orrs	r4, r4, r0
+ 226 0058 E4B2     		uxtb	r4, r4
+ 227 005a 0322     		movs	r2, #3
+ 228 005c 4FF43051 		mov	r1, #11264
+ 229 0060 2846     		mov	r0, r5
+ 230 0062 FFF7FEFF 		bl	_vl53l8cx_poll_for_answer
+ 231 0066 0443     		orrs	r4, r4, r0
+ 232 0068 E4B2     		uxtb	r4, r4
+ 233 006a 4FF44373 		mov	r3, #780
+ARM GAS  C:\Temp\ccmOjQIz.s 			page 5
+
+
+ 234 006e 4246     		mov	r2, r8
+ 235 0070 42F60441 		movw	r1, #11268
+ 236 0074 2846     		mov	r0, r5
+ 237 0076 FFF7FEFF 		bl	VL53L8CX_RdMulti
+ 238 007a 0443     		orrs	r4, r4, r0
+ 239 007c E4B2     		uxtb	r4, r4
+ 240 007e 4FF44072 		mov	r2, #768
+ 241 0082 05F5A361 		add	r1, r5, #1304
+ 242 0086 3846     		mov	r0, r7
+ 243 0088 FFF7FEFF 		bl	memcpy
+ 244 008c 03CE     		ldmia	r6!, {r0, r1}
+ 245 008e C7F80003 		str	r0, [r7, #768]	@ unaligned
+ 246 0092 C7F80413 		str	r1, [r7, #772]	@ unaligned
+ 247 0096 9DF80F10 		ldrb	r1, [sp, #15]	@ zero_extendqisi2
+ 248 009a 2846     		mov	r0, r5
+ 249 009c FFF7FEFF 		bl	vl53l8cx_set_resolution
+ 250 00a0 2043     		orrs	r0, r0, r4
+ 251 00a2 C0B2     		uxtb	r0, r0
+ 252 00a4 04B0     		add	sp, sp, #16
+ 253              		@ sp needed
+ 254 00a6 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 255              	.L22:
+ 256 00aa 00BF     		.align	2
+ 257              	.L21:
+ 258 00ac 00000000 		.word	.LANCHOR0
+ 260              		.section	.text.vl53l8cx_set_caldata_xtalk,"ax",%progbits
+ 261              		.align	1
+ 262              		.global	vl53l8cx_set_caldata_xtalk
+ 263              		.syntax unified
+ 264              		.thumb
+ 265              		.thumb_func
+ 267              	vl53l8cx_set_caldata_xtalk:
+ 268              		@ args = 0, pretend = 0, frame = 8
+ 269              		@ frame_needed = 0, uses_anonymous_args = 0
+ 270 0000 70B5     		push	{r4, r5, r6, lr}
+ 271 0002 82B0     		sub	sp, sp, #8
+ 272 0004 0546     		mov	r5, r0
+ 273 0006 0E46     		mov	r6, r1
+ 274 0008 0DF10701 		add	r1, sp, #7
+ 275 000c FFF7FEFF 		bl	vl53l8cx_get_resolution
+ 276 0010 0446     		mov	r4, r0
+ 277 0012 4FF44272 		mov	r2, #776
+ 278 0016 3146     		mov	r1, r6
+ 279 0018 05F50270 		add	r0, r5, #520
+ 280 001c FFF7FEFF 		bl	memcpy
+ 281 0020 9DF80710 		ldrb	r1, [sp, #7]	@ zero_extendqisi2
+ 282 0024 2846     		mov	r0, r5
+ 283 0026 FFF7FEFF 		bl	vl53l8cx_set_resolution
+ 284 002a 2043     		orrs	r0, r0, r4
+ 285 002c C0B2     		uxtb	r0, r0
+ 286 002e 02B0     		add	sp, sp, #8
+ 287              		@ sp needed
+ 288 0030 70BD     		pop	{r4, r5, r6, pc}
+ 290              		.section	.text.vl53l8cx_get_xtalk_margin,"ax",%progbits
+ 291              		.align	1
+ 292              		.global	vl53l8cx_get_xtalk_margin
+ 293              		.syntax unified
+ARM GAS  C:\Temp\ccmOjQIz.s 			page 6
+
+
+ 294              		.thumb
+ 295              		.thumb_func
+ 297              	vl53l8cx_get_xtalk_margin:
+ 298              		@ args = 0, pretend = 0, frame = 0
+ 299              		@ frame_needed = 0, uses_anonymous_args = 0
+ 300 0000 38B5     		push	{r3, r4, r5, lr}
+ 301 0002 0546     		mov	r5, r0
+ 302 0004 0C46     		mov	r4, r1
+ 303 0006 1023     		movs	r3, #16
+ 304 0008 4AF69452 		movw	r2, #44436
+ 305 000c 00F5A261 		add	r1, r0, #1296
+ 306 0010 FFF7FEFF 		bl	vl53l8cx_dci_read_data
+ 307 0014 D5F81035 		ldr	r3, [r5, #1296]	@ unaligned
+ 308 0018 2360     		str	r3, [r4]	@ unaligned
+ 309 001a DB0A     		lsrs	r3, r3, #11
+ 310 001c 2360     		str	r3, [r4]
+ 311 001e 38BD     		pop	{r3, r4, r5, pc}
+ 313              		.section	.text.vl53l8cx_set_xtalk_margin,"ax",%progbits
+ 314              		.align	1
+ 315              		.global	vl53l8cx_set_xtalk_margin
+ 316              		.syntax unified
+ 317              		.thumb
+ 318              		.thumb_func
+ 320              	vl53l8cx_set_xtalk_margin:
+ 321              		@ args = 0, pretend = 0, frame = 8
+ 322              		@ frame_needed = 0, uses_anonymous_args = 0
+ 323 0000 00B5     		push	{lr}
+ 324 0002 87B0     		sub	sp, sp, #28
+ 325 0004 0591     		str	r1, [sp, #20]
+ 326 0006 42F21073 		movw	r3, #10000
+ 327 000a 9942     		cmp	r1, r3
+ 328 000c 03D9     		bls	.L31
+ 329 000e 7F20     		movs	r0, #127
+ 330              	.L28:
+ 331 0010 07B0     		add	sp, sp, #28
+ 332              		@ sp needed
+ 333 0012 5DF804FB 		ldr	pc, [sp], #4
+ 334              	.L31:
+ 335 0016 C902     		lsls	r1, r1, #11
+ 336 0018 0591     		str	r1, [sp, #20]
+ 337 001a 0023     		movs	r3, #0
+ 338 001c 0293     		str	r3, [sp, #8]
+ 339 001e 0423     		movs	r3, #4
+ 340 0020 0193     		str	r3, [sp, #4]
+ 341 0022 05AB     		add	r3, sp, #20
+ 342 0024 0093     		str	r3, [sp]
+ 343 0026 1023     		movs	r3, #16
+ 344 0028 4AF69452 		movw	r2, #44436
+ 345 002c 00F5A261 		add	r1, r0, #1296
+ 346 0030 FFF7FEFF 		bl	vl53l8cx_dci_replace_data
+ 347 0034 ECE7     		b	.L28
+ 349              		.section	.text.vl53l8cx_calibrate_xtalk,"ax",%progbits
+ 350              		.align	1
+ 351              		.global	vl53l8cx_calibrate_xtalk
+ 352              		.syntax unified
+ 353              		.thumb
+ 354              		.thumb_func
+ARM GAS  C:\Temp\ccmOjQIz.s 			page 7
+
+
+ 356              	vl53l8cx_calibrate_xtalk:
+ 357              		@ args = 0, pretend = 0, frame = 40
+ 358              		@ frame_needed = 0, uses_anonymous_args = 0
+ 359 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 360 0004 8FB0     		sub	sp, sp, #60
+ 361 0006 0546     		mov	r5, r0
+ 362 0008 0E46     		mov	r6, r1
+ 363 000a 4FF44071 		mov	r1, #768
+ 364 000e 0D91     		str	r1, [sp, #52]
+ 365 0010 0BAC     		add	r4, sp, #44
+ 366 0012 B549     		ldr	r1, .L43
+ 367 0014 03C9     		ldm	r1, {r0, r1}
+ 368 0016 84E80300 		stm	r4, {r0, r1}
+ 369 001a ADF81A60 		strh	r6, [sp, #26]	@ movhi
+ 370 001e 8DF81920 		strb	r2, [sp, #25]
+ 371 0022 ADF81630 		strh	r3, [sp, #22]	@ movhi
+ 372 0026 0DF12B01 		add	r1, sp, #43
+ 373 002a 2846     		mov	r0, r5
+ 374 002c FFF7FEFF 		bl	vl53l8cx_get_resolution
+ 375 0030 0446     		mov	r4, r0
+ 376 0032 0DF12A01 		add	r1, sp, #42
+ 377 0036 2846     		mov	r0, r5
+ 378 0038 FFF7FEFF 		bl	vl53l8cx_get_ranging_frequency_hz
+ 379 003c 0443     		orrs	r4, r4, r0
+ 380 003e E4B2     		uxtb	r4, r4
+ 381 0040 08A9     		add	r1, sp, #32
+ 382 0042 2846     		mov	r0, r5
+ 383 0044 FFF7FEFF 		bl	vl53l8cx_get_integration_time_ms
+ 384 0048 0443     		orrs	r4, r4, r0
+ 385 004a E4B2     		uxtb	r4, r4
+ 386 004c 0AA9     		add	r1, sp, #40
+ 387 004e 2846     		mov	r0, r5
+ 388 0050 FFF7FEFF 		bl	vl53l8cx_get_sharpener_percent
+ 389 0054 0443     		orrs	r4, r4, r0
+ 390 0056 E4B2     		uxtb	r4, r4
+ 391 0058 0DF12901 		add	r1, sp, #41
+ 392 005c 2846     		mov	r0, r5
+ 393 005e FFF7FEFF 		bl	vl53l8cx_get_target_order
+ 394 0062 0443     		orrs	r4, r4, r0
+ 395 0064 E4B2     		uxtb	r4, r4
+ 396 0066 07A9     		add	r1, sp, #28
+ 397 0068 2846     		mov	r0, r5
+ 398 006a FFF7FEFF 		bl	vl53l8cx_get_xtalk_margin
+ 399 006e 0443     		orrs	r4, r4, r0
+ 400 0070 E4B2     		uxtb	r4, r4
+ 401 0072 0DF12701 		add	r1, sp, #39
+ 402 0076 2846     		mov	r0, r5
+ 403 0078 FFF7FEFF 		bl	vl53l8cx_get_ranging_mode
+ 404 007c 0443     		orrs	r4, r4, r0
+ 405 007e E4B2     		uxtb	r4, r4
+ 406 0080 BDF81A30 		ldrh	r3, [sp, #26]
+ 407 0084 013B     		subs	r3, r3, #1
+ 408 0086 9BB2     		uxth	r3, r3
+ 409 0088 622B     		cmp	r3, #98
+ 410 008a 0DD8     		bhi	.L33
+ 411 008c BDF81630 		ldrh	r3, [sp, #22]
+ 412 0090 A3F51673 		sub	r3, r3, #600
+ARM GAS  C:\Temp\ccmOjQIz.s 			page 8
+
+
+ 413 0094 9BB2     		uxth	r3, r3
+ 414 0096 B3F5166F 		cmp	r3, #2400
+ 415 009a 05D8     		bhi	.L33
+ 416 009c 9DF81930 		ldrb	r3, [sp, #25]	@ zero_extendqisi2
+ 417 00a0 013B     		subs	r3, r3, #1
+ 418 00a2 DBB2     		uxtb	r3, r3
+ 419 00a4 0F2B     		cmp	r3, #15
+ 420 00a6 76D9     		bls	.L34
+ 421              	.L33:
+ 422 00a8 44F07F04 		orr	r4, r4, #127
+ 423              	.L35:
+ 424 00ac 05F5A267 		add	r7, r5, #1296
+ 425 00b0 4826     		movs	r6, #72
+ 426 00b2 3246     		mov	r2, r6
+ 427 00b4 8D49     		ldr	r1, .L43+4
+ 428 00b6 3846     		mov	r0, r7
+ 429 00b8 FFF7FEFF 		bl	memcpy
+ 430 00bc 3346     		mov	r3, r6
+ 431 00be 3A46     		mov	r2, r7
+ 432 00c0 42F6B871 		movw	r1, #12216
+ 433 00c4 2846     		mov	r0, r5
+ 434 00c6 FFF7FEFF 		bl	VL53L8CX_WrMulti
+ 435 00ca 0443     		orrs	r4, r4, r0
+ 436 00cc E4B2     		uxtb	r4, r4
+ 437 00ce 0322     		movs	r2, #3
+ 438 00d0 4FF43051 		mov	r1, #11264
+ 439 00d4 2846     		mov	r0, r5
+ 440 00d6 FFF7FEFF 		bl	_vl53l8cx_poll_for_answer
+ 441 00da 0443     		orrs	r4, r4, r0
+ 442 00dc E4B2     		uxtb	r4, r4
+ 443 00de 4FF44373 		mov	r3, #780
+ 444 00e2 3A46     		mov	r2, r7
+ 445 00e4 42F60441 		movw	r1, #11268
+ 446 00e8 2846     		mov	r0, r5
+ 447 00ea FFF7FEFF 		bl	VL53L8CX_RdMulti
+ 448 00ee 0443     		orrs	r4, r4, r0
+ 449 00f0 E4B2     		uxtb	r4, r4
+ 450 00f2 4FF44072 		mov	r2, #768
+ 451 00f6 05F5A361 		add	r1, r5, #1304
+ 452 00fa 05F50270 		add	r0, r5, #520
+ 453 00fe FFF7FEFF 		bl	memcpy
+ 454 0102 0BAB     		add	r3, sp, #44
+ 455 0104 03CB     		ldmia	r3!, {r0, r1}
+ 456 0106 C5F80805 		str	r0, [r5, #1288]	@ unaligned
+ 457 010a C5F80C15 		str	r1, [r5, #1292]	@ unaligned
+ 458 010e 4FF47373 		mov	r3, #972
+ 459 0112 AA69     		ldr	r2, [r5, #24]
+ 460 0114 42F63441 		movw	r1, #11316
+ 461 0118 2846     		mov	r0, r5
+ 462 011a FFF7FEFF 		bl	VL53L8CX_WrMulti
+ 463 011e 0443     		orrs	r4, r4, r0
+ 464 0120 E4B2     		uxtb	r4, r4
+ 465 0122 0322     		movs	r2, #3
+ 466 0124 4FF43051 		mov	r1, #11264
+ 467 0128 2846     		mov	r0, r5
+ 468 012a FFF7FEFF 		bl	_vl53l8cx_poll_for_answer
+ 469 012e 0443     		orrs	r4, r4, r0
+ARM GAS  C:\Temp\ccmOjQIz.s 			page 9
+
+
+ 470 0130 E4B2     		uxtb	r4, r4
+ 471 0132 9DF82B10 		ldrb	r1, [sp, #43]	@ zero_extendqisi2
+ 472 0136 2846     		mov	r0, r5
+ 473 0138 FFF7FEFF 		bl	vl53l8cx_set_resolution
+ 474 013c 0443     		orrs	r4, r4, r0
+ 475 013e E4B2     		uxtb	r4, r4
+ 476 0140 9DF82A10 		ldrb	r1, [sp, #42]	@ zero_extendqisi2
+ 477 0144 2846     		mov	r0, r5
+ 478 0146 FFF7FEFF 		bl	vl53l8cx_set_ranging_frequency_hz
+ 479 014a 0443     		orrs	r4, r4, r0
+ 480 014c E4B2     		uxtb	r4, r4
+ 481 014e 0899     		ldr	r1, [sp, #32]
+ 482 0150 2846     		mov	r0, r5
+ 483 0152 FFF7FEFF 		bl	vl53l8cx_set_integration_time_ms
+ 484 0156 0443     		orrs	r4, r4, r0
+ 485 0158 E4B2     		uxtb	r4, r4
+ 486 015a 9DF82810 		ldrb	r1, [sp, #40]	@ zero_extendqisi2
+ 487 015e 2846     		mov	r0, r5
+ 488 0160 FFF7FEFF 		bl	vl53l8cx_set_sharpener_percent
+ 489 0164 0443     		orrs	r4, r4, r0
+ 490 0166 E4B2     		uxtb	r4, r4
+ 491 0168 9DF82910 		ldrb	r1, [sp, #41]	@ zero_extendqisi2
+ 492 016c 2846     		mov	r0, r5
+ 493 016e FFF7FEFF 		bl	vl53l8cx_set_target_order
+ 494 0172 0443     		orrs	r4, r4, r0
+ 495 0174 E4B2     		uxtb	r4, r4
+ 496 0176 0799     		ldr	r1, [sp, #28]
+ 497 0178 2846     		mov	r0, r5
+ 498 017a FFF7FEFF 		bl	vl53l8cx_set_xtalk_margin
+ 499 017e 0443     		orrs	r4, r4, r0
+ 500 0180 E4B2     		uxtb	r4, r4
+ 501 0182 9DF82710 		ldrb	r1, [sp, #39]	@ zero_extendqisi2
+ 502 0186 2846     		mov	r0, r5
+ 503 0188 FFF7FEFF 		bl	vl53l8cx_set_ranging_mode
+ 504 018c 2043     		orrs	r0, r0, r4
+ 505 018e C0B2     		uxtb	r0, r0
+ 506 0190 0FB0     		add	sp, sp, #60
+ 507              		@ sp needed
+ 508 0192 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 509              	.L34:
+ 510 0196 4021     		movs	r1, #64
+ 511 0198 2846     		mov	r0, r5
+ 512 019a FFF7FEFF 		bl	vl53l8cx_set_resolution
+ 513 019e 0443     		orrs	r4, r4, r0
+ 514 01a0 E4B2     		uxtb	r4, r4
+ 515 01a2 05F5A266 		add	r6, r5, #1296
+ 516 01a6 4FF47677 		mov	r7, #984
+ 517 01aa 3A46     		mov	r2, r7
+ 518 01ac 5049     		ldr	r1, .L43+8
+ 519 01ae 3046     		mov	r0, r6
+ 520 01b0 FFF7FEFF 		bl	memcpy
+ 521 01b4 3B46     		mov	r3, r7
+ 522 01b6 3246     		mov	r2, r6
+ 523 01b8 42F62841 		movw	r1, #11304
+ 524 01bc 2846     		mov	r0, r5
+ 525 01be FFF7FEFF 		bl	VL53L8CX_WrMulti
+ 526 01c2 0443     		orrs	r4, r4, r0
+ARM GAS  C:\Temp\ccmOjQIz.s 			page 10
+
+
+ 527 01c4 E4B2     		uxtb	r4, r4
+ 528 01c6 0322     		movs	r2, #3
+ 529 01c8 4FF43051 		mov	r1, #11264
+ 530 01cc 2846     		mov	r0, r5
+ 531 01ce FFF7FEFF 		bl	_vl53l8cx_poll_for_answer
+ 532 01d2 0443     		orrs	r4, r4, r0
+ 533 01d4 E4B2     		uxtb	r4, r4
+ 534 01d6 BDF81A30 		ldrh	r3, [sp, #26]
+ 535 01da 1B01     		lsls	r3, r3, #4
+ 536 01dc ADF81A30 		strh	r3, [sp, #26]	@ movhi
+ 537 01e0 BDF81630 		ldrh	r3, [sp, #22]
+ 538 01e4 9B00     		lsls	r3, r3, #2
+ 539 01e6 ADF81630 		strh	r3, [sp, #22]	@ movhi
+ 540 01ea 4FF00008 		mov	r8, #0
+ 541 01ee CDF80880 		str	r8, [sp, #8]
+ 542 01f2 0227     		movs	r7, #2
+ 543 01f4 0197     		str	r7, [sp, #4]
+ 544 01f6 0DF11603 		add	r3, sp, #22
+ 545 01fa 0093     		str	r3, [sp]
+ 546 01fc 0823     		movs	r3, #8
+ 547 01fe 45F27042 		movw	r2, #21616
+ 548 0202 3146     		mov	r1, r6
+ 549 0204 2846     		mov	r0, r5
+ 550 0206 FFF7FEFF 		bl	vl53l8cx_dci_replace_data
+ 551 020a 0443     		orrs	r4, r4, r0
+ 552 020c E4B2     		uxtb	r4, r4
+ 553 020e 0297     		str	r7, [sp, #8]
+ 554 0210 0197     		str	r7, [sp, #4]
+ 555 0212 0DF11A03 		add	r3, sp, #26
+ 556 0216 0093     		str	r3, [sp]
+ 557 0218 0823     		movs	r3, #8
+ 558 021a 45F27042 		movw	r2, #21616
+ 559 021e 3146     		mov	r1, r6
+ 560 0220 2846     		mov	r0, r5
+ 561 0222 FFF7FEFF 		bl	vl53l8cx_dci_replace_data
+ 562 0226 0443     		orrs	r4, r4, r0
+ 563 0228 E4B2     		uxtb	r4, r4
+ 564 022a 4FF00409 		mov	r9, #4
+ 565 022e CDF80890 		str	r9, [sp, #8]
+ 566 0232 0127     		movs	r7, #1
+ 567 0234 0197     		str	r7, [sp, #4]
+ 568 0236 0DF11903 		add	r3, sp, #25
+ 569 023a 0093     		str	r3, [sp]
+ 570 023c 0823     		movs	r3, #8
+ 571 023e 45F27042 		movw	r2, #21616
+ 572 0242 3146     		mov	r1, r6
+ 573 0244 2846     		mov	r0, r5
+ 574 0246 FFF7FEFF 		bl	vl53l8cx_dci_replace_data
+ 575 024a 0443     		orrs	r4, r4, r0
+ 576 024c E4B2     		uxtb	r4, r4
+ 577 024e 2846     		mov	r0, r5
+ 578 0250 FFF7FEFF 		bl	_vl53l8cx_program_output_config
+ 579 0254 0443     		orrs	r4, r4, r0
+ 580 0256 E4B2     		uxtb	r4, r4
+ 581 0258 4B46     		mov	r3, r9
+ 582 025a 0DAA     		add	r2, sp, #52
+ 583 025c 42F6FC71 		movw	r1, #12284
+ARM GAS  C:\Temp\ccmOjQIz.s 			page 11
+
+
+ 584 0260 2846     		mov	r0, r5
+ 585 0262 FFF7FEFF 		bl	VL53L8CX_WrMulti
+ 586 0266 0443     		orrs	r4, r4, r0
+ 587 0268 E4B2     		uxtb	r4, r4
+ 588 026a 0322     		movs	r2, #3
+ 589 026c 4FF43051 		mov	r1, #11264
+ 590 0270 2846     		mov	r0, r5
+ 591 0272 FFF7FEFF 		bl	_vl53l8cx_poll_for_answer
+ 592 0276 0443     		orrs	r4, r4, r0
+ 593 0278 E4B2     		uxtb	r4, r4
+ 594 027a 11E0     		b	.L38
+ 595              	.L36:
+ 596 027c B8F5C87F 		cmp	r8, #400
+ 597 0280 2FD2     		bcs	.L41
+ 598 0282 08F10108 		add	r8, r8, #1
+ 599 0286 1FFA88F8 		uxth	r8, r8
+ 600 028a 3221     		movs	r1, #50
+ 601 028c 2846     		mov	r0, r5
+ 602 028e FFF7FEFF 		bl	VL53L8CX_WaitMs
+ 603 0292 2043     		orrs	r0, r0, r4
+ 604 0294 C4B2     		uxtb	r4, r0
+ 605 0296 00E0     		b	.L37
+ 606              	.L39:
+ 607 0298 0027     		movs	r7, #0
+ 608              	.L37:
+ 609 029a 002F     		cmp	r7, #0
+ 610 029c 3FF406AF 		beq	.L35
+ 611              	.L38:
+ 612 02a0 0423     		movs	r3, #4
+ 613 02a2 3246     		mov	r2, r6
+ 614 02a4 0021     		movs	r1, #0
+ 615 02a6 2846     		mov	r0, r5
+ 616 02a8 FFF7FEFF 		bl	VL53L8CX_RdMulti
+ 617 02ac 2043     		orrs	r0, r0, r4
+ 618 02ae C4B2     		uxtb	r4, r0
+ 619 02b0 95F81035 		ldrb	r3, [r5, #1296]	@ zero_extendqisi2
+ 620 02b4 FF2B     		cmp	r3, #255
+ 621 02b6 E1D0     		beq	.L36
+ 622 02b8 95F81235 		ldrb	r3, [r5, #1298]	@ zero_extendqisi2
+ 623 02bc 7E2B     		cmp	r3, #126
+ 624 02be EBD9     		bls	.L39
+ 625 02c0 95F81335 		ldrb	r3, [r5, #1299]	@ zero_extendqisi2
+ 626 02c4 DB09     		lsrs	r3, r3, #7
+ 627 02c6 0AD0     		beq	.L40
+ 628 02c8 4FF44272 		mov	r2, #776
+ 629 02cc E969     		ldr	r1, [r5, #28]
+ 630 02ce 05F50270 		add	r0, r5, #520
+ 631 02d2 FFF7FEFF 		bl	memcpy
+ 632 02d6 44F00404 		orr	r4, r4, #4
+ 633 02da 0027     		movs	r7, #0
+ 634 02dc DDE7     		b	.L37
+ 635              	.L40:
+ 636 02de 0027     		movs	r7, #0
+ 637 02e0 DBE7     		b	.L37
+ 638              	.L41:
+ 639 02e2 1C46     		mov	r4, r3
+ 640 02e4 0027     		movs	r7, #0
+ARM GAS  C:\Temp\ccmOjQIz.s 			page 12
+
+
+ 641 02e6 D8E7     		b	.L37
+ 642              	.L44:
+ 643              		.align	2
+ 644              	.L43:
+ 645 02e8 54000000 		.word	.LANCHOR0+84
+ 646 02ec 5C000000 		.word	.LANCHOR0+92
+ 647 02f0 A4000000 		.word	.LANCHOR0+164
+ 649              		.section	.rodata
+ 650              		.align	2
+ 651              		.set	.LANCHOR0,. + 0
+ 652              	.LC0:
+ 653 0000 FFFF0100 		.word	131071
+ 654 0004 00000000 		.word	0
+ 655 0008 00000000 		.word	0
+ 656 000c 000000C0 		.word	-1073741824
+ 657              	.LC1:
+ 658 0010 0D000000 		.word	13
+ 659 0014 40000054 		.word	1409286208
+ 660 0018 C000D89F 		.word	-1613233984
+ 661 001c 4001E49F 		.word	-1612447424
+ 662 0020 4000F89F 		.word	-1611136960
+ 663 0024 0404FC9F 		.word	-1610873852
+ 664 0028 0001FCA0 		.word	-1594097408
+ 665 002c 00010CA1 		.word	-1593048832
+ 666 0030 C0001CA1 		.word	-1592000320
+ 667 0034 020928A1 		.word	-1591211774
+ 668 0038 400048A2 		.word	-1572339648
+ 669 003c 81004CA2 		.word	-1572077439
+ 670 0040 810054A2 		.word	-1571553151
+ 671 0044 81005CA2 		.word	-1571028863
+ 672 0048 810064A2 		.word	-1570504575
+ 673 004c 84006CA2 		.word	-1569980284
+ 674 0050 82008CA2 		.word	-1567883134
+ 675              	.LC2:
+ 676 0054 0000000F 		.ascii	"\000\000\000\017\000\001\003\004"
+ 676      00010304 
+ 677              	.LC3:
+ 678 005c 54000040 		.ascii	"T\000\000@\237\330\000\300\237\344\001@\237\370\000"
+ 678      9FD800C0 
+ 678      9FE40140 
+ 678      9FF800
+ 679 006b 409FFC04 		.ascii	"@\237\374\004\004\240\374\001\000\241\014\001\000\241"
+ 679      04A0FC01 
+ 679      00A10C01 
+ 679      00A1
+ 680 0079 1C00C0A1 		.ascii	"\034\000\300\241(\011\002\242H\000@\242L\000\201\242"
+ 680      280902A2 
+ 680      480040A2 
+ 680      4C0081A2 
+ 681 0089 540081A2 		.ascii	"T\000\201\242\\\000\201\242d\000\201\242l\000\204\242"
+ 681      5C0081A2 
+ 681      640081A2 
+ 681      6C0084A2 
+ 682 0099 8C008200 		.ascii	"\214\000\202\000\000\000\017\007\002\000D"
+ 682      00000F07 
+ 682      020044
+ 683              	.LC4:
+ARM GAS  C:\Temp\ccmOjQIz.s 			page 13
+
+
+ 684 00a4 54500080 		.ascii	"TP\000\200\000\004\010\010\000\000\004\004\2550\000"
+ 684      00040808 
+ 684      00000404 
+ 684      AD3000
+ 685 00b3 80030106 		.ascii	"\200\003\001\006\003\000\000\001\000\2558\001\000\001"
+ 685      03000001 
+ 685      00AD3801 
+ 685      0001
+ 686 00c1 E0014000 		.ascii	"\340\001@\000\020\000\020\001\000\001\000\000\000\000"
+ 686      10001001 
+ 686      00010000 
+ 686      0000
+ 687 00cf 01545800 		.ascii	"\001TX\000@\004\032\002\000T\\\001@\000\001\000Q\000"
+ 687      40041A02 
+ 687      00545C01 
+ 687      40000100 
+ 687      5100
+ 688 00e1 000FA00F 		.ascii	"\000\017\240\017\240\003\350\002\200\037@\000\000\005"
+ 688      A003E802 
+ 688      801F4000 
+ 688      0005
+ 689 00ef 00547000 		.ascii	"\000Tp\000\200\003 \003 \000\000\000\010Tx\001\000\001"
+ 689      80032003 
+ 689      20000000 
+ 689      08547801 
+ 689      0001
+ 690 0101 1B002100 		.ascii	"\033\000!\0003\000\000\002\000\000\001\004\001\010\002"
+ 690      33000002 
+ 690      00000104 
+ 690      010802
+ 691 0110 54880140 		.ascii	"T\210\001@\000\000\000\000\000\000\000\000\000\000\000"
+ 691      00000000 
+ 691      00000000 
+ 691      000000
+ 692 011f 00000000 		.ascii	"\000\000\000\000\000\000\000\010\000\255H\001\000\001"
+ 692      00000008 
+ 692      00AD4801 
+ 692      0001
+ 693 012d F4000003 		.ascii	"\364\000\000\003\006\000\020\010\010\010\010\000\000"
+ 693      06001008 
+ 693      08080800 
+ 693      00
+ 694 013a 0008AD60 		.ascii	"\000\010\255`\001\000\000\000\000\200\000\000\000\000"
+ 694      01000000 
+ 694      00800000 
+ 694      0000
+ 695 0148 201F01F4 		.ascii	" \037\001\364\000\000\035\012\255p\000\200\010\000\037"
+ 695      00001D0A 
+ 695      AD700080 
+ 695      08001F
+ 696 0157 40000000 		.ascii	"@\000\000\000\001\255x\000\200\000\240\003 \000\001"
+ 696      01AD7800 
+ 696      8000A003 
+ 696      200001
+ 697 0166 0190AD80 		.ascii	"\001\220\255\200\000@\000\000(\000\255\204\000\200\000"
+ 697      00400000 
+ 697      2800AD84 
+ARM GAS  C:\Temp\ccmOjQIz.s 			page 14
+
+
+ 697      008000
+ 698 0175 00320003 		.ascii	"\0002\000\003 \000\000\255\214\000\200\002X\3778\000"
+ 698      200000AD 
+ 698      8C008002 
+ 698      58FF3800 
+ 699 0185 00000CAD 		.ascii	"\000\000\014\255\224\001\000\000\001\220\000\377\377"
+ 699      94010000 
+ 699      019000FF 
+ 699      FF
+ 700 0192 FC000000 		.ascii	"\374\000\000\000\004\000\000\000\001\000\255\244\000"
+ 700      04000000 
+ 700      0100ADA4 
+ 700      00
+ 701 019f C0048006 		.ascii	"\300\004\200\006\032\000\200\005\200\000\000\001\006"
+ 701      1A008005 
+ 701      80000001 
+ 701      06
+ 702 01ac ADB000C0 		.ascii	"\255\260\000\300\004\200\006\032\031\000\005\200\000"
+ 702      0480061A 
+ 702      19000580 
+ 702      00
+ 703 01b9 000190AD 		.ascii	"\000\001\220\255\274\004@\000\000\000\000\000\000\000"
+ 703      BC044000 
+ 703      00000000 
+ 703      0000
+ 704 01c7 00001200 		.ascii	"\000\000\022\000%\000\000\000\006\000\000\000\005\000"
+ 704      25000000 
+ 704      06000000 
+ 704      0500
+ 705 01d5 00000500 		.ascii	"\000\000\005\000\000\000\006\000\000\000\004\000\000"
+ 705      00000600 
+ 705      00000400 
+ 705      00
+ 706 01e2 000F0000 		.ascii	"\000\017\000\000\000Z\000\000\000\000\000\000\000\011"
+ 706      005A0000 
+ 706      00000000 
+ 706      0009
+ 707 01f0 0B0C0B0B 		.ascii	"\013\014\013\013\003\003\021\005\001\001\001\001\000"
+ 707      03031105 
+ 707      01010101 
+ 707      00
+ 708 01fd 00000000 		.ascii	"\000\000\000\000\015\000\000\256\000\001\004\000\000"
+ 708      0D0000AE 
+ 708      00010400 
+ 708      00
+ 709 020a 00040000 		.ascii	"\000\004\000\000\000\010\000\000\000\012\000\000\000"
+ 709      00080000 
+ 709      000A0000 
+ 709      00
+ 710 0217 0C000000 		.ascii	"\014\000\000\000\015\000\000\000\016\000\000\000\010"
+ 710      0D000000 
+ 710      0E000000 
+ 710      08
+ 711 0224 00000008 		.ascii	"\000\000\000\010\000\000\000\020\000\000\000\020\000"
+ 711      00000010 
+ 711      00000010 
+ 711      00
+ARM GAS  C:\Temp\ccmOjQIz.s 			page 15
+
+
+ 712 0231 00002000 		.ascii	"\000\000 \000\000\000 \000\000\000\006\000\000\005\012"
+ 712      00002000 
+ 712      00000600 
+ 712      00050A
+ 713 0240 02000C08 		.ascii	"\002\000\014\010\000\000\000\000\256@\000@\000\000\000"
+ 713      00000000 
+ 713      AE400040 
+ 713      000000
+ 714 024f FFAE4400 		.ascii	"\377\256D\000@\000\020\004\001\256H\000@\000\000\020"
+ 714      40001004 
+ 714      01AE4800 
+ 714      40000010 
+ 715 025f 00AE4C00 		.ascii	"\000\256L\000@\000\000\000\001\256P\001@\000\000\000"
+ 715      40000000 
+ 715      01AE5001 
+ 715      40000000 
+ 716 026f 14040028 		.ascii	"\024\004\000(\000\003 l\000\000\000\000\000\000\000"
+ 716      0003206C 
+ 716      00000000 
+ 716      000000
+ 717 027e 0000AE64 		.ascii	"\000\000\256d\000@\000\000\000\001\256\330\001\000\000"
+ 717      00400000 
+ 717      0001AED8 
+ 717      010000
+ 718 028d C805DC00 		.ascii	"\310\005\334\000\000\014\315\001\004\000\000\000\001"
+ 718      000CCD01 
+ 718      04000000 
+ 718      01
+ 719 029a 2601B550 		.ascii	"&\001\265P\002\202\243\350\243\270\2448\244(\246H\244"
+ 719      0282A3E8 
+ 719      A3B8A438 
+ 719      A428A648 
+ 719      A4
+ 720 02ab 48A788A7 		.ascii	"H\247\210\247H\254\020\247\220\231\274\231\264\232\374"
+ 720      48AC10A7 
+ 720      9099BC99 
+ 720      B49AFC
+ 721 02ba 9ABC0000 		.ascii	"\232\274\000\000\000\000\000\000\000\000\000\000\000"
+ 721      00000000 
+ 721      00000000 
+ 721      00
+ 722 02c7 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000\000\000"
+ 722      00000000 
+ 722      00000000 
+ 722      00
+ 723 02d4 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000\000\000"
+ 723      00000000 
+ 723      00000000 
+ 723      00
+ 724 02e1 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000\000\000"
+ 724      00000000 
+ 724      00000000 
+ 724      00
+ 725 02ee 0000B5A0 		.ascii	"\000\000\265\240\002\202\000\210\003\000\000\202\000"
+ 725      02820088 
+ 725      03000082 
+ 725      00
+ARM GAS  C:\Temp\ccmOjQIz.s 			page 16
+
+
+ 726 02fb 82040404 		.ascii	"\202\004\004\004\010\000\200\004\001\011\002\011\010"
+ 726      08008004 
+ 726      01090209 
+ 726      08
+ 727 0308 04040080 		.ascii	"\004\004\000\200\004\001\004\001\000\000\000\000\000"
+ 727      04010401 
+ 727      00000000 
+ 727      00
+ 728 0315 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000\000\000"
+ 728      00000000 
+ 728      00000000 
+ 728      00
+ 729 0322 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000\000\000"
+ 729      00000000 
+ 729      00000000 
+ 729      00
+ 730 032f 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000\000\000"
+ 730      00000000 
+ 730      00000000 
+ 730      00
+ 731 033c 00000000 		.ascii	"\000\000\000\000\000\000\000\000\265\360\000@\000\004"
+ 731      00000000 
+ 731      B5F00040 
+ 731      0004
+ 732 034a 0000B39C 		.ascii	"\000\000\263\234\001\000@\000\005\036\002\033\010|\200"
+ 732      01004000 
+ 732      051E021B 
+ 732      087C80
+ 733 0359 00120100 		.ascii	"\000\022\001\000\001\010\000\266\300\000\300\000\000"
+ 733      010800B6 
+ 733      C000C000 
+ 733      00
+ 734 0366 60000000 		.ascii	"`\000\000\000 \000\000\000\000\000\256\250\000@\000"
+ 734      20000000 
+ 734      0000AEA8 
+ 734      004000
+ 735 0375 000405AE 		.ascii	"\000\004\005\256\254\000\200\001\000\001\000\000\002"
+ 735      AC008001 
+ 735      00010000 
+ 735      02
+ 736 0382 0000AEB4 		.ascii	"\000\000\256\264\000@\000\000\000\000\256\270\000\201"
+ 736      00400000 
+ 736      0000AEB8 
+ 736      0081
+ 737 0390 00000000 		.ascii	"\000\000\000\000\000\000\000\000\256\300\000\201\000"
+ 737      00000000 
+ 737      AEC00081 
+ 737      00
+ 738 039d 00000000 		.ascii	"\000\000\000\000\000\000\000\256\310\000\201\010\001"
+ 738      000000AE 
+ 738      C8008108 
+ 738      01
+ 739 03aa 01080000 		.ascii	"\001\010\000\000\000\010\256\320\000\201\001\010\010"
+ 739      0008AED0 
+ 739      00810108 
+ 739      08
+ 740 03b7 08000000 		.ascii	"\010\000\000\000\001\265\364\000\200\000\000\000\000"
+ARM GAS  C:\Temp\ccmOjQIz.s 			page 17
+
+
+ 740      01B5F400 
+ 740      80000000 
+ 740      00
+ 741 03c4 00000000 		.ascii	"\000\000\000\000\265\374\000\200\000\000\000\000\000"
+ 741      B5FC0080 
+ 741      00000000 
+ 741      00
+ 742 03d1 000000B6 		.ascii	"\000\000\000\266\004\000@\000\000\000\000\266\010\000"
+ 742      04004000 
+ 742      000000B6 
+ 742      0800
+ 743 03df 44000000 		.ascii	"D\000\000\000\000\000\000\000\000\000\000\000\000\000"
+ 743      00000000 
+ 743      00000000 
+ 743      0000
+ 744 03ed 000000B6 		.ascii	"\000\000\000\266\030\000D\000\000\000\000\000\000\000"
+ 744      18004400 
+ 744      00000000 
+ 744      0000
+ 745 03fb 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\266(\000D\000\000"
+ 745      00000000 
+ 745      00B62800 
+ 745      440000
+ 746 040a 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000\000\000"
+ 746      00000000 
+ 746      00000000 
+ 746      00
+ 747 0417 00B63800 		.ascii	"\000\2668\000D\000\000\000\000\000\000\000\000\000\000"
+ 747      44000000 
+ 747      00000000 
+ 747      000000
+ 748 0426 00000000 		.ascii	"\000\000\000\000\000\000\266H\001\000\000\000\000\000"
+ 748      0000B648 
+ 748      01000000 
+ 748      0000
+ 749 0434 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000\000\266"
+ 749      00000000 
+ 749      00000000 
+ 749      B6
+ 750 0441 58010000 		.ascii	"X\001\000\000\000\000\000\000\000\000\000\000\000\000"
+ 750      00000000 
+ 750      00000000 
+ 750      0000
+ 751 044f 00000000 		.ascii	"\000\000\000\000\000\266h\001\000\000\000\000\000\000"
+ 751      00B66801 
+ 751      00000000 
+ 751      0000
+ 752 045d 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000Tp\000\200"
+ 752      00000000 
+ 752      00000054 
+ 752      700080
+ 753 046c 00000000 		.ascii	"\000\000\000\000\000\000\000\002\000\000\000\017\000"
+ 753      00000002 
+ 753      0000000F 
+ 753      00
+ 754 0479 0103D4   		.ascii	"\001\003\324"
+ 755              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccmOjQIz.s 			page 18
+
+
+ARM GAS  C:\Temp\ccmOjQIz.s 			page 19
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 vl53l8cx_plugin_xtalk.c
+  C:\Temp\ccmOjQIz.s:18     .text._vl53l8cx_poll_for_answer:00000000 $t
+  C:\Temp\ccmOjQIz.s:23     .text._vl53l8cx_poll_for_answer:00000000 _vl53l8cx_poll_for_answer
+  C:\Temp\ccmOjQIz.s:63     .text._vl53l8cx_program_output_config:00000000 $t
+  C:\Temp\ccmOjQIz.s:68     .text._vl53l8cx_program_output_config:00000000 _vl53l8cx_program_output_config
+  C:\Temp\ccmOjQIz.s:184    .text._vl53l8cx_program_output_config:0000011c $d
+  C:\Temp\ccmOjQIz.s:187    .text.vl53l8cx_get_caldata_xtalk:00000000 $t
+  C:\Temp\ccmOjQIz.s:193    .text.vl53l8cx_get_caldata_xtalk:00000000 vl53l8cx_get_caldata_xtalk
+  C:\Temp\ccmOjQIz.s:258    .text.vl53l8cx_get_caldata_xtalk:000000ac $d
+  C:\Temp\ccmOjQIz.s:261    .text.vl53l8cx_set_caldata_xtalk:00000000 $t
+  C:\Temp\ccmOjQIz.s:267    .text.vl53l8cx_set_caldata_xtalk:00000000 vl53l8cx_set_caldata_xtalk
+  C:\Temp\ccmOjQIz.s:291    .text.vl53l8cx_get_xtalk_margin:00000000 $t
+  C:\Temp\ccmOjQIz.s:297    .text.vl53l8cx_get_xtalk_margin:00000000 vl53l8cx_get_xtalk_margin
+  C:\Temp\ccmOjQIz.s:314    .text.vl53l8cx_set_xtalk_margin:00000000 $t
+  C:\Temp\ccmOjQIz.s:320    .text.vl53l8cx_set_xtalk_margin:00000000 vl53l8cx_set_xtalk_margin
+  C:\Temp\ccmOjQIz.s:350    .text.vl53l8cx_calibrate_xtalk:00000000 $t
+  C:\Temp\ccmOjQIz.s:356    .text.vl53l8cx_calibrate_xtalk:00000000 vl53l8cx_calibrate_xtalk
+  C:\Temp\ccmOjQIz.s:645    .text.vl53l8cx_calibrate_xtalk:000002e8 $d
+  C:\Temp\ccmOjQIz.s:650    .rodata:00000000 $d
+
+UNDEFINED SYMBOLS
+VL53L8CX_RdMulti
+VL53L8CX_WaitMs
+vl53l8cx_get_resolution
+memcpy
+vl53l8cx_dci_write_data
+vl53l8cx_set_resolution
+VL53L8CX_WrMulti
+vl53l8cx_dci_read_data
+vl53l8cx_dci_replace_data
+vl53l8cx_get_ranging_frequency_hz
+vl53l8cx_get_integration_time_ms
+vl53l8cx_get_sharpener_percent
+vl53l8cx_get_target_order
+vl53l8cx_get_ranging_mode
+vl53l8cx_set_ranging_frequency_hz
+vl53l8cx_set_integration_time_ms
+vl53l8cx_set_sharpener_percent
+vl53l8cx_set_target_order
+vl53l8cx_set_ranging_mode

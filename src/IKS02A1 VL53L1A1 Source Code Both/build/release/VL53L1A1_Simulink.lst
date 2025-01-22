@@ -1,0 +1,416 @@
+ARM GAS  C:\Temp\ccGVwcqU.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"VL53L1A1_Simulink.c"
+  16              		.text
+  17              		.section	.rodata.initVL53L1A1.str1.4,"aMS",%progbits,1
+  18              		.align	2
+  19              	.LC0:
+  20 0000 564C3533 		.ascii	"VL53L1X Model_ID: %X \012\000"
+  20      4C315820 
+  20      4D6F6465 
+  20      6C5F4944 
+  20      3A202558 
+  21 0017 00       		.align	2
+  22              	.LC1:
+  23 0018 564C3533 		.ascii	"VL53L1X Module_Type: %X \012\000"
+  23      4C315820 
+  23      4D6F6475 
+  23      6C655F54 
+  23      7970653A 
+  24 0032 0000     		.align	2
+  25              	.LC2:
+  26 0034 564C3533 		.ascii	"VL53L1X: %X \012\000"
+  26      4C31583A 
+  26      20255820 
+  26      0A00
+  27 0042 0000     		.align	2
+  28              	.LC3:
+  29 0044 564C3533 		.ascii	"VL53L1X Initialized and Calibrated\000"
+  29      4C315820 
+  29      496E6974 
+  29      69616C69 
+  29      7A656420 
+  30              		.section	.text.initVL53L1A1,"ax",%progbits
+  31              		.align	1
+  32              		.global	initVL53L1A1
+  33              		.syntax unified
+  34              		.thumb
+  35              		.thumb_func
+  37              	initVL53L1A1:
+  38              		@ args = 0, pretend = 0, frame = 56
+  39              		@ frame_needed = 0, uses_anonymous_args = 0
+  40 0000 70B5     		push	{r4, r5, r6, lr}
+  41 0002 8EB0     		sub	sp, sp, #56
+  42 0004 0446     		mov	r4, r0
+  43 0006 0D46     		mov	r5, r1
+ARM GAS  C:\Temp\ccGVwcqU.s 			page 2
+
+
+  44 0008 0021     		movs	r1, #0
+  45 000a 8DF80210 		strb	r1, [sp, #2]
+  46 000e FFF7FEFF 		bl	XNUCLEO53L1A1_ResetId
+  47 0012 0220     		movs	r0, #2
+  48 0014 FFF7FEFF 		bl	HAL_Delay
+  49 0018 0121     		movs	r1, #1
+  50 001a 2046     		mov	r0, r4
+  51 001c FFF7FEFF 		bl	XNUCLEO53L1A1_ResetId
+  52 0020 0220     		movs	r0, #2
+  53 0022 FFF7FEFF 		bl	HAL_Delay
+  54 0026 424E     		ldr	r6, .L7
+  55 0028 0DF10302 		add	r2, sp, #3
+  56 002c 40F20F11 		movw	r1, #271
+  57 0030 3088     		ldrh	r0, [r6]
+  58 0032 FFF7FEFF 		bl	VL53L1_RdByte
+  59 0036 9DF80320 		ldrb	r2, [sp, #3]	@ zero_extendqisi2
+  60 003a 3E49     		ldr	r1, .L7+4
+  61 003c 01A8     		add	r0, sp, #4
+  62 003e FFF7FEFF 		bl	sprintf
+  63 0042 3D4C     		ldr	r4, .L7+8
+  64 0044 4FF0FF33 		mov	r3, #-1
+  65 0048 3222     		movs	r2, #50
+  66 004a 01A9     		add	r1, sp, #4
+  67 004c 2046     		mov	r0, r4
+  68 004e FFF7FEFF 		bl	HAL_UART_Transmit
+  69 0052 0DF10302 		add	r2, sp, #3
+  70 0056 4FF48871 		mov	r1, #272
+  71 005a 3088     		ldrh	r0, [r6]
+  72 005c FFF7FEFF 		bl	VL53L1_RdByte
+  73 0060 9DF80320 		ldrb	r2, [sp, #3]	@ zero_extendqisi2
+  74 0064 3549     		ldr	r1, .L7+12
+  75 0066 01A8     		add	r0, sp, #4
+  76 0068 FFF7FEFF 		bl	sprintf
+  77 006c 4FF0FF33 		mov	r3, #-1
+  78 0070 3222     		movs	r2, #50
+  79 0072 01A9     		add	r1, sp, #4
+  80 0074 2046     		mov	r0, r4
+  81 0076 FFF7FEFF 		bl	HAL_UART_Transmit
+  82 007a 6A46     		mov	r2, sp
+  83 007c 40F20F11 		movw	r1, #271
+  84 0080 3088     		ldrh	r0, [r6]
+  85 0082 FFF7FEFF 		bl	VL53L1_RdWord
+  86 0086 BDF80020 		ldrh	r2, [sp]
+  87 008a 2D49     		ldr	r1, .L7+16
+  88 008c 01A8     		add	r0, sp, #4
+  89 008e FFF7FEFF 		bl	sprintf
+  90 0092 4FF0FF33 		mov	r3, #-1
+  91 0096 3222     		movs	r2, #50
+  92 0098 01A9     		add	r1, sp, #4
+  93 009a 2046     		mov	r0, r4
+  94 009c FFF7FEFF 		bl	HAL_UART_Transmit
+  95 00a0 08E0     		b	.L2
+  96              	.L3:
+  97 00a2 0DF10201 		add	r1, sp, #2
+  98 00a6 224B     		ldr	r3, .L7
+  99 00a8 1888     		ldrh	r0, [r3]
+ 100 00aa FFF7FEFF 		bl	VL53L1X_BootState
+ARM GAS  C:\Temp\ccGVwcqU.s 			page 3
+
+
+ 101 00ae 0220     		movs	r0, #2
+ 102 00b0 FFF7FEFF 		bl	HAL_Delay
+ 103              	.L2:
+ 104 00b4 9DF80230 		ldrb	r3, [sp, #2]	@ zero_extendqisi2
+ 105 00b8 002B     		cmp	r3, #0
+ 106 00ba F2D0     		beq	.L3
+ 107 00bc 9DF80320 		ldrb	r2, [sp, #3]	@ zero_extendqisi2
+ 108 00c0 1C49     		ldr	r1, .L7+4
+ 109 00c2 01A8     		add	r0, sp, #4
+ 110 00c4 FFF7FEFF 		bl	sprintf
+ 111 00c8 4FF0FF33 		mov	r3, #-1
+ 112 00cc 3222     		movs	r2, #50
+ 113 00ce 01A9     		add	r1, sp, #4
+ 114 00d0 1948     		ldr	r0, .L7+8
+ 115 00d2 FFF7FEFF 		bl	HAL_UART_Transmit
+ 116 00d6 164C     		ldr	r4, .L7
+ 117 00d8 2088     		ldrh	r0, [r4]
+ 118 00da FFF7FEFF 		bl	VL53L1X_SensorInit
+ 119 00de 194B     		ldr	r3, .L7+20
+ 120 00e0 1988     		ldrh	r1, [r3]
+ 121 00e2 2088     		ldrh	r0, [r4]
+ 122 00e4 FFF7FEFF 		bl	VL53L1X_SetDistanceMode
+ 123 00e8 174B     		ldr	r3, .L7+24
+ 124 00ea 1988     		ldrh	r1, [r3]
+ 125 00ec 2088     		ldrh	r0, [r4]
+ 126 00ee FFF7FEFF 		bl	VL53L1X_SetTimingBudgetInMs
+ 127 00f2 164B     		ldr	r3, .L7+28
+ 128 00f4 1968     		ldr	r1, [r3]
+ 129 00f6 2088     		ldrh	r0, [r4]
+ 130 00f8 FFF7FEFF 		bl	VL53L1X_SetInterMeasurementInMs
+ 131 00fc 144B     		ldr	r3, .L7+32
+ 132 00fe 1A88     		ldrh	r2, [r3]
+ 133 0100 144B     		ldr	r3, .L7+36
+ 134 0102 1988     		ldrh	r1, [r3]
+ 135 0104 2088     		ldrh	r0, [r4]
+ 136 0106 FFF7FEFF 		bl	VL53L1X_SetROI
+ 137 010a 2088     		ldrh	r0, [r4]
+ 138 010c FFF7FEFF 		bl	VL53L1X_StartRanging
+ 139 0110 2946     		mov	r1, r5
+ 140 0112 2088     		ldrh	r0, [r4]
+ 141 0114 FFF7FEFF 		bl	VL53L1X_SetI2CAddress
+ 142 0118 08B1     		cbz	r0, .L6
+ 143              	.L1:
+ 144 011a 0EB0     		add	sp, sp, #56
+ 145              		@ sp needed
+ 146 011c 70BD     		pop	{r4, r5, r6, pc}
+ 147              	.L6:
+ 148 011e 4FF0FF33 		mov	r3, #-1
+ 149 0122 2322     		movs	r2, #35
+ 150 0124 0C49     		ldr	r1, .L7+40
+ 151 0126 0448     		ldr	r0, .L7+8
+ 152 0128 FFF7FEFF 		bl	HAL_UART_Transmit
+ 153 012c F5E7     		b	.L1
+ 154              	.L8:
+ 155 012e 00BF     		.align	2
+ 156              	.L7:
+ 157 0130 00000000 		.word	VL53L1_address_default
+ARM GAS  C:\Temp\ccGVwcqU.s 			page 4
+
+
+ 158 0134 00000000 		.word	.LC0
+ 159 0138 00000000 		.word	huart2
+ 160 013c 18000000 		.word	.LC1
+ 161 0140 34000000 		.word	.LC2
+ 162 0144 00000000 		.word	rangingProfile
+ 163 0148 00000000 		.word	timingBudget
+ 164 014c 00000000 		.word	pollingPeriod
+ 165 0150 00000000 		.word	ROI_Y
+ 166 0154 00000000 		.word	ROI_X
+ 167 0158 44000000 		.word	.LC3
+ 169              		.section	.text.getVL53L1A1,"ax",%progbits
+ 170              		.align	1
+ 171              		.global	getVL53L1A1
+ 172              		.syntax unified
+ 173              		.thumb
+ 174              		.thumb_func
+ 176              	getVL53L1A1:
+ 177              		@ args = 0, pretend = 0, frame = 0
+ 178              		@ frame_needed = 0, uses_anonymous_args = 0
+ 179 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 180 0004 0446     		mov	r4, r0
+ 181 0006 06E0     		b	.L10
+ 182              	.L11:
+ 183 0008 1F49     		ldr	r1, .L13
+ 184 000a 2088     		ldrh	r0, [r4]
+ 185 000c FFF7FEFF 		bl	VL53L1X_CheckForDataReady
+ 186 0010 0220     		movs	r0, #2
+ 187 0012 FFF7FEFF 		bl	HAL_Delay
+ 188              	.L10:
+ 189 0016 1C4B     		ldr	r3, .L13
+ 190 0018 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 191 001a 002B     		cmp	r3, #0
+ 192 001c F4D0     		beq	.L11
+ 193 001e 1A4B     		ldr	r3, .L13
+ 194 0020 0022     		movs	r2, #0
+ 195 0022 1A70     		strb	r2, [r3]
+ 196 0024 194F     		ldr	r7, .L13+4
+ 197 0026 3946     		mov	r1, r7
+ 198 0028 2088     		ldrh	r0, [r4]
+ 199 002a FFF7FEFF 		bl	VL53L1X_GetRangeStatus
+ 200 002e DFF86C80 		ldr	r8, .L13+20
+ 201 0032 4146     		mov	r1, r8
+ 202 0034 2088     		ldrh	r0, [r4]
+ 203 0036 FFF7FEFF 		bl	VL53L1X_GetDistance
+ 204 003a 154D     		ldr	r5, .L13+8
+ 205 003c 2946     		mov	r1, r5
+ 206 003e 2088     		ldrh	r0, [r4]
+ 207 0040 FFF7FEFF 		bl	VL53L1X_GetSignalRate
+ 208 0044 134E     		ldr	r6, .L13+12
+ 209 0046 3146     		mov	r1, r6
+ 210 0048 2088     		ldrh	r0, [r4]
+ 211 004a FFF7FEFF 		bl	VL53L1X_GetAmbientRate
+ 212 004e 1249     		ldr	r1, .L13+16
+ 213 0050 2088     		ldrh	r0, [r4]
+ 214 0052 FFF7FEFF 		bl	VL53L1X_GetSpadNb
+ 215 0056 2088     		ldrh	r0, [r4]
+ 216 0058 FFF7FEFF 		bl	VL53L1X_ClearInterrupt
+ARM GAS  C:\Temp\ccGVwcqU.s 			page 5
+
+
+ 217 005c B8F80030 		ldrh	r3, [r8]
+ 218 0060 6360     		str	r3, [r4, #4]
+ 219 0062 3B78     		ldrb	r3, [r7]	@ zero_extendqisi2
+ 220 0064 A360     		str	r3, [r4, #8]
+ 221 0066 3388     		ldrh	r3, [r6]
+ 222 0068 07EE903A 		vmov	s15, r3	@ int
+ 223 006c F8EE677A 		vcvt.f32.u32	s15, s15
+ 224 0070 C4ED037A 		vstr.32	s15, [r4, #12]
+ 225 0074 2B88     		ldrh	r3, [r5]
+ 226 0076 07EE903A 		vmov	s15, r3	@ int
+ 227 007a F8EE677A 		vcvt.f32.u32	s15, s15
+ 228 007e C4ED047A 		vstr.32	s15, [r4, #16]
+ 229 0082 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 230              	.L14:
+ 231 0086 00BF     		.align	2
+ 232              	.L13:
+ 233 0088 00000000 		.word	dataReady
+ 234 008c 00000000 		.word	RangeStatus
+ 235 0090 00000000 		.word	SignalRate
+ 236 0094 00000000 		.word	AmbientRate
+ 237 0098 00000000 		.word	SpadNum
+ 238 009c 00000000 		.word	Distance
+ 240              		.section	.text.bytesToFloat,"ax",%progbits
+ 241              		.align	1
+ 242              		.weak	bytesToFloat
+ 243              		.syntax unified
+ 244              		.thumb
+ 245              		.thumb_func
+ 247              	bytesToFloat:
+ 248              		@ args = 0, pretend = 0, frame = 8
+ 249              		@ frame_needed = 0, uses_anonymous_args = 0
+ 250              		@ link register save eliminated.
+ 251 0000 82B0     		sub	sp, sp, #8
+ 252 0002 8DF80400 		strb	r0, [sp, #4]
+ 253 0006 8DF80510 		strb	r1, [sp, #5]
+ 254 000a 8DF80620 		strb	r2, [sp, #6]
+ 255 000e 8DF80730 		strb	r3, [sp, #7]
+ 256 0012 DDED017A 		vldr.32	s15, [sp, #4]
+ 257 0016 FDEEE77A 		vcvt.s32.f32	s15, s15
+ 258 001a 17EE900A 		vmov	r0, s15	@ int
+ 259 001e 02B0     		add	sp, sp, #8
+ 260              		@ sp needed
+ 261 0020 7047     		bx	lr
+ 263              		.section	.text.bytesToInt32,"ax",%progbits
+ 264              		.align	1
+ 265              		.weak	bytesToInt32
+ 266              		.syntax unified
+ 267              		.thumb
+ 268              		.thumb_func
+ 270              	bytesToInt32:
+ 271              		@ args = 0, pretend = 0, frame = 8
+ 272              		@ frame_needed = 0, uses_anonymous_args = 0
+ 273              		@ link register save eliminated.
+ 274 0000 82B0     		sub	sp, sp, #8
+ 275 0002 8DF80400 		strb	r0, [sp, #4]
+ 276 0006 8DF80510 		strb	r1, [sp, #5]
+ 277 000a 8DF80620 		strb	r2, [sp, #6]
+ARM GAS  C:\Temp\ccGVwcqU.s 			page 6
+
+
+ 278 000e 8DF80730 		strb	r3, [sp, #7]
+ 279 0012 0198     		ldr	r0, [sp, #4]
+ 280 0014 02B0     		add	sp, sp, #8
+ 281              		@ sp needed
+ 282 0016 7047     		bx	lr
+ 284              		.global	SpadNum
+ 285              		.section	.bss.SpadNum,"aw",%nobits
+ 286              		.align	1
+ 289              	SpadNum:
+ 290 0000 0000     		.space	2
+ 291              		.global	AmbientRate
+ 292              		.section	.bss.AmbientRate,"aw",%nobits
+ 293              		.align	1
+ 296              	AmbientRate:
+ 297 0000 0000     		.space	2
+ 298              		.global	SignalRate
+ 299              		.section	.bss.SignalRate,"aw",%nobits
+ 300              		.align	1
+ 303              	SignalRate:
+ 304 0000 0000     		.space	2
+ 305              		.global	Distance
+ 306              		.section	.bss.Distance,"aw",%nobits
+ 307              		.align	1
+ 310              	Distance:
+ 311 0000 0000     		.space	2
+ 312              		.global	ROI_Y
+ 313              		.section	.data.ROI_Y,"aw"
+ 314              		.align	2
+ 317              	ROI_Y:
+ 318 0000 04000000 		.word	4
+ 319              		.global	ROI_X
+ 320              		.section	.data.ROI_X,"aw"
+ 321              		.align	2
+ 324              	ROI_X:
+ 325 0000 04000000 		.word	4
+ 326              		.global	dataReady
+ 327              		.section	.bss.dataReady,"aw",%nobits
+ 330              	dataReady:
+ 331 0000 00       		.space	1
+ 332              		.global	RangeStatus
+ 333              		.section	.bss.RangeStatus,"aw",%nobits
+ 336              	RangeStatus:
+ 337 0000 00       		.space	1
+ 338              		.global	VL53L1_address_default
+ 339              		.section	.data.VL53L1_address_default,"aw"
+ 340              		.align	1
+ 343              	VL53L1_address_default:
+ 344 0000 5200     		.short	82
+ 345              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccGVwcqU.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 VL53L1A1_Simulink.c
+  C:\Temp\ccGVwcqU.s:18     .rodata.initVL53L1A1.str1.4:00000000 $d
+  C:\Temp\ccGVwcqU.s:31     .text.initVL53L1A1:00000000 $t
+  C:\Temp\ccGVwcqU.s:37     .text.initVL53L1A1:00000000 initVL53L1A1
+  C:\Temp\ccGVwcqU.s:157    .text.initVL53L1A1:00000130 $d
+  C:\Temp\ccGVwcqU.s:343    .data.VL53L1_address_default:00000000 VL53L1_address_default
+  C:\Temp\ccGVwcqU.s:317    .data.ROI_Y:00000000 ROI_Y
+  C:\Temp\ccGVwcqU.s:324    .data.ROI_X:00000000 ROI_X
+  C:\Temp\ccGVwcqU.s:170    .text.getVL53L1A1:00000000 $t
+  C:\Temp\ccGVwcqU.s:176    .text.getVL53L1A1:00000000 getVL53L1A1
+  C:\Temp\ccGVwcqU.s:233    .text.getVL53L1A1:00000088 $d
+  C:\Temp\ccGVwcqU.s:330    .bss.dataReady:00000000 dataReady
+  C:\Temp\ccGVwcqU.s:336    .bss.RangeStatus:00000000 RangeStatus
+  C:\Temp\ccGVwcqU.s:303    .bss.SignalRate:00000000 SignalRate
+  C:\Temp\ccGVwcqU.s:296    .bss.AmbientRate:00000000 AmbientRate
+  C:\Temp\ccGVwcqU.s:289    .bss.SpadNum:00000000 SpadNum
+  C:\Temp\ccGVwcqU.s:310    .bss.Distance:00000000 Distance
+  C:\Temp\ccGVwcqU.s:241    .text.bytesToFloat:00000000 $t
+  C:\Temp\ccGVwcqU.s:247    .text.bytesToFloat:00000000 bytesToFloat
+  C:\Temp\ccGVwcqU.s:264    .text.bytesToInt32:00000000 $t
+  C:\Temp\ccGVwcqU.s:270    .text.bytesToInt32:00000000 bytesToInt32
+  C:\Temp\ccGVwcqU.s:286    .bss.SpadNum:00000000 $d
+  C:\Temp\ccGVwcqU.s:293    .bss.AmbientRate:00000000 $d
+  C:\Temp\ccGVwcqU.s:300    .bss.SignalRate:00000000 $d
+  C:\Temp\ccGVwcqU.s:307    .bss.Distance:00000000 $d
+  C:\Temp\ccGVwcqU.s:314    .data.ROI_Y:00000000 $d
+  C:\Temp\ccGVwcqU.s:321    .data.ROI_X:00000000 $d
+  C:\Temp\ccGVwcqU.s:331    .bss.dataReady:00000000 $d
+  C:\Temp\ccGVwcqU.s:337    .bss.RangeStatus:00000000 $d
+  C:\Temp\ccGVwcqU.s:340    .data.VL53L1_address_default:00000000 $d
+
+UNDEFINED SYMBOLS
+XNUCLEO53L1A1_ResetId
+HAL_Delay
+VL53L1_RdByte
+sprintf
+HAL_UART_Transmit
+VL53L1_RdWord
+VL53L1X_BootState
+VL53L1X_SensorInit
+VL53L1X_SetDistanceMode
+VL53L1X_SetTimingBudgetInMs
+VL53L1X_SetInterMeasurementInMs
+VL53L1X_SetROI
+VL53L1X_StartRanging
+VL53L1X_SetI2CAddress
+huart2
+rangingProfile
+timingBudget
+pollingPeriod
+VL53L1X_CheckForDataReady
+VL53L1X_GetRangeStatus
+VL53L1X_GetDistance
+VL53L1X_GetSignalRate
+VL53L1X_GetAmbientRate
+VL53L1X_GetSpadNb
+ARM GAS  C:\Temp\ccGVwcqU.s 			page 8
+
+
+VL53L1X_ClearInterrupt

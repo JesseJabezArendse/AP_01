@@ -49,11 +49,6 @@ UART_HandleTypeDef huart2;
 DMA_HandleTypeDef hdma_usart2_tx;
 
 /* USER CODE BEGIN PV */
-RANGING_SENSOR_Result_t TOF_left;
-RANGING_SENSOR_Result_t TOF_centre;
-RANGING_SENSOR_Result_t TOF_right;
-RANGING_SENSOR_ProfileConfig_t Profile;
-
 
 IKS02A1_MOTION_SENSOR_Axes_t accel1_axis;
 IKS02A1_MOTION_SENSOR_Axes_t gyro_axis;
@@ -88,8 +83,19 @@ uint8_t clearToGetL1 = 0;
 uint8_t calibrated = 0;
 int32_t counter = 0;
 
-extern int32_t tof_fsr;
-extern float tof_odr;
+int32_t tof_fsr = 1;
+int32_t tof_odr   = 30;
+uint16_t rangingProfile = 1;
+uint16_t timingBudget   = 30;
+uint32_t pollingPeriod  = 250;
+
+VL53L1_Result TOF_left_result;
+VL53L1_Result TOF_centre_result;
+VL53L1_Result TOF_right_result;
+
+volatile int IntCount;
+#define isInterrupt 0 /* If isInterrupt = 1 then device working in interrupt mode, else device working in polling mode */
+
 
 extern int32_t accel1_fsr;
 extern float accel1_odr;
@@ -124,7 +130,7 @@ int32_t bytesToInt32_main(uint8_t byte1 , uint8_t byte2 , uint8_t byte3 , uint8_
 
 void receivedFromSimulink(uint8_t* bigBuffer){
     tof_fsr = bytesToInt32_main(bigBuffer[3  + 0] , bigBuffer[3  + 1] , bigBuffer[3  + 2] ,  bigBuffer[3  + 3] );
-    tof_odr = bytesToFloat_main(bigBuffer[7  + 0] , bigBuffer[7  + 1] , bigBuffer[7  + 2] ,  bigBuffer[7  + 3] );
+    tof_odr = bytesToInt32_main(bigBuffer[7  + 0] , bigBuffer[7  + 1] , bigBuffer[7  + 2] ,  bigBuffer[7  + 3] );
     
 
     accel1_fsr = bytesToInt32_main(bigBuffer[11 + 0] , bigBuffer[11 + 1] , bigBuffer[11 + 2] ,  bigBuffer[11 + 3] );
@@ -137,7 +143,7 @@ void receivedFromSimulink(uint8_t* bigBuffer){
     
 }
 
-void configureTimer(float desired_frequency) {
+void configureTimer(float desired_frequency, TIM_TypeDef* tim) {
     // Assuming the clock frequency driving the timer is 100 MHz
     float clock_frequency = SystemCoreClock; // 100 MHz
 
@@ -151,46 +157,17 @@ void configureTimer(float desired_frequency) {
     }
 
     // Calculate the ARR based on the chosen PSC
-    uint32_t arr = (uint32_t)(timer_period / (prescaler + 1));
-    if (arr > 65535) {
-        arr = 65535; // Cap ARR if it exceeds 16-bit value
-    }
+    uint64_t arr = (uint64_t)(timer_period / (prescaler + 1));
+
+
 
     // Update the timer registers
-    TIM2->PSC = prescaler;   // Set the prescaler
-    TIM2->ARR = arr;         // Set the auto-reload register
+    tim->PSC = prescaler;   // Set the prescaler
+    tim->ARR = arr;         // Set the auto-reload register
 
     // Reload the timer settings to apply the changes immediately
-    TIM2->EGR = TIM_EGR_UG;  // Generate an update event to reload PSC and ARR
+    tim->EGR = TIM_EGR_UG;  // Generate an update event to reload PSC and ARR
 }
-
-void configureOtherTimer(float desired_frequency) {
-    // Assuming the clock frequency driving the timer is 100 MHz
-    float clock_frequency = SystemCoreClock; // 100 MHz
-
-    // Calculate the required total timer period in timer clock cycles
-    float timer_period = clock_frequency / desired_frequency;
-
-    // Choose a suitable prescaler (PSC) to fit the period within ARR's range
-    uint32_t prescaler = (uint32_t)(timer_period / 65536.0f); // PSC ensures ARR <= 65535
-    if (prescaler > 65535) {
-        prescaler = 65535; // Cap PSC if it exceeds 16-bit value
-    }
-
-    // Calculate the ARR based on the chosen PSC
-    uint32_t arr = (uint32_t)(timer_period / (prescaler + 1));
-    if (arr > 65535) {
-        arr = 65535; // Cap ARR if it exceeds 16-bit value
-    }
-
-    // Update the timer registers
-    TIM3->PSC = prescaler;   // Set the prescaler
-    TIM3->ARR = arr;         // Set the auto-reload register
-
-    // Reload the timer settings to apply the changes immediately
-    TIM3->EGR = TIM_EGR_UG;  // Generate an update event to reload PSC and ARR
-}
-
 // Function to return the fastest (highest) ODR
 float get_fastest_odr(float odr1, float odr2, float odr3, float odr4, float odr5) {
     float fastest = odr1; // Assume odr1 is the fastest initially
@@ -214,15 +191,20 @@ float get_fastest_odr(float odr1, float odr2, float odr3, float odr4, float odr5
 void sendToSimulink(){
     HAL_UART_Transmit(&huart2, (uint8_t *) &header           ,3 , HAL_MAX_DELAY);
 
-    HAL_UART_Transmit(&huart2, (uint32_t *) &((TOF_left   .ZoneResult[0]) .Distance  [0])  , 4 , HAL_MAX_DELAY);
-    HAL_UART_Transmit(&huart2, (float_t *)  &((TOF_left   .ZoneResult[0]) .Ambient   [0])  , 4 , HAL_MAX_DELAY);
-    HAL_UART_Transmit(&huart2, (float_t *)  &((TOF_left   .ZoneResult[0]) .Signal    [0])  , 4 , HAL_MAX_DELAY);
-    HAL_UART_Transmit(&huart2, (uint32_t *) &((TOF_centre .ZoneResult[0]) .Distance  [0])  , 4 , HAL_MAX_DELAY);
-    HAL_UART_Transmit(&huart2, (float_t *)  &((TOF_centre .ZoneResult[0]) .Ambient   [0])  , 4 , HAL_MAX_DELAY);
-    HAL_UART_Transmit(&huart2, (float_t *)  &((TOF_centre .ZoneResult[0]) .Signal    [0])  , 4 , HAL_MAX_DELAY);
-    HAL_UART_Transmit(&huart2, (uint32_t *) &((TOF_right  .ZoneResult[0]) .Distance  [0])  , 4 , HAL_MAX_DELAY);
-    HAL_UART_Transmit(&huart2, (float_t *)  &((TOF_right  .ZoneResult[0]) .Ambient   [0])  , 4 , HAL_MAX_DELAY);
-    HAL_UART_Transmit(&huart2, (float_t *)  &((TOF_right  .ZoneResult[0]) .Signal    [0])  , 4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2, &(TOF_left_result.Distance)  , 4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2, &(TOF_left_result.Ambient )  , 4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2, &(TOF_left_result.Signal  )  , 4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2, &(TOF_left_result.Status  )  , 4 , HAL_MAX_DELAY);
+
+    HAL_UART_Transmit(&huart2,  &(TOF_centre_result.Distance)  , 4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2,  &(TOF_centre_result.Ambient )  , 4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2,  &(TOF_centre_result.Signal  )  , 4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2,  &(TOF_centre_result.Status  )  , 4 , HAL_MAX_DELAY);
+
+    HAL_UART_Transmit(&huart2,  &(TOF_right_result.Distance)  , 4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2,  &(TOF_right_result.Ambient )  , 4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2,  &(TOF_right_result.Signal  )  , 4 , HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart2,  &(TOF_right_result.Status  )  , 4 , HAL_MAX_DELAY);
 
     HAL_UART_Transmit(&huart2, (int32_t *) &(accel1_axis.x)  ,4 , HAL_MAX_DELAY);
     HAL_UART_Transmit(&huart2, (int32_t *) &accel1_axis.y    ,4 , HAL_MAX_DELAY);
@@ -237,6 +219,7 @@ void sendToSimulink(){
     HAL_UART_Transmit(&huart2, (int32_t *) &mag_axis.x       ,4 , HAL_MAX_DELAY);
     HAL_UART_Transmit(&huart2, (int32_t *) &mag_axis.y       ,4 , HAL_MAX_DELAY);
     HAL_UART_Transmit(&huart2, (int32_t *) &mag_axis.z       ,4 , HAL_MAX_DELAY);
+
     HAL_UART_Transmit(&huart2, (int32_t *) &counter          ,4 , HAL_MAX_DELAY);
     HAL_UART_Transmit(&huart2, (float_t *) &fastestODR       ,4 , HAL_MAX_DELAY);
 
@@ -244,7 +227,7 @@ void sendToSimulink(){
 }
 
 void initialCalibration(){
-  HAL_UART_Receive(&huart2,(uint8_t *) &bigBuffer, (size_t) (numberOfSimulinkBytes+3+3),1);
+  HAL_UART_Receive(&huart2, &bigBuffer, 42 ,HAL_MAX_DELAY);
   if (bigBuffer[0] == expectedHeader[0] &&
       bigBuffer[1] == expectedHeader[1] &&
       bigBuffer[2] == expectedHeader[2] &&
@@ -296,17 +279,25 @@ int main(void)
   while (calibrated != 1){
     initialCalibration();
   }
-  calibrate_VL53L1A1();
-  initVL53L1A1();
+
+  XNUCLEO53L1A1_Init(); // initializes GPIO Expanders
+  
+  TOF_left_result.Address = ToF_Left;
+  TOF_centre_result.Address = ToF_Centre;
+  TOF_right_result.Address = ToF_Right;
+
+  initVL53L1A1(XNUCLEO53L1A1_DEV_LEFT,   ToF_Left);
+  initVL53L1A1(XNUCLEO53L1A1_DEV_CENTER, ToF_Centre);
+  initVL53L1A1(XNUCLEO53L1A1_DEV_RIGHT,  ToF_Right);
+
   initIKS02A1();
   calibrate_IKS02A1();
 
-  configureOtherTimer(tof_odr);
-  configureTimer(fastestODR);
+  configureTimer(fastestODR,TIM2);
+  configureTimer(tof_odr,TIM3);
   HAL_TIM_Base_Start_IT(&htim2);
   HAL_TIM_Base_Start_IT(&htim3);
   HAL_GPIO_WritePin(LD2_GPIO_Port,LD2_Pin,1);
-
 
   /* USER CODE END 2 */
 
@@ -315,10 +306,11 @@ int main(void)
   while (1)
   {
     getIKS02A1(); 
-    // (void)VL53L1_GetMeasurementDataReady(pObj, &NewDataReady);
     
     if (clearToGetL1 == 1){
-      getVL53L1A1();
+      getVL53L1A1(&TOF_left_result);
+      getVL53L1A1(&TOF_centre_result);
+      getVL53L1A1(&TOF_right_result);
       clearToGetL1 = 0;
     }
     /* USER CODE END WHILE */

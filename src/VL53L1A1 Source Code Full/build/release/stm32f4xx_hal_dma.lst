@@ -1,4 +1,4 @@
-ARM GAS  C:\Temp\ccV0fdBV.s 			page 1
+ARM GAS  C:\Temp\ccw4Kfuf.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Temp\ccV0fdBV.s 			page 1
   58              		@ args = 0, pretend = 0, frame = 0
   59              		@ frame_needed = 0, uses_anonymous_args = 0
   60              		@ link register save eliminated.
-ARM GAS  C:\Temp\ccV0fdBV.s 			page 2
+ARM GAS  C:\Temp\ccw4Kfuf.s 			page 2
 
 
   61 0000 10B4     		push	{r4}
@@ -118,7 +118,7 @@ ARM GAS  C:\Temp\ccV0fdBV.s 			page 1
  117 001e 7047     		bx	lr
  118              	.L14:
  119 0020 C36A     		ldr	r3, [r0, #44]
-ARM GAS  C:\Temp\ccV0fdBV.s 			page 3
+ARM GAS  C:\Temp\ccw4Kfuf.s 			page 3
 
 
  120 0022 B3F1C07F 		cmp	r3, #25165824
@@ -178,7 +178,7 @@ ARM GAS  C:\Temp\ccV0fdBV.s 			page 1
  174 007e 0120     		movs	r0, #1
  175 0080 7047     		bx	lr
  176              	.L28:
-ARM GAS  C:\Temp\ccV0fdBV.s 			page 4
+ARM GAS  C:\Temp\ccw4Kfuf.s 			page 4
 
 
  177 0082 0120     		movs	r0, #1
@@ -238,7 +238,7 @@ ARM GAS  C:\Temp\ccV0fdBV.s 			page 1
  233 0052 0243     		orrs	r2, r2, r0
  234 0054 2069     		ldr	r0, [r4, #16]
  235 0056 0243     		orrs	r2, r2, r0
-ARM GAS  C:\Temp\ccV0fdBV.s 			page 5
+ARM GAS  C:\Temp\ccw4Kfuf.s 			page 5
 
 
  236 0058 6069     		ldr	r0, [r4, #20]
@@ -298,7 +298,7 @@ ARM GAS  C:\Temp\ccV0fdBV.s 			page 1
  290 00c4 0120     		movs	r0, #1
  291 00c6 BCE7     		b	.L33
  292              	.L44:
-ARM GAS  C:\Temp\ccV0fdBV.s 			page 6
+ARM GAS  C:\Temp\ccw4Kfuf.s 			page 6
 
 
  293              		.align	2
@@ -358,7 +358,7 @@ ARM GAS  C:\Temp\ccV0fdBV.s 			page 1
  349              	.L46:
  350 005e 38BD     		pop	{r3, r4, r5, pc}
  351              	.L47:
-ARM GAS  C:\Temp\ccV0fdBV.s 			page 7
+ARM GAS  C:\Temp\ccw4Kfuf.s 			page 7
 
 
  352 0060 0120     		movs	r0, #1
@@ -418,7 +418,7 @@ ARM GAS  C:\Temp\ccV0fdBV.s 			page 1
  410 0004 856D     		ldr	r5, [r0, #88]
  411 0006 90F83400 		ldrb	r0, [r0, #52]	@ zero_extendqisi2
  412 000a 0128     		cmp	r0, #1
-ARM GAS  C:\Temp\ccV0fdBV.s 			page 8
+ARM GAS  C:\Temp\ccw4Kfuf.s 			page 8
 
 
  413 000c 2BD0     		beq	.L62
@@ -478,7 +478,7 @@ ARM GAS  C:\Temp\ccV0fdBV.s 			page 1
  469 0004 866D     		ldr	r6, [r0, #88]
  470 0006 FFF7FEFF 		bl	HAL_GetTick
  471 000a 94F83530 		ldrb	r3, [r4, #53]	@ zero_extendqisi2
-ARM GAS  C:\Temp\ccV0fdBV.s 			page 9
+ARM GAS  C:\Temp\ccw4Kfuf.s 			page 9
 
 
  472 000e DBB2     		uxtb	r3, r3
@@ -538,7 +538,7 @@ ARM GAS  C:\Temp\ccV0fdBV.s 			page 1
  526 007e E26D     		ldr	r2, [r4, #92]
  527 0080 3F23     		movs	r3, #63
  528 0082 9340     		lsls	r3, r3, r2
-ARM GAS  C:\Temp\ccV0fdBV.s 			page 10
+ARM GAS  C:\Temp\ccw4Kfuf.s 			page 10
 
 
  529 0084 B360     		str	r3, [r6, #8]
@@ -598,7 +598,7 @@ ARM GAS  C:\Temp\ccV0fdBV.s 			page 1
  587 001e 84F83430 		strb	r3, [r4, #52]
  588 0022 0120     		movs	r0, #1
  589              	.L80:
-ARM GAS  C:\Temp\ccV0fdBV.s 			page 11
+ARM GAS  C:\Temp\ccw4Kfuf.s 			page 11
 
 
  590 0024 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
@@ -658,7 +658,7 @@ ARM GAS  C:\Temp\ccV0fdBV.s 			page 1
  644 009c 1D42     		tst	r5, r3
  645 009e D3D0     		beq	.L84
  646 00a0 626D     		ldr	r2, [r4, #84]
-ARM GAS  C:\Temp\ccV0fdBV.s 			page 12
+ARM GAS  C:\Temp\ccw4Kfuf.s 			page 12
 
 
  647 00a2 42F00402 		orr	r2, r2, #4
@@ -718,7 +718,7 @@ ARM GAS  C:\Temp\ccV0fdBV.s 			page 1
  701              	.L93:
  702 011c E26D     		ldr	r2, [r4, #92]
  703 011e 1023     		movs	r3, #16
-ARM GAS  C:\Temp\ccV0fdBV.s 			page 13
+ARM GAS  C:\Temp\ccw4Kfuf.s 			page 13
 
 
  704 0120 9340     		lsls	r3, r3, r2
@@ -778,7 +778,7 @@ ARM GAS  C:\Temp\ccV0fdBV.s 			page 1
  760 005a BB60     		str	r3, [r7, #8]
  761 005c 636D     		ldr	r3, [r4, #84]
  762 005e 43F00203 		orr	r3, r3, #2
-ARM GAS  C:\Temp\ccV0fdBV.s 			page 14
+ARM GAS  C:\Temp\ccw4Kfuf.s 			page 14
 
 
  763 0062 6365     		str	r3, [r4, #84]
@@ -838,7 +838,7 @@ ARM GAS  C:\Temp\ccV0fdBV.s 			page 1
  817 00d2 2046     		mov	r0, r4
  818 00d4 9847     		blx	r3
  819              	.L101:
-ARM GAS  C:\Temp\ccV0fdBV.s 			page 15
+ARM GAS  C:\Temp\ccw4Kfuf.s 			page 15
 
 
  820 00d6 E26D     		ldr	r2, [r4, #92]
@@ -898,7 +898,7 @@ ARM GAS  C:\Temp\ccV0fdBV.s 			page 1
  874 014e 3FD0     		beq	.L97
  875 0150 2046     		mov	r0, r4
  876 0152 9847     		blx	r3
-ARM GAS  C:\Temp\ccV0fdBV.s 			page 16
+ARM GAS  C:\Temp\ccw4Kfuf.s 			page 16
 
 
  877 0154 3CE0     		b	.L97
@@ -958,7 +958,7 @@ ARM GAS  C:\Temp\ccV0fdBV.s 			page 1
  931 01c4 84F83430 		strb	r3, [r4, #52]
  932              	.L114:
  933 01c8 E36C     		ldr	r3, [r4, #76]
-ARM GAS  C:\Temp\ccV0fdBV.s 			page 17
+ARM GAS  C:\Temp\ccw4Kfuf.s 			page 17
 
 
  934 01ca 0BB1     		cbz	r3, .L97
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Temp\ccV0fdBV.s 			page 1
  990 0038 1A64     		str	r2, [r3, #64]
  991 003a 0020     		movs	r0, #0
  992 003c EEE7     		b	.L124
-ARM GAS  C:\Temp\ccV0fdBV.s 			page 18
+ARM GAS  C:\Temp\ccw4Kfuf.s 			page 18
 
 
  993              	.L129:
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Temp\ccV0fdBV.s 			page 1
  1049 0031 14       		.byte	(.L141-.L140)/2
  1050 0032 17       		.byte	(.L139-.L140)/2
  1051 0033 00       		.p2align 1
-ARM GAS  C:\Temp\ccV0fdBV.s 			page 19
+ARM GAS  C:\Temp\ccw4Kfuf.s 			page 19
 
 
  1052              	.L146:
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Temp\ccV0fdBV.s 			page 1
  1109              		.thumb_func
  1111              	HAL_DMA_GetError:
  1112              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  C:\Temp\ccV0fdBV.s 			page 20
+ARM GAS  C:\Temp\ccw4Kfuf.s 			page 20
 
 
  1113              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -1151,53 +1151,53 @@ ARM GAS  C:\Temp\ccV0fdBV.s 			page 1
  1123 0000 00061016 		.ascii	"\000\006\020\026\000\006\020\026"
  1123      00061016 
  1124              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
-ARM GAS  C:\Temp\ccV0fdBV.s 			page 21
+ARM GAS  C:\Temp\ccw4Kfuf.s 			page 21
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 stm32f4xx_hal_dma.c
-  C:\Temp\ccV0fdBV.s:18     .text.DMA_SetConfig:00000000 $t
-  C:\Temp\ccV0fdBV.s:23     .text.DMA_SetConfig:00000000 DMA_SetConfig
-  C:\Temp\ccV0fdBV.s:52     .text.DMA_CalcBaseAndBitshift:00000000 $t
-  C:\Temp\ccV0fdBV.s:57     .text.DMA_CalcBaseAndBitshift:00000000 DMA_CalcBaseAndBitshift
-  C:\Temp\ccV0fdBV.s:89     .text.DMA_CalcBaseAndBitshift:0000003c $d
-  C:\Temp\ccV0fdBV.s:1122   .rodata.flagBitshiftOffset.0:00000000 flagBitshiftOffset.0
-  C:\Temp\ccV0fdBV.s:93     .text.DMA_CheckFifoParam:00000000 $t
-  C:\Temp\ccV0fdBV.s:98     .text.DMA_CheckFifoParam:00000000 DMA_CheckFifoParam
-  C:\Temp\ccV0fdBV.s:141    .text.DMA_CheckFifoParam:0000004e $d
-  C:\Temp\ccV0fdBV.s:145    .text.DMA_CheckFifoParam:00000052 $t
-  C:\Temp\ccV0fdBV.s:187    .text.HAL_DMA_Init:00000000 $t
-  C:\Temp\ccV0fdBV.s:193    .text.HAL_DMA_Init:00000000 HAL_DMA_Init
-  C:\Temp\ccV0fdBV.s:295    .text.HAL_DMA_Init:000000c8 $d
-  C:\Temp\ccV0fdBV.s:298    .text.HAL_DMA_DeInit:00000000 $t
-  C:\Temp\ccV0fdBV.s:304    .text.HAL_DMA_DeInit:00000000 HAL_DMA_DeInit
-  C:\Temp\ccV0fdBV.s:356    .text.HAL_DMA_Start:00000000 $t
-  C:\Temp\ccV0fdBV.s:362    .text.HAL_DMA_Start:00000000 HAL_DMA_Start
-  C:\Temp\ccV0fdBV.s:399    .text.HAL_DMA_Start_IT:00000000 $t
-  C:\Temp\ccV0fdBV.s:405    .text.HAL_DMA_Start_IT:00000000 HAL_DMA_Start_IT
-  C:\Temp\ccV0fdBV.s:458    .text.HAL_DMA_Abort:00000000 $t
-  C:\Temp\ccV0fdBV.s:464    .text.HAL_DMA_Abort:00000000 HAL_DMA_Abort
-  C:\Temp\ccV0fdBV.s:537    .text.HAL_DMA_Abort_IT:00000000 $t
-  C:\Temp\ccV0fdBV.s:543    .text.HAL_DMA_Abort_IT:00000000 HAL_DMA_Abort_IT
-  C:\Temp\ccV0fdBV.s:566    .text.HAL_DMA_PollForTransfer:00000000 $t
-  C:\Temp\ccV0fdBV.s:572    .text.HAL_DMA_PollForTransfer:00000000 HAL_DMA_PollForTransfer
-  C:\Temp\ccV0fdBV.s:710    .text.HAL_DMA_IRQHandler:00000000 $t
-  C:\Temp\ccV0fdBV.s:716    .text.HAL_DMA_IRQHandler:00000000 HAL_DMA_IRQHandler
-  C:\Temp\ccV0fdBV.s:944    .text.HAL_DMA_IRQHandler:000001d4 $d
-  C:\Temp\ccV0fdBV.s:948    .text.HAL_DMA_RegisterCallback:00000000 $t
-  C:\Temp\ccV0fdBV.s:954    .text.HAL_DMA_RegisterCallback:00000000 HAL_DMA_RegisterCallback
-  C:\Temp\ccV0fdBV.s:978    .text.HAL_DMA_RegisterCallback:0000002c $d
-  C:\Temp\ccV0fdBV.s:984    .text.HAL_DMA_RegisterCallback:00000032 $t
-  C:\Temp\ccV0fdBV.s:1014   .text.HAL_DMA_UnRegisterCallback:00000000 $t
-  C:\Temp\ccV0fdBV.s:1020   .text.HAL_DMA_UnRegisterCallback:00000000 HAL_DMA_UnRegisterCallback
-  C:\Temp\ccV0fdBV.s:1044   .text.HAL_DMA_UnRegisterCallback:0000002c $d
-  C:\Temp\ccV0fdBV.s:1091   .text.HAL_DMA_GetState:00000000 $t
-  C:\Temp\ccV0fdBV.s:1097   .text.HAL_DMA_GetState:00000000 HAL_DMA_GetState
-  C:\Temp\ccV0fdBV.s:1105   .text.HAL_DMA_GetError:00000000 $t
-  C:\Temp\ccV0fdBV.s:1111   .text.HAL_DMA_GetError:00000000 HAL_DMA_GetError
-  C:\Temp\ccV0fdBV.s:1119   .rodata.flagBitshiftOffset.0:00000000 $d
-  C:\Temp\ccV0fdBV.s:1051   .text.HAL_DMA_UnRegisterCallback:00000033 $d
-  C:\Temp\ccV0fdBV.s:1051   .text.HAL_DMA_UnRegisterCallback:00000034 $t
+  C:\Temp\ccw4Kfuf.s:18     .text.DMA_SetConfig:00000000 $t
+  C:\Temp\ccw4Kfuf.s:23     .text.DMA_SetConfig:00000000 DMA_SetConfig
+  C:\Temp\ccw4Kfuf.s:52     .text.DMA_CalcBaseAndBitshift:00000000 $t
+  C:\Temp\ccw4Kfuf.s:57     .text.DMA_CalcBaseAndBitshift:00000000 DMA_CalcBaseAndBitshift
+  C:\Temp\ccw4Kfuf.s:89     .text.DMA_CalcBaseAndBitshift:0000003c $d
+  C:\Temp\ccw4Kfuf.s:1122   .rodata.flagBitshiftOffset.0:00000000 flagBitshiftOffset.0
+  C:\Temp\ccw4Kfuf.s:93     .text.DMA_CheckFifoParam:00000000 $t
+  C:\Temp\ccw4Kfuf.s:98     .text.DMA_CheckFifoParam:00000000 DMA_CheckFifoParam
+  C:\Temp\ccw4Kfuf.s:141    .text.DMA_CheckFifoParam:0000004e $d
+  C:\Temp\ccw4Kfuf.s:145    .text.DMA_CheckFifoParam:00000052 $t
+  C:\Temp\ccw4Kfuf.s:187    .text.HAL_DMA_Init:00000000 $t
+  C:\Temp\ccw4Kfuf.s:193    .text.HAL_DMA_Init:00000000 HAL_DMA_Init
+  C:\Temp\ccw4Kfuf.s:295    .text.HAL_DMA_Init:000000c8 $d
+  C:\Temp\ccw4Kfuf.s:298    .text.HAL_DMA_DeInit:00000000 $t
+  C:\Temp\ccw4Kfuf.s:304    .text.HAL_DMA_DeInit:00000000 HAL_DMA_DeInit
+  C:\Temp\ccw4Kfuf.s:356    .text.HAL_DMA_Start:00000000 $t
+  C:\Temp\ccw4Kfuf.s:362    .text.HAL_DMA_Start:00000000 HAL_DMA_Start
+  C:\Temp\ccw4Kfuf.s:399    .text.HAL_DMA_Start_IT:00000000 $t
+  C:\Temp\ccw4Kfuf.s:405    .text.HAL_DMA_Start_IT:00000000 HAL_DMA_Start_IT
+  C:\Temp\ccw4Kfuf.s:458    .text.HAL_DMA_Abort:00000000 $t
+  C:\Temp\ccw4Kfuf.s:464    .text.HAL_DMA_Abort:00000000 HAL_DMA_Abort
+  C:\Temp\ccw4Kfuf.s:537    .text.HAL_DMA_Abort_IT:00000000 $t
+  C:\Temp\ccw4Kfuf.s:543    .text.HAL_DMA_Abort_IT:00000000 HAL_DMA_Abort_IT
+  C:\Temp\ccw4Kfuf.s:566    .text.HAL_DMA_PollForTransfer:00000000 $t
+  C:\Temp\ccw4Kfuf.s:572    .text.HAL_DMA_PollForTransfer:00000000 HAL_DMA_PollForTransfer
+  C:\Temp\ccw4Kfuf.s:710    .text.HAL_DMA_IRQHandler:00000000 $t
+  C:\Temp\ccw4Kfuf.s:716    .text.HAL_DMA_IRQHandler:00000000 HAL_DMA_IRQHandler
+  C:\Temp\ccw4Kfuf.s:944    .text.HAL_DMA_IRQHandler:000001d4 $d
+  C:\Temp\ccw4Kfuf.s:948    .text.HAL_DMA_RegisterCallback:00000000 $t
+  C:\Temp\ccw4Kfuf.s:954    .text.HAL_DMA_RegisterCallback:00000000 HAL_DMA_RegisterCallback
+  C:\Temp\ccw4Kfuf.s:978    .text.HAL_DMA_RegisterCallback:0000002c $d
+  C:\Temp\ccw4Kfuf.s:984    .text.HAL_DMA_RegisterCallback:00000032 $t
+  C:\Temp\ccw4Kfuf.s:1014   .text.HAL_DMA_UnRegisterCallback:00000000 $t
+  C:\Temp\ccw4Kfuf.s:1020   .text.HAL_DMA_UnRegisterCallback:00000000 HAL_DMA_UnRegisterCallback
+  C:\Temp\ccw4Kfuf.s:1044   .text.HAL_DMA_UnRegisterCallback:0000002c $d
+  C:\Temp\ccw4Kfuf.s:1091   .text.HAL_DMA_GetState:00000000 $t
+  C:\Temp\ccw4Kfuf.s:1097   .text.HAL_DMA_GetState:00000000 HAL_DMA_GetState
+  C:\Temp\ccw4Kfuf.s:1105   .text.HAL_DMA_GetError:00000000 $t
+  C:\Temp\ccw4Kfuf.s:1111   .text.HAL_DMA_GetError:00000000 HAL_DMA_GetError
+  C:\Temp\ccw4Kfuf.s:1119   .rodata.flagBitshiftOffset.0:00000000 $d
+  C:\Temp\ccw4Kfuf.s:1051   .text.HAL_DMA_UnRegisterCallback:00000033 $d
+  C:\Temp\ccw4Kfuf.s:1051   .text.HAL_DMA_UnRegisterCallback:00000034 $t
 
 UNDEFINED SYMBOLS
 HAL_GetTick

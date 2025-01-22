@@ -1,0 +1,733 @@
+ARM GAS  C:\Temp\ccoQqjMo.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"stm32f4xx_hal.c"
+  16              		.text
+  17              		.section	.text.HAL_MspInit,"ax",%progbits
+  18              		.align	1
+  19              		.weak	HAL_MspInit
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	HAL_MspInit:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27              		@ link register save eliminated.
+  28 0000 7047     		bx	lr
+  30              		.section	.text.HAL_MspDeInit,"ax",%progbits
+  31              		.align	1
+  32              		.weak	HAL_MspDeInit
+  33              		.syntax unified
+  34              		.thumb
+  35              		.thumb_func
+  37              	HAL_MspDeInit:
+  38              		@ args = 0, pretend = 0, frame = 0
+  39              		@ frame_needed = 0, uses_anonymous_args = 0
+  40              		@ link register save eliminated.
+  41 0000 7047     		bx	lr
+  43              		.section	.text.HAL_DeInit,"ax",%progbits
+  44              		.align	1
+  45              		.global	HAL_DeInit
+  46              		.syntax unified
+  47              		.thumb
+  48              		.thumb_func
+  50              	HAL_DeInit:
+  51              		@ args = 0, pretend = 0, frame = 0
+  52              		@ frame_needed = 0, uses_anonymous_args = 0
+  53 0000 10B5     		push	{r4, lr}
+  54 0002 0B4B     		ldr	r3, .L5
+  55 0004 0B4A     		ldr	r2, .L5+4
+  56 0006 1A62     		str	r2, [r3, #32]
+  57 0008 0024     		movs	r4, #0
+  58 000a 1C62     		str	r4, [r3, #32]
+  59 000c 0A4A     		ldr	r2, .L5+8
+  60 000e 5A62     		str	r2, [r3, #36]
+  61 0010 5C62     		str	r4, [r3, #36]
+  62 0012 0A4A     		ldr	r2, .L5+12
+ARM GAS  C:\Temp\ccoQqjMo.s 			page 2
+
+
+  63 0014 1A61     		str	r2, [r3, #16]
+  64 0016 1C61     		str	r4, [r3, #16]
+  65 0018 8022     		movs	r2, #128
+  66 001a 5A61     		str	r2, [r3, #20]
+  67 001c 5C61     		str	r4, [r3, #20]
+  68 001e 4FF0FF32 		mov	r2, #-1
+  69 0022 9A61     		str	r2, [r3, #24]
+  70 0024 9C61     		str	r4, [r3, #24]
+  71 0026 FFF7FEFF 		bl	HAL_MspDeInit
+  72 002a 2046     		mov	r0, r4
+  73 002c 10BD     		pop	{r4, pc}
+  74              	.L6:
+  75 002e 00BF     		.align	2
+  76              	.L5:
+  77 0030 00380240 		.word	1073887232
+  78 0034 0FC8E210 		.word	283297807
+  79 0038 31791700 		.word	1538353
+  80 003c 9F106000 		.word	6295711
+  82              		.section	.text.HAL_InitTick,"ax",%progbits
+  83              		.align	1
+  84              		.weak	HAL_InitTick
+  85              		.syntax unified
+  86              		.thumb
+  87              		.thumb_func
+  89              	HAL_InitTick:
+  90              		@ args = 0, pretend = 0, frame = 0
+  91              		@ frame_needed = 0, uses_anonymous_args = 0
+  92 0000 10B5     		push	{r4, lr}
+  93 0002 0446     		mov	r4, r0
+  94 0004 0E4B     		ldr	r3, .L13
+  95 0006 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+  96 0008 4FF47A73 		mov	r3, #1000
+  97 000c B3FBF2F3 		udiv	r3, r3, r2
+  98 0010 0C4A     		ldr	r2, .L13+4
+  99 0012 1068     		ldr	r0, [r2]
+ 100 0014 B0FBF3F0 		udiv	r0, r0, r3
+ 101 0018 FFF7FEFF 		bl	HAL_SYSTICK_Config
+ 102 001c 68B9     		cbnz	r0, .L9
+ 103 001e 0F2C     		cmp	r4, #15
+ 104 0020 01D9     		bls	.L12
+ 105 0022 0120     		movs	r0, #1
+ 106 0024 0AE0     		b	.L8
+ 107              	.L12:
+ 108 0026 0022     		movs	r2, #0
+ 109 0028 2146     		mov	r1, r4
+ 110 002a 4FF0FF30 		mov	r0, #-1
+ 111 002e FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 112 0032 054B     		ldr	r3, .L13+8
+ 113 0034 1C60     		str	r4, [r3]
+ 114 0036 0020     		movs	r0, #0
+ 115 0038 00E0     		b	.L8
+ 116              	.L9:
+ 117 003a 0120     		movs	r0, #1
+ 118              	.L8:
+ 119 003c 10BD     		pop	{r4, pc}
+ 120              	.L14:
+ 121 003e 00BF     		.align	2
+ARM GAS  C:\Temp\ccoQqjMo.s 			page 3
+
+
+ 122              	.L13:
+ 123 0040 00000000 		.word	uwTickFreq
+ 124 0044 00000000 		.word	SystemCoreClock
+ 125 0048 00000000 		.word	uwTickPrio
+ 127              		.section	.text.HAL_Init,"ax",%progbits
+ 128              		.align	1
+ 129              		.global	HAL_Init
+ 130              		.syntax unified
+ 131              		.thumb
+ 132              		.thumb_func
+ 134              	HAL_Init:
+ 135              		@ args = 0, pretend = 0, frame = 0
+ 136              		@ frame_needed = 0, uses_anonymous_args = 0
+ 137 0000 08B5     		push	{r3, lr}
+ 138 0002 0B4B     		ldr	r3, .L17
+ 139 0004 1A68     		ldr	r2, [r3]
+ 140 0006 42F40072 		orr	r2, r2, #512
+ 141 000a 1A60     		str	r2, [r3]
+ 142 000c 1A68     		ldr	r2, [r3]
+ 143 000e 42F48062 		orr	r2, r2, #1024
+ 144 0012 1A60     		str	r2, [r3]
+ 145 0014 1A68     		ldr	r2, [r3]
+ 146 0016 42F48072 		orr	r2, r2, #256
+ 147 001a 1A60     		str	r2, [r3]
+ 148 001c 0320     		movs	r0, #3
+ 149 001e FFF7FEFF 		bl	HAL_NVIC_SetPriorityGrouping
+ 150 0022 0020     		movs	r0, #0
+ 151 0024 FFF7FEFF 		bl	HAL_InitTick
+ 152 0028 FFF7FEFF 		bl	HAL_MspInit
+ 153 002c 0020     		movs	r0, #0
+ 154 002e 08BD     		pop	{r3, pc}
+ 155              	.L18:
+ 156              		.align	2
+ 157              	.L17:
+ 158 0030 003C0240 		.word	1073888256
+ 160              		.section	.text.HAL_IncTick,"ax",%progbits
+ 161              		.align	1
+ 162              		.weak	HAL_IncTick
+ 163              		.syntax unified
+ 164              		.thumb
+ 165              		.thumb_func
+ 167              	HAL_IncTick:
+ 168              		@ args = 0, pretend = 0, frame = 0
+ 169              		@ frame_needed = 0, uses_anonymous_args = 0
+ 170              		@ link register save eliminated.
+ 171 0000 034A     		ldr	r2, .L20
+ 172 0002 1168     		ldr	r1, [r2]
+ 173 0004 034B     		ldr	r3, .L20+4
+ 174 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 175 0008 0B44     		add	r3, r3, r1
+ 176 000a 1360     		str	r3, [r2]
+ 177 000c 7047     		bx	lr
+ 178              	.L21:
+ 179 000e 00BF     		.align	2
+ 180              	.L20:
+ 181 0010 00000000 		.word	uwTick
+ 182 0014 00000000 		.word	uwTickFreq
+ARM GAS  C:\Temp\ccoQqjMo.s 			page 4
+
+
+ 184              		.section	.text.HAL_GetTick,"ax",%progbits
+ 185              		.align	1
+ 186              		.weak	HAL_GetTick
+ 187              		.syntax unified
+ 188              		.thumb
+ 189              		.thumb_func
+ 191              	HAL_GetTick:
+ 192              		@ args = 0, pretend = 0, frame = 0
+ 193              		@ frame_needed = 0, uses_anonymous_args = 0
+ 194              		@ link register save eliminated.
+ 195 0000 014B     		ldr	r3, .L23
+ 196 0002 1868     		ldr	r0, [r3]
+ 197 0004 7047     		bx	lr
+ 198              	.L24:
+ 199 0006 00BF     		.align	2
+ 200              	.L23:
+ 201 0008 00000000 		.word	uwTick
+ 203              		.section	.text.HAL_GetTickPrio,"ax",%progbits
+ 204              		.align	1
+ 205              		.global	HAL_GetTickPrio
+ 206              		.syntax unified
+ 207              		.thumb
+ 208              		.thumb_func
+ 210              	HAL_GetTickPrio:
+ 211              		@ args = 0, pretend = 0, frame = 0
+ 212              		@ frame_needed = 0, uses_anonymous_args = 0
+ 213              		@ link register save eliminated.
+ 214 0000 014B     		ldr	r3, .L26
+ 215 0002 1868     		ldr	r0, [r3]
+ 216 0004 7047     		bx	lr
+ 217              	.L27:
+ 218 0006 00BF     		.align	2
+ 219              	.L26:
+ 220 0008 00000000 		.word	uwTickPrio
+ 222              		.section	.rodata.HAL_SetTickFreq.str1.4,"aMS",%progbits,1
+ 223              		.align	2
+ 224              	.LC0:
+ 225 0000 44726976 		.ascii	"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c\000"
+ 225      6572732F 
+ 225      53544D33 
+ 225      32463478 
+ 225      785F4841 
+ 226              		.section	.text.HAL_SetTickFreq,"ax",%progbits
+ 227              		.align	1
+ 228              		.global	HAL_SetTickFreq
+ 229              		.syntax unified
+ 230              		.thumb
+ 231              		.thumb_func
+ 233              	HAL_SetTickFreq:
+ 234              		@ args = 0, pretend = 0, frame = 0
+ 235              		@ frame_needed = 0, uses_anonymous_args = 0
+ 236 0000 38B5     		push	{r3, r4, r5, lr}
+ 237 0002 0446     		mov	r4, r0
+ 238 0004 6428     		cmp	r0, #100
+ 239 0006 03D0     		beq	.L29
+ 240 0008 0A28     		cmp	r0, #10
+ 241 000a 01D0     		beq	.L29
+ARM GAS  C:\Temp\ccoQqjMo.s 			page 5
+
+
+ 242 000c 0128     		cmp	r0, #1
+ 243 000e 05D1     		bne	.L33
+ 244              	.L29:
+ 245 0010 0A4B     		ldr	r3, .L35
+ 246 0012 1D78     		ldrb	r5, [r3]	@ zero_extendqisi2
+ 247 0014 A542     		cmp	r5, r4
+ 248 0016 07D1     		bne	.L34
+ 249 0018 0020     		movs	r0, #0
+ 250              	.L30:
+ 251 001a 38BD     		pop	{r3, r4, r5, pc}
+ 252              	.L33:
+ 253 001c 4FF4AD71 		mov	r1, #346
+ 254 0020 0748     		ldr	r0, .L35+4
+ 255 0022 FFF7FEFF 		bl	assert_failed
+ 256 0026 F3E7     		b	.L29
+ 257              	.L34:
+ 258 0028 1C70     		strb	r4, [r3]
+ 259 002a 064B     		ldr	r3, .L35+8
+ 260 002c 1868     		ldr	r0, [r3]
+ 261 002e FFF7FEFF 		bl	HAL_InitTick
+ 262 0032 0028     		cmp	r0, #0
+ 263 0034 F1D0     		beq	.L30
+ 264 0036 014B     		ldr	r3, .L35
+ 265 0038 1D70     		strb	r5, [r3]
+ 266 003a EEE7     		b	.L30
+ 267              	.L36:
+ 268              		.align	2
+ 269              	.L35:
+ 270 003c 00000000 		.word	uwTickFreq
+ 271 0040 00000000 		.word	.LC0
+ 272 0044 00000000 		.word	uwTickPrio
+ 274              		.section	.text.HAL_GetTickFreq,"ax",%progbits
+ 275              		.align	1
+ 276              		.global	HAL_GetTickFreq
+ 277              		.syntax unified
+ 278              		.thumb
+ 279              		.thumb_func
+ 281              	HAL_GetTickFreq:
+ 282              		@ args = 0, pretend = 0, frame = 0
+ 283              		@ frame_needed = 0, uses_anonymous_args = 0
+ 284              		@ link register save eliminated.
+ 285 0000 014B     		ldr	r3, .L38
+ 286 0002 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 287 0004 7047     		bx	lr
+ 288              	.L39:
+ 289 0006 00BF     		.align	2
+ 290              	.L38:
+ 291 0008 00000000 		.word	uwTickFreq
+ 293              		.section	.text.HAL_Delay,"ax",%progbits
+ 294              		.align	1
+ 295              		.weak	HAL_Delay
+ 296              		.syntax unified
+ 297              		.thumb
+ 298              		.thumb_func
+ 300              	HAL_Delay:
+ 301              		@ args = 0, pretend = 0, frame = 0
+ 302              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Temp\ccoQqjMo.s 			page 6
+
+
+ 303 0000 38B5     		push	{r3, r4, r5, lr}
+ 304 0002 0446     		mov	r4, r0
+ 305 0004 FFF7FEFF 		bl	HAL_GetTick
+ 306 0008 0546     		mov	r5, r0
+ 307 000a B4F1FF3F 		cmp	r4, #-1
+ 308 000e 02D0     		beq	.L42
+ 309 0010 044B     		ldr	r3, .L44
+ 310 0012 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 311 0014 1C44     		add	r4, r4, r3
+ 312              	.L42:
+ 313 0016 FFF7FEFF 		bl	HAL_GetTick
+ 314 001a 401B     		subs	r0, r0, r5
+ 315 001c A042     		cmp	r0, r4
+ 316 001e FAD3     		bcc	.L42
+ 317 0020 38BD     		pop	{r3, r4, r5, pc}
+ 318              	.L45:
+ 319 0022 00BF     		.align	2
+ 320              	.L44:
+ 321 0024 00000000 		.word	uwTickFreq
+ 323              		.section	.text.HAL_SuspendTick,"ax",%progbits
+ 324              		.align	1
+ 325              		.weak	HAL_SuspendTick
+ 326              		.syntax unified
+ 327              		.thumb
+ 328              		.thumb_func
+ 330              	HAL_SuspendTick:
+ 331              		@ args = 0, pretend = 0, frame = 0
+ 332              		@ frame_needed = 0, uses_anonymous_args = 0
+ 333              		@ link register save eliminated.
+ 334 0000 4FF0E022 		mov	r2, #-536813568
+ 335 0004 1369     		ldr	r3, [r2, #16]
+ 336 0006 23F00203 		bic	r3, r3, #2
+ 337 000a 1361     		str	r3, [r2, #16]
+ 338 000c 7047     		bx	lr
+ 340              		.section	.text.HAL_ResumeTick,"ax",%progbits
+ 341              		.align	1
+ 342              		.weak	HAL_ResumeTick
+ 343              		.syntax unified
+ 344              		.thumb
+ 345              		.thumb_func
+ 347              	HAL_ResumeTick:
+ 348              		@ args = 0, pretend = 0, frame = 0
+ 349              		@ frame_needed = 0, uses_anonymous_args = 0
+ 350              		@ link register save eliminated.
+ 351 0000 4FF0E022 		mov	r2, #-536813568
+ 352 0004 1369     		ldr	r3, [r2, #16]
+ 353 0006 43F00203 		orr	r3, r3, #2
+ 354 000a 1361     		str	r3, [r2, #16]
+ 355 000c 7047     		bx	lr
+ 357              		.section	.text.HAL_GetHalVersion,"ax",%progbits
+ 358              		.align	1
+ 359              		.global	HAL_GetHalVersion
+ 360              		.syntax unified
+ 361              		.thumb
+ 362              		.thumb_func
+ 364              	HAL_GetHalVersion:
+ 365              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Temp\ccoQqjMo.s 			page 7
+
+
+ 366              		@ frame_needed = 0, uses_anonymous_args = 0
+ 367              		@ link register save eliminated.
+ 368 0000 0048     		ldr	r0, .L49
+ 369 0002 7047     		bx	lr
+ 370              	.L50:
+ 371              		.align	2
+ 372              	.L49:
+ 373 0004 00030801 		.word	17302272
+ 375              		.section	.text.HAL_GetREVID,"ax",%progbits
+ 376              		.align	1
+ 377              		.global	HAL_GetREVID
+ 378              		.syntax unified
+ 379              		.thumb
+ 380              		.thumb_func
+ 382              	HAL_GetREVID:
+ 383              		@ args = 0, pretend = 0, frame = 0
+ 384              		@ frame_needed = 0, uses_anonymous_args = 0
+ 385              		@ link register save eliminated.
+ 386 0000 014B     		ldr	r3, .L52
+ 387 0002 1868     		ldr	r0, [r3]
+ 388 0004 000C     		lsrs	r0, r0, #16
+ 389 0006 7047     		bx	lr
+ 390              	.L53:
+ 391              		.align	2
+ 392              	.L52:
+ 393 0008 002004E0 		.word	-536600576
+ 395              		.section	.text.HAL_GetDEVID,"ax",%progbits
+ 396              		.align	1
+ 397              		.global	HAL_GetDEVID
+ 398              		.syntax unified
+ 399              		.thumb
+ 400              		.thumb_func
+ 402              	HAL_GetDEVID:
+ 403              		@ args = 0, pretend = 0, frame = 0
+ 404              		@ frame_needed = 0, uses_anonymous_args = 0
+ 405              		@ link register save eliminated.
+ 406 0000 024B     		ldr	r3, .L55
+ 407 0002 1868     		ldr	r0, [r3]
+ 408 0004 C0F30B00 		ubfx	r0, r0, #0, #12
+ 409 0008 7047     		bx	lr
+ 410              	.L56:
+ 411 000a 00BF     		.align	2
+ 412              	.L55:
+ 413 000c 002004E0 		.word	-536600576
+ 415              		.section	.text.HAL_DBGMCU_EnableDBGSleepMode,"ax",%progbits
+ 416              		.align	1
+ 417              		.global	HAL_DBGMCU_EnableDBGSleepMode
+ 418              		.syntax unified
+ 419              		.thumb
+ 420              		.thumb_func
+ 422              	HAL_DBGMCU_EnableDBGSleepMode:
+ 423              		@ args = 0, pretend = 0, frame = 0
+ 424              		@ frame_needed = 0, uses_anonymous_args = 0
+ 425              		@ link register save eliminated.
+ 426 0000 024A     		ldr	r2, .L58
+ 427 0002 5368     		ldr	r3, [r2, #4]
+ 428 0004 43F00103 		orr	r3, r3, #1
+ARM GAS  C:\Temp\ccoQqjMo.s 			page 8
+
+
+ 429 0008 5360     		str	r3, [r2, #4]
+ 430 000a 7047     		bx	lr
+ 431              	.L59:
+ 432              		.align	2
+ 433              	.L58:
+ 434 000c 002004E0 		.word	-536600576
+ 436              		.section	.text.HAL_DBGMCU_DisableDBGSleepMode,"ax",%progbits
+ 437              		.align	1
+ 438              		.global	HAL_DBGMCU_DisableDBGSleepMode
+ 439              		.syntax unified
+ 440              		.thumb
+ 441              		.thumb_func
+ 443              	HAL_DBGMCU_DisableDBGSleepMode:
+ 444              		@ args = 0, pretend = 0, frame = 0
+ 445              		@ frame_needed = 0, uses_anonymous_args = 0
+ 446              		@ link register save eliminated.
+ 447 0000 024A     		ldr	r2, .L61
+ 448 0002 5368     		ldr	r3, [r2, #4]
+ 449 0004 23F00103 		bic	r3, r3, #1
+ 450 0008 5360     		str	r3, [r2, #4]
+ 451 000a 7047     		bx	lr
+ 452              	.L62:
+ 453              		.align	2
+ 454              	.L61:
+ 455 000c 002004E0 		.word	-536600576
+ 457              		.section	.text.HAL_DBGMCU_EnableDBGStopMode,"ax",%progbits
+ 458              		.align	1
+ 459              		.global	HAL_DBGMCU_EnableDBGStopMode
+ 460              		.syntax unified
+ 461              		.thumb
+ 462              		.thumb_func
+ 464              	HAL_DBGMCU_EnableDBGStopMode:
+ 465              		@ args = 0, pretend = 0, frame = 0
+ 466              		@ frame_needed = 0, uses_anonymous_args = 0
+ 467              		@ link register save eliminated.
+ 468 0000 024A     		ldr	r2, .L64
+ 469 0002 5368     		ldr	r3, [r2, #4]
+ 470 0004 43F00203 		orr	r3, r3, #2
+ 471 0008 5360     		str	r3, [r2, #4]
+ 472 000a 7047     		bx	lr
+ 473              	.L65:
+ 474              		.align	2
+ 475              	.L64:
+ 476 000c 002004E0 		.word	-536600576
+ 478              		.section	.text.HAL_DBGMCU_DisableDBGStopMode,"ax",%progbits
+ 479              		.align	1
+ 480              		.global	HAL_DBGMCU_DisableDBGStopMode
+ 481              		.syntax unified
+ 482              		.thumb
+ 483              		.thumb_func
+ 485              	HAL_DBGMCU_DisableDBGStopMode:
+ 486              		@ args = 0, pretend = 0, frame = 0
+ 487              		@ frame_needed = 0, uses_anonymous_args = 0
+ 488              		@ link register save eliminated.
+ 489 0000 024A     		ldr	r2, .L67
+ 490 0002 5368     		ldr	r3, [r2, #4]
+ 491 0004 23F00203 		bic	r3, r3, #2
+ARM GAS  C:\Temp\ccoQqjMo.s 			page 9
+
+
+ 492 0008 5360     		str	r3, [r2, #4]
+ 493 000a 7047     		bx	lr
+ 494              	.L68:
+ 495              		.align	2
+ 496              	.L67:
+ 497 000c 002004E0 		.word	-536600576
+ 499              		.section	.text.HAL_DBGMCU_EnableDBGStandbyMode,"ax",%progbits
+ 500              		.align	1
+ 501              		.global	HAL_DBGMCU_EnableDBGStandbyMode
+ 502              		.syntax unified
+ 503              		.thumb
+ 504              		.thumb_func
+ 506              	HAL_DBGMCU_EnableDBGStandbyMode:
+ 507              		@ args = 0, pretend = 0, frame = 0
+ 508              		@ frame_needed = 0, uses_anonymous_args = 0
+ 509              		@ link register save eliminated.
+ 510 0000 024A     		ldr	r2, .L70
+ 511 0002 5368     		ldr	r3, [r2, #4]
+ 512 0004 43F00403 		orr	r3, r3, #4
+ 513 0008 5360     		str	r3, [r2, #4]
+ 514 000a 7047     		bx	lr
+ 515              	.L71:
+ 516              		.align	2
+ 517              	.L70:
+ 518 000c 002004E0 		.word	-536600576
+ 520              		.section	.text.HAL_DBGMCU_DisableDBGStandbyMode,"ax",%progbits
+ 521              		.align	1
+ 522              		.global	HAL_DBGMCU_DisableDBGStandbyMode
+ 523              		.syntax unified
+ 524              		.thumb
+ 525              		.thumb_func
+ 527              	HAL_DBGMCU_DisableDBGStandbyMode:
+ 528              		@ args = 0, pretend = 0, frame = 0
+ 529              		@ frame_needed = 0, uses_anonymous_args = 0
+ 530              		@ link register save eliminated.
+ 531 0000 024A     		ldr	r2, .L73
+ 532 0002 5368     		ldr	r3, [r2, #4]
+ 533 0004 23F00403 		bic	r3, r3, #4
+ 534 0008 5360     		str	r3, [r2, #4]
+ 535 000a 7047     		bx	lr
+ 536              	.L74:
+ 537              		.align	2
+ 538              	.L73:
+ 539 000c 002004E0 		.word	-536600576
+ 541              		.section	.text.HAL_EnableCompensationCell,"ax",%progbits
+ 542              		.align	1
+ 543              		.global	HAL_EnableCompensationCell
+ 544              		.syntax unified
+ 545              		.thumb
+ 546              		.thumb_func
+ 548              	HAL_EnableCompensationCell:
+ 549              		@ args = 0, pretend = 0, frame = 0
+ 550              		@ frame_needed = 0, uses_anonymous_args = 0
+ 551              		@ link register save eliminated.
+ 552 0000 024B     		ldr	r3, .L76
+ 553 0002 0122     		movs	r2, #1
+ 554 0004 C3F80024 		str	r2, [r3, #1024]
+ARM GAS  C:\Temp\ccoQqjMo.s 			page 10
+
+
+ 555 0008 7047     		bx	lr
+ 556              	.L77:
+ 557 000a 00BF     		.align	2
+ 558              	.L76:
+ 559 000c 00002742 		.word	1109852160
+ 561              		.section	.text.HAL_DisableCompensationCell,"ax",%progbits
+ 562              		.align	1
+ 563              		.global	HAL_DisableCompensationCell
+ 564              		.syntax unified
+ 565              		.thumb
+ 566              		.thumb_func
+ 568              	HAL_DisableCompensationCell:
+ 569              		@ args = 0, pretend = 0, frame = 0
+ 570              		@ frame_needed = 0, uses_anonymous_args = 0
+ 571              		@ link register save eliminated.
+ 572 0000 024B     		ldr	r3, .L79
+ 573 0002 0022     		movs	r2, #0
+ 574 0004 C3F80024 		str	r2, [r3, #1024]
+ 575 0008 7047     		bx	lr
+ 576              	.L80:
+ 577 000a 00BF     		.align	2
+ 578              	.L79:
+ 579 000c 00002742 		.word	1109852160
+ 581              		.section	.text.HAL_GetUIDw0,"ax",%progbits
+ 582              		.align	1
+ 583              		.global	HAL_GetUIDw0
+ 584              		.syntax unified
+ 585              		.thumb
+ 586              		.thumb_func
+ 588              	HAL_GetUIDw0:
+ 589              		@ args = 0, pretend = 0, frame = 0
+ 590              		@ frame_needed = 0, uses_anonymous_args = 0
+ 591              		@ link register save eliminated.
+ 592 0000 014B     		ldr	r3, .L82
+ 593 0002 D3F8100A 		ldr	r0, [r3, #2576]
+ 594 0006 7047     		bx	lr
+ 595              	.L83:
+ 596              		.align	2
+ 597              	.L82:
+ 598 0008 0070FF1F 		.word	536834048
+ 600              		.section	.text.HAL_GetUIDw1,"ax",%progbits
+ 601              		.align	1
+ 602              		.global	HAL_GetUIDw1
+ 603              		.syntax unified
+ 604              		.thumb
+ 605              		.thumb_func
+ 607              	HAL_GetUIDw1:
+ 608              		@ args = 0, pretend = 0, frame = 0
+ 609              		@ frame_needed = 0, uses_anonymous_args = 0
+ 610              		@ link register save eliminated.
+ 611 0000 014B     		ldr	r3, .L85
+ 612 0002 D3F8140A 		ldr	r0, [r3, #2580]
+ 613 0006 7047     		bx	lr
+ 614              	.L86:
+ 615              		.align	2
+ 616              	.L85:
+ 617 0008 0070FF1F 		.word	536834048
+ARM GAS  C:\Temp\ccoQqjMo.s 			page 11
+
+
+ 619              		.section	.text.HAL_GetUIDw2,"ax",%progbits
+ 620              		.align	1
+ 621              		.global	HAL_GetUIDw2
+ 622              		.syntax unified
+ 623              		.thumb
+ 624              		.thumb_func
+ 626              	HAL_GetUIDw2:
+ 627              		@ args = 0, pretend = 0, frame = 0
+ 628              		@ frame_needed = 0, uses_anonymous_args = 0
+ 629              		@ link register save eliminated.
+ 630 0000 014B     		ldr	r3, .L88
+ 631 0002 D3F8180A 		ldr	r0, [r3, #2584]
+ 632 0006 7047     		bx	lr
+ 633              	.L89:
+ 634              		.align	2
+ 635              	.L88:
+ 636 0008 0070FF1F 		.word	536834048
+ 638              		.global	uwTickFreq
+ 639              		.section	.data.uwTickFreq,"aw"
+ 642              	uwTickFreq:
+ 643 0000 01       		.byte	1
+ 644              		.global	uwTickPrio
+ 645              		.section	.data.uwTickPrio,"aw"
+ 646              		.align	2
+ 649              	uwTickPrio:
+ 650 0000 10000000 		.word	16
+ 651              		.global	uwTick
+ 652              		.section	.bss.uwTick,"aw",%nobits
+ 653              		.align	2
+ 656              	uwTick:
+ 657 0000 00000000 		.space	4
+ 658              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccoQqjMo.s 			page 12
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f4xx_hal.c
+  C:\Temp\ccoQqjMo.s:18     .text.HAL_MspInit:00000000 $t
+  C:\Temp\ccoQqjMo.s:24     .text.HAL_MspInit:00000000 HAL_MspInit
+  C:\Temp\ccoQqjMo.s:31     .text.HAL_MspDeInit:00000000 $t
+  C:\Temp\ccoQqjMo.s:37     .text.HAL_MspDeInit:00000000 HAL_MspDeInit
+  C:\Temp\ccoQqjMo.s:44     .text.HAL_DeInit:00000000 $t
+  C:\Temp\ccoQqjMo.s:50     .text.HAL_DeInit:00000000 HAL_DeInit
+  C:\Temp\ccoQqjMo.s:77     .text.HAL_DeInit:00000030 $d
+  C:\Temp\ccoQqjMo.s:83     .text.HAL_InitTick:00000000 $t
+  C:\Temp\ccoQqjMo.s:89     .text.HAL_InitTick:00000000 HAL_InitTick
+  C:\Temp\ccoQqjMo.s:123    .text.HAL_InitTick:00000040 $d
+  C:\Temp\ccoQqjMo.s:642    .data.uwTickFreq:00000000 uwTickFreq
+  C:\Temp\ccoQqjMo.s:649    .data.uwTickPrio:00000000 uwTickPrio
+  C:\Temp\ccoQqjMo.s:128    .text.HAL_Init:00000000 $t
+  C:\Temp\ccoQqjMo.s:134    .text.HAL_Init:00000000 HAL_Init
+  C:\Temp\ccoQqjMo.s:158    .text.HAL_Init:00000030 $d
+  C:\Temp\ccoQqjMo.s:161    .text.HAL_IncTick:00000000 $t
+  C:\Temp\ccoQqjMo.s:167    .text.HAL_IncTick:00000000 HAL_IncTick
+  C:\Temp\ccoQqjMo.s:181    .text.HAL_IncTick:00000010 $d
+  C:\Temp\ccoQqjMo.s:656    .bss.uwTick:00000000 uwTick
+  C:\Temp\ccoQqjMo.s:185    .text.HAL_GetTick:00000000 $t
+  C:\Temp\ccoQqjMo.s:191    .text.HAL_GetTick:00000000 HAL_GetTick
+  C:\Temp\ccoQqjMo.s:201    .text.HAL_GetTick:00000008 $d
+  C:\Temp\ccoQqjMo.s:204    .text.HAL_GetTickPrio:00000000 $t
+  C:\Temp\ccoQqjMo.s:210    .text.HAL_GetTickPrio:00000000 HAL_GetTickPrio
+  C:\Temp\ccoQqjMo.s:220    .text.HAL_GetTickPrio:00000008 $d
+  C:\Temp\ccoQqjMo.s:223    .rodata.HAL_SetTickFreq.str1.4:00000000 $d
+  C:\Temp\ccoQqjMo.s:227    .text.HAL_SetTickFreq:00000000 $t
+  C:\Temp\ccoQqjMo.s:233    .text.HAL_SetTickFreq:00000000 HAL_SetTickFreq
+  C:\Temp\ccoQqjMo.s:270    .text.HAL_SetTickFreq:0000003c $d
+  C:\Temp\ccoQqjMo.s:275    .text.HAL_GetTickFreq:00000000 $t
+  C:\Temp\ccoQqjMo.s:281    .text.HAL_GetTickFreq:00000000 HAL_GetTickFreq
+  C:\Temp\ccoQqjMo.s:291    .text.HAL_GetTickFreq:00000008 $d
+  C:\Temp\ccoQqjMo.s:294    .text.HAL_Delay:00000000 $t
+  C:\Temp\ccoQqjMo.s:300    .text.HAL_Delay:00000000 HAL_Delay
+  C:\Temp\ccoQqjMo.s:321    .text.HAL_Delay:00000024 $d
+  C:\Temp\ccoQqjMo.s:324    .text.HAL_SuspendTick:00000000 $t
+  C:\Temp\ccoQqjMo.s:330    .text.HAL_SuspendTick:00000000 HAL_SuspendTick
+  C:\Temp\ccoQqjMo.s:341    .text.HAL_ResumeTick:00000000 $t
+  C:\Temp\ccoQqjMo.s:347    .text.HAL_ResumeTick:00000000 HAL_ResumeTick
+  C:\Temp\ccoQqjMo.s:358    .text.HAL_GetHalVersion:00000000 $t
+  C:\Temp\ccoQqjMo.s:364    .text.HAL_GetHalVersion:00000000 HAL_GetHalVersion
+  C:\Temp\ccoQqjMo.s:373    .text.HAL_GetHalVersion:00000004 $d
+  C:\Temp\ccoQqjMo.s:376    .text.HAL_GetREVID:00000000 $t
+  C:\Temp\ccoQqjMo.s:382    .text.HAL_GetREVID:00000000 HAL_GetREVID
+  C:\Temp\ccoQqjMo.s:393    .text.HAL_GetREVID:00000008 $d
+  C:\Temp\ccoQqjMo.s:396    .text.HAL_GetDEVID:00000000 $t
+  C:\Temp\ccoQqjMo.s:402    .text.HAL_GetDEVID:00000000 HAL_GetDEVID
+  C:\Temp\ccoQqjMo.s:413    .text.HAL_GetDEVID:0000000c $d
+  C:\Temp\ccoQqjMo.s:416    .text.HAL_DBGMCU_EnableDBGSleepMode:00000000 $t
+  C:\Temp\ccoQqjMo.s:422    .text.HAL_DBGMCU_EnableDBGSleepMode:00000000 HAL_DBGMCU_EnableDBGSleepMode
+  C:\Temp\ccoQqjMo.s:434    .text.HAL_DBGMCU_EnableDBGSleepMode:0000000c $d
+  C:\Temp\ccoQqjMo.s:437    .text.HAL_DBGMCU_DisableDBGSleepMode:00000000 $t
+  C:\Temp\ccoQqjMo.s:443    .text.HAL_DBGMCU_DisableDBGSleepMode:00000000 HAL_DBGMCU_DisableDBGSleepMode
+  C:\Temp\ccoQqjMo.s:455    .text.HAL_DBGMCU_DisableDBGSleepMode:0000000c $d
+  C:\Temp\ccoQqjMo.s:458    .text.HAL_DBGMCU_EnableDBGStopMode:00000000 $t
+ARM GAS  C:\Temp\ccoQqjMo.s 			page 13
+
+
+  C:\Temp\ccoQqjMo.s:464    .text.HAL_DBGMCU_EnableDBGStopMode:00000000 HAL_DBGMCU_EnableDBGStopMode
+  C:\Temp\ccoQqjMo.s:476    .text.HAL_DBGMCU_EnableDBGStopMode:0000000c $d
+  C:\Temp\ccoQqjMo.s:479    .text.HAL_DBGMCU_DisableDBGStopMode:00000000 $t
+  C:\Temp\ccoQqjMo.s:485    .text.HAL_DBGMCU_DisableDBGStopMode:00000000 HAL_DBGMCU_DisableDBGStopMode
+  C:\Temp\ccoQqjMo.s:497    .text.HAL_DBGMCU_DisableDBGStopMode:0000000c $d
+  C:\Temp\ccoQqjMo.s:500    .text.HAL_DBGMCU_EnableDBGStandbyMode:00000000 $t
+  C:\Temp\ccoQqjMo.s:506    .text.HAL_DBGMCU_EnableDBGStandbyMode:00000000 HAL_DBGMCU_EnableDBGStandbyMode
+  C:\Temp\ccoQqjMo.s:518    .text.HAL_DBGMCU_EnableDBGStandbyMode:0000000c $d
+  C:\Temp\ccoQqjMo.s:521    .text.HAL_DBGMCU_DisableDBGStandbyMode:00000000 $t
+  C:\Temp\ccoQqjMo.s:527    .text.HAL_DBGMCU_DisableDBGStandbyMode:00000000 HAL_DBGMCU_DisableDBGStandbyMode
+  C:\Temp\ccoQqjMo.s:539    .text.HAL_DBGMCU_DisableDBGStandbyMode:0000000c $d
+  C:\Temp\ccoQqjMo.s:542    .text.HAL_EnableCompensationCell:00000000 $t
+  C:\Temp\ccoQqjMo.s:548    .text.HAL_EnableCompensationCell:00000000 HAL_EnableCompensationCell
+  C:\Temp\ccoQqjMo.s:559    .text.HAL_EnableCompensationCell:0000000c $d
+  C:\Temp\ccoQqjMo.s:562    .text.HAL_DisableCompensationCell:00000000 $t
+  C:\Temp\ccoQqjMo.s:568    .text.HAL_DisableCompensationCell:00000000 HAL_DisableCompensationCell
+  C:\Temp\ccoQqjMo.s:579    .text.HAL_DisableCompensationCell:0000000c $d
+  C:\Temp\ccoQqjMo.s:582    .text.HAL_GetUIDw0:00000000 $t
+  C:\Temp\ccoQqjMo.s:588    .text.HAL_GetUIDw0:00000000 HAL_GetUIDw0
+  C:\Temp\ccoQqjMo.s:598    .text.HAL_GetUIDw0:00000008 $d
+  C:\Temp\ccoQqjMo.s:601    .text.HAL_GetUIDw1:00000000 $t
+  C:\Temp\ccoQqjMo.s:607    .text.HAL_GetUIDw1:00000000 HAL_GetUIDw1
+  C:\Temp\ccoQqjMo.s:617    .text.HAL_GetUIDw1:00000008 $d
+  C:\Temp\ccoQqjMo.s:620    .text.HAL_GetUIDw2:00000000 $t
+  C:\Temp\ccoQqjMo.s:626    .text.HAL_GetUIDw2:00000000 HAL_GetUIDw2
+  C:\Temp\ccoQqjMo.s:636    .text.HAL_GetUIDw2:00000008 $d
+  C:\Temp\ccoQqjMo.s:646    .data.uwTickPrio:00000000 $d
+  C:\Temp\ccoQqjMo.s:653    .bss.uwTick:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_SYSTICK_Config
+HAL_NVIC_SetPriority
+SystemCoreClock
+HAL_NVIC_SetPriorityGrouping
+assert_failed

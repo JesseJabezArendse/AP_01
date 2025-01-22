@@ -128,6 +128,7 @@ void sendToSimulink(){
         HAL_UART_Transmit(&huart2, (uint32_t *) &((TOF_centre .ZoneResult[i]) .Distance  [0])  , 4 , HAL_MAX_DELAY);
         HAL_UART_Transmit(&huart2, (float_t *)  &((TOF_centre .ZoneResult[i]) .Ambient   [0])  , 4 , HAL_MAX_DELAY);
         HAL_UART_Transmit(&huart2, (float_t *)  &((TOF_centre .ZoneResult[i]) .Signal    [0])  , 4 , HAL_MAX_DELAY);
+        HAL_UART_Transmit(&huart2, (float_t *)  &((TOF_centre .ZoneResult[i]) .Status    [0])  , 4 , HAL_MAX_DELAY);
     }
     HAL_UART_Transmit(&huart2, (uint32_t *) &counter          ,4 , HAL_MAX_DELAY);
     HAL_UART_Transmit(&huart2, (uint8_t *) &terminator       ,3 , HAL_MAX_DELAY);

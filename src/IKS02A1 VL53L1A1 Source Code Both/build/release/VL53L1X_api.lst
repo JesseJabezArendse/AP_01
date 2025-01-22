@@ -1,0 +1,1808 @@
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"VL53L1X_api.c"
+  16              		.text
+  17              		.section	.text.VL53L1X_GetSWVersion,"ax",%progbits
+  18              		.align	1
+  19              		.global	VL53L1X_GetSWVersion
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	VL53L1X_GetSWVersion:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27              		@ link register save eliminated.
+  28 0000 0346     		mov	r3, r0
+  29 0002 0322     		movs	r2, #3
+  30 0004 0270     		strb	r2, [r0]
+  31 0006 0522     		movs	r2, #5
+  32 0008 4270     		strb	r2, [r0, #1]
+  33 000a 0422     		movs	r2, #4
+  34 000c 8270     		strb	r2, [r0, #2]
+  35 000e 0020     		movs	r0, #0
+  36 0010 5860     		str	r0, [r3, #4]
+  37 0012 7047     		bx	lr
+  39              		.section	.text.VL53L1X_SetI2CAddress,"ax",%progbits
+  40              		.align	1
+  41              		.global	VL53L1X_SetI2CAddress
+  42              		.syntax unified
+  43              		.thumb
+  44              		.thumb_func
+  46              	VL53L1X_SetI2CAddress:
+  47              		@ args = 0, pretend = 0, frame = 0
+  48              		@ frame_needed = 0, uses_anonymous_args = 0
+  49 0000 08B5     		push	{r3, lr}
+  50 0002 4A08     		lsrs	r2, r1, #1
+  51 0004 0121     		movs	r1, #1
+  52 0006 FFF7FEFF 		bl	VL53L1_WrByte
+  53 000a 08BD     		pop	{r3, pc}
+  55              		.section	.text.VL53L1X_ClearInterrupt,"ax",%progbits
+  56              		.align	1
+  57              		.global	VL53L1X_ClearInterrupt
+  58              		.syntax unified
+  59              		.thumb
+  60              		.thumb_func
+  62              	VL53L1X_ClearInterrupt:
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 2
+
+
+  63              		@ args = 0, pretend = 0, frame = 0
+  64              		@ frame_needed = 0, uses_anonymous_args = 0
+  65 0000 08B5     		push	{r3, lr}
+  66 0002 0122     		movs	r2, #1
+  67 0004 8621     		movs	r1, #134
+  68 0006 FFF7FEFF 		bl	VL53L1_WrByte
+  69 000a 08BD     		pop	{r3, pc}
+  71              		.section	.text.VL53L1X_SetInterruptPolarity,"ax",%progbits
+  72              		.align	1
+  73              		.global	VL53L1X_SetInterruptPolarity
+  74              		.syntax unified
+  75              		.thumb
+  76              		.thumb_func
+  78              	VL53L1X_SetInterruptPolarity:
+  79              		@ args = 0, pretend = 0, frame = 8
+  80              		@ frame_needed = 0, uses_anonymous_args = 0
+  81 0000 70B5     		push	{r4, r5, r6, lr}
+  82 0002 82B0     		sub	sp, sp, #8
+  83 0004 0546     		mov	r5, r0
+  84 0006 0E46     		mov	r6, r1
+  85 0008 0DF10702 		add	r2, sp, #7
+  86 000c 3021     		movs	r1, #48
+  87 000e FFF7FEFF 		bl	VL53L1_RdByte
+  88 0012 0446     		mov	r4, r0
+  89 0014 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+  90 0018 03F0EF03 		and	r3, r3, #239
+  91 001c 8DF80730 		strb	r3, [sp, #7]
+  92 0020 16F0010F 		tst	r6, #1
+  93 0024 09D1     		bne	.L8
+  94 0026 1022     		movs	r2, #16
+  95              	.L7:
+  96 0028 1A43     		orrs	r2, r2, r3
+  97 002a 3021     		movs	r1, #48
+  98 002c 2846     		mov	r0, r5
+  99 002e FFF7FEFF 		bl	VL53L1_WrByte
+ 100 0032 2043     		orrs	r0, r0, r4
+ 101 0034 40B2     		sxtb	r0, r0
+ 102 0036 02B0     		add	sp, sp, #8
+ 103              		@ sp needed
+ 104 0038 70BD     		pop	{r4, r5, r6, pc}
+ 105              	.L8:
+ 106 003a 0022     		movs	r2, #0
+ 107 003c F4E7     		b	.L7
+ 109              		.section	.text.VL53L1X_GetInterruptPolarity,"ax",%progbits
+ 110              		.align	1
+ 111              		.global	VL53L1X_GetInterruptPolarity
+ 112              		.syntax unified
+ 113              		.thumb
+ 114              		.thumb_func
+ 116              	VL53L1X_GetInterruptPolarity:
+ 117              		@ args = 0, pretend = 0, frame = 8
+ 118              		@ frame_needed = 0, uses_anonymous_args = 0
+ 119 0000 10B5     		push	{r4, lr}
+ 120 0002 82B0     		sub	sp, sp, #8
+ 121 0004 0C46     		mov	r4, r1
+ 122 0006 0DF10702 		add	r2, sp, #7
+ 123 000a 3021     		movs	r1, #48
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 3
+
+
+ 124 000c FFF7FEFF 		bl	VL53L1_RdByte
+ 125 0010 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 126 0014 03F01003 		and	r3, r3, #16
+ 127 0018 8DF80730 		strb	r3, [sp, #7]
+ 128 001c B3FA83F3 		clz	r3, r3
+ 129 0020 5B09     		lsrs	r3, r3, #5
+ 130 0022 2370     		strb	r3, [r4]
+ 131 0024 02B0     		add	sp, sp, #8
+ 132              		@ sp needed
+ 133 0026 10BD     		pop	{r4, pc}
+ 135              		.section	.text.VL53L1X_StartRanging,"ax",%progbits
+ 136              		.align	1
+ 137              		.global	VL53L1X_StartRanging
+ 138              		.syntax unified
+ 139              		.thumb
+ 140              		.thumb_func
+ 142              	VL53L1X_StartRanging:
+ 143              		@ args = 0, pretend = 0, frame = 0
+ 144              		@ frame_needed = 0, uses_anonymous_args = 0
+ 145 0000 08B5     		push	{r3, lr}
+ 146 0002 4022     		movs	r2, #64
+ 147 0004 8721     		movs	r1, #135
+ 148 0006 FFF7FEFF 		bl	VL53L1_WrByte
+ 149 000a 08BD     		pop	{r3, pc}
+ 151              		.section	.text.VL53L1X_StopRanging,"ax",%progbits
+ 152              		.align	1
+ 153              		.global	VL53L1X_StopRanging
+ 154              		.syntax unified
+ 155              		.thumb
+ 156              		.thumb_func
+ 158              	VL53L1X_StopRanging:
+ 159              		@ args = 0, pretend = 0, frame = 0
+ 160              		@ frame_needed = 0, uses_anonymous_args = 0
+ 161 0000 08B5     		push	{r3, lr}
+ 162 0002 0022     		movs	r2, #0
+ 163 0004 8721     		movs	r1, #135
+ 164 0006 FFF7FEFF 		bl	VL53L1_WrByte
+ 165 000a 08BD     		pop	{r3, pc}
+ 167              		.section	.text.VL53L1X_CheckForDataReady,"ax",%progbits
+ 168              		.align	1
+ 169              		.global	VL53L1X_CheckForDataReady
+ 170              		.syntax unified
+ 171              		.thumb
+ 172              		.thumb_func
+ 174              	VL53L1X_CheckForDataReady:
+ 175              		@ args = 0, pretend = 0, frame = 8
+ 176              		@ frame_needed = 0, uses_anonymous_args = 0
+ 177 0000 70B5     		push	{r4, r5, r6, lr}
+ 178 0002 82B0     		sub	sp, sp, #8
+ 179 0004 0546     		mov	r5, r0
+ 180 0006 0E46     		mov	r6, r1
+ 181 0008 0DF10601 		add	r1, sp, #6
+ 182 000c FFF7FEFF 		bl	VL53L1X_GetInterruptPolarity
+ 183 0010 0446     		mov	r4, r0
+ 184 0012 0DF10702 		add	r2, sp, #7
+ 185 0016 3121     		movs	r1, #49
+ 186 0018 2846     		mov	r0, r5
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 4
+
+
+ 187 001a FFF7FEFF 		bl	VL53L1_RdByte
+ 188 001e 2043     		orrs	r0, r0, r4
+ 189 0020 40B2     		sxtb	r0, r0
+ 190 0022 48B9     		cbnz	r0, .L17
+ 191 0024 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 192 0028 9DF80620 		ldrb	r2, [sp, #6]	@ zero_extendqisi2
+ 193 002c 03F00103 		and	r3, r3, #1
+ 194 0030 9A42     		cmp	r2, r3
+ 195 0032 03D0     		beq	.L20
+ 196 0034 0023     		movs	r3, #0
+ 197 0036 3370     		strb	r3, [r6]
+ 198              	.L17:
+ 199 0038 02B0     		add	sp, sp, #8
+ 200              		@ sp needed
+ 201 003a 70BD     		pop	{r4, r5, r6, pc}
+ 202              	.L20:
+ 203 003c 0123     		movs	r3, #1
+ 204 003e 3370     		strb	r3, [r6]
+ 205 0040 FAE7     		b	.L17
+ 207              		.section	.text.VL53L1X_SensorInit,"ax",%progbits
+ 208              		.align	1
+ 209              		.global	VL53L1X_SensorInit
+ 210              		.syntax unified
+ 211              		.thumb
+ 212              		.thumb_func
+ 214              	VL53L1X_SensorInit:
+ 215              		@ args = 0, pretend = 0, frame = 8
+ 216              		@ frame_needed = 0, uses_anonymous_args = 0
+ 217 0000 70B5     		push	{r4, r5, r6, lr}
+ 218 0002 82B0     		sub	sp, sp, #8
+ 219 0004 0646     		mov	r6, r0
+ 220 0006 2D24     		movs	r4, #45
+ 221 0008 0025     		movs	r5, #0
+ 222 000a 0BE0     		b	.L22
+ 223              	.L23:
+ 224 000c A4F12D03 		sub	r3, r4, #45
+ 225 0010 1D4A     		ldr	r2, .L27
+ 226 0012 D25C     		ldrb	r2, [r2, r3]	@ zero_extendqisi2
+ 227 0014 2146     		mov	r1, r4
+ 228 0016 3046     		mov	r0, r6
+ 229 0018 FFF7FEFF 		bl	VL53L1_WrByte
+ 230 001c 0543     		orrs	r5, r5, r0
+ 231 001e 6DB2     		sxtb	r5, r5
+ 232 0020 0134     		adds	r4, r4, #1
+ 233 0022 E4B2     		uxtb	r4, r4
+ 234              	.L22:
+ 235 0024 872C     		cmp	r4, #135
+ 236 0026 F1D9     		bls	.L23
+ 237 0028 3046     		mov	r0, r6
+ 238 002a FFF7FEFF 		bl	VL53L1X_StartRanging
+ 239 002e 45EA0004 		orr	r4, r5, r0
+ 240 0032 64B2     		sxtb	r4, r4
+ 241 0034 0023     		movs	r3, #0
+ 242 0036 8DF80730 		strb	r3, [sp, #7]
+ 243 003a 06E0     		b	.L24
+ 244              	.L25:
+ 245 003c 0DF10701 		add	r1, sp, #7
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 5
+
+
+ 246 0040 3046     		mov	r0, r6
+ 247 0042 FFF7FEFF 		bl	VL53L1X_CheckForDataReady
+ 248 0046 0443     		orrs	r4, r4, r0
+ 249 0048 64B2     		sxtb	r4, r4
+ 250              	.L24:
+ 251 004a 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 252 004e 002B     		cmp	r3, #0
+ 253 0050 F4D0     		beq	.L25
+ 254 0052 3046     		mov	r0, r6
+ 255 0054 FFF7FEFF 		bl	VL53L1X_ClearInterrupt
+ 256 0058 0443     		orrs	r4, r4, r0
+ 257 005a 64B2     		sxtb	r4, r4
+ 258 005c 3046     		mov	r0, r6
+ 259 005e FFF7FEFF 		bl	VL53L1X_StopRanging
+ 260 0062 0443     		orrs	r4, r4, r0
+ 261 0064 64B2     		sxtb	r4, r4
+ 262 0066 0922     		movs	r2, #9
+ 263 0068 0821     		movs	r1, #8
+ 264 006a 3046     		mov	r0, r6
+ 265 006c FFF7FEFF 		bl	VL53L1_WrByte
+ 266 0070 0443     		orrs	r4, r4, r0
+ 267 0072 64B2     		sxtb	r4, r4
+ 268 0074 0022     		movs	r2, #0
+ 269 0076 0B21     		movs	r1, #11
+ 270 0078 3046     		mov	r0, r6
+ 271 007a FFF7FEFF 		bl	VL53L1_WrByte
+ 272 007e 2043     		orrs	r0, r0, r4
+ 273 0080 40B2     		sxtb	r0, r0
+ 274 0082 02B0     		add	sp, sp, #8
+ 275              		@ sp needed
+ 276 0084 70BD     		pop	{r4, r5, r6, pc}
+ 277              	.L28:
+ 278 0086 00BF     		.align	2
+ 279              	.L27:
+ 280 0088 00000000 		.word	VL51L1X_DEFAULT_CONFIGURATION
+ 282              		.section	.text.VL53L1X_GetTimingBudgetInMs,"ax",%progbits
+ 283              		.align	1
+ 284              		.global	VL53L1X_GetTimingBudgetInMs
+ 285              		.syntax unified
+ 286              		.thumb
+ 287              		.thumb_func
+ 289              	VL53L1X_GetTimingBudgetInMs:
+ 290              		@ args = 0, pretend = 0, frame = 8
+ 291              		@ frame_needed = 0, uses_anonymous_args = 0
+ 292 0000 10B5     		push	{r4, lr}
+ 293 0002 82B0     		sub	sp, sp, #8
+ 294 0004 0C46     		mov	r4, r1
+ 295 0006 0DF10602 		add	r2, sp, #6
+ 296 000a 5E21     		movs	r1, #94
+ 297 000c FFF7FEFF 		bl	VL53L1_RdWord
+ 298 0010 BDF80630 		ldrh	r3, [sp, #6]
+ 299 0014 B3F5D77F 		cmp	r3, #430
+ 300 0018 3BD0     		beq	.L30
+ 301 001a 1AD8     		bhi	.L31
+ 302 001c 512B     		cmp	r3, #81
+ 303 001e 0FD0     		beq	.L32
+ 304 0020 06D9     		bls	.L43
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 6
+
+
+ 305 0022 AD2B     		cmp	r3, #173
+ 306 0024 35D0     		beq	.L30
+ 307 0026 D62B     		cmp	r3, #214
+ 308 0028 0DD1     		bne	.L44
+ 309              	.L36:
+ 310 002a 2123     		movs	r3, #33
+ 311 002c 2380     		strh	r3, [r4]	@ movhi
+ 312 002e 03E0     		b	.L41
+ 313              	.L43:
+ 314 0030 1D2B     		cmp	r3, #29
+ 315 0032 03D1     		bne	.L45
+ 316 0034 0F23     		movs	r3, #15
+ 317 0036 2380     		strh	r3, [r4]	@ movhi
+ 318              	.L41:
+ 319 0038 02B0     		add	sp, sp, #8
+ 320              		@ sp needed
+ 321 003a 10BD     		pop	{r4, pc}
+ 322              	.L45:
+ 323 003c 1E2B     		cmp	r3, #30
+ 324 003e 04D1     		bne	.L35
+ 325              	.L32:
+ 326 0040 1423     		movs	r3, #20
+ 327 0042 2380     		strh	r3, [r4]	@ movhi
+ 328 0044 F8E7     		b	.L41
+ 329              	.L44:
+ 330 0046 602B     		cmp	r3, #96
+ 331 0048 EFD0     		beq	.L36
+ 332              	.L35:
+ 333 004a 0023     		movs	r3, #0
+ 334 004c 2380     		strh	r3, [r4]	@ movhi
+ 335 004e 0120     		movs	r0, #1
+ 336 0050 F2E7     		b	.L41
+ 337              	.L31:
+ 338 0052 40F2E132 		movw	r2, #993
+ 339 0056 9342     		cmp	r3, r2
+ 340 0058 1ED0     		beq	.L37
+ 341 005a 0BD9     		bls	.L46
+ 342 005c 40F28F42 		movw	r2, #1167
+ 343 0060 9342     		cmp	r3, r2
+ 344 0062 03D0     		beq	.L40
+ 345 0064 40F29152 		movw	r2, #1425
+ 346 0068 9342     		cmp	r3, r2
+ 347 006a EED1     		bne	.L35
+ 348              	.L40:
+ 349 006c 4FF4FA73 		mov	r3, #500
+ 350 0070 2380     		strh	r3, [r4]	@ movhi
+ 351 0072 E1E7     		b	.L41
+ 352              	.L46:
+ 353 0074 40F2D922 		movw	r2, #729
+ 354 0078 9342     		cmp	r3, r2
+ 355 007a 0DD0     		beq	.L37
+ 356 007c 40F2E122 		movw	r2, #737
+ 357 0080 9342     		cmp	r3, r2
+ 358 0082 02D1     		bne	.L47
+ 359              	.L39:
+ 360 0084 6423     		movs	r3, #100
+ 361 0086 2380     		strh	r3, [r4]	@ movhi
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 7
+
+
+ 362 0088 D6E7     		b	.L41
+ 363              	.L47:
+ 364 008a B3F5E67F 		cmp	r3, #460
+ 365 008e F9D0     		beq	.L39
+ 366 0090 DBE7     		b	.L35
+ 367              	.L30:
+ 368 0092 3223     		movs	r3, #50
+ 369 0094 2380     		strh	r3, [r4]	@ movhi
+ 370 0096 CFE7     		b	.L41
+ 371              	.L37:
+ 372 0098 C823     		movs	r3, #200
+ 373 009a 2380     		strh	r3, [r4]	@ movhi
+ 374 009c CCE7     		b	.L41
+ 376              		.section	.text.VL53L1X_GetDistanceMode,"ax",%progbits
+ 377              		.align	1
+ 378              		.global	VL53L1X_GetDistanceMode
+ 379              		.syntax unified
+ 380              		.thumb
+ 381              		.thumb_func
+ 383              	VL53L1X_GetDistanceMode:
+ 384              		@ args = 0, pretend = 0, frame = 8
+ 385              		@ frame_needed = 0, uses_anonymous_args = 0
+ 386 0000 10B5     		push	{r4, lr}
+ 387 0002 82B0     		sub	sp, sp, #8
+ 388 0004 0C46     		mov	r4, r1
+ 389 0006 0DF10702 		add	r2, sp, #7
+ 390 000a 4B21     		movs	r1, #75
+ 391 000c FFF7FEFF 		bl	VL53L1_RdByte
+ 392 0010 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 393 0014 142B     		cmp	r3, #20
+ 394 0016 03D0     		beq	.L52
+ 395              	.L49:
+ 396 0018 0A2B     		cmp	r3, #10
+ 397 001a 04D0     		beq	.L53
+ 398              	.L50:
+ 399 001c 02B0     		add	sp, sp, #8
+ 400              		@ sp needed
+ 401 001e 10BD     		pop	{r4, pc}
+ 402              	.L52:
+ 403 0020 0122     		movs	r2, #1
+ 404 0022 2280     		strh	r2, [r4]	@ movhi
+ 405 0024 F8E7     		b	.L49
+ 406              	.L53:
+ 407 0026 0223     		movs	r3, #2
+ 408 0028 2380     		strh	r3, [r4]	@ movhi
+ 409 002a F7E7     		b	.L50
+ 411              		.section	.text.VL53L1X_SetTimingBudgetInMs,"ax",%progbits
+ 412              		.align	1
+ 413              		.global	VL53L1X_SetTimingBudgetInMs
+ 414              		.syntax unified
+ 415              		.thumb
+ 416              		.thumb_func
+ 418              	VL53L1X_SetTimingBudgetInMs:
+ 419              		@ args = 0, pretend = 0, frame = 8
+ 420              		@ frame_needed = 0, uses_anonymous_args = 0
+ 421 0000 70B5     		push	{r4, r5, r6, lr}
+ 422 0002 82B0     		sub	sp, sp, #8
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 8
+
+
+ 423 0004 0646     		mov	r6, r0
+ 424 0006 0C46     		mov	r4, r1
+ 425 0008 0DF10601 		add	r1, sp, #6
+ 426 000c FFF7FEFF 		bl	VL53L1X_GetDistanceMode
+ 427 0010 BDF80630 		ldrh	r3, [sp, #6]
+ 428 0014 002B     		cmp	r3, #0
+ 429 0016 00F0C980 		beq	.L72
+ 430 001a 0546     		mov	r5, r0
+ 431 001c 012B     		cmp	r3, #1
+ 432 001e 14D0     		beq	.L74
+ 433 0020 642C     		cmp	r4, #100
+ 434 0022 00F0A980 		beq	.L65
+ 435 0026 00F28880 		bhi	.L66
+ 436 002a 212C     		cmp	r4, #33
+ 437 002c 00F09980 		beq	.L67
+ 438 0030 322C     		cmp	r4, #50
+ 439 0032 73D1     		bne	.L75
+ 440 0034 AD22     		movs	r2, #173
+ 441 0036 5E21     		movs	r1, #94
+ 442 0038 3046     		mov	r0, r6
+ 443 003a FFF7FEFF 		bl	VL53L1_WrWord
+ 444 003e C622     		movs	r2, #198
+ 445 0040 6121     		movs	r1, #97
+ 446 0042 3046     		mov	r0, r6
+ 447 0044 FFF7FEFF 		bl	VL53L1_WrWord
+ 448 0048 B1E0     		b	.L55
+ 449              	.L74:
+ 450 004a 322C     		cmp	r4, #50
+ 451 004c 4CD0     		beq	.L57
+ 452 004e 1DD8     		bhi	.L58
+ 453 0050 142C     		cmp	r4, #20
+ 454 0052 3ED0     		beq	.L59
+ 455 0054 212C     		cmp	r4, #33
+ 456 0056 0AD1     		bne	.L76
+ 457 0058 D622     		movs	r2, #214
+ 458 005a 5E21     		movs	r1, #94
+ 459 005c 3046     		mov	r0, r6
+ 460 005e FFF7FEFF 		bl	VL53L1_WrWord
+ 461 0062 6E22     		movs	r2, #110
+ 462 0064 6121     		movs	r1, #97
+ 463 0066 3046     		mov	r0, r6
+ 464 0068 FFF7FEFF 		bl	VL53L1_WrWord
+ 465 006c 9FE0     		b	.L55
+ 466              	.L76:
+ 467 006e 0F2C     		cmp	r4, #15
+ 468 0070 0AD1     		bne	.L77
+ 469 0072 1D22     		movs	r2, #29
+ 470 0074 5E21     		movs	r1, #94
+ 471 0076 3046     		mov	r0, r6
+ 472 0078 FFF7FEFF 		bl	VL53L1_WrWord
+ 473 007c 2722     		movs	r2, #39
+ 474 007e 6121     		movs	r1, #97
+ 475 0080 3046     		mov	r0, r6
+ 476 0082 FFF7FEFF 		bl	VL53L1_WrWord
+ 477 0086 92E0     		b	.L55
+ 478              	.L77:
+ 479 0088 0125     		movs	r5, #1
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 9
+
+
+ 480 008a 90E0     		b	.L55
+ 481              	.L58:
+ 482 008c C82C     		cmp	r4, #200
+ 483 008e 38D0     		beq	.L62
+ 484 0090 B4F5FA7F 		cmp	r4, #500
+ 485 0094 0CD1     		bne	.L78
+ 486 0096 40F29152 		movw	r2, #1425
+ 487 009a 5E21     		movs	r1, #94
+ 488 009c 3046     		mov	r0, r6
+ 489 009e FFF7FEFF 		bl	VL53L1_WrWord
+ 490 00a2 40F2C152 		movw	r2, #1473
+ 491 00a6 6121     		movs	r1, #97
+ 492 00a8 3046     		mov	r0, r6
+ 493 00aa FFF7FEFF 		bl	VL53L1_WrWord
+ 494 00ae 7EE0     		b	.L55
+ 495              	.L78:
+ 496 00b0 642C     		cmp	r4, #100
+ 497 00b2 0CD1     		bne	.L79
+ 498 00b4 40F2E122 		movw	r2, #737
+ 499 00b8 5E21     		movs	r1, #94
+ 500 00ba 3046     		mov	r0, r6
+ 501 00bc FFF7FEFF 		bl	VL53L1_WrWord
+ 502 00c0 4FF46272 		mov	r2, #904
+ 503 00c4 6121     		movs	r1, #97
+ 504 00c6 3046     		mov	r0, r6
+ 505 00c8 FFF7FEFF 		bl	VL53L1_WrWord
+ 506 00cc 6FE0     		b	.L55
+ 507              	.L79:
+ 508 00ce 0125     		movs	r5, #1
+ 509 00d0 6DE0     		b	.L55
+ 510              	.L59:
+ 511 00d2 5122     		movs	r2, #81
+ 512 00d4 5E21     		movs	r1, #94
+ 513 00d6 3046     		mov	r0, r6
+ 514 00d8 FFF7FEFF 		bl	VL53L1_WrWord
+ 515 00dc 6E22     		movs	r2, #110
+ 516 00de 6121     		movs	r1, #97
+ 517 00e0 3046     		mov	r0, r6
+ 518 00e2 FFF7FEFF 		bl	VL53L1_WrWord
+ 519 00e6 62E0     		b	.L55
+ 520              	.L57:
+ 521 00e8 4FF4D772 		mov	r2, #430
+ 522 00ec 5E21     		movs	r1, #94
+ 523 00ee 3046     		mov	r0, r6
+ 524 00f0 FFF7FEFF 		bl	VL53L1_WrWord
+ 525 00f4 4FF4F472 		mov	r2, #488
+ 526 00f8 6121     		movs	r1, #97
+ 527 00fa 3046     		mov	r0, r6
+ 528 00fc FFF7FEFF 		bl	VL53L1_WrWord
+ 529 0100 55E0     		b	.L55
+ 530              	.L62:
+ 531 0102 40F2E132 		movw	r2, #993
+ 532 0106 5E21     		movs	r1, #94
+ 533 0108 3046     		mov	r0, r6
+ 534 010a FFF7FEFF 		bl	VL53L1_WrWord
+ 535 010e 40F29642 		movw	r2, #1174
+ 536 0112 6121     		movs	r1, #97
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 10
+
+
+ 537 0114 3046     		mov	r0, r6
+ 538 0116 FFF7FEFF 		bl	VL53L1_WrWord
+ 539 011a 48E0     		b	.L55
+ 540              	.L75:
+ 541 011c 142C     		cmp	r4, #20
+ 542 011e 0AD1     		bne	.L80
+ 543 0120 1E22     		movs	r2, #30
+ 544 0122 5E21     		movs	r1, #94
+ 545 0124 3046     		mov	r0, r6
+ 546 0126 FFF7FEFF 		bl	VL53L1_WrWord
+ 547 012a 2222     		movs	r2, #34
+ 548 012c 6121     		movs	r1, #97
+ 549 012e 3046     		mov	r0, r6
+ 550 0130 FFF7FEFF 		bl	VL53L1_WrWord
+ 551 0134 3BE0     		b	.L55
+ 552              	.L80:
+ 553 0136 0125     		movs	r5, #1
+ 554 0138 39E0     		b	.L55
+ 555              	.L66:
+ 556 013a C82C     		cmp	r4, #200
+ 557 013c 29D0     		beq	.L70
+ 558 013e B4F5FA7F 		cmp	r4, #500
+ 559 0142 0CD1     		bne	.L81
+ 560 0144 40F28F42 		movw	r2, #1167
+ 561 0148 5E21     		movs	r1, #94
+ 562 014a 3046     		mov	r0, r6
+ 563 014c FFF7FEFF 		bl	VL53L1_WrWord
+ 564 0150 40F2A442 		movw	r2, #1188
+ 565 0154 6121     		movs	r1, #97
+ 566 0156 3046     		mov	r0, r6
+ 567 0158 FFF7FEFF 		bl	VL53L1_WrWord
+ 568 015c 27E0     		b	.L55
+ 569              	.L81:
+ 570 015e 0125     		movs	r5, #1
+ 571 0160 25E0     		b	.L55
+ 572              	.L67:
+ 573 0162 6022     		movs	r2, #96
+ 574 0164 5E21     		movs	r1, #94
+ 575 0166 3046     		mov	r0, r6
+ 576 0168 FFF7FEFF 		bl	VL53L1_WrWord
+ 577 016c 6E22     		movs	r2, #110
+ 578 016e 6121     		movs	r1, #97
+ 579 0170 3046     		mov	r0, r6
+ 580 0172 FFF7FEFF 		bl	VL53L1_WrWord
+ 581 0176 1AE0     		b	.L55
+ 582              	.L65:
+ 583 0178 4FF4E672 		mov	r2, #460
+ 584 017c 5E21     		movs	r1, #94
+ 585 017e 3046     		mov	r0, r6
+ 586 0180 FFF7FEFF 		bl	VL53L1_WrWord
+ 587 0184 4FF4F572 		mov	r2, #490
+ 588 0188 6121     		movs	r1, #97
+ 589 018a 3046     		mov	r0, r6
+ 590 018c FFF7FEFF 		bl	VL53L1_WrWord
+ 591 0190 0DE0     		b	.L55
+ 592              	.L70:
+ 593 0192 40F2D922 		movw	r2, #729
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 11
+
+
+ 594 0196 5E21     		movs	r1, #94
+ 595 0198 3046     		mov	r0, r6
+ 596 019a FFF7FEFF 		bl	VL53L1_WrWord
+ 597 019e 4FF43E72 		mov	r2, #760
+ 598 01a2 6121     		movs	r1, #97
+ 599 01a4 3046     		mov	r0, r6
+ 600 01a6 FFF7FEFF 		bl	VL53L1_WrWord
+ 601 01aa 00E0     		b	.L55
+ 602              	.L72:
+ 603 01ac 0125     		movs	r5, #1
+ 604              	.L55:
+ 605 01ae 2846     		mov	r0, r5
+ 606 01b0 02B0     		add	sp, sp, #8
+ 607              		@ sp needed
+ 608 01b2 70BD     		pop	{r4, r5, r6, pc}
+ 610              		.section	.text.VL53L1X_SetDistanceMode,"ax",%progbits
+ 611              		.align	1
+ 612              		.global	VL53L1X_SetDistanceMode
+ 613              		.syntax unified
+ 614              		.thumb
+ 615              		.thumb_func
+ 617              	VL53L1X_SetDistanceMode:
+ 618              		@ args = 0, pretend = 0, frame = 8
+ 619              		@ frame_needed = 0, uses_anonymous_args = 0
+ 620 0000 30B5     		push	{r4, r5, lr}
+ 621 0002 83B0     		sub	sp, sp, #12
+ 622 0004 0446     		mov	r4, r0
+ 623 0006 0D46     		mov	r5, r1
+ 624 0008 0DF10601 		add	r1, sp, #6
+ 625 000c FFF7FEFF 		bl	VL53L1X_GetTimingBudgetInMs
+ 626 0010 0028     		cmp	r0, #0
+ 627 0012 51D1     		bne	.L87
+ 628 0014 012D     		cmp	r5, #1
+ 629 0016 03D0     		beq	.L84
+ 630 0018 022D     		cmp	r5, #2
+ 631 001a 2BD0     		beq	.L85
+ 632 001c 0125     		movs	r5, #1
+ 633 001e 4CE0     		b	.L83
+ 634              	.L84:
+ 635 0020 1422     		movs	r2, #20
+ 636 0022 4B21     		movs	r1, #75
+ 637 0024 2046     		mov	r0, r4
+ 638 0026 FFF7FEFF 		bl	VL53L1_WrByte
+ 639 002a 0722     		movs	r2, #7
+ 640 002c 6021     		movs	r1, #96
+ 641 002e 2046     		mov	r0, r4
+ 642 0030 FFF7FEFF 		bl	VL53L1_WrByte
+ 643 0034 0522     		movs	r2, #5
+ 644 0036 6321     		movs	r1, #99
+ 645 0038 2046     		mov	r0, r4
+ 646 003a FFF7FEFF 		bl	VL53L1_WrByte
+ 647 003e 3822     		movs	r2, #56
+ 648 0040 6921     		movs	r1, #105
+ 649 0042 2046     		mov	r0, r4
+ 650 0044 FFF7FEFF 		bl	VL53L1_WrByte
+ 651 0048 40F20572 		movw	r2, #1797
+ 652 004c 7821     		movs	r1, #120
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 12
+
+
+ 653 004e 2046     		mov	r0, r4
+ 654 0050 FFF7FEFF 		bl	VL53L1_WrWord
+ 655 0054 40F20662 		movw	r2, #1542
+ 656 0058 7A21     		movs	r1, #122
+ 657 005a 2046     		mov	r0, r4
+ 658 005c FFF7FEFF 		bl	VL53L1_WrWord
+ 659 0060 0546     		mov	r5, r0
+ 660              	.L86:
+ 661 0062 55BB     		cbnz	r5, .L83
+ 662 0064 BDF80610 		ldrh	r1, [sp, #6]
+ 663 0068 2046     		mov	r0, r4
+ 664 006a FFF7FEFF 		bl	VL53L1X_SetTimingBudgetInMs
+ 665 006e 0543     		orrs	r5, r5, r0
+ 666 0070 6DB2     		sxtb	r5, r5
+ 667 0072 22E0     		b	.L83
+ 668              	.L85:
+ 669 0074 0A22     		movs	r2, #10
+ 670 0076 4B21     		movs	r1, #75
+ 671 0078 2046     		mov	r0, r4
+ 672 007a FFF7FEFF 		bl	VL53L1_WrByte
+ 673 007e 0F22     		movs	r2, #15
+ 674 0080 6021     		movs	r1, #96
+ 675 0082 2046     		mov	r0, r4
+ 676 0084 FFF7FEFF 		bl	VL53L1_WrByte
+ 677 0088 0D22     		movs	r2, #13
+ 678 008a 6321     		movs	r1, #99
+ 679 008c 2046     		mov	r0, r4
+ 680 008e FFF7FEFF 		bl	VL53L1_WrByte
+ 681 0092 B822     		movs	r2, #184
+ 682 0094 6921     		movs	r1, #105
+ 683 0096 2046     		mov	r0, r4
+ 684 0098 FFF7FEFF 		bl	VL53L1_WrByte
+ 685 009c 40F60D72 		movw	r2, #3853
+ 686 00a0 7821     		movs	r1, #120
+ 687 00a2 2046     		mov	r0, r4
+ 688 00a4 FFF7FEFF 		bl	VL53L1_WrWord
+ 689 00a8 40F60E62 		movw	r2, #3598
+ 690 00ac 7A21     		movs	r1, #122
+ 691 00ae 2046     		mov	r0, r4
+ 692 00b0 FFF7FEFF 		bl	VL53L1_WrWord
+ 693 00b4 0546     		mov	r5, r0
+ 694 00b6 D4E7     		b	.L86
+ 695              	.L87:
+ 696 00b8 0125     		movs	r5, #1
+ 697              	.L83:
+ 698 00ba 2846     		mov	r0, r5
+ 699 00bc 03B0     		add	sp, sp, #12
+ 700              		@ sp needed
+ 701 00be 30BD     		pop	{r4, r5, pc}
+ 703              		.global	__aeabi_ui2d
+ 704              		.global	__aeabi_dmul
+ 705              		.global	__aeabi_d2uiz
+ 706              		.section	.text.VL53L1X_SetInterMeasurementInMs,"ax",%progbits
+ 707              		.align	1
+ 708              		.global	VL53L1X_SetInterMeasurementInMs
+ 709              		.syntax unified
+ 710              		.thumb
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 13
+
+
+ 711              		.thumb_func
+ 713              	VL53L1X_SetInterMeasurementInMs:
+ 714              		@ args = 0, pretend = 0, frame = 8
+ 715              		@ frame_needed = 0, uses_anonymous_args = 0
+ 716 0000 70B5     		push	{r4, r5, r6, lr}
+ 717 0002 82B0     		sub	sp, sp, #8
+ 718 0004 0546     		mov	r5, r0
+ 719 0006 0E46     		mov	r6, r1
+ 720 0008 0DF10602 		add	r2, sp, #6
+ 721 000c DE21     		movs	r1, #222
+ 722 000e FFF7FEFF 		bl	VL53L1_RdWord
+ 723 0012 0446     		mov	r4, r0
+ 724 0014 BDF80630 		ldrh	r3, [sp, #6]
+ 725 0018 C3F30903 		ubfx	r3, r3, #0, #10
+ 726 001c ADF80630 		strh	r3, [sp, #6]	@ movhi
+ 727 0020 06FB03F0 		mul	r0, r6, r3
+ 728 0024 FFF7FEFF 		bl	__aeabi_ui2d
+ 729 0028 07A3     		adr	r3, .L91
+ 730 002a D3E90023 		ldrd	r2, [r3]
+ 731 002e FFF7FEFF 		bl	__aeabi_dmul
+ 732 0032 FFF7FEFF 		bl	__aeabi_d2uiz
+ 733 0036 0246     		mov	r2, r0
+ 734 0038 6C21     		movs	r1, #108
+ 735 003a 2846     		mov	r0, r5
+ 736 003c FFF7FEFF 		bl	VL53L1_WrDWord
+ 737 0040 2046     		mov	r0, r4
+ 738 0042 02B0     		add	sp, sp, #8
+ 739              		@ sp needed
+ 740 0044 70BD     		pop	{r4, r5, r6, pc}
+ 741              	.L92:
+ 742 0046 00BF     		.align	3
+ 743              	.L91:
+ 744 0048 33333333 		.word	858993459
+ 745 004c 3333F13F 		.word	1072771891
+ 747              		.global	__aeabi_i2d
+ 748              		.global	__aeabi_ddiv
+ 749              		.section	.text.VL53L1X_GetInterMeasurementInMs,"ax",%progbits
+ 750              		.align	1
+ 751              		.global	VL53L1X_GetInterMeasurementInMs
+ 752              		.syntax unified
+ 753              		.thumb
+ 754              		.thumb_func
+ 756              	VL53L1X_GetInterMeasurementInMs:
+ 757              		@ args = 0, pretend = 0, frame = 8
+ 758              		@ frame_needed = 0, uses_anonymous_args = 0
+ 759 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 760 0004 82B0     		sub	sp, sp, #8
+ 761 0006 0646     		mov	r6, r0
+ 762 0008 0D46     		mov	r5, r1
+ 763 000a 6A46     		mov	r2, sp
+ 764 000c 6C21     		movs	r1, #108
+ 765 000e FFF7FEFF 		bl	VL53L1_RdDWord
+ 766 0012 0446     		mov	r4, r0
+ 767 0014 BDF80030 		ldrh	r3, [sp]
+ 768 0018 2B80     		strh	r3, [r5]	@ movhi
+ 769 001a 0DF10602 		add	r2, sp, #6
+ 770 001e DE21     		movs	r1, #222
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 14
+
+
+ 771 0020 3046     		mov	r0, r6
+ 772 0022 FFF7FEFF 		bl	VL53L1_RdWord
+ 773 0026 0443     		orrs	r4, r4, r0
+ 774 0028 64B2     		sxtb	r4, r4
+ 775 002a BDF80600 		ldrh	r0, [sp, #6]
+ 776 002e C0F30900 		ubfx	r0, r0, #0, #10
+ 777 0032 ADF80600 		strh	r0, [sp, #6]	@ movhi
+ 778 0036 B5F80080 		ldrh	r8, [r5]
+ 779 003a FFF7FEFF 		bl	__aeabi_i2d
+ 780 003e 0AA3     		adr	r3, .L95
+ 781 0040 D3E90023 		ldrd	r2, [r3]
+ 782 0044 FFF7FEFF 		bl	__aeabi_dmul
+ 783 0048 0646     		mov	r6, r0
+ 784 004a 0F46     		mov	r7, r1
+ 785 004c 4046     		mov	r0, r8
+ 786 004e FFF7FEFF 		bl	__aeabi_i2d
+ 787 0052 3246     		mov	r2, r6
+ 788 0054 3B46     		mov	r3, r7
+ 789 0056 FFF7FEFF 		bl	__aeabi_ddiv
+ 790 005a FFF7FEFF 		bl	__aeabi_d2uiz
+ 791 005e 2880     		strh	r0, [r5]	@ movhi
+ 792 0060 2046     		mov	r0, r4
+ 793 0062 02B0     		add	sp, sp, #8
+ 794              		@ sp needed
+ 795 0064 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 796              	.L96:
+ 797              		.align	3
+ 798              	.L95:
+ 799 0068 0AD7A370 		.word	1889785610
+ 800 006c 3D0AF13F 		.word	1072761405
+ 802              		.section	.text.VL53L1X_BootState,"ax",%progbits
+ 803              		.align	1
+ 804              		.global	VL53L1X_BootState
+ 805              		.syntax unified
+ 806              		.thumb
+ 807              		.thumb_func
+ 809              	VL53L1X_BootState:
+ 810              		@ args = 0, pretend = 0, frame = 8
+ 811              		@ frame_needed = 0, uses_anonymous_args = 0
+ 812 0000 10B5     		push	{r4, lr}
+ 813 0002 82B0     		sub	sp, sp, #8
+ 814 0004 0C46     		mov	r4, r1
+ 815 0006 0023     		movs	r3, #0
+ 816 0008 8DF80730 		strb	r3, [sp, #7]
+ 817 000c 0DF10702 		add	r2, sp, #7
+ 818 0010 E521     		movs	r1, #229
+ 819 0012 FFF7FEFF 		bl	VL53L1_RdByte
+ 820 0016 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 821 001a 2370     		strb	r3, [r4]
+ 822 001c 02B0     		add	sp, sp, #8
+ 823              		@ sp needed
+ 824 001e 10BD     		pop	{r4, pc}
+ 826              		.section	.text.VL53L1X_GetSensorId,"ax",%progbits
+ 827              		.align	1
+ 828              		.global	VL53L1X_GetSensorId
+ 829              		.syntax unified
+ 830              		.thumb
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 15
+
+
+ 831              		.thumb_func
+ 833              	VL53L1X_GetSensorId:
+ 834              		@ args = 0, pretend = 0, frame = 8
+ 835              		@ frame_needed = 0, uses_anonymous_args = 0
+ 836 0000 10B5     		push	{r4, lr}
+ 837 0002 82B0     		sub	sp, sp, #8
+ 838 0004 0C46     		mov	r4, r1
+ 839 0006 0023     		movs	r3, #0
+ 840 0008 ADF80630 		strh	r3, [sp, #6]	@ movhi
+ 841 000c 0DF10602 		add	r2, sp, #6
+ 842 0010 40F20F11 		movw	r1, #271
+ 843 0014 FFF7FEFF 		bl	VL53L1_RdWord
+ 844 0018 BDF80630 		ldrh	r3, [sp, #6]
+ 845 001c 2380     		strh	r3, [r4]	@ movhi
+ 846 001e 02B0     		add	sp, sp, #8
+ 847              		@ sp needed
+ 848 0020 10BD     		pop	{r4, pc}
+ 850              		.section	.text.VL53L1X_GetDistance,"ax",%progbits
+ 851              		.align	1
+ 852              		.global	VL53L1X_GetDistance
+ 853              		.syntax unified
+ 854              		.thumb
+ 855              		.thumb_func
+ 857              	VL53L1X_GetDistance:
+ 858              		@ args = 0, pretend = 0, frame = 8
+ 859              		@ frame_needed = 0, uses_anonymous_args = 0
+ 860 0000 10B5     		push	{r4, lr}
+ 861 0002 82B0     		sub	sp, sp, #8
+ 862 0004 0C46     		mov	r4, r1
+ 863 0006 0DF10602 		add	r2, sp, #6
+ 864 000a 9621     		movs	r1, #150
+ 865 000c FFF7FEFF 		bl	VL53L1_RdWord
+ 866 0010 BDF80630 		ldrh	r3, [sp, #6]
+ 867 0014 2380     		strh	r3, [r4]	@ movhi
+ 868 0016 02B0     		add	sp, sp, #8
+ 869              		@ sp needed
+ 870 0018 10BD     		pop	{r4, pc}
+ 872              		.section	.text.VL53L1X_GetSignalPerSpad,"ax",%progbits
+ 873              		.align	1
+ 874              		.global	VL53L1X_GetSignalPerSpad
+ 875              		.syntax unified
+ 876              		.thumb
+ 877              		.thumb_func
+ 879              	VL53L1X_GetSignalPerSpad:
+ 880              		@ args = 0, pretend = 0, frame = 8
+ 881              		@ frame_needed = 0, uses_anonymous_args = 0
+ 882 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 883 0002 83B0     		sub	sp, sp, #12
+ 884 0004 0646     		mov	r6, r0
+ 885 0006 0D46     		mov	r5, r1
+ 886 0008 0123     		movs	r3, #1
+ 887 000a ADF80630 		strh	r3, [sp, #6]	@ movhi
+ 888 000e 01AA     		add	r2, sp, #4
+ 889 0010 9821     		movs	r1, #152
+ 890 0012 FFF7FEFF 		bl	VL53L1_RdWord
+ 891 0016 0446     		mov	r4, r0
+ 892 0018 0DF10602 		add	r2, sp, #6
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 16
+
+
+ 893 001c 8C21     		movs	r1, #140
+ 894 001e 3046     		mov	r0, r6
+ 895 0020 FFF7FEFF 		bl	VL53L1_RdWord
+ 896 0024 0443     		orrs	r4, r4, r0
+ 897 0026 64B2     		sxtb	r4, r4
+ 898 0028 BDF80400 		ldrh	r0, [sp, #4]
+ 899 002c FFF7FEFF 		bl	__aeabi_i2d
+ 900 0030 0022     		movs	r2, #0
+ 901 0032 0A4B     		ldr	r3, .L105
+ 902 0034 FFF7FEFF 		bl	__aeabi_dmul
+ 903 0038 0646     		mov	r6, r0
+ 904 003a 0F46     		mov	r7, r1
+ 905 003c BDF80600 		ldrh	r0, [sp, #6]
+ 906 0040 FFF7FEFF 		bl	__aeabi_i2d
+ 907 0044 0246     		mov	r2, r0
+ 908 0046 0B46     		mov	r3, r1
+ 909 0048 3046     		mov	r0, r6
+ 910 004a 3946     		mov	r1, r7
+ 911 004c FFF7FEFF 		bl	__aeabi_ddiv
+ 912 0050 FFF7FEFF 		bl	__aeabi_d2uiz
+ 913 0054 2880     		strh	r0, [r5]	@ movhi
+ 914 0056 2046     		mov	r0, r4
+ 915 0058 03B0     		add	sp, sp, #12
+ 916              		@ sp needed
+ 917 005a F0BD     		pop	{r4, r5, r6, r7, pc}
+ 918              	.L106:
+ 919              		.align	2
+ 920              	.L105:
+ 921 005c 00006940 		.word	1080623104
+ 923              		.section	.text.VL53L1X_GetAmbientPerSpad,"ax",%progbits
+ 924              		.align	1
+ 925              		.global	VL53L1X_GetAmbientPerSpad
+ 926              		.syntax unified
+ 927              		.thumb
+ 928              		.thumb_func
+ 930              	VL53L1X_GetAmbientPerSpad:
+ 931              		@ args = 0, pretend = 0, frame = 8
+ 932              		@ frame_needed = 0, uses_anonymous_args = 0
+ 933 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 934 0002 83B0     		sub	sp, sp, #12
+ 935 0004 0646     		mov	r6, r0
+ 936 0006 0D46     		mov	r5, r1
+ 937 0008 0123     		movs	r3, #1
+ 938 000a ADF80430 		strh	r3, [sp, #4]	@ movhi
+ 939 000e 0DF10602 		add	r2, sp, #6
+ 940 0012 9021     		movs	r1, #144
+ 941 0014 FFF7FEFF 		bl	VL53L1_RdWord
+ 942 0018 0446     		mov	r4, r0
+ 943 001a 01AA     		add	r2, sp, #4
+ 944 001c 8C21     		movs	r1, #140
+ 945 001e 3046     		mov	r0, r6
+ 946 0020 FFF7FEFF 		bl	VL53L1_RdWord
+ 947 0024 0443     		orrs	r4, r4, r0
+ 948 0026 64B2     		sxtb	r4, r4
+ 949 0028 BDF80600 		ldrh	r0, [sp, #6]
+ 950 002c FFF7FEFF 		bl	__aeabi_i2d
+ 951 0030 0022     		movs	r2, #0
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 17
+
+
+ 952 0032 0A4B     		ldr	r3, .L109
+ 953 0034 FFF7FEFF 		bl	__aeabi_dmul
+ 954 0038 0646     		mov	r6, r0
+ 955 003a 0F46     		mov	r7, r1
+ 956 003c BDF80400 		ldrh	r0, [sp, #4]
+ 957 0040 FFF7FEFF 		bl	__aeabi_i2d
+ 958 0044 0246     		mov	r2, r0
+ 959 0046 0B46     		mov	r3, r1
+ 960 0048 3046     		mov	r0, r6
+ 961 004a 3946     		mov	r1, r7
+ 962 004c FFF7FEFF 		bl	__aeabi_ddiv
+ 963 0050 FFF7FEFF 		bl	__aeabi_d2uiz
+ 964 0054 2880     		strh	r0, [r5]	@ movhi
+ 965 0056 2046     		mov	r0, r4
+ 966 0058 03B0     		add	sp, sp, #12
+ 967              		@ sp needed
+ 968 005a F0BD     		pop	{r4, r5, r6, r7, pc}
+ 969              	.L110:
+ 970              		.align	2
+ 971              	.L109:
+ 972 005c 00006940 		.word	1080623104
+ 974              		.section	.text.VL53L1X_GetSignalRate,"ax",%progbits
+ 975              		.align	1
+ 976              		.global	VL53L1X_GetSignalRate
+ 977              		.syntax unified
+ 978              		.thumb
+ 979              		.thumb_func
+ 981              	VL53L1X_GetSignalRate:
+ 982              		@ args = 0, pretend = 0, frame = 8
+ 983              		@ frame_needed = 0, uses_anonymous_args = 0
+ 984 0000 10B5     		push	{r4, lr}
+ 985 0002 82B0     		sub	sp, sp, #8
+ 986 0004 0C46     		mov	r4, r1
+ 987 0006 0DF10602 		add	r2, sp, #6
+ 988 000a 9821     		movs	r1, #152
+ 989 000c FFF7FEFF 		bl	VL53L1_RdWord
+ 990 0010 BDF80630 		ldrh	r3, [sp, #6]
+ 991 0014 DB00     		lsls	r3, r3, #3
+ 992 0016 2380     		strh	r3, [r4]	@ movhi
+ 993 0018 02B0     		add	sp, sp, #8
+ 994              		@ sp needed
+ 995 001a 10BD     		pop	{r4, pc}
+ 997              		.section	.text.VL53L1X_GetSpadNb,"ax",%progbits
+ 998              		.align	1
+ 999              		.global	VL53L1X_GetSpadNb
+ 1000              		.syntax unified
+ 1001              		.thumb
+ 1002              		.thumb_func
+ 1004              	VL53L1X_GetSpadNb:
+ 1005              		@ args = 0, pretend = 0, frame = 8
+ 1006              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1007 0000 10B5     		push	{r4, lr}
+ 1008 0002 82B0     		sub	sp, sp, #8
+ 1009 0004 0C46     		mov	r4, r1
+ 1010 0006 0DF10602 		add	r2, sp, #6
+ 1011 000a 8C21     		movs	r1, #140
+ 1012 000c FFF7FEFF 		bl	VL53L1_RdWord
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 18
+
+
+ 1013 0010 BDF80630 		ldrh	r3, [sp, #6]
+ 1014 0014 1B0A     		lsrs	r3, r3, #8
+ 1015 0016 2380     		strh	r3, [r4]	@ movhi
+ 1016 0018 02B0     		add	sp, sp, #8
+ 1017              		@ sp needed
+ 1018 001a 10BD     		pop	{r4, pc}
+ 1020              		.section	.text.VL53L1X_GetAmbientRate,"ax",%progbits
+ 1021              		.align	1
+ 1022              		.global	VL53L1X_GetAmbientRate
+ 1023              		.syntax unified
+ 1024              		.thumb
+ 1025              		.thumb_func
+ 1027              	VL53L1X_GetAmbientRate:
+ 1028              		@ args = 0, pretend = 0, frame = 8
+ 1029              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1030 0000 10B5     		push	{r4, lr}
+ 1031 0002 82B0     		sub	sp, sp, #8
+ 1032 0004 0C46     		mov	r4, r1
+ 1033 0006 0DF10602 		add	r2, sp, #6
+ 1034 000a 9021     		movs	r1, #144
+ 1035 000c FFF7FEFF 		bl	VL53L1_RdWord
+ 1036 0010 BDF80630 		ldrh	r3, [sp, #6]
+ 1037 0014 DB00     		lsls	r3, r3, #3
+ 1038 0016 2380     		strh	r3, [r4]	@ movhi
+ 1039 0018 02B0     		add	sp, sp, #8
+ 1040              		@ sp needed
+ 1041 001a 10BD     		pop	{r4, pc}
+ 1043              		.section	.text.VL53L1X_GetRangeStatus,"ax",%progbits
+ 1044              		.align	1
+ 1045              		.global	VL53L1X_GetRangeStatus
+ 1046              		.syntax unified
+ 1047              		.thumb
+ 1048              		.thumb_func
+ 1050              	VL53L1X_GetRangeStatus:
+ 1051              		@ args = 0, pretend = 0, frame = 8
+ 1052              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1053 0000 10B5     		push	{r4, lr}
+ 1054 0002 82B0     		sub	sp, sp, #8
+ 1055 0004 0C46     		mov	r4, r1
+ 1056 0006 FF23     		movs	r3, #255
+ 1057 0008 0B70     		strb	r3, [r1]
+ 1058 000a 0DF10702 		add	r2, sp, #7
+ 1059 000e 8921     		movs	r1, #137
+ 1060 0010 FFF7FEFF 		bl	VL53L1_RdByte
+ 1061 0014 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 1062 0018 03F01F03 		and	r3, r3, #31
+ 1063 001c 8DF80730 		strb	r3, [sp, #7]
+ 1064 0020 172B     		cmp	r3, #23
+ 1065 0022 02D8     		bhi	.L118
+ 1066 0024 024A     		ldr	r2, .L120
+ 1067 0026 D35C     		ldrb	r3, [r2, r3]	@ zero_extendqisi2
+ 1068 0028 2370     		strb	r3, [r4]
+ 1069              	.L118:
+ 1070 002a 02B0     		add	sp, sp, #8
+ 1071              		@ sp needed
+ 1072 002c 10BD     		pop	{r4, pc}
+ 1073              	.L121:
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 19
+
+
+ 1074 002e 00BF     		.align	2
+ 1075              	.L120:
+ 1076 0030 00000000 		.word	status_rtn
+ 1078              		.section	.text.VL53L1X_GetResult,"ax",%progbits
+ 1079              		.align	1
+ 1080              		.global	VL53L1X_GetResult
+ 1081              		.syntax unified
+ 1082              		.thumb
+ 1083              		.thumb_func
+ 1085              	VL53L1X_GetResult:
+ 1086              		@ args = 0, pretend = 0, frame = 24
+ 1087              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1088 0000 10B5     		push	{r4, lr}
+ 1089 0002 86B0     		sub	sp, sp, #24
+ 1090 0004 0C46     		mov	r4, r1
+ 1091 0006 1123     		movs	r3, #17
+ 1092 0008 01AA     		add	r2, sp, #4
+ 1093 000a 8921     		movs	r1, #137
+ 1094 000c FFF7FEFF 		bl	VL53L1_ReadMulti
+ 1095 0010 9DF80430 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 1096 0014 03F01F03 		and	r3, r3, #31
+ 1097 0018 172B     		cmp	r3, #23
+ 1098 001a 01D8     		bhi	.L123
+ 1099 001c 0F4A     		ldr	r2, .L125
+ 1100 001e D35C     		ldrb	r3, [r2, r3]	@ zero_extendqisi2
+ 1101              	.L123:
+ 1102 0020 2370     		strb	r3, [r4]
+ 1103 0022 9DF80B20 		ldrb	r2, [sp, #11]	@ zero_extendqisi2
+ 1104 0026 9DF80C30 		ldrb	r3, [sp, #12]	@ zero_extendqisi2
+ 1105 002a 43EA0223 		orr	r3, r3, r2, lsl #8
+ 1106 002e DB00     		lsls	r3, r3, #3
+ 1107 0030 A380     		strh	r3, [r4, #4]	@ movhi
+ 1108 0032 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 1109 0036 2381     		strh	r3, [r4, #8]	@ movhi
+ 1110 0038 9DF81320 		ldrb	r2, [sp, #19]	@ zero_extendqisi2
+ 1111 003c 9DF81430 		ldrb	r3, [sp, #20]	@ zero_extendqisi2
+ 1112 0040 43EA0223 		orr	r3, r3, r2, lsl #8
+ 1113 0044 DB00     		lsls	r3, r3, #3
+ 1114 0046 E380     		strh	r3, [r4, #6]	@ movhi
+ 1115 0048 9DF81120 		ldrb	r2, [sp, #17]	@ zero_extendqisi2
+ 1116 004c 9DF81230 		ldrb	r3, [sp, #18]	@ zero_extendqisi2
+ 1117 0050 43EA0223 		orr	r3, r3, r2, lsl #8
+ 1118 0054 6380     		strh	r3, [r4, #2]	@ movhi
+ 1119 0056 06B0     		add	sp, sp, #24
+ 1120              		@ sp needed
+ 1121 0058 10BD     		pop	{r4, pc}
+ 1122              	.L126:
+ 1123 005a 00BF     		.align	2
+ 1124              	.L125:
+ 1125 005c 00000000 		.word	status_rtn
+ 1127              		.section	.text.VL53L1X_SetOffset,"ax",%progbits
+ 1128              		.align	1
+ 1129              		.global	VL53L1X_SetOffset
+ 1130              		.syntax unified
+ 1131              		.thumb
+ 1132              		.thumb_func
+ 1134              	VL53L1X_SetOffset:
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 20
+
+
+ 1135              		@ args = 0, pretend = 0, frame = 0
+ 1136              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1137 0000 38B5     		push	{r3, r4, r5, lr}
+ 1138 0002 0546     		mov	r5, r0
+ 1139 0004 8A00     		lsls	r2, r1, #2
+ 1140 0006 92B2     		uxth	r2, r2
+ 1141 0008 1E21     		movs	r1, #30
+ 1142 000a FFF7FEFF 		bl	VL53L1_WrWord
+ 1143 000e 0446     		mov	r4, r0
+ 1144 0010 0022     		movs	r2, #0
+ 1145 0012 2021     		movs	r1, #32
+ 1146 0014 2846     		mov	r0, r5
+ 1147 0016 FFF7FEFF 		bl	VL53L1_WrWord
+ 1148 001a 0443     		orrs	r4, r4, r0
+ 1149 001c 64B2     		sxtb	r4, r4
+ 1150 001e 0022     		movs	r2, #0
+ 1151 0020 2221     		movs	r1, #34
+ 1152 0022 2846     		mov	r0, r5
+ 1153 0024 FFF7FEFF 		bl	VL53L1_WrWord
+ 1154 0028 2043     		orrs	r0, r0, r4
+ 1155 002a 40B2     		sxtb	r0, r0
+ 1156 002c 38BD     		pop	{r3, r4, r5, pc}
+ 1158              		.section	.text.VL53L1X_GetOffset,"ax",%progbits
+ 1159              		.align	1
+ 1160              		.global	VL53L1X_GetOffset
+ 1161              		.syntax unified
+ 1162              		.thumb
+ 1163              		.thumb_func
+ 1165              	VL53L1X_GetOffset:
+ 1166              		@ args = 0, pretend = 0, frame = 8
+ 1167              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1168 0000 10B5     		push	{r4, lr}
+ 1169 0002 82B0     		sub	sp, sp, #8
+ 1170 0004 0C46     		mov	r4, r1
+ 1171 0006 0DF10602 		add	r2, sp, #6
+ 1172 000a 1E21     		movs	r1, #30
+ 1173 000c FFF7FEFF 		bl	VL53L1_RdWord
+ 1174 0010 BDF80630 		ldrh	r3, [sp, #6]
+ 1175 0014 DB00     		lsls	r3, r3, #3
+ 1176 0016 9BB2     		uxth	r3, r3
+ 1177 0018 ADF80630 		strh	r3, [sp, #6]	@ movhi
+ 1178 001c 5B09     		lsrs	r3, r3, #5
+ 1179 001e ADF80630 		strh	r3, [sp, #6]	@ movhi
+ 1180 0022 1AB2     		sxth	r2, r3
+ 1181 0024 2280     		strh	r2, [r4]	@ movhi
+ 1182 0026 B2F5806F 		cmp	r2, #1024
+ 1183 002a 02DD     		ble	.L130
+ 1184 002c A3F50063 		sub	r3, r3, #2048
+ 1185 0030 2380     		strh	r3, [r4]	@ movhi
+ 1186              	.L130:
+ 1187 0032 02B0     		add	sp, sp, #8
+ 1188              		@ sp needed
+ 1189 0034 10BD     		pop	{r4, pc}
+ 1191              		.section	.text.VL53L1X_SetXtalk,"ax",%progbits
+ 1192              		.align	1
+ 1193              		.global	VL53L1X_SetXtalk
+ 1194              		.syntax unified
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 21
+
+
+ 1195              		.thumb
+ 1196              		.thumb_func
+ 1198              	VL53L1X_SetXtalk:
+ 1199              		@ args = 0, pretend = 0, frame = 0
+ 1200              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1201 0000 70B5     		push	{r4, r5, r6, lr}
+ 1202 0002 0646     		mov	r6, r0
+ 1203 0004 0D46     		mov	r5, r1
+ 1204 0006 0022     		movs	r2, #0
+ 1205 0008 1821     		movs	r1, #24
+ 1206 000a FFF7FEFF 		bl	VL53L1_WrWord
+ 1207 000e 0446     		mov	r4, r0
+ 1208 0010 0022     		movs	r2, #0
+ 1209 0012 1A21     		movs	r1, #26
+ 1210 0014 3046     		mov	r0, r6
+ 1211 0016 FFF7FEFF 		bl	VL53L1_WrWord
+ 1212 001a 0443     		orrs	r4, r4, r0
+ 1213 001c 64B2     		sxtb	r4, r4
+ 1214 001e 6A02     		lsls	r2, r5, #9
+ 1215 0020 054B     		ldr	r3, .L134
+ 1216 0022 83FB0232 		smull	r3, r2, r3, r2
+ 1217 0026 9209     		lsrs	r2, r2, #6
+ 1218 0028 1621     		movs	r1, #22
+ 1219 002a 3046     		mov	r0, r6
+ 1220 002c FFF7FEFF 		bl	VL53L1_WrWord
+ 1221 0030 2043     		orrs	r0, r0, r4
+ 1222 0032 40B2     		sxtb	r0, r0
+ 1223 0034 70BD     		pop	{r4, r5, r6, pc}
+ 1224              	.L135:
+ 1225 0036 00BF     		.align	2
+ 1226              	.L134:
+ 1227 0038 D34D6210 		.word	274877907
+ 1229              		.section	.text.VL53L1X_GetXtalk,"ax",%progbits
+ 1230              		.align	1
+ 1231              		.global	VL53L1X_GetXtalk
+ 1232              		.syntax unified
+ 1233              		.thumb
+ 1234              		.thumb_func
+ 1236              	VL53L1X_GetXtalk:
+ 1237              		@ args = 0, pretend = 0, frame = 0
+ 1238              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1239 0000 10B5     		push	{r4, lr}
+ 1240 0002 0C46     		mov	r4, r1
+ 1241 0004 0A46     		mov	r2, r1
+ 1242 0006 1621     		movs	r1, #22
+ 1243 0008 FFF7FEFF 		bl	VL53L1_RdWord
+ 1244 000c 2388     		ldrh	r3, [r4]
+ 1245 000e 4FF47A72 		mov	r2, #1000
+ 1246 0012 02FB03F3 		mul	r3, r2, r3
+ 1247 0016 C3F34F23 		ubfx	r3, r3, #9, #16
+ 1248 001a 2380     		strh	r3, [r4]	@ movhi
+ 1249 001c 10BD     		pop	{r4, pc}
+ 1251              		.section	.text.VL53L1X_SetDistanceThreshold,"ax",%progbits
+ 1252              		.align	1
+ 1253              		.global	VL53L1X_SetDistanceThreshold
+ 1254              		.syntax unified
+ 1255              		.thumb
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 22
+
+
+ 1256              		.thumb_func
+ 1258              	VL53L1X_SetDistanceThreshold:
+ 1259              		@ args = 4, pretend = 0, frame = 8
+ 1260              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1261 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 1262 0004 82B0     		sub	sp, sp, #8
+ 1263 0006 0546     		mov	r5, r0
+ 1264 0008 0E46     		mov	r6, r1
+ 1265 000a 1746     		mov	r7, r2
+ 1266 000c 1C46     		mov	r4, r3
+ 1267 000e 9DF82080 		ldrb	r8, [sp, #32]	@ zero_extendqisi2
+ 1268 0012 0023     		movs	r3, #0
+ 1269 0014 8DF80730 		strb	r3, [sp, #7]
+ 1270 0018 0DF10702 		add	r2, sp, #7
+ 1271 001c 4621     		movs	r1, #70
+ 1272 001e FFF7FEFF 		bl	VL53L1_RdByte
+ 1273 0022 9DF80720 		ldrb	r2, [sp, #7]	@ zero_extendqisi2
+ 1274 0026 02F09001 		and	r1, r2, #144
+ 1275 002a 8DF80710 		strb	r1, [sp, #7]
+ 1276 002e 41EA0402 		orr	r2, r1, r4
+ 1277 0032 8DF80720 		strb	r2, [sp, #7]
+ 1278 0036 B8F1000F 		cmp	r8, #0
+ 1279 003a 15D1     		bne	.L139
+ 1280 003c 4621     		movs	r1, #70
+ 1281 003e 2846     		mov	r0, r5
+ 1282 0040 FFF7FEFF 		bl	VL53L1_WrByte
+ 1283 0044 0446     		mov	r4, r0
+ 1284              	.L140:
+ 1285 0046 3A46     		mov	r2, r7
+ 1286 0048 7221     		movs	r1, #114
+ 1287 004a 2846     		mov	r0, r5
+ 1288 004c FFF7FEFF 		bl	VL53L1_WrWord
+ 1289 0050 0443     		orrs	r4, r4, r0
+ 1290 0052 64B2     		sxtb	r4, r4
+ 1291 0054 3246     		mov	r2, r6
+ 1292 0056 7421     		movs	r1, #116
+ 1293 0058 2846     		mov	r0, r5
+ 1294 005a FFF7FEFF 		bl	VL53L1_WrWord
+ 1295 005e 2043     		orrs	r0, r0, r4
+ 1296 0060 40B2     		sxtb	r0, r0
+ 1297 0062 02B0     		add	sp, sp, #8
+ 1298              		@ sp needed
+ 1299 0064 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 1300              	.L139:
+ 1301 0068 42F04002 		orr	r2, r2, #64
+ 1302 006c 4621     		movs	r1, #70
+ 1303 006e 2846     		mov	r0, r5
+ 1304 0070 FFF7FEFF 		bl	VL53L1_WrByte
+ 1305 0074 0446     		mov	r4, r0
+ 1306 0076 E6E7     		b	.L140
+ 1308              		.section	.text.VL53L1X_GetDistanceThresholdWindow,"ax",%progbits
+ 1309              		.align	1
+ 1310              		.global	VL53L1X_GetDistanceThresholdWindow
+ 1311              		.syntax unified
+ 1312              		.thumb
+ 1313              		.thumb_func
+ 1315              	VL53L1X_GetDistanceThresholdWindow:
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 23
+
+
+ 1316              		@ args = 0, pretend = 0, frame = 8
+ 1317              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1318 0000 10B5     		push	{r4, lr}
+ 1319 0002 82B0     		sub	sp, sp, #8
+ 1320 0004 0C46     		mov	r4, r1
+ 1321 0006 0DF10702 		add	r2, sp, #7
+ 1322 000a 4621     		movs	r1, #70
+ 1323 000c FFF7FEFF 		bl	VL53L1_RdByte
+ 1324 0010 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 1325 0014 03F00703 		and	r3, r3, #7
+ 1326 0018 2380     		strh	r3, [r4]	@ movhi
+ 1327 001a 02B0     		add	sp, sp, #8
+ 1328              		@ sp needed
+ 1329 001c 10BD     		pop	{r4, pc}
+ 1331              		.section	.text.VL53L1X_GetDistanceThresholdLow,"ax",%progbits
+ 1332              		.align	1
+ 1333              		.global	VL53L1X_GetDistanceThresholdLow
+ 1334              		.syntax unified
+ 1335              		.thumb
+ 1336              		.thumb_func
+ 1338              	VL53L1X_GetDistanceThresholdLow:
+ 1339              		@ args = 0, pretend = 0, frame = 8
+ 1340              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1341 0000 10B5     		push	{r4, lr}
+ 1342 0002 82B0     		sub	sp, sp, #8
+ 1343 0004 0C46     		mov	r4, r1
+ 1344 0006 0DF10602 		add	r2, sp, #6
+ 1345 000a 7421     		movs	r1, #116
+ 1346 000c FFF7FEFF 		bl	VL53L1_RdWord
+ 1347 0010 BDF80630 		ldrh	r3, [sp, #6]
+ 1348 0014 2380     		strh	r3, [r4]	@ movhi
+ 1349 0016 02B0     		add	sp, sp, #8
+ 1350              		@ sp needed
+ 1351 0018 10BD     		pop	{r4, pc}
+ 1353              		.section	.text.VL53L1X_GetDistanceThresholdHigh,"ax",%progbits
+ 1354              		.align	1
+ 1355              		.global	VL53L1X_GetDistanceThresholdHigh
+ 1356              		.syntax unified
+ 1357              		.thumb
+ 1358              		.thumb_func
+ 1360              	VL53L1X_GetDistanceThresholdHigh:
+ 1361              		@ args = 0, pretend = 0, frame = 8
+ 1362              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1363 0000 10B5     		push	{r4, lr}
+ 1364 0002 82B0     		sub	sp, sp, #8
+ 1365 0004 0C46     		mov	r4, r1
+ 1366 0006 0DF10602 		add	r2, sp, #6
+ 1367 000a 7221     		movs	r1, #114
+ 1368 000c FFF7FEFF 		bl	VL53L1_RdWord
+ 1369 0010 BDF80630 		ldrh	r3, [sp, #6]
+ 1370 0014 2380     		strh	r3, [r4]	@ movhi
+ 1371 0016 02B0     		add	sp, sp, #8
+ 1372              		@ sp needed
+ 1373 0018 10BD     		pop	{r4, pc}
+ 1375              		.section	.text.VL53L1X_SetROICenter,"ax",%progbits
+ 1376              		.align	1
+ 1377              		.global	VL53L1X_SetROICenter
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 24
+
+
+ 1378              		.syntax unified
+ 1379              		.thumb
+ 1380              		.thumb_func
+ 1382              	VL53L1X_SetROICenter:
+ 1383              		@ args = 0, pretend = 0, frame = 0
+ 1384              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1385 0000 08B5     		push	{r3, lr}
+ 1386 0002 0A46     		mov	r2, r1
+ 1387 0004 7F21     		movs	r1, #127
+ 1388 0006 FFF7FEFF 		bl	VL53L1_WrByte
+ 1389 000a 08BD     		pop	{r3, pc}
+ 1391              		.section	.text.VL53L1X_GetROICenter,"ax",%progbits
+ 1392              		.align	1
+ 1393              		.global	VL53L1X_GetROICenter
+ 1394              		.syntax unified
+ 1395              		.thumb
+ 1396              		.thumb_func
+ 1398              	VL53L1X_GetROICenter:
+ 1399              		@ args = 0, pretend = 0, frame = 8
+ 1400              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1401 0000 10B5     		push	{r4, lr}
+ 1402 0002 82B0     		sub	sp, sp, #8
+ 1403 0004 0C46     		mov	r4, r1
+ 1404 0006 0DF10702 		add	r2, sp, #7
+ 1405 000a 7F21     		movs	r1, #127
+ 1406 000c FFF7FEFF 		bl	VL53L1_RdByte
+ 1407 0010 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 1408 0014 2370     		strb	r3, [r4]
+ 1409 0016 02B0     		add	sp, sp, #8
+ 1410              		@ sp needed
+ 1411 0018 10BD     		pop	{r4, pc}
+ 1413              		.section	.text.VL53L1X_SetROI,"ax",%progbits
+ 1414              		.align	1
+ 1415              		.global	VL53L1X_SetROI
+ 1416              		.syntax unified
+ 1417              		.thumb
+ 1418              		.thumb_func
+ 1420              	VL53L1X_SetROI:
+ 1421              		@ args = 0, pretend = 0, frame = 8
+ 1422              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1423 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 1424 0002 83B0     		sub	sp, sp, #12
+ 1425 0004 0746     		mov	r7, r0
+ 1426 0006 0C46     		mov	r4, r1
+ 1427 0008 1646     		mov	r6, r2
+ 1428 000a 0DF10702 		add	r2, sp, #7
+ 1429 000e 4FF49F71 		mov	r1, #318
+ 1430 0012 FFF7FEFF 		bl	VL53L1_RdByte
+ 1431 0016 0546     		mov	r5, r0
+ 1432 0018 102C     		cmp	r4, #16
+ 1433 001a 00D9     		bls	.L153
+ 1434 001c 1024     		movs	r4, #16
+ 1435              	.L153:
+ 1436 001e 102E     		cmp	r6, #16
+ 1437 0020 00D9     		bls	.L154
+ 1438 0022 1026     		movs	r6, #16
+ 1439              	.L154:
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 25
+
+
+ 1440 0024 0A2C     		cmp	r4, #10
+ 1441 0026 01D8     		bhi	.L155
+ 1442 0028 0A2E     		cmp	r6, #10
+ 1443 002a 02D9     		bls	.L156
+ 1444              	.L155:
+ 1445 002c C723     		movs	r3, #199
+ 1446 002e 8DF80730 		strb	r3, [sp, #7]
+ 1447              	.L156:
+ 1448 0032 9DF80720 		ldrb	r2, [sp, #7]	@ zero_extendqisi2
+ 1449 0036 7F21     		movs	r1, #127
+ 1450 0038 3846     		mov	r0, r7
+ 1451 003a FFF7FEFF 		bl	VL53L1_WrByte
+ 1452 003e 0543     		orrs	r5, r5, r0
+ 1453 0040 6DB2     		sxtb	r5, r5
+ 1454 0042 013E     		subs	r6, r6, #1
+ 1455 0044 621E     		subs	r2, r4, #1
+ 1456 0046 D2B2     		uxtb	r2, r2
+ 1457 0048 42EA0612 		orr	r2, r2, r6, lsl #4
+ 1458 004c D2B2     		uxtb	r2, r2
+ 1459 004e 8021     		movs	r1, #128
+ 1460 0050 3846     		mov	r0, r7
+ 1461 0052 FFF7FEFF 		bl	VL53L1_WrByte
+ 1462 0056 2843     		orrs	r0, r0, r5
+ 1463 0058 40B2     		sxtb	r0, r0
+ 1464 005a 03B0     		add	sp, sp, #12
+ 1465              		@ sp needed
+ 1466 005c F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1468              		.section	.text.VL53L1X_GetROI_XY,"ax",%progbits
+ 1469              		.align	1
+ 1470              		.global	VL53L1X_GetROI_XY
+ 1471              		.syntax unified
+ 1472              		.thumb
+ 1473              		.thumb_func
+ 1475              	VL53L1X_GetROI_XY:
+ 1476              		@ args = 0, pretend = 0, frame = 8
+ 1477              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1478 0000 30B5     		push	{r4, r5, lr}
+ 1479 0002 83B0     		sub	sp, sp, #12
+ 1480 0004 0D46     		mov	r5, r1
+ 1481 0006 1446     		mov	r4, r2
+ 1482 0008 0DF10702 		add	r2, sp, #7
+ 1483 000c 8021     		movs	r1, #128
+ 1484 000e FFF7FEFF 		bl	VL53L1_RdByte
+ 1485 0012 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 1486 0016 03F00F02 		and	r2, r3, #15
+ 1487 001a 0132     		adds	r2, r2, #1
+ 1488 001c 2A80     		strh	r2, [r5]	@ movhi
+ 1489 001e 1B09     		lsrs	r3, r3, #4
+ 1490 0020 0133     		adds	r3, r3, #1
+ 1491 0022 2380     		strh	r3, [r4]	@ movhi
+ 1492 0024 03B0     		add	sp, sp, #12
+ 1493              		@ sp needed
+ 1494 0026 30BD     		pop	{r4, r5, pc}
+ 1496              		.section	.text.VL53L1X_SetSignalThreshold,"ax",%progbits
+ 1497              		.align	1
+ 1498              		.global	VL53L1X_SetSignalThreshold
+ 1499              		.syntax unified
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 26
+
+
+ 1500              		.thumb
+ 1501              		.thumb_func
+ 1503              	VL53L1X_SetSignalThreshold:
+ 1504              		@ args = 0, pretend = 0, frame = 0
+ 1505              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1506 0000 08B5     		push	{r3, lr}
+ 1507 0002 CA08     		lsrs	r2, r1, #3
+ 1508 0004 6621     		movs	r1, #102
+ 1509 0006 FFF7FEFF 		bl	VL53L1_WrWord
+ 1510 000a 08BD     		pop	{r3, pc}
+ 1512              		.section	.text.VL53L1X_GetSignalThreshold,"ax",%progbits
+ 1513              		.align	1
+ 1514              		.global	VL53L1X_GetSignalThreshold
+ 1515              		.syntax unified
+ 1516              		.thumb
+ 1517              		.thumb_func
+ 1519              	VL53L1X_GetSignalThreshold:
+ 1520              		@ args = 0, pretend = 0, frame = 8
+ 1521              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1522 0000 10B5     		push	{r4, lr}
+ 1523 0002 82B0     		sub	sp, sp, #8
+ 1524 0004 0C46     		mov	r4, r1
+ 1525 0006 0DF10602 		add	r2, sp, #6
+ 1526 000a 6621     		movs	r1, #102
+ 1527 000c FFF7FEFF 		bl	VL53L1_RdWord
+ 1528 0010 BDF80630 		ldrh	r3, [sp, #6]
+ 1529 0014 DB00     		lsls	r3, r3, #3
+ 1530 0016 2380     		strh	r3, [r4]	@ movhi
+ 1531 0018 02B0     		add	sp, sp, #8
+ 1532              		@ sp needed
+ 1533 001a 10BD     		pop	{r4, pc}
+ 1535              		.section	.text.VL53L1X_SetSigmaThreshold,"ax",%progbits
+ 1536              		.align	1
+ 1537              		.global	VL53L1X_SetSigmaThreshold
+ 1538              		.syntax unified
+ 1539              		.thumb
+ 1540              		.thumb_func
+ 1542              	VL53L1X_SetSigmaThreshold:
+ 1543              		@ args = 0, pretend = 0, frame = 0
+ 1544              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1545 0000 B1F5804F 		cmp	r1, #16384
+ 1546 0004 01D3     		bcc	.L173
+ 1547 0006 0120     		movs	r0, #1
+ 1548 0008 7047     		bx	lr
+ 1549              	.L173:
+ 1550 000a 08B5     		push	{r3, lr}
+ 1551 000c 8900     		lsls	r1, r1, #2
+ 1552 000e 8AB2     		uxth	r2, r1
+ 1553 0010 6421     		movs	r1, #100
+ 1554 0012 FFF7FEFF 		bl	VL53L1_WrWord
+ 1555 0016 08BD     		pop	{r3, pc}
+ 1557              		.section	.text.VL53L1X_GetSigmaThreshold,"ax",%progbits
+ 1558              		.align	1
+ 1559              		.global	VL53L1X_GetSigmaThreshold
+ 1560              		.syntax unified
+ 1561              		.thumb
+ 1562              		.thumb_func
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 27
+
+
+ 1564              	VL53L1X_GetSigmaThreshold:
+ 1565              		@ args = 0, pretend = 0, frame = 8
+ 1566              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1567 0000 10B5     		push	{r4, lr}
+ 1568 0002 82B0     		sub	sp, sp, #8
+ 1569 0004 0C46     		mov	r4, r1
+ 1570 0006 0DF10602 		add	r2, sp, #6
+ 1571 000a 6421     		movs	r1, #100
+ 1572 000c FFF7FEFF 		bl	VL53L1_RdWord
+ 1573 0010 BDF80630 		ldrh	r3, [sp, #6]
+ 1574 0014 9B08     		lsrs	r3, r3, #2
+ 1575 0016 2380     		strh	r3, [r4]	@ movhi
+ 1576 0018 02B0     		add	sp, sp, #8
+ 1577              		@ sp needed
+ 1578 001a 10BD     		pop	{r4, pc}
+ 1580              		.section	.text.VL53L1X_StartTemperatureUpdate,"ax",%progbits
+ 1581              		.align	1
+ 1582              		.global	VL53L1X_StartTemperatureUpdate
+ 1583              		.syntax unified
+ 1584              		.thumb
+ 1585              		.thumb_func
+ 1587              	VL53L1X_StartTemperatureUpdate:
+ 1588              		@ args = 0, pretend = 0, frame = 8
+ 1589              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1590 0000 70B5     		push	{r4, r5, r6, lr}
+ 1591 0002 82B0     		sub	sp, sp, #8
+ 1592 0004 0546     		mov	r5, r0
+ 1593 0006 0023     		movs	r3, #0
+ 1594 0008 8DF80730 		strb	r3, [sp, #7]
+ 1595 000c 8122     		movs	r2, #129
+ 1596 000e 0821     		movs	r1, #8
+ 1597 0010 FFF7FEFF 		bl	VL53L1_WrByte
+ 1598 0014 0446     		mov	r4, r0
+ 1599 0016 9222     		movs	r2, #146
+ 1600 0018 0B21     		movs	r1, #11
+ 1601 001a 2846     		mov	r0, r5
+ 1602 001c FFF7FEFF 		bl	VL53L1_WrByte
+ 1603 0020 0443     		orrs	r4, r4, r0
+ 1604 0022 64B2     		sxtb	r4, r4
+ 1605 0024 2846     		mov	r0, r5
+ 1606 0026 FFF7FEFF 		bl	VL53L1X_StartRanging
+ 1607 002a 0443     		orrs	r4, r4, r0
+ 1608 002c 64B2     		sxtb	r4, r4
+ 1609 002e 06E0     		b	.L177
+ 1610              	.L178:
+ 1611 0030 0DF10701 		add	r1, sp, #7
+ 1612 0034 2846     		mov	r0, r5
+ 1613 0036 FFF7FEFF 		bl	VL53L1X_CheckForDataReady
+ 1614 003a 0443     		orrs	r4, r4, r0
+ 1615 003c 64B2     		sxtb	r4, r4
+ 1616              	.L177:
+ 1617 003e 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 1618 0042 002B     		cmp	r3, #0
+ 1619 0044 F4D0     		beq	.L178
+ 1620 0046 0026     		movs	r6, #0
+ 1621 0048 8DF80760 		strb	r6, [sp, #7]
+ 1622 004c 2846     		mov	r0, r5
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 28
+
+
+ 1623 004e FFF7FEFF 		bl	VL53L1X_ClearInterrupt
+ 1624 0052 0443     		orrs	r4, r4, r0
+ 1625 0054 64B2     		sxtb	r4, r4
+ 1626 0056 2846     		mov	r0, r5
+ 1627 0058 FFF7FEFF 		bl	VL53L1X_StopRanging
+ 1628 005c 0443     		orrs	r4, r4, r0
+ 1629 005e 64B2     		sxtb	r4, r4
+ 1630 0060 0922     		movs	r2, #9
+ 1631 0062 0821     		movs	r1, #8
+ 1632 0064 2846     		mov	r0, r5
+ 1633 0066 FFF7FEFF 		bl	VL53L1_WrByte
+ 1634 006a 0443     		orrs	r4, r4, r0
+ 1635 006c 64B2     		sxtb	r4, r4
+ 1636 006e 3246     		mov	r2, r6
+ 1637 0070 0B21     		movs	r1, #11
+ 1638 0072 2846     		mov	r0, r5
+ 1639 0074 FFF7FEFF 		bl	VL53L1_WrByte
+ 1640 0078 2043     		orrs	r0, r0, r4
+ 1641 007a 40B2     		sxtb	r0, r0
+ 1642 007c 02B0     		add	sp, sp, #8
+ 1643              		@ sp needed
+ 1644 007e 70BD     		pop	{r4, r5, r6, pc}
+ 1646              		.section	.rodata.status_rtn,"a"
+ 1647              		.align	2
+ 1650              	status_rtn:
+ 1651 0000 FFFFFF05 		.ascii	"\377\377\377\005\002\004\001\007\003\000\377\377\011"
+ 1651      02040107 
+ 1651      0300FFFF 
+ 1651      09
+ 1652 000d 0DFFFFFF 		.ascii	"\015\377\377\377\377\012\006\377\377\013\014"
+ 1652      FF0A06FF 
+ 1652      FF0B0C
+ 1653              		.global	VL51L1X_DEFAULT_CONFIGURATION
+ 1654              		.section	.rodata.VL51L1X_DEFAULT_CONFIGURATION,"a"
+ 1655              		.align	2
+ 1658              	VL51L1X_DEFAULT_CONFIGURATION:
+ 1659 0000 00000001 		.ascii	"\000\000\000\001\002\000\002\010\000\010\020\001\001"
+ 1659      02000208 
+ 1659      00081001 
+ 1659      01
+ 1660 000d 00000000 		.ascii	"\000\000\000\000\377\000\017\000\000\000\000\000 \013"
+ 1660      FF000F00 
+ 1660      00000000 
+ 1660      200B
+ 1661 001b 0000020A 		.ascii	"\000\000\002\012!\000\000\005\000\000\000\000\310\000"
+ 1661      21000005 
+ 1661      00000000 
+ 1661      C800
+ 1662 0029 0038FF01 		.ascii	"\0008\377\001\000\010\000\000\001\314\017\001\361\015"
+ 1662      00080000 
+ 1662      01CC0F01 
+ 1662      F10D
+ 1663 0037 01680080 		.ascii	"\001h\000\200\010\270\000\000\000\000\017\211\000\000"
+ 1663      08B80000 
+ 1663      00000F89 
+ 1663      0000
+ 1664 0045 00000000 		.ascii	"\000\000\000\000\000\001\017\015\016\016\000\000\002"
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 29
+
+
+ 1664      00010F0D 
+ 1664      0E0E0000 
+ 1664      02
+ 1665 0052 C7FF9B00 		.ascii	"\307\377\233\000\000\000\001\000\000"
+ 1665      00000100 
+ 1665      00
+ 1666              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 30
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 VL53L1X_api.c
+  C:\Temp\ccEKRZBT.s:18     .text.VL53L1X_GetSWVersion:00000000 $t
+  C:\Temp\ccEKRZBT.s:24     .text.VL53L1X_GetSWVersion:00000000 VL53L1X_GetSWVersion
+  C:\Temp\ccEKRZBT.s:40     .text.VL53L1X_SetI2CAddress:00000000 $t
+  C:\Temp\ccEKRZBT.s:46     .text.VL53L1X_SetI2CAddress:00000000 VL53L1X_SetI2CAddress
+  C:\Temp\ccEKRZBT.s:56     .text.VL53L1X_ClearInterrupt:00000000 $t
+  C:\Temp\ccEKRZBT.s:62     .text.VL53L1X_ClearInterrupt:00000000 VL53L1X_ClearInterrupt
+  C:\Temp\ccEKRZBT.s:72     .text.VL53L1X_SetInterruptPolarity:00000000 $t
+  C:\Temp\ccEKRZBT.s:78     .text.VL53L1X_SetInterruptPolarity:00000000 VL53L1X_SetInterruptPolarity
+  C:\Temp\ccEKRZBT.s:110    .text.VL53L1X_GetInterruptPolarity:00000000 $t
+  C:\Temp\ccEKRZBT.s:116    .text.VL53L1X_GetInterruptPolarity:00000000 VL53L1X_GetInterruptPolarity
+  C:\Temp\ccEKRZBT.s:136    .text.VL53L1X_StartRanging:00000000 $t
+  C:\Temp\ccEKRZBT.s:142    .text.VL53L1X_StartRanging:00000000 VL53L1X_StartRanging
+  C:\Temp\ccEKRZBT.s:152    .text.VL53L1X_StopRanging:00000000 $t
+  C:\Temp\ccEKRZBT.s:158    .text.VL53L1X_StopRanging:00000000 VL53L1X_StopRanging
+  C:\Temp\ccEKRZBT.s:168    .text.VL53L1X_CheckForDataReady:00000000 $t
+  C:\Temp\ccEKRZBT.s:174    .text.VL53L1X_CheckForDataReady:00000000 VL53L1X_CheckForDataReady
+  C:\Temp\ccEKRZBT.s:208    .text.VL53L1X_SensorInit:00000000 $t
+  C:\Temp\ccEKRZBT.s:214    .text.VL53L1X_SensorInit:00000000 VL53L1X_SensorInit
+  C:\Temp\ccEKRZBT.s:280    .text.VL53L1X_SensorInit:00000088 $d
+  C:\Temp\ccEKRZBT.s:1658   .rodata.VL51L1X_DEFAULT_CONFIGURATION:00000000 VL51L1X_DEFAULT_CONFIGURATION
+  C:\Temp\ccEKRZBT.s:283    .text.VL53L1X_GetTimingBudgetInMs:00000000 $t
+  C:\Temp\ccEKRZBT.s:289    .text.VL53L1X_GetTimingBudgetInMs:00000000 VL53L1X_GetTimingBudgetInMs
+  C:\Temp\ccEKRZBT.s:377    .text.VL53L1X_GetDistanceMode:00000000 $t
+  C:\Temp\ccEKRZBT.s:383    .text.VL53L1X_GetDistanceMode:00000000 VL53L1X_GetDistanceMode
+  C:\Temp\ccEKRZBT.s:412    .text.VL53L1X_SetTimingBudgetInMs:00000000 $t
+  C:\Temp\ccEKRZBT.s:418    .text.VL53L1X_SetTimingBudgetInMs:00000000 VL53L1X_SetTimingBudgetInMs
+  C:\Temp\ccEKRZBT.s:611    .text.VL53L1X_SetDistanceMode:00000000 $t
+  C:\Temp\ccEKRZBT.s:617    .text.VL53L1X_SetDistanceMode:00000000 VL53L1X_SetDistanceMode
+  C:\Temp\ccEKRZBT.s:707    .text.VL53L1X_SetInterMeasurementInMs:00000000 $t
+  C:\Temp\ccEKRZBT.s:713    .text.VL53L1X_SetInterMeasurementInMs:00000000 VL53L1X_SetInterMeasurementInMs
+  C:\Temp\ccEKRZBT.s:744    .text.VL53L1X_SetInterMeasurementInMs:00000048 $d
+  C:\Temp\ccEKRZBT.s:750    .text.VL53L1X_GetInterMeasurementInMs:00000000 $t
+  C:\Temp\ccEKRZBT.s:756    .text.VL53L1X_GetInterMeasurementInMs:00000000 VL53L1X_GetInterMeasurementInMs
+  C:\Temp\ccEKRZBT.s:799    .text.VL53L1X_GetInterMeasurementInMs:00000068 $d
+  C:\Temp\ccEKRZBT.s:803    .text.VL53L1X_BootState:00000000 $t
+  C:\Temp\ccEKRZBT.s:809    .text.VL53L1X_BootState:00000000 VL53L1X_BootState
+  C:\Temp\ccEKRZBT.s:827    .text.VL53L1X_GetSensorId:00000000 $t
+  C:\Temp\ccEKRZBT.s:833    .text.VL53L1X_GetSensorId:00000000 VL53L1X_GetSensorId
+  C:\Temp\ccEKRZBT.s:851    .text.VL53L1X_GetDistance:00000000 $t
+  C:\Temp\ccEKRZBT.s:857    .text.VL53L1X_GetDistance:00000000 VL53L1X_GetDistance
+  C:\Temp\ccEKRZBT.s:873    .text.VL53L1X_GetSignalPerSpad:00000000 $t
+  C:\Temp\ccEKRZBT.s:879    .text.VL53L1X_GetSignalPerSpad:00000000 VL53L1X_GetSignalPerSpad
+  C:\Temp\ccEKRZBT.s:921    .text.VL53L1X_GetSignalPerSpad:0000005c $d
+  C:\Temp\ccEKRZBT.s:924    .text.VL53L1X_GetAmbientPerSpad:00000000 $t
+  C:\Temp\ccEKRZBT.s:930    .text.VL53L1X_GetAmbientPerSpad:00000000 VL53L1X_GetAmbientPerSpad
+  C:\Temp\ccEKRZBT.s:972    .text.VL53L1X_GetAmbientPerSpad:0000005c $d
+  C:\Temp\ccEKRZBT.s:975    .text.VL53L1X_GetSignalRate:00000000 $t
+  C:\Temp\ccEKRZBT.s:981    .text.VL53L1X_GetSignalRate:00000000 VL53L1X_GetSignalRate
+  C:\Temp\ccEKRZBT.s:998    .text.VL53L1X_GetSpadNb:00000000 $t
+  C:\Temp\ccEKRZBT.s:1004   .text.VL53L1X_GetSpadNb:00000000 VL53L1X_GetSpadNb
+  C:\Temp\ccEKRZBT.s:1021   .text.VL53L1X_GetAmbientRate:00000000 $t
+  C:\Temp\ccEKRZBT.s:1027   .text.VL53L1X_GetAmbientRate:00000000 VL53L1X_GetAmbientRate
+  C:\Temp\ccEKRZBT.s:1044   .text.VL53L1X_GetRangeStatus:00000000 $t
+  C:\Temp\ccEKRZBT.s:1050   .text.VL53L1X_GetRangeStatus:00000000 VL53L1X_GetRangeStatus
+  C:\Temp\ccEKRZBT.s:1076   .text.VL53L1X_GetRangeStatus:00000030 $d
+ARM GAS  C:\Temp\ccEKRZBT.s 			page 31
+
+
+  C:\Temp\ccEKRZBT.s:1650   .rodata.status_rtn:00000000 status_rtn
+  C:\Temp\ccEKRZBT.s:1079   .text.VL53L1X_GetResult:00000000 $t
+  C:\Temp\ccEKRZBT.s:1085   .text.VL53L1X_GetResult:00000000 VL53L1X_GetResult
+  C:\Temp\ccEKRZBT.s:1125   .text.VL53L1X_GetResult:0000005c $d
+  C:\Temp\ccEKRZBT.s:1128   .text.VL53L1X_SetOffset:00000000 $t
+  C:\Temp\ccEKRZBT.s:1134   .text.VL53L1X_SetOffset:00000000 VL53L1X_SetOffset
+  C:\Temp\ccEKRZBT.s:1159   .text.VL53L1X_GetOffset:00000000 $t
+  C:\Temp\ccEKRZBT.s:1165   .text.VL53L1X_GetOffset:00000000 VL53L1X_GetOffset
+  C:\Temp\ccEKRZBT.s:1192   .text.VL53L1X_SetXtalk:00000000 $t
+  C:\Temp\ccEKRZBT.s:1198   .text.VL53L1X_SetXtalk:00000000 VL53L1X_SetXtalk
+  C:\Temp\ccEKRZBT.s:1227   .text.VL53L1X_SetXtalk:00000038 $d
+  C:\Temp\ccEKRZBT.s:1230   .text.VL53L1X_GetXtalk:00000000 $t
+  C:\Temp\ccEKRZBT.s:1236   .text.VL53L1X_GetXtalk:00000000 VL53L1X_GetXtalk
+  C:\Temp\ccEKRZBT.s:1252   .text.VL53L1X_SetDistanceThreshold:00000000 $t
+  C:\Temp\ccEKRZBT.s:1258   .text.VL53L1X_SetDistanceThreshold:00000000 VL53L1X_SetDistanceThreshold
+  C:\Temp\ccEKRZBT.s:1309   .text.VL53L1X_GetDistanceThresholdWindow:00000000 $t
+  C:\Temp\ccEKRZBT.s:1315   .text.VL53L1X_GetDistanceThresholdWindow:00000000 VL53L1X_GetDistanceThresholdWindow
+  C:\Temp\ccEKRZBT.s:1332   .text.VL53L1X_GetDistanceThresholdLow:00000000 $t
+  C:\Temp\ccEKRZBT.s:1338   .text.VL53L1X_GetDistanceThresholdLow:00000000 VL53L1X_GetDistanceThresholdLow
+  C:\Temp\ccEKRZBT.s:1354   .text.VL53L1X_GetDistanceThresholdHigh:00000000 $t
+  C:\Temp\ccEKRZBT.s:1360   .text.VL53L1X_GetDistanceThresholdHigh:00000000 VL53L1X_GetDistanceThresholdHigh
+  C:\Temp\ccEKRZBT.s:1376   .text.VL53L1X_SetROICenter:00000000 $t
+  C:\Temp\ccEKRZBT.s:1382   .text.VL53L1X_SetROICenter:00000000 VL53L1X_SetROICenter
+  C:\Temp\ccEKRZBT.s:1392   .text.VL53L1X_GetROICenter:00000000 $t
+  C:\Temp\ccEKRZBT.s:1398   .text.VL53L1X_GetROICenter:00000000 VL53L1X_GetROICenter
+  C:\Temp\ccEKRZBT.s:1414   .text.VL53L1X_SetROI:00000000 $t
+  C:\Temp\ccEKRZBT.s:1420   .text.VL53L1X_SetROI:00000000 VL53L1X_SetROI
+  C:\Temp\ccEKRZBT.s:1469   .text.VL53L1X_GetROI_XY:00000000 $t
+  C:\Temp\ccEKRZBT.s:1475   .text.VL53L1X_GetROI_XY:00000000 VL53L1X_GetROI_XY
+  C:\Temp\ccEKRZBT.s:1497   .text.VL53L1X_SetSignalThreshold:00000000 $t
+  C:\Temp\ccEKRZBT.s:1503   .text.VL53L1X_SetSignalThreshold:00000000 VL53L1X_SetSignalThreshold
+  C:\Temp\ccEKRZBT.s:1513   .text.VL53L1X_GetSignalThreshold:00000000 $t
+  C:\Temp\ccEKRZBT.s:1519   .text.VL53L1X_GetSignalThreshold:00000000 VL53L1X_GetSignalThreshold
+  C:\Temp\ccEKRZBT.s:1536   .text.VL53L1X_SetSigmaThreshold:00000000 $t
+  C:\Temp\ccEKRZBT.s:1542   .text.VL53L1X_SetSigmaThreshold:00000000 VL53L1X_SetSigmaThreshold
+  C:\Temp\ccEKRZBT.s:1558   .text.VL53L1X_GetSigmaThreshold:00000000 $t
+  C:\Temp\ccEKRZBT.s:1564   .text.VL53L1X_GetSigmaThreshold:00000000 VL53L1X_GetSigmaThreshold
+  C:\Temp\ccEKRZBT.s:1581   .text.VL53L1X_StartTemperatureUpdate:00000000 $t
+  C:\Temp\ccEKRZBT.s:1587   .text.VL53L1X_StartTemperatureUpdate:00000000 VL53L1X_StartTemperatureUpdate
+  C:\Temp\ccEKRZBT.s:1647   .rodata.status_rtn:00000000 $d
+  C:\Temp\ccEKRZBT.s:1655   .rodata.VL51L1X_DEFAULT_CONFIGURATION:00000000 $d
+
+UNDEFINED SYMBOLS
+VL53L1_WrByte
+VL53L1_RdByte
+VL53L1_RdWord
+VL53L1_WrWord
+__aeabi_ui2d
+__aeabi_dmul
+__aeabi_d2uiz
+VL53L1_WrDWord
+__aeabi_i2d
+__aeabi_ddiv
+VL53L1_RdDWord
+VL53L1_ReadMulti

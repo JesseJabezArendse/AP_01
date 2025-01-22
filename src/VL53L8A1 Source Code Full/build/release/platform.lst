@@ -1,0 +1,167 @@
+ARM GAS  C:\Temp\ccUMKSKp.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"platform.c"
+  16              		.text
+  17              		.section	.text.VL53L8CX_RdByte,"ax",%progbits
+  18              		.align	1
+  19              		.global	VL53L8CX_RdByte
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	VL53L8CX_RdByte:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 10B5     		push	{r4, lr}
+  28 0002 8468     		ldr	r4, [r0, #8]
+  29 0004 0123     		movs	r3, #1
+  30 0006 0088     		ldrh	r0, [r0]
+  31 0008 A047     		blx	r4
+  32 000a C0B2     		uxtb	r0, r0
+  33 000c 10BD     		pop	{r4, pc}
+  35              		.section	.text.VL53L8CX_WrByte,"ax",%progbits
+  36              		.align	1
+  37              		.global	VL53L8CX_WrByte
+  38              		.syntax unified
+  39              		.thumb
+  40              		.thumb_func
+  42              	VL53L8CX_WrByte:
+  43              		@ args = 0, pretend = 0, frame = 8
+  44              		@ frame_needed = 0, uses_anonymous_args = 0
+  45 0000 10B5     		push	{r4, lr}
+  46 0002 82B0     		sub	sp, sp, #8
+  47 0004 8DF80720 		strb	r2, [sp, #7]
+  48 0008 4468     		ldr	r4, [r0, #4]
+  49 000a 0123     		movs	r3, #1
+  50 000c 0DF10702 		add	r2, sp, #7
+  51 0010 0088     		ldrh	r0, [r0]
+  52 0012 A047     		blx	r4
+  53 0014 C0B2     		uxtb	r0, r0
+  54 0016 02B0     		add	sp, sp, #8
+  55              		@ sp needed
+  56 0018 10BD     		pop	{r4, pc}
+  58              		.section	.text.VL53L8CX_WrMulti,"ax",%progbits
+  59              		.align	1
+  60              		.global	VL53L8CX_WrMulti
+  61              		.syntax unified
+ARM GAS  C:\Temp\ccUMKSKp.s 			page 2
+
+
+  62              		.thumb
+  63              		.thumb_func
+  65              	VL53L8CX_WrMulti:
+  66              		@ args = 0, pretend = 0, frame = 0
+  67              		@ frame_needed = 0, uses_anonymous_args = 0
+  68 0000 10B5     		push	{r4, lr}
+  69 0002 4468     		ldr	r4, [r0, #4]
+  70 0004 9BB2     		uxth	r3, r3
+  71 0006 0088     		ldrh	r0, [r0]
+  72 0008 A047     		blx	r4
+  73 000a C0B2     		uxtb	r0, r0
+  74 000c 10BD     		pop	{r4, pc}
+  76              		.section	.text.VL53L8CX_RdMulti,"ax",%progbits
+  77              		.align	1
+  78              		.global	VL53L8CX_RdMulti
+  79              		.syntax unified
+  80              		.thumb
+  81              		.thumb_func
+  83              	VL53L8CX_RdMulti:
+  84              		@ args = 0, pretend = 0, frame = 0
+  85              		@ frame_needed = 0, uses_anonymous_args = 0
+  86 0000 10B5     		push	{r4, lr}
+  87 0002 8468     		ldr	r4, [r0, #8]
+  88 0004 9BB2     		uxth	r3, r3
+  89 0006 0088     		ldrh	r0, [r0]
+  90 0008 A047     		blx	r4
+  91 000a C0B2     		uxtb	r0, r0
+  92 000c 10BD     		pop	{r4, pc}
+  94              		.section	.text.VL53L8CX_SwapBuffer,"ax",%progbits
+  95              		.align	1
+  96              		.global	VL53L8CX_SwapBuffer
+  97              		.syntax unified
+  98              		.thumb
+  99              		.thumb_func
+ 101              	VL53L8CX_SwapBuffer:
+ 102              		@ args = 0, pretend = 0, frame = 0
+ 103              		@ frame_needed = 0, uses_anonymous_args = 0
+ 104 0000 0022     		movs	r2, #0
+ 105 0002 9142     		cmp	r1, r2
+ 106 0004 17D9     		bls	.L15
+ 107 0006 00B5     		push	{lr}
+ 108              	.L11:
+ 109 0008 00EB020C 		add	ip, r0, r2
+ 110 000c 10F802E0 		ldrb	lr, [r0, r2]	@ zero_extendqisi2
+ 111 0010 9CF80130 		ldrb	r3, [ip, #1]	@ zero_extendqisi2
+ 112 0014 1B04     		lsls	r3, r3, #16
+ 113 0016 43EA0E63 		orr	r3, r3, lr, lsl #24
+ 114 001a 9CF802E0 		ldrb	lr, [ip, #2]	@ zero_extendqisi2
+ 115 001e 43EA0E23 		orr	r3, r3, lr, lsl #8
+ 116 0022 9CF803C0 		ldrb	ip, [ip, #3]	@ zero_extendqisi2
+ 117 0026 43EA0C03 		orr	r3, r3, ip
+ 118 002a 8350     		str	r3, [r0, r2]	@ unaligned
+ 119 002c 0432     		adds	r2, r2, #4
+ 120 002e 9142     		cmp	r1, r2
+ 121 0030 EAD8     		bhi	.L11
+ 122 0032 5DF804FB 		ldr	pc, [sp], #4
+ 123              	.L15:
+ARM GAS  C:\Temp\ccUMKSKp.s 			page 3
+
+
+ 124 0036 7047     		bx	lr
+ 126              		.section	.text.VL53L8CX_WaitMs,"ax",%progbits
+ 127              		.align	1
+ 128              		.global	VL53L8CX_WaitMs
+ 129              		.syntax unified
+ 130              		.thumb
+ 131              		.thumb_func
+ 133              	VL53L8CX_WaitMs:
+ 134              		@ args = 0, pretend = 0, frame = 0
+ 135              		@ frame_needed = 0, uses_anonymous_args = 0
+ 136 0000 70B5     		push	{r4, r5, r6, lr}
+ 137 0002 0446     		mov	r4, r0
+ 138 0004 0E46     		mov	r6, r1
+ 139 0006 C368     		ldr	r3, [r0, #12]
+ 140 0008 9847     		blx	r3
+ 141 000a 0546     		mov	r5, r0
+ 142              	.L17:
+ 143 000c E368     		ldr	r3, [r4, #12]
+ 144 000e 9847     		blx	r3
+ 145 0010 401B     		subs	r0, r0, r5
+ 146 0012 B042     		cmp	r0, r6
+ 147 0014 FAD3     		bcc	.L17
+ 148 0016 0020     		movs	r0, #0
+ 149 0018 70BD     		pop	{r4, r5, r6, pc}
+ 151              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccUMKSKp.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 platform.c
+  C:\Temp\ccUMKSKp.s:18     .text.VL53L8CX_RdByte:00000000 $t
+  C:\Temp\ccUMKSKp.s:24     .text.VL53L8CX_RdByte:00000000 VL53L8CX_RdByte
+  C:\Temp\ccUMKSKp.s:36     .text.VL53L8CX_WrByte:00000000 $t
+  C:\Temp\ccUMKSKp.s:42     .text.VL53L8CX_WrByte:00000000 VL53L8CX_WrByte
+  C:\Temp\ccUMKSKp.s:59     .text.VL53L8CX_WrMulti:00000000 $t
+  C:\Temp\ccUMKSKp.s:65     .text.VL53L8CX_WrMulti:00000000 VL53L8CX_WrMulti
+  C:\Temp\ccUMKSKp.s:77     .text.VL53L8CX_RdMulti:00000000 $t
+  C:\Temp\ccUMKSKp.s:83     .text.VL53L8CX_RdMulti:00000000 VL53L8CX_RdMulti
+  C:\Temp\ccUMKSKp.s:95     .text.VL53L8CX_SwapBuffer:00000000 $t
+  C:\Temp\ccUMKSKp.s:101    .text.VL53L8CX_SwapBuffer:00000000 VL53L8CX_SwapBuffer
+  C:\Temp\ccUMKSKp.s:127    .text.VL53L8CX_WaitMs:00000000 $t
+  C:\Temp\ccUMKSKp.s:133    .text.VL53L8CX_WaitMs:00000000 VL53L8CX_WaitMs
+
+NO UNDEFINED SYMBOLS

@@ -1,0 +1,412 @@
+ARM GAS  C:\Temp\ccC5wdyU.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"IKS02A1_Simulink.c"
+  16              		.text
+  17              		.section	.text.getTemperature,"ax",%progbits
+  18              		.align	1
+  19              		.global	getTemperature
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	getTemperature:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  28 0002 85B0     		sub	sp, sp, #20
+  29 0004 114F     		ldr	r7, .L3
+  30 0006 4FF0FF36 		mov	r6, #-1
+  31 000a 0296     		str	r6, [sp, #8]
+  32 000c 0124     		movs	r4, #1
+  33 000e 0194     		str	r4, [sp, #4]
+  34 0010 0F4D     		ldr	r5, .L3+4
+  35 0012 0095     		str	r5, [sp]
+  36 0014 2346     		mov	r3, r4
+  37 0016 0D22     		movs	r2, #13
+  38 0018 3321     		movs	r1, #51
+  39 001a 3846     		mov	r0, r7
+  40 001c FFF7FEFF 		bl	HAL_I2C_Mem_Read
+  41 0020 0296     		str	r6, [sp, #8]
+  42 0022 0194     		str	r4, [sp, #4]
+  43 0024 0B4E     		ldr	r6, .L3+8
+  44 0026 0096     		str	r6, [sp]
+  45 0028 2346     		mov	r3, r4
+  46 002a 0E22     		movs	r2, #14
+  47 002c 3321     		movs	r1, #51
+  48 002e 3846     		mov	r0, r7
+  49 0030 FFF7FEFF 		bl	HAL_I2C_Mem_Read
+  50 0034 3378     		ldrb	r3, [r6]	@ zero_extendqisi2
+  51 0036 1B02     		lsls	r3, r3, #8
+  52 0038 1BB2     		sxth	r3, r3
+  53 003a 2878     		ldrb	r0, [r5]	@ zero_extendqisi2
+  54 003c 1843     		orrs	r0, r0, r3
+  55 003e FFF7FEFF 		bl	iis2dlpc_from_lsb_to_celsius
+  56 0042 054B     		ldr	r3, .L3+12
+  57 0044 83ED000A 		vstr.32	s0, [r3]
+  58 0048 05B0     		add	sp, sp, #20
+ARM GAS  C:\Temp\ccC5wdyU.s 			page 2
+
+
+  59              		@ sp needed
+  60 004a F0BD     		pop	{r4, r5, r6, r7, pc}
+  61              	.L4:
+  62              		.align	2
+  63              	.L3:
+  64 004c 00000000 		.word	hi2c1
+  65 0050 00000000 		.word	temperature_raw_l
+  66 0054 00000000 		.word	temperature_raw_h
+  67 0058 00000000 		.word	temperature
+  69              		.section	.text.bytesToFloat,"ax",%progbits
+  70              		.align	1
+  71              		.global	bytesToFloat
+  72              		.syntax unified
+  73              		.thumb
+  74              		.thumb_func
+  76              	bytesToFloat:
+  77              		@ args = 0, pretend = 0, frame = 8
+  78              		@ frame_needed = 0, uses_anonymous_args = 0
+  79              		@ link register save eliminated.
+  80 0000 82B0     		sub	sp, sp, #8
+  81 0002 8DF80400 		strb	r0, [sp, #4]
+  82 0006 8DF80510 		strb	r1, [sp, #5]
+  83 000a 8DF80620 		strb	r2, [sp, #6]
+  84 000e 8DF80730 		strb	r3, [sp, #7]
+  85 0012 9DED010A 		vldr.32	s0, [sp, #4]
+  86 0016 02B0     		add	sp, sp, #8
+  87              		@ sp needed
+  88 0018 7047     		bx	lr
+  90              		.section	.text.bytesToInt32,"ax",%progbits
+  91              		.align	1
+  92              		.global	bytesToInt32
+  93              		.syntax unified
+  94              		.thumb
+  95              		.thumb_func
+  97              	bytesToInt32:
+  98              		@ args = 0, pretend = 0, frame = 8
+  99              		@ frame_needed = 0, uses_anonymous_args = 0
+ 100              		@ link register save eliminated.
+ 101 0000 82B0     		sub	sp, sp, #8
+ 102 0002 8DF80400 		strb	r0, [sp, #4]
+ 103 0006 8DF80510 		strb	r1, [sp, #5]
+ 104 000a 8DF80620 		strb	r2, [sp, #6]
+ 105 000e 8DF80730 		strb	r3, [sp, #7]
+ 106 0012 0198     		ldr	r0, [sp, #4]
+ 107 0014 02B0     		add	sp, sp, #8
+ 108              		@ sp needed
+ 109 0016 7047     		bx	lr
+ 111              		.section	.text.initIKS02A1,"ax",%progbits
+ 112              		.align	1
+ 113              		.global	initIKS02A1
+ 114              		.syntax unified
+ 115              		.thumb
+ 116              		.thumb_func
+ 118              	initIKS02A1:
+ 119              		@ args = 0, pretend = 0, frame = 0
+ 120              		@ frame_needed = 0, uses_anonymous_args = 0
+ 121 0000 08B5     		push	{r3, lr}
+ARM GAS  C:\Temp\ccC5wdyU.s 			page 3
+
+
+ 122 0002 0321     		movs	r1, #3
+ 123 0004 0020     		movs	r0, #0
+ 124 0006 FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_Init
+ 125 000a 0221     		movs	r1, #2
+ 126 000c 0120     		movs	r0, #1
+ 127 000e FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_Init
+ 128 0012 0421     		movs	r1, #4
+ 129 0014 0220     		movs	r0, #2
+ 130 0016 FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_Init
+ 131 001a 08BD     		pop	{r3, pc}
+ 133              		.section	.text.getIKS02A1,"ax",%progbits
+ 134              		.align	1
+ 135              		.global	getIKS02A1
+ 136              		.syntax unified
+ 137              		.thumb
+ 138              		.thumb_func
+ 140              	getIKS02A1:
+ 141              		@ args = 0, pretend = 0, frame = 0
+ 142              		@ frame_needed = 0, uses_anonymous_args = 0
+ 143 0000 08B5     		push	{r3, lr}
+ 144              	.L12:
+ 145 0002 0F4A     		ldr	r2, .L17
+ 146 0004 0221     		movs	r1, #2
+ 147 0006 0020     		movs	r0, #0
+ 148 0008 FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_GetAxes
+ 149 000c 0028     		cmp	r0, #0
+ 150 000e F8D1     		bne	.L12
+ 151              	.L13:
+ 152 0010 0C4A     		ldr	r2, .L17+4
+ 153 0012 0121     		movs	r1, #1
+ 154 0014 0020     		movs	r0, #0
+ 155 0016 FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_GetAxes
+ 156 001a 0028     		cmp	r0, #0
+ 157 001c F8D1     		bne	.L13
+ 158              	.L14:
+ 159 001e 0A4A     		ldr	r2, .L17+8
+ 160 0020 0221     		movs	r1, #2
+ 161 0022 0120     		movs	r0, #1
+ 162 0024 FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_GetAxes
+ 163 0028 0028     		cmp	r0, #0
+ 164 002a F8D1     		bne	.L14
+ 165              	.L15:
+ 166 002c 074A     		ldr	r2, .L17+12
+ 167 002e 0421     		movs	r1, #4
+ 168 0030 0220     		movs	r0, #2
+ 169 0032 FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_GetAxes
+ 170 0036 0028     		cmp	r0, #0
+ 171 0038 F8D1     		bne	.L15
+ 172 003a FFF7FEFF 		bl	getTemperature
+ 173 003e 08BD     		pop	{r3, pc}
+ 174              	.L18:
+ 175              		.align	2
+ 176              	.L17:
+ 177 0040 00000000 		.word	accel1_axis
+ 178 0044 00000000 		.word	gyro_axis
+ 179 0048 00000000 		.word	accel2_axis
+ 180 004c 00000000 		.word	mag_axis
+ARM GAS  C:\Temp\ccC5wdyU.s 			page 4
+
+
+ 182              		.section	.text.initial_calibrate,"ax",%progbits
+ 183              		.align	1
+ 184              		.global	initial_calibrate
+ 185              		.syntax unified
+ 186              		.thumb
+ 187              		.thumb_func
+ 189              	initial_calibrate:
+ 190              		@ args = 0, pretend = 0, frame = 0
+ 191              		@ frame_needed = 0, uses_anonymous_args = 0
+ 192 0000 08B5     		push	{r3, lr}
+ 193 0002 2DED028B 		vpush.64	{d8}
+ 194 0006 9FED0F8A 		vldr.32	s16, .L21
+ 195 000a B0EE480A 		vmov.f32	s0, s16
+ 196 000e 0221     		movs	r1, #2
+ 197 0010 0020     		movs	r0, #0
+ 198 0012 FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_SetOutputDataRate
+ 199 0016 B0EE480A 		vmov.f32	s0, s16
+ 200 001a 0121     		movs	r1, #1
+ 201 001c 0020     		movs	r0, #0
+ 202 001e FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_SetOutputDataRate
+ 203 0022 094B     		ldr	r3, .L21+4
+ 204 0024 93ED000A 		vldr.32	s0, [r3]
+ 205 0028 0221     		movs	r1, #2
+ 206 002a 0120     		movs	r0, #1
+ 207 002c FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_SetOutputDataRate
+ 208 0030 064B     		ldr	r3, .L21+8
+ 209 0032 93ED000A 		vldr.32	s0, [r3]
+ 210 0036 0421     		movs	r1, #4
+ 211 0038 0220     		movs	r0, #2
+ 212 003a FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_SetOutputDataRate
+ 213 003e BDEC028B 		vldm	sp!, {d8}
+ 214 0042 08BD     		pop	{r3, pc}
+ 215              	.L22:
+ 216              		.align	2
+ 217              	.L21:
+ 218 0044 00005043 		.word	1129316352
+ 219 0048 00000000 		.word	accel2_odr
+ 220 004c 00000000 		.word	mag_odr
+ 222              		.section	.text.calibrate_IKS02A1,"ax",%progbits
+ 223              		.align	1
+ 224              		.global	calibrate_IKS02A1
+ 225              		.syntax unified
+ 226              		.thumb
+ 227              		.thumb_func
+ 229              	calibrate_IKS02A1:
+ 230              		@ args = 0, pretend = 0, frame = 0
+ 231              		@ frame_needed = 0, uses_anonymous_args = 0
+ 232 0000 08B5     		push	{r3, lr}
+ 233 0002 174B     		ldr	r3, .L25
+ 234 0004 1A68     		ldr	r2, [r3]
+ 235 0006 0221     		movs	r1, #2
+ 236 0008 0020     		movs	r0, #0
+ 237 000a FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_SetFullScale
+ 238 000e 154B     		ldr	r3, .L25+4
+ 239 0010 93ED000A 		vldr.32	s0, [r3]
+ 240 0014 0221     		movs	r1, #2
+ 241 0016 0020     		movs	r0, #0
+ARM GAS  C:\Temp\ccC5wdyU.s 			page 5
+
+
+ 242 0018 FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_SetOutputDataRate
+ 243 001c 124B     		ldr	r3, .L25+8
+ 244 001e 1A68     		ldr	r2, [r3]
+ 245 0020 0121     		movs	r1, #1
+ 246 0022 0020     		movs	r0, #0
+ 247 0024 FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_SetFullScale
+ 248 0028 104B     		ldr	r3, .L25+12
+ 249 002a 93ED000A 		vldr.32	s0, [r3]
+ 250 002e 0121     		movs	r1, #1
+ 251 0030 0020     		movs	r0, #0
+ 252 0032 FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_SetOutputDataRate
+ 253 0036 0E4B     		ldr	r3, .L25+16
+ 254 0038 1A68     		ldr	r2, [r3]
+ 255 003a 0221     		movs	r1, #2
+ 256 003c 0120     		movs	r0, #1
+ 257 003e FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_SetFullScale
+ 258 0042 0C4B     		ldr	r3, .L25+20
+ 259 0044 93ED000A 		vldr.32	s0, [r3]
+ 260 0048 0221     		movs	r1, #2
+ 261 004a 0120     		movs	r0, #1
+ 262 004c FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_SetOutputDataRate
+ 263 0050 094B     		ldr	r3, .L25+24
+ 264 0052 93ED000A 		vldr.32	s0, [r3]
+ 265 0056 0421     		movs	r1, #4
+ 266 0058 0220     		movs	r0, #2
+ 267 005a FFF7FEFF 		bl	IKS02A1_MOTION_SENSOR_SetOutputDataRate
+ 268 005e 08BD     		pop	{r3, pc}
+ 269              	.L26:
+ 270              		.align	2
+ 271              	.L25:
+ 272 0060 00000000 		.word	accel1_fsr
+ 273 0064 00000000 		.word	accel1_odr
+ 274 0068 00000000 		.word	gyro_fsr
+ 275 006c 00000000 		.word	gyro_odr
+ 276 0070 00000000 		.word	accel2_fsr
+ 277 0074 00000000 		.word	accel2_odr
+ 278 0078 00000000 		.word	mag_odr
+ 280              		.global	temperature
+ 281              		.section	.bss.temperature,"aw",%nobits
+ 282              		.align	2
+ 285              	temperature:
+ 286 0000 00000000 		.space	4
+ 287              		.global	temperature_raw_h
+ 288              		.section	.bss.temperature_raw_h,"aw",%nobits
+ 291              	temperature_raw_h:
+ 292 0000 00       		.space	1
+ 293              		.global	temperature_raw_l
+ 294              		.section	.bss.temperature_raw_l,"aw",%nobits
+ 297              	temperature_raw_l:
+ 298 0000 00       		.space	1
+ 299              		.global	fastestODR
+ 300              		.section	.bss.fastestODR,"aw",%nobits
+ 301              		.align	2
+ 304              	fastestODR:
+ 305 0000 00000000 		.space	4
+ 306              		.global	mag_odr
+ 307              		.section	.bss.mag_odr,"aw",%nobits
+ARM GAS  C:\Temp\ccC5wdyU.s 			page 6
+
+
+ 308              		.align	2
+ 311              	mag_odr:
+ 312 0000 00000000 		.space	4
+ 313              		.global	accel2_odr
+ 314              		.section	.bss.accel2_odr,"aw",%nobits
+ 315              		.align	2
+ 318              	accel2_odr:
+ 319 0000 00000000 		.space	4
+ 320              		.global	accel2_fsr
+ 321              		.section	.bss.accel2_fsr,"aw",%nobits
+ 322              		.align	2
+ 325              	accel2_fsr:
+ 326 0000 00000000 		.space	4
+ 327              		.global	gyro_odr
+ 328              		.section	.bss.gyro_odr,"aw",%nobits
+ 329              		.align	2
+ 332              	gyro_odr:
+ 333 0000 00000000 		.space	4
+ 334              		.global	gyro_fsr
+ 335              		.section	.bss.gyro_fsr,"aw",%nobits
+ 336              		.align	2
+ 339              	gyro_fsr:
+ 340 0000 00000000 		.space	4
+ 341              		.global	accel1_odr
+ 342              		.section	.bss.accel1_odr,"aw",%nobits
+ 343              		.align	2
+ 346              	accel1_odr:
+ 347 0000 00000000 		.space	4
+ 348              		.global	accel1_fsr
+ 349              		.section	.bss.accel1_fsr,"aw",%nobits
+ 350              		.align	2
+ 353              	accel1_fsr:
+ 354 0000 00000000 		.space	4
+ 355              		.global	tim2_arr
+ 356              		.section	.bss.tim2_arr,"aw",%nobits
+ 357              		.align	2
+ 360              	tim2_arr:
+ 361 0000 00000000 		.space	4
+ 362              		.global	tim2_psc
+ 363              		.section	.bss.tim2_psc,"aw",%nobits
+ 364              		.align	2
+ 367              	tim2_psc:
+ 368 0000 00000000 		.space	4
+ 369              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccC5wdyU.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 IKS02A1_Simulink.c
+  C:\Temp\ccC5wdyU.s:18     .text.getTemperature:00000000 $t
+  C:\Temp\ccC5wdyU.s:24     .text.getTemperature:00000000 getTemperature
+  C:\Temp\ccC5wdyU.s:64     .text.getTemperature:0000004c $d
+  C:\Temp\ccC5wdyU.s:297    .bss.temperature_raw_l:00000000 temperature_raw_l
+  C:\Temp\ccC5wdyU.s:291    .bss.temperature_raw_h:00000000 temperature_raw_h
+  C:\Temp\ccC5wdyU.s:285    .bss.temperature:00000000 temperature
+  C:\Temp\ccC5wdyU.s:70     .text.bytesToFloat:00000000 $t
+  C:\Temp\ccC5wdyU.s:76     .text.bytesToFloat:00000000 bytesToFloat
+  C:\Temp\ccC5wdyU.s:91     .text.bytesToInt32:00000000 $t
+  C:\Temp\ccC5wdyU.s:97     .text.bytesToInt32:00000000 bytesToInt32
+  C:\Temp\ccC5wdyU.s:112    .text.initIKS02A1:00000000 $t
+  C:\Temp\ccC5wdyU.s:118    .text.initIKS02A1:00000000 initIKS02A1
+  C:\Temp\ccC5wdyU.s:134    .text.getIKS02A1:00000000 $t
+  C:\Temp\ccC5wdyU.s:140    .text.getIKS02A1:00000000 getIKS02A1
+  C:\Temp\ccC5wdyU.s:177    .text.getIKS02A1:00000040 $d
+  C:\Temp\ccC5wdyU.s:183    .text.initial_calibrate:00000000 $t
+  C:\Temp\ccC5wdyU.s:189    .text.initial_calibrate:00000000 initial_calibrate
+  C:\Temp\ccC5wdyU.s:218    .text.initial_calibrate:00000044 $d
+  C:\Temp\ccC5wdyU.s:318    .bss.accel2_odr:00000000 accel2_odr
+  C:\Temp\ccC5wdyU.s:311    .bss.mag_odr:00000000 mag_odr
+  C:\Temp\ccC5wdyU.s:223    .text.calibrate_IKS02A1:00000000 $t
+  C:\Temp\ccC5wdyU.s:229    .text.calibrate_IKS02A1:00000000 calibrate_IKS02A1
+  C:\Temp\ccC5wdyU.s:272    .text.calibrate_IKS02A1:00000060 $d
+  C:\Temp\ccC5wdyU.s:353    .bss.accel1_fsr:00000000 accel1_fsr
+  C:\Temp\ccC5wdyU.s:346    .bss.accel1_odr:00000000 accel1_odr
+  C:\Temp\ccC5wdyU.s:339    .bss.gyro_fsr:00000000 gyro_fsr
+  C:\Temp\ccC5wdyU.s:332    .bss.gyro_odr:00000000 gyro_odr
+  C:\Temp\ccC5wdyU.s:325    .bss.accel2_fsr:00000000 accel2_fsr
+  C:\Temp\ccC5wdyU.s:282    .bss.temperature:00000000 $d
+  C:\Temp\ccC5wdyU.s:292    .bss.temperature_raw_h:00000000 $d
+  C:\Temp\ccC5wdyU.s:298    .bss.temperature_raw_l:00000000 $d
+  C:\Temp\ccC5wdyU.s:304    .bss.fastestODR:00000000 fastestODR
+  C:\Temp\ccC5wdyU.s:301    .bss.fastestODR:00000000 $d
+  C:\Temp\ccC5wdyU.s:308    .bss.mag_odr:00000000 $d
+  C:\Temp\ccC5wdyU.s:315    .bss.accel2_odr:00000000 $d
+  C:\Temp\ccC5wdyU.s:322    .bss.accel2_fsr:00000000 $d
+  C:\Temp\ccC5wdyU.s:329    .bss.gyro_odr:00000000 $d
+  C:\Temp\ccC5wdyU.s:336    .bss.gyro_fsr:00000000 $d
+  C:\Temp\ccC5wdyU.s:343    .bss.accel1_odr:00000000 $d
+  C:\Temp\ccC5wdyU.s:350    .bss.accel1_fsr:00000000 $d
+  C:\Temp\ccC5wdyU.s:360    .bss.tim2_arr:00000000 tim2_arr
+  C:\Temp\ccC5wdyU.s:357    .bss.tim2_arr:00000000 $d
+  C:\Temp\ccC5wdyU.s:367    .bss.tim2_psc:00000000 tim2_psc
+  C:\Temp\ccC5wdyU.s:364    .bss.tim2_psc:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_I2C_Mem_Read
+iis2dlpc_from_lsb_to_celsius
+hi2c1
+IKS02A1_MOTION_SENSOR_Init
+IKS02A1_MOTION_SENSOR_GetAxes
+accel1_axis
+gyro_axis
+accel2_axis
+mag_axis
+ARM GAS  C:\Temp\ccC5wdyU.s 			page 8
+
+
+IKS02A1_MOTION_SENSOR_SetOutputDataRate
+IKS02A1_MOTION_SENSOR_SetFullScale

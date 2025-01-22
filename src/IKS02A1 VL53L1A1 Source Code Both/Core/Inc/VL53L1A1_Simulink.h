@@ -10,37 +10,35 @@
 #ifndef AP_01_H
 #define AP_01_H
 
-#define INSTANCE_TOF_LEFT    0 
-#define INSTANCE_TOF_CENTRE  1 
-#define INSTANCE_TOF_RIGHT   2 
-
-#define TIMING_BUDGET (30U) /* 16 ms < TimingBudget < 500 ms */
-#define POLLING_PERIOD (250U) /* refresh rate for polling mode (ms, shall be consistent with TimingBudget value) */
-
-
 // Includes ///////////////////////////////////////////////
-#include "53l1a2_ranging_sensor.h"
-#include "53l1a2_conf.h"
 #include "main.h"
 
 #include "stdio.h"
 #include <stdint.h>
 #include <string.h>  // For memcpy
 
+#define XNUCLEO53L1A1_DEV_LEFT    0 
+#define XNUCLEO53L1A1_DEV_CENTER  1 
+#define XNUCLEO53L1A1_DEV_RIGHT   2   
+#define RANGING_SENSOR_INSTANCES_NBR 3
+
+#define ToF_Left    0x54 
+#define ToF_Centre  0x56
+#define ToF_Right   0x58
+
+typedef struct
+{
+  uint16_t Address;   /*!< I2C Address */
+  uint32_t Distance;  /*!< millimeters */
+  uint32_t Status;    /*!< OK: 0, NOK: !0 */
+  float Ambient;    /*!< kcps / spad */
+  float Signal;     /*!< kcps / spad */
+} VL53L1_Result;
+
 // Function Prototypes ////////////////////////////////////
 
-void initVL53L1A1(void);
+void initVL53L1A1(int ToFNumber, uint8_t newToFAddress);
 
-// Gets the distance measurements from VL53L1A1 sensors
-void getVL53L1A1(void);
-
-// Receives data from Simulink
-void receivedFromSimulink(uint8_t* bigBuffer);
-
-// Sends data to Simulink
-void sendToSimulink(void);
-
-// Calibrates the VL53L1A1 sensors
-void calibrate_VL53L1A1(void);
+void getVL53L1A1(VL53L1_Result* TOF_result);
 
 #endif // AP_01_H

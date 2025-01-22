@@ -76,43 +76,17 @@ endif
 # C sources
 C_SOURCES =  \
 Core/Src/VL53L1A1_Simulink.c \
+Core/Src/VL53L1X_api.c \
+Core/Src/VL53L1X_calibration.c \
+Core/Src/X-NUCLEO-53L1A1.c \
 Core/Src/main.c \
 Core/Src/stm32f4xx_hal_msp.c \
 Core/Src/stm32f4xx_hal_timebase_tim.c \
 Core/Src/stm32f4xx_it.c \
-Core/Src/stm32f4xx_nucleo_bus.c \
 Core/Src/syscalls.c \
 Core/Src/sysmem.c \
 Core/Src/system_stm32f4xx.c \
-Drivers/BSP/53L1A2/53l1a2.c \
-Drivers/BSP/53L1A2/53l1a2_ranging_sensor.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_calibration.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_core.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_preset_modes.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_core.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_core_support.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_algos_gen3.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_algos_gen4.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_char.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_funcs.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_nvm.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_nvm_debug.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_register_funcs.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_silicon_core.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_wait.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_xtalk.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c \
-Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c \
-Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c \
-Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_log.c \
-Drivers/BSP/Components/vl53l1cb/vl53l1cb.c \
+Core/Src/vl53l1_platform.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c \
@@ -133,7 +107,7 @@ Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
 
 
-CPP_SOURCES = \
+CXX_SOURCES = \
 
 
 # ASM sources
@@ -224,16 +198,10 @@ AS_INCLUDES = \
 # C includes
 C_INCLUDES =  \
 -ICore/Inc \
--IDrivers/BSP/53L1A2 \
--IDrivers/BSP/Components/Common \
--IDrivers/BSP/Components/vl53l1cb \
--IDrivers/BSP/Components/vl53l1cb/modules \
--IDrivers/BSP/Components/vl53l1cb/porting \
 -IDrivers/CMSIS/Device/ST/STM32F4xx/Include \
 -IDrivers/CMSIS/Include \
 -IDrivers/STM32F4xx_HAL_Driver/Inc \
--IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy \
--ITOF/Target
+-IDrivers/STM32F4xx_HAL_Driver/Inc/Legacy
 
 
 
@@ -283,7 +251,7 @@ add_release_directory = $(sort $(addprefix $(RELEASE_DIRECTORY)/,$(addsuffix .$(
 
 
 OBJECTS = $(call add_release_directory,$(C_SOURCES),o)
-OBJECTS += $(call add_release_directory,$(CPP_SOURCES),o)
+OBJECTS += $(call add_release_directory,$(CXX_SOURCES),o)
 OBJECTS += $(call add_release_directory,$(ASM_SOURCES),o)
 vpath %.c $(sort $(dir $(C_SOURCES)))
 vpath %.cc $(sort $(dir $(CXX_SOURCES)))
