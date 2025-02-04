@@ -1,0 +1,2389 @@
+ARM GAS  C:\Temp\ccluW06P.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"vl53l8cx_plugin_xtalk.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c"
+  20              		.section	.text._vl53l8cx_poll_for_answer,"ax",%progbits
+  21              		.align	1
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	_vl53l8cx_poll_for_answer:
+  27              	.LVL0:
+  28              	.LFB0:
+   1:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** /**
+   2:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****   *
+   3:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****   * Copyright (c) 2021 STMicroelectronics.
+   4:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****   * All rights reserved.
+   5:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****   *
+   6:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****   * This software is licensed under terms that can be found in the LICENSE file
+   7:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****   * in the root directory of this software component.
+   8:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****   * If no LICENSE file comes with this software, it is provided AS-IS.
+   9:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****   *
+  10:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****   ******************************************************************************
+  11:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****   */
+  12:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+  13:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** #include "vl53l8cx_plugin_xtalk.h"
+  14:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+  15:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** /*
+  16:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****  * Inner function, not available outside this file. This function is used to
+  17:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****  * wait for an answer from VL53L5 sensor.
+  18:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****  */
+  19:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+  20:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** static uint8_t _vl53l8cx_poll_for_answer(
+  21:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		VL53L8CX_Configuration   *p_dev,
+  22:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		uint16_t 				address,
+  23:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		uint8_t 				expected_value)
+  24:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** {
+  29              		.loc 1 24 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		.loc 1 24 1 is_stmt 0 view .LVU1
+  34 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ARM GAS  C:\Temp\ccluW06P.s 			page 2
+
+
+  35              		.cfi_def_cfa_offset 24
+  36              		.cfi_offset 4, -24
+  37              		.cfi_offset 5, -20
+  38              		.cfi_offset 6, -16
+  39              		.cfi_offset 7, -12
+  40              		.cfi_offset 8, -8
+  41              		.cfi_offset 14, -4
+  42 0004 0546     		mov	r5, r0
+  43 0006 0F46     		mov	r7, r1
+  44 0008 9046     		mov	r8, r2
+  25:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint8_t status = VL53L8CX_STATUS_OK;
+  45              		.loc 1 25 2 is_stmt 1 view .LVU2
+  46              	.LVL1:
+  26:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint8_t timeout = 0;
+  47              		.loc 1 26 2 view .LVU3
+  48              		.loc 1 26 10 is_stmt 0 view .LVU4
+  49 000a 0026     		movs	r6, #0
+  25:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint8_t status = VL53L8CX_STATUS_OK;
+  50              		.loc 1 25 10 view .LVU5
+  51 000c 3446     		mov	r4, r6
+  52              	.LVL2:
+  53              	.L5:
+  27:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+  28:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	do {
+  54              		.loc 1 28 2 is_stmt 1 view .LVU6
+  29:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		status |= VL53L8CX_RdMulti(&(p_dev->platform), 
+  55              		.loc 1 29 3 view .LVU7
+  56              		.loc 1 29 13 is_stmt 0 view .LVU8
+  57 000e 0423     		movs	r3, #4
+  58 0010 05F5A262 		add	r2, r5, #1296
+  59 0014 3946     		mov	r1, r7
+  60 0016 2846     		mov	r0, r5
+  61 0018 FFF7FEFF 		bl	VL53L8CX_RdMulti
+  62              	.LVL3:
+  63              		.loc 1 29 10 view .LVU9
+  64 001c 0443     		orrs	r4, r4, r0
+  65              	.LVL4:
+  66              		.loc 1 29 10 view .LVU10
+  67 001e E4B2     		uxtb	r4, r4
+  68              	.LVL5:
+  30:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                                   address, p_dev->temp_buffer, 4);
+  31:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		status |= VL53L8CX_WaitMs(&(p_dev->platform), 10);
+  69              		.loc 1 31 3 is_stmt 1 view .LVU11
+  70              		.loc 1 31 13 is_stmt 0 view .LVU12
+  71 0020 0A21     		movs	r1, #10
+  72 0022 2846     		mov	r0, r5
+  73 0024 FFF7FEFF 		bl	VL53L8CX_WaitMs
+  74              	.LVL6:
+  75              		.loc 1 31 10 view .LVU13
+  76 0028 0443     		orrs	r4, r4, r0
+  77              	.LVL7:
+  78              		.loc 1 31 10 view .LVU14
+  79 002a E4B2     		uxtb	r4, r4
+  80              	.LVL8:
+  32:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		
+  33:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                 /* 2s timeout or FW error*/
+  34:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		if((timeout >= (uint8_t)200) 
+ARM GAS  C:\Temp\ccluW06P.s 			page 3
+
+
+  81              		.loc 1 34 3 is_stmt 1 view .LVU15
+  82              		.loc 1 34 5 is_stmt 0 view .LVU16
+  83 002c C72E     		cmp	r6, #199
+  84 002e 0AD8     		bhi	.L2
+  35:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                    || (p_dev->temp_buffer[2] >= (uint8_t) 0x7f))
+  85              		.loc 1 35 42 view .LVU17
+  86 0030 95F81235 		ldrb	r3, [r5, #1298]	@ zero_extendqisi2
+  87              		.loc 1 35 20 view .LVU18
+  88 0034 7E2B     		cmp	r3, #126
+  89 0036 06D8     		bhi	.L2
+  36:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		{
+  37:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			status |= VL53L8CX_MCU_ERROR;
+  38:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			break;
+  39:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		}
+  40:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                 else
+  41:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                 {
+  42:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                   timeout++;
+  90              		.loc 1 42 19 is_stmt 1 view .LVU19
+  91              		.loc 1 42 26 is_stmt 0 view .LVU20
+  92 0038 0136     		adds	r6, r6, #1
+  93              	.LVL9:
+  94              		.loc 1 42 26 view .LVU21
+  95 003a F6B2     		uxtb	r6, r6
+  96              	.LVL10:
+  43:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                 }
+  44:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	}while ((p_dev->temp_buffer[0x1]) != expected_value);
+  97              		.loc 1 44 36 is_stmt 1 view .LVU22
+  98              		.loc 1 44 29 is_stmt 0 view .LVU23
+  99 003c 95F81135 		ldrb	r3, [r5, #1297]	@ zero_extendqisi2
+ 100              		.loc 1 44 36 view .LVU24
+ 101 0040 4345     		cmp	r3, r8
+ 102 0042 E4D1     		bne	.L5
+ 103 0044 01E0     		b	.L4
+ 104              	.L2:
+  37:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			break;
+ 105              		.loc 1 37 4 is_stmt 1 view .LVU25
+  37:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			break;
+ 106              		.loc 1 37 11 is_stmt 0 view .LVU26
+ 107 0046 44F04204 		orr	r4, r4, #66
+ 108              	.LVL11:
+  38:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		}
+ 109              		.loc 1 38 4 is_stmt 1 view .LVU27
+ 110              	.L4:
+  45:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****         
+  46:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	return status;
+ 111              		.loc 1 46 2 view .LVU28
+  47:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** }
+ 112              		.loc 1 47 1 is_stmt 0 view .LVU29
+ 113 004a 2046     		mov	r0, r4
+ 114 004c BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 115              		.loc 1 47 1 view .LVU30
+ 116              		.cfi_endproc
+ 117              	.LFE0:
+ 119              		.section	.text._vl53l8cx_program_output_config,"ax",%progbits
+ 120              		.align	1
+ 121              		.syntax unified
+ 122              		.thumb
+ARM GAS  C:\Temp\ccluW06P.s 			page 4
+
+
+ 123              		.thumb_func
+ 125              	_vl53l8cx_program_output_config:
+ 126              	.LVL12:
+ 127              	.LFB1:
+  48:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+  49:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** /*
+  50:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****  * Inner function, not available outside this file. This function is used to
+  51:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****  * program the output using the macro defined into the 'platform.h' file.
+  52:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****  */
+  53:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+  54:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** static uint8_t _vl53l8cx_program_output_config(
+  55:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		VL53L8CX_Configuration 		 *p_dev)
+  56:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** {
+ 128              		.loc 1 56 1 is_stmt 1 view -0
+ 129              		.cfi_startproc
+ 130              		@ args = 0, pretend = 0, frame = 96
+ 131              		@ frame_needed = 0, uses_anonymous_args = 0
+ 132              		.loc 1 56 1 is_stmt 0 view .LVU32
+ 133 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 134              		.cfi_def_cfa_offset 20
+ 135              		.cfi_offset 4, -20
+ 136              		.cfi_offset 5, -16
+ 137              		.cfi_offset 6, -12
+ 138              		.cfi_offset 7, -8
+ 139              		.cfi_offset 14, -4
+ 140 0002 99B0     		sub	sp, sp, #100
+ 141              		.cfi_def_cfa_offset 120
+ 142 0004 0546     		mov	r5, r0
+  57:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint8_t resolution, status = VL53L8CX_STATUS_OK;
+ 143              		.loc 1 57 2 is_stmt 1 view .LVU33
+ 144              	.LVL13:
+  58:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint32_t i;
+ 145              		.loc 1 58 2 view .LVU34
+  59:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint32_t header_config[2] = {0, 0};
+ 146              		.loc 1 59 2 view .LVU35
+ 147              		.loc 1 59 11 is_stmt 0 view .LVU36
+ 148 0006 0024     		movs	r4, #0
+ 149 0008 1594     		str	r4, [sp, #84]
+ 150 000a 1694     		str	r4, [sp, #88]
+  60:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	union Block_header *bh_ptr;
+ 151              		.loc 1 60 2 is_stmt 1 view .LVU37
+  61:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+  62:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_resolution(p_dev, &resolution);
+ 152              		.loc 1 62 2 view .LVU38
+ 153              		.loc 1 62 12 is_stmt 0 view .LVU39
+ 154 000c 0DF15F01 		add	r1, sp, #95
+ 155 0010 FFF7FEFF 		bl	vl53l8cx_get_resolution
+ 156              	.LVL14:
+ 157              		.loc 1 62 12 view .LVU40
+ 158 0014 0646     		mov	r6, r0
+ 159              	.LVL15:
+  63:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	p_dev->data_read_size = 0;
+ 160              		.loc 1 63 2 is_stmt 1 view .LVU41
+ 161              		.loc 1 63 24 is_stmt 0 view .LVU42
+ 162 0016 6C61     		str	r4, [r5, #20]
+  64:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+  65:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	/* Enable mandatory output (meta and common data) */
+ARM GAS  C:\Temp\ccluW06P.s 			page 5
+
+
+  66:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint32_t output_bh_enable[] = {
+ 163              		.loc 1 66 2 is_stmt 1 view .LVU43
+ 164              		.loc 1 66 11 is_stmt 0 view .LVU44
+ 165 0018 404F     		ldr	r7, .L17
+ 166 001a 0DF1440C 		add	ip, sp, #68
+ 167 001e 97E80F00 		ldm	r7, {r0, r1, r2, r3}
+ 168 0022 8CE80F00 		stm	ip, {r0, r1, r2, r3}
+  67:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			0x0001FFFFU,
+  68:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			0x00000000U,
+  69:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			0x00000000U,
+  70:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			0xC0000000U};
+  71:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+  72:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	/* Send addresses of possible output */
+  73:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint32_t output[] ={
+ 169              		.loc 1 73 2 is_stmt 1 view .LVU45
+ 170              		.loc 1 73 11 is_stmt 0 view .LVU46
+ 171 0026 4422     		movs	r2, #68
+ 172 0028 07F11001 		add	r1, r7, #16
+ 173 002c 6846     		mov	r0, sp
+ 174 002e FFF7FEFF 		bl	memcpy
+ 175              	.LVL16:
+  74:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			0x0000000DU,
+  75:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			0x54000040U,
+  76:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			0x9FD800C0U,
+  77:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			0x9FE40140U,
+  78:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			0x9FF80040U,
+  79:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			0x9FFC0404U,
+  80:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			0xA0FC0100U,
+  81:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			0xA10C0100U,
+  82:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			0xA11C00C0U,
+  83:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			0xA1280902U,
+  84:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			0xA2480040U,
+  85:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			0xA24C0081U,
+  86:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			0xA2540081U,
+  87:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			0xA25C0081U,
+  88:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			0xA2640081U,
+  89:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			0xA26C0084U,
+  90:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			0xA28C0082U};
+  91:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+  92:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	/* Update data size */
+  93:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	for (i = 0; i < (uint32_t)(sizeof(output)/sizeof(uint32_t)); i++)
+ 176              		.loc 1 93 2 is_stmt 1 view .LVU47
+ 177              		.loc 1 93 2 is_stmt 0 view .LVU48
+ 178 0032 13E0     		b	.L8
+ 179              	.LVL17:
+ 180              	.L11:
+  94:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	{
+  95:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		if ((output[i] == (uint8_t)0) 
+  96:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                     || ((output_bh_enable[i/(uint32_t)32]
+  97:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                          &((uint32_t)1 << (i%(uint32_t)32))) == (uint32_t)0))
+  98:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		{
+  99:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			continue;
+ 100:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		}
+ 101:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 102:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		bh_ptr = (union Block_header *)&(output[i]);
+ 103:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		if (((uint8_t)bh_ptr->type >= (uint8_t)0x1) 
+ 104:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                     && ((uint8_t)bh_ptr->type < (uint8_t)0x0d))
+ARM GAS  C:\Temp\ccluW06P.s 			page 6
+
+
+ 105:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		{
+ 106:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			if ((bh_ptr->idx >= (uint16_t)0x54d0) 
+ 107:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                             && (bh_ptr->idx < (uint16_t)(0x54d0 + 960)))
+ 108:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			{
+ 109:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				bh_ptr->size = resolution;
+ 110:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			}	
+ 111:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			else 
+ 112:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			{
+ 113:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				bh_ptr->size = (uint8_t)(resolution 
+ 181              		.loc 1 113 5 is_stmt 1 view .LVU49
+ 182              		.loc 1 113 20 is_stmt 0 view .LVU50
+ 183 0034 9DF85F00 		ldrb	r0, [sp, #95]	@ zero_extendqisi2
+ 184              		.loc 1 113 18 view .LVU51
+ 185 0038 3DF80210 		ldrh	r1, [sp, r2]
+ 186 003c 60F30F11 		bfi	r1, r0, #4, #12
+ 187 0040 2DF80210 		strh	r1, [sp, r2]	@ movhi
+ 188 0044 3BE0     		b	.L12
+ 189              	.LVL18:
+ 190              	.L10:
+ 114:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                                   * (uint8_t)VL53L8CX_NB_TARGET_PER_ZONE);
+ 115:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			}
+ 116:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 117:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                         
+ 118:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			p_dev->data_read_size += bh_ptr->type * bh_ptr->size;
+ 119:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		}
+ 120:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		else
+ 121:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		{
+ 122:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			p_dev->data_read_size += bh_ptr->size;
+ 191              		.loc 1 122 4 is_stmt 1 view .LVU52
+ 192              		.loc 1 122 9 is_stmt 0 view .LVU53
+ 193 0046 6B69     		ldr	r3, [r5, #20]
+ 194              		.loc 1 122 35 view .LVU54
+ 195 0048 3DF80220 		ldrh	r2, [sp, r2]
+ 196 004c C2F30B12 		ubfx	r2, r2, #4, #12
+ 197              		.loc 1 122 26 view .LVU55
+ 198 0050 1344     		add	r3, r3, r2
+ 199 0052 6B61     		str	r3, [r5, #20]
+ 200              	.LVL19:
+ 201              	.L13:
+ 123:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		}
+ 124:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 125:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		p_dev->data_read_size += (uint32_t)4;
+ 202              		.loc 1 125 3 is_stmt 1 view .LVU56
+ 203              		.loc 1 125 8 is_stmt 0 view .LVU57
+ 204 0054 6B69     		ldr	r3, [r5, #20]
+ 205              		.loc 1 125 25 view .LVU58
+ 206 0056 0433     		adds	r3, r3, #4
+ 207 0058 6B61     		str	r3, [r5, #20]
+ 208              	.LVL20:
+ 209              	.L9:
+  93:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	{
+ 210              		.loc 1 93 64 is_stmt 1 discriminator 2 view .LVU59
+ 211 005a 0134     		adds	r4, r4, #1
+ 212              	.LVL21:
+ 213              	.L8:
+  93:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	{
+ 214              		.loc 1 93 16 discriminator 1 view .LVU60
+ARM GAS  C:\Temp\ccluW06P.s 			page 7
+
+
+ 215 005c 102C     		cmp	r4, #16
+ 216 005e 37D8     		bhi	.L16
+  95:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                     || ((output_bh_enable[i/(uint32_t)32]
+ 217              		.loc 1 95 3 view .LVU61
+  95:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                     || ((output_bh_enable[i/(uint32_t)32]
+ 218              		.loc 1 95 14 is_stmt 0 view .LVU62
+ 219 0060 18AB     		add	r3, sp, #96
+ 220 0062 03EB8403 		add	r3, r3, r4, lsl #2
+ 221 0066 53F8603C 		ldr	r3, [r3, #-96]
+  95:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                     || ((output_bh_enable[i/(uint32_t)32]
+ 222              		.loc 1 95 6 view .LVU63
+ 223 006a 002B     		cmp	r3, #0
+ 224 006c F5D0     		beq	.L9
+  96:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                          &((uint32_t)1 << (i%(uint32_t)32))) == (uint32_t)0))
+ 225              		.loc 1 96 44 view .LVU64
+ 226 006e 6309     		lsrs	r3, r4, #5
+  96:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                          &((uint32_t)1 << (i%(uint32_t)32))) == (uint32_t)0))
+ 227              		.loc 1 96 42 view .LVU65
+ 228 0070 18AA     		add	r2, sp, #96
+ 229 0072 02EB8303 		add	r3, r2, r3, lsl #2
+ 230 0076 53F81C3C 		ldr	r3, [r3, #-28]
+  97:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		{
+ 231              		.loc 1 97 45 view .LVU66
+ 232 007a 04F01F02 		and	r2, r4, #31
+  97:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		{
+ 233              		.loc 1 97 62 view .LVU67
+ 234 007e D340     		lsrs	r3, r3, r2
+  96:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                          &((uint32_t)1 << (i%(uint32_t)32))) == (uint32_t)0))
+ 235              		.loc 1 96 21 view .LVU68
+ 236 0080 13F0010F 		tst	r3, #1
+ 237 0084 E9D0     		beq	.L9
+ 102:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		if (((uint8_t)bh_ptr->type >= (uint8_t)0x1) 
+ 238              		.loc 1 102 3 is_stmt 1 view .LVU69
+ 102:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		if (((uint8_t)bh_ptr->type >= (uint8_t)0x1) 
+ 239              		.loc 1 102 10 is_stmt 0 view .LVU70
+ 240 0086 A200     		lsls	r2, r4, #2
+ 241 0088 0DEB8401 		add	r1, sp, r4, lsl #2
+ 242              	.LVL22:
+ 103:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                     && ((uint8_t)bh_ptr->type < (uint8_t)0x0d))
+ 243              		.loc 1 103 3 is_stmt 1 view .LVU71
+ 103:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                     && ((uint8_t)bh_ptr->type < (uint8_t)0x0d))
+ 244              		.loc 1 103 30 is_stmt 0 view .LVU72
+ 245 008c 1DF82430 		ldrb	r3, [sp, r4, lsl #2]	@ zero_extendqisi2
+ 103:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                     && ((uint8_t)bh_ptr->type < (uint8_t)0x0d))
+ 246              		.loc 1 103 6 view .LVU73
+ 247 0090 13F00F0F 		tst	r3, #15
+ 248 0094 D7D0     		beq	.L10
+ 104:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		{
+ 249              		.loc 1 104 40 view .LVU74
+ 250 0096 03F00F03 		and	r3, r3, #15
+ 104:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		{
+ 251              		.loc 1 104 21 view .LVU75
+ 252 009a 0C2B     		cmp	r3, #12
+ 253 009c D3D8     		bhi	.L10
+ 106:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                             && (bh_ptr->idx < (uint16_t)(0x54d0 + 960)))
+ 254              		.loc 1 106 4 is_stmt 1 view .LVU76
+ 106:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                             && (bh_ptr->idx < (uint16_t)(0x54d0 + 960)))
+ARM GAS  C:\Temp\ccluW06P.s 			page 8
+
+
+ 255              		.loc 1 106 15 is_stmt 0 view .LVU77
+ 256 009e 4988     		ldrh	r1, [r1, #2]
+ 257              	.LVL23:
+ 107:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			{
+ 258              		.loc 1 107 29 view .LVU78
+ 259 00a0 A1F5A941 		sub	r1, r1, #21632
+ 260 00a4 5039     		subs	r1, r1, #80
+ 261 00a6 89B2     		uxth	r1, r1
+ 106:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                             && (bh_ptr->idx < (uint16_t)(0x54d0 + 960)))
+ 262              		.loc 1 106 7 view .LVU79
+ 263 00a8 B1F5707F 		cmp	r1, #960
+ 264 00ac C2D2     		bcs	.L11
+ 109:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			}	
+ 265              		.loc 1 109 5 is_stmt 1 view .LVU80
+ 109:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			}	
+ 266              		.loc 1 109 18 is_stmt 0 view .LVU81
+ 267 00ae 9DF85F00 		ldrb	r0, [sp, #95]	@ zero_extendqisi2
+ 268 00b2 3DF80210 		ldrh	r1, [sp, r2]
+ 269 00b6 60F30F11 		bfi	r1, r0, #4, #12
+ 270 00ba 2DF80210 		strh	r1, [sp, r2]	@ movhi
+ 271              	.L12:
+ 118:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		}
+ 272              		.loc 1 118 4 is_stmt 1 view .LVU82
+ 118:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		}
+ 273              		.loc 1 118 9 is_stmt 0 view .LVU83
+ 274 00be 6969     		ldr	r1, [r5, #20]
+ 118:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		}
+ 275              		.loc 1 118 50 view .LVU84
+ 276 00c0 3DF80220 		ldrh	r2, [sp, r2]
+ 277 00c4 C2F30B12 		ubfx	r2, r2, #4, #12
+ 118:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		}
+ 278              		.loc 1 118 26 view .LVU85
+ 279 00c8 02FB0311 		mla	r1, r2, r3, r1
+ 280 00cc 6961     		str	r1, [r5, #20]
+ 281 00ce C1E7     		b	.L13
+ 282              	.LVL24:
+ 283              	.L16:
+ 126:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	}
+ 127:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	p_dev->data_read_size += (uint32_t)24;
+ 284              		.loc 1 127 2 is_stmt 1 view .LVU86
+ 285              		.loc 1 127 7 is_stmt 0 view .LVU87
+ 286 00d0 6B69     		ldr	r3, [r5, #20]
+ 287              		.loc 1 127 24 view .LVU88
+ 288 00d2 1833     		adds	r3, r3, #24
+ 289 00d4 6B61     		str	r3, [r5, #20]
+ 128:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 129:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_dci_write_data(p_dev,
+ 290              		.loc 1 129 2 is_stmt 1 view .LVU89
+ 291              		.loc 1 129 12 is_stmt 0 view .LVU90
+ 292 00d6 4423     		movs	r3, #68
+ 293 00d8 4DF68012 		movw	r2, #55680
+ 294 00dc 6946     		mov	r1, sp
+ 295 00de 2846     		mov	r0, r5
+ 296 00e0 FFF7FEFF 		bl	vl53l8cx_dci_write_data
+ 297              	.LVL25:
+ 298              		.loc 1 129 9 view .LVU91
+ 299 00e4 0643     		orrs	r6, r6, r0
+ARM GAS  C:\Temp\ccluW06P.s 			page 9
+
+
+ 300              	.LVL26:
+ 301              		.loc 1 129 9 view .LVU92
+ 302 00e6 F6B2     		uxtb	r6, r6
+ 303              	.LVL27:
+ 130:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			(uint8_t*)&(output), 
+ 131:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                         VL53L8CX_DCI_OUTPUT_LIST, (uint16_t)sizeof(output));
+ 132:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****         
+ 133:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	header_config[0] = p_dev->data_read_size;
+ 304              		.loc 1 133 2 is_stmt 1 view .LVU93
+ 305              		.loc 1 133 26 is_stmt 0 view .LVU94
+ 306 00e8 6B69     		ldr	r3, [r5, #20]
+ 307              		.loc 1 133 19 view .LVU95
+ 308 00ea 1593     		str	r3, [sp, #84]
+ 134:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	header_config[1] = i + (uint32_t)1;
+ 309              		.loc 1 134 2 is_stmt 1 view .LVU96
+ 310              		.loc 1 134 23 is_stmt 0 view .LVU97
+ 311 00ec 0134     		adds	r4, r4, #1
+ 312              	.LVL28:
+ 313              		.loc 1 134 19 view .LVU98
+ 314 00ee 1694     		str	r4, [sp, #88]
+ 135:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 136:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_dci_write_data(p_dev, (uint8_t*)&(header_config),
+ 315              		.loc 1 136 2 is_stmt 1 view .LVU99
+ 316              		.loc 1 136 12 is_stmt 0 view .LVU100
+ 317 00f0 0823     		movs	r3, #8
+ 318 00f2 4DF66812 		movw	r2, #55656
+ 319 00f6 15A9     		add	r1, sp, #84
+ 320 00f8 2846     		mov	r0, r5
+ 321 00fa FFF7FEFF 		bl	vl53l8cx_dci_write_data
+ 322              	.LVL29:
+ 323              		.loc 1 136 9 view .LVU101
+ 324 00fe 46EA0004 		orr	r4, r6, r0
+ 325              	.LVL30:
+ 326              		.loc 1 136 9 view .LVU102
+ 327 0102 E4B2     		uxtb	r4, r4
+ 328              	.LVL31:
+ 137:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			VL53L8CX_DCI_OUTPUT_CONFIG,
+ 138:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                         (uint16_t)sizeof(header_config));
+ 139:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_dci_write_data(p_dev, (uint8_t*)&(output_bh_enable),
+ 329              		.loc 1 139 2 is_stmt 1 view .LVU103
+ 330              		.loc 1 139 12 is_stmt 0 view .LVU104
+ 331 0104 1023     		movs	r3, #16
+ 332 0106 4DF67012 		movw	r2, #55664
+ 333 010a 11A9     		add	r1, sp, #68
+ 334 010c 2846     		mov	r0, r5
+ 335 010e FFF7FEFF 		bl	vl53l8cx_dci_write_data
+ 336              	.LVL32:
+ 337              		.loc 1 139 9 view .LVU105
+ 338 0112 2043     		orrs	r0, r0, r4
+ 339              	.LVL33:
+ 140:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			VL53L8CX_DCI_OUTPUT_ENABLES,
+ 141:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                         (uint16_t)sizeof(output_bh_enable));
+ 142:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 143:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	return status;
+ 340              		.loc 1 143 2 is_stmt 1 view .LVU106
+ 144:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** }
+ 341              		.loc 1 144 1 is_stmt 0 view .LVU107
+ARM GAS  C:\Temp\ccluW06P.s 			page 10
+
+
+ 342 0114 C0B2     		uxtb	r0, r0
+ 343              		.loc 1 144 1 view .LVU108
+ 344 0116 19B0     		add	sp, sp, #100
+ 345              		.cfi_def_cfa_offset 20
+ 346              		@ sp needed
+ 347 0118 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 348              	.LVL34:
+ 349              	.L18:
+ 350              		.loc 1 144 1 view .LVU109
+ 351 011a 00BF     		.align	2
+ 352              	.L17:
+ 353 011c 00000000 		.word	.LANCHOR0
+ 354              		.cfi_endproc
+ 355              	.LFE1:
+ 357              		.section	.text.vl53l8cx_get_caldata_xtalk,"ax",%progbits
+ 358              		.align	1
+ 359              		.global	vl53l8cx_get_caldata_xtalk
+ 360              		.syntax unified
+ 361              		.thumb
+ 362              		.thumb_func
+ 364              	vl53l8cx_get_caldata_xtalk:
+ 365              	.LVL35:
+ 366              	.LFB3:
+ 145:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 146:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** uint8_t vl53l8cx_calibrate_xtalk(
+ 147:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		VL53L8CX_Configuration		*p_dev,
+ 148:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		uint16_t			reflectance_percent,
+ 149:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		uint8_t				nb_samples,
+ 150:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		uint16_t			distance_mm)
+ 151:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** {
+ 152:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint16_t timeout = 0;
+ 153:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint8_t cmd[] = {0x00, 0x03, 0x00, 0x00};
+ 154:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint8_t footer[] = {0x00, 0x00, 0x00, 0x0F, 0x00, 0x01, 0x03, 0x04};
+ 155:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint8_t continue_loop = 1, status = VL53L8CX_STATUS_OK;
+ 156:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 157:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint8_t resolution, frequency, target_order, sharp_prct, ranging_mode;
+ 158:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint32_t integration_time_ms, xtalk_margin;
+ 159:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****         
+ 160:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint16_t reflectance = reflectance_percent;
+ 161:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint8_t	samples = nb_samples;
+ 162:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint16_t distance = distance_mm;
+ 163:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint8_t *default_xtalk_ptr;
+ 164:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 165:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	/* Get initial configuration */
+ 166:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_resolution(p_dev, &resolution);
+ 167:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_ranging_frequency_hz(p_dev, &frequency);
+ 168:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_integration_time_ms(p_dev, &integration_time_ms);
+ 169:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_sharpener_percent(p_dev, &sharp_prct);
+ 170:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_target_order(p_dev, &target_order);
+ 171:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_xtalk_margin(p_dev, &xtalk_margin);
+ 172:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_ranging_mode(p_dev, &ranging_mode);
+ 173:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 174:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	/* Check input arguments validity */
+ 175:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	if(((reflectance < (uint16_t)1) || (reflectance > (uint16_t)99))
+ 176:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		|| ((distance < (uint16_t)600) || (distance > (uint16_t)3000))
+ 177:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		|| ((samples < (uint8_t)1) || (samples > (uint8_t)16)))
+ 178:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	{
+ARM GAS  C:\Temp\ccluW06P.s 			page 11
+
+
+ 179:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		status |= VL53L8CX_STATUS_INVALID_PARAM;
+ 180:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	}
+ 181:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	else
+ 182:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	{
+ 183:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		status |= vl53l8cx_set_resolution(p_dev,
+ 184:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_RESOLUTION_8X8);
+ 185:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 186:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		/* Send Xtalk calibration buffer */
+ 187:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                 (void)memcpy(p_dev->temp_buffer, VL53L8CX_CALIBRATE_XTALK,
+ 188:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                        sizeof(VL53L8CX_CALIBRATE_XTALK));
+ 189:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		status |= VL53L8CX_WrMulti(&(p_dev->platform), 0x2c28,
+ 190:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				p_dev->temp_buffer, 
+ 191:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                        (uint16_t)sizeof(VL53L8CX_CALIBRATE_XTALK));
+ 192:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		status |= _vl53l8cx_poll_for_answer(p_dev,
+ 193:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_UI_CMD_STATUS, 0x3);
+ 194:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 195:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		/* Format input argument */
+ 196:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		reflectance = reflectance * (uint16_t)16;
+ 197:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		distance = distance * (uint16_t)4;
+ 198:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 199:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		/* Update required fields */
+ 200:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		status |= vl53l8cx_dci_replace_data(p_dev, p_dev->temp_buffer,
+ 201:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_DCI_CAL_CFG, 8,
+ 202:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                                 (uint8_t*)&distance, 2, 0x00);
+ 203:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 204:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		status |= vl53l8cx_dci_replace_data(p_dev, p_dev->temp_buffer,
+ 205:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_DCI_CAL_CFG, 8,
+ 206:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                                 (uint8_t*)&reflectance, 2,0x02);
+ 207:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 208:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		status |= vl53l8cx_dci_replace_data(p_dev, p_dev->temp_buffer,
+ 209:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_DCI_CAL_CFG, 8,
+ 210:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                                 (uint8_t*)&samples, 1, 0x04);
+ 211:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 212:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		/* Program output for Xtalk calibration */
+ 213:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		status |= _vl53l8cx_program_output_config(p_dev);
+ 214:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 215:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		/* Start ranging session */
+ 216:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		status |= VL53L8CX_WrMulti(&(p_dev->platform),
+ 217:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_UI_CMD_END - (uint16_t)(4 - 1),
+ 218:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				(uint8_t*)cmd, sizeof(cmd));
+ 219:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		status |= _vl53l8cx_poll_for_answer(p_dev,
+ 220:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_UI_CMD_STATUS, 0x3);
+ 221:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 222:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		/* Wait for end of calibration */
+ 223:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		do {
+ 224:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			status |= VL53L8CX_RdMulti(&(p_dev->platform), 
+ 225:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                                           0x0, p_dev->temp_buffer, 4);
+ 226:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			if(p_dev->temp_buffer[0] != VL53L8CX_STATUS_ERROR)
+ 227:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			{
+ 228:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				/* Coverglass too good for Xtalk calibration */
+ 229:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				if((p_dev->temp_buffer[2] >= (uint8_t)0x7f) &&
+ 230:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				(((uint16_t)(p_dev->temp_buffer[3] & 
+ 231:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                                  (uint16_t)0x80) >> 7) == (uint16_t)1))
+ 232:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				{
+ 233:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 					default_xtalk_ptr = p_dev->default_xtalk;
+ 234:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 					(void)memcpy(p_dev->xtalk_data, 
+ 235:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 						default_xtalk_ptr,
+ARM GAS  C:\Temp\ccluW06P.s 			page 12
+
+
+ 236:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 						sizeof(p_dev->xtalk_data));
+ 237:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 					status |= VL53L8CX_STATUS_XTALK_FAILED;
+ 238:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				}
+ 239:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				continue_loop = (uint8_t)0;
+ 240:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			}
+ 241:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			else if(timeout >= (uint16_t)400)
+ 242:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			{
+ 243:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				status |= VL53L8CX_STATUS_ERROR;
+ 244:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				continue_loop = (uint8_t)0;
+ 245:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			}
+ 246:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			else
+ 247:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			{
+ 248:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				timeout++;
+ 249:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				status |= VL53L8CX_WaitMs(&(p_dev->platform), 50);
+ 250:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			}
+ 251:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 252:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		}while (continue_loop == (uint8_t)1);
+ 253:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	}
+ 254:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 255:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	/* Save Xtalk data into the Xtalk buffer */
+ 256:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****         (void)memcpy(p_dev->temp_buffer, VL53L8CX_GET_XTALK_CMD,
+ 257:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                sizeof(VL53L8CX_GET_XTALK_CMD));
+ 258:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= VL53L8CX_WrMulti(&(p_dev->platform), 0x2fb8,
+ 259:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			p_dev->temp_buffer, 
+ 260:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                         (uint16_t)sizeof(VL53L8CX_GET_XTALK_CMD));
+ 261:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= _vl53l8cx_poll_for_answer(p_dev,VL53L8CX_UI_CMD_STATUS, 0x03);
+ 262:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= VL53L8CX_RdMulti(&(p_dev->platform), VL53L8CX_UI_CMD_START,
+ 263:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			p_dev->temp_buffer, 
+ 264:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                         VL53L8CX_XTALK_BUFFER_SIZE + (uint16_t)4);
+ 265:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 266:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	(void)memcpy(&(p_dev->xtalk_data[0]), &(p_dev->temp_buffer[8]),
+ 267:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			VL53L8CX_XTALK_BUFFER_SIZE - (uint16_t)8);
+ 268:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	(void)memcpy(&(p_dev->xtalk_data[VL53L8CX_XTALK_BUFFER_SIZE
+ 269:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                        - (uint16_t)8]), footer, sizeof(footer));
+ 270:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 271:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	/* Reset default buffer */
+ 272:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= VL53L8CX_WrMulti(&(p_dev->platform), 0x2c34,
+ 273:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			p_dev->default_configuration,
+ 274:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			VL53L8CX_CONFIGURATION_SIZE);
+ 275:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= _vl53l8cx_poll_for_answer(p_dev,VL53L8CX_UI_CMD_STATUS, 0x03);
+ 276:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 277:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	/* Reset initial configuration */
+ 278:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_resolution(p_dev, resolution);
+ 279:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_ranging_frequency_hz(p_dev, frequency);
+ 280:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_integration_time_ms(p_dev, integration_time_ms);
+ 281:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_sharpener_percent(p_dev, sharp_prct);
+ 282:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_target_order(p_dev, target_order);
+ 283:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_xtalk_margin(p_dev, xtalk_margin);
+ 284:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_ranging_mode(p_dev, ranging_mode);
+ 285:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 286:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	return status;
+ 287:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** }
+ 288:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 289:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** uint8_t vl53l8cx_get_caldata_xtalk(
+ 290:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		VL53L8CX_Configuration		*p_dev,
+ 291:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		uint8_t				*p_xtalk_data)
+ 292:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** {
+ARM GAS  C:\Temp\ccluW06P.s 			page 13
+
+
+ 367              		.loc 1 292 1 is_stmt 1 view -0
+ 368              		.cfi_startproc
+ 369              		@ args = 0, pretend = 0, frame = 16
+ 370              		@ frame_needed = 0, uses_anonymous_args = 0
+ 371              		.loc 1 292 1 is_stmt 0 view .LVU111
+ 372 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+ 373              		.cfi_def_cfa_offset 32
+ 374              		.cfi_offset 4, -32
+ 375              		.cfi_offset 5, -28
+ 376              		.cfi_offset 6, -24
+ 377              		.cfi_offset 7, -20
+ 378              		.cfi_offset 8, -16
+ 379              		.cfi_offset 9, -12
+ 380              		.cfi_offset 10, -8
+ 381              		.cfi_offset 14, -4
+ 382 0004 84B0     		sub	sp, sp, #16
+ 383              		.cfi_def_cfa_offset 48
+ 384 0006 0546     		mov	r5, r0
+ 385 0008 0F46     		mov	r7, r1
+ 293:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint8_t status = VL53L8CX_STATUS_OK, resolution;
+ 386              		.loc 1 293 2 is_stmt 1 view .LVU112
+ 387              	.LVL36:
+ 294:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint8_t footer[] = {0x00, 0x00, 0x00, 0x0F, 0x00, 0x01, 0x03, 0x04};
+ 388              		.loc 1 294 2 view .LVU113
+ 389              		.loc 1 294 10 is_stmt 0 view .LVU114
+ 390 000a DFF8A090 		ldr	r9, .L21
+ 391 000e 01AE     		add	r6, sp, #4
+ 392 0010 09F15403 		add	r3, r9, #84
+ 393 0014 93E80300 		ldm	r3, {r0, r1}
+ 394              	.LVL37:
+ 395              		.loc 1 294 10 view .LVU115
+ 396 0018 86E80300 		stm	r6, {r0, r1}
+ 295:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 296:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_resolution(p_dev, &resolution);
+ 397              		.loc 1 296 2 is_stmt 1 view .LVU116
+ 398              		.loc 1 296 12 is_stmt 0 view .LVU117
+ 399 001c 0DF10F01 		add	r1, sp, #15
+ 400 0020 2846     		mov	r0, r5
+ 401 0022 FFF7FEFF 		bl	vl53l8cx_get_resolution
+ 402              	.LVL38:
+ 403 0026 0446     		mov	r4, r0
+ 404              	.LVL39:
+ 297:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_resolution(p_dev, VL53L8CX_RESOLUTION_8X8);
+ 405              		.loc 1 297 2 is_stmt 1 view .LVU118
+ 406              		.loc 1 297 12 is_stmt 0 view .LVU119
+ 407 0028 4021     		movs	r1, #64
+ 408 002a 2846     		mov	r0, r5
+ 409 002c FFF7FEFF 		bl	vl53l8cx_set_resolution
+ 410              	.LVL40:
+ 411              		.loc 1 297 9 view .LVU120
+ 412 0030 0443     		orrs	r4, r4, r0
+ 413              	.LVL41:
+ 414              		.loc 1 297 9 view .LVU121
+ 415 0032 E4B2     		uxtb	r4, r4
+ 416              	.LVL42:
+ 298:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 299:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****         (void)memcpy(p_dev->temp_buffer, VL53L8CX_GET_XTALK_CMD,
+ARM GAS  C:\Temp\ccluW06P.s 			page 14
+
+
+ 417              		.loc 1 299 9 is_stmt 1 view .LVU122
+ 418              		.loc 1 299 15 is_stmt 0 view .LVU123
+ 419 0034 05F5A268 		add	r8, r5, #1296
+ 420 0038 4FF0480A 		mov	r10, #72
+ 421 003c 5246     		mov	r2, r10
+ 422 003e 09F15C01 		add	r1, r9, #92
+ 423 0042 4046     		mov	r0, r8
+ 424 0044 FFF7FEFF 		bl	memcpy
+ 425              	.LVL43:
+ 300:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                sizeof(VL53L8CX_GET_XTALK_CMD));
+ 301:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= VL53L8CX_WrMulti(&(p_dev->platform), 0x2fb8,
+ 426              		.loc 1 301 2 is_stmt 1 view .LVU124
+ 427              		.loc 1 301 12 is_stmt 0 view .LVU125
+ 428 0048 5346     		mov	r3, r10
+ 429 004a 4246     		mov	r2, r8
+ 430 004c 42F6B871 		movw	r1, #12216
+ 431 0050 2846     		mov	r0, r5
+ 432 0052 FFF7FEFF 		bl	VL53L8CX_WrMulti
+ 433              	.LVL44:
+ 434              		.loc 1 301 9 view .LVU126
+ 435 0056 0443     		orrs	r4, r4, r0
+ 436              	.LVL45:
+ 437              		.loc 1 301 9 view .LVU127
+ 438 0058 E4B2     		uxtb	r4, r4
+ 439              	.LVL46:
+ 302:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			p_dev->temp_buffer,  sizeof(VL53L8CX_GET_XTALK_CMD));
+ 303:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= _vl53l8cx_poll_for_answer(p_dev,VL53L8CX_UI_CMD_STATUS, 0x03);
+ 440              		.loc 1 303 2 is_stmt 1 view .LVU128
+ 441              		.loc 1 303 12 is_stmt 0 view .LVU129
+ 442 005a 0322     		movs	r2, #3
+ 443 005c 4FF43051 		mov	r1, #11264
+ 444 0060 2846     		mov	r0, r5
+ 445 0062 FFF7FEFF 		bl	_vl53l8cx_poll_for_answer
+ 446              	.LVL47:
+ 447              		.loc 1 303 9 view .LVU130
+ 448 0066 0443     		orrs	r4, r4, r0
+ 449              	.LVL48:
+ 450              		.loc 1 303 9 view .LVU131
+ 451 0068 E4B2     		uxtb	r4, r4
+ 452              	.LVL49:
+ 304:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= VL53L8CX_RdMulti(&(p_dev->platform), VL53L8CX_UI_CMD_START,
+ 453              		.loc 1 304 2 is_stmt 1 view .LVU132
+ 454              		.loc 1 304 12 is_stmt 0 view .LVU133
+ 455 006a 4FF44373 		mov	r3, #780
+ 456 006e 4246     		mov	r2, r8
+ 457 0070 42F60441 		movw	r1, #11268
+ 458 0074 2846     		mov	r0, r5
+ 459 0076 FFF7FEFF 		bl	VL53L8CX_RdMulti
+ 460              	.LVL50:
+ 461              		.loc 1 304 9 view .LVU134
+ 462 007a 0443     		orrs	r4, r4, r0
+ 463              	.LVL51:
+ 464              		.loc 1 304 9 view .LVU135
+ 465 007c E4B2     		uxtb	r4, r4
+ 466              	.LVL52:
+ 305:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			p_dev->temp_buffer, 
+ 306:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                         VL53L8CX_XTALK_BUFFER_SIZE + (uint16_t)4);
+ARM GAS  C:\Temp\ccluW06P.s 			page 15
+
+
+ 307:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 308:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	(void)memcpy(&(p_xtalk_data[0]), &(p_dev->temp_buffer[8]),
+ 467              		.loc 1 308 2 is_stmt 1 view .LVU136
+ 468              		.loc 1 308 8 is_stmt 0 view .LVU137
+ 469 007e 4FF44072 		mov	r2, #768
+ 470 0082 05F5A361 		add	r1, r5, #1304
+ 471 0086 3846     		mov	r0, r7
+ 472 0088 FFF7FEFF 		bl	memcpy
+ 473              	.LVL53:
+ 309:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			VL53L8CX_XTALK_BUFFER_SIZE-(uint16_t)8);
+ 310:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	(void)memcpy(&(p_xtalk_data[VL53L8CX_XTALK_BUFFER_SIZE - (uint16_t)8]),
+ 474              		.loc 1 310 2 is_stmt 1 view .LVU138
+ 475              		.loc 1 310 8 is_stmt 0 view .LVU139
+ 476 008c 03CE     		ldmia	r6!, {r0, r1}
+ 477 008e C7F80003 		str	r0, [r7, #768]	@ unaligned
+ 478 0092 C7F80413 		str	r1, [r7, #772]	@ unaligned
+ 311:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			footer, sizeof(footer));
+ 312:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 313:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_resolution(p_dev, resolution);
+ 479              		.loc 1 313 2 is_stmt 1 view .LVU140
+ 480              		.loc 1 313 12 is_stmt 0 view .LVU141
+ 481 0096 9DF80F10 		ldrb	r1, [sp, #15]	@ zero_extendqisi2
+ 482 009a 2846     		mov	r0, r5
+ 483 009c FFF7FEFF 		bl	vl53l8cx_set_resolution
+ 484              	.LVL54:
+ 485              		.loc 1 313 9 view .LVU142
+ 486 00a0 2043     		orrs	r0, r0, r4
+ 487              	.LVL55:
+ 314:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 315:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	return status;
+ 488              		.loc 1 315 2 is_stmt 1 view .LVU143
+ 316:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** }
+ 489              		.loc 1 316 1 is_stmt 0 view .LVU144
+ 490 00a2 C0B2     		uxtb	r0, r0
+ 491              		.loc 1 316 1 view .LVU145
+ 492 00a4 04B0     		add	sp, sp, #16
+ 493              		.cfi_def_cfa_offset 32
+ 494              		@ sp needed
+ 495 00a6 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 496              	.LVL56:
+ 497              	.L22:
+ 498              		.loc 1 316 1 view .LVU146
+ 499 00aa 00BF     		.align	2
+ 500              	.L21:
+ 501 00ac 00000000 		.word	.LANCHOR0
+ 502              		.cfi_endproc
+ 503              	.LFE3:
+ 505              		.section	.text.vl53l8cx_set_caldata_xtalk,"ax",%progbits
+ 506              		.align	1
+ 507              		.global	vl53l8cx_set_caldata_xtalk
+ 508              		.syntax unified
+ 509              		.thumb
+ 510              		.thumb_func
+ 512              	vl53l8cx_set_caldata_xtalk:
+ 513              	.LVL57:
+ 514              	.LFB4:
+ 317:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ARM GAS  C:\Temp\ccluW06P.s 			page 16
+
+
+ 318:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** uint8_t vl53l8cx_set_caldata_xtalk(
+ 319:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		VL53L8CX_Configuration		*p_dev,
+ 320:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		uint8_t				*p_xtalk_data)
+ 321:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** {
+ 515              		.loc 1 321 1 is_stmt 1 view -0
+ 516              		.cfi_startproc
+ 517              		@ args = 0, pretend = 0, frame = 8
+ 518              		@ frame_needed = 0, uses_anonymous_args = 0
+ 519              		.loc 1 321 1 is_stmt 0 view .LVU148
+ 520 0000 70B5     		push	{r4, r5, r6, lr}
+ 521              		.cfi_def_cfa_offset 16
+ 522              		.cfi_offset 4, -16
+ 523              		.cfi_offset 5, -12
+ 524              		.cfi_offset 6, -8
+ 525              		.cfi_offset 14, -4
+ 526 0002 82B0     		sub	sp, sp, #8
+ 527              		.cfi_def_cfa_offset 24
+ 528 0004 0546     		mov	r5, r0
+ 529 0006 0E46     		mov	r6, r1
+ 322:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint8_t resolution, status = VL53L8CX_STATUS_OK;
+ 530              		.loc 1 322 2 is_stmt 1 view .LVU149
+ 531              	.LVL58:
+ 323:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 324:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_resolution(p_dev, &resolution);
+ 532              		.loc 1 324 2 view .LVU150
+ 533              		.loc 1 324 12 is_stmt 0 view .LVU151
+ 534 0008 0DF10701 		add	r1, sp, #7
+ 535              	.LVL59:
+ 536              		.loc 1 324 12 view .LVU152
+ 537 000c FFF7FEFF 		bl	vl53l8cx_get_resolution
+ 538              	.LVL60:
+ 539              		.loc 1 324 12 view .LVU153
+ 540 0010 0446     		mov	r4, r0
+ 541              	.LVL61:
+ 325:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	(void)memcpy(p_dev->xtalk_data, p_xtalk_data, VL53L8CX_XTALK_BUFFER_SIZE);
+ 542              		.loc 1 325 2 is_stmt 1 view .LVU154
+ 543              		.loc 1 325 8 is_stmt 0 view .LVU155
+ 544 0012 4FF44272 		mov	r2, #776
+ 545 0016 3146     		mov	r1, r6
+ 546 0018 05F50270 		add	r0, r5, #520
+ 547 001c FFF7FEFF 		bl	memcpy
+ 548              	.LVL62:
+ 326:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_resolution(p_dev, resolution);
+ 549              		.loc 1 326 2 is_stmt 1 view .LVU156
+ 550              		.loc 1 326 12 is_stmt 0 view .LVU157
+ 551 0020 9DF80710 		ldrb	r1, [sp, #7]	@ zero_extendqisi2
+ 552 0024 2846     		mov	r0, r5
+ 553 0026 FFF7FEFF 		bl	vl53l8cx_set_resolution
+ 554              	.LVL63:
+ 555              		.loc 1 326 9 view .LVU158
+ 556 002a 2043     		orrs	r0, r0, r4
+ 557              	.LVL64:
+ 327:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 328:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	return status;
+ 558              		.loc 1 328 2 is_stmt 1 view .LVU159
+ 329:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** }
+ 559              		.loc 1 329 1 is_stmt 0 view .LVU160
+ARM GAS  C:\Temp\ccluW06P.s 			page 17
+
+
+ 560 002c C0B2     		uxtb	r0, r0
+ 561              		.loc 1 329 1 view .LVU161
+ 562 002e 02B0     		add	sp, sp, #8
+ 563              		.cfi_def_cfa_offset 16
+ 564              		@ sp needed
+ 565 0030 70BD     		pop	{r4, r5, r6, pc}
+ 566              		.loc 1 329 1 view .LVU162
+ 567              		.cfi_endproc
+ 568              	.LFE4:
+ 570              		.section	.text.vl53l8cx_get_xtalk_margin,"ax",%progbits
+ 571              		.align	1
+ 572              		.global	vl53l8cx_get_xtalk_margin
+ 573              		.syntax unified
+ 574              		.thumb
+ 575              		.thumb_func
+ 577              	vl53l8cx_get_xtalk_margin:
+ 578              	.LVL65:
+ 579              	.LFB5:
+ 330:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 331:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** uint8_t vl53l8cx_get_xtalk_margin(
+ 332:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		VL53L8CX_Configuration		*p_dev,
+ 333:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		uint32_t			*p_xtalk_margin)
+ 334:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** {
+ 580              		.loc 1 334 1 is_stmt 1 view -0
+ 581              		.cfi_startproc
+ 582              		@ args = 0, pretend = 0, frame = 0
+ 583              		@ frame_needed = 0, uses_anonymous_args = 0
+ 584              		.loc 1 334 1 is_stmt 0 view .LVU164
+ 585 0000 38B5     		push	{r3, r4, r5, lr}
+ 586              		.cfi_def_cfa_offset 16
+ 587              		.cfi_offset 3, -16
+ 588              		.cfi_offset 4, -12
+ 589              		.cfi_offset 5, -8
+ 590              		.cfi_offset 14, -4
+ 591 0002 0546     		mov	r5, r0
+ 592 0004 0C46     		mov	r4, r1
+ 335:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint8_t status = VL53L8CX_STATUS_OK;
+ 593              		.loc 1 335 2 is_stmt 1 view .LVU165
+ 594              	.LVL66:
+ 336:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 337:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_dci_read_data(p_dev, (uint8_t*)p_dev->temp_buffer,
+ 595              		.loc 1 337 2 view .LVU166
+ 596              		.loc 1 337 12 is_stmt 0 view .LVU167
+ 597 0006 1023     		movs	r3, #16
+ 598 0008 4AF69452 		movw	r2, #44436
+ 599 000c 00F5A261 		add	r1, r0, #1296
+ 600              	.LVL67:
+ 601              		.loc 1 337 12 view .LVU168
+ 602 0010 FFF7FEFF 		bl	vl53l8cx_dci_read_data
+ 603              	.LVL68:
+ 338:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			VL53L8CX_DCI_XTALK_CFG, 16);
+ 339:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 340:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	(void)memcpy(p_xtalk_margin, p_dev->temp_buffer, 4);
+ 604              		.loc 1 340 2 is_stmt 1 view .LVU169
+ 605              		.loc 1 340 8 is_stmt 0 view .LVU170
+ 606 0014 D5F81035 		ldr	r3, [r5, #1296]	@ unaligned
+ 607 0018 2360     		str	r3, [r4]	@ unaligned
+ARM GAS  C:\Temp\ccluW06P.s 			page 18
+
+
+ 341:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	*p_xtalk_margin = *p_xtalk_margin/(uint32_t)2048;
+ 608              		.loc 1 341 2 is_stmt 1 view .LVU171
+ 609              		.loc 1 341 35 is_stmt 0 view .LVU172
+ 610 001a DB0A     		lsrs	r3, r3, #11
+ 611              		.loc 1 341 18 view .LVU173
+ 612 001c 2360     		str	r3, [r4]
+ 342:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 343:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	return status;
+ 613              		.loc 1 343 2 is_stmt 1 view .LVU174
+ 344:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** }
+ 614              		.loc 1 344 1 is_stmt 0 view .LVU175
+ 615 001e 38BD     		pop	{r3, r4, r5, pc}
+ 616              		.loc 1 344 1 view .LVU176
+ 617              		.cfi_endproc
+ 618              	.LFE5:
+ 620              		.section	.text.vl53l8cx_set_xtalk_margin,"ax",%progbits
+ 621              		.align	1
+ 622              		.global	vl53l8cx_set_xtalk_margin
+ 623              		.syntax unified
+ 624              		.thumb
+ 625              		.thumb_func
+ 627              	vl53l8cx_set_xtalk_margin:
+ 628              	.LVL69:
+ 629              	.LFB6:
+ 345:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 346:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** uint8_t vl53l8cx_set_xtalk_margin(
+ 347:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		VL53L8CX_Configuration		*p_dev,
+ 348:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		uint32_t			xtalk_margin)
+ 349:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** {
+ 630              		.loc 1 349 1 is_stmt 1 view -0
+ 631              		.cfi_startproc
+ 632              		@ args = 0, pretend = 0, frame = 8
+ 633              		@ frame_needed = 0, uses_anonymous_args = 0
+ 634              		.loc 1 349 1 is_stmt 0 view .LVU178
+ 635 0000 00B5     		push	{lr}
+ 636              		.cfi_def_cfa_offset 4
+ 637              		.cfi_offset 14, -4
+ 638 0002 87B0     		sub	sp, sp, #28
+ 639              		.cfi_def_cfa_offset 32
+ 350:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint8_t status = VL53L8CX_STATUS_OK;
+ 640              		.loc 1 350 2 is_stmt 1 view .LVU179
+ 641              	.LVL70:
+ 351:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****         uint32_t margin_kcps = xtalk_margin;
+ 642              		.loc 1 351 9 view .LVU180
+ 643              		.loc 1 351 18 is_stmt 0 view .LVU181
+ 644 0004 0591     		str	r1, [sp, #20]
+ 352:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 353:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	if(margin_kcps > (uint32_t)10000)
+ 645              		.loc 1 353 2 is_stmt 1 view .LVU182
+ 646              		.loc 1 353 4 is_stmt 0 view .LVU183
+ 647 0006 42F21073 		movw	r3, #10000
+ 648 000a 9942     		cmp	r1, r3
+ 649 000c 03D9     		bls	.L31
+ 354:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	{
+ 355:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		status |= VL53L8CX_STATUS_INVALID_PARAM;
+ 650              		.loc 1 355 10 view .LVU184
+ 651 000e 7F20     		movs	r0, #127
+ARM GAS  C:\Temp\ccluW06P.s 			page 19
+
+
+ 652              	.LVL71:
+ 653              	.L28:
+ 356:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	}
+ 357:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	else
+ 358:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	{
+ 359:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		margin_kcps = margin_kcps*(uint32_t)2048;
+ 360:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		status |= vl53l8cx_dci_replace_data(p_dev, p_dev->temp_buffer,
+ 361:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_DCI_XTALK_CFG, 16,
+ 362:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                                 (uint8_t*)&margin_kcps, 4, 0x00);
+ 363:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	}
+ 364:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 365:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	return status;
+ 654              		.loc 1 365 2 is_stmt 1 view .LVU185
+ 366:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** }
+ 655              		.loc 1 366 1 is_stmt 0 view .LVU186
+ 656 0010 07B0     		add	sp, sp, #28
+ 657              		.cfi_remember_state
+ 658              		.cfi_def_cfa_offset 4
+ 659              		@ sp needed
+ 660 0012 5DF804FB 		ldr	pc, [sp], #4
+ 661              	.LVL72:
+ 662              	.L31:
+ 663              		.cfi_restore_state
+ 359:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		status |= vl53l8cx_dci_replace_data(p_dev, p_dev->temp_buffer,
+ 664              		.loc 1 359 3 is_stmt 1 view .LVU187
+ 359:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		status |= vl53l8cx_dci_replace_data(p_dev, p_dev->temp_buffer,
+ 665              		.loc 1 359 28 is_stmt 0 view .LVU188
+ 666 0016 C902     		lsls	r1, r1, #11
+ 667              	.LVL73:
+ 359:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		status |= vl53l8cx_dci_replace_data(p_dev, p_dev->temp_buffer,
+ 668              		.loc 1 359 15 view .LVU189
+ 669 0018 0591     		str	r1, [sp, #20]
+ 670              	.LVL74:
+ 360:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_DCI_XTALK_CFG, 16,
+ 671              		.loc 1 360 3 is_stmt 1 view .LVU190
+ 360:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_DCI_XTALK_CFG, 16,
+ 672              		.loc 1 360 13 is_stmt 0 view .LVU191
+ 673 001a 0023     		movs	r3, #0
+ 674 001c 0293     		str	r3, [sp, #8]
+ 675 001e 0423     		movs	r3, #4
+ 676 0020 0193     		str	r3, [sp, #4]
+ 677 0022 05AB     		add	r3, sp, #20
+ 678 0024 0093     		str	r3, [sp]
+ 679 0026 1023     		movs	r3, #16
+ 680 0028 4AF69452 		movw	r2, #44436
+ 681 002c 00F5A261 		add	r1, r0, #1296
+ 682 0030 FFF7FEFF 		bl	vl53l8cx_dci_replace_data
+ 683              	.LVL75:
+ 360:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_DCI_XTALK_CFG, 16,
+ 684              		.loc 1 360 13 view .LVU192
+ 685 0034 ECE7     		b	.L28
+ 686              		.cfi_endproc
+ 687              	.LFE6:
+ 689              		.section	.text.vl53l8cx_calibrate_xtalk,"ax",%progbits
+ 690              		.align	1
+ 691              		.global	vl53l8cx_calibrate_xtalk
+ 692              		.syntax unified
+ARM GAS  C:\Temp\ccluW06P.s 			page 20
+
+
+ 693              		.thumb
+ 694              		.thumb_func
+ 696              	vl53l8cx_calibrate_xtalk:
+ 697              	.LVL76:
+ 698              	.LFB2:
+ 151:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint16_t timeout = 0;
+ 699              		.loc 1 151 1 is_stmt 1 view -0
+ 700              		.cfi_startproc
+ 701              		@ args = 0, pretend = 0, frame = 40
+ 702              		@ frame_needed = 0, uses_anonymous_args = 0
+ 151:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint16_t timeout = 0;
+ 703              		.loc 1 151 1 is_stmt 0 view .LVU194
+ 704 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 705              		.cfi_def_cfa_offset 28
+ 706              		.cfi_offset 4, -28
+ 707              		.cfi_offset 5, -24
+ 708              		.cfi_offset 6, -20
+ 709              		.cfi_offset 7, -16
+ 710              		.cfi_offset 8, -12
+ 711              		.cfi_offset 9, -8
+ 712              		.cfi_offset 14, -4
+ 713 0004 8FB0     		sub	sp, sp, #60
+ 714              		.cfi_def_cfa_offset 88
+ 715 0006 0546     		mov	r5, r0
+ 716 0008 0E46     		mov	r6, r1
+ 152:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint8_t cmd[] = {0x00, 0x03, 0x00, 0x00};
+ 717              		.loc 1 152 2 is_stmt 1 view .LVU195
+ 718              	.LVL77:
+ 153:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint8_t footer[] = {0x00, 0x00, 0x00, 0x0F, 0x00, 0x01, 0x03, 0x04};
+ 719              		.loc 1 153 2 view .LVU196
+ 153:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint8_t footer[] = {0x00, 0x00, 0x00, 0x0F, 0x00, 0x01, 0x03, 0x04};
+ 720              		.loc 1 153 10 is_stmt 0 view .LVU197
+ 721 000a 4FF44071 		mov	r1, #768
+ 722              	.LVL78:
+ 153:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint8_t footer[] = {0x00, 0x00, 0x00, 0x0F, 0x00, 0x01, 0x03, 0x04};
+ 723              		.loc 1 153 10 view .LVU198
+ 724 000e 0D91     		str	r1, [sp, #52]
+ 154:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint8_t continue_loop = 1, status = VL53L8CX_STATUS_OK;
+ 725              		.loc 1 154 2 is_stmt 1 view .LVU199
+ 154:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint8_t continue_loop = 1, status = VL53L8CX_STATUS_OK;
+ 726              		.loc 1 154 10 is_stmt 0 view .LVU200
+ 727 0010 0BAC     		add	r4, sp, #44
+ 728 0012 B549     		ldr	r1, .L43
+ 729 0014 03C9     		ldm	r1, {r0, r1}
+ 730              	.LVL79:
+ 154:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint8_t continue_loop = 1, status = VL53L8CX_STATUS_OK;
+ 731              		.loc 1 154 10 view .LVU201
+ 732 0016 84E80300 		stm	r4, {r0, r1}
+ 155:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 733              		.loc 1 155 2 is_stmt 1 view .LVU202
+ 734              	.LVL80:
+ 157:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint32_t integration_time_ms, xtalk_margin;
+ 735              		.loc 1 157 2 view .LVU203
+ 158:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****         
+ 736              		.loc 1 158 2 view .LVU204
+ 160:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint8_t	samples = nb_samples;
+ 737              		.loc 1 160 2 view .LVU205
+ARM GAS  C:\Temp\ccluW06P.s 			page 21
+
+
+ 160:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint8_t	samples = nb_samples;
+ 738              		.loc 1 160 11 is_stmt 0 view .LVU206
+ 739 001a ADF81A60 		strh	r6, [sp, #26]	@ movhi
+ 161:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint16_t distance = distance_mm;
+ 740              		.loc 1 161 2 is_stmt 1 view .LVU207
+ 161:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint16_t distance = distance_mm;
+ 741              		.loc 1 161 10 is_stmt 0 view .LVU208
+ 742 001e 8DF81920 		strb	r2, [sp, #25]
+ 162:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint8_t *default_xtalk_ptr;
+ 743              		.loc 1 162 2 is_stmt 1 view .LVU209
+ 162:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	uint8_t *default_xtalk_ptr;
+ 744              		.loc 1 162 11 is_stmt 0 view .LVU210
+ 745 0022 ADF81630 		strh	r3, [sp, #22]	@ movhi
+ 163:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 746              		.loc 1 163 2 is_stmt 1 view .LVU211
+ 166:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_ranging_frequency_hz(p_dev, &frequency);
+ 747              		.loc 1 166 2 view .LVU212
+ 166:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_ranging_frequency_hz(p_dev, &frequency);
+ 748              		.loc 1 166 12 is_stmt 0 view .LVU213
+ 749 0026 0DF12B01 		add	r1, sp, #43
+ 750 002a 2846     		mov	r0, r5
+ 751 002c FFF7FEFF 		bl	vl53l8cx_get_resolution
+ 752              	.LVL81:
+ 166:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_ranging_frequency_hz(p_dev, &frequency);
+ 753              		.loc 1 166 12 view .LVU214
+ 754 0030 0446     		mov	r4, r0
+ 755              	.LVL82:
+ 167:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_integration_time_ms(p_dev, &integration_time_ms);
+ 756              		.loc 1 167 2 is_stmt 1 view .LVU215
+ 167:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_integration_time_ms(p_dev, &integration_time_ms);
+ 757              		.loc 1 167 12 is_stmt 0 view .LVU216
+ 758 0032 0DF12A01 		add	r1, sp, #42
+ 759 0036 2846     		mov	r0, r5
+ 760 0038 FFF7FEFF 		bl	vl53l8cx_get_ranging_frequency_hz
+ 761              	.LVL83:
+ 167:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_integration_time_ms(p_dev, &integration_time_ms);
+ 762              		.loc 1 167 9 view .LVU217
+ 763 003c 0443     		orrs	r4, r4, r0
+ 764              	.LVL84:
+ 167:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_integration_time_ms(p_dev, &integration_time_ms);
+ 765              		.loc 1 167 9 view .LVU218
+ 766 003e E4B2     		uxtb	r4, r4
+ 767              	.LVL85:
+ 168:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_sharpener_percent(p_dev, &sharp_prct);
+ 768              		.loc 1 168 2 is_stmt 1 view .LVU219
+ 168:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_sharpener_percent(p_dev, &sharp_prct);
+ 769              		.loc 1 168 12 is_stmt 0 view .LVU220
+ 770 0040 08A9     		add	r1, sp, #32
+ 771 0042 2846     		mov	r0, r5
+ 772 0044 FFF7FEFF 		bl	vl53l8cx_get_integration_time_ms
+ 773              	.LVL86:
+ 168:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_sharpener_percent(p_dev, &sharp_prct);
+ 774              		.loc 1 168 9 view .LVU221
+ 775 0048 0443     		orrs	r4, r4, r0
+ 776              	.LVL87:
+ 168:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_sharpener_percent(p_dev, &sharp_prct);
+ 777              		.loc 1 168 9 view .LVU222
+ARM GAS  C:\Temp\ccluW06P.s 			page 22
+
+
+ 778 004a E4B2     		uxtb	r4, r4
+ 779              	.LVL88:
+ 169:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_target_order(p_dev, &target_order);
+ 780              		.loc 1 169 2 is_stmt 1 view .LVU223
+ 169:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_target_order(p_dev, &target_order);
+ 781              		.loc 1 169 12 is_stmt 0 view .LVU224
+ 782 004c 0AA9     		add	r1, sp, #40
+ 783 004e 2846     		mov	r0, r5
+ 784 0050 FFF7FEFF 		bl	vl53l8cx_get_sharpener_percent
+ 785              	.LVL89:
+ 169:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_target_order(p_dev, &target_order);
+ 786              		.loc 1 169 9 view .LVU225
+ 787 0054 0443     		orrs	r4, r4, r0
+ 788              	.LVL90:
+ 169:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_target_order(p_dev, &target_order);
+ 789              		.loc 1 169 9 view .LVU226
+ 790 0056 E4B2     		uxtb	r4, r4
+ 791              	.LVL91:
+ 170:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_xtalk_margin(p_dev, &xtalk_margin);
+ 792              		.loc 1 170 2 is_stmt 1 view .LVU227
+ 170:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_xtalk_margin(p_dev, &xtalk_margin);
+ 793              		.loc 1 170 12 is_stmt 0 view .LVU228
+ 794 0058 0DF12901 		add	r1, sp, #41
+ 795 005c 2846     		mov	r0, r5
+ 796 005e FFF7FEFF 		bl	vl53l8cx_get_target_order
+ 797              	.LVL92:
+ 170:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_xtalk_margin(p_dev, &xtalk_margin);
+ 798              		.loc 1 170 9 view .LVU229
+ 799 0062 0443     		orrs	r4, r4, r0
+ 800              	.LVL93:
+ 170:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_xtalk_margin(p_dev, &xtalk_margin);
+ 801              		.loc 1 170 9 view .LVU230
+ 802 0064 E4B2     		uxtb	r4, r4
+ 803              	.LVL94:
+ 171:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_ranging_mode(p_dev, &ranging_mode);
+ 804              		.loc 1 171 2 is_stmt 1 view .LVU231
+ 171:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_ranging_mode(p_dev, &ranging_mode);
+ 805              		.loc 1 171 12 is_stmt 0 view .LVU232
+ 806 0066 07A9     		add	r1, sp, #28
+ 807 0068 2846     		mov	r0, r5
+ 808 006a FFF7FEFF 		bl	vl53l8cx_get_xtalk_margin
+ 809              	.LVL95:
+ 171:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_ranging_mode(p_dev, &ranging_mode);
+ 810              		.loc 1 171 9 view .LVU233
+ 811 006e 0443     		orrs	r4, r4, r0
+ 812              	.LVL96:
+ 171:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_get_ranging_mode(p_dev, &ranging_mode);
+ 813              		.loc 1 171 9 view .LVU234
+ 814 0070 E4B2     		uxtb	r4, r4
+ 815              	.LVL97:
+ 172:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 816              		.loc 1 172 2 is_stmt 1 view .LVU235
+ 172:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 817              		.loc 1 172 12 is_stmt 0 view .LVU236
+ 818 0072 0DF12701 		add	r1, sp, #39
+ 819 0076 2846     		mov	r0, r5
+ 820 0078 FFF7FEFF 		bl	vl53l8cx_get_ranging_mode
+ARM GAS  C:\Temp\ccluW06P.s 			page 23
+
+
+ 821              	.LVL98:
+ 172:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 822              		.loc 1 172 9 view .LVU237
+ 823 007c 0443     		orrs	r4, r4, r0
+ 824              	.LVL99:
+ 172:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 825              		.loc 1 172 9 view .LVU238
+ 826 007e E4B2     		uxtb	r4, r4
+ 827              	.LVL100:
+ 175:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		|| ((distance < (uint16_t)600) || (distance > (uint16_t)3000))
+ 828              		.loc 1 175 2 is_stmt 1 view .LVU239
+ 175:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		|| ((distance < (uint16_t)600) || (distance > (uint16_t)3000))
+ 829              		.loc 1 175 34 is_stmt 0 view .LVU240
+ 830 0080 BDF81A30 		ldrh	r3, [sp, #26]
+ 831 0084 013B     		subs	r3, r3, #1
+ 832 0086 9BB2     		uxth	r3, r3
+ 175:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		|| ((distance < (uint16_t)600) || (distance > (uint16_t)3000))
+ 833              		.loc 1 175 4 view .LVU241
+ 834 0088 622B     		cmp	r3, #98
+ 835 008a 0DD8     		bhi	.L33
+ 176:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		|| ((samples < (uint8_t)1) || (samples > (uint8_t)16)))
+ 836              		.loc 1 176 34 view .LVU242
+ 837 008c BDF81630 		ldrh	r3, [sp, #22]
+ 838 0090 A3F51673 		sub	r3, r3, #600
+ 839 0094 9BB2     		uxth	r3, r3
+ 176:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		|| ((samples < (uint8_t)1) || (samples > (uint8_t)16)))
+ 840              		.loc 1 176 3 view .LVU243
+ 841 0096 B3F5166F 		cmp	r3, #2400
+ 842 009a 05D8     		bhi	.L33
+ 177:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	{
+ 843              		.loc 1 177 30 view .LVU244
+ 844 009c 9DF81930 		ldrb	r3, [sp, #25]	@ zero_extendqisi2
+ 845 00a0 013B     		subs	r3, r3, #1
+ 846 00a2 DBB2     		uxtb	r3, r3
+ 177:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	{
+ 847              		.loc 1 177 3 view .LVU245
+ 848 00a4 0F2B     		cmp	r3, #15
+ 849 00a6 76D9     		bls	.L34
+ 850              	.L33:
+ 179:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	}
+ 851              		.loc 1 179 3 is_stmt 1 view .LVU246
+ 179:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	}
+ 852              		.loc 1 179 10 is_stmt 0 view .LVU247
+ 853 00a8 44F07F04 		orr	r4, r4, #127
+ 854              	.LVL101:
+ 855              	.L35:
+ 256:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                sizeof(VL53L8CX_GET_XTALK_CMD));
+ 856              		.loc 1 256 9 is_stmt 1 view .LVU248
+ 256:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                sizeof(VL53L8CX_GET_XTALK_CMD));
+ 857              		.loc 1 256 15 is_stmt 0 view .LVU249
+ 858 00ac 05F5A267 		add	r7, r5, #1296
+ 859 00b0 4826     		movs	r6, #72
+ 860 00b2 3246     		mov	r2, r6
+ 861 00b4 8D49     		ldr	r1, .L43+4
+ 862 00b6 3846     		mov	r0, r7
+ 863 00b8 FFF7FEFF 		bl	memcpy
+ 864              	.LVL102:
+ARM GAS  C:\Temp\ccluW06P.s 			page 24
+
+
+ 258:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			p_dev->temp_buffer, 
+ 865              		.loc 1 258 2 is_stmt 1 view .LVU250
+ 258:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			p_dev->temp_buffer, 
+ 866              		.loc 1 258 12 is_stmt 0 view .LVU251
+ 867 00bc 3346     		mov	r3, r6
+ 868 00be 3A46     		mov	r2, r7
+ 869 00c0 42F6B871 		movw	r1, #12216
+ 870 00c4 2846     		mov	r0, r5
+ 871 00c6 FFF7FEFF 		bl	VL53L8CX_WrMulti
+ 872              	.LVL103:
+ 258:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			p_dev->temp_buffer, 
+ 873              		.loc 1 258 9 view .LVU252
+ 874 00ca 0443     		orrs	r4, r4, r0
+ 875              	.LVL104:
+ 258:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			p_dev->temp_buffer, 
+ 876              		.loc 1 258 9 view .LVU253
+ 877 00cc E4B2     		uxtb	r4, r4
+ 878              	.LVL105:
+ 261:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= VL53L8CX_RdMulti(&(p_dev->platform), VL53L8CX_UI_CMD_START,
+ 879              		.loc 1 261 2 is_stmt 1 view .LVU254
+ 261:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= VL53L8CX_RdMulti(&(p_dev->platform), VL53L8CX_UI_CMD_START,
+ 880              		.loc 1 261 12 is_stmt 0 view .LVU255
+ 881 00ce 0322     		movs	r2, #3
+ 882 00d0 4FF43051 		mov	r1, #11264
+ 883 00d4 2846     		mov	r0, r5
+ 884 00d6 FFF7FEFF 		bl	_vl53l8cx_poll_for_answer
+ 885              	.LVL106:
+ 261:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= VL53L8CX_RdMulti(&(p_dev->platform), VL53L8CX_UI_CMD_START,
+ 886              		.loc 1 261 9 view .LVU256
+ 887 00da 0443     		orrs	r4, r4, r0
+ 888              	.LVL107:
+ 261:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= VL53L8CX_RdMulti(&(p_dev->platform), VL53L8CX_UI_CMD_START,
+ 889              		.loc 1 261 9 view .LVU257
+ 890 00dc E4B2     		uxtb	r4, r4
+ 891              	.LVL108:
+ 262:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			p_dev->temp_buffer, 
+ 892              		.loc 1 262 2 is_stmt 1 view .LVU258
+ 262:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			p_dev->temp_buffer, 
+ 893              		.loc 1 262 12 is_stmt 0 view .LVU259
+ 894 00de 4FF44373 		mov	r3, #780
+ 895 00e2 3A46     		mov	r2, r7
+ 896 00e4 42F60441 		movw	r1, #11268
+ 897 00e8 2846     		mov	r0, r5
+ 898 00ea FFF7FEFF 		bl	VL53L8CX_RdMulti
+ 899              	.LVL109:
+ 262:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			p_dev->temp_buffer, 
+ 900              		.loc 1 262 9 view .LVU260
+ 901 00ee 0443     		orrs	r4, r4, r0
+ 902              	.LVL110:
+ 262:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			p_dev->temp_buffer, 
+ 903              		.loc 1 262 9 view .LVU261
+ 904 00f0 E4B2     		uxtb	r4, r4
+ 905              	.LVL111:
+ 266:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			VL53L8CX_XTALK_BUFFER_SIZE - (uint16_t)8);
+ 906              		.loc 1 266 2 is_stmt 1 view .LVU262
+ 266:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			VL53L8CX_XTALK_BUFFER_SIZE - (uint16_t)8);
+ 907              		.loc 1 266 8 is_stmt 0 view .LVU263
+ARM GAS  C:\Temp\ccluW06P.s 			page 25
+
+
+ 908 00f2 4FF44072 		mov	r2, #768
+ 909 00f6 05F5A361 		add	r1, r5, #1304
+ 910 00fa 05F50270 		add	r0, r5, #520
+ 911 00fe FFF7FEFF 		bl	memcpy
+ 912              	.LVL112:
+ 268:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                        - (uint16_t)8]), footer, sizeof(footer));
+ 913              		.loc 1 268 2 is_stmt 1 view .LVU264
+ 268:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                        - (uint16_t)8]), footer, sizeof(footer));
+ 914              		.loc 1 268 8 is_stmt 0 view .LVU265
+ 915 0102 0BAB     		add	r3, sp, #44
+ 916 0104 03CB     		ldmia	r3!, {r0, r1}
+ 917 0106 C5F80805 		str	r0, [r5, #1288]	@ unaligned
+ 918 010a C5F80C15 		str	r1, [r5, #1292]	@ unaligned
+ 272:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			p_dev->default_configuration,
+ 919              		.loc 1 272 2 is_stmt 1 view .LVU266
+ 272:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			p_dev->default_configuration,
+ 920              		.loc 1 272 12 is_stmt 0 view .LVU267
+ 921 010e 4FF47373 		mov	r3, #972
+ 922 0112 AA69     		ldr	r2, [r5, #24]
+ 923 0114 42F63441 		movw	r1, #11316
+ 924 0118 2846     		mov	r0, r5
+ 925 011a FFF7FEFF 		bl	VL53L8CX_WrMulti
+ 926              	.LVL113:
+ 272:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			p_dev->default_configuration,
+ 927              		.loc 1 272 9 view .LVU268
+ 928 011e 0443     		orrs	r4, r4, r0
+ 929              	.LVL114:
+ 272:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			p_dev->default_configuration,
+ 930              		.loc 1 272 9 view .LVU269
+ 931 0120 E4B2     		uxtb	r4, r4
+ 932              	.LVL115:
+ 275:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 933              		.loc 1 275 2 is_stmt 1 view .LVU270
+ 275:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 934              		.loc 1 275 12 is_stmt 0 view .LVU271
+ 935 0122 0322     		movs	r2, #3
+ 936 0124 4FF43051 		mov	r1, #11264
+ 937 0128 2846     		mov	r0, r5
+ 938 012a FFF7FEFF 		bl	_vl53l8cx_poll_for_answer
+ 939              	.LVL116:
+ 275:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 940              		.loc 1 275 9 view .LVU272
+ 941 012e 0443     		orrs	r4, r4, r0
+ 942              	.LVL117:
+ 275:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 943              		.loc 1 275 9 view .LVU273
+ 944 0130 E4B2     		uxtb	r4, r4
+ 945              	.LVL118:
+ 278:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_ranging_frequency_hz(p_dev, frequency);
+ 946              		.loc 1 278 2 is_stmt 1 view .LVU274
+ 278:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_ranging_frequency_hz(p_dev, frequency);
+ 947              		.loc 1 278 12 is_stmt 0 view .LVU275
+ 948 0132 9DF82B10 		ldrb	r1, [sp, #43]	@ zero_extendqisi2
+ 949 0136 2846     		mov	r0, r5
+ 950 0138 FFF7FEFF 		bl	vl53l8cx_set_resolution
+ 951              	.LVL119:
+ 278:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_ranging_frequency_hz(p_dev, frequency);
+ARM GAS  C:\Temp\ccluW06P.s 			page 26
+
+
+ 952              		.loc 1 278 9 view .LVU276
+ 953 013c 0443     		orrs	r4, r4, r0
+ 954              	.LVL120:
+ 278:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_ranging_frequency_hz(p_dev, frequency);
+ 955              		.loc 1 278 9 view .LVU277
+ 956 013e E4B2     		uxtb	r4, r4
+ 957              	.LVL121:
+ 279:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_integration_time_ms(p_dev, integration_time_ms);
+ 958              		.loc 1 279 2 is_stmt 1 view .LVU278
+ 279:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_integration_time_ms(p_dev, integration_time_ms);
+ 959              		.loc 1 279 12 is_stmt 0 view .LVU279
+ 960 0140 9DF82A10 		ldrb	r1, [sp, #42]	@ zero_extendqisi2
+ 961 0144 2846     		mov	r0, r5
+ 962 0146 FFF7FEFF 		bl	vl53l8cx_set_ranging_frequency_hz
+ 963              	.LVL122:
+ 279:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_integration_time_ms(p_dev, integration_time_ms);
+ 964              		.loc 1 279 9 view .LVU280
+ 965 014a 0443     		orrs	r4, r4, r0
+ 966              	.LVL123:
+ 279:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_integration_time_ms(p_dev, integration_time_ms);
+ 967              		.loc 1 279 9 view .LVU281
+ 968 014c E4B2     		uxtb	r4, r4
+ 969              	.LVL124:
+ 280:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_sharpener_percent(p_dev, sharp_prct);
+ 970              		.loc 1 280 2 is_stmt 1 view .LVU282
+ 280:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_sharpener_percent(p_dev, sharp_prct);
+ 971              		.loc 1 280 12 is_stmt 0 view .LVU283
+ 972 014e 0899     		ldr	r1, [sp, #32]
+ 973 0150 2846     		mov	r0, r5
+ 974 0152 FFF7FEFF 		bl	vl53l8cx_set_integration_time_ms
+ 975              	.LVL125:
+ 280:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_sharpener_percent(p_dev, sharp_prct);
+ 976              		.loc 1 280 9 view .LVU284
+ 977 0156 0443     		orrs	r4, r4, r0
+ 978              	.LVL126:
+ 280:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_sharpener_percent(p_dev, sharp_prct);
+ 979              		.loc 1 280 9 view .LVU285
+ 980 0158 E4B2     		uxtb	r4, r4
+ 981              	.LVL127:
+ 281:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_target_order(p_dev, target_order);
+ 982              		.loc 1 281 2 is_stmt 1 view .LVU286
+ 281:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_target_order(p_dev, target_order);
+ 983              		.loc 1 281 12 is_stmt 0 view .LVU287
+ 984 015a 9DF82810 		ldrb	r1, [sp, #40]	@ zero_extendqisi2
+ 985 015e 2846     		mov	r0, r5
+ 986 0160 FFF7FEFF 		bl	vl53l8cx_set_sharpener_percent
+ 987              	.LVL128:
+ 281:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_target_order(p_dev, target_order);
+ 988              		.loc 1 281 9 view .LVU288
+ 989 0164 0443     		orrs	r4, r4, r0
+ 990              	.LVL129:
+ 281:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_target_order(p_dev, target_order);
+ 991              		.loc 1 281 9 view .LVU289
+ 992 0166 E4B2     		uxtb	r4, r4
+ 993              	.LVL130:
+ 282:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_xtalk_margin(p_dev, xtalk_margin);
+ 994              		.loc 1 282 2 is_stmt 1 view .LVU290
+ARM GAS  C:\Temp\ccluW06P.s 			page 27
+
+
+ 282:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_xtalk_margin(p_dev, xtalk_margin);
+ 995              		.loc 1 282 12 is_stmt 0 view .LVU291
+ 996 0168 9DF82910 		ldrb	r1, [sp, #41]	@ zero_extendqisi2
+ 997 016c 2846     		mov	r0, r5
+ 998 016e FFF7FEFF 		bl	vl53l8cx_set_target_order
+ 999              	.LVL131:
+ 282:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_xtalk_margin(p_dev, xtalk_margin);
+ 1000              		.loc 1 282 9 view .LVU292
+ 1001 0172 0443     		orrs	r4, r4, r0
+ 1002              	.LVL132:
+ 282:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_xtalk_margin(p_dev, xtalk_margin);
+ 1003              		.loc 1 282 9 view .LVU293
+ 1004 0174 E4B2     		uxtb	r4, r4
+ 1005              	.LVL133:
+ 283:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_ranging_mode(p_dev, ranging_mode);
+ 1006              		.loc 1 283 2 is_stmt 1 view .LVU294
+ 283:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_ranging_mode(p_dev, ranging_mode);
+ 1007              		.loc 1 283 12 is_stmt 0 view .LVU295
+ 1008 0176 0799     		ldr	r1, [sp, #28]
+ 1009 0178 2846     		mov	r0, r5
+ 1010 017a FFF7FEFF 		bl	vl53l8cx_set_xtalk_margin
+ 1011              	.LVL134:
+ 283:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_ranging_mode(p_dev, ranging_mode);
+ 1012              		.loc 1 283 9 view .LVU296
+ 1013 017e 0443     		orrs	r4, r4, r0
+ 1014              	.LVL135:
+ 283:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	status |= vl53l8cx_set_ranging_mode(p_dev, ranging_mode);
+ 1015              		.loc 1 283 9 view .LVU297
+ 1016 0180 E4B2     		uxtb	r4, r4
+ 1017              	.LVL136:
+ 284:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 1018              		.loc 1 284 2 is_stmt 1 view .LVU298
+ 284:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 1019              		.loc 1 284 12 is_stmt 0 view .LVU299
+ 1020 0182 9DF82710 		ldrb	r1, [sp, #39]	@ zero_extendqisi2
+ 1021 0186 2846     		mov	r0, r5
+ 1022 0188 FFF7FEFF 		bl	vl53l8cx_set_ranging_mode
+ 1023              	.LVL137:
+ 284:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 1024              		.loc 1 284 9 view .LVU300
+ 1025 018c 2043     		orrs	r0, r0, r4
+ 1026              	.LVL138:
+ 286:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** }
+ 1027              		.loc 1 286 2 is_stmt 1 view .LVU301
+ 287:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 1028              		.loc 1 287 1 is_stmt 0 view .LVU302
+ 1029 018e C0B2     		uxtb	r0, r0
+ 287:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 1030              		.loc 1 287 1 view .LVU303
+ 1031 0190 0FB0     		add	sp, sp, #60
+ 1032              		.cfi_remember_state
+ 1033              		.cfi_def_cfa_offset 28
+ 1034              		@ sp needed
+ 1035 0192 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 1036              	.LVL139:
+ 1037              	.L34:
+ 1038              		.cfi_restore_state
+ARM GAS  C:\Temp\ccluW06P.s 			page 28
+
+
+ 183:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_RESOLUTION_8X8);
+ 1039              		.loc 1 183 3 is_stmt 1 view .LVU304
+ 183:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_RESOLUTION_8X8);
+ 1040              		.loc 1 183 13 is_stmt 0 view .LVU305
+ 1041 0196 4021     		movs	r1, #64
+ 1042 0198 2846     		mov	r0, r5
+ 1043 019a FFF7FEFF 		bl	vl53l8cx_set_resolution
+ 1044              	.LVL140:
+ 183:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_RESOLUTION_8X8);
+ 1045              		.loc 1 183 10 view .LVU306
+ 1046 019e 0443     		orrs	r4, r4, r0
+ 1047              	.LVL141:
+ 183:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_RESOLUTION_8X8);
+ 1048              		.loc 1 183 10 view .LVU307
+ 1049 01a0 E4B2     		uxtb	r4, r4
+ 1050              	.LVL142:
+ 187:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                        sizeof(VL53L8CX_CALIBRATE_XTALK));
+ 1051              		.loc 1 187 17 is_stmt 1 view .LVU308
+ 187:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                        sizeof(VL53L8CX_CALIBRATE_XTALK));
+ 1052              		.loc 1 187 23 is_stmt 0 view .LVU309
+ 1053 01a2 05F5A266 		add	r6, r5, #1296
+ 1054 01a6 4FF47677 		mov	r7, #984
+ 1055 01aa 3A46     		mov	r2, r7
+ 1056 01ac 5049     		ldr	r1, .L43+8
+ 1057 01ae 3046     		mov	r0, r6
+ 1058 01b0 FFF7FEFF 		bl	memcpy
+ 1059              	.LVL143:
+ 189:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				p_dev->temp_buffer, 
+ 1060              		.loc 1 189 3 is_stmt 1 view .LVU310
+ 189:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				p_dev->temp_buffer, 
+ 1061              		.loc 1 189 13 is_stmt 0 view .LVU311
+ 1062 01b4 3B46     		mov	r3, r7
+ 1063 01b6 3246     		mov	r2, r6
+ 1064 01b8 42F62841 		movw	r1, #11304
+ 1065 01bc 2846     		mov	r0, r5
+ 1066 01be FFF7FEFF 		bl	VL53L8CX_WrMulti
+ 1067              	.LVL144:
+ 189:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				p_dev->temp_buffer, 
+ 1068              		.loc 1 189 10 view .LVU312
+ 1069 01c2 0443     		orrs	r4, r4, r0
+ 1070              	.LVL145:
+ 189:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				p_dev->temp_buffer, 
+ 1071              		.loc 1 189 10 view .LVU313
+ 1072 01c4 E4B2     		uxtb	r4, r4
+ 1073              	.LVL146:
+ 192:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_UI_CMD_STATUS, 0x3);
+ 1074              		.loc 1 192 3 is_stmt 1 view .LVU314
+ 192:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_UI_CMD_STATUS, 0x3);
+ 1075              		.loc 1 192 13 is_stmt 0 view .LVU315
+ 1076 01c6 0322     		movs	r2, #3
+ 1077 01c8 4FF43051 		mov	r1, #11264
+ 1078 01cc 2846     		mov	r0, r5
+ 1079 01ce FFF7FEFF 		bl	_vl53l8cx_poll_for_answer
+ 1080              	.LVL147:
+ 192:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_UI_CMD_STATUS, 0x3);
+ 1081              		.loc 1 192 10 view .LVU316
+ 1082 01d2 0443     		orrs	r4, r4, r0
+ARM GAS  C:\Temp\ccluW06P.s 			page 29
+
+
+ 1083              	.LVL148:
+ 192:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_UI_CMD_STATUS, 0x3);
+ 1084              		.loc 1 192 10 view .LVU317
+ 1085 01d4 E4B2     		uxtb	r4, r4
+ 1086              	.LVL149:
+ 196:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		distance = distance * (uint16_t)4;
+ 1087              		.loc 1 196 3 is_stmt 1 view .LVU318
+ 196:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 		distance = distance * (uint16_t)4;
+ 1088              		.loc 1 196 15 is_stmt 0 view .LVU319
+ 1089 01d6 BDF81A30 		ldrh	r3, [sp, #26]
+ 1090 01da 1B01     		lsls	r3, r3, #4
+ 1091 01dc ADF81A30 		strh	r3, [sp, #26]	@ movhi
+ 197:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 1092              		.loc 1 197 3 is_stmt 1 view .LVU320
+ 197:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 1093              		.loc 1 197 12 is_stmt 0 view .LVU321
+ 1094 01e0 BDF81630 		ldrh	r3, [sp, #22]
+ 1095 01e4 9B00     		lsls	r3, r3, #2
+ 1096 01e6 ADF81630 		strh	r3, [sp, #22]	@ movhi
+ 200:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_DCI_CAL_CFG, 8,
+ 1097              		.loc 1 200 3 is_stmt 1 view .LVU322
+ 200:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_DCI_CAL_CFG, 8,
+ 1098              		.loc 1 200 13 is_stmt 0 view .LVU323
+ 1099 01ea 4FF00008 		mov	r8, #0
+ 1100 01ee CDF80880 		str	r8, [sp, #8]
+ 1101 01f2 0227     		movs	r7, #2
+ 1102 01f4 0197     		str	r7, [sp, #4]
+ 1103 01f6 0DF11603 		add	r3, sp, #22
+ 1104 01fa 0093     		str	r3, [sp]
+ 1105 01fc 0823     		movs	r3, #8
+ 1106 01fe 45F27042 		movw	r2, #21616
+ 1107 0202 3146     		mov	r1, r6
+ 1108 0204 2846     		mov	r0, r5
+ 1109 0206 FFF7FEFF 		bl	vl53l8cx_dci_replace_data
+ 1110              	.LVL150:
+ 200:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_DCI_CAL_CFG, 8,
+ 1111              		.loc 1 200 10 view .LVU324
+ 1112 020a 0443     		orrs	r4, r4, r0
+ 1113              	.LVL151:
+ 200:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_DCI_CAL_CFG, 8,
+ 1114              		.loc 1 200 10 view .LVU325
+ 1115 020c E4B2     		uxtb	r4, r4
+ 1116              	.LVL152:
+ 204:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_DCI_CAL_CFG, 8,
+ 1117              		.loc 1 204 3 is_stmt 1 view .LVU326
+ 204:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_DCI_CAL_CFG, 8,
+ 1118              		.loc 1 204 13 is_stmt 0 view .LVU327
+ 1119 020e 0297     		str	r7, [sp, #8]
+ 1120 0210 0197     		str	r7, [sp, #4]
+ 1121 0212 0DF11A03 		add	r3, sp, #26
+ 1122 0216 0093     		str	r3, [sp]
+ 1123 0218 0823     		movs	r3, #8
+ 1124 021a 45F27042 		movw	r2, #21616
+ 1125 021e 3146     		mov	r1, r6
+ 1126 0220 2846     		mov	r0, r5
+ 1127 0222 FFF7FEFF 		bl	vl53l8cx_dci_replace_data
+ 1128              	.LVL153:
+ARM GAS  C:\Temp\ccluW06P.s 			page 30
+
+
+ 204:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_DCI_CAL_CFG, 8,
+ 1129              		.loc 1 204 10 view .LVU328
+ 1130 0226 0443     		orrs	r4, r4, r0
+ 1131              	.LVL154:
+ 204:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_DCI_CAL_CFG, 8,
+ 1132              		.loc 1 204 10 view .LVU329
+ 1133 0228 E4B2     		uxtb	r4, r4
+ 1134              	.LVL155:
+ 208:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_DCI_CAL_CFG, 8,
+ 1135              		.loc 1 208 3 is_stmt 1 view .LVU330
+ 208:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_DCI_CAL_CFG, 8,
+ 1136              		.loc 1 208 13 is_stmt 0 view .LVU331
+ 1137 022a 4FF00409 		mov	r9, #4
+ 1138 022e CDF80890 		str	r9, [sp, #8]
+ 1139 0232 0127     		movs	r7, #1
+ 1140 0234 0197     		str	r7, [sp, #4]
+ 1141 0236 0DF11903 		add	r3, sp, #25
+ 1142 023a 0093     		str	r3, [sp]
+ 1143 023c 0823     		movs	r3, #8
+ 1144 023e 45F27042 		movw	r2, #21616
+ 1145 0242 3146     		mov	r1, r6
+ 1146 0244 2846     		mov	r0, r5
+ 1147 0246 FFF7FEFF 		bl	vl53l8cx_dci_replace_data
+ 1148              	.LVL156:
+ 208:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_DCI_CAL_CFG, 8,
+ 1149              		.loc 1 208 10 view .LVU332
+ 1150 024a 0443     		orrs	r4, r4, r0
+ 1151              	.LVL157:
+ 208:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_DCI_CAL_CFG, 8,
+ 1152              		.loc 1 208 10 view .LVU333
+ 1153 024c E4B2     		uxtb	r4, r4
+ 1154              	.LVL158:
+ 213:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 1155              		.loc 1 213 3 is_stmt 1 view .LVU334
+ 213:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 1156              		.loc 1 213 13 is_stmt 0 view .LVU335
+ 1157 024e 2846     		mov	r0, r5
+ 1158 0250 FFF7FEFF 		bl	_vl53l8cx_program_output_config
+ 1159              	.LVL159:
+ 213:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 1160              		.loc 1 213 10 view .LVU336
+ 1161 0254 0443     		orrs	r4, r4, r0
+ 1162              	.LVL160:
+ 213:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 
+ 1163              		.loc 1 213 10 view .LVU337
+ 1164 0256 E4B2     		uxtb	r4, r4
+ 1165              	.LVL161:
+ 216:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_UI_CMD_END - (uint16_t)(4 - 1),
+ 1166              		.loc 1 216 3 is_stmt 1 view .LVU338
+ 216:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_UI_CMD_END - (uint16_t)(4 - 1),
+ 1167              		.loc 1 216 13 is_stmt 0 view .LVU339
+ 1168 0258 4B46     		mov	r3, r9
+ 1169 025a 0DAA     		add	r2, sp, #52
+ 1170 025c 42F6FC71 		movw	r1, #12284
+ 1171 0260 2846     		mov	r0, r5
+ 1172 0262 FFF7FEFF 		bl	VL53L8CX_WrMulti
+ 1173              	.LVL162:
+ARM GAS  C:\Temp\ccluW06P.s 			page 31
+
+
+ 216:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_UI_CMD_END - (uint16_t)(4 - 1),
+ 1174              		.loc 1 216 10 view .LVU340
+ 1175 0266 0443     		orrs	r4, r4, r0
+ 1176              	.LVL163:
+ 216:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_UI_CMD_END - (uint16_t)(4 - 1),
+ 1177              		.loc 1 216 10 view .LVU341
+ 1178 0268 E4B2     		uxtb	r4, r4
+ 1179              	.LVL164:
+ 219:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_UI_CMD_STATUS, 0x3);
+ 1180              		.loc 1 219 3 is_stmt 1 view .LVU342
+ 219:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_UI_CMD_STATUS, 0x3);
+ 1181              		.loc 1 219 13 is_stmt 0 view .LVU343
+ 1182 026a 0322     		movs	r2, #3
+ 1183 026c 4FF43051 		mov	r1, #11264
+ 1184 0270 2846     		mov	r0, r5
+ 1185 0272 FFF7FEFF 		bl	_vl53l8cx_poll_for_answer
+ 1186              	.LVL165:
+ 219:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_UI_CMD_STATUS, 0x3);
+ 1187              		.loc 1 219 10 view .LVU344
+ 1188 0276 0443     		orrs	r4, r4, r0
+ 1189              	.LVL166:
+ 219:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_UI_CMD_STATUS, 0x3);
+ 1190              		.loc 1 219 10 view .LVU345
+ 1191 0278 E4B2     		uxtb	r4, r4
+ 1192              	.LVL167:
+ 219:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				VL53L8CX_UI_CMD_STATUS, 0x3);
+ 1193              		.loc 1 219 10 view .LVU346
+ 1194 027a 11E0     		b	.L38
+ 1195              	.LVL168:
+ 1196              	.L36:
+ 241:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			{
+ 1197              		.loc 1 241 9 is_stmt 1 view .LVU347
+ 241:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			{
+ 1198              		.loc 1 241 11 is_stmt 0 view .LVU348
+ 1199 027c B8F5C87F 		cmp	r8, #400
+ 1200 0280 2FD2     		bcs	.L41
+ 248:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				status |= VL53L8CX_WaitMs(&(p_dev->platform), 50);
+ 1201              		.loc 1 248 5 is_stmt 1 view .LVU349
+ 248:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				status |= VL53L8CX_WaitMs(&(p_dev->platform), 50);
+ 1202              		.loc 1 248 12 is_stmt 0 view .LVU350
+ 1203 0282 08F10108 		add	r8, r8, #1
+ 1204              	.LVL169:
+ 248:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				status |= VL53L8CX_WaitMs(&(p_dev->platform), 50);
+ 1205              		.loc 1 248 12 view .LVU351
+ 1206 0286 1FFA88F8 		uxth	r8, r8
+ 1207              	.LVL170:
+ 249:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			}
+ 1208              		.loc 1 249 5 is_stmt 1 view .LVU352
+ 249:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			}
+ 1209              		.loc 1 249 15 is_stmt 0 view .LVU353
+ 1210 028a 3221     		movs	r1, #50
+ 1211 028c 2846     		mov	r0, r5
+ 1212 028e FFF7FEFF 		bl	VL53L8CX_WaitMs
+ 1213              	.LVL171:
+ 249:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			}
+ 1214              		.loc 1 249 12 view .LVU354
+ 1215 0292 2043     		orrs	r0, r0, r4
+ARM GAS  C:\Temp\ccluW06P.s 			page 32
+
+
+ 1216 0294 C4B2     		uxtb	r4, r0
+ 1217              	.LVL172:
+ 249:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			}
+ 1218              		.loc 1 249 12 view .LVU355
+ 1219 0296 00E0     		b	.L37
+ 1220              	.L39:
+ 239:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			}
+ 1221              		.loc 1 239 19 view .LVU356
+ 1222 0298 0027     		movs	r7, #0
+ 1223              	.LVL173:
+ 1224              	.L37:
+ 252:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 	}
+ 1225              		.loc 1 252 25 is_stmt 1 view .LVU357
+ 1226 029a 002F     		cmp	r7, #0
+ 1227 029c 3FF406AF 		beq	.L35
+ 1228              	.LVL174:
+ 1229              	.L38:
+ 223:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			status |= VL53L8CX_RdMulti(&(p_dev->platform), 
+ 1230              		.loc 1 223 3 view .LVU358
+ 224:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                                           0x0, p_dev->temp_buffer, 4);
+ 1231              		.loc 1 224 4 view .LVU359
+ 224:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                                           0x0, p_dev->temp_buffer, 4);
+ 1232              		.loc 1 224 14 is_stmt 0 view .LVU360
+ 1233 02a0 0423     		movs	r3, #4
+ 1234 02a2 3246     		mov	r2, r6
+ 1235 02a4 0021     		movs	r1, #0
+ 1236 02a6 2846     		mov	r0, r5
+ 1237 02a8 FFF7FEFF 		bl	VL53L8CX_RdMulti
+ 1238              	.LVL175:
+ 224:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                                           0x0, p_dev->temp_buffer, 4);
+ 1239              		.loc 1 224 11 view .LVU361
+ 1240 02ac 2043     		orrs	r0, r0, r4
+ 1241 02ae C4B2     		uxtb	r4, r0
+ 1242              	.LVL176:
+ 226:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			{
+ 1243              		.loc 1 226 4 is_stmt 1 view .LVU362
+ 226:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			{
+ 1244              		.loc 1 226 25 is_stmt 0 view .LVU363
+ 1245 02b0 95F81035 		ldrb	r3, [r5, #1296]	@ zero_extendqisi2
+ 226:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			{
+ 1246              		.loc 1 226 6 view .LVU364
+ 1247 02b4 FF2B     		cmp	r3, #255
+ 1248 02b6 E1D0     		beq	.L36
+ 229:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				(((uint16_t)(p_dev->temp_buffer[3] & 
+ 1249              		.loc 1 229 5 is_stmt 1 view .LVU365
+ 229:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				(((uint16_t)(p_dev->temp_buffer[3] & 
+ 1250              		.loc 1 229 27 is_stmt 0 view .LVU366
+ 1251 02b8 95F81235 		ldrb	r3, [r5, #1298]	@ zero_extendqisi2
+ 229:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				(((uint16_t)(p_dev->temp_buffer[3] & 
+ 1252              		.loc 1 229 7 view .LVU367
+ 1253 02bc 7E2B     		cmp	r3, #126
+ 1254 02be EBD9     		bls	.L39
+ 230:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c ****                                  (uint16_t)0x80) >> 7) == (uint16_t)1))
+ 1255              		.loc 1 230 36 discriminator 1 view .LVU368
+ 1256 02c0 95F81335 		ldrb	r3, [r5, #1299]	@ zero_extendqisi2
+ 229:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				(((uint16_t)(p_dev->temp_buffer[3] & 
+ 1257              		.loc 1 229 49 discriminator 1 view .LVU369
+ARM GAS  C:\Temp\ccluW06P.s 			page 33
+
+
+ 1258 02c4 DB09     		lsrs	r3, r3, #7
+ 1259 02c6 0AD0     		beq	.L40
+ 233:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 					(void)memcpy(p_dev->xtalk_data, 
+ 1260              		.loc 1 233 6 is_stmt 1 view .LVU370
+ 1261              	.LVL177:
+ 234:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 						default_xtalk_ptr,
+ 1262              		.loc 1 234 6 view .LVU371
+ 234:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 						default_xtalk_ptr,
+ 1263              		.loc 1 234 12 is_stmt 0 view .LVU372
+ 1264 02c8 4FF44272 		mov	r2, #776
+ 1265 02cc E969     		ldr	r1, [r5, #28]
+ 1266 02ce 05F50270 		add	r0, r5, #520
+ 1267 02d2 FFF7FEFF 		bl	memcpy
+ 1268              	.LVL178:
+ 237:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				}
+ 1269              		.loc 1 237 6 is_stmt 1 view .LVU373
+ 237:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				}
+ 1270              		.loc 1 237 13 is_stmt 0 view .LVU374
+ 1271 02d6 44F00404 		orr	r4, r4, #4
+ 1272              	.LVL179:
+ 239:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			}
+ 1273              		.loc 1 239 19 view .LVU375
+ 1274 02da 0027     		movs	r7, #0
+ 1275              	.LVL180:
+ 239:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			}
+ 1276              		.loc 1 239 19 view .LVU376
+ 1277 02dc DDE7     		b	.L37
+ 1278              	.LVL181:
+ 1279              	.L40:
+ 239:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			}
+ 1280              		.loc 1 239 19 view .LVU377
+ 1281 02de 0027     		movs	r7, #0
+ 1282              	.LVL182:
+ 239:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			}
+ 1283              		.loc 1 239 19 view .LVU378
+ 1284 02e0 DBE7     		b	.L37
+ 1285              	.LVL183:
+ 1286              	.L41:
+ 243:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 				continue_loop = (uint8_t)0;
+ 1287              		.loc 1 243 12 view .LVU379
+ 1288 02e2 1C46     		mov	r4, r3
+ 1289              	.LVL184:
+ 244:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			}
+ 1290              		.loc 1 244 19 view .LVU380
+ 1291 02e4 0027     		movs	r7, #0
+ 1292              	.LVL185:
+ 244:Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c **** 			}
+ 1293              		.loc 1 244 19 view .LVU381
+ 1294 02e6 D8E7     		b	.L37
+ 1295              	.L44:
+ 1296              		.align	2
+ 1297              	.L43:
+ 1298 02e8 54000000 		.word	.LANCHOR0+84
+ 1299 02ec 5C000000 		.word	.LANCHOR0+92
+ 1300 02f0 A4000000 		.word	.LANCHOR0+164
+ 1301              		.cfi_endproc
+ 1302              	.LFE2:
+ARM GAS  C:\Temp\ccluW06P.s 			page 34
+
+
+ 1304              		.section	.rodata
+ 1305              		.align	2
+ 1306              		.set	.LANCHOR0,. + 0
+ 1307              	.LC0:
+ 1308 0000 FFFF0100 		.word	131071
+ 1309 0004 00000000 		.word	0
+ 1310 0008 00000000 		.word	0
+ 1311 000c 000000C0 		.word	-1073741824
+ 1312              	.LC1:
+ 1313 0010 0D000000 		.word	13
+ 1314 0014 40000054 		.word	1409286208
+ 1315 0018 C000D89F 		.word	-1613233984
+ 1316 001c 4001E49F 		.word	-1612447424
+ 1317 0020 4000F89F 		.word	-1611136960
+ 1318 0024 0404FC9F 		.word	-1610873852
+ 1319 0028 0001FCA0 		.word	-1594097408
+ 1320 002c 00010CA1 		.word	-1593048832
+ 1321 0030 C0001CA1 		.word	-1592000320
+ 1322 0034 020928A1 		.word	-1591211774
+ 1323 0038 400048A2 		.word	-1572339648
+ 1324 003c 81004CA2 		.word	-1572077439
+ 1325 0040 810054A2 		.word	-1571553151
+ 1326 0044 81005CA2 		.word	-1571028863
+ 1327 0048 810064A2 		.word	-1570504575
+ 1328 004c 84006CA2 		.word	-1569980284
+ 1329 0050 82008CA2 		.word	-1567883134
+ 1330              	.LC2:
+ 1331 0054 0000000F 		.ascii	"\000\000\000\017\000\001\003\004"
+ 1331      00010304 
+ 1332              	.LC3:
+ 1333 005c 54000040 		.ascii	"T\000\000@\237\330\000\300\237\344\001@\237\370\000"
+ 1333      9FD800C0 
+ 1333      9FE40140 
+ 1333      9FF800
+ 1334 006b 409FFC04 		.ascii	"@\237\374\004\004\240\374\001\000\241\014\001\000\241"
+ 1334      04A0FC01 
+ 1334      00A10C01 
+ 1334      00A1
+ 1335 0079 1C00C0A1 		.ascii	"\034\000\300\241(\011\002\242H\000@\242L\000\201\242"
+ 1335      280902A2 
+ 1335      480040A2 
+ 1335      4C0081A2 
+ 1336 0089 540081A2 		.ascii	"T\000\201\242\\\000\201\242d\000\201\242l\000\204\242"
+ 1336      5C0081A2 
+ 1336      640081A2 
+ 1336      6C0084A2 
+ 1337 0099 8C008200 		.ascii	"\214\000\202\000\000\000\017\007\002\000D"
+ 1337      00000F07 
+ 1337      020044
+ 1338              	.LC4:
+ 1339 00a4 54500080 		.ascii	"TP\000\200\000\004\010\010\000\000\004\004\2550\000"
+ 1339      00040808 
+ 1339      00000404 
+ 1339      AD3000
+ 1340 00b3 80030106 		.ascii	"\200\003\001\006\003\000\000\001\000\2558\001\000\001"
+ 1340      03000001 
+ 1340      00AD3801 
+ARM GAS  C:\Temp\ccluW06P.s 			page 35
+
+
+ 1340      0001
+ 1341 00c1 E0014000 		.ascii	"\340\001@\000\020\000\020\001\000\001\000\000\000\000"
+ 1341      10001001 
+ 1341      00010000 
+ 1341      0000
+ 1342 00cf 01545800 		.ascii	"\001TX\000@\004\032\002\000T\\\001@\000\001\000Q\000"
+ 1342      40041A02 
+ 1342      00545C01 
+ 1342      40000100 
+ 1342      5100
+ 1343 00e1 000FA00F 		.ascii	"\000\017\240\017\240\003\350\002\200\037@\000\000\005"
+ 1343      A003E802 
+ 1343      801F4000 
+ 1343      0005
+ 1344 00ef 00547000 		.ascii	"\000Tp\000\200\003 \003 \000\000\000\010Tx\001\000\001"
+ 1344      80032003 
+ 1344      20000000 
+ 1344      08547801 
+ 1344      0001
+ 1345 0101 1B002100 		.ascii	"\033\000!\0003\000\000\002\000\000\001\004\001\010\002"
+ 1345      33000002 
+ 1345      00000104 
+ 1345      010802
+ 1346 0110 54880140 		.ascii	"T\210\001@\000\000\000\000\000\000\000\000\000\000\000"
+ 1346      00000000 
+ 1346      00000000 
+ 1346      000000
+ 1347 011f 00000000 		.ascii	"\000\000\000\000\000\000\000\010\000\255H\001\000\001"
+ 1347      00000008 
+ 1347      00AD4801 
+ 1347      0001
+ 1348 012d F4000003 		.ascii	"\364\000\000\003\006\000\020\010\010\010\010\000\000"
+ 1348      06001008 
+ 1348      08080800 
+ 1348      00
+ 1349 013a 0008AD60 		.ascii	"\000\010\255`\001\000\000\000\000\200\000\000\000\000"
+ 1349      01000000 
+ 1349      00800000 
+ 1349      0000
+ 1350 0148 201F01F4 		.ascii	" \037\001\364\000\000\035\012\255p\000\200\010\000\037"
+ 1350      00001D0A 
+ 1350      AD700080 
+ 1350      08001F
+ 1351 0157 40000000 		.ascii	"@\000\000\000\001\255x\000\200\000\240\003 \000\001"
+ 1351      01AD7800 
+ 1351      8000A003 
+ 1351      200001
+ 1352 0166 0190AD80 		.ascii	"\001\220\255\200\000@\000\000(\000\255\204\000\200\000"
+ 1352      00400000 
+ 1352      2800AD84 
+ 1352      008000
+ 1353 0175 00320003 		.ascii	"\0002\000\003 \000\000\255\214\000\200\002X\3778\000"
+ 1353      200000AD 
+ 1353      8C008002 
+ 1353      58FF3800 
+ 1354 0185 00000CAD 		.ascii	"\000\000\014\255\224\001\000\000\001\220\000\377\377"
+ 1354      94010000 
+ARM GAS  C:\Temp\ccluW06P.s 			page 36
+
+
+ 1354      019000FF 
+ 1354      FF
+ 1355 0192 FC000000 		.ascii	"\374\000\000\000\004\000\000\000\001\000\255\244\000"
+ 1355      04000000 
+ 1355      0100ADA4 
+ 1355      00
+ 1356 019f C0048006 		.ascii	"\300\004\200\006\032\000\200\005\200\000\000\001\006"
+ 1356      1A008005 
+ 1356      80000001 
+ 1356      06
+ 1357 01ac ADB000C0 		.ascii	"\255\260\000\300\004\200\006\032\031\000\005\200\000"
+ 1357      0480061A 
+ 1357      19000580 
+ 1357      00
+ 1358 01b9 000190AD 		.ascii	"\000\001\220\255\274\004@\000\000\000\000\000\000\000"
+ 1358      BC044000 
+ 1358      00000000 
+ 1358      0000
+ 1359 01c7 00001200 		.ascii	"\000\000\022\000%\000\000\000\006\000\000\000\005\000"
+ 1359      25000000 
+ 1359      06000000 
+ 1359      0500
+ 1360 01d5 00000500 		.ascii	"\000\000\005\000\000\000\006\000\000\000\004\000\000"
+ 1360      00000600 
+ 1360      00000400 
+ 1360      00
+ 1361 01e2 000F0000 		.ascii	"\000\017\000\000\000Z\000\000\000\000\000\000\000\011"
+ 1361      005A0000 
+ 1361      00000000 
+ 1361      0009
+ 1362 01f0 0B0C0B0B 		.ascii	"\013\014\013\013\003\003\021\005\001\001\001\001\000"
+ 1362      03031105 
+ 1362      01010101 
+ 1362      00
+ 1363 01fd 00000000 		.ascii	"\000\000\000\000\015\000\000\256\000\001\004\000\000"
+ 1363      0D0000AE 
+ 1363      00010400 
+ 1363      00
+ 1364 020a 00040000 		.ascii	"\000\004\000\000\000\010\000\000\000\012\000\000\000"
+ 1364      00080000 
+ 1364      000A0000 
+ 1364      00
+ 1365 0217 0C000000 		.ascii	"\014\000\000\000\015\000\000\000\016\000\000\000\010"
+ 1365      0D000000 
+ 1365      0E000000 
+ 1365      08
+ 1366 0224 00000008 		.ascii	"\000\000\000\010\000\000\000\020\000\000\000\020\000"
+ 1366      00000010 
+ 1366      00000010 
+ 1366      00
+ 1367 0231 00002000 		.ascii	"\000\000 \000\000\000 \000\000\000\006\000\000\005\012"
+ 1367      00002000 
+ 1367      00000600 
+ 1367      00050A
+ 1368 0240 02000C08 		.ascii	"\002\000\014\010\000\000\000\000\256@\000@\000\000\000"
+ 1368      00000000 
+ 1368      AE400040 
+ARM GAS  C:\Temp\ccluW06P.s 			page 37
+
+
+ 1368      000000
+ 1369 024f FFAE4400 		.ascii	"\377\256D\000@\000\020\004\001\256H\000@\000\000\020"
+ 1369      40001004 
+ 1369      01AE4800 
+ 1369      40000010 
+ 1370 025f 00AE4C00 		.ascii	"\000\256L\000@\000\000\000\001\256P\001@\000\000\000"
+ 1370      40000000 
+ 1370      01AE5001 
+ 1370      40000000 
+ 1371 026f 14040028 		.ascii	"\024\004\000(\000\003 l\000\000\000\000\000\000\000"
+ 1371      0003206C 
+ 1371      00000000 
+ 1371      000000
+ 1372 027e 0000AE64 		.ascii	"\000\000\256d\000@\000\000\000\001\256\330\001\000\000"
+ 1372      00400000 
+ 1372      0001AED8 
+ 1372      010000
+ 1373 028d C805DC00 		.ascii	"\310\005\334\000\000\014\315\001\004\000\000\000\001"
+ 1373      000CCD01 
+ 1373      04000000 
+ 1373      01
+ 1374 029a 2601B550 		.ascii	"&\001\265P\002\202\243\350\243\270\2448\244(\246H\244"
+ 1374      0282A3E8 
+ 1374      A3B8A438 
+ 1374      A428A648 
+ 1374      A4
+ 1375 02ab 48A788A7 		.ascii	"H\247\210\247H\254\020\247\220\231\274\231\264\232\374"
+ 1375      48AC10A7 
+ 1375      9099BC99 
+ 1375      B49AFC
+ 1376 02ba 9ABC0000 		.ascii	"\232\274\000\000\000\000\000\000\000\000\000\000\000"
+ 1376      00000000 
+ 1376      00000000 
+ 1376      00
+ 1377 02c7 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000\000\000"
+ 1377      00000000 
+ 1377      00000000 
+ 1377      00
+ 1378 02d4 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000\000\000"
+ 1378      00000000 
+ 1378      00000000 
+ 1378      00
+ 1379 02e1 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000\000\000"
+ 1379      00000000 
+ 1379      00000000 
+ 1379      00
+ 1380 02ee 0000B5A0 		.ascii	"\000\000\265\240\002\202\000\210\003\000\000\202\000"
+ 1380      02820088 
+ 1380      03000082 
+ 1380      00
+ 1381 02fb 82040404 		.ascii	"\202\004\004\004\010\000\200\004\001\011\002\011\010"
+ 1381      08008004 
+ 1381      01090209 
+ 1381      08
+ 1382 0308 04040080 		.ascii	"\004\004\000\200\004\001\004\001\000\000\000\000\000"
+ 1382      04010401 
+ 1382      00000000 
+ARM GAS  C:\Temp\ccluW06P.s 			page 38
+
+
+ 1382      00
+ 1383 0315 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000\000\000"
+ 1383      00000000 
+ 1383      00000000 
+ 1383      00
+ 1384 0322 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000\000\000"
+ 1384      00000000 
+ 1384      00000000 
+ 1384      00
+ 1385 032f 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000\000\000"
+ 1385      00000000 
+ 1385      00000000 
+ 1385      00
+ 1386 033c 00000000 		.ascii	"\000\000\000\000\000\000\000\000\265\360\000@\000\004"
+ 1386      00000000 
+ 1386      B5F00040 
+ 1386      0004
+ 1387 034a 0000B39C 		.ascii	"\000\000\263\234\001\000@\000\005\036\002\033\010|\200"
+ 1387      01004000 
+ 1387      051E021B 
+ 1387      087C80
+ 1388 0359 00120100 		.ascii	"\000\022\001\000\001\010\000\266\300\000\300\000\000"
+ 1388      010800B6 
+ 1388      C000C000 
+ 1388      00
+ 1389 0366 60000000 		.ascii	"`\000\000\000 \000\000\000\000\000\256\250\000@\000"
+ 1389      20000000 
+ 1389      0000AEA8 
+ 1389      004000
+ 1390 0375 000405AE 		.ascii	"\000\004\005\256\254\000\200\001\000\001\000\000\002"
+ 1390      AC008001 
+ 1390      00010000 
+ 1390      02
+ 1391 0382 0000AEB4 		.ascii	"\000\000\256\264\000@\000\000\000\000\256\270\000\201"
+ 1391      00400000 
+ 1391      0000AEB8 
+ 1391      0081
+ 1392 0390 00000000 		.ascii	"\000\000\000\000\000\000\000\000\256\300\000\201\000"
+ 1392      00000000 
+ 1392      AEC00081 
+ 1392      00
+ 1393 039d 00000000 		.ascii	"\000\000\000\000\000\000\000\256\310\000\201\010\001"
+ 1393      000000AE 
+ 1393      C8008108 
+ 1393      01
+ 1394 03aa 01080000 		.ascii	"\001\010\000\000\000\010\256\320\000\201\001\010\010"
+ 1394      0008AED0 
+ 1394      00810108 
+ 1394      08
+ 1395 03b7 08000000 		.ascii	"\010\000\000\000\001\265\364\000\200\000\000\000\000"
+ 1395      01B5F400 
+ 1395      80000000 
+ 1395      00
+ 1396 03c4 00000000 		.ascii	"\000\000\000\000\265\374\000\200\000\000\000\000\000"
+ 1396      B5FC0080 
+ 1396      00000000 
+ 1396      00
+ARM GAS  C:\Temp\ccluW06P.s 			page 39
+
+
+ 1397 03d1 000000B6 		.ascii	"\000\000\000\266\004\000@\000\000\000\000\266\010\000"
+ 1397      04004000 
+ 1397      000000B6 
+ 1397      0800
+ 1398 03df 44000000 		.ascii	"D\000\000\000\000\000\000\000\000\000\000\000\000\000"
+ 1398      00000000 
+ 1398      00000000 
+ 1398      0000
+ 1399 03ed 000000B6 		.ascii	"\000\000\000\266\030\000D\000\000\000\000\000\000\000"
+ 1399      18004400 
+ 1399      00000000 
+ 1399      0000
+ 1400 03fb 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\266(\000D\000\000"
+ 1400      00000000 
+ 1400      00B62800 
+ 1400      440000
+ 1401 040a 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000\000\000"
+ 1401      00000000 
+ 1401      00000000 
+ 1401      00
+ 1402 0417 00B63800 		.ascii	"\000\2668\000D\000\000\000\000\000\000\000\000\000\000"
+ 1402      44000000 
+ 1402      00000000 
+ 1402      000000
+ 1403 0426 00000000 		.ascii	"\000\000\000\000\000\000\266H\001\000\000\000\000\000"
+ 1403      0000B648 
+ 1403      01000000 
+ 1403      0000
+ 1404 0434 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000\000\266"
+ 1404      00000000 
+ 1404      00000000 
+ 1404      B6
+ 1405 0441 58010000 		.ascii	"X\001\000\000\000\000\000\000\000\000\000\000\000\000"
+ 1405      00000000 
+ 1405      00000000 
+ 1405      0000
+ 1406 044f 00000000 		.ascii	"\000\000\000\000\000\266h\001\000\000\000\000\000\000"
+ 1406      00B66801 
+ 1406      00000000 
+ 1406      0000
+ 1407 045d 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000Tp\000\200"
+ 1407      00000000 
+ 1407      00000054 
+ 1407      700080
+ 1408 046c 00000000 		.ascii	"\000\000\000\000\000\000\000\002\000\000\000\017\000"
+ 1408      00000002 
+ 1408      0000000F 
+ 1408      00
+ 1409 0479 0103D4   		.ascii	"\001\003\324"
+ 1410              		.text
+ 1411              	.Letext0:
+ 1412              		.file 2 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 1413              		.file 3 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 1414              		.file 4 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 1415              		.file 5 "Drivers/BSP/Components/vl53l8cx/porting/platform.h"
+ 1416              		.file 6 "Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_api.h"
+ 1417              		.file 7 "Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.h"
+ARM GAS  C:\Temp\ccluW06P.s 			page 40
+
+
+ 1418              		.file 8 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 1419              		.file 9 "<built-in>"
+ARM GAS  C:\Temp\ccluW06P.s 			page 41
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 vl53l8cx_plugin_xtalk.c
+  C:\Temp\ccluW06P.s:21     .text._vl53l8cx_poll_for_answer:00000000 $t
+  C:\Temp\ccluW06P.s:26     .text._vl53l8cx_poll_for_answer:00000000 _vl53l8cx_poll_for_answer
+  C:\Temp\ccluW06P.s:120    .text._vl53l8cx_program_output_config:00000000 $t
+  C:\Temp\ccluW06P.s:125    .text._vl53l8cx_program_output_config:00000000 _vl53l8cx_program_output_config
+  C:\Temp\ccluW06P.s:353    .text._vl53l8cx_program_output_config:0000011c $d
+  C:\Temp\ccluW06P.s:358    .text.vl53l8cx_get_caldata_xtalk:00000000 $t
+  C:\Temp\ccluW06P.s:364    .text.vl53l8cx_get_caldata_xtalk:00000000 vl53l8cx_get_caldata_xtalk
+  C:\Temp\ccluW06P.s:501    .text.vl53l8cx_get_caldata_xtalk:000000ac $d
+  C:\Temp\ccluW06P.s:506    .text.vl53l8cx_set_caldata_xtalk:00000000 $t
+  C:\Temp\ccluW06P.s:512    .text.vl53l8cx_set_caldata_xtalk:00000000 vl53l8cx_set_caldata_xtalk
+  C:\Temp\ccluW06P.s:571    .text.vl53l8cx_get_xtalk_margin:00000000 $t
+  C:\Temp\ccluW06P.s:577    .text.vl53l8cx_get_xtalk_margin:00000000 vl53l8cx_get_xtalk_margin
+  C:\Temp\ccluW06P.s:621    .text.vl53l8cx_set_xtalk_margin:00000000 $t
+  C:\Temp\ccluW06P.s:627    .text.vl53l8cx_set_xtalk_margin:00000000 vl53l8cx_set_xtalk_margin
+  C:\Temp\ccluW06P.s:690    .text.vl53l8cx_calibrate_xtalk:00000000 $t
+  C:\Temp\ccluW06P.s:696    .text.vl53l8cx_calibrate_xtalk:00000000 vl53l8cx_calibrate_xtalk
+  C:\Temp\ccluW06P.s:1298   .text.vl53l8cx_calibrate_xtalk:000002e8 $d
+  C:\Temp\ccluW06P.s:1305   .rodata:00000000 $d
+
+UNDEFINED SYMBOLS
+VL53L8CX_RdMulti
+VL53L8CX_WaitMs
+vl53l8cx_get_resolution
+memcpy
+vl53l8cx_dci_write_data
+vl53l8cx_set_resolution
+VL53L8CX_WrMulti
+vl53l8cx_dci_read_data
+vl53l8cx_dci_replace_data
+vl53l8cx_get_ranging_frequency_hz
+vl53l8cx_get_integration_time_ms
+vl53l8cx_get_sharpener_percent
+vl53l8cx_get_target_order
+vl53l8cx_get_ranging_mode
+vl53l8cx_set_ranging_frequency_hz
+vl53l8cx_set_integration_time_ms
+vl53l8cx_set_sharpener_percent
+vl53l8cx_set_target_order
+vl53l8cx_set_ranging_mode

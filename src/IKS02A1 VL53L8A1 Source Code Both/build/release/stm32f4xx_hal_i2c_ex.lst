@@ -1,0 +1,189 @@
+ARM GAS  C:\Temp\ccAdYSMj.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"stm32f4xx_hal_i2c_ex.c"
+  16              		.text
+  17              		.section	.rodata.HAL_I2CEx_ConfigAnalogFilter.str1.4,"aMS",%progbits,1
+  18              		.align	2
+  19              	.LC0:
+  20 0000 44726976 		.ascii	"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_"
+  20      6572732F 
+  20      53544D33 
+  20      32463478 
+  20      785F4841 
+  21 0033 65782E63 		.ascii	"ex.c\000"
+  21      00
+  22              		.section	.text.HAL_I2CEx_ConfigAnalogFilter,"ax",%progbits
+  23              		.align	1
+  24              		.global	HAL_I2CEx_ConfigAnalogFilter
+  25              		.syntax unified
+  26              		.thumb
+  27              		.thumb_func
+  29              	HAL_I2CEx_ConfigAnalogFilter:
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 38B5     		push	{r3, r4, r5, lr}
+  33 0002 0446     		mov	r4, r0
+  34 0004 0D46     		mov	r5, r1
+  35 0006 0368     		ldr	r3, [r0]
+  36 0008 1C4A     		ldr	r2, .L9
+  37 000a 9342     		cmp	r3, r2
+  38 000c 0BD0     		beq	.L2
+  39 000e 02F58062 		add	r2, r2, #1024
+  40 0012 9342     		cmp	r3, r2
+  41 0014 07D0     		beq	.L2
+  42 0016 02F58062 		add	r2, r2, #1024
+  43 001a 9342     		cmp	r3, r2
+  44 001c 03D0     		beq	.L2
+  45 001e 5B21     		movs	r1, #91
+  46 0020 1748     		ldr	r0, .L9+4
+  47 0022 FFF7FEFF 		bl	assert_failed
+  48              	.L2:
+  49 0026 0DB1     		cbz	r5, .L3
+  50 0028 102D     		cmp	r5, #16
+  51 002a 06D1     		bne	.L7
+  52              	.L3:
+  53 002c 94F83D30 		ldrb	r3, [r4, #61]	@ zero_extendqisi2
+ARM GAS  C:\Temp\ccAdYSMj.s 			page 2
+
+
+  54 0030 DBB2     		uxtb	r3, r3
+  55 0032 202B     		cmp	r3, #32
+  56 0034 06D0     		beq	.L8
+  57 0036 0220     		movs	r0, #2
+  58              	.L4:
+  59 0038 38BD     		pop	{r3, r4, r5, pc}
+  60              	.L7:
+  61 003a 5C21     		movs	r1, #92
+  62 003c 1048     		ldr	r0, .L9+4
+  63 003e FFF7FEFF 		bl	assert_failed
+  64 0042 F3E7     		b	.L3
+  65              	.L8:
+  66 0044 2423     		movs	r3, #36
+  67 0046 84F83D30 		strb	r3, [r4, #61]
+  68 004a 2268     		ldr	r2, [r4]
+  69 004c 1368     		ldr	r3, [r2]
+  70 004e 23F00103 		bic	r3, r3, #1
+  71 0052 1360     		str	r3, [r2]
+  72 0054 2268     		ldr	r2, [r4]
+  73 0056 536A     		ldr	r3, [r2, #36]
+  74 0058 23F01003 		bic	r3, r3, #16
+  75 005c 5362     		str	r3, [r2, #36]
+  76 005e 2268     		ldr	r2, [r4]
+  77 0060 536A     		ldr	r3, [r2, #36]
+  78 0062 2B43     		orrs	r3, r3, r5
+  79 0064 5362     		str	r3, [r2, #36]
+  80 0066 2268     		ldr	r2, [r4]
+  81 0068 1368     		ldr	r3, [r2]
+  82 006a 43F00103 		orr	r3, r3, #1
+  83 006e 1360     		str	r3, [r2]
+  84 0070 2023     		movs	r3, #32
+  85 0072 84F83D30 		strb	r3, [r4, #61]
+  86 0076 0020     		movs	r0, #0
+  87 0078 DEE7     		b	.L4
+  88              	.L10:
+  89 007a 00BF     		.align	2
+  90              	.L9:
+  91 007c 00540040 		.word	1073763328
+  92 0080 00000000 		.word	.LC0
+  94              		.section	.text.HAL_I2CEx_ConfigDigitalFilter,"ax",%progbits
+  95              		.align	1
+  96              		.global	HAL_I2CEx_ConfigDigitalFilter
+  97              		.syntax unified
+  98              		.thumb
+  99              		.thumb_func
+ 101              	HAL_I2CEx_ConfigDigitalFilter:
+ 102              		@ args = 0, pretend = 0, frame = 0
+ 103              		@ frame_needed = 0, uses_anonymous_args = 0
+ 104 0000 38B5     		push	{r3, r4, r5, lr}
+ 105 0002 0446     		mov	r4, r0
+ 106 0004 0D46     		mov	r5, r1
+ 107 0006 0368     		ldr	r3, [r0]
+ 108 0008 1B4A     		ldr	r2, .L19
+ 109 000a 9342     		cmp	r3, r2
+ 110 000c 0BD0     		beq	.L12
+ 111 000e 02F58062 		add	r2, r2, #1024
+ 112 0012 9342     		cmp	r3, r2
+ARM GAS  C:\Temp\ccAdYSMj.s 			page 3
+
+
+ 113 0014 07D0     		beq	.L12
+ 114 0016 02F58062 		add	r2, r2, #1024
+ 115 001a 9342     		cmp	r3, r2
+ 116 001c 03D0     		beq	.L12
+ 117 001e 8321     		movs	r1, #131
+ 118 0020 1648     		ldr	r0, .L19+4
+ 119 0022 FFF7FEFF 		bl	assert_failed
+ 120              	.L12:
+ 121 0026 0F2D     		cmp	r5, #15
+ 122 0028 06D8     		bhi	.L17
+ 123              	.L13:
+ 124 002a 94F83D30 		ldrb	r3, [r4, #61]	@ zero_extendqisi2
+ 125 002e DBB2     		uxtb	r3, r3
+ 126 0030 202B     		cmp	r3, #32
+ 127 0032 06D0     		beq	.L18
+ 128 0034 0220     		movs	r0, #2
+ 129              	.L14:
+ 130 0036 38BD     		pop	{r3, r4, r5, pc}
+ 131              	.L17:
+ 132 0038 8421     		movs	r1, #132
+ 133 003a 1048     		ldr	r0, .L19+4
+ 134 003c FFF7FEFF 		bl	assert_failed
+ 135 0040 F3E7     		b	.L13
+ 136              	.L18:
+ 137 0042 2423     		movs	r3, #36
+ 138 0044 84F83D30 		strb	r3, [r4, #61]
+ 139 0048 2268     		ldr	r2, [r4]
+ 140 004a 1368     		ldr	r3, [r2]
+ 141 004c 23F00103 		bic	r3, r3, #1
+ 142 0050 1360     		str	r3, [r2]
+ 143 0052 2268     		ldr	r2, [r4]
+ 144 0054 536A     		ldr	r3, [r2, #36]
+ 145 0056 9BB2     		uxth	r3, r3
+ 146 0058 23F00F03 		bic	r3, r3, #15
+ 147 005c 43EA0501 		orr	r1, r3, r5
+ 148 0060 89B2     		uxth	r1, r1
+ 149 0062 5162     		str	r1, [r2, #36]
+ 150 0064 2268     		ldr	r2, [r4]
+ 151 0066 1368     		ldr	r3, [r2]
+ 152 0068 43F00103 		orr	r3, r3, #1
+ 153 006c 1360     		str	r3, [r2]
+ 154 006e 2023     		movs	r3, #32
+ 155 0070 84F83D30 		strb	r3, [r4, #61]
+ 156 0074 0020     		movs	r0, #0
+ 157 0076 DEE7     		b	.L14
+ 158              	.L20:
+ 159              		.align	2
+ 160              	.L19:
+ 161 0078 00540040 		.word	1073763328
+ 162 007c 00000000 		.word	.LC0
+ 164              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccAdYSMj.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f4xx_hal_i2c_ex.c
+  C:\Temp\ccAdYSMj.s:18     .rodata.HAL_I2CEx_ConfigAnalogFilter.str1.4:00000000 $d
+  C:\Temp\ccAdYSMj.s:23     .text.HAL_I2CEx_ConfigAnalogFilter:00000000 $t
+  C:\Temp\ccAdYSMj.s:29     .text.HAL_I2CEx_ConfigAnalogFilter:00000000 HAL_I2CEx_ConfigAnalogFilter
+  C:\Temp\ccAdYSMj.s:91     .text.HAL_I2CEx_ConfigAnalogFilter:0000007c $d
+  C:\Temp\ccAdYSMj.s:95     .text.HAL_I2CEx_ConfigDigitalFilter:00000000 $t
+  C:\Temp\ccAdYSMj.s:101    .text.HAL_I2CEx_ConfigDigitalFilter:00000000 HAL_I2CEx_ConfigDigitalFilter
+  C:\Temp\ccAdYSMj.s:161    .text.HAL_I2CEx_ConfigDigitalFilter:00000078 $d
+
+UNDEFINED SYMBOLS
+assert_failed

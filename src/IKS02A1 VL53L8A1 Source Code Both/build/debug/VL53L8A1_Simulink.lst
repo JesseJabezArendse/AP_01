@@ -1,0 +1,446 @@
+ARM GAS  C:\Temp\cchW3Bbd.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"VL53L8A1_Simulink.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Core/Src/VL53L8A1_Simulink.c"
+  20              		.section	.rodata.initVL53L8A1.str1.4,"aMS",%progbits,1
+  21              		.align	2
+  22              	.LC0:
+  23 0000 564C3533 		.ascii	"VL53L8A1_RANGING_SENSOR_Init failed\000"
+  23      4C384131 
+  23      5F52414E 
+  23      47494E47 
+  23      5F53454E 
+  24              		.section	.text.initVL53L8A1,"ax",%progbits
+  25              		.align	1
+  26              		.global	initVL53L8A1
+  27              		.syntax unified
+  28              		.thumb
+  29              		.thumb_func
+  31              	initVL53L8A1:
+  32              	.LFB137:
+   1:Core/Src/VL53L8A1_Simulink.c **** ///////////////////////////////////////////////////////////
+   2:Core/Src/VL53L8A1_Simulink.c **** // Project : STM32 Nucleo + VL53L8A1
+   3:Core/Src/VL53L8A1_Simulink.c **** // Abbreviation : AP_01
+   4:Core/Src/VL53L8A1_Simulink.c **** // Microcontroller: STM32 Nucleo F411RE
+   5:Core/Src/VL53L8A1_Simulink.c **** // Made For : Dr. Amir Patel
+   6:Core/Src/VL53L8A1_Simulink.c **** // @author: Jesse Jabez Arendse
+   7:Core/Src/VL53L8A1_Simulink.c **** // @modified: 25/10/2024
+   8:Core/Src/VL53L8A1_Simulink.c **** ///////////////////////////////////////////////////////////
+   9:Core/Src/VL53L8A1_Simulink.c **** 
+  10:Core/Src/VL53L8A1_Simulink.c **** 
+  11:Core/Src/VL53L8A1_Simulink.c **** // Includes ///////////////////////////////////////////////
+  12:Core/Src/VL53L8A1_Simulink.c **** #include "53l8a1_ranging_sensor.h"
+  13:Core/Src/VL53L8A1_Simulink.c **** #include "53l8a1_conf.h"
+  14:Core/Src/VL53L8A1_Simulink.c **** // #include "stm32f4xx_nucleo.h"
+  15:Core/Src/VL53L8A1_Simulink.c **** #include "main.h"
+  16:Core/Src/VL53L8A1_Simulink.c **** 
+  17:Core/Src/VL53L8A1_Simulink.c **** #include "stdio.h"
+  18:Core/Src/VL53L8A1_Simulink.c **** #include <stdint.h>
+  19:Core/Src/VL53L8A1_Simulink.c **** #include <string.h>  // For memcpy
+  20:Core/Src/VL53L8A1_Simulink.c **** #include <stdio.h>
+  21:Core/Src/VL53L8A1_Simulink.c **** 
+  22:Core/Src/VL53L8A1_Simulink.c **** #define TOF_INT_EXTI_PIN    (GPIO_PIN_4)
+ARM GAS  C:\Temp\cchW3Bbd.s 			page 2
+
+
+  23:Core/Src/VL53L8A1_Simulink.c **** #define TOF_INT_EXTI_PORT   (GPIOA)
+  24:Core/Src/VL53L8A1_Simulink.c **** 
+  25:Core/Src/VL53L8A1_Simulink.c **** #define VL53L8A1_PWR_EN_C_PIN   (GPIO_PIN_7)
+  26:Core/Src/VL53L8A1_Simulink.c **** #define VL53L8A1_PWR_EN_C_PORT  (GPIOA)
+  27:Core/Src/VL53L8A1_Simulink.c **** 
+  28:Core/Src/VL53L8A1_Simulink.c **** #define VL53L8A1_LPn_C_PIN   (GPIO_PIN_0)
+  29:Core/Src/VL53L8A1_Simulink.c **** #define VL53L8A1_LPn_C_PORT  (GPIOB)
+  30:Core/Src/VL53L8A1_Simulink.c **** // Project Parent Variables ///////////////////////////////
+  31:Core/Src/VL53L8A1_Simulink.c **** 
+  32:Core/Src/VL53L8A1_Simulink.c **** extern UART_HandleTypeDef huart2;
+  33:Core/Src/VL53L8A1_Simulink.c **** extern uint32_t counter;
+  34:Core/Src/VL53L8A1_Simulink.c **** 
+  35:Core/Src/VL53L8A1_Simulink.c **** // Project Specific Variables /////////////////////////////
+  36:Core/Src/VL53L8A1_Simulink.c **** #define INSTANCE_TOF_CENTRE  VL53L8A1_DEV_CENTER
+  37:Core/Src/VL53L8A1_Simulink.c **** 
+  38:Core/Src/VL53L8A1_Simulink.c **** #define TIMING_BUDGET (30U) /* 16 ms < TimingBudget < 500 ms */
+  39:Core/Src/VL53L8A1_Simulink.c **** #define RANGING_FREQUENCY (10U) /* Ranging frequency Hz (shall be consistent with TimingBudget valu
+  40:Core/Src/VL53L8A1_Simulink.c **** #define POLLING_PERIOD (1)
+  41:Core/Src/VL53L8A1_Simulink.c **** 
+  42:Core/Src/VL53L8A1_Simulink.c **** extern RANGING_SENSOR_Result_t TOF_centre;
+  43:Core/Src/VL53L8A1_Simulink.c **** 
+  44:Core/Src/VL53L8A1_Simulink.c **** 
+  45:Core/Src/VL53L8A1_Simulink.c **** 
+  46:Core/Src/VL53L8A1_Simulink.c **** // mask options from BSP/Components/<IC_reg.h>
+  47:Core/Src/VL53L8A1_Simulink.c **** 
+  48:Core/Src/VL53L8A1_Simulink.c **** // Functions /////////////////////////////////////////////
+  49:Core/Src/VL53L8A1_Simulink.c **** static RANGING_SENSOR_Capabilities_t Cap;
+  50:Core/Src/VL53L8A1_Simulink.c **** static int32_t status = 0;
+  51:Core/Src/VL53L8A1_Simulink.c **** RANGING_SENSOR_ProfileConfig_t Profile;
+  52:Core/Src/VL53L8A1_Simulink.c **** 
+  53:Core/Src/VL53L8A1_Simulink.c **** /*these are the default values for xtalk calibration, update them if needed */
+  54:Core/Src/VL53L8A1_Simulink.c **** uint16_t reflectance = 16; /* expressed in percent (%) - range 0% - 99% */
+  55:Core/Src/VL53L8A1_Simulink.c **** uint16_t cal_distance = 600; /* expressed in millimiters (mm) / range 600 mm - 3000 mm*/
+  56:Core/Src/VL53L8A1_Simulink.c **** 
+  57:Core/Src/VL53L8A1_Simulink.c **** int32_t tof_fsr;
+  58:Core/Src/VL53L8A1_Simulink.c **** float tof_odr;
+  59:Core/Src/VL53L8A1_Simulink.c **** 
+  60:Core/Src/VL53L8A1_Simulink.c **** uint32_t Id;
+  61:Core/Src/VL53L8A1_Simulink.c **** void initVL53L8A1(){
+  33              		.loc 1 61 20 view -0
+  34              		.cfi_startproc
+  35              		@ args = 0, pretend = 0, frame = 0
+  36              		@ frame_needed = 0, uses_anonymous_args = 0
+  37 0000 10B5     		push	{r4, lr}
+  38              		.cfi_def_cfa_offset 8
+  39              		.cfi_offset 4, -8
+  40              		.cfi_offset 14, -4
+  62:Core/Src/VL53L8A1_Simulink.c **** 
+  63:Core/Src/VL53L8A1_Simulink.c ****     HAL_GPIO_WritePin(VL53L8A1_PWR_EN_C_PORT, VL53L8A1_PWR_EN_C_PIN, GPIO_PIN_RESET);
+  41              		.loc 1 63 5 view .LVU1
+  42 0002 224C     		ldr	r4, .L5
+  43 0004 0022     		movs	r2, #0
+  44 0006 8021     		movs	r1, #128
+  45 0008 2046     		mov	r0, r4
+  46 000a FFF7FEFF 		bl	HAL_GPIO_WritePin
+  47              	.LVL0:
+  64:Core/Src/VL53L8A1_Simulink.c ****     HAL_Delay(2);
+ARM GAS  C:\Temp\cchW3Bbd.s 			page 3
+
+
+  48              		.loc 1 64 5 view .LVU2
+  49 000e 0220     		movs	r0, #2
+  50 0010 FFF7FEFF 		bl	HAL_Delay
+  51              	.LVL1:
+  65:Core/Src/VL53L8A1_Simulink.c ****     HAL_GPIO_WritePin(VL53L8A1_PWR_EN_C_PORT, VL53L8A1_PWR_EN_C_PIN, GPIO_PIN_SET);
+  52              		.loc 1 65 5 view .LVU3
+  53 0014 0122     		movs	r2, #1
+  54 0016 8021     		movs	r1, #128
+  55 0018 2046     		mov	r0, r4
+  56 001a FFF7FEFF 		bl	HAL_GPIO_WritePin
+  57              	.LVL2:
+  66:Core/Src/VL53L8A1_Simulink.c ****     HAL_Delay(2);
+  58              		.loc 1 66 5 view .LVU4
+  59 001e 0220     		movs	r0, #2
+  60 0020 FFF7FEFF 		bl	HAL_Delay
+  61              	.LVL3:
+  67:Core/Src/VL53L8A1_Simulink.c ****     HAL_GPIO_WritePin(VL53L8A1_LPn_C_PORT, VL53L8A1_LPn_C_PIN, GPIO_PIN_RESET);
+  62              		.loc 1 67 5 view .LVU5
+  63 0024 04F58064 		add	r4, r4, #1024
+  64 0028 0022     		movs	r2, #0
+  65 002a 0121     		movs	r1, #1
+  66 002c 2046     		mov	r0, r4
+  67 002e FFF7FEFF 		bl	HAL_GPIO_WritePin
+  68              	.LVL4:
+  68:Core/Src/VL53L8A1_Simulink.c ****     HAL_Delay(2);
+  69              		.loc 1 68 5 view .LVU6
+  70 0032 0220     		movs	r0, #2
+  71 0034 FFF7FEFF 		bl	HAL_Delay
+  72              	.LVL5:
+  69:Core/Src/VL53L8A1_Simulink.c ****     HAL_GPIO_WritePin(VL53L8A1_LPn_C_PORT, VL53L8A1_LPn_C_PIN, GPIO_PIN_SET);
+  73              		.loc 1 69 5 view .LVU7
+  74 0038 0122     		movs	r2, #1
+  75 003a 1146     		mov	r1, r2
+  76 003c 2046     		mov	r0, r4
+  77 003e FFF7FEFF 		bl	HAL_GPIO_WritePin
+  78              	.LVL6:
+  70:Core/Src/VL53L8A1_Simulink.c ****     HAL_Delay(2);
+  79              		.loc 1 70 5 view .LVU8
+  80 0042 0220     		movs	r0, #2
+  81 0044 FFF7FEFF 		bl	HAL_Delay
+  82              	.LVL7:
+  71:Core/Src/VL53L8A1_Simulink.c **** 
+  72:Core/Src/VL53L8A1_Simulink.c ****     status = VL53L8A1_RANGING_SENSOR_Init(VL53L8A1_DEV_CENTER);
+  83              		.loc 1 72 5 view .LVU9
+  84              		.loc 1 72 14 is_stmt 0 view .LVU10
+  85 0048 0120     		movs	r0, #1
+  86 004a FFF7FEFF 		bl	VL53L8A1_RANGING_SENSOR_Init
+  87              	.LVL8:
+  88              		.loc 1 72 12 view .LVU11
+  89 004e 104B     		ldr	r3, .L5+4
+  90 0050 1860     		str	r0, [r3]
+  73:Core/Src/VL53L8A1_Simulink.c ****     if (status != BSP_ERROR_NONE)
+  91              		.loc 1 73 5 is_stmt 1 view .LVU12
+  92              		.loc 1 73 8 is_stmt 0 view .LVU13
+  93 0052 18B1     		cbz	r0, .L2
+  74:Core/Src/VL53L8A1_Simulink.c ****     {
+  75:Core/Src/VL53L8A1_Simulink.c ****         printf("VL53L8A1_RANGING_SENSOR_Init failed\n");
+ARM GAS  C:\Temp\cchW3Bbd.s 			page 4
+
+
+  94              		.loc 1 75 9 is_stmt 1 view .LVU14
+  95 0054 0F48     		ldr	r0, .L5+8
+  96 0056 FFF7FEFF 		bl	puts
+  97              	.LVL9:
+  98              	.L3:
+  76:Core/Src/VL53L8A1_Simulink.c ****         while (1);
+  99              		.loc 1 76 9 discriminator 1 view .LVU15
+ 100              		.loc 1 76 15 discriminator 1 view .LVU16
+ 101 005a FEE7     		b	.L3
+ 102              	.L2:
+  77:Core/Src/VL53L8A1_Simulink.c ****     }
+  78:Core/Src/VL53L8A1_Simulink.c **** 
+  79:Core/Src/VL53L8A1_Simulink.c **** 
+  80:Core/Src/VL53L8A1_Simulink.c ****     VL53L8A1_RANGING_SENSOR_ReadID(VL53L8A1_DEV_CENTER, &Id);
+ 103              		.loc 1 80 5 view .LVU17
+ 104 005c 0E49     		ldr	r1, .L5+12
+ 105 005e 0120     		movs	r0, #1
+ 106 0060 FFF7FEFF 		bl	VL53L8A1_RANGING_SENSOR_ReadID
+ 107              	.LVL10:
+  81:Core/Src/VL53L8A1_Simulink.c ****     VL53L8A1_RANGING_SENSOR_GetCapabilities(VL53L8A1_DEV_CENTER, &Cap);
+ 108              		.loc 1 81 5 view .LVU18
+ 109 0064 0D49     		ldr	r1, .L5+16
+ 110 0066 0120     		movs	r0, #1
+ 111 0068 FFF7FEFF 		bl	VL53L8A1_RANGING_SENSOR_GetCapabilities
+ 112              	.LVL11:
+  82:Core/Src/VL53L8A1_Simulink.c **** 
+  83:Core/Src/VL53L8A1_Simulink.c ****     // printf("--- BEGIN XTALK CALIBRATION ---\n");
+  84:Core/Src/VL53L8A1_Simulink.c ****     // VL53L8A1_RANGING_SENSOR_XTalkCalibration(VL53L8A1_DEV_CENTER, reflectance, cal_distance);
+  85:Core/Src/VL53L8A1_Simulink.c ****     // printf("--- END OF XTALK CALIBRATION ---\n");
+  86:Core/Src/VL53L8A1_Simulink.c **** 
+  87:Core/Src/VL53L8A1_Simulink.c **** 
+  88:Core/Src/VL53L8A1_Simulink.c ****     // Profile.Frequency = RANGING_FREQUENCY; /* Ranging frequency Hz (shall be consistent with Tim
+  89:Core/Src/VL53L8A1_Simulink.c ****     Profile.RangingProfile = RS_PROFILE_8x8_CONTINUOUS;
+ 113              		.loc 1 89 5 view .LVU19
+ 114              		.loc 1 89 28 is_stmt 0 view .LVU20
+ 115 006c 0C49     		ldr	r1, .L5+20
+ 116 006e 0324     		movs	r4, #3
+ 117 0070 0C60     		str	r4, [r1]
+  90:Core/Src/VL53L8A1_Simulink.c ****     Profile.TimingBudget = 16;
+ 118              		.loc 1 90 5 is_stmt 1 view .LVU21
+ 119              		.loc 1 90 26 is_stmt 0 view .LVU22
+ 120 0072 1023     		movs	r3, #16
+ 121 0074 4B60     		str	r3, [r1, #4]
+  91:Core/Src/VL53L8A1_Simulink.c ****     Profile.EnableAmbient = 0; /* Enable: 1, Disable: 0 */
+ 122              		.loc 1 91 5 is_stmt 1 view .LVU23
+ 123              		.loc 1 91 27 is_stmt 0 view .LVU24
+ 124 0076 0023     		movs	r3, #0
+ 125 0078 CB60     		str	r3, [r1, #12]
+  92:Core/Src/VL53L8A1_Simulink.c ****     Profile.EnableSignal = 0; /* Enable: 1, Disable: 0 */
+ 126              		.loc 1 92 5 is_stmt 1 view .LVU25
+ 127              		.loc 1 92 26 is_stmt 0 view .LVU26
+ 128 007a 0B61     		str	r3, [r1, #16]
+  93:Core/Src/VL53L8A1_Simulink.c **** 
+  94:Core/Src/VL53L8A1_Simulink.c ****     VL53L8A1_RANGING_SENSOR_ConfigProfile(VL53L8A1_DEV_CENTER , &Profile);
+ 129              		.loc 1 94 5 is_stmt 1 view .LVU27
+ 130 007c 0120     		movs	r0, #1
+ 131 007e FFF7FEFF 		bl	VL53L8A1_RANGING_SENSOR_ConfigProfile
+ARM GAS  C:\Temp\cchW3Bbd.s 			page 5
+
+
+ 132              	.LVL12:
+  95:Core/Src/VL53L8A1_Simulink.c ****     VL53L8A1_RANGING_SENSOR_Start(VL53L8A1_DEV_CENTER , RS_MODE_ASYNC_CONTINUOUS);
+ 133              		.loc 1 95 5 view .LVU28
+ 134 0082 2146     		mov	r1, r4
+ 135 0084 0120     		movs	r0, #1
+ 136 0086 FFF7FEFF 		bl	VL53L8A1_RANGING_SENSOR_Start
+ 137              	.LVL13:
+  96:Core/Src/VL53L8A1_Simulink.c **** }
+ 138              		.loc 1 96 1 is_stmt 0 view .LVU29
+ 139 008a 10BD     		pop	{r4, pc}
+ 140              	.L6:
+ 141              		.align	2
+ 142              	.L5:
+ 143 008c 00000240 		.word	1073872896
+ 144 0090 00000000 		.word	status
+ 145 0094 00000000 		.word	.LC0
+ 146 0098 00000000 		.word	Id
+ 147 009c 00000000 		.word	Cap
+ 148 00a0 00000000 		.word	Profile
+ 149              		.cfi_endproc
+ 150              	.LFE137:
+ 152              		.section	.text.getVL53L8A1,"ax",%progbits
+ 153              		.align	1
+ 154              		.global	getVL53L8A1
+ 155              		.syntax unified
+ 156              		.thumb
+ 157              		.thumb_func
+ 159              	getVL53L8A1:
+ 160              	.LFB138:
+  97:Core/Src/VL53L8A1_Simulink.c **** 
+  98:Core/Src/VL53L8A1_Simulink.c **** 
+  99:Core/Src/VL53L8A1_Simulink.c **** 
+ 100:Core/Src/VL53L8A1_Simulink.c **** void getVL53L8A1(){
+ 161              		.loc 1 100 19 is_stmt 1 view -0
+ 162              		.cfi_startproc
+ 163              		@ args = 0, pretend = 0, frame = 0
+ 164              		@ frame_needed = 0, uses_anonymous_args = 0
+ 165 0000 08B5     		push	{r3, lr}
+ 166              		.cfi_def_cfa_offset 8
+ 167              		.cfi_offset 3, -8
+ 168              		.cfi_offset 14, -4
+ 101:Core/Src/VL53L8A1_Simulink.c ****     VL53L8A1_RANGING_SENSOR_GetDistance(VL53L8A1_DEV_CENTER , &TOF_centre );
+ 169              		.loc 1 101 5 view .LVU31
+ 170 0002 0249     		ldr	r1, .L9
+ 171 0004 0120     		movs	r0, #1
+ 172 0006 FFF7FEFF 		bl	VL53L8A1_RANGING_SENSOR_GetDistance
+ 173              	.LVL14:
+ 102:Core/Src/VL53L8A1_Simulink.c **** }
+ 174              		.loc 1 102 1 is_stmt 0 view .LVU32
+ 175 000a 08BD     		pop	{r3, pc}
+ 176              	.L10:
+ 177              		.align	2
+ 178              	.L9:
+ 179 000c 00000000 		.word	TOF_centre
+ 180              		.cfi_endproc
+ 181              	.LFE138:
+ 183              		.section	.text.calibrateVL53L8A1,"ax",%progbits
+ARM GAS  C:\Temp\cchW3Bbd.s 			page 6
+
+
+ 184              		.align	1
+ 185              		.global	calibrateVL53L8A1
+ 186              		.syntax unified
+ 187              		.thumb
+ 188              		.thumb_func
+ 190              	calibrateVL53L8A1:
+ 191              	.LFB139:
+ 103:Core/Src/VL53L8A1_Simulink.c **** 
+ 104:Core/Src/VL53L8A1_Simulink.c **** 
+ 105:Core/Src/VL53L8A1_Simulink.c **** 
+ 106:Core/Src/VL53L8A1_Simulink.c **** // functions from BSP/<boards>
+ 107:Core/Src/VL53L8A1_Simulink.c **** // parameters from BSP/<boards>
+ 108:Core/Src/VL53L8A1_Simulink.c **** void calibrateVL53L8A1(){
+ 192              		.loc 1 108 25 is_stmt 1 view -0
+ 193              		.cfi_startproc
+ 194              		@ args = 0, pretend = 0, frame = 0
+ 195              		@ frame_needed = 0, uses_anonymous_args = 0
+ 196              		@ link register save eliminated.
+ 109:Core/Src/VL53L8A1_Simulink.c ****     Profile.RangingProfile = RS_PROFILE_8x8_CONTINUOUS;
+ 197              		.loc 1 109 5 view .LVU34
+ 198              		.loc 1 109 28 is_stmt 0 view .LVU35
+ 199 0000 054B     		ldr	r3, .L12
+ 200 0002 0322     		movs	r2, #3
+ 201 0004 1A60     		str	r2, [r3]
+ 110:Core/Src/VL53L8A1_Simulink.c ****     Profile.Frequency = tof_odr;
+ 202              		.loc 1 110 5 is_stmt 1 view .LVU36
+ 203              		.loc 1 110 23 is_stmt 0 view .LVU37
+ 204 0006 054A     		ldr	r2, .L12+4
+ 205 0008 D2ED007A 		vldr.32	s15, [r2]
+ 206 000c FCEEE77A 		vcvt.u32.f32	s15, s15
+ 207 0010 C3ED027A 		vstr.32	s15, [r3, #8]	@ int
+ 111:Core/Src/VL53L8A1_Simulink.c **** }...
+ 208              		.loc 1 111 1 view .LVU38
+ 209 0014 7047     		bx	lr
+ 210              	.L13:
+ 211 0016 00BF     		.align	2
+ 212              	.L12:
+ 213 0018 00000000 		.word	Profile
+ 214 001c 00000000 		.word	tof_odr
+ 215              		.cfi_endproc
+ 216              	.LFE139:
+ 218              		.global	Id
+ 219              		.section	.bss.Id,"aw",%nobits
+ 220              		.align	2
+ 223              	Id:
+ 224 0000 00000000 		.space	4
+ 225              		.global	tof_odr
+ 226              		.section	.bss.tof_odr,"aw",%nobits
+ 227              		.align	2
+ 230              	tof_odr:
+ 231 0000 00000000 		.space	4
+ 232              		.global	tof_fsr
+ 233              		.section	.bss.tof_fsr,"aw",%nobits
+ 234              		.align	2
+ 237              	tof_fsr:
+ 238 0000 00000000 		.space	4
+ 239              		.global	cal_distance
+ARM GAS  C:\Temp\cchW3Bbd.s 			page 7
+
+
+ 240              		.section	.data.cal_distance,"aw"
+ 241              		.align	1
+ 244              	cal_distance:
+ 245 0000 5802     		.short	600
+ 246              		.global	reflectance
+ 247              		.section	.data.reflectance,"aw"
+ 248              		.align	1
+ 251              	reflectance:
+ 252 0000 1000     		.short	16
+ 253              		.global	Profile
+ 254              		.section	.bss.Profile,"aw",%nobits
+ 255              		.align	2
+ 258              	Profile:
+ 259 0000 00000000 		.space	20
+ 259      00000000 
+ 259      00000000 
+ 259      00000000 
+ 259      00000000 
+ 260              		.section	.bss.status,"aw",%nobits
+ 261              		.align	2
+ 264              	status:
+ 265 0000 00000000 		.space	4
+ 266              		.section	.bss.Cap,"aw",%nobits
+ 267              		.align	2
+ 270              	Cap:
+ 271 0000 00000000 		.space	16
+ 271      00000000 
+ 271      00000000 
+ 271      00000000 
+ 272              		.text
+ 273              	.Letext0:
+ 274              		.file 2 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 275              		.file 3 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 276              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f411xe.h"
+ 277              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
+ 278              		.file 6 "c:\\users\\jessejabezarendse\\appdata\\roaming\\code\\user\\globalstorage\\bmd.stm32-for-
+ 279              		.file 7 "Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.h"
+ 280              		.file 8 "Drivers/BSP/53L8A1/53l8a1_ranging_sensor.h"
+ 281              		.file 9 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ 282              		.file 10 "<built-in>"
+ARM GAS  C:\Temp\cchW3Bbd.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 VL53L8A1_Simulink.c
+  C:\Temp\cchW3Bbd.s:21     .rodata.initVL53L8A1.str1.4:00000000 $d
+  C:\Temp\cchW3Bbd.s:25     .text.initVL53L8A1:00000000 $t
+  C:\Temp\cchW3Bbd.s:31     .text.initVL53L8A1:00000000 initVL53L8A1
+  C:\Temp\cchW3Bbd.s:143    .text.initVL53L8A1:0000008c $d
+  C:\Temp\cchW3Bbd.s:264    .bss.status:00000000 status
+  C:\Temp\cchW3Bbd.s:223    .bss.Id:00000000 Id
+  C:\Temp\cchW3Bbd.s:270    .bss.Cap:00000000 Cap
+  C:\Temp\cchW3Bbd.s:258    .bss.Profile:00000000 Profile
+  C:\Temp\cchW3Bbd.s:153    .text.getVL53L8A1:00000000 $t
+  C:\Temp\cchW3Bbd.s:159    .text.getVL53L8A1:00000000 getVL53L8A1
+  C:\Temp\cchW3Bbd.s:179    .text.getVL53L8A1:0000000c $d
+  C:\Temp\cchW3Bbd.s:184    .text.calibrateVL53L8A1:00000000 $t
+  C:\Temp\cchW3Bbd.s:190    .text.calibrateVL53L8A1:00000000 calibrateVL53L8A1
+  C:\Temp\cchW3Bbd.s:213    .text.calibrateVL53L8A1:00000018 $d
+  C:\Temp\cchW3Bbd.s:230    .bss.tof_odr:00000000 tof_odr
+  C:\Temp\cchW3Bbd.s:220    .bss.Id:00000000 $d
+  C:\Temp\cchW3Bbd.s:227    .bss.tof_odr:00000000 $d
+  C:\Temp\cchW3Bbd.s:237    .bss.tof_fsr:00000000 tof_fsr
+  C:\Temp\cchW3Bbd.s:234    .bss.tof_fsr:00000000 $d
+  C:\Temp\cchW3Bbd.s:244    .data.cal_distance:00000000 cal_distance
+  C:\Temp\cchW3Bbd.s:241    .data.cal_distance:00000000 $d
+  C:\Temp\cchW3Bbd.s:251    .data.reflectance:00000000 reflectance
+  C:\Temp\cchW3Bbd.s:248    .data.reflectance:00000000 $d
+  C:\Temp\cchW3Bbd.s:255    .bss.Profile:00000000 $d
+  C:\Temp\cchW3Bbd.s:261    .bss.status:00000000 $d
+  C:\Temp\cchW3Bbd.s:267    .bss.Cap:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_WritePin
+HAL_Delay
+VL53L8A1_RANGING_SENSOR_Init
+puts
+VL53L8A1_RANGING_SENSOR_ReadID
+VL53L8A1_RANGING_SENSOR_GetCapabilities
+VL53L8A1_RANGING_SENSOR_ConfigProfile
+VL53L8A1_RANGING_SENSOR_Start
+VL53L8A1_RANGING_SENSOR_GetDistance
+TOF_centre

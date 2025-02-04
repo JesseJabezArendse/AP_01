@@ -1,0 +1,744 @@
+ARM GAS  C:\Temp\ccCcbybg.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"stm32f4xx_hal_exti.c"
+  16              		.text
+  17              		.section	.rodata.HAL_EXTI_SetConfigLine.str1.4,"aMS",%progbits,1
+  18              		.align	2
+  19              	.LC0:
+  20 0000 44726976 		.ascii	"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti"
+  20      6572732F 
+  20      53544D33 
+  20      32463478 
+  20      785F4841 
+  21 0033 2E6300   		.ascii	".c\000"
+  22              		.section	.text.HAL_EXTI_SetConfigLine,"ax",%progbits
+  23              		.align	1
+  24              		.global	HAL_EXTI_SetConfigLine
+  25              		.syntax unified
+  26              		.thumb
+  27              		.thumb_func
+  29              	HAL_EXTI_SetConfigLine:
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 0028     		cmp	r0, #0
+  33 0002 00F09D80 		beq	.L19
+  34 0006 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  35 0008 0C46     		mov	r4, r1
+  36 000a 0546     		mov	r5, r0
+  37 000c 0029     		cmp	r1, #0
+  38 000e 00F09980 		beq	.L20
+  39 0012 0A68     		ldr	r2, [r1]
+  40 0014 22F0C063 		bic	r3, r2, #100663296
+  41 0018 23F01F03 		bic	r3, r3, #31
+  42 001c 3BB9     		cbnz	r3, .L3
+  43 001e 02F0C063 		and	r3, r2, #100663296
+  44 0022 B3F1007F 		cmp	r3, #33554432
+  45 0026 44D0     		beq	.L4
+  46 0028 B3F1C06F 		cmp	r3, #100663296
+  47 002c 41D0     		beq	.L4
+  48              	.L3:
+  49 002e 9B21     		movs	r1, #155
+  50 0030 4548     		ldr	r0, .L29
+  51 0032 FFF7FEFF 		bl	assert_failed
+  52              	.L5:
+  53 0036 6368     		ldr	r3, [r4, #4]
+  54 0038 13F0030F 		tst	r3, #3
+ARM GAS  C:\Temp\ccCcbybg.s 			page 2
+
+
+  55 003c 01D0     		beq	.L6
+  56 003e 032B     		cmp	r3, #3
+  57 0040 03D9     		bls	.L7
+  58              	.L6:
+  59 0042 9C21     		movs	r1, #156
+  60 0044 4048     		ldr	r0, .L29
+  61 0046 FFF7FEFF 		bl	assert_failed
+  62              	.L7:
+  63 004a 2668     		ldr	r6, [r4]
+  64 004c 2E60     		str	r6, [r5]
+  65 004e 06F01F07 		and	r7, r6, #31
+  66 0052 0125     		movs	r5, #1
+  67 0054 BD40     		lsls	r5, r5, r7
+  68 0056 16F0007F 		tst	r6, #33554432
+  69 005a 18D0     		beq	.L8
+  70 005c A368     		ldr	r3, [r4, #8]
+  71 005e 032B     		cmp	r3, #3
+  72 0060 2CD8     		bhi	.L25
+  73              	.L9:
+  74 0062 A368     		ldr	r3, [r4, #8]
+  75 0064 13F0010F 		tst	r3, #1
+  76 0068 2DD0     		beq	.L10
+  77 006a 384A     		ldr	r2, .L29+4
+  78 006c 9368     		ldr	r3, [r2, #8]
+  79 006e 2B43     		orrs	r3, r3, r5
+  80 0070 9360     		str	r3, [r2, #8]
+  81              	.L11:
+  82 0072 A368     		ldr	r3, [r4, #8]
+  83 0074 13F0020F 		tst	r3, #2
+  84 0078 2BD0     		beq	.L12
+  85 007a 344A     		ldr	r2, .L29+4
+  86 007c D368     		ldr	r3, [r2, #12]
+  87 007e 2B43     		orrs	r3, r3, r5
+  88 0080 D360     		str	r3, [r2, #12]
+  89              	.L13:
+  90 0082 2368     		ldr	r3, [r4]
+  91 0084 03F0C063 		and	r3, r3, #100663296
+  92 0088 B3F1C06F 		cmp	r3, #100663296
+  93 008c 27D0     		beq	.L26
+  94              	.L8:
+  95 008e 6368     		ldr	r3, [r4, #4]
+  96 0090 13F0010F 		tst	r3, #1
+  97 0094 47D0     		beq	.L16
+  98 0096 2D4A     		ldr	r2, .L29+4
+  99 0098 1368     		ldr	r3, [r2]
+ 100 009a 2B43     		orrs	r3, r3, r5
+ 101 009c 1360     		str	r3, [r2]
+ 102              	.L17:
+ 103 009e 6368     		ldr	r3, [r4, #4]
+ 104 00a0 13F0020F 		tst	r3, #2
+ 105 00a4 45D0     		beq	.L18
+ 106 00a6 294A     		ldr	r2, .L29+4
+ 107 00a8 5368     		ldr	r3, [r2, #4]
+ 108 00aa 2B43     		orrs	r3, r3, r5
+ 109 00ac 5360     		str	r3, [r2, #4]
+ 110 00ae 0020     		movs	r0, #0
+ 111              	.L2:
+ARM GAS  C:\Temp\ccCcbybg.s 			page 3
+
+
+ 112 00b0 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 113              	.L4:
+ 114 00b2 02F01F02 		and	r2, r2, #31
+ 115 00b6 162A     		cmp	r2, #22
+ 116 00b8 BDD9     		bls	.L5
+ 117 00ba B8E7     		b	.L3
+ 118              	.L25:
+ 119 00bc A821     		movs	r1, #168
+ 120 00be 2248     		ldr	r0, .L29
+ 121 00c0 FFF7FEFF 		bl	assert_failed
+ 122 00c4 CDE7     		b	.L9
+ 123              	.L10:
+ 124 00c6 214A     		ldr	r2, .L29+4
+ 125 00c8 9368     		ldr	r3, [r2, #8]
+ 126 00ca 23EA0503 		bic	r3, r3, r5
+ 127 00ce 9360     		str	r3, [r2, #8]
+ 128 00d0 CFE7     		b	.L11
+ 129              	.L12:
+ 130 00d2 1E4A     		ldr	r2, .L29+4
+ 131 00d4 D368     		ldr	r3, [r2, #12]
+ 132 00d6 23EA0503 		bic	r3, r3, r5
+ 133 00da D360     		str	r3, [r2, #12]
+ 134 00dc D1E7     		b	.L13
+ 135              	.L26:
+ 136 00de E368     		ldr	r3, [r4, #12]
+ 137 00e0 042B     		cmp	r3, #4
+ 138 00e2 01D9     		bls	.L14
+ 139 00e4 072B     		cmp	r3, #7
+ 140 00e6 14D1     		bne	.L27
+ 141              	.L14:
+ 142 00e8 16F0100F 		tst	r6, #16
+ 143 00ec 16D1     		bne	.L28
+ 144              	.L15:
+ 145 00ee BF08     		lsrs	r7, r7, #2
+ 146 00f0 1749     		ldr	r1, .L29+8
+ 147 00f2 0237     		adds	r7, r7, #2
+ 148 00f4 51F82720 		ldr	r2, [r1, r7, lsl #2]
+ 149 00f8 06F00306 		and	r6, r6, #3
+ 150 00fc B600     		lsls	r6, r6, #2
+ 151 00fe 0F23     		movs	r3, #15
+ 152 0100 B340     		lsls	r3, r3, r6
+ 153 0102 22EA0302 		bic	r2, r2, r3
+ 154 0106 E368     		ldr	r3, [r4, #12]
+ 155 0108 B340     		lsls	r3, r3, r6
+ 156 010a 1343     		orrs	r3, r3, r2
+ 157 010c 41F82730 		str	r3, [r1, r7, lsl #2]
+ 158 0110 BDE7     		b	.L8
+ 159              	.L27:
+ 160 0112 C421     		movs	r1, #196
+ 161 0114 0C48     		ldr	r0, .L29
+ 162 0116 FFF7FEFF 		bl	assert_failed
+ 163 011a E5E7     		b	.L14
+ 164              	.L28:
+ 165 011c C521     		movs	r1, #197
+ 166 011e 0A48     		ldr	r0, .L29
+ 167 0120 FFF7FEFF 		bl	assert_failed
+ 168 0124 E3E7     		b	.L15
+ARM GAS  C:\Temp\ccCcbybg.s 			page 4
+
+
+ 169              	.L16:
+ 170 0126 094A     		ldr	r2, .L29+4
+ 171 0128 1368     		ldr	r3, [r2]
+ 172 012a 23EA0503 		bic	r3, r3, r5
+ 173 012e 1360     		str	r3, [r2]
+ 174 0130 B5E7     		b	.L17
+ 175              	.L18:
+ 176 0132 064A     		ldr	r2, .L29+4
+ 177 0134 5368     		ldr	r3, [r2, #4]
+ 178 0136 23EA0503 		bic	r3, r3, r5
+ 179 013a 5360     		str	r3, [r2, #4]
+ 180 013c 0020     		movs	r0, #0
+ 181 013e B7E7     		b	.L2
+ 182              	.L19:
+ 183 0140 0120     		movs	r0, #1
+ 184 0142 7047     		bx	lr
+ 185              	.L20:
+ 186 0144 0120     		movs	r0, #1
+ 187 0146 B3E7     		b	.L2
+ 188              	.L30:
+ 189              		.align	2
+ 190              	.L29:
+ 191 0148 00000000 		.word	.LC0
+ 192 014c 003C0140 		.word	1073822720
+ 193 0150 00380140 		.word	1073821696
+ 195              		.section	.text.HAL_EXTI_GetConfigLine,"ax",%progbits
+ 196              		.align	1
+ 197              		.global	HAL_EXTI_GetConfigLine
+ 198              		.syntax unified
+ 199              		.thumb
+ 200              		.thumb_func
+ 202              	HAL_EXTI_GetConfigLine:
+ 203              		@ args = 0, pretend = 0, frame = 0
+ 204              		@ frame_needed = 0, uses_anonymous_args = 0
+ 205 0000 0028     		cmp	r0, #0
+ 206 0002 64D0     		beq	.L42
+ 207 0004 70B5     		push	{r4, r5, r6, lr}
+ 208 0006 0C46     		mov	r4, r1
+ 209 0008 0546     		mov	r5, r0
+ 210 000a 0029     		cmp	r1, #0
+ 211 000c 61D0     		beq	.L43
+ 212 000e 0268     		ldr	r2, [r0]
+ 213 0010 22F0C063 		bic	r3, r2, #100663296
+ 214 0014 23F01F03 		bic	r3, r3, #31
+ 215 0018 3BB9     		cbnz	r3, .L33
+ 216 001a 02F0C063 		and	r3, r2, #100663296
+ 217 001e B3F1007F 		cmp	r3, #33554432
+ 218 0022 35D0     		beq	.L34
+ 219 0024 B3F1C06F 		cmp	r3, #100663296
+ 220 0028 32D0     		beq	.L34
+ 221              	.L33:
+ 222 002a FA21     		movs	r1, #250
+ 223 002c 2B48     		ldr	r0, .L52
+ 224 002e FFF7FEFF 		bl	assert_failed
+ 225              	.L35:
+ 226 0032 2D68     		ldr	r5, [r5]
+ 227 0034 2560     		str	r5, [r4]
+ARM GAS  C:\Temp\ccCcbybg.s 			page 5
+
+
+ 228 0036 05F01F06 		and	r6, r5, #31
+ 229 003a 0123     		movs	r3, #1
+ 230 003c B340     		lsls	r3, r3, r6
+ 231 003e 284A     		ldr	r2, .L52+4
+ 232 0040 1268     		ldr	r2, [r2]
+ 233 0042 1A42     		tst	r2, r3
+ 234 0044 29D0     		beq	.L36
+ 235 0046 0122     		movs	r2, #1
+ 236 0048 6260     		str	r2, [r4, #4]
+ 237              	.L37:
+ 238 004a 254A     		ldr	r2, .L52+4
+ 239 004c 5268     		ldr	r2, [r2, #4]
+ 240 004e 1A42     		tst	r2, r3
+ 241 0050 03D0     		beq	.L38
+ 242 0052 6268     		ldr	r2, [r4, #4]
+ 243 0054 42F00202 		orr	r2, r2, #2
+ 244 0058 6260     		str	r2, [r4, #4]
+ 245              	.L38:
+ 246 005a 0022     		movs	r2, #0
+ 247 005c A260     		str	r2, [r4, #8]
+ 248 005e E260     		str	r2, [r4, #12]
+ 249 0060 15F0007F 		tst	r5, #33554432
+ 250 0064 37D0     		beq	.L44
+ 251 0066 1E4A     		ldr	r2, .L52+4
+ 252 0068 9268     		ldr	r2, [r2, #8]
+ 253 006a 1A42     		tst	r2, r3
+ 254 006c 01D0     		beq	.L39
+ 255 006e 0122     		movs	r2, #1
+ 256 0070 A260     		str	r2, [r4, #8]
+ 257              	.L39:
+ 258 0072 1B4A     		ldr	r2, .L52+4
+ 259 0074 D268     		ldr	r2, [r2, #12]
+ 260 0076 1A42     		tst	r2, r3
+ 261 0078 03D0     		beq	.L40
+ 262 007a A368     		ldr	r3, [r4, #8]
+ 263 007c 43F00203 		orr	r3, r3, #2
+ 264 0080 A360     		str	r3, [r4, #8]
+ 265              	.L40:
+ 266 0082 05F0C063 		and	r3, r5, #100663296
+ 267 0086 B3F1C06F 		cmp	r3, #100663296
+ 268 008a 09D0     		beq	.L50
+ 269 008c 0020     		movs	r0, #0
+ 270 008e 23E0     		b	.L32
+ 271              	.L34:
+ 272 0090 02F01F02 		and	r2, r2, #31
+ 273 0094 162A     		cmp	r2, #22
+ 274 0096 CCD9     		bls	.L35
+ 275 0098 C7E7     		b	.L33
+ 276              	.L36:
+ 277 009a 0022     		movs	r2, #0
+ 278 009c 6260     		str	r2, [r4, #4]
+ 279 009e D4E7     		b	.L37
+ 280              	.L50:
+ 281 00a0 15F0100F 		tst	r5, #16
+ 282 00a4 0DD1     		bne	.L51
+ 283              	.L41:
+ 284 00a6 B608     		lsrs	r6, r6, #2
+ARM GAS  C:\Temp\ccCcbybg.s 			page 6
+
+
+ 285 00a8 0236     		adds	r6, r6, #2
+ 286 00aa 0E4B     		ldr	r3, .L52+8
+ 287 00ac 53F82630 		ldr	r3, [r3, r6, lsl #2]
+ 288 00b0 05F00305 		and	r5, r5, #3
+ 289 00b4 AD00     		lsls	r5, r5, #2
+ 290 00b6 EB40     		lsrs	r3, r3, r5
+ 291 00b8 03F00F03 		and	r3, r3, #15
+ 292 00bc E360     		str	r3, [r4, #12]
+ 293 00be 0020     		movs	r0, #0
+ 294 00c0 0AE0     		b	.L32
+ 295              	.L51:
+ 296 00c2 40F22D11 		movw	r1, #301
+ 297 00c6 0548     		ldr	r0, .L52
+ 298 00c8 FFF7FEFF 		bl	assert_failed
+ 299 00cc EBE7     		b	.L41
+ 300              	.L42:
+ 301 00ce 0120     		movs	r0, #1
+ 302 00d0 7047     		bx	lr
+ 303              	.L43:
+ 304 00d2 0120     		movs	r0, #1
+ 305 00d4 00E0     		b	.L32
+ 306              	.L44:
+ 307 00d6 0020     		movs	r0, #0
+ 308              	.L32:
+ 309 00d8 70BD     		pop	{r4, r5, r6, pc}
+ 310              	.L53:
+ 311 00da 00BF     		.align	2
+ 312              	.L52:
+ 313 00dc 00000000 		.word	.LC0
+ 314 00e0 003C0140 		.word	1073822720
+ 315 00e4 00380140 		.word	1073821696
+ 317              		.section	.text.HAL_EXTI_ClearConfigLine,"ax",%progbits
+ 318              		.align	1
+ 319              		.global	HAL_EXTI_ClearConfigLine
+ 320              		.syntax unified
+ 321              		.thumb
+ 322              		.thumb_func
+ 324              	HAL_EXTI_ClearConfigLine:
+ 325              		@ args = 0, pretend = 0, frame = 0
+ 326              		@ frame_needed = 0, uses_anonymous_args = 0
+ 327 0000 0028     		cmp	r0, #0
+ 328 0002 54D0     		beq	.L60
+ 329 0004 70B5     		push	{r4, r5, r6, lr}
+ 330 0006 0446     		mov	r4, r0
+ 331 0008 0268     		ldr	r2, [r0]
+ 332 000a 22F0C063 		bic	r3, r2, #100663296
+ 333 000e 23F01F03 		bic	r3, r3, #31
+ 334 0012 3BB9     		cbnz	r3, .L56
+ 335 0014 02F0C063 		and	r3, r2, #100663296
+ 336 0018 B3F1007F 		cmp	r3, #33554432
+ 337 001c 29D0     		beq	.L57
+ 338 001e B3F1C06F 		cmp	r3, #100663296
+ 339 0022 26D0     		beq	.L57
+ 340              	.L56:
+ 341 0024 40F24911 		movw	r1, #329
+ 342 0028 2348     		ldr	r0, .L69
+ 343 002a FFF7FEFF 		bl	assert_failed
+ARM GAS  C:\Temp\ccCcbybg.s 			page 7
+
+
+ 344              	.L58:
+ 345 002e 2668     		ldr	r6, [r4]
+ 346 0030 06F01F05 		and	r5, r6, #31
+ 347 0034 0123     		movs	r3, #1
+ 348 0036 AB40     		lsls	r3, r3, r5
+ 349 0038 204A     		ldr	r2, .L69+4
+ 350 003a 1168     		ldr	r1, [r2]
+ 351 003c D843     		mvns	r0, r3
+ 352 003e 21EA0301 		bic	r1, r1, r3
+ 353 0042 1160     		str	r1, [r2]
+ 354 0044 5168     		ldr	r1, [r2, #4]
+ 355 0046 21EA0303 		bic	r3, r1, r3
+ 356 004a 5360     		str	r3, [r2, #4]
+ 357 004c 2368     		ldr	r3, [r4]
+ 358 004e 13F0007F 		tst	r3, #33554432
+ 359 0052 2ED0     		beq	.L61
+ 360 0054 1346     		mov	r3, r2
+ 361 0056 9268     		ldr	r2, [r2, #8]
+ 362 0058 0240     		ands	r2, r2, r0
+ 363 005a 9A60     		str	r2, [r3, #8]
+ 364 005c DA68     		ldr	r2, [r3, #12]
+ 365 005e 1040     		ands	r0, r0, r2
+ 366 0060 D860     		str	r0, [r3, #12]
+ 367 0062 2368     		ldr	r3, [r4]
+ 368 0064 03F0C063 		and	r3, r3, #100663296
+ 369 0068 B3F1C06F 		cmp	r3, #100663296
+ 370 006c 06D0     		beq	.L67
+ 371 006e 0020     		movs	r0, #0
+ 372 0070 20E0     		b	.L55
+ 373              	.L57:
+ 374 0072 02F01F02 		and	r2, r2, #31
+ 375 0076 162A     		cmp	r2, #22
+ 376 0078 D9D9     		bls	.L58
+ 377 007a D3E7     		b	.L56
+ 378              	.L67:
+ 379 007c 16F0100F 		tst	r6, #16
+ 380 0080 0FD1     		bne	.L68
+ 381              	.L59:
+ 382 0082 AD08     		lsrs	r5, r5, #2
+ 383 0084 0E49     		ldr	r1, .L69+8
+ 384 0086 0235     		adds	r5, r5, #2
+ 385 0088 51F82530 		ldr	r3, [r1, r5, lsl #2]
+ 386 008c 06F00306 		and	r6, r6, #3
+ 387 0090 B600     		lsls	r6, r6, #2
+ 388 0092 0F22     		movs	r2, #15
+ 389 0094 B240     		lsls	r2, r2, r6
+ 390 0096 23EA0203 		bic	r3, r3, r2
+ 391 009a 41F82530 		str	r3, [r1, r5, lsl #2]
+ 392 009e 0020     		movs	r0, #0
+ 393 00a0 08E0     		b	.L55
+ 394              	.L68:
+ 395 00a2 4FF4AF71 		mov	r1, #350
+ 396 00a6 0448     		ldr	r0, .L69
+ 397 00a8 FFF7FEFF 		bl	assert_failed
+ 398 00ac E9E7     		b	.L59
+ 399              	.L60:
+ 400 00ae 0120     		movs	r0, #1
+ARM GAS  C:\Temp\ccCcbybg.s 			page 8
+
+
+ 401 00b0 7047     		bx	lr
+ 402              	.L61:
+ 403 00b2 0020     		movs	r0, #0
+ 404              	.L55:
+ 405 00b4 70BD     		pop	{r4, r5, r6, pc}
+ 406              	.L70:
+ 407 00b6 00BF     		.align	2
+ 408              	.L69:
+ 409 00b8 00000000 		.word	.LC0
+ 410 00bc 003C0140 		.word	1073822720
+ 411 00c0 00380140 		.word	1073821696
+ 413              		.section	.text.HAL_EXTI_RegisterCallback,"ax",%progbits
+ 414              		.align	1
+ 415              		.global	HAL_EXTI_RegisterCallback
+ 416              		.syntax unified
+ 417              		.thumb
+ 418              		.thumb_func
+ 420              	HAL_EXTI_RegisterCallback:
+ 421              		@ args = 0, pretend = 0, frame = 0
+ 422              		@ frame_needed = 0, uses_anonymous_args = 0
+ 423              		@ link register save eliminated.
+ 424 0000 0346     		mov	r3, r0
+ 425 0002 0846     		mov	r0, r1
+ 426 0004 09B9     		cbnz	r1, .L73
+ 427 0006 5A60     		str	r2, [r3, #4]
+ 428 0008 7047     		bx	lr
+ 429              	.L73:
+ 430 000a 0120     		movs	r0, #1
+ 431 000c 7047     		bx	lr
+ 433              		.section	.text.HAL_EXTI_GetHandle,"ax",%progbits
+ 434              		.align	1
+ 435              		.global	HAL_EXTI_GetHandle
+ 436              		.syntax unified
+ 437              		.thumb
+ 438              		.thumb_func
+ 440              	HAL_EXTI_GetHandle:
+ 441              		@ args = 0, pretend = 0, frame = 0
+ 442              		@ frame_needed = 0, uses_anonymous_args = 0
+ 443 0000 38B5     		push	{r3, r4, r5, lr}
+ 444 0002 0546     		mov	r5, r0
+ 445 0004 0C46     		mov	r4, r1
+ 446 0006 21F0C063 		bic	r3, r1, #100663296
+ 447 000a 23F01F03 		bic	r3, r3, #31
+ 448 000e 3BB9     		cbnz	r3, .L75
+ 449 0010 01F0C063 		and	r3, r1, #100663296
+ 450 0014 B3F1007F 		cmp	r3, #33554432
+ 451 0018 0BD0     		beq	.L76
+ 452 001a B3F1C06F 		cmp	r3, #100663296
+ 453 001e 08D0     		beq	.L76
+ 454              	.L75:
+ 455 0020 40F28D11 		movw	r1, #397
+ 456 0024 0648     		ldr	r0, .L81
+ 457 0026 FFF7FEFF 		bl	assert_failed
+ 458              	.L77:
+ 459 002a 3DB1     		cbz	r5, .L79
+ 460 002c 2C60     		str	r4, [r5]
+ 461 002e 0020     		movs	r0, #0
+ARM GAS  C:\Temp\ccCcbybg.s 			page 9
+
+
+ 462              	.L78:
+ 463 0030 38BD     		pop	{r3, r4, r5, pc}
+ 464              	.L76:
+ 465 0032 04F01F03 		and	r3, r4, #31
+ 466 0036 162B     		cmp	r3, #22
+ 467 0038 F7D9     		bls	.L77
+ 468 003a F1E7     		b	.L75
+ 469              	.L79:
+ 470 003c 0120     		movs	r0, #1
+ 471 003e F7E7     		b	.L78
+ 472              	.L82:
+ 473              		.align	2
+ 474              	.L81:
+ 475 0040 00000000 		.word	.LC0
+ 477              		.section	.text.HAL_EXTI_IRQHandler,"ax",%progbits
+ 478              		.align	1
+ 479              		.global	HAL_EXTI_IRQHandler
+ 480              		.syntax unified
+ 481              		.thumb
+ 482              		.thumb_func
+ 484              	HAL_EXTI_IRQHandler:
+ 485              		@ args = 0, pretend = 0, frame = 0
+ 486              		@ frame_needed = 0, uses_anonymous_args = 0
+ 487 0000 08B5     		push	{r3, lr}
+ 488 0002 0368     		ldr	r3, [r0]
+ 489 0004 03F01F02 		and	r2, r3, #31
+ 490 0008 0123     		movs	r3, #1
+ 491 000a 9340     		lsls	r3, r3, r2
+ 492 000c 044A     		ldr	r2, .L86
+ 493 000e 5269     		ldr	r2, [r2, #20]
+ 494 0010 1A42     		tst	r2, r3
+ 495 0012 04D0     		beq	.L83
+ 496 0014 024A     		ldr	r2, .L86
+ 497 0016 5361     		str	r3, [r2, #20]
+ 498 0018 4368     		ldr	r3, [r0, #4]
+ 499 001a 03B1     		cbz	r3, .L83
+ 500 001c 9847     		blx	r3
+ 501              	.L83:
+ 502 001e 08BD     		pop	{r3, pc}
+ 503              	.L87:
+ 504              		.align	2
+ 505              	.L86:
+ 506 0020 003C0140 		.word	1073822720
+ 508              		.section	.text.HAL_EXTI_GetPending,"ax",%progbits
+ 509              		.align	1
+ 510              		.global	HAL_EXTI_GetPending
+ 511              		.syntax unified
+ 512              		.thumb
+ 513              		.thumb_func
+ 515              	HAL_EXTI_GetPending:
+ 516              		@ args = 0, pretend = 0, frame = 0
+ 517              		@ frame_needed = 0, uses_anonymous_args = 0
+ 518 0000 38B5     		push	{r3, r4, r5, lr}
+ 519 0002 0446     		mov	r4, r0
+ 520 0004 0D46     		mov	r5, r1
+ 521 0006 0268     		ldr	r2, [r0]
+ 522 0008 22F0C063 		bic	r3, r2, #100663296
+ARM GAS  C:\Temp\ccCcbybg.s 			page 10
+
+
+ 523 000c 23F01F03 		bic	r3, r3, #31
+ 524 0010 3BB9     		cbnz	r3, .L89
+ 525 0012 02F0C063 		and	r3, r2, #100663296
+ 526 0016 B3F1007F 		cmp	r3, #33554432
+ 527 001a 17D0     		beq	.L90
+ 528 001c B3F1C06F 		cmp	r3, #100663296
+ 529 0020 14D0     		beq	.L90
+ 530              	.L89:
+ 531 0022 4FF4EE71 		mov	r1, #476
+ 532 0026 1248     		ldr	r0, .L97
+ 533 0028 FFF7FEFF 		bl	assert_failed
+ 534              	.L91:
+ 535 002c 2368     		ldr	r3, [r4]
+ 536 002e 13F0007F 		tst	r3, #33554432
+ 537 0032 10D0     		beq	.L95
+ 538              	.L92:
+ 539 0034 032D     		cmp	r5, #3
+ 540 0036 14D1     		bne	.L96
+ 541              	.L93:
+ 542 0038 2368     		ldr	r3, [r4]
+ 543 003a 03F01F03 		and	r3, r3, #31
+ 544 003e 0122     		movs	r2, #1
+ 545 0040 9A40     		lsls	r2, r2, r3
+ 546 0042 0C49     		ldr	r1, .L97+4
+ 547 0044 4869     		ldr	r0, [r1, #20]
+ 548 0046 1040     		ands	r0, r0, r2
+ 549 0048 D840     		lsrs	r0, r0, r3
+ 550 004a 38BD     		pop	{r3, r4, r5, pc}
+ 551              	.L90:
+ 552 004c 02F01F02 		and	r2, r2, #31
+ 553 0050 162A     		cmp	r2, #22
+ 554 0052 EBD9     		bls	.L91
+ 555 0054 E5E7     		b	.L89
+ 556              	.L95:
+ 557 0056 40F2DD11 		movw	r1, #477
+ 558 005a 0548     		ldr	r0, .L97
+ 559 005c FFF7FEFF 		bl	assert_failed
+ 560 0060 E8E7     		b	.L92
+ 561              	.L96:
+ 562 0062 4FF4EF71 		mov	r1, #478
+ 563 0066 0248     		ldr	r0, .L97
+ 564 0068 FFF7FEFF 		bl	assert_failed
+ 565 006c E4E7     		b	.L93
+ 566              	.L98:
+ 567 006e 00BF     		.align	2
+ 568              	.L97:
+ 569 0070 00000000 		.word	.LC0
+ 570 0074 003C0140 		.word	1073822720
+ 572              		.section	.text.HAL_EXTI_ClearPending,"ax",%progbits
+ 573              		.align	1
+ 574              		.global	HAL_EXTI_ClearPending
+ 575              		.syntax unified
+ 576              		.thumb
+ 577              		.thumb_func
+ 579              	HAL_EXTI_ClearPending:
+ 580              		@ args = 0, pretend = 0, frame = 0
+ 581              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Temp\ccCcbybg.s 			page 11
+
+
+ 582 0000 38B5     		push	{r3, r4, r5, lr}
+ 583 0002 0446     		mov	r4, r0
+ 584 0004 0D46     		mov	r5, r1
+ 585 0006 0268     		ldr	r2, [r0]
+ 586 0008 22F0C063 		bic	r3, r2, #100663296
+ 587 000c 23F01F03 		bic	r3, r3, #31
+ 588 0010 3BB9     		cbnz	r3, .L100
+ 589 0012 02F0C063 		and	r3, r2, #100663296
+ 590 0016 B3F1007F 		cmp	r3, #33554432
+ 591 001a 15D0     		beq	.L101
+ 592 001c B3F1C06F 		cmp	r3, #100663296
+ 593 0020 12D0     		beq	.L101
+ 594              	.L100:
+ 595 0022 4FF4FD71 		mov	r1, #506
+ 596 0026 1148     		ldr	r0, .L108
+ 597 0028 FFF7FEFF 		bl	assert_failed
+ 598              	.L102:
+ 599 002c 2368     		ldr	r3, [r4]
+ 600 002e 13F0007F 		tst	r3, #33554432
+ 601 0032 0ED0     		beq	.L106
+ 602              	.L103:
+ 603 0034 032D     		cmp	r5, #3
+ 604 0036 12D1     		bne	.L107
+ 605              	.L104:
+ 606 0038 2268     		ldr	r2, [r4]
+ 607 003a 02F01F02 		and	r2, r2, #31
+ 608 003e 0123     		movs	r3, #1
+ 609 0040 9340     		lsls	r3, r3, r2
+ 610 0042 0B4A     		ldr	r2, .L108+4
+ 611 0044 5361     		str	r3, [r2, #20]
+ 612 0046 38BD     		pop	{r3, r4, r5, pc}
+ 613              	.L101:
+ 614 0048 02F01F02 		and	r2, r2, #31
+ 615 004c 162A     		cmp	r2, #22
+ 616 004e EDD9     		bls	.L102
+ 617 0050 E7E7     		b	.L100
+ 618              	.L106:
+ 619 0052 40F2FB11 		movw	r1, #507
+ 620 0056 0548     		ldr	r0, .L108
+ 621 0058 FFF7FEFF 		bl	assert_failed
+ 622 005c EAE7     		b	.L103
+ 623              	.L107:
+ 624 005e 4FF4FE71 		mov	r1, #508
+ 625 0062 0248     		ldr	r0, .L108
+ 626 0064 FFF7FEFF 		bl	assert_failed
+ 627 0068 E6E7     		b	.L104
+ 628              	.L109:
+ 629 006a 00BF     		.align	2
+ 630              	.L108:
+ 631 006c 00000000 		.word	.LC0
+ 632 0070 003C0140 		.word	1073822720
+ 634              		.section	.text.HAL_EXTI_GenerateSWI,"ax",%progbits
+ 635              		.align	1
+ 636              		.global	HAL_EXTI_GenerateSWI
+ 637              		.syntax unified
+ 638              		.thumb
+ 639              		.thumb_func
+ARM GAS  C:\Temp\ccCcbybg.s 			page 12
+
+
+ 641              	HAL_EXTI_GenerateSWI:
+ 642              		@ args = 0, pretend = 0, frame = 0
+ 643              		@ frame_needed = 0, uses_anonymous_args = 0
+ 644 0000 10B5     		push	{r4, lr}
+ 645 0002 0446     		mov	r4, r0
+ 646 0004 0268     		ldr	r2, [r0]
+ 647 0006 22F0C063 		bic	r3, r2, #100663296
+ 648 000a 23F01F03 		bic	r3, r3, #31
+ 649 000e 3BB9     		cbnz	r3, .L111
+ 650 0010 02F0C063 		and	r3, r2, #100663296
+ 651 0014 B3F1007F 		cmp	r3, #33554432
+ 652 0018 13D0     		beq	.L112
+ 653 001a B3F1C06F 		cmp	r3, #100663296
+ 654 001e 10D0     		beq	.L112
+ 655              	.L111:
+ 656 0020 40F20F21 		movw	r1, #527
+ 657 0024 0C48     		ldr	r0, .L117
+ 658 0026 FFF7FEFF 		bl	assert_failed
+ 659              	.L113:
+ 660 002a 2368     		ldr	r3, [r4]
+ 661 002c 13F0007F 		tst	r3, #33554432
+ 662 0030 0CD0     		beq	.L116
+ 663              	.L114:
+ 664 0032 2268     		ldr	r2, [r4]
+ 665 0034 02F01F02 		and	r2, r2, #31
+ 666 0038 0123     		movs	r3, #1
+ 667 003a 9340     		lsls	r3, r3, r2
+ 668 003c 074A     		ldr	r2, .L117+4
+ 669 003e 1361     		str	r3, [r2, #16]
+ 670 0040 10BD     		pop	{r4, pc}
+ 671              	.L112:
+ 672 0042 02F01F02 		and	r2, r2, #31
+ 673 0046 162A     		cmp	r2, #22
+ 674 0048 EFD9     		bls	.L113
+ 675 004a E9E7     		b	.L111
+ 676              	.L116:
+ 677 004c 4FF40471 		mov	r1, #528
+ 678 0050 0148     		ldr	r0, .L117
+ 679 0052 FFF7FEFF 		bl	assert_failed
+ 680 0056 ECE7     		b	.L114
+ 681              	.L118:
+ 682              		.align	2
+ 683              	.L117:
+ 684 0058 00000000 		.word	.LC0
+ 685 005c 003C0140 		.word	1073822720
+ 687              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccCcbybg.s 			page 13
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f4xx_hal_exti.c
+  C:\Temp\ccCcbybg.s:18     .rodata.HAL_EXTI_SetConfigLine.str1.4:00000000 $d
+  C:\Temp\ccCcbybg.s:23     .text.HAL_EXTI_SetConfigLine:00000000 $t
+  C:\Temp\ccCcbybg.s:29     .text.HAL_EXTI_SetConfigLine:00000000 HAL_EXTI_SetConfigLine
+  C:\Temp\ccCcbybg.s:191    .text.HAL_EXTI_SetConfigLine:00000148 $d
+  C:\Temp\ccCcbybg.s:196    .text.HAL_EXTI_GetConfigLine:00000000 $t
+  C:\Temp\ccCcbybg.s:202    .text.HAL_EXTI_GetConfigLine:00000000 HAL_EXTI_GetConfigLine
+  C:\Temp\ccCcbybg.s:313    .text.HAL_EXTI_GetConfigLine:000000dc $d
+  C:\Temp\ccCcbybg.s:318    .text.HAL_EXTI_ClearConfigLine:00000000 $t
+  C:\Temp\ccCcbybg.s:324    .text.HAL_EXTI_ClearConfigLine:00000000 HAL_EXTI_ClearConfigLine
+  C:\Temp\ccCcbybg.s:409    .text.HAL_EXTI_ClearConfigLine:000000b8 $d
+  C:\Temp\ccCcbybg.s:414    .text.HAL_EXTI_RegisterCallback:00000000 $t
+  C:\Temp\ccCcbybg.s:420    .text.HAL_EXTI_RegisterCallback:00000000 HAL_EXTI_RegisterCallback
+  C:\Temp\ccCcbybg.s:434    .text.HAL_EXTI_GetHandle:00000000 $t
+  C:\Temp\ccCcbybg.s:440    .text.HAL_EXTI_GetHandle:00000000 HAL_EXTI_GetHandle
+  C:\Temp\ccCcbybg.s:475    .text.HAL_EXTI_GetHandle:00000040 $d
+  C:\Temp\ccCcbybg.s:478    .text.HAL_EXTI_IRQHandler:00000000 $t
+  C:\Temp\ccCcbybg.s:484    .text.HAL_EXTI_IRQHandler:00000000 HAL_EXTI_IRQHandler
+  C:\Temp\ccCcbybg.s:506    .text.HAL_EXTI_IRQHandler:00000020 $d
+  C:\Temp\ccCcbybg.s:509    .text.HAL_EXTI_GetPending:00000000 $t
+  C:\Temp\ccCcbybg.s:515    .text.HAL_EXTI_GetPending:00000000 HAL_EXTI_GetPending
+  C:\Temp\ccCcbybg.s:569    .text.HAL_EXTI_GetPending:00000070 $d
+  C:\Temp\ccCcbybg.s:573    .text.HAL_EXTI_ClearPending:00000000 $t
+  C:\Temp\ccCcbybg.s:579    .text.HAL_EXTI_ClearPending:00000000 HAL_EXTI_ClearPending
+  C:\Temp\ccCcbybg.s:631    .text.HAL_EXTI_ClearPending:0000006c $d
+  C:\Temp\ccCcbybg.s:635    .text.HAL_EXTI_GenerateSWI:00000000 $t
+  C:\Temp\ccCcbybg.s:641    .text.HAL_EXTI_GenerateSWI:00000000 HAL_EXTI_GenerateSWI
+  C:\Temp\ccCcbybg.s:684    .text.HAL_EXTI_GenerateSWI:00000058 $d
+
+UNDEFINED SYMBOLS
+assert_failed

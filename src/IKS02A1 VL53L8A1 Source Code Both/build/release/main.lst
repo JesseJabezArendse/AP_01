@@ -1,0 +1,1232 @@
+ARM GAS  C:\Temp\ccZiDl3m.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"main.c"
+  16              		.text
+  17              		.section	.text.bytesToFloat_main,"ax",%progbits
+  18              		.align	1
+  19              		.global	bytesToFloat_main
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	bytesToFloat_main:
+  25              		@ args = 0, pretend = 0, frame = 8
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27              		@ link register save eliminated.
+  28 0000 82B0     		sub	sp, sp, #8
+  29 0002 8DF80400 		strb	r0, [sp, #4]
+  30 0006 8DF80510 		strb	r1, [sp, #5]
+  31 000a 8DF80620 		strb	r2, [sp, #6]
+  32 000e 8DF80730 		strb	r3, [sp, #7]
+  33 0012 9DED010A 		vldr.32	s0, [sp, #4]
+  34 0016 02B0     		add	sp, sp, #8
+  35              		@ sp needed
+  36 0018 7047     		bx	lr
+  38              		.section	.text.bytesToInt32_main,"ax",%progbits
+  39              		.align	1
+  40              		.global	bytesToInt32_main
+  41              		.syntax unified
+  42              		.thumb
+  43              		.thumb_func
+  45              	bytesToInt32_main:
+  46              		@ args = 0, pretend = 0, frame = 8
+  47              		@ frame_needed = 0, uses_anonymous_args = 0
+  48              		@ link register save eliminated.
+  49 0000 82B0     		sub	sp, sp, #8
+  50 0002 8DF80400 		strb	r0, [sp, #4]
+  51 0006 8DF80510 		strb	r1, [sp, #5]
+  52 000a 8DF80620 		strb	r2, [sp, #6]
+  53 000e 8DF80730 		strb	r3, [sp, #7]
+  54 0012 0198     		ldr	r0, [sp, #4]
+  55 0014 02B0     		add	sp, sp, #8
+  56              		@ sp needed
+  57 0016 7047     		bx	lr
+  59              		.section	.text.receivedFromSimulink,"ax",%progbits
+  60              		.align	1
+  61              		.global	receivedFromSimulink
+ARM GAS  C:\Temp\ccZiDl3m.s 			page 2
+
+
+  62              		.syntax unified
+  63              		.thumb
+  64              		.thumb_func
+  66              	receivedFromSimulink:
+  67              		@ args = 0, pretend = 0, frame = 0
+  68              		@ frame_needed = 0, uses_anonymous_args = 0
+  69 0000 10B5     		push	{r4, lr}
+  70 0002 0446     		mov	r4, r0
+  71 0004 8379     		ldrb	r3, [r0, #6]	@ zero_extendqisi2
+  72 0006 4279     		ldrb	r2, [r0, #5]	@ zero_extendqisi2
+  73 0008 0179     		ldrb	r1, [r0, #4]	@ zero_extendqisi2
+  74 000a C078     		ldrb	r0, [r0, #3]	@ zero_extendqisi2
+  75 000c FFF7FEFF 		bl	bytesToInt32_main
+  76 0010 214B     		ldr	r3, .L7
+  77 0012 1860     		str	r0, [r3]
+  78 0014 A37A     		ldrb	r3, [r4, #10]	@ zero_extendqisi2
+  79 0016 627A     		ldrb	r2, [r4, #9]	@ zero_extendqisi2
+  80 0018 217A     		ldrb	r1, [r4, #8]	@ zero_extendqisi2
+  81 001a E079     		ldrb	r0, [r4, #7]	@ zero_extendqisi2
+  82 001c FFF7FEFF 		bl	bytesToFloat_main
+  83 0020 1E4B     		ldr	r3, .L7+4
+  84 0022 83ED000A 		vstr.32	s0, [r3]
+  85 0026 A37B     		ldrb	r3, [r4, #14]	@ zero_extendqisi2
+  86 0028 627B     		ldrb	r2, [r4, #13]	@ zero_extendqisi2
+  87 002a 217B     		ldrb	r1, [r4, #12]	@ zero_extendqisi2
+  88 002c E07A     		ldrb	r0, [r4, #11]	@ zero_extendqisi2
+  89 002e FFF7FEFF 		bl	bytesToInt32_main
+  90 0032 1B4B     		ldr	r3, .L7+8
+  91 0034 1860     		str	r0, [r3]
+  92 0036 A37C     		ldrb	r3, [r4, #18]	@ zero_extendqisi2
+  93 0038 627C     		ldrb	r2, [r4, #17]	@ zero_extendqisi2
+  94 003a 217C     		ldrb	r1, [r4, #16]	@ zero_extendqisi2
+  95 003c E07B     		ldrb	r0, [r4, #15]	@ zero_extendqisi2
+  96 003e FFF7FEFF 		bl	bytesToFloat_main
+  97 0042 184B     		ldr	r3, .L7+12
+  98 0044 83ED000A 		vstr.32	s0, [r3]
+  99 0048 A37D     		ldrb	r3, [r4, #22]	@ zero_extendqisi2
+ 100 004a 627D     		ldrb	r2, [r4, #21]	@ zero_extendqisi2
+ 101 004c 217D     		ldrb	r1, [r4, #20]	@ zero_extendqisi2
+ 102 004e E07C     		ldrb	r0, [r4, #19]	@ zero_extendqisi2
+ 103 0050 FFF7FEFF 		bl	bytesToInt32_main
+ 104 0054 144B     		ldr	r3, .L7+16
+ 105 0056 1860     		str	r0, [r3]
+ 106 0058 A37E     		ldrb	r3, [r4, #26]	@ zero_extendqisi2
+ 107 005a 627E     		ldrb	r2, [r4, #25]	@ zero_extendqisi2
+ 108 005c 217E     		ldrb	r1, [r4, #24]	@ zero_extendqisi2
+ 109 005e E07D     		ldrb	r0, [r4, #23]	@ zero_extendqisi2
+ 110 0060 FFF7FEFF 		bl	bytesToFloat_main
+ 111 0064 114B     		ldr	r3, .L7+20
+ 112 0066 83ED000A 		vstr.32	s0, [r3]
+ 113 006a A37F     		ldrb	r3, [r4, #30]	@ zero_extendqisi2
+ 114 006c 627F     		ldrb	r2, [r4, #29]	@ zero_extendqisi2
+ 115 006e 217F     		ldrb	r1, [r4, #28]	@ zero_extendqisi2
+ 116 0070 E07E     		ldrb	r0, [r4, #27]	@ zero_extendqisi2
+ 117 0072 FFF7FEFF 		bl	bytesToFloat_main
+ 118 0076 0E4B     		ldr	r3, .L7+24
+ 119 0078 83ED000A 		vstr.32	s0, [r3]
+ARM GAS  C:\Temp\ccZiDl3m.s 			page 3
+
+
+ 120 007c 94F82230 		ldrb	r3, [r4, #34]	@ zero_extendqisi2
+ 121 0080 94F82120 		ldrb	r2, [r4, #33]	@ zero_extendqisi2
+ 122 0084 94F82010 		ldrb	r1, [r4, #32]	@ zero_extendqisi2
+ 123 0088 E07F     		ldrb	r0, [r4, #31]	@ zero_extendqisi2
+ 124 008a FFF7FEFF 		bl	bytesToFloat_main
+ 125 008e 094B     		ldr	r3, .L7+28
+ 126 0090 83ED000A 		vstr.32	s0, [r3]
+ 127 0094 10BD     		pop	{r4, pc}
+ 128              	.L8:
+ 129 0096 00BF     		.align	2
+ 130              	.L7:
+ 131 0098 00000000 		.word	accel1_fsr
+ 132 009c 00000000 		.word	accel1_odr
+ 133 00a0 00000000 		.word	gyro_fsr
+ 134 00a4 00000000 		.word	gyro_odr
+ 135 00a8 00000000 		.word	accel2_fsr
+ 136 00ac 00000000 		.word	accel2_odr
+ 137 00b0 00000000 		.word	mag_odr
+ 138 00b4 00000000 		.word	tof_odr
+ 140              		.global	__aeabi_f2ulz
+ 141              		.section	.text.configureTimer,"ax",%progbits
+ 142              		.align	1
+ 143              		.global	configureTimer
+ 144              		.syntax unified
+ 145              		.thumb
+ 146              		.thumb_func
+ 148              	configureTimer:
+ 149              		@ args = 0, pretend = 0, frame = 0
+ 150              		@ frame_needed = 0, uses_anonymous_args = 0
+ 151 0000 38B5     		push	{r3, r4, r5, lr}
+ 152 0002 0546     		mov	r5, r0
+ 153 0004 114B     		ldr	r3, .L13
+ 154 0006 D3ED007A 		vldr.32	s15, [r3]	@ int
+ 155 000a F8EE677A 		vcvt.f32.u32	s15, s15
+ 156 000e 87EE807A 		vdiv.f32	s14, s15, s0
+ 157 0012 DFED0F7A 		vldr.32	s15, .L13+4
+ 158 0016 67EE277A 		vmul.f32	s15, s14, s15
+ 159 001a FCEEE77A 		vcvt.u32.f32	s15, s15
+ 160 001e 17EE904A 		vmov	r4, s15	@ int
+ 161 0022 B4F5803F 		cmp	r4, #65536
+ 162 0026 01D3     		bcc	.L10
+ 163 0028 4FF6FF74 		movw	r4, #65535
+ 164              	.L10:
+ 165 002c 631C     		adds	r3, r4, #1
+ 166 002e 07EE903A 		vmov	s15, r3	@ int
+ 167 0032 F8EE677A 		vcvt.f32.u32	s15, s15
+ 168 0036 C7EE277A 		vdiv.f32	s15, s14, s15
+ 169 003a 17EE900A 		vmov	r0, s15
+ 170 003e FFF7FEFF 		bl	__aeabi_f2ulz
+ 171 0042 AC62     		str	r4, [r5, #40]
+ 172 0044 E862     		str	r0, [r5, #44]
+ 173 0046 0123     		movs	r3, #1
+ 174 0048 6B61     		str	r3, [r5, #20]
+ 175 004a 38BD     		pop	{r3, r4, r5, pc}
+ 176              	.L14:
+ 177              		.align	2
+ 178              	.L13:
+ARM GAS  C:\Temp\ccZiDl3m.s 			page 4
+
+
+ 179 004c 00000000 		.word	SystemCoreClock
+ 180 0050 00008037 		.word	931135488
+ 182              		.section	.text.get_fastest_odr,"ax",%progbits
+ 183              		.align	1
+ 184              		.global	get_fastest_odr
+ 185              		.syntax unified
+ 186              		.thumb
+ 187              		.thumb_func
+ 189              	get_fastest_odr:
+ 190              		@ args = 0, pretend = 0, frame = 0
+ 191              		@ frame_needed = 0, uses_anonymous_args = 0
+ 192              		@ link register save eliminated.
+ 193 0000 F0EE407A 		vmov.f32	s15, s0
+ 194 0004 B0EE420A 		vmov.f32	s0, s4
+ 195 0008 F4EEE07A 		vcmpe.f32	s15, s1
+ 196 000c F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 197 0010 01D4     		bmi	.L16
+ 198 0012 F0EE670A 		vmov.f32	s1, s15
+ 199              	.L16:
+ 200 0016 F4EEC10A 		vcmpe.f32	s1, s2
+ 201 001a F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 202 001e 01D4     		bmi	.L17
+ 203 0020 B0EE601A 		vmov.f32	s2, s1
+ 204              	.L17:
+ 205 0024 B4EEE11A 		vcmpe.f32	s2, s3
+ 206 0028 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 207 002c 01D4     		bmi	.L18
+ 208 002e F0EE411A 		vmov.f32	s3, s2
+ 209              	.L18:
+ 210 0032 F4EEC01A 		vcmpe.f32	s3, s0
+ 211 0036 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 212 003a 01D4     		bmi	.L19
+ 213 003c B0EE610A 		vmov.f32	s0, s3
+ 214              	.L19:
+ 215 0040 7047     		bx	lr
+ 217              		.section	.text.sendToSimulink,"ax",%progbits
+ 218              		.align	1
+ 219              		.global	sendToSimulink
+ 220              		.syntax unified
+ 221              		.thumb
+ 222              		.thumb_func
+ 224              	sendToSimulink:
+ 225              		@ args = 0, pretend = 0, frame = 0
+ 226              		@ frame_needed = 0, uses_anonymous_args = 0
+ 227 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 228 0004 564C     		ldr	r4, .L24
+ 229 0006 4FF0FF33 		mov	r3, #-1
+ 230 000a 0322     		movs	r2, #3
+ 231 000c 5549     		ldr	r1, .L24+4
+ 232 000e 2046     		mov	r0, r4
+ 233 0010 FFF7FEFF 		bl	HAL_UART_Transmit
+ 234 0014 544D     		ldr	r5, .L24+8
+ 235 0016 4FF0FF33 		mov	r3, #-1
+ 236 001a 0422     		movs	r2, #4
+ 237 001c 2946     		mov	r1, r5
+ 238 001e 2046     		mov	r0, r4
+ 239 0020 FFF7FEFF 		bl	HAL_UART_Transmit
+ARM GAS  C:\Temp\ccZiDl3m.s 			page 5
+
+
+ 240 0024 4FF0FF33 		mov	r3, #-1
+ 241 0028 0422     		movs	r2, #4
+ 242 002a A918     		adds	r1, r5, r2
+ 243 002c 2046     		mov	r0, r4
+ 244 002e FFF7FEFF 		bl	HAL_UART_Transmit
+ 245 0032 4FF0FF33 		mov	r3, #-1
+ 246 0036 0422     		movs	r2, #4
+ 247 0038 05F10801 		add	r1, r5, #8
+ 248 003c 2046     		mov	r0, r4
+ 249 003e FFF7FEFF 		bl	HAL_UART_Transmit
+ 250 0042 4A4D     		ldr	r5, .L24+12
+ 251 0044 4FF0FF33 		mov	r3, #-1
+ 252 0048 0422     		movs	r2, #4
+ 253 004a 2946     		mov	r1, r5
+ 254 004c 2046     		mov	r0, r4
+ 255 004e FFF7FEFF 		bl	HAL_UART_Transmit
+ 256 0052 4FF0FF33 		mov	r3, #-1
+ 257 0056 0422     		movs	r2, #4
+ 258 0058 A918     		adds	r1, r5, r2
+ 259 005a 2046     		mov	r0, r4
+ 260 005c FFF7FEFF 		bl	HAL_UART_Transmit
+ 261 0060 4FF0FF33 		mov	r3, #-1
+ 262 0064 0422     		movs	r2, #4
+ 263 0066 05F10801 		add	r1, r5, #8
+ 264 006a 2046     		mov	r0, r4
+ 265 006c FFF7FEFF 		bl	HAL_UART_Transmit
+ 266 0070 3F4D     		ldr	r5, .L24+16
+ 267 0072 4FF0FF33 		mov	r3, #-1
+ 268 0076 0422     		movs	r2, #4
+ 269 0078 2946     		mov	r1, r5
+ 270 007a 2046     		mov	r0, r4
+ 271 007c FFF7FEFF 		bl	HAL_UART_Transmit
+ 272 0080 4FF0FF33 		mov	r3, #-1
+ 273 0084 0422     		movs	r2, #4
+ 274 0086 A918     		adds	r1, r5, r2
+ 275 0088 2046     		mov	r0, r4
+ 276 008a FFF7FEFF 		bl	HAL_UART_Transmit
+ 277 008e 4FF0FF33 		mov	r3, #-1
+ 278 0092 0422     		movs	r2, #4
+ 279 0094 05F10801 		add	r1, r5, #8
+ 280 0098 2046     		mov	r0, r4
+ 281 009a FFF7FEFF 		bl	HAL_UART_Transmit
+ 282 009e 4FF0FF33 		mov	r3, #-1
+ 283 00a2 0422     		movs	r2, #4
+ 284 00a4 3349     		ldr	r1, .L24+20
+ 285 00a6 2046     		mov	r0, r4
+ 286 00a8 FFF7FEFF 		bl	HAL_UART_Transmit
+ 287 00ac 324D     		ldr	r5, .L24+24
+ 288 00ae 4FF0FF33 		mov	r3, #-1
+ 289 00b2 0422     		movs	r2, #4
+ 290 00b4 2946     		mov	r1, r5
+ 291 00b6 2046     		mov	r0, r4
+ 292 00b8 FFF7FEFF 		bl	HAL_UART_Transmit
+ 293 00bc 4FF0FF33 		mov	r3, #-1
+ 294 00c0 0422     		movs	r2, #4
+ 295 00c2 A918     		adds	r1, r5, r2
+ 296 00c4 2046     		mov	r0, r4
+ARM GAS  C:\Temp\ccZiDl3m.s 			page 6
+
+
+ 297 00c6 FFF7FEFF 		bl	HAL_UART_Transmit
+ 298 00ca 4FF0FF33 		mov	r3, #-1
+ 299 00ce 0422     		movs	r2, #4
+ 300 00d0 05F10801 		add	r1, r5, #8
+ 301 00d4 2046     		mov	r0, r4
+ 302 00d6 FFF7FEFF 		bl	HAL_UART_Transmit
+ 303 00da 0024     		movs	r4, #0
+ 304 00dc 2DE0     		b	.L21
+ 305              	.L22:
+ 306 00de A600     		lsls	r6, r4, #2
+ 307 00e0 04EB8403 		add	r3, r4, r4, lsl #2
+ 308 00e4 9900     		lsls	r1, r3, #2
+ 309 00e6 DFF89C80 		ldr	r8, .L24+36
+ 310 00ea 4144     		add	r1, r1, r8
+ 311 00ec 1C4F     		ldr	r7, .L24
+ 312 00ee 4FF0FF33 		mov	r3, #-1
+ 313 00f2 0422     		movs	r2, #4
+ 314 00f4 0831     		adds	r1, r1, #8
+ 315 00f6 3846     		mov	r0, r7
+ 316 00f8 FFF7FEFF 		bl	HAL_UART_Transmit
+ 317 00fc 3319     		adds	r3, r6, r4
+ 318 00fe 9D00     		lsls	r5, r3, #2
+ 319 0100 0835     		adds	r5, r5, #8
+ 320 0102 4544     		add	r5, r5, r8
+ 321 0104 4FF0FF33 		mov	r3, #-1
+ 322 0108 0422     		movs	r2, #4
+ 323 010a 05F10801 		add	r1, r5, #8
+ 324 010e 3846     		mov	r0, r7
+ 325 0110 FFF7FEFF 		bl	HAL_UART_Transmit
+ 326 0114 2644     		add	r6, r6, r4
+ 327 0116 B100     		lsls	r1, r6, #2
+ 328 0118 1031     		adds	r1, r1, #16
+ 329 011a 4144     		add	r1, r1, r8
+ 330 011c 4FF0FF33 		mov	r3, #-1
+ 331 0120 0422     		movs	r2, #4
+ 332 0122 1144     		add	r1, r1, r2
+ 333 0124 3846     		mov	r0, r7
+ 334 0126 FFF7FEFF 		bl	HAL_UART_Transmit
+ 335 012a 4FF0FF33 		mov	r3, #-1
+ 336 012e 0422     		movs	r2, #4
+ 337 0130 A918     		adds	r1, r5, r2
+ 338 0132 3846     		mov	r0, r7
+ 339 0134 FFF7FEFF 		bl	HAL_UART_Transmit
+ 340 0138 0134     		adds	r4, r4, #1
+ 341              	.L21:
+ 342 013a 3F2C     		cmp	r4, #63
+ 343 013c CFDD     		ble	.L22
+ 344 013e 084C     		ldr	r4, .L24
+ 345 0140 4FF0FF33 		mov	r3, #-1
+ 346 0144 0422     		movs	r2, #4
+ 347 0146 0D49     		ldr	r1, .L24+28
+ 348 0148 2046     		mov	r0, r4
+ 349 014a FFF7FEFF 		bl	HAL_UART_Transmit
+ 350 014e 4FF0FF33 		mov	r3, #-1
+ 351 0152 0322     		movs	r2, #3
+ 352 0154 0A49     		ldr	r1, .L24+32
+ 353 0156 2046     		mov	r0, r4
+ARM GAS  C:\Temp\ccZiDl3m.s 			page 7
+
+
+ 354 0158 FFF7FEFF 		bl	HAL_UART_Transmit
+ 355 015c BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 356              	.L25:
+ 357              		.align	2
+ 358              	.L24:
+ 359 0160 00000000 		.word	huart2
+ 360 0164 00000000 		.word	header
+ 361 0168 00000000 		.word	accel1_axis
+ 362 016c 00000000 		.word	gyro_axis
+ 363 0170 00000000 		.word	accel2_axis
+ 364 0174 00000000 		.word	temperature
+ 365 0178 00000000 		.word	mag_axis
+ 366 017c 00000000 		.word	counter
+ 367 0180 00000000 		.word	terminator
+ 368 0184 00000000 		.word	TOF_centre
+ 370              		.section	.text.initialCalibration,"ax",%progbits
+ 371              		.align	1
+ 372              		.global	initialCalibration
+ 373              		.syntax unified
+ 374              		.thumb
+ 375              		.thumb_func
+ 377              	initialCalibration:
+ 378              		@ args = 0, pretend = 0, frame = 0
+ 379              		@ frame_needed = 0, uses_anonymous_args = 0
+ 380 0000 10B5     		push	{r4, lr}
+ 381 0002 184C     		ldr	r4, .L30
+ 382 0004 4FF0FF33 		mov	r3, #-1
+ 383 0008 2622     		movs	r2, #38
+ 384 000a 2146     		mov	r1, r4
+ 385 000c 1648     		ldr	r0, .L30+4
+ 386 000e FFF7FEFF 		bl	HAL_UART_Receive
+ 387 0012 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 388 0014 4A2B     		cmp	r3, #74
+ 389 0016 00D0     		beq	.L29
+ 390              	.L26:
+ 391 0018 10BD     		pop	{r4, pc}
+ 392              	.L29:
+ 393 001a 6378     		ldrb	r3, [r4, #1]	@ zero_extendqisi2
+ 394 001c 5F2B     		cmp	r3, #95
+ 395 001e FBD1     		bne	.L26
+ 396 0020 A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 397 0022 412B     		cmp	r3, #65
+ 398 0024 F8D1     		bne	.L26
+ 399 0026 0122     		movs	r2, #1
+ 400 0028 104B     		ldr	r3, .L30+8
+ 401 002a 1A70     		strb	r2, [r3]
+ 402 002c 2021     		movs	r1, #32
+ 403 002e 1048     		ldr	r0, .L30+12
+ 404 0030 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 405 0034 2046     		mov	r0, r4
+ 406 0036 FFF7FEFF 		bl	receivedFromSimulink
+ 407 003a 0E4B     		ldr	r3, .L30+16
+ 408 003c 93ED002A 		vldr.32	s4, [r3]
+ 409 0040 0D4B     		ldr	r3, .L30+20
+ 410 0042 D3ED001A 		vldr.32	s3, [r3]
+ 411 0046 0D4B     		ldr	r3, .L30+24
+ 412 0048 93ED001A 		vldr.32	s2, [r3]
+ARM GAS  C:\Temp\ccZiDl3m.s 			page 8
+
+
+ 413 004c 0C4B     		ldr	r3, .L30+28
+ 414 004e D3ED000A 		vldr.32	s1, [r3]
+ 415 0052 0C4B     		ldr	r3, .L30+32
+ 416 0054 93ED000A 		vldr.32	s0, [r3]
+ 417 0058 FFF7FEFF 		bl	get_fastest_odr
+ 418 005c 0A4B     		ldr	r3, .L30+36
+ 419 005e 83ED000A 		vstr.32	s0, [r3]
+ 420 0062 D9E7     		b	.L26
+ 421              	.L31:
+ 422              		.align	2
+ 423              	.L30:
+ 424 0064 00000000 		.word	bigBuffer
+ 425 0068 00000000 		.word	huart2
+ 426 006c 00000000 		.word	calibrated
+ 427 0070 00000240 		.word	1073872896
+ 428 0074 00000000 		.word	tof_odr
+ 429 0078 00000000 		.word	mag_odr
+ 430 007c 00000000 		.word	accel2_odr
+ 431 0080 00000000 		.word	gyro_odr
+ 432 0084 00000000 		.word	accel1_odr
+ 433 0088 00000000 		.word	fastestODR
+ 435              		.section	.text.MX_GPIO_Init,"ax",%progbits
+ 436              		.align	1
+ 437              		.global	MX_GPIO_Init
+ 438              		.syntax unified
+ 439              		.thumb
+ 440              		.thumb_func
+ 442              	MX_GPIO_Init:
+ 443              		@ args = 0, pretend = 0, frame = 40
+ 444              		@ frame_needed = 0, uses_anonymous_args = 0
+ 445 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 446 0004 8AB0     		sub	sp, sp, #40
+ 447 0006 0024     		movs	r4, #0
+ 448 0008 0594     		str	r4, [sp, #20]
+ 449 000a 0694     		str	r4, [sp, #24]
+ 450 000c 0794     		str	r4, [sp, #28]
+ 451 000e 0894     		str	r4, [sp, #32]
+ 452 0010 0994     		str	r4, [sp, #36]
+ 453 0012 0094     		str	r4, [sp]
+ 454 0014 574B     		ldr	r3, .L34
+ 455 0016 1A6B     		ldr	r2, [r3, #48]
+ 456 0018 42F00402 		orr	r2, r2, #4
+ 457 001c 1A63     		str	r2, [r3, #48]
+ 458 001e 1A6B     		ldr	r2, [r3, #48]
+ 459 0020 02F00402 		and	r2, r2, #4
+ 460 0024 0092     		str	r2, [sp]
+ 461 0026 009A     		ldr	r2, [sp]
+ 462 0028 0194     		str	r4, [sp, #4]
+ 463 002a 1A6B     		ldr	r2, [r3, #48]
+ 464 002c 42F08002 		orr	r2, r2, #128
+ 465 0030 1A63     		str	r2, [r3, #48]
+ 466 0032 1A6B     		ldr	r2, [r3, #48]
+ 467 0034 02F08002 		and	r2, r2, #128
+ 468 0038 0192     		str	r2, [sp, #4]
+ 469 003a 019A     		ldr	r2, [sp, #4]
+ 470 003c 0294     		str	r4, [sp, #8]
+ 471 003e 1A6B     		ldr	r2, [r3, #48]
+ARM GAS  C:\Temp\ccZiDl3m.s 			page 9
+
+
+ 472 0040 42F00102 		orr	r2, r2, #1
+ 473 0044 1A63     		str	r2, [r3, #48]
+ 474 0046 1A6B     		ldr	r2, [r3, #48]
+ 475 0048 02F00102 		and	r2, r2, #1
+ 476 004c 0292     		str	r2, [sp, #8]
+ 477 004e 029A     		ldr	r2, [sp, #8]
+ 478 0050 0394     		str	r4, [sp, #12]
+ 479 0052 1A6B     		ldr	r2, [r3, #48]
+ 480 0054 42F00202 		orr	r2, r2, #2
+ 481 0058 1A63     		str	r2, [r3, #48]
+ 482 005a 1A6B     		ldr	r2, [r3, #48]
+ 483 005c 02F00202 		and	r2, r2, #2
+ 484 0060 0392     		str	r2, [sp, #12]
+ 485 0062 039A     		ldr	r2, [sp, #12]
+ 486 0064 0494     		str	r4, [sp, #16]
+ 487 0066 1A6B     		ldr	r2, [r3, #48]
+ 488 0068 42F00802 		orr	r2, r2, #8
+ 489 006c 1A63     		str	r2, [r3, #48]
+ 490 006e 1B6B     		ldr	r3, [r3, #48]
+ 491 0070 03F00803 		and	r3, r3, #8
+ 492 0074 0493     		str	r3, [sp, #16]
+ 493 0076 049B     		ldr	r3, [sp, #16]
+ 494 0078 3F4D     		ldr	r5, .L34+4
+ 495 007a 2246     		mov	r2, r4
+ 496 007c 2021     		movs	r1, #32
+ 497 007e 2846     		mov	r0, r5
+ 498 0080 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 499 0084 0122     		movs	r2, #1
+ 500 0086 C021     		movs	r1, #192
+ 501 0088 2846     		mov	r0, r5
+ 502 008a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 503 008e DFF8F480 		ldr	r8, .L34+16
+ 504 0092 0122     		movs	r2, #1
+ 505 0094 40F21141 		movw	r1, #1041
+ 506 0098 4046     		mov	r0, r8
+ 507 009a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 508 009e 4FF40053 		mov	r3, #8192
+ 509 00a2 0593     		str	r3, [sp, #20]
+ 510 00a4 4FF48813 		mov	r3, #1114112
+ 511 00a8 0693     		str	r3, [sp, #24]
+ 512 00aa 0794     		str	r4, [sp, #28]
+ 513 00ac 334E     		ldr	r6, .L34+8
+ 514 00ae 05A9     		add	r1, sp, #20
+ 515 00b0 3046     		mov	r0, r6
+ 516 00b2 FFF7FEFF 		bl	HAL_GPIO_Init
+ 517 00b6 41F6FF73 		movw	r3, #8191
+ 518 00ba 0593     		str	r3, [sp, #20]
+ 519 00bc 0327     		movs	r7, #3
+ 520 00be 0697     		str	r7, [sp, #24]
+ 521 00c0 0794     		str	r4, [sp, #28]
+ 522 00c2 05A9     		add	r1, sp, #20
+ 523 00c4 3046     		mov	r0, r6
+ 524 00c6 FFF7FEFF 		bl	HAL_GPIO_Init
+ 525 00ca 49F60373 		movw	r3, #40707
+ 526 00ce 0593     		str	r3, [sp, #20]
+ 527 00d0 0697     		str	r7, [sp, #24]
+ 528 00d2 0794     		str	r4, [sp, #28]
+ARM GAS  C:\Temp\ccZiDl3m.s 			page 10
+
+
+ 529 00d4 05A9     		add	r1, sp, #20
+ 530 00d6 2846     		mov	r0, r5
+ 531 00d8 FFF7FEFF 		bl	HAL_GPIO_Init
+ 532 00dc 1023     		movs	r3, #16
+ 533 00de 0593     		str	r3, [sp, #20]
+ 534 00e0 4FF40413 		mov	r3, #2162688
+ 535 00e4 0693     		str	r3, [sp, #24]
+ 536 00e6 0794     		str	r4, [sp, #28]
+ 537 00e8 05A9     		add	r1, sp, #20
+ 538 00ea 2846     		mov	r0, r5
+ 539 00ec FFF7FEFF 		bl	HAL_GPIO_Init
+ 540 00f0 2023     		movs	r3, #32
+ 541 00f2 0593     		str	r3, [sp, #20]
+ 542 00f4 0126     		movs	r6, #1
+ 543 00f6 0696     		str	r6, [sp, #24]
+ 544 00f8 0794     		str	r4, [sp, #28]
+ 545 00fa 0894     		str	r4, [sp, #32]
+ 546 00fc 05A9     		add	r1, sp, #20
+ 547 00fe 2846     		mov	r0, r5
+ 548 0100 FFF7FEFF 		bl	HAL_GPIO_Init
+ 549 0104 C023     		movs	r3, #192
+ 550 0106 0593     		str	r3, [sp, #20]
+ 551 0108 0696     		str	r6, [sp, #24]
+ 552 010a 0796     		str	r6, [sp, #28]
+ 553 010c 0894     		str	r4, [sp, #32]
+ 554 010e 05A9     		add	r1, sp, #20
+ 555 0110 2846     		mov	r0, r5
+ 556 0112 FFF7FEFF 		bl	HAL_GPIO_Init
+ 557 0116 40F21143 		movw	r3, #1041
+ 558 011a 0593     		str	r3, [sp, #20]
+ 559 011c 0696     		str	r6, [sp, #24]
+ 560 011e 0796     		str	r6, [sp, #28]
+ 561 0120 0894     		str	r4, [sp, #32]
+ 562 0122 05A9     		add	r1, sp, #20
+ 563 0124 4046     		mov	r0, r8
+ 564 0126 FFF7FEFF 		bl	HAL_GPIO_Init
+ 565 012a 4FF2EE03 		movw	r3, #61678
+ 566 012e 0593     		str	r3, [sp, #20]
+ 567 0130 0697     		str	r7, [sp, #24]
+ 568 0132 0794     		str	r4, [sp, #28]
+ 569 0134 05A9     		add	r1, sp, #20
+ 570 0136 4046     		mov	r0, r8
+ 571 0138 FFF7FEFF 		bl	HAL_GPIO_Init
+ 572 013c 0423     		movs	r3, #4
+ 573 013e 0593     		str	r3, [sp, #20]
+ 574 0140 0697     		str	r7, [sp, #24]
+ 575 0142 0794     		str	r4, [sp, #28]
+ 576 0144 05A9     		add	r1, sp, #20
+ 577 0146 0E48     		ldr	r0, .L34+12
+ 578 0148 FFF7FEFF 		bl	HAL_GPIO_Init
+ 579 014c 2246     		mov	r2, r4
+ 580 014e 2146     		mov	r1, r4
+ 581 0150 0A20     		movs	r0, #10
+ 582 0152 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 583 0156 0A20     		movs	r0, #10
+ 584 0158 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 585 015c 2246     		mov	r2, r4
+ARM GAS  C:\Temp\ccZiDl3m.s 			page 11
+
+
+ 586 015e 2146     		mov	r1, r4
+ 587 0160 2820     		movs	r0, #40
+ 588 0162 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 589 0166 2820     		movs	r0, #40
+ 590 0168 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 591 016c 0AB0     		add	sp, sp, #40
+ 592              		@ sp needed
+ 593 016e BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 594              	.L35:
+ 595 0172 00BF     		.align	2
+ 596              	.L34:
+ 597 0174 00380240 		.word	1073887232
+ 598 0178 00000240 		.word	1073872896
+ 599 017c 00080240 		.word	1073874944
+ 600 0180 000C0240 		.word	1073875968
+ 601 0184 00040240 		.word	1073873920
+ 603              		.section	.text.HAL_TIM_PeriodElapsedCallback,"ax",%progbits
+ 604              		.align	1
+ 605              		.global	HAL_TIM_PeriodElapsedCallback
+ 606              		.syntax unified
+ 607              		.thumb
+ 608              		.thumb_func
+ 610              	HAL_TIM_PeriodElapsedCallback:
+ 611              		@ args = 0, pretend = 0, frame = 0
+ 612              		@ frame_needed = 0, uses_anonymous_args = 0
+ 613 0000 08B5     		push	{r3, lr}
+ 614 0002 0268     		ldr	r2, [r0]
+ 615 0004 034B     		ldr	r3, .L40
+ 616 0006 9A42     		cmp	r2, r3
+ 617 0008 00D0     		beq	.L39
+ 618              	.L36:
+ 619 000a 08BD     		pop	{r3, pc}
+ 620              	.L39:
+ 621 000c FFF7FEFF 		bl	HAL_IncTick
+ 622 0010 FBE7     		b	.L36
+ 623              	.L41:
+ 624 0012 00BF     		.align	2
+ 625              	.L40:
+ 626 0014 00000140 		.word	1073807360
+ 628              		.section	.text.Error_Handler,"ax",%progbits
+ 629              		.align	1
+ 630              		.global	Error_Handler
+ 631              		.syntax unified
+ 632              		.thumb
+ 633              		.thumb_func
+ 635              	Error_Handler:
+ 636              		@ Volatile: function does not return.
+ 637              		@ args = 0, pretend = 0, frame = 0
+ 638              		@ frame_needed = 0, uses_anonymous_args = 0
+ 639              		@ link register save eliminated.
+ 640              		.syntax unified
+ 641              	@ 962 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 642 0000 72B6     		cpsid i
+ 643              	@ 0 "" 2
+ 644              		.thumb
+ 645              		.syntax unified
+ 646              	.L43:
+ARM GAS  C:\Temp\ccZiDl3m.s 			page 12
+
+
+ 647 0002 FEE7     		b	.L43
+ 649              		.section	.text.MX_TIM2_Init,"ax",%progbits
+ 650              		.align	1
+ 651              		.syntax unified
+ 652              		.thumb
+ 653              		.thumb_func
+ 655              	MX_TIM2_Init:
+ 656              		@ args = 0, pretend = 0, frame = 24
+ 657              		@ frame_needed = 0, uses_anonymous_args = 0
+ 658 0000 00B5     		push	{lr}
+ 659 0002 87B0     		sub	sp, sp, #28
+ 660 0004 0023     		movs	r3, #0
+ 661 0006 0293     		str	r3, [sp, #8]
+ 662 0008 0393     		str	r3, [sp, #12]
+ 663 000a 0493     		str	r3, [sp, #16]
+ 664 000c 0593     		str	r3, [sp, #20]
+ 665 000e 0093     		str	r3, [sp]
+ 666 0010 0193     		str	r3, [sp, #4]
+ 667 0012 1448     		ldr	r0, .L52
+ 668 0014 4FF08042 		mov	r2, #1073741824
+ 669 0018 0260     		str	r2, [r0]
+ 670 001a 40F2E732 		movw	r2, #999
+ 671 001e 4260     		str	r2, [r0, #4]
+ 672 0020 8360     		str	r3, [r0, #8]
+ 673 0022 C260     		str	r2, [r0, #12]
+ 674 0024 0361     		str	r3, [r0, #16]
+ 675 0026 8023     		movs	r3, #128
+ 676 0028 8361     		str	r3, [r0, #24]
+ 677 002a FFF7FEFF 		bl	HAL_TIM_Base_Init
+ 678 002e 90B9     		cbnz	r0, .L49
+ 679 0030 4FF48053 		mov	r3, #4096
+ 680 0034 0293     		str	r3, [sp, #8]
+ 681 0036 02A9     		add	r1, sp, #8
+ 682 0038 0A48     		ldr	r0, .L52
+ 683 003a FFF7FEFF 		bl	HAL_TIM_ConfigClockSource
+ 684 003e 60B9     		cbnz	r0, .L50
+ 685 0040 0023     		movs	r3, #0
+ 686 0042 0093     		str	r3, [sp]
+ 687 0044 0193     		str	r3, [sp, #4]
+ 688 0046 6946     		mov	r1, sp
+ 689 0048 0648     		ldr	r0, .L52
+ 690 004a FFF7FEFF 		bl	HAL_TIMEx_MasterConfigSynchronization
+ 691 004e 30B9     		cbnz	r0, .L51
+ 692 0050 07B0     		add	sp, sp, #28
+ 693              		@ sp needed
+ 694 0052 5DF804FB 		ldr	pc, [sp], #4
+ 695              	.L49:
+ 696 0056 FFF7FEFF 		bl	Error_Handler
+ 697              	.L50:
+ 698 005a FFF7FEFF 		bl	Error_Handler
+ 699              	.L51:
+ 700 005e FFF7FEFF 		bl	Error_Handler
+ 701              	.L53:
+ 702 0062 00BF     		.align	2
+ 703              	.L52:
+ 704 0064 00000000 		.word	htim2
+ 706              		.section	.text.MX_USART2_UART_Init,"ax",%progbits
+ARM GAS  C:\Temp\ccZiDl3m.s 			page 13
+
+
+ 707              		.align	1
+ 708              		.syntax unified
+ 709              		.thumb
+ 710              		.thumb_func
+ 712              	MX_USART2_UART_Init:
+ 713              		@ args = 0, pretend = 0, frame = 0
+ 714              		@ frame_needed = 0, uses_anonymous_args = 0
+ 715 0000 08B5     		push	{r3, lr}
+ 716 0002 0D48     		ldr	r0, .L58
+ 717 0004 0D4B     		ldr	r3, .L58+4
+ 718 0006 0360     		str	r3, [r0]
+ 719 0008 4FF4E113 		mov	r3, #1843200
+ 720 000c 4360     		str	r3, [r0, #4]
+ 721 000e 4FF48053 		mov	r3, #4096
+ 722 0012 8360     		str	r3, [r0, #8]
+ 723 0014 4FF40053 		mov	r3, #8192
+ 724 0018 C360     		str	r3, [r0, #12]
+ 725 001a 4FF48063 		mov	r3, #1024
+ 726 001e 0361     		str	r3, [r0, #16]
+ 727 0020 0C23     		movs	r3, #12
+ 728 0022 4361     		str	r3, [r0, #20]
+ 729 0024 0023     		movs	r3, #0
+ 730 0026 8361     		str	r3, [r0, #24]
+ 731 0028 C361     		str	r3, [r0, #28]
+ 732 002a FFF7FEFF 		bl	HAL_UART_Init
+ 733 002e 00B9     		cbnz	r0, .L57
+ 734 0030 08BD     		pop	{r3, pc}
+ 735              	.L57:
+ 736 0032 FFF7FEFF 		bl	Error_Handler
+ 737              	.L59:
+ 738 0036 00BF     		.align	2
+ 739              	.L58:
+ 740 0038 00000000 		.word	huart2
+ 741 003c 00440040 		.word	1073759232
+ 743              		.section	.text.MX_TIM3_Init,"ax",%progbits
+ 744              		.align	1
+ 745              		.syntax unified
+ 746              		.thumb
+ 747              		.thumb_func
+ 749              	MX_TIM3_Init:
+ 750              		@ args = 0, pretend = 0, frame = 24
+ 751              		@ frame_needed = 0, uses_anonymous_args = 0
+ 752 0000 00B5     		push	{lr}
+ 753 0002 87B0     		sub	sp, sp, #28
+ 754 0004 0023     		movs	r3, #0
+ 755 0006 0293     		str	r3, [sp, #8]
+ 756 0008 0393     		str	r3, [sp, #12]
+ 757 000a 0493     		str	r3, [sp, #16]
+ 758 000c 0593     		str	r3, [sp, #20]
+ 759 000e 0093     		str	r3, [sp]
+ 760 0010 0193     		str	r3, [sp, #4]
+ 761 0012 1348     		ldr	r0, .L68
+ 762 0014 134A     		ldr	r2, .L68+4
+ 763 0016 0260     		str	r2, [r0]
+ 764 0018 4360     		str	r3, [r0, #4]
+ 765 001a 8360     		str	r3, [r0, #8]
+ 766 001c 4FF6FF72 		movw	r2, #65535
+ARM GAS  C:\Temp\ccZiDl3m.s 			page 14
+
+
+ 767 0020 C260     		str	r2, [r0, #12]
+ 768 0022 0361     		str	r3, [r0, #16]
+ 769 0024 8023     		movs	r3, #128
+ 770 0026 8361     		str	r3, [r0, #24]
+ 771 0028 FFF7FEFF 		bl	HAL_TIM_Base_Init
+ 772 002c 90B9     		cbnz	r0, .L65
+ 773 002e 4FF48053 		mov	r3, #4096
+ 774 0032 0293     		str	r3, [sp, #8]
+ 775 0034 02A9     		add	r1, sp, #8
+ 776 0036 0A48     		ldr	r0, .L68
+ 777 0038 FFF7FEFF 		bl	HAL_TIM_ConfigClockSource
+ 778 003c 60B9     		cbnz	r0, .L66
+ 779 003e 0023     		movs	r3, #0
+ 780 0040 0093     		str	r3, [sp]
+ 781 0042 0193     		str	r3, [sp, #4]
+ 782 0044 6946     		mov	r1, sp
+ 783 0046 0648     		ldr	r0, .L68
+ 784 0048 FFF7FEFF 		bl	HAL_TIMEx_MasterConfigSynchronization
+ 785 004c 30B9     		cbnz	r0, .L67
+ 786 004e 07B0     		add	sp, sp, #28
+ 787              		@ sp needed
+ 788 0050 5DF804FB 		ldr	pc, [sp], #4
+ 789              	.L65:
+ 790 0054 FFF7FEFF 		bl	Error_Handler
+ 791              	.L66:
+ 792 0058 FFF7FEFF 		bl	Error_Handler
+ 793              	.L67:
+ 794 005c FFF7FEFF 		bl	Error_Handler
+ 795              	.L69:
+ 796              		.align	2
+ 797              	.L68:
+ 798 0060 00000000 		.word	htim3
+ 799 0064 00040040 		.word	1073742848
+ 801              		.section	.text.SystemClock_Config,"ax",%progbits
+ 802              		.align	1
+ 803              		.global	SystemClock_Config
+ 804              		.syntax unified
+ 805              		.thumb
+ 806              		.thumb_func
+ 808              	SystemClock_Config:
+ 809              		@ args = 0, pretend = 0, frame = 80
+ 810              		@ frame_needed = 0, uses_anonymous_args = 0
+ 811 0000 00B5     		push	{lr}
+ 812 0002 95B0     		sub	sp, sp, #84
+ 813 0004 3022     		movs	r2, #48
+ 814 0006 0021     		movs	r1, #0
+ 815 0008 08A8     		add	r0, sp, #32
+ 816 000a FFF7FEFF 		bl	memset
+ 817 000e 0023     		movs	r3, #0
+ 818 0010 0393     		str	r3, [sp, #12]
+ 819 0012 0493     		str	r3, [sp, #16]
+ 820 0014 0593     		str	r3, [sp, #20]
+ 821 0016 0693     		str	r3, [sp, #24]
+ 822 0018 0793     		str	r3, [sp, #28]
+ 823 001a 0193     		str	r3, [sp, #4]
+ 824 001c 1F4A     		ldr	r2, .L76
+ 825 001e 116C     		ldr	r1, [r2, #64]
+ARM GAS  C:\Temp\ccZiDl3m.s 			page 15
+
+
+ 826 0020 41F08051 		orr	r1, r1, #268435456
+ 827 0024 1164     		str	r1, [r2, #64]
+ 828 0026 126C     		ldr	r2, [r2, #64]
+ 829 0028 02F08052 		and	r2, r2, #268435456
+ 830 002c 0192     		str	r2, [sp, #4]
+ 831 002e 019A     		ldr	r2, [sp, #4]
+ 832 0030 0293     		str	r3, [sp, #8]
+ 833 0032 1B4B     		ldr	r3, .L76+4
+ 834 0034 1A68     		ldr	r2, [r3]
+ 835 0036 42F44042 		orr	r2, r2, #49152
+ 836 003a 1A60     		str	r2, [r3]
+ 837 003c 1B68     		ldr	r3, [r3]
+ 838 003e 03F44043 		and	r3, r3, #49152
+ 839 0042 0293     		str	r3, [sp, #8]
+ 840 0044 029B     		ldr	r3, [sp, #8]
+ 841 0046 0123     		movs	r3, #1
+ 842 0048 0893     		str	r3, [sp, #32]
+ 843 004a 4FF48033 		mov	r3, #65536
+ 844 004e 0993     		str	r3, [sp, #36]
+ 845 0050 0222     		movs	r2, #2
+ 846 0052 0E92     		str	r2, [sp, #56]
+ 847 0054 4FF48003 		mov	r3, #4194304
+ 848 0058 0F93     		str	r3, [sp, #60]
+ 849 005a 0423     		movs	r3, #4
+ 850 005c 1093     		str	r3, [sp, #64]
+ 851 005e 6421     		movs	r1, #100
+ 852 0060 1191     		str	r1, [sp, #68]
+ 853 0062 1292     		str	r2, [sp, #72]
+ 854 0064 1393     		str	r3, [sp, #76]
+ 855 0066 08A8     		add	r0, sp, #32
+ 856 0068 FFF7FEFF 		bl	HAL_RCC_OscConfig
+ 857 006c 88B9     		cbnz	r0, .L74
+ 858 006e 0F23     		movs	r3, #15
+ 859 0070 0393     		str	r3, [sp, #12]
+ 860 0072 0223     		movs	r3, #2
+ 861 0074 0493     		str	r3, [sp, #16]
+ 862 0076 0023     		movs	r3, #0
+ 863 0078 0593     		str	r3, [sp, #20]
+ 864 007a 4FF48052 		mov	r2, #4096
+ 865 007e 0692     		str	r2, [sp, #24]
+ 866 0080 0793     		str	r3, [sp, #28]
+ 867 0082 0321     		movs	r1, #3
+ 868 0084 03A8     		add	r0, sp, #12
+ 869 0086 FFF7FEFF 		bl	HAL_RCC_ClockConfig
+ 870 008a 20B9     		cbnz	r0, .L75
+ 871 008c 15B0     		add	sp, sp, #84
+ 872              		@ sp needed
+ 873 008e 5DF804FB 		ldr	pc, [sp], #4
+ 874              	.L74:
+ 875 0092 FFF7FEFF 		bl	Error_Handler
+ 876              	.L75:
+ 877 0096 FFF7FEFF 		bl	Error_Handler
+ 878              	.L77:
+ 879 009a 00BF     		.align	2
+ 880              	.L76:
+ 881 009c 00380240 		.word	1073887232
+ 882 00a0 00700040 		.word	1073770496
+ARM GAS  C:\Temp\ccZiDl3m.s 			page 16
+
+
+ 884              		.section	.text.main,"ax",%progbits
+ 885              		.align	1
+ 886              		.global	main
+ 887              		.syntax unified
+ 888              		.thumb
+ 889              		.thumb_func
+ 891              	main:
+ 892              		@ Volatile: function does not return.
+ 893              		@ args = 0, pretend = 0, frame = 0
+ 894              		@ frame_needed = 0, uses_anonymous_args = 0
+ 895 0000 08B5     		push	{r3, lr}
+ 896 0002 FFF7FEFF 		bl	HAL_Init
+ 897 0006 FFF7FEFF 		bl	SystemClock_Config
+ 898 000a FFF7FEFF 		bl	MX_GPIO_Init
+ 899 000e FFF7FEFF 		bl	MX_TIM2_Init
+ 900 0012 FFF7FEFF 		bl	MX_USART2_UART_Init
+ 901 0016 FFF7FEFF 		bl	MX_TIM3_Init
+ 902              	.L79:
+ 903 001a 194B     		ldr	r3, .L85
+ 904 001c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 905 001e 012B     		cmp	r3, #1
+ 906 0020 02D0     		beq	.L84
+ 907 0022 FFF7FEFF 		bl	initialCalibration
+ 908 0026 F8E7     		b	.L79
+ 909              	.L84:
+ 910 0028 FFF7FEFF 		bl	calibrateVL53L8A1
+ 911 002c FFF7FEFF 		bl	initVL53L8A1
+ 912 0030 FFF7FEFF 		bl	initIKS02A1
+ 913 0034 FFF7FEFF 		bl	calibrate_IKS02A1
+ 914 0038 4FF08040 		mov	r0, #1073741824
+ 915 003c 114B     		ldr	r3, .L85+4
+ 916 003e 93ED000A 		vldr.32	s0, [r3]
+ 917 0042 FFF7FEFF 		bl	configureTimer
+ 918 0046 1048     		ldr	r0, .L85+8
+ 919 0048 104B     		ldr	r3, .L85+12
+ 920 004a 93ED000A 		vldr.32	s0, [r3]
+ 921 004e FFF7FEFF 		bl	configureTimer
+ 922 0052 0F48     		ldr	r0, .L85+16
+ 923 0054 FFF7FEFF 		bl	HAL_TIM_Base_Start_IT
+ 924 0058 0E48     		ldr	r0, .L85+20
+ 925 005a FFF7FEFF 		bl	HAL_TIM_Base_Start_IT
+ 926 005e 0122     		movs	r2, #1
+ 927 0060 2021     		movs	r1, #32
+ 928 0062 0D48     		ldr	r0, .L85+24
+ 929 0064 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 930              	.L81:
+ 931 0068 FFF7FEFF 		bl	getIKS02A1
+ 932 006c 0B4B     		ldr	r3, .L85+28
+ 933 006e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 934 0070 012B     		cmp	r3, #1
+ 935 0072 F9D1     		bne	.L81
+ 936 0074 FFF7FEFF 		bl	getVL53L8A1
+ 937 0078 084B     		ldr	r3, .L85+28
+ 938 007a 0022     		movs	r2, #0
+ 939 007c 1A70     		strb	r2, [r3]
+ 940 007e F3E7     		b	.L81
+ 941              	.L86:
+ARM GAS  C:\Temp\ccZiDl3m.s 			page 17
+
+
+ 942              		.align	2
+ 943              	.L85:
+ 944 0080 00000000 		.word	calibrated
+ 945 0084 00000000 		.word	fastestODR
+ 946 0088 00040040 		.word	1073742848
+ 947 008c 00000000 		.word	tof_odr
+ 948 0090 00000000 		.word	htim2
+ 949 0094 00000000 		.word	htim3
+ 950 0098 00000240 		.word	1073872896
+ 951 009c 00000000 		.word	clearToGetL8
+ 953              		.section	.text.assert_failed,"ax",%progbits
+ 954              		.align	1
+ 955              		.global	assert_failed
+ 956              		.syntax unified
+ 957              		.thumb
+ 958              		.thumb_func
+ 960              	assert_failed:
+ 961              		@ args = 0, pretend = 0, frame = 0
+ 962              		@ frame_needed = 0, uses_anonymous_args = 0
+ 963              		@ link register save eliminated.
+ 964 0000 7047     		bx	lr
+ 966              		.global	counter
+ 967              		.section	.bss.counter,"aw",%nobits
+ 968              		.align	2
+ 971              	counter:
+ 972 0000 00000000 		.space	4
+ 973              		.global	calibrated
+ 974              		.section	.bss.calibrated,"aw",%nobits
+ 977              	calibrated:
+ 978 0000 00       		.space	1
+ 979              		.global	clearToGetL8
+ 980              		.section	.bss.clearToGetL8,"aw",%nobits
+ 983              	clearToGetL8:
+ 984 0000 00       		.space	1
+ 985              		.global	clearToSend
+ 986              		.section	.bss.clearToSend,"aw",%nobits
+ 989              	clearToSend:
+ 990 0000 00       		.space	1
+ 991              		.global	bigBuffer
+ 992              		.section	.bss.bigBuffer,"aw",%nobits
+ 993              		.align	2
+ 996              	bigBuffer:
+ 997 0000 00000000 		.space	38
+ 997      00000000 
+ 997      00000000 
+ 997      00000000 
+ 997      00000000 
+ 998              		.global	numberOfSimulinkBytes
+ 999              		.section	.rodata.numberOfSimulinkBytes,"a"
+ 1000              		.align	2
+ 1003              	numberOfSimulinkBytes:
+ 1004 0000 20000000 		.word	32
+ 1005              		.global	expectedTerminator
+ 1006              		.section	.rodata.expectedTerminator,"a"
+ 1007              		.align	2
+ 1010              	expectedTerminator:
+ 1011 0000 415F4A   		.ascii	"A_J"
+ARM GAS  C:\Temp\ccZiDl3m.s 			page 18
+
+
+ 1012              		.global	expectedHeader
+ 1013              		.section	.rodata.expectedHeader,"a"
+ 1014              		.align	2
+ 1017              	expectedHeader:
+ 1018 0000 4A5F41   		.ascii	"J_A"
+ 1019              		.global	terminator
+ 1020              		.section	.data.terminator,"aw"
+ 1021              		.align	2
+ 1024              	terminator:
+ 1025 0000 415F4A00 		.word	4874049
+ 1026              		.global	header
+ 1027              		.section	.data.header,"aw"
+ 1028              		.align	2
+ 1031              	header:
+ 1032 0000 4A5F4100 		.word	4284234
+ 1033              		.global	TOF_centre
+ 1034              		.section	.bss.TOF_centre,"aw",%nobits
+ 1035              		.align	2
+ 1038              	TOF_centre:
+ 1039 0000 00000000 		.space	1284
+ 1039      00000000 
+ 1039      00000000 
+ 1039      00000000 
+ 1039      00000000 
+ 1040              		.global	mag_axis
+ 1041              		.section	.bss.mag_axis,"aw",%nobits
+ 1042              		.align	2
+ 1045              	mag_axis:
+ 1046 0000 00000000 		.space	12
+ 1046      00000000 
+ 1046      00000000 
+ 1047              		.global	accel2_axis
+ 1048              		.section	.bss.accel2_axis,"aw",%nobits
+ 1049              		.align	2
+ 1052              	accel2_axis:
+ 1053 0000 00000000 		.space	12
+ 1053      00000000 
+ 1053      00000000 
+ 1054              		.global	gyro_axis
+ 1055              		.section	.bss.gyro_axis,"aw",%nobits
+ 1056              		.align	2
+ 1059              	gyro_axis:
+ 1060 0000 00000000 		.space	12
+ 1060      00000000 
+ 1060      00000000 
+ 1061              		.global	accel1_axis
+ 1062              		.section	.bss.accel1_axis,"aw",%nobits
+ 1063              		.align	2
+ 1066              	accel1_axis:
+ 1067 0000 00000000 		.space	12
+ 1067      00000000 
+ 1067      00000000 
+ 1068              		.global	huart2
+ 1069              		.section	.bss.huart2,"aw",%nobits
+ 1070              		.align	2
+ 1073              	huart2:
+ 1074 0000 00000000 		.space	72
+ARM GAS  C:\Temp\ccZiDl3m.s 			page 19
+
+
+ 1074      00000000 
+ 1074      00000000 
+ 1074      00000000 
+ 1074      00000000 
+ 1075              		.global	htim3
+ 1076              		.section	.bss.htim3,"aw",%nobits
+ 1077              		.align	2
+ 1080              	htim3:
+ 1081 0000 00000000 		.space	72
+ 1081      00000000 
+ 1081      00000000 
+ 1081      00000000 
+ 1081      00000000 
+ 1082              		.global	htim2
+ 1083              		.section	.bss.htim2,"aw",%nobits
+ 1084              		.align	2
+ 1087              	htim2:
+ 1088 0000 00000000 		.space	72
+ 1088      00000000 
+ 1088      00000000 
+ 1088      00000000 
+ 1088      00000000 
+ 1089              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccZiDl3m.s 			page 20
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+  C:\Temp\ccZiDl3m.s:18     .text.bytesToFloat_main:00000000 $t
+  C:\Temp\ccZiDl3m.s:24     .text.bytesToFloat_main:00000000 bytesToFloat_main
+  C:\Temp\ccZiDl3m.s:39     .text.bytesToInt32_main:00000000 $t
+  C:\Temp\ccZiDl3m.s:45     .text.bytesToInt32_main:00000000 bytesToInt32_main
+  C:\Temp\ccZiDl3m.s:60     .text.receivedFromSimulink:00000000 $t
+  C:\Temp\ccZiDl3m.s:66     .text.receivedFromSimulink:00000000 receivedFromSimulink
+  C:\Temp\ccZiDl3m.s:131    .text.receivedFromSimulink:00000098 $d
+  C:\Temp\ccZiDl3m.s:142    .text.configureTimer:00000000 $t
+  C:\Temp\ccZiDl3m.s:148    .text.configureTimer:00000000 configureTimer
+  C:\Temp\ccZiDl3m.s:179    .text.configureTimer:0000004c $d
+  C:\Temp\ccZiDl3m.s:183    .text.get_fastest_odr:00000000 $t
+  C:\Temp\ccZiDl3m.s:189    .text.get_fastest_odr:00000000 get_fastest_odr
+  C:\Temp\ccZiDl3m.s:218    .text.sendToSimulink:00000000 $t
+  C:\Temp\ccZiDl3m.s:224    .text.sendToSimulink:00000000 sendToSimulink
+  C:\Temp\ccZiDl3m.s:359    .text.sendToSimulink:00000160 $d
+  C:\Temp\ccZiDl3m.s:1073   .bss.huart2:00000000 huart2
+  C:\Temp\ccZiDl3m.s:1031   .data.header:00000000 header
+  C:\Temp\ccZiDl3m.s:1066   .bss.accel1_axis:00000000 accel1_axis
+  C:\Temp\ccZiDl3m.s:1059   .bss.gyro_axis:00000000 gyro_axis
+  C:\Temp\ccZiDl3m.s:1052   .bss.accel2_axis:00000000 accel2_axis
+  C:\Temp\ccZiDl3m.s:1045   .bss.mag_axis:00000000 mag_axis
+  C:\Temp\ccZiDl3m.s:971    .bss.counter:00000000 counter
+  C:\Temp\ccZiDl3m.s:1024   .data.terminator:00000000 terminator
+  C:\Temp\ccZiDl3m.s:1038   .bss.TOF_centre:00000000 TOF_centre
+  C:\Temp\ccZiDl3m.s:371    .text.initialCalibration:00000000 $t
+  C:\Temp\ccZiDl3m.s:377    .text.initialCalibration:00000000 initialCalibration
+  C:\Temp\ccZiDl3m.s:424    .text.initialCalibration:00000064 $d
+  C:\Temp\ccZiDl3m.s:996    .bss.bigBuffer:00000000 bigBuffer
+  C:\Temp\ccZiDl3m.s:977    .bss.calibrated:00000000 calibrated
+  C:\Temp\ccZiDl3m.s:436    .text.MX_GPIO_Init:00000000 $t
+  C:\Temp\ccZiDl3m.s:442    .text.MX_GPIO_Init:00000000 MX_GPIO_Init
+  C:\Temp\ccZiDl3m.s:597    .text.MX_GPIO_Init:00000174 $d
+  C:\Temp\ccZiDl3m.s:604    .text.HAL_TIM_PeriodElapsedCallback:00000000 $t
+  C:\Temp\ccZiDl3m.s:610    .text.HAL_TIM_PeriodElapsedCallback:00000000 HAL_TIM_PeriodElapsedCallback
+  C:\Temp\ccZiDl3m.s:626    .text.HAL_TIM_PeriodElapsedCallback:00000014 $d
+  C:\Temp\ccZiDl3m.s:629    .text.Error_Handler:00000000 $t
+  C:\Temp\ccZiDl3m.s:635    .text.Error_Handler:00000000 Error_Handler
+  C:\Temp\ccZiDl3m.s:650    .text.MX_TIM2_Init:00000000 $t
+  C:\Temp\ccZiDl3m.s:655    .text.MX_TIM2_Init:00000000 MX_TIM2_Init
+  C:\Temp\ccZiDl3m.s:704    .text.MX_TIM2_Init:00000064 $d
+  C:\Temp\ccZiDl3m.s:1087   .bss.htim2:00000000 htim2
+  C:\Temp\ccZiDl3m.s:707    .text.MX_USART2_UART_Init:00000000 $t
+  C:\Temp\ccZiDl3m.s:712    .text.MX_USART2_UART_Init:00000000 MX_USART2_UART_Init
+  C:\Temp\ccZiDl3m.s:740    .text.MX_USART2_UART_Init:00000038 $d
+  C:\Temp\ccZiDl3m.s:744    .text.MX_TIM3_Init:00000000 $t
+  C:\Temp\ccZiDl3m.s:749    .text.MX_TIM3_Init:00000000 MX_TIM3_Init
+  C:\Temp\ccZiDl3m.s:798    .text.MX_TIM3_Init:00000060 $d
+  C:\Temp\ccZiDl3m.s:1080   .bss.htim3:00000000 htim3
+  C:\Temp\ccZiDl3m.s:802    .text.SystemClock_Config:00000000 $t
+  C:\Temp\ccZiDl3m.s:808    .text.SystemClock_Config:00000000 SystemClock_Config
+  C:\Temp\ccZiDl3m.s:881    .text.SystemClock_Config:0000009c $d
+  C:\Temp\ccZiDl3m.s:885    .text.main:00000000 $t
+  C:\Temp\ccZiDl3m.s:891    .text.main:00000000 main
+  C:\Temp\ccZiDl3m.s:944    .text.main:00000080 $d
+  C:\Temp\ccZiDl3m.s:983    .bss.clearToGetL8:00000000 clearToGetL8
+ARM GAS  C:\Temp\ccZiDl3m.s 			page 21
+
+
+  C:\Temp\ccZiDl3m.s:954    .text.assert_failed:00000000 $t
+  C:\Temp\ccZiDl3m.s:960    .text.assert_failed:00000000 assert_failed
+  C:\Temp\ccZiDl3m.s:968    .bss.counter:00000000 $d
+  C:\Temp\ccZiDl3m.s:978    .bss.calibrated:00000000 $d
+  C:\Temp\ccZiDl3m.s:984    .bss.clearToGetL8:00000000 $d
+  C:\Temp\ccZiDl3m.s:989    .bss.clearToSend:00000000 clearToSend
+  C:\Temp\ccZiDl3m.s:990    .bss.clearToSend:00000000 $d
+  C:\Temp\ccZiDl3m.s:993    .bss.bigBuffer:00000000 $d
+  C:\Temp\ccZiDl3m.s:1003   .rodata.numberOfSimulinkBytes:00000000 numberOfSimulinkBytes
+  C:\Temp\ccZiDl3m.s:1000   .rodata.numberOfSimulinkBytes:00000000 $d
+  C:\Temp\ccZiDl3m.s:1010   .rodata.expectedTerminator:00000000 expectedTerminator
+  C:\Temp\ccZiDl3m.s:1007   .rodata.expectedTerminator:00000000 $d
+  C:\Temp\ccZiDl3m.s:1017   .rodata.expectedHeader:00000000 expectedHeader
+  C:\Temp\ccZiDl3m.s:1014   .rodata.expectedHeader:00000000 $d
+  C:\Temp\ccZiDl3m.s:1021   .data.terminator:00000000 $d
+  C:\Temp\ccZiDl3m.s:1028   .data.header:00000000 $d
+  C:\Temp\ccZiDl3m.s:1035   .bss.TOF_centre:00000000 $d
+  C:\Temp\ccZiDl3m.s:1042   .bss.mag_axis:00000000 $d
+  C:\Temp\ccZiDl3m.s:1049   .bss.accel2_axis:00000000 $d
+  C:\Temp\ccZiDl3m.s:1056   .bss.gyro_axis:00000000 $d
+  C:\Temp\ccZiDl3m.s:1063   .bss.accel1_axis:00000000 $d
+  C:\Temp\ccZiDl3m.s:1070   .bss.huart2:00000000 $d
+  C:\Temp\ccZiDl3m.s:1077   .bss.htim3:00000000 $d
+  C:\Temp\ccZiDl3m.s:1084   .bss.htim2:00000000 $d
+
+UNDEFINED SYMBOLS
+accel1_fsr
+accel1_odr
+gyro_fsr
+gyro_odr
+accel2_fsr
+accel2_odr
+mag_odr
+tof_odr
+__aeabi_f2ulz
+SystemCoreClock
+HAL_UART_Transmit
+temperature
+HAL_UART_Receive
+HAL_GPIO_WritePin
+fastestODR
+HAL_GPIO_Init
+HAL_NVIC_SetPriority
+HAL_NVIC_EnableIRQ
+HAL_IncTick
+HAL_TIM_Base_Init
+HAL_TIM_ConfigClockSource
+HAL_TIMEx_MasterConfigSynchronization
+HAL_UART_Init
+memset
+HAL_RCC_OscConfig
+HAL_RCC_ClockConfig
+HAL_Init
+calibrateVL53L8A1
+initVL53L8A1
+initIKS02A1
+calibrate_IKS02A1
+ARM GAS  C:\Temp\ccZiDl3m.s 			page 22
+
+
+HAL_TIM_Base_Start_IT
+getIKS02A1
+getVL53L8A1

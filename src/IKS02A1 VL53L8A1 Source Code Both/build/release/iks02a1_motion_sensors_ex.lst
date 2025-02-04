@@ -1,0 +1,667 @@
+ARM GAS  C:\Temp\ccx6oxfh.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"iks02a1_motion_sensors_ex.c"
+  16              		.text
+  17              		.section	.text.IKS02A1_MOTION_SENSOR_Get_DRDY_Status,"ax",%progbits
+  18              		.align	1
+  19              		.global	IKS02A1_MOTION_SENSOR_Get_DRDY_Status
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	IKS02A1_MOTION_SENSOR_Get_DRDY_Status:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 08B5     		push	{r3, lr}
+  28 0002 0B46     		mov	r3, r1
+  29 0004 1146     		mov	r1, r2
+  30 0006 0128     		cmp	r0, #1
+  31 0008 1FD0     		beq	.L2
+  32 000a 0228     		cmp	r0, #2
+  33 000c 2AD0     		beq	.L3
+  34 000e 10B1     		cbz	r0, .L11
+  35 0010 6FF00100 		mvn	r0, #1
+  36              	.L1:
+  37 0014 08BD     		pop	{r3, pc}
+  38              	.L11:
+  39 0016 13F0020F 		tst	r3, #2
+  40 001a 0CD1     		bne	.L12
+  41 001c 13F0010F 		tst	r3, #1
+  42 0020 2DD0     		beq	.L7
+  43 0022 1B4B     		ldr	r3, .L13
+  44 0024 53F82000 		ldr	r0, [r3, r0, lsl #2]
+  45 0028 FFF7FEFF 		bl	ISM330DHCX_GYRO_Get_DRDY_Status
+  46 002c 0028     		cmp	r0, #0
+  47 002e F1D0     		beq	.L1
+  48 0030 6FF00400 		mvn	r0, #4
+  49 0034 EEE7     		b	.L1
+  50              	.L12:
+  51 0036 164B     		ldr	r3, .L13
+  52 0038 53F82000 		ldr	r0, [r3, r0, lsl #2]
+  53 003c FFF7FEFF 		bl	ISM330DHCX_ACC_Get_DRDY_Status
+  54 0040 0028     		cmp	r0, #0
+  55 0042 E7D0     		beq	.L1
+  56 0044 6FF00400 		mvn	r0, #4
+  57 0048 E4E7     		b	.L1
+  58              	.L2:
+ARM GAS  C:\Temp\ccx6oxfh.s 			page 2
+
+
+  59 004a 13F0020F 		tst	r3, #2
+  60 004e 19D0     		beq	.L8
+  61 0050 0F4B     		ldr	r3, .L13
+  62 0052 53F82000 		ldr	r0, [r3, r0, lsl #2]
+  63 0056 FFF7FEFF 		bl	IIS2DLPC_ACC_Get_DRDY_Status
+  64 005a 0028     		cmp	r0, #0
+  65 005c DAD0     		beq	.L1
+  66 005e 6FF00400 		mvn	r0, #4
+  67 0062 D7E7     		b	.L1
+  68              	.L3:
+  69 0064 13F0040F 		tst	r3, #4
+  70 0068 0FD0     		beq	.L9
+  71 006a 094B     		ldr	r3, .L13
+  72 006c 53F82000 		ldr	r0, [r3, r0, lsl #2]
+  73 0070 FFF7FEFF 		bl	IIS2MDC_MAG_Get_DRDY_Status
+  74 0074 0028     		cmp	r0, #0
+  75 0076 CDD0     		beq	.L1
+  76 0078 6FF00400 		mvn	r0, #4
+  77 007c CAE7     		b	.L1
+  78              	.L7:
+  79 007e 6FF00400 		mvn	r0, #4
+  80 0082 C7E7     		b	.L1
+  81              	.L8:
+  82 0084 6FF00400 		mvn	r0, #4
+  83 0088 C4E7     		b	.L1
+  84              	.L9:
+  85 008a 6FF00400 		mvn	r0, #4
+  86 008e C1E7     		b	.L1
+  87              	.L14:
+  88              		.align	2
+  89              	.L13:
+  90 0090 00000000 		.word	MotionCompObj
+  92              		.section	.text.IKS02A1_MOTION_SENSOR_Read_Register,"ax",%progbits
+  93              		.align	1
+  94              		.global	IKS02A1_MOTION_SENSOR_Read_Register
+  95              		.syntax unified
+  96              		.thumb
+  97              		.thumb_func
+  99              	IKS02A1_MOTION_SENSOR_Read_Register:
+ 100              		@ args = 0, pretend = 0, frame = 0
+ 101              		@ frame_needed = 0, uses_anonymous_args = 0
+ 102 0000 08B5     		push	{r3, lr}
+ 103 0002 0128     		cmp	r0, #1
+ 104 0004 0FD0     		beq	.L16
+ 105 0006 0228     		cmp	r0, #2
+ 106 0008 17D0     		beq	.L17
+ 107 000a 10B1     		cbz	r0, .L21
+ 108 000c 6FF00100 		mvn	r0, #1
+ 109              	.L15:
+ 110 0010 08BD     		pop	{r3, pc}
+ 111              	.L21:
+ 112 0012 0F4B     		ldr	r3, .L22
+ 113 0014 53F82000 		ldr	r0, [r3, r0, lsl #2]
+ 114 0018 FFF7FEFF 		bl	ISM330DHCX_Read_Reg
+ 115 001c 0028     		cmp	r0, #0
+ 116 001e F7D0     		beq	.L15
+ 117 0020 6FF00400 		mvn	r0, #4
+ARM GAS  C:\Temp\ccx6oxfh.s 			page 3
+
+
+ 118 0024 F4E7     		b	.L15
+ 119              	.L16:
+ 120 0026 0A4B     		ldr	r3, .L22
+ 121 0028 53F82000 		ldr	r0, [r3, r0, lsl #2]
+ 122 002c FFF7FEFF 		bl	IIS2DLPC_Read_Reg
+ 123 0030 0028     		cmp	r0, #0
+ 124 0032 EDD0     		beq	.L15
+ 125 0034 6FF00400 		mvn	r0, #4
+ 126 0038 EAE7     		b	.L15
+ 127              	.L17:
+ 128 003a 054B     		ldr	r3, .L22
+ 129 003c 53F82000 		ldr	r0, [r3, r0, lsl #2]
+ 130 0040 FFF7FEFF 		bl	IIS2MDC_Read_Reg
+ 131 0044 0028     		cmp	r0, #0
+ 132 0046 E3D0     		beq	.L15
+ 133 0048 6FF00400 		mvn	r0, #4
+ 134 004c E0E7     		b	.L15
+ 135              	.L23:
+ 136 004e 00BF     		.align	2
+ 137              	.L22:
+ 138 0050 00000000 		.word	MotionCompObj
+ 140              		.section	.text.IKS02A1_MOTION_SENSOR_Write_Register,"ax",%progbits
+ 141              		.align	1
+ 142              		.global	IKS02A1_MOTION_SENSOR_Write_Register
+ 143              		.syntax unified
+ 144              		.thumb
+ 145              		.thumb_func
+ 147              	IKS02A1_MOTION_SENSOR_Write_Register:
+ 148              		@ args = 0, pretend = 0, frame = 0
+ 149              		@ frame_needed = 0, uses_anonymous_args = 0
+ 150 0000 08B5     		push	{r3, lr}
+ 151 0002 0128     		cmp	r0, #1
+ 152 0004 0FD0     		beq	.L25
+ 153 0006 0228     		cmp	r0, #2
+ 154 0008 17D0     		beq	.L26
+ 155 000a 10B1     		cbz	r0, .L30
+ 156 000c 6FF00100 		mvn	r0, #1
+ 157              	.L24:
+ 158 0010 08BD     		pop	{r3, pc}
+ 159              	.L30:
+ 160 0012 0F4B     		ldr	r3, .L31
+ 161 0014 53F82000 		ldr	r0, [r3, r0, lsl #2]
+ 162 0018 FFF7FEFF 		bl	ISM330DHCX_Write_Reg
+ 163 001c 0028     		cmp	r0, #0
+ 164 001e F7D0     		beq	.L24
+ 165 0020 6FF00400 		mvn	r0, #4
+ 166 0024 F4E7     		b	.L24
+ 167              	.L25:
+ 168 0026 0A4B     		ldr	r3, .L31
+ 169 0028 53F82000 		ldr	r0, [r3, r0, lsl #2]
+ 170 002c FFF7FEFF 		bl	IIS2DLPC_Write_Reg
+ 171 0030 0028     		cmp	r0, #0
+ 172 0032 EDD0     		beq	.L24
+ 173 0034 6FF00400 		mvn	r0, #4
+ 174 0038 EAE7     		b	.L24
+ 175              	.L26:
+ 176 003a 054B     		ldr	r3, .L31
+ARM GAS  C:\Temp\ccx6oxfh.s 			page 4
+
+
+ 177 003c 53F82000 		ldr	r0, [r3, r0, lsl #2]
+ 178 0040 FFF7FEFF 		bl	IIS2MDC_Write_Reg
+ 179 0044 0028     		cmp	r0, #0
+ 180 0046 E3D0     		beq	.L24
+ 181 0048 6FF00400 		mvn	r0, #4
+ 182 004c E0E7     		b	.L24
+ 183              	.L32:
+ 184 004e 00BF     		.align	2
+ 185              	.L31:
+ 186 0050 00000000 		.word	MotionCompObj
+ 188              		.section	.text.IKS02A1_MOTION_SENSOR_FIFO_Get_Num_Samples,"ax",%progbits
+ 189              		.align	1
+ 190              		.global	IKS02A1_MOTION_SENSOR_FIFO_Get_Num_Samples
+ 191              		.syntax unified
+ 192              		.thumb
+ 193              		.thumb_func
+ 195              	IKS02A1_MOTION_SENSOR_FIFO_Get_Num_Samples:
+ 196              		@ args = 0, pretend = 0, frame = 0
+ 197              		@ frame_needed = 0, uses_anonymous_args = 0
+ 198 0000 50B9     		cbnz	r0, .L35
+ 199 0002 08B5     		push	{r3, lr}
+ 200 0004 064A     		ldr	r2, .L41
+ 201 0006 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 202 000a FFF7FEFF 		bl	ISM330DHCX_FIFO_Get_Num_Samples
+ 203 000e 00B9     		cbnz	r0, .L40
+ 204              	.L33:
+ 205 0010 08BD     		pop	{r3, pc}
+ 206              	.L40:
+ 207 0012 6FF00400 		mvn	r0, #4
+ 208 0016 FBE7     		b	.L33
+ 209              	.L35:
+ 210 0018 6FF00100 		mvn	r0, #1
+ 211 001c 7047     		bx	lr
+ 212              	.L42:
+ 213 001e 00BF     		.align	2
+ 214              	.L41:
+ 215 0020 00000000 		.word	MotionCompObj
+ 217              		.section	.text.IKS02A1_MOTION_SENSOR_FIFO_Set_BDR,"ax",%progbits
+ 218              		.align	1
+ 219              		.global	IKS02A1_MOTION_SENSOR_FIFO_Set_BDR
+ 220              		.syntax unified
+ 221              		.thumb
+ 222              		.thumb_func
+ 224              	IKS02A1_MOTION_SENSOR_FIFO_Set_BDR:
+ 225              		@ args = 0, pretend = 0, frame = 0
+ 226              		@ frame_needed = 0, uses_anonymous_args = 0
+ 227 0000 D0B9     		cbnz	r0, .L46
+ 228 0002 08B5     		push	{r3, lr}
+ 229 0004 11F0020F 		tst	r1, #2
+ 230 0008 09D1     		bne	.L52
+ 231 000a 11F0010F 		tst	r1, #1
+ 232 000e 16D0     		beq	.L47
+ 233 0010 0C4A     		ldr	r2, .L54
+ 234 0012 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 235 0016 FFF7FEFF 		bl	ISM330DHCX_FIFO_GYRO_Set_BDR
+ 236 001a 50B9     		cbnz	r0, .L53
+ 237              	.L43:
+ARM GAS  C:\Temp\ccx6oxfh.s 			page 5
+
+
+ 238 001c 08BD     		pop	{r3, pc}
+ 239              	.L52:
+ 240 001e 094A     		ldr	r2, .L54
+ 241 0020 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 242 0024 FFF7FEFF 		bl	ISM330DHCX_FIFO_ACC_Set_BDR
+ 243 0028 0028     		cmp	r0, #0
+ 244 002a F7D0     		beq	.L43
+ 245 002c 6FF00400 		mvn	r0, #4
+ 246 0030 F4E7     		b	.L43
+ 247              	.L53:
+ 248 0032 6FF00400 		mvn	r0, #4
+ 249 0036 F1E7     		b	.L43
+ 250              	.L46:
+ 251 0038 6FF00100 		mvn	r0, #1
+ 252 003c 7047     		bx	lr
+ 253              	.L47:
+ 254 003e 6FF00100 		mvn	r0, #1
+ 255 0042 EBE7     		b	.L43
+ 256              	.L55:
+ 257              		.align	2
+ 258              	.L54:
+ 259 0044 00000000 		.word	MotionCompObj
+ 261              		.section	.text.IKS02A1_MOTION_SENSOR_FIFO_Set_INT1_FIFO_Full,"ax",%progbits
+ 262              		.align	1
+ 263              		.global	IKS02A1_MOTION_SENSOR_FIFO_Set_INT1_FIFO_Full
+ 264              		.syntax unified
+ 265              		.thumb
+ 266              		.thumb_func
+ 268              	IKS02A1_MOTION_SENSOR_FIFO_Set_INT1_FIFO_Full:
+ 269              		@ args = 0, pretend = 0, frame = 0
+ 270              		@ frame_needed = 0, uses_anonymous_args = 0
+ 271 0000 50B9     		cbnz	r0, .L58
+ 272 0002 08B5     		push	{r3, lr}
+ 273 0004 064A     		ldr	r2, .L64
+ 274 0006 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 275 000a FFF7FEFF 		bl	ISM330DHCX_FIFO_Set_INT1_FIFO_Full
+ 276 000e 00B9     		cbnz	r0, .L63
+ 277              	.L56:
+ 278 0010 08BD     		pop	{r3, pc}
+ 279              	.L63:
+ 280 0012 6FF00400 		mvn	r0, #4
+ 281 0016 FBE7     		b	.L56
+ 282              	.L58:
+ 283 0018 6FF00100 		mvn	r0, #1
+ 284 001c 7047     		bx	lr
+ 285              	.L65:
+ 286 001e 00BF     		.align	2
+ 287              	.L64:
+ 288 0020 00000000 		.word	MotionCompObj
+ 290              		.section	.text.IKS02A1_MOTION_SENSOR_FIFO_Set_Watermark_Level,"ax",%progbits
+ 291              		.align	1
+ 292              		.global	IKS02A1_MOTION_SENSOR_FIFO_Set_Watermark_Level
+ 293              		.syntax unified
+ 294              		.thumb
+ 295              		.thumb_func
+ 297              	IKS02A1_MOTION_SENSOR_FIFO_Set_Watermark_Level:
+ 298              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Temp\ccx6oxfh.s 			page 6
+
+
+ 299              		@ frame_needed = 0, uses_anonymous_args = 0
+ 300 0000 50B9     		cbnz	r0, .L68
+ 301 0002 08B5     		push	{r3, lr}
+ 302 0004 064A     		ldr	r2, .L74
+ 303 0006 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 304 000a FFF7FEFF 		bl	ISM330DHCX_FIFO_Set_Watermark_Level
+ 305 000e 00B9     		cbnz	r0, .L73
+ 306              	.L66:
+ 307 0010 08BD     		pop	{r3, pc}
+ 308              	.L73:
+ 309 0012 6FF00400 		mvn	r0, #4
+ 310 0016 FBE7     		b	.L66
+ 311              	.L68:
+ 312 0018 6FF00100 		mvn	r0, #1
+ 313 001c 7047     		bx	lr
+ 314              	.L75:
+ 315 001e 00BF     		.align	2
+ 316              	.L74:
+ 317 0020 00000000 		.word	MotionCompObj
+ 319              		.section	.text.IKS02A1_MOTION_SENSOR_FIFO_Set_Stop_On_Fth,"ax",%progbits
+ 320              		.align	1
+ 321              		.global	IKS02A1_MOTION_SENSOR_FIFO_Set_Stop_On_Fth
+ 322              		.syntax unified
+ 323              		.thumb
+ 324              		.thumb_func
+ 326              	IKS02A1_MOTION_SENSOR_FIFO_Set_Stop_On_Fth:
+ 327              		@ args = 0, pretend = 0, frame = 0
+ 328              		@ frame_needed = 0, uses_anonymous_args = 0
+ 329 0000 50B9     		cbnz	r0, .L78
+ 330 0002 08B5     		push	{r3, lr}
+ 331 0004 064A     		ldr	r2, .L84
+ 332 0006 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 333 000a FFF7FEFF 		bl	ISM330DHCX_FIFO_Set_Stop_On_Fth
+ 334 000e 00B9     		cbnz	r0, .L83
+ 335              	.L76:
+ 336 0010 08BD     		pop	{r3, pc}
+ 337              	.L83:
+ 338 0012 6FF00400 		mvn	r0, #4
+ 339 0016 FBE7     		b	.L76
+ 340              	.L78:
+ 341 0018 6FF00100 		mvn	r0, #1
+ 342 001c 7047     		bx	lr
+ 343              	.L85:
+ 344 001e 00BF     		.align	2
+ 345              	.L84:
+ 346 0020 00000000 		.word	MotionCompObj
+ 348              		.section	.text.IKS02A1_MOTION_SENSOR_FIFO_Set_Mode,"ax",%progbits
+ 349              		.align	1
+ 350              		.global	IKS02A1_MOTION_SENSOR_FIFO_Set_Mode
+ 351              		.syntax unified
+ 352              		.thumb
+ 353              		.thumb_func
+ 355              	IKS02A1_MOTION_SENSOR_FIFO_Set_Mode:
+ 356              		@ args = 0, pretend = 0, frame = 0
+ 357              		@ frame_needed = 0, uses_anonymous_args = 0
+ 358 0000 50B9     		cbnz	r0, .L88
+ 359 0002 08B5     		push	{r3, lr}
+ARM GAS  C:\Temp\ccx6oxfh.s 			page 7
+
+
+ 360 0004 064A     		ldr	r2, .L94
+ 361 0006 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 362 000a FFF7FEFF 		bl	ISM330DHCX_FIFO_Set_Mode
+ 363 000e 00B9     		cbnz	r0, .L93
+ 364              	.L86:
+ 365 0010 08BD     		pop	{r3, pc}
+ 366              	.L93:
+ 367 0012 6FF00400 		mvn	r0, #4
+ 368 0016 FBE7     		b	.L86
+ 369              	.L88:
+ 370 0018 6FF00100 		mvn	r0, #1
+ 371 001c 7047     		bx	lr
+ 372              	.L95:
+ 373 001e 00BF     		.align	2
+ 374              	.L94:
+ 375 0020 00000000 		.word	MotionCompObj
+ 377              		.section	.text.IKS02A1_MOTION_SENSOR_FIFO_Get_Tag,"ax",%progbits
+ 378              		.align	1
+ 379              		.global	IKS02A1_MOTION_SENSOR_FIFO_Get_Tag
+ 380              		.syntax unified
+ 381              		.thumb
+ 382              		.thumb_func
+ 384              	IKS02A1_MOTION_SENSOR_FIFO_Get_Tag:
+ 385              		@ args = 0, pretend = 0, frame = 0
+ 386              		@ frame_needed = 0, uses_anonymous_args = 0
+ 387 0000 50B9     		cbnz	r0, .L98
+ 388 0002 08B5     		push	{r3, lr}
+ 389 0004 064A     		ldr	r2, .L104
+ 390 0006 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 391 000a FFF7FEFF 		bl	ISM330DHCX_FIFO_Get_Tag
+ 392 000e 00B9     		cbnz	r0, .L103
+ 393              	.L96:
+ 394 0010 08BD     		pop	{r3, pc}
+ 395              	.L103:
+ 396 0012 6FF00400 		mvn	r0, #4
+ 397 0016 FBE7     		b	.L96
+ 398              	.L98:
+ 399 0018 6FF00100 		mvn	r0, #1
+ 400 001c 7047     		bx	lr
+ 401              	.L105:
+ 402 001e 00BF     		.align	2
+ 403              	.L104:
+ 404 0020 00000000 		.word	MotionCompObj
+ 406              		.section	.text.IKS02A1_MOTION_SENSOR_FIFO_Get_Axes,"ax",%progbits
+ 407              		.align	1
+ 408              		.global	IKS02A1_MOTION_SENSOR_FIFO_Get_Axes
+ 409              		.syntax unified
+ 410              		.thumb
+ 411              		.thumb_func
+ 413              	IKS02A1_MOTION_SENSOR_FIFO_Get_Axes:
+ 414              		@ args = 0, pretend = 0, frame = 0
+ 415              		@ frame_needed = 0, uses_anonymous_args = 0
+ 416 0000 E0B9     		cbnz	r0, .L109
+ 417 0002 08B5     		push	{r3, lr}
+ 418 0004 0B46     		mov	r3, r1
+ 419 0006 1146     		mov	r1, r2
+ 420 0008 13F0020F 		tst	r3, #2
+ARM GAS  C:\Temp\ccx6oxfh.s 			page 8
+
+
+ 421 000c 09D1     		bne	.L115
+ 422 000e 13F0010F 		tst	r3, #1
+ 423 0012 16D0     		beq	.L110
+ 424 0014 0C4B     		ldr	r3, .L117
+ 425 0016 53F82000 		ldr	r0, [r3, r0, lsl #2]
+ 426 001a FFF7FEFF 		bl	ISM330DHCX_FIFO_GYRO_Get_Axes
+ 427 001e 50B9     		cbnz	r0, .L116
+ 428              	.L106:
+ 429 0020 08BD     		pop	{r3, pc}
+ 430              	.L115:
+ 431 0022 094B     		ldr	r3, .L117
+ 432 0024 53F82000 		ldr	r0, [r3, r0, lsl #2]
+ 433 0028 FFF7FEFF 		bl	ISM330DHCX_FIFO_ACC_Get_Axes
+ 434 002c 0028     		cmp	r0, #0
+ 435 002e F7D0     		beq	.L106
+ 436 0030 6FF00400 		mvn	r0, #4
+ 437 0034 F4E7     		b	.L106
+ 438              	.L116:
+ 439 0036 6FF00400 		mvn	r0, #4
+ 440 003a F1E7     		b	.L106
+ 441              	.L109:
+ 442 003c 6FF00100 		mvn	r0, #1
+ 443 0040 7047     		bx	lr
+ 444              	.L110:
+ 445 0042 6FF00100 		mvn	r0, #1
+ 446 0046 EBE7     		b	.L106
+ 447              	.L118:
+ 448              		.align	2
+ 449              	.L117:
+ 450 0048 00000000 		.word	MotionCompObj
+ 452              		.section	.text.IKS02A1_MOTION_SENSOR_DRDY_Set_Mode,"ax",%progbits
+ 453              		.align	1
+ 454              		.global	IKS02A1_MOTION_SENSOR_DRDY_Set_Mode
+ 455              		.syntax unified
+ 456              		.thumb
+ 457              		.thumb_func
+ 459              	IKS02A1_MOTION_SENSOR_DRDY_Set_Mode:
+ 460              		@ args = 0, pretend = 0, frame = 0
+ 461              		@ frame_needed = 0, uses_anonymous_args = 0
+ 462 0000 50B9     		cbnz	r0, .L121
+ 463 0002 08B5     		push	{r3, lr}
+ 464 0004 064A     		ldr	r2, .L127
+ 465 0006 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 466 000a FFF7FEFF 		bl	ISM330DHCX_DRDY_Set_Mode
+ 467 000e 00B9     		cbnz	r0, .L126
+ 468              	.L119:
+ 469 0010 08BD     		pop	{r3, pc}
+ 470              	.L126:
+ 471 0012 6FF00400 		mvn	r0, #4
+ 472 0016 FBE7     		b	.L119
+ 473              	.L121:
+ 474 0018 6FF00100 		mvn	r0, #1
+ 475 001c 7047     		bx	lr
+ 476              	.L128:
+ 477 001e 00BF     		.align	2
+ 478              	.L127:
+ 479 0020 00000000 		.word	MotionCompObj
+ARM GAS  C:\Temp\ccx6oxfh.s 			page 9
+
+
+ 481              		.section	.text.IKS02A1_MOTION_SENSOR_DRDY_Enable_Interrupt,"ax",%progbits
+ 482              		.align	1
+ 483              		.global	IKS02A1_MOTION_SENSOR_DRDY_Enable_Interrupt
+ 484              		.syntax unified
+ 485              		.thumb
+ 486              		.thumb_func
+ 488              	IKS02A1_MOTION_SENSOR_DRDY_Enable_Interrupt:
+ 489              		@ args = 0, pretend = 0, frame = 0
+ 490              		@ frame_needed = 0, uses_anonymous_args = 0
+ 491 0000 E8B9     		cbnz	r0, .L132
+ 492 0002 08B5     		push	{r3, lr}
+ 493 0004 11F0020F 		tst	r1, #2
+ 494 0008 0AD0     		beq	.L131
+ 495 000a DAB9     		cbnz	r2, .L133
+ 496 000c 124A     		ldr	r2, .L141
+ 497 000e 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 498 0012 FFF7FEFF 		bl	ISM330DHCX_ACC_Enable_DRDY_On_INT1
+ 499 0016 00B9     		cbnz	r0, .L140
+ 500              	.L129:
+ 501 0018 08BD     		pop	{r3, pc}
+ 502              	.L140:
+ 503 001a 6FF00400 		mvn	r0, #4
+ 504 001e FBE7     		b	.L129
+ 505              	.L131:
+ 506 0020 11F0010F 		tst	r1, #1
+ 507 0024 11D0     		beq	.L134
+ 508 0026 012A     		cmp	r2, #1
+ 509 0028 12D1     		bne	.L135
+ 510 002a 0B4A     		ldr	r2, .L141
+ 511 002c 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 512 0030 FFF7FEFF 		bl	ISM330DHCX_GYRO_Enable_DRDY_On_INT2
+ 513 0034 0028     		cmp	r0, #0
+ 514 0036 EFD0     		beq	.L129
+ 515 0038 6FF00400 		mvn	r0, #4
+ 516 003c ECE7     		b	.L129
+ 517              	.L132:
+ 518 003e 6FF00100 		mvn	r0, #1
+ 519 0042 7047     		bx	lr
+ 520              	.L133:
+ 521 0044 6FF00400 		mvn	r0, #4
+ 522 0048 E6E7     		b	.L129
+ 523              	.L134:
+ 524 004a 6FF00400 		mvn	r0, #4
+ 525 004e E3E7     		b	.L129
+ 526              	.L135:
+ 527 0050 6FF00400 		mvn	r0, #4
+ 528 0054 E0E7     		b	.L129
+ 529              	.L142:
+ 530 0056 00BF     		.align	2
+ 531              	.L141:
+ 532 0058 00000000 		.word	MotionCompObj
+ 534              		.section	.text.IKS02A1_MOTION_SENSOR_DRDY_Disable_Interrupt,"ax",%progbits
+ 535              		.align	1
+ 536              		.global	IKS02A1_MOTION_SENSOR_DRDY_Disable_Interrupt
+ 537              		.syntax unified
+ 538              		.thumb
+ 539              		.thumb_func
+ARM GAS  C:\Temp\ccx6oxfh.s 			page 10
+
+
+ 541              	IKS02A1_MOTION_SENSOR_DRDY_Disable_Interrupt:
+ 542              		@ args = 0, pretend = 0, frame = 0
+ 543              		@ frame_needed = 0, uses_anonymous_args = 0
+ 544 0000 E8B9     		cbnz	r0, .L146
+ 545 0002 08B5     		push	{r3, lr}
+ 546 0004 11F0020F 		tst	r1, #2
+ 547 0008 0AD0     		beq	.L145
+ 548 000a DAB9     		cbnz	r2, .L147
+ 549 000c 124A     		ldr	r2, .L155
+ 550 000e 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 551 0012 FFF7FEFF 		bl	ISM330DHCX_ACC_Disable_DRDY_On_INT1
+ 552 0016 00B9     		cbnz	r0, .L154
+ 553              	.L143:
+ 554 0018 08BD     		pop	{r3, pc}
+ 555              	.L154:
+ 556 001a 6FF00400 		mvn	r0, #4
+ 557 001e FBE7     		b	.L143
+ 558              	.L145:
+ 559 0020 11F0010F 		tst	r1, #1
+ 560 0024 11D0     		beq	.L148
+ 561 0026 012A     		cmp	r2, #1
+ 562 0028 12D1     		bne	.L149
+ 563 002a 0B4A     		ldr	r2, .L155
+ 564 002c 52F82000 		ldr	r0, [r2, r0, lsl #2]
+ 565 0030 FFF7FEFF 		bl	ISM330DHCX_GYRO_Disable_DRDY_On_INT2
+ 566 0034 0028     		cmp	r0, #0
+ 567 0036 EFD0     		beq	.L143
+ 568 0038 6FF00400 		mvn	r0, #4
+ 569 003c ECE7     		b	.L143
+ 570              	.L146:
+ 571 003e 6FF00100 		mvn	r0, #1
+ 572 0042 7047     		bx	lr
+ 573              	.L147:
+ 574 0044 6FF00400 		mvn	r0, #4
+ 575 0048 E6E7     		b	.L143
+ 576              	.L148:
+ 577 004a 6FF00400 		mvn	r0, #4
+ 578 004e E3E7     		b	.L143
+ 579              	.L149:
+ 580 0050 6FF00400 		mvn	r0, #4
+ 581 0054 E0E7     		b	.L143
+ 582              	.L156:
+ 583 0056 00BF     		.align	2
+ 584              	.L155:
+ 585 0058 00000000 		.word	MotionCompObj
+ 587              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccx6oxfh.s 			page 11
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 iks02a1_motion_sensors_ex.c
+  C:\Temp\ccx6oxfh.s:18     .text.IKS02A1_MOTION_SENSOR_Get_DRDY_Status:00000000 $t
+  C:\Temp\ccx6oxfh.s:24     .text.IKS02A1_MOTION_SENSOR_Get_DRDY_Status:00000000 IKS02A1_MOTION_SENSOR_Get_DRDY_Status
+  C:\Temp\ccx6oxfh.s:90     .text.IKS02A1_MOTION_SENSOR_Get_DRDY_Status:00000090 $d
+  C:\Temp\ccx6oxfh.s:93     .text.IKS02A1_MOTION_SENSOR_Read_Register:00000000 $t
+  C:\Temp\ccx6oxfh.s:99     .text.IKS02A1_MOTION_SENSOR_Read_Register:00000000 IKS02A1_MOTION_SENSOR_Read_Register
+  C:\Temp\ccx6oxfh.s:138    .text.IKS02A1_MOTION_SENSOR_Read_Register:00000050 $d
+  C:\Temp\ccx6oxfh.s:141    .text.IKS02A1_MOTION_SENSOR_Write_Register:00000000 $t
+  C:\Temp\ccx6oxfh.s:147    .text.IKS02A1_MOTION_SENSOR_Write_Register:00000000 IKS02A1_MOTION_SENSOR_Write_Register
+  C:\Temp\ccx6oxfh.s:186    .text.IKS02A1_MOTION_SENSOR_Write_Register:00000050 $d
+  C:\Temp\ccx6oxfh.s:189    .text.IKS02A1_MOTION_SENSOR_FIFO_Get_Num_Samples:00000000 $t
+  C:\Temp\ccx6oxfh.s:195    .text.IKS02A1_MOTION_SENSOR_FIFO_Get_Num_Samples:00000000 IKS02A1_MOTION_SENSOR_FIFO_Get_Num_Samples
+  C:\Temp\ccx6oxfh.s:215    .text.IKS02A1_MOTION_SENSOR_FIFO_Get_Num_Samples:00000020 $d
+  C:\Temp\ccx6oxfh.s:218    .text.IKS02A1_MOTION_SENSOR_FIFO_Set_BDR:00000000 $t
+  C:\Temp\ccx6oxfh.s:224    .text.IKS02A1_MOTION_SENSOR_FIFO_Set_BDR:00000000 IKS02A1_MOTION_SENSOR_FIFO_Set_BDR
+  C:\Temp\ccx6oxfh.s:259    .text.IKS02A1_MOTION_SENSOR_FIFO_Set_BDR:00000044 $d
+  C:\Temp\ccx6oxfh.s:262    .text.IKS02A1_MOTION_SENSOR_FIFO_Set_INT1_FIFO_Full:00000000 $t
+  C:\Temp\ccx6oxfh.s:268    .text.IKS02A1_MOTION_SENSOR_FIFO_Set_INT1_FIFO_Full:00000000 IKS02A1_MOTION_SENSOR_FIFO_Set_INT1_FIFO_Full
+  C:\Temp\ccx6oxfh.s:288    .text.IKS02A1_MOTION_SENSOR_FIFO_Set_INT1_FIFO_Full:00000020 $d
+  C:\Temp\ccx6oxfh.s:291    .text.IKS02A1_MOTION_SENSOR_FIFO_Set_Watermark_Level:00000000 $t
+  C:\Temp\ccx6oxfh.s:297    .text.IKS02A1_MOTION_SENSOR_FIFO_Set_Watermark_Level:00000000 IKS02A1_MOTION_SENSOR_FIFO_Set_Watermark_Level
+  C:\Temp\ccx6oxfh.s:317    .text.IKS02A1_MOTION_SENSOR_FIFO_Set_Watermark_Level:00000020 $d
+  C:\Temp\ccx6oxfh.s:320    .text.IKS02A1_MOTION_SENSOR_FIFO_Set_Stop_On_Fth:00000000 $t
+  C:\Temp\ccx6oxfh.s:326    .text.IKS02A1_MOTION_SENSOR_FIFO_Set_Stop_On_Fth:00000000 IKS02A1_MOTION_SENSOR_FIFO_Set_Stop_On_Fth
+  C:\Temp\ccx6oxfh.s:346    .text.IKS02A1_MOTION_SENSOR_FIFO_Set_Stop_On_Fth:00000020 $d
+  C:\Temp\ccx6oxfh.s:349    .text.IKS02A1_MOTION_SENSOR_FIFO_Set_Mode:00000000 $t
+  C:\Temp\ccx6oxfh.s:355    .text.IKS02A1_MOTION_SENSOR_FIFO_Set_Mode:00000000 IKS02A1_MOTION_SENSOR_FIFO_Set_Mode
+  C:\Temp\ccx6oxfh.s:375    .text.IKS02A1_MOTION_SENSOR_FIFO_Set_Mode:00000020 $d
+  C:\Temp\ccx6oxfh.s:378    .text.IKS02A1_MOTION_SENSOR_FIFO_Get_Tag:00000000 $t
+  C:\Temp\ccx6oxfh.s:384    .text.IKS02A1_MOTION_SENSOR_FIFO_Get_Tag:00000000 IKS02A1_MOTION_SENSOR_FIFO_Get_Tag
+  C:\Temp\ccx6oxfh.s:404    .text.IKS02A1_MOTION_SENSOR_FIFO_Get_Tag:00000020 $d
+  C:\Temp\ccx6oxfh.s:407    .text.IKS02A1_MOTION_SENSOR_FIFO_Get_Axes:00000000 $t
+  C:\Temp\ccx6oxfh.s:413    .text.IKS02A1_MOTION_SENSOR_FIFO_Get_Axes:00000000 IKS02A1_MOTION_SENSOR_FIFO_Get_Axes
+  C:\Temp\ccx6oxfh.s:450    .text.IKS02A1_MOTION_SENSOR_FIFO_Get_Axes:00000048 $d
+  C:\Temp\ccx6oxfh.s:453    .text.IKS02A1_MOTION_SENSOR_DRDY_Set_Mode:00000000 $t
+  C:\Temp\ccx6oxfh.s:459    .text.IKS02A1_MOTION_SENSOR_DRDY_Set_Mode:00000000 IKS02A1_MOTION_SENSOR_DRDY_Set_Mode
+  C:\Temp\ccx6oxfh.s:479    .text.IKS02A1_MOTION_SENSOR_DRDY_Set_Mode:00000020 $d
+  C:\Temp\ccx6oxfh.s:482    .text.IKS02A1_MOTION_SENSOR_DRDY_Enable_Interrupt:00000000 $t
+  C:\Temp\ccx6oxfh.s:488    .text.IKS02A1_MOTION_SENSOR_DRDY_Enable_Interrupt:00000000 IKS02A1_MOTION_SENSOR_DRDY_Enable_Interrupt
+  C:\Temp\ccx6oxfh.s:532    .text.IKS02A1_MOTION_SENSOR_DRDY_Enable_Interrupt:00000058 $d
+  C:\Temp\ccx6oxfh.s:535    .text.IKS02A1_MOTION_SENSOR_DRDY_Disable_Interrupt:00000000 $t
+  C:\Temp\ccx6oxfh.s:541    .text.IKS02A1_MOTION_SENSOR_DRDY_Disable_Interrupt:00000000 IKS02A1_MOTION_SENSOR_DRDY_Disable_Interrupt
+  C:\Temp\ccx6oxfh.s:585    .text.IKS02A1_MOTION_SENSOR_DRDY_Disable_Interrupt:00000058 $d
+
+UNDEFINED SYMBOLS
+ISM330DHCX_GYRO_Get_DRDY_Status
+ISM330DHCX_ACC_Get_DRDY_Status
+IIS2DLPC_ACC_Get_DRDY_Status
+IIS2MDC_MAG_Get_DRDY_Status
+MotionCompObj
+ISM330DHCX_Read_Reg
+IIS2DLPC_Read_Reg
+IIS2MDC_Read_Reg
+ISM330DHCX_Write_Reg
+IIS2DLPC_Write_Reg
+IIS2MDC_Write_Reg
+ARM GAS  C:\Temp\ccx6oxfh.s 			page 12
+
+
+ISM330DHCX_FIFO_Get_Num_Samples
+ISM330DHCX_FIFO_GYRO_Set_BDR
+ISM330DHCX_FIFO_ACC_Set_BDR
+ISM330DHCX_FIFO_Set_INT1_FIFO_Full
+ISM330DHCX_FIFO_Set_Watermark_Level
+ISM330DHCX_FIFO_Set_Stop_On_Fth
+ISM330DHCX_FIFO_Set_Mode
+ISM330DHCX_FIFO_Get_Tag
+ISM330DHCX_FIFO_GYRO_Get_Axes
+ISM330DHCX_FIFO_ACC_Get_Axes
+ISM330DHCX_DRDY_Set_Mode
+ISM330DHCX_ACC_Enable_DRDY_On_INT1
+ISM330DHCX_GYRO_Enable_DRDY_On_INT2
+ISM330DHCX_ACC_Disable_DRDY_On_INT1
+ISM330DHCX_GYRO_Disable_DRDY_On_INT2

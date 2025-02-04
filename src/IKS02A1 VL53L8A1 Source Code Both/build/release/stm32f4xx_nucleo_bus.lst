@@ -1,0 +1,595 @@
+ARM GAS  C:\Temp\ccG1dPB0.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"stm32f4xx_nucleo_bus.c"
+  16              		.text
+  17              		.section	.text.I2C1_MspInit,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  23              	I2C1_MspInit:
+  24              		@ args = 0, pretend = 0, frame = 32
+  25              		@ frame_needed = 0, uses_anonymous_args = 0
+  26 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+  27 0004 89B0     		sub	sp, sp, #36
+  28 0006 0025     		movs	r5, #0
+  29 0008 0195     		str	r5, [sp, #4]
+  30 000a 1B4C     		ldr	r4, .L3
+  31 000c 236B     		ldr	r3, [r4, #48]
+  32 000e 43F00203 		orr	r3, r3, #2
+  33 0012 2363     		str	r3, [r4, #48]
+  34 0014 236B     		ldr	r3, [r4, #48]
+  35 0016 03F00203 		and	r3, r3, #2
+  36 001a 0193     		str	r3, [sp, #4]
+  37 001c 019B     		ldr	r3, [sp, #4]
+  38 001e 4FF48073 		mov	r3, #256
+  39 0022 0393     		str	r3, [sp, #12]
+  40 0024 4FF01209 		mov	r9, #18
+  41 0028 CDF81090 		str	r9, [sp, #16]
+  42 002c 0595     		str	r5, [sp, #20]
+  43 002e 4FF00308 		mov	r8, #3
+  44 0032 CDF81880 		str	r8, [sp, #24]
+  45 0036 0427     		movs	r7, #4
+  46 0038 0797     		str	r7, [sp, #28]
+  47 003a 104E     		ldr	r6, .L3+4
+  48 003c 03A9     		add	r1, sp, #12
+  49 003e 3046     		mov	r0, r6
+  50 0040 FFF7FEFF 		bl	HAL_GPIO_Init
+  51 0044 4FF40073 		mov	r3, #512
+  52 0048 0393     		str	r3, [sp, #12]
+  53 004a CDF81090 		str	r9, [sp, #16]
+  54 004e 0595     		str	r5, [sp, #20]
+  55 0050 CDF81880 		str	r8, [sp, #24]
+  56 0054 0797     		str	r7, [sp, #28]
+  57 0056 03A9     		add	r1, sp, #12
+  58 0058 3046     		mov	r0, r6
+ARM GAS  C:\Temp\ccG1dPB0.s 			page 2
+
+
+  59 005a FFF7FEFF 		bl	HAL_GPIO_Init
+  60 005e 0295     		str	r5, [sp, #8]
+  61 0060 236C     		ldr	r3, [r4, #64]
+  62 0062 43F40013 		orr	r3, r3, #2097152
+  63 0066 2364     		str	r3, [r4, #64]
+  64 0068 236C     		ldr	r3, [r4, #64]
+  65 006a 03F40013 		and	r3, r3, #2097152
+  66 006e 0293     		str	r3, [sp, #8]
+  67 0070 029B     		ldr	r3, [sp, #8]
+  68 0072 09B0     		add	sp, sp, #36
+  69              		@ sp needed
+  70 0074 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+  71              	.L4:
+  72              		.align	2
+  73              	.L3:
+  74 0078 00380240 		.word	1073887232
+  75 007c 00040240 		.word	1073873920
+  77              		.section	.text.I2C1_MspDeInit,"ax",%progbits
+  78              		.align	1
+  79              		.syntax unified
+  80              		.thumb
+  81              		.thumb_func
+  83              	I2C1_MspDeInit:
+  84              		@ args = 0, pretend = 0, frame = 0
+  85              		@ frame_needed = 0, uses_anonymous_args = 0
+  86 0000 10B5     		push	{r4, lr}
+  87 0002 084A     		ldr	r2, .L7
+  88 0004 136C     		ldr	r3, [r2, #64]
+  89 0006 23F40013 		bic	r3, r3, #2097152
+  90 000a 1364     		str	r3, [r2, #64]
+  91 000c 064C     		ldr	r4, .L7+4
+  92 000e 4FF48071 		mov	r1, #256
+  93 0012 2046     		mov	r0, r4
+  94 0014 FFF7FEFF 		bl	HAL_GPIO_DeInit
+  95 0018 4FF40071 		mov	r1, #512
+  96 001c 2046     		mov	r0, r4
+  97 001e FFF7FEFF 		bl	HAL_GPIO_DeInit
+  98 0022 10BD     		pop	{r4, pc}
+  99              	.L8:
+ 100              		.align	2
+ 101              	.L7:
+ 102 0024 00380240 		.word	1073887232
+ 103 0028 00040240 		.word	1073873920
+ 105              		.section	.text.BSP_I2C1_DeInit,"ax",%progbits
+ 106              		.align	1
+ 107              		.global	BSP_I2C1_DeInit
+ 108              		.syntax unified
+ 109              		.thumb
+ 110              		.thumb_func
+ 112              	BSP_I2C1_DeInit:
+ 113              		@ args = 0, pretend = 0, frame = 0
+ 114              		@ frame_needed = 0, uses_anonymous_args = 0
+ 115 0000 0B4B     		ldr	r3, .L19
+ 116 0002 1B68     		ldr	r3, [r3]
+ 117 0004 7BB1     		cbz	r3, .L11
+ 118 0006 013B     		subs	r3, r3, #1
+ 119 0008 094A     		ldr	r2, .L19
+ARM GAS  C:\Temp\ccG1dPB0.s 			page 3
+
+
+ 120 000a 1360     		str	r3, [r2]
+ 121 000c 0BB1     		cbz	r3, .L18
+ 122 000e 0020     		movs	r0, #0
+ 123 0010 7047     		bx	lr
+ 124              	.L18:
+ 125 0012 10B5     		push	{r4, lr}
+ 126 0014 074C     		ldr	r4, .L19+4
+ 127 0016 2046     		mov	r0, r4
+ 128 0018 FFF7FEFF 		bl	I2C1_MspDeInit
+ 129 001c 2046     		mov	r0, r4
+ 130 001e FFF7FEFF 		bl	HAL_I2C_DeInit
+ 131 0022 10B9     		cbnz	r0, .L13
+ 132              	.L9:
+ 133 0024 10BD     		pop	{r4, pc}
+ 134              	.L11:
+ 135 0026 0020     		movs	r0, #0
+ 136 0028 7047     		bx	lr
+ 137              	.L13:
+ 138 002a 6FF00700 		mvn	r0, #7
+ 139 002e F9E7     		b	.L9
+ 140              	.L20:
+ 141              		.align	2
+ 142              	.L19:
+ 143 0030 00000000 		.word	I2C1InitCounter
+ 144 0034 00000000 		.word	hi2c1
+ 146              		.section	.text.BSP_I2C1_IsReady,"ax",%progbits
+ 147              		.align	1
+ 148              		.global	BSP_I2C1_IsReady
+ 149              		.syntax unified
+ 150              		.thumb
+ 151              		.thumb_func
+ 153              	BSP_I2C1_IsReady:
+ 154              		@ args = 0, pretend = 0, frame = 0
+ 155              		@ frame_needed = 0, uses_anonymous_args = 0
+ 156 0000 08B5     		push	{r3, lr}
+ 157 0002 0A46     		mov	r2, r1
+ 158 0004 4FF4A063 		mov	r3, #1280
+ 159 0008 0146     		mov	r1, r0
+ 160 000a 0448     		ldr	r0, .L26
+ 161 000c FFF7FEFF 		bl	HAL_I2C_IsDeviceReady
+ 162 0010 00B9     		cbnz	r0, .L25
+ 163              	.L21:
+ 164 0012 08BD     		pop	{r3, pc}
+ 165              	.L25:
+ 166 0014 6FF00200 		mvn	r0, #2
+ 167 0018 FBE7     		b	.L21
+ 168              	.L27:
+ 169 001a 00BF     		.align	2
+ 170              	.L26:
+ 171 001c 00000000 		.word	hi2c1
+ 173              		.section	.text.BSP_I2C1_WriteReg,"ax",%progbits
+ 174              		.align	1
+ 175              		.global	BSP_I2C1_WriteReg
+ 176              		.syntax unified
+ 177              		.thumb
+ 178              		.thumb_func
+ 180              	BSP_I2C1_WriteReg:
+ARM GAS  C:\Temp\ccG1dPB0.s 			page 4
+
+
+ 181              		@ args = 0, pretend = 0, frame = 0
+ 182              		@ frame_needed = 0, uses_anonymous_args = 0
+ 183 0000 10B5     		push	{r4, lr}
+ 184 0002 84B0     		sub	sp, sp, #16
+ 185 0004 4FF4A064 		mov	r4, #1280
+ 186 0008 0294     		str	r4, [sp, #8]
+ 187 000a 0193     		str	r3, [sp, #4]
+ 188 000c 0092     		str	r2, [sp]
+ 189 000e 0123     		movs	r3, #1
+ 190 0010 0A46     		mov	r2, r1
+ 191 0012 0146     		mov	r1, r0
+ 192 0014 0848     		ldr	r0, .L35
+ 193 0016 FFF7FEFF 		bl	HAL_I2C_Mem_Write
+ 194 001a 10B9     		cbnz	r0, .L33
+ 195 001c 0020     		movs	r0, #0
+ 196              	.L28:
+ 197 001e 04B0     		add	sp, sp, #16
+ 198              		@ sp needed
+ 199 0020 10BD     		pop	{r4, pc}
+ 200              	.L33:
+ 201 0022 0548     		ldr	r0, .L35
+ 202 0024 FFF7FEFF 		bl	HAL_I2C_GetError
+ 203 0028 0428     		cmp	r0, #4
+ 204 002a 02D0     		beq	.L34
+ 205 002c 6FF00300 		mvn	r0, #3
+ 206 0030 F5E7     		b	.L28
+ 207              	.L34:
+ 208 0032 6FF06500 		mvn	r0, #101
+ 209 0036 F2E7     		b	.L28
+ 210              	.L36:
+ 211              		.align	2
+ 212              	.L35:
+ 213 0038 00000000 		.word	hi2c1
+ 215              		.section	.text.BSP_I2C1_ReadReg,"ax",%progbits
+ 216              		.align	1
+ 217              		.global	BSP_I2C1_ReadReg
+ 218              		.syntax unified
+ 219              		.thumb
+ 220              		.thumb_func
+ 222              	BSP_I2C1_ReadReg:
+ 223              		@ args = 0, pretend = 0, frame = 0
+ 224              		@ frame_needed = 0, uses_anonymous_args = 0
+ 225 0000 10B5     		push	{r4, lr}
+ 226 0002 84B0     		sub	sp, sp, #16
+ 227 0004 4FF4A064 		mov	r4, #1280
+ 228 0008 0294     		str	r4, [sp, #8]
+ 229 000a 0193     		str	r3, [sp, #4]
+ 230 000c 0092     		str	r2, [sp]
+ 231 000e 0123     		movs	r3, #1
+ 232 0010 0A46     		mov	r2, r1
+ 233 0012 0146     		mov	r1, r0
+ 234 0014 0848     		ldr	r0, .L44
+ 235 0016 FFF7FEFF 		bl	HAL_I2C_Mem_Read
+ 236 001a 10B9     		cbnz	r0, .L42
+ 237 001c 0020     		movs	r0, #0
+ 238              	.L37:
+ 239 001e 04B0     		add	sp, sp, #16
+ARM GAS  C:\Temp\ccG1dPB0.s 			page 5
+
+
+ 240              		@ sp needed
+ 241 0020 10BD     		pop	{r4, pc}
+ 242              	.L42:
+ 243 0022 0548     		ldr	r0, .L44
+ 244 0024 FFF7FEFF 		bl	HAL_I2C_GetError
+ 245 0028 0428     		cmp	r0, #4
+ 246 002a 02D0     		beq	.L43
+ 247 002c 6FF00300 		mvn	r0, #3
+ 248 0030 F5E7     		b	.L37
+ 249              	.L43:
+ 250 0032 6FF06500 		mvn	r0, #101
+ 251 0036 F2E7     		b	.L37
+ 252              	.L45:
+ 253              		.align	2
+ 254              	.L44:
+ 255 0038 00000000 		.word	hi2c1
+ 257              		.section	.text.BSP_I2C1_WriteReg16,"ax",%progbits
+ 258              		.align	1
+ 259              		.global	BSP_I2C1_WriteReg16
+ 260              		.syntax unified
+ 261              		.thumb
+ 262              		.thumb_func
+ 264              	BSP_I2C1_WriteReg16:
+ 265              		@ args = 0, pretend = 0, frame = 0
+ 266              		@ frame_needed = 0, uses_anonymous_args = 0
+ 267 0000 10B5     		push	{r4, lr}
+ 268 0002 84B0     		sub	sp, sp, #16
+ 269 0004 4FF4A064 		mov	r4, #1280
+ 270 0008 0294     		str	r4, [sp, #8]
+ 271 000a 0193     		str	r3, [sp, #4]
+ 272 000c 0092     		str	r2, [sp]
+ 273 000e 1023     		movs	r3, #16
+ 274 0010 0A46     		mov	r2, r1
+ 275 0012 0146     		mov	r1, r0
+ 276 0014 0848     		ldr	r0, .L53
+ 277 0016 FFF7FEFF 		bl	HAL_I2C_Mem_Write
+ 278 001a 10B9     		cbnz	r0, .L51
+ 279 001c 0020     		movs	r0, #0
+ 280              	.L46:
+ 281 001e 04B0     		add	sp, sp, #16
+ 282              		@ sp needed
+ 283 0020 10BD     		pop	{r4, pc}
+ 284              	.L51:
+ 285 0022 0548     		ldr	r0, .L53
+ 286 0024 FFF7FEFF 		bl	HAL_I2C_GetError
+ 287 0028 0428     		cmp	r0, #4
+ 288 002a 02D0     		beq	.L52
+ 289 002c 6FF00300 		mvn	r0, #3
+ 290 0030 F5E7     		b	.L46
+ 291              	.L52:
+ 292 0032 6FF06500 		mvn	r0, #101
+ 293 0036 F2E7     		b	.L46
+ 294              	.L54:
+ 295              		.align	2
+ 296              	.L53:
+ 297 0038 00000000 		.word	hi2c1
+ 299              		.section	.text.BSP_I2C1_ReadReg16,"ax",%progbits
+ARM GAS  C:\Temp\ccG1dPB0.s 			page 6
+
+
+ 300              		.align	1
+ 301              		.global	BSP_I2C1_ReadReg16
+ 302              		.syntax unified
+ 303              		.thumb
+ 304              		.thumb_func
+ 306              	BSP_I2C1_ReadReg16:
+ 307              		@ args = 0, pretend = 0, frame = 0
+ 308              		@ frame_needed = 0, uses_anonymous_args = 0
+ 309 0000 10B5     		push	{r4, lr}
+ 310 0002 84B0     		sub	sp, sp, #16
+ 311 0004 4FF4A064 		mov	r4, #1280
+ 312 0008 0294     		str	r4, [sp, #8]
+ 313 000a 0193     		str	r3, [sp, #4]
+ 314 000c 0092     		str	r2, [sp]
+ 315 000e 1023     		movs	r3, #16
+ 316 0010 0A46     		mov	r2, r1
+ 317 0012 0146     		mov	r1, r0
+ 318 0014 0848     		ldr	r0, .L61
+ 319 0016 FFF7FEFF 		bl	HAL_I2C_Mem_Read
+ 320 001a 10B9     		cbnz	r0, .L60
+ 321 001c 0020     		movs	r0, #0
+ 322              	.L55:
+ 323 001e 04B0     		add	sp, sp, #16
+ 324              		@ sp needed
+ 325 0020 10BD     		pop	{r4, pc}
+ 326              	.L60:
+ 327 0022 0548     		ldr	r0, .L61
+ 328 0024 FFF7FEFF 		bl	HAL_I2C_GetError
+ 329 0028 0428     		cmp	r0, #4
+ 330 002a 02D0     		beq	.L58
+ 331 002c 6FF06500 		mvn	r0, #101
+ 332 0030 F5E7     		b	.L55
+ 333              	.L58:
+ 334 0032 6FF00300 		mvn	r0, #3
+ 335 0036 F2E7     		b	.L55
+ 336              	.L62:
+ 337              		.align	2
+ 338              	.L61:
+ 339 0038 00000000 		.word	hi2c1
+ 341              		.section	.text.BSP_I2C1_Send,"ax",%progbits
+ 342              		.align	1
+ 343              		.global	BSP_I2C1_Send
+ 344              		.syntax unified
+ 345              		.thumb
+ 346              		.thumb_func
+ 348              	BSP_I2C1_Send:
+ 349              		@ args = 0, pretend = 0, frame = 0
+ 350              		@ frame_needed = 0, uses_anonymous_args = 0
+ 351 0000 00B5     		push	{lr}
+ 352 0002 83B0     		sub	sp, sp, #12
+ 353 0004 1346     		mov	r3, r2
+ 354 0006 4FF4A062 		mov	r2, #1280
+ 355 000a 0092     		str	r2, [sp]
+ 356 000c 0A46     		mov	r2, r1
+ 357 000e 0146     		mov	r1, r0
+ 358 0010 0948     		ldr	r0, .L69
+ 359 0012 FFF7FEFF 		bl	HAL_I2C_Master_Transmit
+ARM GAS  C:\Temp\ccG1dPB0.s 			page 7
+
+
+ 360 0016 18B9     		cbnz	r0, .L68
+ 361 0018 0020     		movs	r0, #0
+ 362              	.L63:
+ 363 001a 03B0     		add	sp, sp, #12
+ 364              		@ sp needed
+ 365 001c 5DF804FB 		ldr	pc, [sp], #4
+ 366              	.L68:
+ 367 0020 0548     		ldr	r0, .L69
+ 368 0022 FFF7FEFF 		bl	HAL_I2C_GetError
+ 369 0026 0428     		cmp	r0, #4
+ 370 0028 02D0     		beq	.L66
+ 371 002a 6FF06500 		mvn	r0, #101
+ 372 002e F4E7     		b	.L63
+ 373              	.L66:
+ 374 0030 6FF00300 		mvn	r0, #3
+ 375 0034 F1E7     		b	.L63
+ 376              	.L70:
+ 377 0036 00BF     		.align	2
+ 378              	.L69:
+ 379 0038 00000000 		.word	hi2c1
+ 381              		.section	.text.BSP_I2C1_Recv,"ax",%progbits
+ 382              		.align	1
+ 383              		.global	BSP_I2C1_Recv
+ 384              		.syntax unified
+ 385              		.thumb
+ 386              		.thumb_func
+ 388              	BSP_I2C1_Recv:
+ 389              		@ args = 0, pretend = 0, frame = 0
+ 390              		@ frame_needed = 0, uses_anonymous_args = 0
+ 391 0000 00B5     		push	{lr}
+ 392 0002 83B0     		sub	sp, sp, #12
+ 393 0004 1346     		mov	r3, r2
+ 394 0006 4FF4A062 		mov	r2, #1280
+ 395 000a 0092     		str	r2, [sp]
+ 396 000c 0A46     		mov	r2, r1
+ 397 000e 0146     		mov	r1, r0
+ 398 0010 0948     		ldr	r0, .L77
+ 399 0012 FFF7FEFF 		bl	HAL_I2C_Master_Receive
+ 400 0016 18B9     		cbnz	r0, .L76
+ 401 0018 0020     		movs	r0, #0
+ 402              	.L71:
+ 403 001a 03B0     		add	sp, sp, #12
+ 404              		@ sp needed
+ 405 001c 5DF804FB 		ldr	pc, [sp], #4
+ 406              	.L76:
+ 407 0020 0548     		ldr	r0, .L77
+ 408 0022 FFF7FEFF 		bl	HAL_I2C_GetError
+ 409 0026 0428     		cmp	r0, #4
+ 410 0028 02D0     		beq	.L74
+ 411 002a 6FF06500 		mvn	r0, #101
+ 412 002e F4E7     		b	.L71
+ 413              	.L74:
+ 414 0030 6FF00300 		mvn	r0, #3
+ 415 0034 F1E7     		b	.L71
+ 416              	.L78:
+ 417 0036 00BF     		.align	2
+ 418              	.L77:
+ARM GAS  C:\Temp\ccG1dPB0.s 			page 8
+
+
+ 419 0038 00000000 		.word	hi2c1
+ 421              		.section	.text.BSP_GetTick,"ax",%progbits
+ 422              		.align	1
+ 423              		.global	BSP_GetTick
+ 424              		.syntax unified
+ 425              		.thumb
+ 426              		.thumb_func
+ 428              	BSP_GetTick:
+ 429              		@ args = 0, pretend = 0, frame = 0
+ 430              		@ frame_needed = 0, uses_anonymous_args = 0
+ 431 0000 08B5     		push	{r3, lr}
+ 432 0002 FFF7FEFF 		bl	HAL_GetTick
+ 433 0006 08BD     		pop	{r3, pc}
+ 435              		.section	.text.MX_I2C1_Init,"ax",%progbits
+ 436              		.align	1
+ 437              		.weak	MX_I2C1_Init
+ 438              		.syntax unified
+ 439              		.thumb
+ 440              		.thumb_func
+ 442              	MX_I2C1_Init:
+ 443              		@ args = 0, pretend = 0, frame = 0
+ 444              		@ frame_needed = 0, uses_anonymous_args = 0
+ 445 0000 08B5     		push	{r3, lr}
+ 446 0002 094A     		ldr	r2, .L85
+ 447 0004 0260     		str	r2, [r0]
+ 448 0006 094A     		ldr	r2, .L85+4
+ 449 0008 4260     		str	r2, [r0, #4]
+ 450 000a 0022     		movs	r2, #0
+ 451 000c 8260     		str	r2, [r0, #8]
+ 452 000e C260     		str	r2, [r0, #12]
+ 453 0010 4FF48041 		mov	r1, #16384
+ 454 0014 0161     		str	r1, [r0, #16]
+ 455 0016 4261     		str	r2, [r0, #20]
+ 456 0018 8261     		str	r2, [r0, #24]
+ 457 001a C261     		str	r2, [r0, #28]
+ 458 001c 0262     		str	r2, [r0, #32]
+ 459 001e FFF7FEFF 		bl	HAL_I2C_Init
+ 460 0022 00B1     		cbz	r0, .L82
+ 461 0024 0120     		movs	r0, #1
+ 462              	.L82:
+ 463 0026 08BD     		pop	{r3, pc}
+ 464              	.L86:
+ 465              		.align	2
+ 466              	.L85:
+ 467 0028 00540040 		.word	1073763328
+ 468 002c 801A0600 		.word	400000
+ 470              		.section	.text.BSP_I2C1_Init,"ax",%progbits
+ 471              		.align	1
+ 472              		.global	BSP_I2C1_Init
+ 473              		.syntax unified
+ 474              		.thumb
+ 475              		.thumb_func
+ 477              	BSP_I2C1_Init:
+ 478              		@ args = 0, pretend = 0, frame = 0
+ 479              		@ frame_needed = 0, uses_anonymous_args = 0
+ 480 0000 0E4B     		ldr	r3, .L99
+ 481 0002 0F4A     		ldr	r2, .L99+4
+ARM GAS  C:\Temp\ccG1dPB0.s 			page 9
+
+
+ 482 0004 1A60     		str	r2, [r3]
+ 483 0006 0F4A     		ldr	r2, .L99+8
+ 484 0008 1368     		ldr	r3, [r2]
+ 485 000a 591C     		adds	r1, r3, #1
+ 486 000c 1160     		str	r1, [r2]
+ 487 000e 0BB1     		cbz	r3, .L96
+ 488 0010 0020     		movs	r0, #0
+ 489 0012 7047     		bx	lr
+ 490              	.L96:
+ 491 0014 10B5     		push	{r4, lr}
+ 492 0016 0948     		ldr	r0, .L99
+ 493 0018 FFF7FEFF 		bl	HAL_I2C_GetState
+ 494 001c 08B1     		cbz	r0, .L97
+ 495 001e 0020     		movs	r0, #0
+ 496              	.L87:
+ 497 0020 10BD     		pop	{r4, pc}
+ 498              	.L97:
+ 499 0022 064C     		ldr	r4, .L99
+ 500 0024 2046     		mov	r0, r4
+ 501 0026 FFF7FEFF 		bl	I2C1_MspInit
+ 502 002a 2046     		mov	r0, r4
+ 503 002c FFF7FEFF 		bl	MX_I2C1_Init
+ 504 0030 08B9     		cbnz	r0, .L98
+ 505 0032 0020     		movs	r0, #0
+ 506 0034 F4E7     		b	.L87
+ 507              	.L98:
+ 508 0036 6FF00700 		mvn	r0, #7
+ 509 003a F1E7     		b	.L87
+ 510              	.L100:
+ 511              		.align	2
+ 512              	.L99:
+ 513 003c 00000000 		.word	hi2c1
+ 514 0040 00540040 		.word	1073763328
+ 515 0044 00000000 		.word	I2C1InitCounter
+ 517              		.section	.bss.I2C1InitCounter,"aw",%nobits
+ 518              		.align	2
+ 521              	I2C1InitCounter:
+ 522 0000 00000000 		.space	4
+ 523              		.global	hi2c1
+ 524              		.section	.bss.hi2c1,"aw",%nobits
+ 525              		.align	2
+ 528              	hi2c1:
+ 529 0000 00000000 		.space	84
+ 529      00000000 
+ 529      00000000 
+ 529      00000000 
+ 529      00000000 
+ 530              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\ccG1dPB0.s 			page 10
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f4xx_nucleo_bus.c
+  C:\Temp\ccG1dPB0.s:18     .text.I2C1_MspInit:00000000 $t
+  C:\Temp\ccG1dPB0.s:23     .text.I2C1_MspInit:00000000 I2C1_MspInit
+  C:\Temp\ccG1dPB0.s:74     .text.I2C1_MspInit:00000078 $d
+  C:\Temp\ccG1dPB0.s:78     .text.I2C1_MspDeInit:00000000 $t
+  C:\Temp\ccG1dPB0.s:83     .text.I2C1_MspDeInit:00000000 I2C1_MspDeInit
+  C:\Temp\ccG1dPB0.s:102    .text.I2C1_MspDeInit:00000024 $d
+  C:\Temp\ccG1dPB0.s:106    .text.BSP_I2C1_DeInit:00000000 $t
+  C:\Temp\ccG1dPB0.s:112    .text.BSP_I2C1_DeInit:00000000 BSP_I2C1_DeInit
+  C:\Temp\ccG1dPB0.s:143    .text.BSP_I2C1_DeInit:00000030 $d
+  C:\Temp\ccG1dPB0.s:521    .bss.I2C1InitCounter:00000000 I2C1InitCounter
+  C:\Temp\ccG1dPB0.s:528    .bss.hi2c1:00000000 hi2c1
+  C:\Temp\ccG1dPB0.s:147    .text.BSP_I2C1_IsReady:00000000 $t
+  C:\Temp\ccG1dPB0.s:153    .text.BSP_I2C1_IsReady:00000000 BSP_I2C1_IsReady
+  C:\Temp\ccG1dPB0.s:171    .text.BSP_I2C1_IsReady:0000001c $d
+  C:\Temp\ccG1dPB0.s:174    .text.BSP_I2C1_WriteReg:00000000 $t
+  C:\Temp\ccG1dPB0.s:180    .text.BSP_I2C1_WriteReg:00000000 BSP_I2C1_WriteReg
+  C:\Temp\ccG1dPB0.s:213    .text.BSP_I2C1_WriteReg:00000038 $d
+  C:\Temp\ccG1dPB0.s:216    .text.BSP_I2C1_ReadReg:00000000 $t
+  C:\Temp\ccG1dPB0.s:222    .text.BSP_I2C1_ReadReg:00000000 BSP_I2C1_ReadReg
+  C:\Temp\ccG1dPB0.s:255    .text.BSP_I2C1_ReadReg:00000038 $d
+  C:\Temp\ccG1dPB0.s:258    .text.BSP_I2C1_WriteReg16:00000000 $t
+  C:\Temp\ccG1dPB0.s:264    .text.BSP_I2C1_WriteReg16:00000000 BSP_I2C1_WriteReg16
+  C:\Temp\ccG1dPB0.s:297    .text.BSP_I2C1_WriteReg16:00000038 $d
+  C:\Temp\ccG1dPB0.s:300    .text.BSP_I2C1_ReadReg16:00000000 $t
+  C:\Temp\ccG1dPB0.s:306    .text.BSP_I2C1_ReadReg16:00000000 BSP_I2C1_ReadReg16
+  C:\Temp\ccG1dPB0.s:339    .text.BSP_I2C1_ReadReg16:00000038 $d
+  C:\Temp\ccG1dPB0.s:342    .text.BSP_I2C1_Send:00000000 $t
+  C:\Temp\ccG1dPB0.s:348    .text.BSP_I2C1_Send:00000000 BSP_I2C1_Send
+  C:\Temp\ccG1dPB0.s:379    .text.BSP_I2C1_Send:00000038 $d
+  C:\Temp\ccG1dPB0.s:382    .text.BSP_I2C1_Recv:00000000 $t
+  C:\Temp\ccG1dPB0.s:388    .text.BSP_I2C1_Recv:00000000 BSP_I2C1_Recv
+  C:\Temp\ccG1dPB0.s:419    .text.BSP_I2C1_Recv:00000038 $d
+  C:\Temp\ccG1dPB0.s:422    .text.BSP_GetTick:00000000 $t
+  C:\Temp\ccG1dPB0.s:428    .text.BSP_GetTick:00000000 BSP_GetTick
+  C:\Temp\ccG1dPB0.s:436    .text.MX_I2C1_Init:00000000 $t
+  C:\Temp\ccG1dPB0.s:442    .text.MX_I2C1_Init:00000000 MX_I2C1_Init
+  C:\Temp\ccG1dPB0.s:467    .text.MX_I2C1_Init:00000028 $d
+  C:\Temp\ccG1dPB0.s:471    .text.BSP_I2C1_Init:00000000 $t
+  C:\Temp\ccG1dPB0.s:477    .text.BSP_I2C1_Init:00000000 BSP_I2C1_Init
+  C:\Temp\ccG1dPB0.s:513    .text.BSP_I2C1_Init:0000003c $d
+  C:\Temp\ccG1dPB0.s:518    .bss.I2C1InitCounter:00000000 $d
+  C:\Temp\ccG1dPB0.s:525    .bss.hi2c1:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_Init
+HAL_GPIO_DeInit
+HAL_I2C_DeInit
+HAL_I2C_IsDeviceReady
+HAL_I2C_Mem_Write
+HAL_I2C_GetError
+HAL_I2C_Mem_Read
+HAL_I2C_Master_Transmit
+HAL_I2C_Master_Receive
+HAL_GetTick
+HAL_I2C_Init
+ARM GAS  C:\Temp\ccG1dPB0.s 			page 11
+
+
+HAL_I2C_GetState

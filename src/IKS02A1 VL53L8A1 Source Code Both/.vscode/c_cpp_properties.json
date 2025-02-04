@@ -1,0 +1,31 @@
+{
+  "configurations": [
+    {
+      "name": "STM32",
+      "includePath": [
+        "Core/Inc",
+        "Drivers/BSP/53L8A1",
+        "Drivers/BSP/Components/Common",
+        "Drivers/BSP/Components/iis2dlpc",
+        "Drivers/BSP/Components/iis2mdc",
+        "Drivers/BSP/Components/ism330dhcx",
+        "Drivers/BSP/Components/vl53l8cx",
+        "Drivers/BSP/Components/vl53l8cx/modules",
+        "Drivers/BSP/Components/vl53l8cx/porting",
+        "Drivers/BSP/IKS02A1",
+        "Drivers/CMSIS/Device/ST/STM32F4xx/Include",
+        "Drivers/CMSIS/Include",
+        "Drivers/STM32F4xx_HAL_Driver/Inc",
+        "Drivers/STM32F4xx_HAL_Driver/Inc/Legacy",
+        "TOF/Target",
+        "X-CUBE-MEMS1/Target"
+      ],
+      "defines": [
+        "STM32F411xE",
+        "USE_HAL_DRIVER"
+      ],
+      "compilerPath": "c:\\Users\\JesseJabezArendse\\AppData\\Roaming\\Code\\User\\globalStorage\\bmd.stm32-for-vscode\\@xpack-dev-tools\\arm-none-eabi-gcc\\12.3.1-1.2.1\\.content\\bin\\arm-none-eabi-gcc.EXE"
+    }
+  ],
+  "version": 4
+}

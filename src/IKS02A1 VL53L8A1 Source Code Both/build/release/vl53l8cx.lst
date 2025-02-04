@@ -1,0 +1,1041 @@
+ARM GAS  C:\Temp\cc5hrsBQ.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"vl53l8cx.c"
+  16              		.text
+  17              		.section	.text.VL53L8CX_DeInit,"ax",%progbits
+  18              		.align	1
+  19              		.global	VL53L8CX_DeInit
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	VL53L8CX_DeInit:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 58B1     		cbz	r0, .L3
+  28 0002 10B5     		push	{r4, lr}
+  29 0004 0446     		mov	r4, r0
+  30 0006 90F82C39 		ldrb	r3, [r0, #2348]	@ zero_extendqisi2
+  31 000a 012B     		cmp	r3, #1
+  32 000c 08D1     		bne	.L4
+  33 000e 4368     		ldr	r3, [r0, #4]
+  34 0010 9847     		blx	r3
+  35 0012 40B9     		cbnz	r0, .L5
+  36 0014 84F82C09 		strb	r0, [r4, #2348]
+  37              	.L1:
+  38 0018 10BD     		pop	{r4, pc}
+  39              	.L3:
+  40 001a 6FF00100 		mvn	r0, #1
+  41 001e 7047     		bx	lr
+  42              	.L4:
+  43 0020 4FF0FF30 		mov	r0, #-1
+  44 0024 F8E7     		b	.L1
+  45              	.L5:
+  46 0026 4FF0FF30 		mov	r0, #-1
+  47 002a F5E7     		b	.L1
+  49              		.section	.text.VL53L8CX_GetCapabilities,"ax",%progbits
+  50              		.align	1
+  51              		.global	VL53L8CX_GetCapabilities
+  52              		.syntax unified
+  53              		.thumb
+  54              		.thumb_func
+  56              	VL53L8CX_GetCapabilities:
+  57              		@ args = 0, pretend = 0, frame = 0
+  58              		@ frame_needed = 0, uses_anonymous_args = 0
+  59              		@ link register save eliminated.
+  60 0000 40B1     		cbz	r0, .L12
+ARM GAS  C:\Temp\cc5hrsBQ.s 			page 2
+
+
+  61 0002 51B1     		cbz	r1, .L13
+  62 0004 4023     		movs	r3, #64
+  63 0006 0B60     		str	r3, [r1]
+  64 0008 0123     		movs	r3, #1
+  65 000a 4B60     		str	r3, [r1, #4]
+  66 000c 0020     		movs	r0, #0
+  67 000e 8860     		str	r0, [r1, #8]
+  68 0010 CB60     		str	r3, [r1, #12]
+  69 0012 7047     		bx	lr
+  70              	.L12:
+  71 0014 6FF00100 		mvn	r0, #1
+  72 0018 7047     		bx	lr
+  73              	.L13:
+  74 001a 6FF00100 		mvn	r0, #1
+  75 001e 7047     		bx	lr
+  77              		.section	.text.VL53L8CX_ConfigROI,"ax",%progbits
+  78              		.align	1
+  79              		.global	VL53L8CX_ConfigROI
+  80              		.syntax unified
+  81              		.thumb
+  82              		.thumb_func
+  84              	VL53L8CX_ConfigROI:
+  85              		@ args = 0, pretend = 0, frame = 0
+  86              		@ frame_needed = 0, uses_anonymous_args = 0
+  87              		@ link register save eliminated.
+  88 0000 6FF00300 		mvn	r0, #3
+  89 0004 7047     		bx	lr
+  91              		.section	.text.VL53L8CX_GetAddress,"ax",%progbits
+  92              		.align	1
+  93              		.global	VL53L8CX_GetAddress
+  94              		.syntax unified
+  95              		.thumb
+  96              		.thumb_func
+  98              	VL53L8CX_GetAddress:
+  99              		@ args = 0, pretend = 0, frame = 0
+ 100              		@ frame_needed = 0, uses_anonymous_args = 0
+ 101              		@ link register save eliminated.
+ 102 0000 20B1     		cbz	r0, .L17
+ 103 0002 31B1     		cbz	r1, .L18
+ 104 0004 0389     		ldrh	r3, [r0, #8]
+ 105 0006 0B60     		str	r3, [r1]
+ 106 0008 0020     		movs	r0, #0
+ 107 000a 7047     		bx	lr
+ 108              	.L17:
+ 109 000c 6FF00100 		mvn	r0, #1
+ 110 0010 7047     		bx	lr
+ 111              	.L18:
+ 112 0012 6FF00100 		mvn	r0, #1
+ 113 0016 7047     		bx	lr
+ 115              		.section	.text.vl53l8cx_map_target_status,"ax",%progbits
+ 116              		.align	1
+ 117              		.syntax unified
+ 118              		.thumb
+ 119              		.thumb_func
+ 121              	vl53l8cx_map_target_status:
+ 122              		@ args = 0, pretend = 0, frame = 0
+ 123              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Temp\cc5hrsBQ.s 			page 3
+
+
+ 124              		@ link register save eliminated.
+ 125 0000 0528     		cmp	r0, #5
+ 126 0002 05D0     		beq	.L21
+ 127 0004 0928     		cmp	r0, #9
+ 128 0006 05D0     		beq	.L22
+ 129 0008 00B1     		cbz	r0, .L23
+ 130              	.L20:
+ 131 000a 7047     		bx	lr
+ 132              	.L23:
+ 133 000c FF20     		movs	r0, #255
+ 134 000e 7047     		bx	lr
+ 135              	.L21:
+ 136 0010 0020     		movs	r0, #0
+ 137 0012 7047     		bx	lr
+ 138              	.L22:
+ 139 0014 0020     		movs	r0, #0
+ 140 0016 F8E7     		b	.L20
+ 142              		.section	.text.VL53L8CX_Init,"ax",%progbits
+ 143              		.align	1
+ 144              		.global	VL53L8CX_Init
+ 145              		.syntax unified
+ 146              		.thumb
+ 147              		.thumb_func
+ 149              	VL53L8CX_Init:
+ 150              		@ args = 0, pretend = 0, frame = 0
+ 151              		@ frame_needed = 0, uses_anonymous_args = 0
+ 152 0000 B0B1     		cbz	r0, .L26
+ 153 0002 10B5     		push	{r4, lr}
+ 154 0004 0446     		mov	r4, r0
+ 155 0006 90F82C39 		ldrb	r3, [r0, #2348]	@ zero_extendqisi2
+ 156 000a A3B9     		cbnz	r3, .L27
+ 157 000c 1830     		adds	r0, r0, #24
+ 158 000e FFF7FEFF 		bl	vl53l8cx_init
+ 159 0012 98B9     		cbnz	r0, .L28
+ 160 0014 84F82D09 		strb	r0, [r4, #2349]
+ 161 0018 84F82E09 		strb	r0, [r4, #2350]
+ 162 001c 84F82F09 		strb	r0, [r4, #2351]
+ 163 0020 84F83009 		strb	r0, [r4, #2352]
+ 164 0024 84F83109 		strb	r0, [r4, #2353]
+ 165 0028 0123     		movs	r3, #1
+ 166 002a 84F82C39 		strb	r3, [r4, #2348]
+ 167              	.L24:
+ 168 002e 10BD     		pop	{r4, pc}
+ 169              	.L26:
+ 170 0030 6FF00100 		mvn	r0, #1
+ 171 0034 7047     		bx	lr
+ 172              	.L27:
+ 173 0036 4FF0FF30 		mov	r0, #-1
+ 174 003a F8E7     		b	.L24
+ 175              	.L28:
+ 176 003c 4FF0FF30 		mov	r0, #-1
+ 177 0040 F5E7     		b	.L24
+ 179              		.section	.text.VL53L8CX_ReadID,"ax",%progbits
+ 180              		.align	1
+ 181              		.global	VL53L8CX_ReadID
+ 182              		.syntax unified
+ 183              		.thumb
+ARM GAS  C:\Temp\cc5hrsBQ.s 			page 4
+
+
+ 184              		.thumb_func
+ 186              	VL53L8CX_ReadID:
+ 187              		@ args = 0, pretend = 0, frame = 8
+ 188              		@ frame_needed = 0, uses_anonymous_args = 0
+ 189 0000 70B5     		push	{r4, r5, r6, lr}
+ 190 0002 82B0     		sub	sp, sp, #8
+ 191 0004 0023     		movs	r3, #0
+ 192 0006 8DF80730 		strb	r3, [sp, #7]
+ 193 000a 8DF80630 		strb	r3, [sp, #6]
+ 194 000e 98B3     		cbz	r0, .L36
+ 195 0010 0D46     		mov	r5, r1
+ 196 0012 0646     		mov	r6, r0
+ 197 0014 99B3     		cbz	r1, .L37
+ 198 0016 1836     		adds	r6, r6, #24
+ 199 0018 1A46     		mov	r2, r3
+ 200 001a 47F6FF71 		movw	r1, #32767
+ 201 001e 3046     		mov	r0, r6
+ 202 0020 FFF7FEFF 		bl	VL53L8CX_WrByte
+ 203 0024 0446     		mov	r4, r0
+ 204 0026 0DF10702 		add	r2, sp, #7
+ 205 002a 0021     		movs	r1, #0
+ 206 002c 3046     		mov	r0, r6
+ 207 002e FFF7FEFF 		bl	VL53L8CX_RdByte
+ 208 0032 0443     		orrs	r4, r4, r0
+ 209 0034 E4B2     		uxtb	r4, r4
+ 210 0036 0DF10602 		add	r2, sp, #6
+ 211 003a 0121     		movs	r1, #1
+ 212 003c 3046     		mov	r0, r6
+ 213 003e FFF7FEFF 		bl	VL53L8CX_RdByte
+ 214 0042 0443     		orrs	r4, r4, r0
+ 215 0044 E4B2     		uxtb	r4, r4
+ 216 0046 0222     		movs	r2, #2
+ 217 0048 47F6FF71 		movw	r1, #32767
+ 218 004c 3046     		mov	r0, r6
+ 219 004e FFF7FEFF 		bl	VL53L8CX_WrByte
+ 220 0052 0443     		orrs	r4, r4, r0
+ 221 0054 14F0FF0F 		tst	r4, #255
+ 222 0058 09D1     		bne	.L35
+ 223 005a 9DF80720 		ldrb	r2, [sp, #7]	@ zero_extendqisi2
+ 224 005e 9DF80630 		ldrb	r3, [sp, #6]	@ zero_extendqisi2
+ 225 0062 03EB0223 		add	r3, r3, r2, lsl #8
+ 226 0066 2B60     		str	r3, [r5]
+ 227 0068 0020     		movs	r0, #0
+ 228              	.L33:
+ 229 006a 02B0     		add	sp, sp, #8
+ 230              		@ sp needed
+ 231 006c 70BD     		pop	{r4, r5, r6, pc}
+ 232              	.L35:
+ 233 006e 0023     		movs	r3, #0
+ 234 0070 2B60     		str	r3, [r5]
+ 235 0072 4FF0FF30 		mov	r0, #-1
+ 236 0076 F8E7     		b	.L33
+ 237              	.L36:
+ 238 0078 6FF00100 		mvn	r0, #1
+ 239 007c F5E7     		b	.L33
+ 240              	.L37:
+ 241 007e 6FF00100 		mvn	r0, #1
+ARM GAS  C:\Temp\cc5hrsBQ.s 			page 5
+
+
+ 242 0082 F2E7     		b	.L33
+ 244              		.section	.text.VL53L8CX_ConfigProfile,"ax",%progbits
+ 245              		.align	1
+ 246              		.global	VL53L8CX_ConfigProfile
+ 247              		.syntax unified
+ 248              		.thumb
+ 249              		.thumb_func
+ 251              	VL53L8CX_ConfigProfile:
+ 252              		@ args = 0, pretend = 0, frame = 0
+ 253              		@ frame_needed = 0, uses_anonymous_args = 0
+ 254 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+ 255 0004 0028     		cmp	r0, #0
+ 256 0006 48D0     		beq	.L47
+ 257 0008 0C46     		mov	r4, r1
+ 258 000a 8046     		mov	r8, r0
+ 259 000c 0029     		cmp	r1, #0
+ 260 000e 47D0     		beq	.L48
+ 261 0010 0D78     		ldrb	r5, [r1]	@ zero_extendqisi2
+ 262 0012 D1F80490 		ldr	r9, [r1, #4]
+ 263 0016 91F808A0 		ldrb	r10, [r1, #8]	@ zero_extendqisi2
+ 264 001a 6B1E     		subs	r3, r5, #1
+ 265 001c 032B     		cmp	r3, #3
+ 266 001e 11D8     		bhi	.L41
+ 267 0020 DFE803F0 		tbb	[pc, r3]
+ 268              	.L43:
+ 269 0024 02       		.byte	(.L46-.L43)/2
+ 270 0025 15       		.byte	(.L49-.L43)/2
+ 271 0026 08       		.byte	(.L44-.L43)/2
+ 272 0027 0C       		.byte	(.L42-.L43)/2
+ 273              		.p2align 1
+ 274              	.L46:
+ 275 0028 1021     		movs	r1, #16
+ 276 002a 0026     		movs	r6, #0
+ 277              	.L45:
+ 278 002c 9EB1     		cbz	r6, .L55
+ 279              	.L39:
+ 280 002e 3046     		mov	r0, r6
+ 281 0030 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 282              	.L44:
+ 283 0034 0125     		movs	r5, #1
+ 284 0036 4021     		movs	r1, #64
+ 285 0038 0026     		movs	r6, #0
+ 286 003a F7E7     		b	.L45
+ 287              	.L42:
+ 288 003c 0325     		movs	r5, #3
+ 289 003e 4021     		movs	r1, #64
+ 290 0040 0026     		movs	r6, #0
+ 291 0042 F3E7     		b	.L45
+ 292              	.L41:
+ 293 0044 0025     		movs	r5, #0
+ 294 0046 2946     		mov	r1, r5
+ 295 0048 6FF00106 		mvn	r6, #1
+ 296 004c EEE7     		b	.L45
+ 297              	.L49:
+ 298 004e 0325     		movs	r5, #3
+ 299 0050 1021     		movs	r1, #16
+ 300 0052 0026     		movs	r6, #0
+ARM GAS  C:\Temp\cc5hrsBQ.s 			page 6
+
+
+ 301 0054 EAE7     		b	.L45
+ 302              	.L55:
+ 303 0056 08F11807 		add	r7, r8, #24
+ 304 005a 3846     		mov	r0, r7
+ 305 005c FFF7FEFF 		bl	vl53l8cx_set_resolution
+ 306 0060 08BB     		cbnz	r0, .L50
+ 307 0062 2946     		mov	r1, r5
+ 308 0064 3846     		mov	r0, r7
+ 309 0066 FFF7FEFF 		bl	vl53l8cx_set_ranging_mode
+ 310 006a F8B9     		cbnz	r0, .L51
+ 311 006c 4946     		mov	r1, r9
+ 312 006e 3846     		mov	r0, r7
+ 313 0070 FFF7FEFF 		bl	vl53l8cx_set_integration_time_ms
+ 314 0074 E8B9     		cbnz	r0, .L52
+ 315 0076 5146     		mov	r1, r10
+ 316 0078 3846     		mov	r0, r7
+ 317 007a FFF7FEFF 		bl	vl53l8cx_set_ranging_frequency_hz
+ 318 007e D8B9     		cbnz	r0, .L53
+ 319 0080 E368     		ldr	r3, [r4, #12]
+ 320 0082 003B     		subs	r3, r3, #0
+ 321 0084 18BF     		it	ne
+ 322 0086 0123     		movne	r3, #1
+ 323 0088 88F83039 		strb	r3, [r8, #2352]
+ 324 008c 2369     		ldr	r3, [r4, #16]
+ 325 008e 003B     		subs	r3, r3, #0
+ 326 0090 18BF     		it	ne
+ 327 0092 0123     		movne	r3, #1
+ 328 0094 88F83139 		strb	r3, [r8, #2353]
+ 329 0098 C9E7     		b	.L39
+ 330              	.L47:
+ 331 009a 6FF00106 		mvn	r6, #1
+ 332 009e C6E7     		b	.L39
+ 333              	.L48:
+ 334 00a0 6FF00106 		mvn	r6, #1
+ 335 00a4 C3E7     		b	.L39
+ 336              	.L50:
+ 337 00a6 4FF0FF36 		mov	r6, #-1
+ 338 00aa C0E7     		b	.L39
+ 339              	.L51:
+ 340 00ac 4FF0FF36 		mov	r6, #-1
+ 341 00b0 BDE7     		b	.L39
+ 342              	.L52:
+ 343 00b2 4FF0FF36 		mov	r6, #-1
+ 344 00b6 BAE7     		b	.L39
+ 345              	.L53:
+ 346 00b8 4FF0FF36 		mov	r6, #-1
+ 347 00bc B7E7     		b	.L39
+ 349              		.section	.text.VL53L8CX_ConfigIT,"ax",%progbits
+ 350              		.align	1
+ 351              		.global	VL53L8CX_ConfigIT
+ 352              		.syntax unified
+ 353              		.thumb
+ 354              		.thumb_func
+ 356              	VL53L8CX_ConfigIT:
+ 357              		@ args = 0, pretend = 0, frame = 8
+ 358              		@ frame_needed = 0, uses_anonymous_args = 0
+ 359 0000 0028     		cmp	r0, #0
+ARM GAS  C:\Temp\cc5hrsBQ.s 			page 7
+
+
+ 360 0002 5AD0     		beq	.L61
+ 361 0004 30B5     		push	{r4, r5, lr}
+ 362 0006 83B0     		sub	sp, sp, #12
+ 363 0008 0C46     		mov	r4, r1
+ 364 000a 0546     		mov	r5, r0
+ 365 000c 0029     		cmp	r1, #0
+ 366 000e 57D0     		beq	.L62
+ 367 0010 0B68     		ldr	r3, [r1]
+ 368 0012 FF2B     		cmp	r3, #255
+ 369 0014 07D0     		beq	.L69
+ 370 0016 1835     		adds	r5, r5, #24
+ 371 0018 0DF10701 		add	r1, sp, #7
+ 372 001c 2846     		mov	r0, r5
+ 373 001e FFF7FEFF 		bl	vl53l8cx_get_resolution
+ 374 0022 0023     		movs	r3, #0
+ 375 0024 26E0     		b	.L59
+ 376              	.L69:
+ 377 0026 0021     		movs	r1, #0
+ 378 0028 1830     		adds	r0, r0, #24
+ 379 002a FFF7FEFF 		bl	vl53l8cx_set_detection_thresholds_enable
+ 380 002e 08B9     		cbnz	r0, .L70
+ 381 0030 0020     		movs	r0, #0
+ 382 0032 3DE0     		b	.L56
+ 383              	.L70:
+ 384 0034 4FF0FF30 		mov	r0, #-1
+ 385 0038 3AE0     		b	.L56
+ 386              	.L60:
+ 387 003a 234A     		ldr	r2, .L72
+ 388 003c 03EB4301 		add	r1, r3, r3, lsl #1
+ 389 0040 02EB8100 		add	r0, r2, r1, lsl #2
+ 390 0044 8372     		strb	r3, [r0, #10]
+ 391 0046 4FF0010C 		mov	ip, #1
+ 392 004a 80F808C0 		strb	ip, [r0, #8]
+ 393 004e 94F800C0 		ldrb	ip, [r4]	@ zero_extendqisi2
+ 394 0052 80F809C0 		strb	ip, [r0, #9]
+ 395 0056 4FF0000C 		mov	ip, #0
+ 396 005a 80F80BC0 		strb	ip, [r0, #11]
+ 397 005e 6068     		ldr	r0, [r4, #4]
+ 398 0060 42F82100 		str	r0, [r2, r1, lsl #2]
+ 399 0064 A168     		ldr	r1, [r4, #8]
+ 400 0066 03EB4300 		add	r0, r3, r3, lsl #1
+ 401 006a 02EB8002 		add	r2, r2, r0, lsl #2
+ 402 006e 5160     		str	r1, [r2, #4]
+ 403 0070 0133     		adds	r3, r3, #1
+ 404 0072 DBB2     		uxtb	r3, r3
+ 405              	.L59:
+ 406 0074 9DF80720 		ldrb	r2, [sp, #7]	@ zero_extendqisi2
+ 407 0078 9A42     		cmp	r2, r3
+ 408 007a DED8     		bhi	.L60
+ 409 007c 1249     		ldr	r1, .L72
+ 410 007e 03EB4302 		add	r2, r3, r3, lsl #1
+ 411 0082 01EB8202 		add	r2, r1, r2, lsl #2
+ 412 0086 927A     		ldrb	r2, [r2, #10]	@ zero_extendqisi2
+ 413 0088 03EB4303 		add	r3, r3, r3, lsl #1
+ 414 008c 01EB8303 		add	r3, r1, r3, lsl #2
+ 415 0090 62F07F02 		orn	r2, r2, #127
+ 416 0094 9A72     		strb	r2, [r3, #10]
+ARM GAS  C:\Temp\cc5hrsBQ.s 			page 8
+
+
+ 417 0096 2846     		mov	r0, r5
+ 418 0098 FFF7FEFF 		bl	vl53l8cx_set_detection_thresholds
+ 419 009c 0446     		mov	r4, r0
+ 420 009e 0121     		movs	r1, #1
+ 421 00a0 2846     		mov	r0, r5
+ 422 00a2 FFF7FEFF 		bl	vl53l8cx_set_detection_thresholds_enable
+ 423 00a6 0443     		orrs	r4, r4, r0
+ 424 00a8 14F0FF0F 		tst	r4, #255
+ 425 00ac 02D1     		bne	.L71
+ 426 00ae 0020     		movs	r0, #0
+ 427              	.L56:
+ 428 00b0 03B0     		add	sp, sp, #12
+ 429              		@ sp needed
+ 430 00b2 30BD     		pop	{r4, r5, pc}
+ 431              	.L71:
+ 432 00b4 4FF0FF30 		mov	r0, #-1
+ 433 00b8 FAE7     		b	.L56
+ 434              	.L61:
+ 435 00ba 6FF00100 		mvn	r0, #1
+ 436 00be 7047     		bx	lr
+ 437              	.L62:
+ 438 00c0 6FF00100 		mvn	r0, #1
+ 439 00c4 F4E7     		b	.L56
+ 440              	.L73:
+ 441 00c6 00BF     		.align	2
+ 442              	.L72:
+ 443 00c8 00000000 		.word	thresholds.1
+ 445              		.section	.text.vl53l8cx_poll_for_measurement,"ax",%progbits
+ 446              		.align	1
+ 447              		.syntax unified
+ 448              		.thumb
+ 449              		.thumb_func
+ 451              	vl53l8cx_poll_for_measurement:
+ 452              		@ args = 0, pretend = 0, frame = 8
+ 453              		@ frame_needed = 0, uses_anonymous_args = 0
+ 454 0000 70B5     		push	{r4, r5, r6, lr}
+ 455 0002 82B0     		sub	sp, sp, #8
+ 456 0004 0023     		movs	r3, #0
+ 457 0006 8DF80730 		strb	r3, [sp, #7]
+ 458 000a B0B1     		cbz	r0, .L77
+ 459 000c 0E46     		mov	r6, r1
+ 460 000e 0446     		mov	r4, r0
+ 461 0010 4369     		ldr	r3, [r0, #20]
+ 462 0012 9847     		blx	r3
+ 463 0014 0546     		mov	r5, r0
+ 464              	.L76:
+ 465 0016 0DF10701 		add	r1, sp, #7
+ 466 001a 04F11800 		add	r0, r4, #24
+ 467 001e FFF7FEFF 		bl	vl53l8cx_check_data_ready
+ 468 0022 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 469 0026 012B     		cmp	r3, #1
+ 470 0028 0AD0     		beq	.L78
+ 471 002a 6369     		ldr	r3, [r4, #20]
+ 472 002c 9847     		blx	r3
+ 473 002e 401B     		subs	r0, r0, r5
+ 474 0030 B042     		cmp	r0, r6
+ 475 0032 F0D3     		bcc	.L76
+ARM GAS  C:\Temp\cc5hrsBQ.s 			page 9
+
+
+ 476 0034 6FF00200 		mvn	r0, #2
+ 477 0038 03E0     		b	.L74
+ 478              	.L77:
+ 479 003a 6FF00100 		mvn	r0, #1
+ 480 003e 00E0     		b	.L74
+ 481              	.L78:
+ 482 0040 0020     		movs	r0, #0
+ 483              	.L74:
+ 484 0042 02B0     		add	sp, sp, #8
+ 485              		@ sp needed
+ 486 0044 70BD     		pop	{r4, r5, r6, pc}
+ 488              		.section	.text.vl53l8cx_get_result,"ax",%progbits
+ 489              		.align	1
+ 490              		.syntax unified
+ 491              		.thumb
+ 492              		.thumb_func
+ 494              	vl53l8cx_get_result:
+ 495              		@ args = 0, pretend = 0, frame = 8
+ 496              		@ frame_needed = 0, uses_anonymous_args = 0
+ 497 0000 0028     		cmp	r0, #0
+ 498 0002 6BD0     		beq	.L88
+ 499 0004 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 500 0008 83B0     		sub	sp, sp, #12
+ 501 000a 0E46     		mov	r6, r1
+ 502 000c 8046     		mov	r8, r0
+ 503 000e 0029     		cmp	r1, #0
+ 504 0010 67D0     		beq	.L89
+ 505 0012 00F11804 		add	r4, r0, #24
+ 506 0016 0DF10701 		add	r1, sp, #7
+ 507 001a 2046     		mov	r0, r4
+ 508 001c FFF7FEFF 		bl	vl53l8cx_get_resolution
+ 509 0020 0028     		cmp	r0, #0
+ 510 0022 61D1     		bne	.L90
+ 511 0024 3349     		ldr	r1, .L99
+ 512 0026 2046     		mov	r0, r4
+ 513 0028 FFF7FEFF 		bl	vl53l8cx_get_ranging_data
+ 514 002c 8246     		mov	r10, r0
+ 515 002e 0028     		cmp	r0, #0
+ 516 0030 5DD1     		bne	.L91
+ 517 0032 9DF80790 		ldrb	r9, [sp, #7]	@ zero_extendqisi2
+ 518 0036 C6F80090 		str	r9, [r6]
+ 519 003a 0746     		mov	r7, r0
+ 520 003c 3DE0     		b	.L82
+ 521              	.L97:
+ 522 003e 05EB8503 		add	r3, r5, r5, lsl #2
+ 523 0042 5B44     		add	r3, r3, fp
+ 524 0044 0433     		adds	r3, r3, #4
+ 525 0046 06EB8303 		add	r3, r6, r3, lsl #2
+ 526 004a 0021     		movs	r1, #0
+ 527 004c 5960     		str	r1, [r3, #4]	@ float
+ 528              	.L85:
+ 529 004e 294B     		ldr	r3, .L99
+ 530 0050 1344     		add	r3, r3, r2
+ 531 0052 93F8C200 		ldrb	r0, [r3, #194]	@ zero_extendqisi2
+ 532 0056 FFF7FEFF 		bl	vl53l8cx_map_target_status
+ 533 005a 05EB8503 		add	r3, r5, r5, lsl #2
+ 534 005e 5B44     		add	r3, r3, fp
+ARM GAS  C:\Temp\cc5hrsBQ.s 			page 10
+
+
+ 535 0060 0233     		adds	r3, r3, #2
+ 536 0062 06EB8303 		add	r3, r6, r3, lsl #2
+ 537 0066 5860     		str	r0, [r3, #4]
+ 538 0068 0134     		adds	r4, r4, #1
+ 539 006a E4B2     		uxtb	r4, r4
+ 540              	.L83:
+ 541 006c 214B     		ldr	r3, .L99
+ 542 006e 2B44     		add	r3, r3, r5
+ 543 0070 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 544 0072 A342     		cmp	r3, r4
+ 545 0074 1FD9     		bls	.L96
+ 546 0076 E219     		adds	r2, r4, r7
+ 547 0078 02F12001 		add	r1, r2, #32
+ 548 007c 1D4B     		ldr	r3, .L99
+ 549 007e 03EB4103 		add	r3, r3, r1, lsl #1
+ 550 0082 B3F90210 		ldrsh	r1, [r3, #2]
+ 551 0086 A346     		mov	fp, r4
+ 552 0088 05EB8503 		add	r3, r5, r5, lsl #2
+ 553 008c 2344     		add	r3, r3, r4
+ 554 008e 06EB8303 		add	r3, r6, r3, lsl #2
+ 555 0092 9960     		str	r1, [r3, #8]
+ 556 0094 98F83039 		ldrb	r3, [r8, #2352]	@ zero_extendqisi2
+ 557 0098 012B     		cmp	r3, #1
+ 558 009a 07D0     		beq	.L84
+ 559 009c 05EB8503 		add	r3, r5, r5, lsl #2
+ 560 00a0 2344     		add	r3, r3, r4
+ 561 00a2 0233     		adds	r3, r3, #2
+ 562 00a4 06EB8303 		add	r3, r6, r3, lsl #2
+ 563 00a8 0021     		movs	r1, #0
+ 564 00aa 9960     		str	r1, [r3, #8]	@ float
+ 565              	.L84:
+ 566 00ac 98F83139 		ldrb	r3, [r8, #2353]	@ zero_extendqisi2
+ 567 00b0 012B     		cmp	r3, #1
+ 568 00b2 C4D1     		bne	.L97
+ 569 00b4 CBE7     		b	.L85
+ 570              	.L96:
+ 571 00b6 0137     		adds	r7, r7, #1
+ 572 00b8 FFB2     		uxtb	r7, r7
+ 573              	.L82:
+ 574 00ba B945     		cmp	r9, r7
+ 575 00bc 0AD9     		bls	.L98
+ 576 00be 3D46     		mov	r5, r7
+ 577 00c0 0C4B     		ldr	r3, .L99
+ 578 00c2 3B44     		add	r3, r3, r7
+ 579 00c4 5A78     		ldrb	r2, [r3, #1]	@ zero_extendqisi2
+ 580 00c6 07EB8703 		add	r3, r7, r7, lsl #2
+ 581 00ca 06EB8303 		add	r3, r6, r3, lsl #2
+ 582 00ce 1A71     		strb	r2, [r3, #4]
+ 583 00d0 5446     		mov	r4, r10
+ 584 00d2 CBE7     		b	.L83
+ 585              	.L98:
+ 586 00d4 0020     		movs	r0, #0
+ 587              	.L80:
+ 588 00d6 03B0     		add	sp, sp, #12
+ 589              		@ sp needed
+ 590 00d8 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 591              	.L88:
+ARM GAS  C:\Temp\cc5hrsBQ.s 			page 11
+
+
+ 592 00dc 6FF00100 		mvn	r0, #1
+ 593 00e0 7047     		bx	lr
+ 594              	.L89:
+ 595 00e2 6FF00100 		mvn	r0, #1
+ 596 00e6 F6E7     		b	.L80
+ 597              	.L90:
+ 598 00e8 4FF0FF30 		mov	r0, #-1
+ 599 00ec F3E7     		b	.L80
+ 600              	.L91:
+ 601 00ee 4FF0FF30 		mov	r0, #-1
+ 602 00f2 F0E7     		b	.L80
+ 603              	.L100:
+ 604              		.align	2
+ 605              	.L99:
+ 606 00f4 00000000 		.word	data.0
+ 608              		.section	.text.VL53L8CX_GetDistance,"ax",%progbits
+ 609              		.align	1
+ 610              		.global	VL53L8CX_GetDistance
+ 611              		.syntax unified
+ 612              		.thumb
+ 613              		.thumb_func
+ 615              	VL53L8CX_GetDistance:
+ 616              		@ args = 0, pretend = 0, frame = 0
+ 617              		@ frame_needed = 0, uses_anonymous_args = 0
+ 618 0000 E0B1     		cbz	r0, .L105
+ 619 0002 38B5     		push	{r3, r4, r5, lr}
+ 620 0004 0C46     		mov	r4, r1
+ 621 0006 0546     		mov	r5, r0
+ 622 0008 81B1     		cbz	r1, .L106
+ 623 000a 90F82D39 		ldrb	r3, [r0, #2349]	@ zero_extendqisi2
+ 624 000e C3B1     		cbz	r3, .L107
+ 625 0010 90F82E39 		ldrb	r3, [r0, #2350]	@ zero_extendqisi2
+ 626 0014 012B     		cmp	r3, #1
+ 627 0016 04D0     		beq	.L112
+ 628 0018 0021     		movs	r1, #0
+ 629 001a FFF7FEFF 		bl	vl53l8cx_poll_for_measurement
+ 630              	.L103:
+ 631 001e 40B1     		cbz	r0, .L113
+ 632              	.L101:
+ 633 0020 38BD     		pop	{r3, r4, r5, pc}
+ 634              	.L112:
+ 635 0022 41F28831 		movw	r1, #5000
+ 636 0026 FFF7FEFF 		bl	vl53l8cx_poll_for_measurement
+ 637 002a F8E7     		b	.L103
+ 638              	.L106:
+ 639 002c 6FF00100 		mvn	r0, #1
+ 640 0030 F5E7     		b	.L103
+ 641              	.L113:
+ 642 0032 2146     		mov	r1, r4
+ 643 0034 2846     		mov	r0, r5
+ 644 0036 FFF7FEFF 		bl	vl53l8cx_get_result
+ 645 003a F1E7     		b	.L101
+ 646              	.L105:
+ 647 003c 6FF00100 		mvn	r0, #1
+ 648 0040 7047     		bx	lr
+ 649              	.L107:
+ 650 0042 4FF0FF30 		mov	r0, #-1
+ARM GAS  C:\Temp\cc5hrsBQ.s 			page 12
+
+
+ 651 0046 EBE7     		b	.L101
+ 653              		.section	.text.VL53L8CX_Start,"ax",%progbits
+ 654              		.align	1
+ 655              		.global	VL53L8CX_Start
+ 656              		.syntax unified
+ 657              		.thumb
+ 658              		.thumb_func
+ 660              	VL53L8CX_Start:
+ 661              		@ args = 0, pretend = 0, frame = 0
+ 662              		@ frame_needed = 0, uses_anonymous_args = 0
+ 663 0000 88B3     		cbz	r0, .L122
+ 664 0002 38B5     		push	{r3, r4, r5, lr}
+ 665 0004 0C46     		mov	r4, r1
+ 666 0006 0546     		mov	r5, r0
+ 667 0008 1830     		adds	r0, r0, #24
+ 668 000a FFF7FEFF 		bl	vl53l8cx_start_ranging
+ 669 000e 68BB     		cbnz	r0, .L123
+ 670 0010 0123     		movs	r3, #1
+ 671 0012 85F82D39 		strb	r3, [r5, #2349]
+ 672 0016 611E     		subs	r1, r4, #1
+ 673 0018 0329     		cmp	r1, #3
+ 674 001a 1ED8     		bhi	.L116
+ 675 001c DFE801F0 		tbb	[pc, r1]
+ 676              	.L118:
+ 677 0020 02       		.byte	(.L121-.L118)/2
+ 678 0021 09       		.byte	(.L120-.L118)/2
+ 679 0022 10       		.byte	(.L119-.L118)/2
+ 680 0023 17       		.byte	(.L117-.L118)/2
+ 681              		.p2align 1
+ 682              	.L121:
+ 683 0024 0123     		movs	r3, #1
+ 684 0026 85F82F39 		strb	r3, [r5, #2351]
+ 685 002a 85F82E39 		strb	r3, [r5, #2350]
+ 686 002e 0020     		movs	r0, #0
+ 687              	.L114:
+ 688 0030 38BD     		pop	{r3, r4, r5, pc}
+ 689              	.L120:
+ 690 0032 0020     		movs	r0, #0
+ 691 0034 85F82F09 		strb	r0, [r5, #2351]
+ 692 0038 0123     		movs	r3, #1
+ 693 003a 85F82E39 		strb	r3, [r5, #2350]
+ 694 003e F7E7     		b	.L114
+ 695              	.L119:
+ 696 0040 0123     		movs	r3, #1
+ 697 0042 85F82F39 		strb	r3, [r5, #2351]
+ 698 0046 0020     		movs	r0, #0
+ 699 0048 85F82E09 		strb	r0, [r5, #2350]
+ 700 004c F0E7     		b	.L114
+ 701              	.L117:
+ 702 004e 0020     		movs	r0, #0
+ 703 0050 85F82F09 		strb	r0, [r5, #2351]
+ 704 0054 85F82E09 		strb	r0, [r5, #2350]
+ 705 0058 EAE7     		b	.L114
+ 706              	.L116:
+ 707 005a 0023     		movs	r3, #0
+ 708 005c 85F82D39 		strb	r3, [r5, #2349]
+ 709 0060 6FF00100 		mvn	r0, #1
+ARM GAS  C:\Temp\cc5hrsBQ.s 			page 13
+
+
+ 710 0064 E4E7     		b	.L114
+ 711              	.L122:
+ 712 0066 6FF00100 		mvn	r0, #1
+ 713 006a 7047     		bx	lr
+ 714              	.L123:
+ 715 006c 4FF0FF30 		mov	r0, #-1
+ 716 0070 DEE7     		b	.L114
+ 718              		.section	.text.VL53L8CX_Stop,"ax",%progbits
+ 719              		.align	1
+ 720              		.global	VL53L8CX_Stop
+ 721              		.syntax unified
+ 722              		.thumb
+ 723              		.thumb_func
+ 725              	VL53L8CX_Stop:
+ 726              		@ args = 0, pretend = 0, frame = 0
+ 727              		@ frame_needed = 0, uses_anonymous_args = 0
+ 728 0000 58B1     		cbz	r0, .L130
+ 729 0002 10B5     		push	{r4, lr}
+ 730 0004 0446     		mov	r4, r0
+ 731 0006 90F82D39 		ldrb	r3, [r0, #2349]	@ zero_extendqisi2
+ 732 000a 4BB1     		cbz	r3, .L131
+ 733 000c 1830     		adds	r0, r0, #24
+ 734 000e FFF7FEFF 		bl	vl53l8cx_stop_ranging
+ 735 0012 40B9     		cbnz	r0, .L132
+ 736 0014 84F82D09 		strb	r0, [r4, #2349]
+ 737              	.L128:
+ 738 0018 10BD     		pop	{r4, pc}
+ 739              	.L130:
+ 740 001a 6FF00100 		mvn	r0, #1
+ 741 001e 7047     		bx	lr
+ 742              	.L131:
+ 743 0020 4FF0FF30 		mov	r0, #-1
+ 744 0024 F8E7     		b	.L128
+ 745              	.L132:
+ 746 0026 4FF0FF30 		mov	r0, #-1
+ 747 002a F5E7     		b	.L128
+ 749              		.section	.text.VL53L8CX_SetAddress,"ax",%progbits
+ 750              		.align	1
+ 751              		.global	VL53L8CX_SetAddress
+ 752              		.syntax unified
+ 753              		.thumb
+ 754              		.thumb_func
+ 756              	VL53L8CX_SetAddress:
+ 757              		@ args = 0, pretend = 0, frame = 0
+ 758              		@ frame_needed = 0, uses_anonymous_args = 0
+ 759 0000 48B1     		cbz	r0, .L139
+ 760 0002 38B5     		push	{r3, r4, r5, lr}
+ 761 0004 0546     		mov	r5, r0
+ 762 0006 CCB2     		uxtb	r4, r1
+ 763 0008 2146     		mov	r1, r4
+ 764 000a 1830     		adds	r0, r0, #24
+ 765 000c FFF7FEFF 		bl	vl53l8cx_set_i2c_address
+ 766 0010 20B9     		cbnz	r0, .L140
+ 767 0012 2C81     		strh	r4, [r5, #8]	@ movhi
+ 768              	.L137:
+ 769 0014 38BD     		pop	{r3, r4, r5, pc}
+ 770              	.L139:
+ARM GAS  C:\Temp\cc5hrsBQ.s 			page 14
+
+
+ 771 0016 6FF00100 		mvn	r0, #1
+ 772 001a 7047     		bx	lr
+ 773              	.L140:
+ 774 001c 4FF0FF30 		mov	r0, #-1
+ 775 0020 F8E7     		b	.L137
+ 777              		.section	.text.VL53L8CX_SetPowerMode,"ax",%progbits
+ 778              		.align	1
+ 779              		.global	VL53L8CX_SetPowerMode
+ 780              		.syntax unified
+ 781              		.thumb
+ 782              		.thumb_func
+ 784              	VL53L8CX_SetPowerMode:
+ 785              		@ args = 0, pretend = 0, frame = 0
+ 786              		@ frame_needed = 0, uses_anonymous_args = 0
+ 787 0000 60B1     		cbz	r0, .L147
+ 788 0002 08B5     		push	{r3, lr}
+ 789 0004 0129     		cmp	r1, #1
+ 790 0006 0CD8     		bhi	.L148
+ 791 0008 C9B2     		uxtb	r1, r1
+ 792 000a 1830     		adds	r0, r0, #24
+ 793 000c FFF7FEFF 		bl	vl53l8cx_set_power_mode
+ 794 0010 08B9     		cbnz	r0, .L154
+ 795 0012 0020     		movs	r0, #0
+ 796              	.L145:
+ 797 0014 08BD     		pop	{r3, pc}
+ 798              	.L154:
+ 799 0016 4FF0FF30 		mov	r0, #-1
+ 800 001a FBE7     		b	.L145
+ 801              	.L147:
+ 802 001c 6FF00100 		mvn	r0, #1
+ 803 0020 7047     		bx	lr
+ 804              	.L148:
+ 805 0022 6FF00100 		mvn	r0, #1
+ 806 0026 F5E7     		b	.L145
+ 808              		.section	.text.VL53L8CX_GetPowerMode,"ax",%progbits
+ 809              		.align	1
+ 810              		.global	VL53L8CX_GetPowerMode
+ 811              		.syntax unified
+ 812              		.thumb
+ 813              		.thumb_func
+ 815              	VL53L8CX_GetPowerMode:
+ 816              		@ args = 0, pretend = 0, frame = 8
+ 817              		@ frame_needed = 0, uses_anonymous_args = 0
+ 818 0000 A0B1     		cbz	r0, .L158
+ 819 0002 10B5     		push	{r4, lr}
+ 820 0004 82B0     		sub	sp, sp, #8
+ 821 0006 0C46     		mov	r4, r1
+ 822 0008 99B1     		cbz	r1, .L159
+ 823 000a 0DF10701 		add	r1, sp, #7
+ 824 000e 1830     		adds	r0, r0, #24
+ 825 0010 FFF7FEFF 		bl	vl53l8cx_get_power_mode
+ 826 0014 28B9     		cbnz	r0, .L164
+ 827 0016 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 828 001a 2360     		str	r3, [r4]
+ 829 001c 0020     		movs	r0, #0
+ 830              	.L155:
+ 831 001e 02B0     		add	sp, sp, #8
+ARM GAS  C:\Temp\cc5hrsBQ.s 			page 15
+
+
+ 832              		@ sp needed
+ 833 0020 10BD     		pop	{r4, pc}
+ 834              	.L164:
+ 835 0022 0023     		movs	r3, #0
+ 836 0024 2360     		str	r3, [r4]
+ 837 0026 4FF0FF30 		mov	r0, #-1
+ 838 002a F8E7     		b	.L155
+ 839              	.L158:
+ 840 002c 6FF00100 		mvn	r0, #1
+ 841 0030 7047     		bx	lr
+ 842              	.L159:
+ 843 0032 6FF00100 		mvn	r0, #1
+ 844 0036 F2E7     		b	.L155
+ 846              		.section	.text.VL53L8CX_RegisterBusIO,"ax",%progbits
+ 847              		.align	1
+ 848              		.global	VL53L8CX_RegisterBusIO
+ 849              		.syntax unified
+ 850              		.thumb
+ 851              		.thumb_func
+ 853              	VL53L8CX_RegisterBusIO:
+ 854              		@ args = 0, pretend = 0, frame = 0
+ 855              		@ frame_needed = 0, uses_anonymous_args = 0
+ 856 0000 C8B1     		cbz	r0, .L167
+ 857 0002 08B5     		push	{r3, lr}
+ 858 0004 0346     		mov	r3, r0
+ 859 0006 C9B1     		cbz	r1, .L168
+ 860 0008 0A68     		ldr	r2, [r1]
+ 861 000a 0260     		str	r2, [r0]
+ 862 000c 4868     		ldr	r0, [r1, #4]
+ 863 000e 5860     		str	r0, [r3, #4]
+ 864 0010 0889     		ldrh	r0, [r1, #8]
+ 865 0012 1881     		strh	r0, [r3, #8]	@ movhi
+ 866 0014 C868     		ldr	r0, [r1, #12]
+ 867 0016 D860     		str	r0, [r3, #12]
+ 868 0018 0869     		ldr	r0, [r1, #16]
+ 869 001a 1861     		str	r0, [r3, #16]
+ 870 001c 4869     		ldr	r0, [r1, #20]
+ 871 001e 5861     		str	r0, [r3, #20]
+ 872 0020 0889     		ldrh	r0, [r1, #8]
+ 873 0022 1883     		strh	r0, [r3, #24]	@ movhi
+ 874 0024 0869     		ldr	r0, [r1, #16]
+ 875 0026 1862     		str	r0, [r3, #32]
+ 876 0028 C868     		ldr	r0, [r1, #12]
+ 877 002a D861     		str	r0, [r3, #28]
+ 878 002c 4969     		ldr	r1, [r1, #20]
+ 879 002e 5962     		str	r1, [r3, #36]
+ 880 0030 3AB1     		cbz	r2, .L169
+ 881 0032 9047     		blx	r2
+ 882              	.L165:
+ 883 0034 08BD     		pop	{r3, pc}
+ 884              	.L167:
+ 885 0036 6FF00100 		mvn	r0, #1
+ 886 003a 7047     		bx	lr
+ 887              	.L168:
+ 888 003c 6FF00100 		mvn	r0, #1
+ 889 0040 F8E7     		b	.L165
+ 890              	.L169:
+ARM GAS  C:\Temp\cc5hrsBQ.s 			page 16
+
+
+ 891 0042 4FF0FF30 		mov	r0, #-1
+ 892 0046 F5E7     		b	.L165
+ 894              		.section	.text.VL53L8CX_XTalkCalibration,"ax",%progbits
+ 895              		.align	1
+ 896              		.global	VL53L8CX_XTalkCalibration
+ 897              		.syntax unified
+ 898              		.thumb
+ 899              		.thumb_func
+ 901              	VL53L8CX_XTalkCalibration:
+ 902              		@ args = 0, pretend = 0, frame = 0
+ 903              		@ frame_needed = 0, uses_anonymous_args = 0
+ 904 0000 08B5     		push	{r3, lr}
+ 905 0002 1346     		mov	r3, r2
+ 906 0004 0222     		movs	r2, #2
+ 907 0006 1830     		adds	r0, r0, #24
+ 908 0008 FFF7FEFF 		bl	vl53l8cx_calibrate_xtalk
+ 909 000c 00B9     		cbnz	r0, .L178
+ 910              	.L174:
+ 911 000e 08BD     		pop	{r3, pc}
+ 912              	.L178:
+ 913 0010 4FF0FF30 		mov	r0, #-1
+ 914 0014 FBE7     		b	.L174
+ 916              		.section	.bss.data.0,"aw",%nobits
+ 917              		.align	2
+ 920              	data.0:
+ 921 0000 00000000 		.space	258
+ 921      00000000 
+ 921      00000000 
+ 921      00000000 
+ 921      00000000 
+ 922              		.section	.bss.thresholds.1,"aw",%nobits
+ 923              		.align	2
+ 926              	thresholds.1:
+ 927 0000 00000000 		.space	768
+ 927      00000000 
+ 927      00000000 
+ 927      00000000 
+ 927      00000000 
+ 928              		.global	VL53L8CX_RANGING_SENSOR_Driver
+ 929              		.section	.data.VL53L8CX_RANGING_SENSOR_Driver,"aw"
+ 930              		.align	2
+ 933              	VL53L8CX_RANGING_SENSOR_Driver:
+ 934 0000 00000000 		.word	VL53L8CX_Init
+ 935 0004 00000000 		.word	VL53L8CX_DeInit
+ 936 0008 00000000 		.word	VL53L8CX_ReadID
+ 937 000c 00000000 		.word	VL53L8CX_GetCapabilities
+ 938 0010 00000000 		.word	VL53L8CX_ConfigProfile
+ 939 0014 00000000 		.word	VL53L8CX_ConfigROI
+ 940 0018 00000000 		.word	VL53L8CX_ConfigIT
+ 941 001c 00000000 		.word	VL53L8CX_GetDistance
+ 942 0020 00000000 		.word	VL53L8CX_Start
+ 943 0024 00000000 		.word	VL53L8CX_Stop
+ 944 0028 00000000 		.word	VL53L8CX_SetAddress
+ 945 002c 00000000 		.word	VL53L8CX_GetAddress
+ 946 0030 00000000 		.word	VL53L8CX_SetPowerMode
+ 947 0034 00000000 		.word	VL53L8CX_GetPowerMode
+ 948              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 12.3.1 20230626"
+ARM GAS  C:\Temp\cc5hrsBQ.s 			page 17
+
+
+ARM GAS  C:\Temp\cc5hrsBQ.s 			page 18
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 vl53l8cx.c
+  C:\Temp\cc5hrsBQ.s:18     .text.VL53L8CX_DeInit:00000000 $t
+  C:\Temp\cc5hrsBQ.s:24     .text.VL53L8CX_DeInit:00000000 VL53L8CX_DeInit
+  C:\Temp\cc5hrsBQ.s:50     .text.VL53L8CX_GetCapabilities:00000000 $t
+  C:\Temp\cc5hrsBQ.s:56     .text.VL53L8CX_GetCapabilities:00000000 VL53L8CX_GetCapabilities
+  C:\Temp\cc5hrsBQ.s:78     .text.VL53L8CX_ConfigROI:00000000 $t
+  C:\Temp\cc5hrsBQ.s:84     .text.VL53L8CX_ConfigROI:00000000 VL53L8CX_ConfigROI
+  C:\Temp\cc5hrsBQ.s:92     .text.VL53L8CX_GetAddress:00000000 $t
+  C:\Temp\cc5hrsBQ.s:98     .text.VL53L8CX_GetAddress:00000000 VL53L8CX_GetAddress
+  C:\Temp\cc5hrsBQ.s:116    .text.vl53l8cx_map_target_status:00000000 $t
+  C:\Temp\cc5hrsBQ.s:121    .text.vl53l8cx_map_target_status:00000000 vl53l8cx_map_target_status
+  C:\Temp\cc5hrsBQ.s:143    .text.VL53L8CX_Init:00000000 $t
+  C:\Temp\cc5hrsBQ.s:149    .text.VL53L8CX_Init:00000000 VL53L8CX_Init
+  C:\Temp\cc5hrsBQ.s:180    .text.VL53L8CX_ReadID:00000000 $t
+  C:\Temp\cc5hrsBQ.s:186    .text.VL53L8CX_ReadID:00000000 VL53L8CX_ReadID
+  C:\Temp\cc5hrsBQ.s:245    .text.VL53L8CX_ConfigProfile:00000000 $t
+  C:\Temp\cc5hrsBQ.s:251    .text.VL53L8CX_ConfigProfile:00000000 VL53L8CX_ConfigProfile
+  C:\Temp\cc5hrsBQ.s:269    .text.VL53L8CX_ConfigProfile:00000024 $d
+  C:\Temp\cc5hrsBQ.s:273    .text.VL53L8CX_ConfigProfile:00000028 $t
+  C:\Temp\cc5hrsBQ.s:350    .text.VL53L8CX_ConfigIT:00000000 $t
+  C:\Temp\cc5hrsBQ.s:356    .text.VL53L8CX_ConfigIT:00000000 VL53L8CX_ConfigIT
+  C:\Temp\cc5hrsBQ.s:443    .text.VL53L8CX_ConfigIT:000000c8 $d
+  C:\Temp\cc5hrsBQ.s:926    .bss.thresholds.1:00000000 thresholds.1
+  C:\Temp\cc5hrsBQ.s:446    .text.vl53l8cx_poll_for_measurement:00000000 $t
+  C:\Temp\cc5hrsBQ.s:451    .text.vl53l8cx_poll_for_measurement:00000000 vl53l8cx_poll_for_measurement
+  C:\Temp\cc5hrsBQ.s:489    .text.vl53l8cx_get_result:00000000 $t
+  C:\Temp\cc5hrsBQ.s:494    .text.vl53l8cx_get_result:00000000 vl53l8cx_get_result
+  C:\Temp\cc5hrsBQ.s:606    .text.vl53l8cx_get_result:000000f4 $d
+  C:\Temp\cc5hrsBQ.s:920    .bss.data.0:00000000 data.0
+  C:\Temp\cc5hrsBQ.s:609    .text.VL53L8CX_GetDistance:00000000 $t
+  C:\Temp\cc5hrsBQ.s:615    .text.VL53L8CX_GetDistance:00000000 VL53L8CX_GetDistance
+  C:\Temp\cc5hrsBQ.s:654    .text.VL53L8CX_Start:00000000 $t
+  C:\Temp\cc5hrsBQ.s:660    .text.VL53L8CX_Start:00000000 VL53L8CX_Start
+  C:\Temp\cc5hrsBQ.s:677    .text.VL53L8CX_Start:00000020 $d
+  C:\Temp\cc5hrsBQ.s:681    .text.VL53L8CX_Start:00000024 $t
+  C:\Temp\cc5hrsBQ.s:719    .text.VL53L8CX_Stop:00000000 $t
+  C:\Temp\cc5hrsBQ.s:725    .text.VL53L8CX_Stop:00000000 VL53L8CX_Stop
+  C:\Temp\cc5hrsBQ.s:750    .text.VL53L8CX_SetAddress:00000000 $t
+  C:\Temp\cc5hrsBQ.s:756    .text.VL53L8CX_SetAddress:00000000 VL53L8CX_SetAddress
+  C:\Temp\cc5hrsBQ.s:778    .text.VL53L8CX_SetPowerMode:00000000 $t
+  C:\Temp\cc5hrsBQ.s:784    .text.VL53L8CX_SetPowerMode:00000000 VL53L8CX_SetPowerMode
+  C:\Temp\cc5hrsBQ.s:809    .text.VL53L8CX_GetPowerMode:00000000 $t
+  C:\Temp\cc5hrsBQ.s:815    .text.VL53L8CX_GetPowerMode:00000000 VL53L8CX_GetPowerMode
+  C:\Temp\cc5hrsBQ.s:847    .text.VL53L8CX_RegisterBusIO:00000000 $t
+  C:\Temp\cc5hrsBQ.s:853    .text.VL53L8CX_RegisterBusIO:00000000 VL53L8CX_RegisterBusIO
+  C:\Temp\cc5hrsBQ.s:895    .text.VL53L8CX_XTalkCalibration:00000000 $t
+  C:\Temp\cc5hrsBQ.s:901    .text.VL53L8CX_XTalkCalibration:00000000 VL53L8CX_XTalkCalibration
+  C:\Temp\cc5hrsBQ.s:917    .bss.data.0:00000000 $d
+  C:\Temp\cc5hrsBQ.s:923    .bss.thresholds.1:00000000 $d
+  C:\Temp\cc5hrsBQ.s:933    .data.VL53L8CX_RANGING_SENSOR_Driver:00000000 VL53L8CX_RANGING_SENSOR_Driver
+  C:\Temp\cc5hrsBQ.s:930    .data.VL53L8CX_RANGING_SENSOR_Driver:00000000 $d
+
+UNDEFINED SYMBOLS
+vl53l8cx_init
+VL53L8CX_WrByte
+VL53L8CX_RdByte
+ARM GAS  C:\Temp\cc5hrsBQ.s 			page 19
+
+
+vl53l8cx_set_resolution
+vl53l8cx_set_ranging_mode
+vl53l8cx_set_integration_time_ms
+vl53l8cx_set_ranging_frequency_hz
+vl53l8cx_get_resolution
+vl53l8cx_set_detection_thresholds_enable
+vl53l8cx_set_detection_thresholds
+vl53l8cx_check_data_ready
+vl53l8cx_get_ranging_data
+vl53l8cx_start_ranging
+vl53l8cx_stop_ranging
+vl53l8cx_set_i2c_address
+vl53l8cx_set_power_mode
+vl53l8cx_get_power_mode
+vl53l8cx_calibrate_xtalk
