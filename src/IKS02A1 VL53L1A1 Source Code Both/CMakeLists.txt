@@ -12,13 +12,6 @@ set(CMAKE_C_FLAGS_INIT "${CMAKE_C_FLAGS_INIT} -Wall -fdata-sections -ffunction-s
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
-# Compiler toolchain (ARM Cortex)
-set(CMAKE_C_COMPILER arm-none-eabi-gcc)
-set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
-set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
-set(CMAKE_OBJCOPY arm-none-eabi-objcopy)
-set(CMAKE_SIZE arm-none-eabi-size)
-
 # Set MCU-specific compiler flags
 set(MCU_FLAGS "-mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${MCU_FLAGS}")
