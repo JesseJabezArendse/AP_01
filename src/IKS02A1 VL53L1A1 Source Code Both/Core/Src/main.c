@@ -139,6 +139,9 @@ void receivedFromSimulink(uint8_t* bigBuffer){
       rangingProfile = 2;
     }
 
+    timingBudget = 1000/tof_odr;
+    pollingPeriod = timingBudget + 10;
+
     accel1_fsr = bytesToInt32_main(bigBuffer[11 + 0] , bigBuffer[11 + 1] , bigBuffer[11 + 2] ,  bigBuffer[11 + 3] );
     accel1_odr = bytesToFloat_main(bigBuffer[15 + 0] , bigBuffer[15 + 1] , bigBuffer[15 + 2] ,  bigBuffer[15 + 3] );
     gyro_fsr =   bytesToInt32_main(bigBuffer[19 + 0] , bigBuffer[19 + 1] , bigBuffer[19 + 2] ,  bigBuffer[19 + 3] );

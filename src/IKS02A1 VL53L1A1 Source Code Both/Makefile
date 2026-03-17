@@ -37,44 +37,21 @@ BUILD_DIR = build
 # C sources
 C_SOURCES =  \
 Core/Src/main.c \
+Core/Src/IKS02A1_Simulink.c \
+Core/Src/VL53L1A1_Simulink.c \
+Core/Src/VL53L1X_api.c \
+Core/Src/VL53L1X_calibration.c \
+Core/Src/X-NUCLEO-53L1A1.c \
+Core/Src/vl53l1_platform.c \
 Core/Src/stm32f4xx_nucleo_bus.c \
 Core/Src/stm32f4xx_it.c \
 Core/Src/stm32f4xx_hal_msp.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_calibration.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_core.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_debug.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_preset_modes.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_api_strings.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_core.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_core_support.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_dmax.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_error_strings.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_algos_gen3.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_algos_gen4.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_char.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_core.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_hist_funcs.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_nvm.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_nvm_debug.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_register_funcs.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_sigma_estimate.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_silicon_core.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_wait.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_xtalk.c \
-Drivers/BSP/Components/vl53l1cb/modules/vl53l1_zone_presets.c \
-Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform.c \
-Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_ipp.c \
-Drivers/BSP/Components/vl53l1cb/porting/vl53l1_platform_log.c \
-Drivers/BSP/Components/vl53l1cb/vl53l1cb.c \
 Drivers/BSP/Components/iis2dlpc/iis2dlpc_reg.c \
 Drivers/BSP/Components/iis2dlpc/iis2dlpc.c \
 Drivers/BSP/Components/iis2mdc/iis2mdc_reg.c \
 Drivers/BSP/Components/iis2mdc/iis2mdc.c \
 Drivers/BSP/Components/ism330dhcx/ism330dhcx_reg.c \
 Drivers/BSP/Components/ism330dhcx/ism330dhcx.c \
-Drivers/BSP/53L1A2/53l1a2.c \
-Drivers/BSP/53L1A2/53l1a2_ranging_sensor.c \
 Drivers/BSP/IKS02A1/iks02a1_motion_sensors.c \
 Drivers/BSP/IKS02A1/iks02a1_motion_sensors_ex.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c \
@@ -93,11 +70,11 @@ Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c \
+Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c \
+Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c \
 Core/Src/system_stm32f4xx.c \
 Core/Src/sysmem.c \
-Core/Src/syscalls.c \
-Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c \
-Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c
+Core/Src/syscalls.c
 
 # ASM sources
 ASM_SOURCES =  \
