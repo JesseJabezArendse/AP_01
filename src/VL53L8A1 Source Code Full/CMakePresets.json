@@ -1,0 +1,27 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "app",
+      "displayName": "STM32F4 NucleoMX VL53L8A1 Application",
+      "description": "Debug build for STM32F4 Nucleo with VL53L8A1 (8x8 ToF)",
+      "generator": "Unix Makefiles",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+      },
+      "binaryDir": "${sourceDir}/build",
+      "toolchainFile": "${sourceDir}/arm-toolchain.cmake",
+      "environment": {
+        "ARM_TOOLCHAIN_PATH": "${sourceDir}"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "app",
+      "configurePreset": "app",
+      "jobs": 4
+    }
+  ]
+}

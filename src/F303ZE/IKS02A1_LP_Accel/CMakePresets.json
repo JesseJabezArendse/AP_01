@@ -1,0 +1,27 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "app",
+      "displayName": "STM32F3 IKS02A1 LP Accel Application",
+      "description": "Debug build for STM32F3 Nucleo with IKS02A1 Low-Power Accelerometer",
+      "generator": "Unix Makefiles",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+      },
+      "binaryDir": "${sourceDir}/build",
+      "toolchainFile": "${sourceDir}/arm-toolchain.cmake",
+      "environment": {
+        "ARM_TOOLCHAIN_PATH": "${sourceDir}"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "app",
+      "configurePreset": "app",
+      "jobs": 4
+    }
+  ]
+}
