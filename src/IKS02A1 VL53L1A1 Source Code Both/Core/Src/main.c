@@ -132,6 +132,12 @@ void receivedFromSimulink(uint8_t* bigBuffer){
     tof_fsr = bytesToInt32_main(bigBuffer[3  + 0] , bigBuffer[3  + 1] , bigBuffer[3  + 2] ,  bigBuffer[3  + 3] );
     tof_odr = bytesToInt32_main(bigBuffer[7  + 0] , bigBuffer[7  + 1] , bigBuffer[7  + 2] ,  bigBuffer[7  + 3] );
     
+    if (tof_fsr == 1){
+      rangingProfile = 1;
+    }
+    if (tof_fsr == 2){
+      rangingProfile = 2;
+    }
 
     accel1_fsr = bytesToInt32_main(bigBuffer[11 + 0] , bigBuffer[11 + 1] , bigBuffer[11 + 2] ,  bigBuffer[11 + 3] );
     accel1_odr = bytesToFloat_main(bigBuffer[15 + 0] , bigBuffer[15 + 1] , bigBuffer[15 + 2] ,  bigBuffer[15 + 3] );
