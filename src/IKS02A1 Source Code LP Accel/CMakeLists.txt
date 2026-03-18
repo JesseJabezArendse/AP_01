@@ -29,7 +29,7 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Og")
 
 # Debug symbols
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -gdwarf-2")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g3")
 endif()
 
 # Linker script
@@ -53,34 +53,25 @@ set(C_INCLUDES
     Drivers/BSP/Components/iis2mdc
     Drivers/BSP/Components/ism330dhcx
     Drivers/BSP/IKS02A1
-    Drivers/BSP/Components/vl53l8cx
-    Drivers/BSP/Components/vl53l8cx/modules
-    Drivers/BSP/Components/vl53l8cx/porting
-    Drivers/BSP/53L8A1
-    Drivers/BSP/STM32F4xx_Nucleo
     MEMS/Target
 )
 
 # C Source files
 set(C_SOURCES
     Core/Src/main.c
+    Core/Src/IKS02A1_Simulink.c
     Core/Src/stm32f4xx_nucleo_bus.c
     Core/Src/stm32f4xx_it.c
     Core/Src/stm32f4xx_hal_msp.c
-    Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_api.c
-    Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_detection_thresholds.c
-    Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_motion_indicator.c
-    Drivers/BSP/Components/vl53l8cx/modules/vl53l8cx_plugin_xtalk.c
-    Drivers/BSP/Components/vl53l8cx/porting/platform.c
-    Drivers/BSP/Components/vl53l8cx/vl53l8cx.c
-    Drivers/BSP/53L8A1/53l8a1_ranging_sensor.c
-    Drivers/BSP/STM32F4xx_Nucleo/stm32f4xx_nucleo.c
     Drivers/BSP/Components/iis2dlpc/iis2dlpc_reg.c
     Drivers/BSP/Components/iis2dlpc/iis2dlpc.c
     Drivers/BSP/Components/iis2mdc/iis2mdc_reg.c
     Drivers/BSP/Components/iis2mdc/iis2mdc.c
     Drivers/BSP/Components/ism330dhcx/ism330dhcx_reg.c
     Drivers/BSP/Components/ism330dhcx/ism330dhcx.c
+    Drivers/BSP/IKS02A1/iks02a1_audio.c
+    Drivers/BSP/IKS02A1/iks02a1_env_sensors.c
+    Drivers/BSP/IKS02A1/iks02a1_env_sensors_ex.c
     Drivers/BSP/IKS02A1/iks02a1_motion_sensors.c
     Drivers/BSP/IKS02A1/iks02a1_motion_sensors_ex.c
     Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c
@@ -101,6 +92,7 @@ set(C_SOURCES
     Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
     Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c
     Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c
+    Core/Src/stm32f4xx_hal_timebase_tim.c
     Core/Src/system_stm32f4xx.c
     Core/Src/sysmem.c
     Core/Src/syscalls.c

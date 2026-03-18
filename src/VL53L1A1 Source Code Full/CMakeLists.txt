@@ -29,7 +29,7 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Og")
 
 # Debug symbols
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -gdwarf-2")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g3")
 endif()
 
 # Linker script
@@ -48,20 +48,19 @@ set(C_INCLUDES
     Drivers/STM32F4xx_HAL_Driver/Inc/Legacy
     Drivers/CMSIS/Device/ST/STM32F4xx/Include
     Drivers/CMSIS/Include
-    VL53L1X_API
-    Drivers/BSP/Components/Common
 )
 
 # C Source files
 set(C_SOURCES
     Core/Src/main.c
+    Core/Src/VL53L1A1_Simulink.c
     Core/Src/VL53L1X_api.c
     Core/Src/VL53L1X_calibration.c
     Core/Src/X-NUCLEO-53L1A1.c
     Core/Src/vl53l1_platform.c
-    Core/Src/stm32f4xx_nucleo_bus.c
     Core/Src/stm32f4xx_it.c
     Core/Src/stm32f4xx_hal_msp.c
+    Core/Src/stm32f4xx_hal_timebase_tim.c
     Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c
     Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c
     Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c

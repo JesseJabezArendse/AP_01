@@ -70,23 +70,23 @@ void initVL53L1A1(int ToFNumber, uint8_t newToFAddress){
 
 /* Those basic I2C read functions can be used to check your own I2C functions */
   status = VL53L1_RdByte(VL53L1_address_default, 0x010F, &byteData);
-  sprintf(buffer, "VL53L1X Model_ID: %X \n", byteData);
-  HAL_UART_Transmit(&huart2 , buffer, sizeof(buffer) , HAL_MAX_DELAY);
+  //sprintf(buffer, "VL53L1X Model_ID: %X \n", byteData);
+  //HAL_UART_Transmit(&huart2 , buffer, sizeof(buffer) , HAL_MAX_DELAY);
 
   status = VL53L1_RdByte(VL53L1_address_default, 0x0110, &byteData);
-  sprintf(buffer, "VL53L1X Module_Type: %X \n", byteData);
-  HAL_UART_Transmit(&huart2 , buffer, sizeof(buffer) , HAL_MAX_DELAY);
+  //sprintf(buffer, "VL53L1X Module_Type: %X \n", byteData);
+  //HAL_UART_Transmit(&huart2 , buffer, sizeof(buffer) , HAL_MAX_DELAY);
 
   status = VL53L1_RdWord(VL53L1_address_default, 0x010F, &wordData);
-  sprintf(buffer, "VL53L1X: %X \n", wordData);
-  HAL_UART_Transmit(&huart2 , buffer, sizeof(buffer) , HAL_MAX_DELAY);
+  //sprintf(buffer, "VL53L1X: %X \n", wordData);
+  //HAL_UART_Transmit(&huart2 , buffer, sizeof(buffer) , HAL_MAX_DELAY);
 
   while(sensorState==0){
 		status = VL53L1X_BootState(VL53L1_address_default, &sensorState);
 	  HAL_Delay(2);
   }
-  sprintf(buffer, "VL53L1X Model_ID: %X \n", byteData);
-  HAL_UART_Transmit(&huart2 , buffer, sizeof(buffer) , HAL_MAX_DELAY);
+  //sprintf(buffer, "VL53L1X Model_ID: %X \n", byteData);
+  //HAL_UART_Transmit(&huart2 , buffer, sizeof(buffer) , HAL_MAX_DELAY);
 
     /* This function must to be called to initialize the sensor with the default setting  */
   status = VL53L1X_SensorInit(VL53L1_address_default);
@@ -102,7 +102,7 @@ void initVL53L1A1(int ToFNumber, uint8_t newToFAddress){
   status = VL53L1X_StartRanging(VL53L1_address_default);   /* This function has to be called to enable the ranging */
   status =  VL53L1X_SetI2CAddress(VL53L1_address_default, newToFAddress);
   if (status == 0){
-    HAL_UART_Transmit(&huart2 , "VL53L1X Initialized and Calibrated", sizeof("VL53L1X Initialized and Calibrated") , HAL_MAX_DELAY);
+    //HAL_UART_Transmit(&huart2 , "VL53L1X Initialized and Calibrated", sizeof("VL53L1X Initialized and Calibrated") , HAL_MAX_DELAY);
   }
 }
 

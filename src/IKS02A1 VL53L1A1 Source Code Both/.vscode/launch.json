@@ -2,13 +2,13 @@
     "configurations": [
         {
             "showDevDebugOutput": "parsed",
-            "cwd": "${workspaceRoot}",
-            "executable": "./build/debug/NucleoMX_IKS02A1_VL53L1.elf",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/build/bin/NucleoMX_IKS02A1_VL53L1A1.elf",
             "name": "Debug STM32",
             "request": "launch",
             "type": "cortex-debug",
             "servertype": "openocd",
-            "preLaunchTask": "Build STM",
+            "preLaunchTask": "CMake Configure + Build",
             "device": "stm32f411xe.s",
             "configFiles": [
                 "openocd.cfg"
@@ -16,13 +16,13 @@
         },
         {
             "showDevDebugOutput": "parsed",
-            "cwd": "${workspaceRoot}",
-            "executable": "./build/debug/NucleoMX_IKS02A1_VL53L1.elf",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/build/bin/NucleoMX_IKS02A1_VL53L1A1.elf",
             "name": "Attach STM32",
             "request": "attach",
             "type": "cortex-debug",
             "servertype": "openocd",
-            "preLaunchTask": "Build STM",
+            "preLaunchTask": "CMake Configure + Build",
             "device": "stm32f411xe.s",
             "configFiles": [
                 "openocd.cfg"

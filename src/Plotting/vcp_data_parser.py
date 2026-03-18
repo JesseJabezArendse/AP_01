@@ -26,10 +26,10 @@ import sys
 
 import serial
 import serial.tools.list_ports
+import webbrowser
+import logging
 import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation
-from matplotlib.gridspec import GridSpec
+from flask import Flask, Response, jsonify
 
 
 @dataclass
@@ -117,11 +117,12 @@ class CombinedPacket(DataPacket):
 class VCPDataParser:
     """Parses binary data from VCP"""
 
-    HEADER = b'A_J'
-    TERMINATOR = b'J_A'
+    HEADER = b'J_A'
+    TERMINATOR = b'A_J'
 
-    def __init__(self):
+    def __init__(self, verbose: bool = False):
         self.buffer = bytearray()
+        self.verbose = verbose
 
     def bytes_to_float(self, b1: int, b2: int, b3: int, b4: int) -> float:
         """Convert 4 bytes to float"""
@@ -140,22 +141,23 @@ class VCPDataParser:
         self.buffer.extend(data)
         packets = []
 
-        while len(self.buffer) >= 42:  # Minimum packet size
-            # Find header
+        while len(self.buffer) >= 10:
             header_idx = self.buffer.find(self.HEADER)
+
             if header_idx == -1:
+                # No header found; keep last 2 bytes in case header spans reads
+                self.buffer = self.buffer[-2:]
                 break
 
             if header_idx > 0:
                 self.buffer = self.buffer[header_idx:]
 
-            # Try to find terminator
-            terminator_idx = self.buffer.find(self.TERMINATOR, 3)
+            terminator_idx = self.buffer.find(self.TERMINATOR, len(self.HEADER))
             if terminator_idx == -1:
                 break
 
-            packet_data = bytes(self.buffer[:terminator_idx + 3])
-            self.buffer = self.buffer[terminator_idx + 3:]
+            packet_data = bytes(self.buffer[:terminator_idx + len(self.TERMINATOR)])
+            self.buffer = self.buffer[terminator_idx + len(self.TERMINATOR):]
 
             try:
                 packet = self._parse_packet(packet_data)
@@ -173,31 +175,31 @@ class VCPDataParser:
 
         payload_size = len(data) - 6  # Subtract header and terminator
 
-        # Detect packet type based on payload size
-        if payload_size == 36:  # IKS02A1 only or VL53L1A1 only
-            return self._parse_iks02a1_or_tof(data)
-        elif payload_size == 76:  # Combined IKS02A1 + VL53L1A1
-            return self._parse_combined(data)
+        if payload_size == 52:  # VL53L1A1 only
+            packet = self._parse_vl53l1a1_only(data)
+        elif payload_size == 60:  # IKS02A1 only
+            packet = self._parse_iks02a1_only(data)
+        elif payload_size in (100, 108, 114, 228):  # Combined IKS02A1 + VL53L1A1
+            packet = self._parse_combined(data)
         elif payload_size == 288:  # VL53L8A1 (64 floats for 8x8 matrix)
-            return self._parse_vl53l8a1(data)
+            packet = self._parse_vl53l8a1(data)
         else:
-            print(f"Unknown packet size: {payload_size}")
+            if self.verbose:
+                print(f"Unknown packet size: {payload_size}, data: {data.hex()}")
             return None
 
-    def _parse_iks02a1_or_tof(self, data: bytes) -> Optional[DataPacket]:
-        """Parse IKS02A1 or VL53L1A1 only packet (36 bytes payload)"""
+        if self.verbose and packet:
+            print(f"Parsed packet: {type(packet).__name__} (size {payload_size})")
+
+        return packet
+
+    def _parse_iks02a1_only(self, data: bytes) -> Optional[IKS02A1Packet]:
+        """Parse IKS02A1 only packet (60 bytes payload)."""
         payload = data[3:-3]
-
-        # Check for ToF data pattern (3 sensors * 4 values * 4 bytes = 48 bytes)
-        # or IMU data pattern (11 values * 4 bytes = 44 bytes)
-
-        if len(payload) < 36:
+        if len(payload) != 60:
             return None
 
-        # Try to determine which type by checking if it looks like IMU data
-        # IMU has temperature as float around room temp (20-40), and mag/accel/gyro as large integers
         try:
-            # Assume IMU first
             accel1_x = self.bytes_to_int32(payload[0], payload[1], payload[2], payload[3])
             accel1_y = self.bytes_to_int32(payload[4], payload[5], payload[6], payload[7])
             accel1_z = self.bytes_to_int32(payload[8], payload[9], payload[10], payload[11])
@@ -206,34 +208,42 @@ class VCPDataParser:
             gyro_z = self.bytes_to_int32(payload[20], payload[21], payload[22], payload[23])
             accel2_x = self.bytes_to_int32(payload[24], payload[25], payload[26], payload[27])
             accel2_y = self.bytes_to_int32(payload[28], payload[29], payload[30], payload[31])
-            temperature = self.bytes_to_float(payload[32], payload[33], payload[34], payload[35])
+            accel2_z = self.bytes_to_int32(payload[32], payload[33], payload[34], payload[35])
+            temperature = self.bytes_to_float(payload[36], payload[37], payload[38], payload[39])
+            mag_x = self.bytes_to_int32(payload[40], payload[41], payload[42], payload[43])
+            mag_y = self.bytes_to_int32(payload[44], payload[45], payload[46], payload[47])
+            mag_z = self.bytes_to_int32(payload[48], payload[49], payload[50], payload[51])
+            counter = self.bytes_to_int32(payload[52], payload[53], payload[54], payload[55])
+            fastest_odr = self.bytes_to_float(payload[56], payload[57], payload[58], payload[59])
 
-            # Check if temperature is reasonable (should be between -40 and 85°C)
-            if -40 <= temperature <= 85:
-                # This looks like partial IMU data (without mag and fastestODR)
-                counter = 0
-                return IKS02A1Packet(
-                    timestamp=time.time(),
-                    counter=counter,
-                    accel1_x=accel1_x,
-                    accel1_y=accel1_y,
-                    accel1_z=accel1_z,
-                    gyro_x=gyro_x,
-                    gyro_y=gyro_y,
-                    gyro_z=gyro_z,
-                    accel2_x=accel2_x,
-                    accel2_y=accel2_y,
-                    accel2_z=accel2_z,
-                    temperature=temperature,
-                    mag_x=0,
-                    mag_y=0,
-                    mag_z=0,
-                    fastest_odr=0
-                )
-        except Exception:
-            pass
+            return IKS02A1Packet(
+                timestamp=time.time(),
+                counter=counter,
+                accel1_x=accel1_x,
+                accel1_y=accel1_y,
+                accel1_z=accel1_z,
+                gyro_x=gyro_x,
+                gyro_y=gyro_y,
+                gyro_z=gyro_z,
+                accel2_x=accel2_x,
+                accel2_y=accel2_y,
+                accel2_z=accel2_z,
+                temperature=temperature,
+                mag_x=mag_x,
+                mag_y=mag_y,
+                mag_z=mag_z,
+                fastest_odr=fastest_odr,
+            )
+        except Exception as e:
+            print(f"Error parsing IKS02A1 packet: {e}")
+            return None
 
-        # Try ToF data
+    def _parse_vl53l1a1_only(self, data: bytes) -> Optional[VL53L1A1Packet]:
+        """Parse VL53L1A1 only packet (52 bytes payload)."""
+        payload = data[3:-3]
+        if len(payload) != 52:
+            return None
+
         try:
             tof_left_distance = self.bytes_to_uint32(payload[0], payload[1], payload[2], payload[3])
             tof_left_ambient = self.bytes_to_uint32(payload[4], payload[5], payload[6], payload[7])
@@ -243,7 +253,11 @@ class VCPDataParser:
             tof_centre_ambient = self.bytes_to_uint32(payload[20], payload[21], payload[22], payload[23])
             tof_centre_signal = self.bytes_to_uint32(payload[24], payload[25], payload[26], payload[27])
             tof_centre_status = self.bytes_to_uint32(payload[28], payload[29], payload[30], payload[31])
-            counter = self.bytes_to_uint32(payload[32], payload[33], payload[34], payload[35])
+            tof_right_distance = self.bytes_to_uint32(payload[32], payload[33], payload[34], payload[35])
+            tof_right_ambient = self.bytes_to_uint32(payload[36], payload[37], payload[38], payload[39])
+            tof_right_signal = self.bytes_to_uint32(payload[40], payload[41], payload[42], payload[43])
+            tof_right_status = self.bytes_to_uint32(payload[44], payload[45], payload[46], payload[47])
+            counter = self.bytes_to_uint32(payload[48], payload[49], payload[50], payload[51])
 
             return VL53L1A1Packet(
                 timestamp=time.time(),
@@ -256,21 +270,20 @@ class VCPDataParser:
                 tof_centre_ambient=tof_centre_ambient,
                 tof_centre_signal=tof_centre_signal,
                 tof_centre_status=tof_centre_status,
-                tof_right_distance=0,
-                tof_right_ambient=0,
-                tof_right_signal=0,
-                tof_right_status=0
+                tof_right_distance=tof_right_distance,
+                tof_right_ambient=tof_right_ambient,
+                tof_right_signal=tof_right_signal,
+                tof_right_status=tof_right_status,
             )
-        except Exception:
-            pass
-
-        return None
+        except Exception as e:
+            print(f"Error parsing VL53L1A1 packet: {e}")
+            return None
 
     def _parse_combined(self, data: bytes) -> Optional[CombinedPacket]:
         """Parse combined IKS02A1 + VL53L1A1 packet (76 bytes payload)"""
         payload = data[3:-3]
 
-        if len(payload) != 76:
+        if len(payload) not in (100, 108):
             return None
 
         try:
@@ -382,13 +395,17 @@ class VCPDataParser:
             )
             offset += 4
 
-            counter = self.bytes_to_int32(
-                payload[offset], payload[offset + 1], payload[offset + 2], payload[offset + 3]
-            )
-            offset += 4
-            fastest_odr = self.bytes_to_float(
-                payload[offset], payload[offset + 1], payload[offset + 2], payload[offset + 3]
-            )
+            if len(payload) >= offset + 8:
+                counter = self.bytes_to_int32(
+                    payload[offset], payload[offset + 1], payload[offset + 2], payload[offset + 3]
+                )
+                offset += 4
+                fastest_odr = self.bytes_to_float(
+                    payload[offset], payload[offset + 1], payload[offset + 2], payload[offset + 3]
+                )
+            else:
+                counter = 0
+                fastest_odr = 0.0
 
             return CombinedPacket(
                 timestamp=time.time(),
@@ -451,282 +468,402 @@ class VCPDataParser:
             return None
 
 
-class DataPlotter:
-    """Real-time plotter for sensor data"""
+# ---------------------------------------------------------------------------
+# Flask dashboard HTML (served at /)
+# ---------------------------------------------------------------------------
+HTML_DASHBOARD = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AP_01 Sensor Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0d1117;color:#e6edf3;font-family:'Segoe UI',system-ui,sans-serif;font-size:14px}
+header{display:flex;align-items:center;gap:20px;padding:12px 20px;background:#161b22;border-bottom:1px solid #30363d;flex-wrap:wrap}
+header h1{font-size:1.1rem;font-weight:700;color:#58a6ff;margin-right:4px}
+.badge{padding:3px 10px;border-radius:12px;font-size:0.75rem;font-weight:700;background:#1f3a1f;color:#3fb950}
+.badge.err{background:#3d1a1a;color:#f85149}
+.badge.warn{background:#2d2200;color:#d29922}
+.stat{font-size:0.8rem;color:#8b949e}
+.stat b{color:#e6edf3;font-size:0.95rem}
+#config-bar{padding:7px 20px;background:#0d1117;border-bottom:1px solid #21262d;font-size:0.78rem;color:#8b949e;min-height:28px}
+#config-bar b{color:#d2a679}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;padding:16px 20px}
+.card{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:14px}
+.card h2{font-size:0.68rem;text-transform:uppercase;letter-spacing:.08em;color:#8b949e;margin-bottom:10px}
+.vals{display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.vb{flex:1;min-width:60px}
+.vlabel{font-size:0.62rem;color:#8b949e;text-transform:uppercase;margin-bottom:2px}
+.vnum{font-size:1.25rem;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.2}
+.vnum.x{color:#f85149}.vnum.y{color:#3fb950}.vnum.z{color:#58a6ff}
+.vnum.d{color:#e6edf3}.vnum.t{color:#d2a679}
+.vstatus{font-size:0.68rem;margin-top:2px}
+.vstatus.ok{color:#3fb950}.vstatus.warn{color:#d29922}.vstatus.err{color:#f85149}
+.ch{height:80px;position:relative}
+</style>
+</head>
+<body>
+<header>
+  <h1>AP_01 Sensor Dashboard</h1>
+  <div id="status-badge" class="badge err">Waiting</div>
+  <div class="stat">Rate: <b id="rate">--</b> Hz</div>
+  <div class="stat">Firmware ODR: <b id="fw-odr">--</b> Hz</div>
+  <div class="stat">Packet #<b id="counter">--</b></div>
+  <div class="stat">Temp: <b id="temp-hdr">--</b> &deg;C</div>
+</header>
+<div id="config-bar">Waiting for calibration config&hellip;</div>
+<div class="grid">
 
-    def __init__(self, max_points: int = 500):
-        self.max_points = max_points
-        self.packets: deque = deque(maxlen=max_points)
-        self.packet_type = None
+  <div class="card">
+    <h2>Time-of-Flight Distance (mm)</h2>
+    <div class="vals">
+      <div class="vb"><div class="vlabel">Left</div><div class="vnum d" id="tof-l">--</div><div class="vstatus" id="tof-l-st"></div></div>
+      <div class="vb"><div class="vlabel">Centre</div><div class="vnum d" id="tof-c">--</div><div class="vstatus" id="tof-c-st"></div></div>
+      <div class="vb"><div class="vlabel">Right</div><div class="vnum d" id="tof-r">--</div><div class="vstatus" id="tof-r-st"></div></div>
+    </div>
+    <div class="ch"><canvas id="chart-tof"></canvas></div>
+  </div>
 
-        # Setup figure with multiple subplots
-        self.fig = plt.figure(figsize=(16, 12))
-        self.fig.suptitle('AP_01 Sensor Data Monitor', fontsize=16, fontweight='bold')
+  <div class="card">
+    <h2>Accelerometer 1 (mg)</h2>
+    <div class="vals">
+      <div class="vb"><div class="vlabel">X</div><div class="vnum x" id="a1x">--</div></div>
+      <div class="vb"><div class="vlabel">Y</div><div class="vnum y" id="a1y">--</div></div>
+      <div class="vb"><div class="vlabel">Z</div><div class="vnum z" id="a1z">--</div></div>
+    </div>
+    <div class="ch"><canvas id="chart-accel1"></canvas></div>
+  </div>
 
-        self.setup_plots()
+  <div class="card">
+    <h2>Gyroscope (dps)</h2>
+    <div class="vals">
+      <div class="vb"><div class="vlabel">X</div><div class="vnum x" id="gx">--</div></div>
+      <div class="vb"><div class="vlabel">Y</div><div class="vnum y" id="gy">--</div></div>
+      <div class="vb"><div class="vlabel">Z</div><div class="vnum z" id="gz">--</div></div>
+    </div>
+    <div class="ch"><canvas id="chart-gyro"></canvas></div>
+  </div>
 
-    def setup_plots(self):
-        """Setup the plot layout"""
-        gs = GridSpec(4, 3, figure=self.fig, hspace=0.35, wspace=0.3)
+  <div class="card">
+    <h2>Accelerometer 2 (mg)</h2>
+    <div class="vals">
+      <div class="vb"><div class="vlabel">X</div><div class="vnum x" id="a2x">--</div></div>
+      <div class="vb"><div class="vlabel">Y</div><div class="vnum y" id="a2y">--</div></div>
+      <div class="vb"><div class="vlabel">Z</div><div class="vnum z" id="a2z">--</div></div>
+    </div>
+    <div class="ch"><canvas id="chart-accel2"></canvas></div>
+  </div>
 
-        # Accelerometer plots
-        self.ax_accel1 = self.fig.add_subplot(gs[0, 0])
-        self.ax_accel2 = self.fig.add_subplot(gs[0, 1])
+  <div class="card">
+    <h2>Magnetometer (mGauss)</h2>
+    <div class="vals">
+      <div class="vb"><div class="vlabel">X</div><div class="vnum x" id="mx">--</div></div>
+      <div class="vb"><div class="vlabel">Y</div><div class="vnum y" id="my">--</div></div>
+      <div class="vb"><div class="vlabel">Z</div><div class="vnum z" id="mz">--</div></div>
+    </div>
+    <div class="ch"><canvas id="chart-mag"></canvas></div>
+  </div>
 
-        # Gyroscope plot
-        self.ax_gyro = self.fig.add_subplot(gs[0, 2])
+  <div class="card">
+    <h2>Temperature (&deg;C)</h2>
+    <div class="vals">
+      <div class="vb"><div class="vlabel">Board</div><div class="vnum t" id="temp">--</div></div>
+    </div>
+    <div class="ch"><canvas id="chart-temp"></canvas></div>
+  </div>
 
-        # Temperature plot
-        self.ax_temp = self.fig.add_subplot(gs[1, 0])
+</div>
+<script>
+const TOF_ST = {0:'OK',1:'Sigma Fail',2:'Signal Fail',4:'Phase Fail',7:'Wrap Fail',12:'No Target'};
+function stClass(s){return s===0?'ok':(s===12?'warn':'err');}
+function stText(s){return TOF_ST[s]??'Status '+s;}
 
-        # Magnetometer plot
-        self.ax_mag = self.fig.add_subplot(gs[1, 1])
+const N = 100;
+function mkChart(id, labels, colors){
+  return new Chart(document.getElementById(id).getContext('2d'),{
+    type:'line',
+    data:{
+      labels:Array(N).fill(''),
+      datasets:labels.map((l,i)=>({label:l,data:Array(N).fill(null),
+        borderColor:colors[i],borderWidth:1.5,pointRadius:0,tension:0.2,fill:false}))
+    },
+    options:{animation:false,responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{x:{display:false},y:{display:true,
+        grid:{color:'#21262d'},
+        ticks:{color:'#8b949e',font:{size:9},maxTicksLimit:4}}}}
+  });
+}
 
-        # ToF distance plots
-        self.ax_tof_dist = self.fig.add_subplot(gs[1, 2])
+function setChartSeries(chart, series){
+  series.forEach((arr,di)=>{
+    if(!arr||!arr.length)return;
+    const s=arr.slice(-N);
+    chart.data.datasets[di].data=Array(N-s.length).fill(null).concat(s);
+  });
+  chart.update('none');
+}
 
-        # ToF ambient/signal plots
-        self.ax_tof_ambient = self.fig.add_subplot(gs[2, 0])
-        self.ax_tof_signal = self.fig.add_subplot(gs[2, 1])
+const charts={
+  tof:   mkChart('chart-tof',   ['L','C','R'],  ['#f85149','#3fb950','#58a6ff']),
+  a1:    mkChart('chart-accel1',['X','Y','Z'],  ['#f85149','#3fb950','#58a6ff']),
+  gyro:  mkChart('chart-gyro',  ['X','Y','Z'],  ['#f85149','#3fb950','#58a6ff']),
+  a2:    mkChart('chart-accel2',['X','Y','Z'],  ['#f85149','#3fb950','#58a6ff']),
+  mag:   mkChart('chart-mag',   ['X','Y','Z'],  ['#f85149','#3fb950','#58a6ff']),
+  temp:  mkChart('chart-temp',  ['Temp'],       ['#d2a679']),
+};
 
-        # Counter plot
-        self.ax_counter = self.fig.add_subplot(gs[2, 2])
+let cfgShown=false;
 
-        # Status plot
-        self.ax_status = self.fig.add_subplot(gs[3, 0])
+async function poll(){
+  try{
+    const d=await(await fetch('/data')).json();
+    const badge=document.getElementById('status-badge');
+    badge.textContent=d.latest?'Live':'Waiting';
+    badge.className='badge'+(d.latest?'':' err');
+    document.getElementById('rate').textContent=d.rate_hz.toFixed(1);
 
-        # ToF 8x8 heatmap (if applicable)
-        self.ax_tof_heatmap = self.fig.add_subplot(gs[3, 1:])
+    if(d.config&&!cfgShown&&Object.keys(d.config).length){
+      cfgShown=true;
+      const c=d.config;
+      document.getElementById('config-bar').innerHTML=
+        '<b>Config sent</b> &mdash; '+
+        'ToF: '+(c.tof_profile||'?')+' FSR='+c.tof_fsr+' @ '+c.tof_odr+' Hz &nbsp;|&nbsp; '+
+        'Accel1: &plusmn;'+c.accel1_fsr+'g @ '+c.accel1_odr+' Hz &nbsp;|&nbsp; '+
+        'Gyro: &plusmn;'+c.gyro_fsr+'dps @ '+c.gyro_odr+' Hz &nbsp;|&nbsp; '+
+        'Accel2: &plusmn;'+c.accel2_fsr+'g @ '+c.accel2_odr+' Hz &nbsp;|&nbsp; '+
+        'Mag: '+c.mag_odr+' Hz';
+    }
 
-        # Initialize line objects
-        self.line_accel1_x, = self.ax_accel1.plot([], [], label='Accel1 X', color='r')
-        self.line_accel1_y, = self.ax_accel1.plot([], [], label='Accel1 Y', color='g')
-        self.line_accel1_z, = self.ax_accel1.plot([], [], label='Accel1 Z', color='b')
-        self.ax_accel1.set_ylabel('Accel1 (mg)')
-        self.ax_accel1.legend(loc='upper right', fontsize=8)
-        self.ax_accel1.grid(True)
+    const lat=d.latest;
+    if(!lat)return;
+    if(lat.counter!=null)document.getElementById('counter').textContent=lat.counter;
+    if(lat.fastest_odr!=null)document.getElementById('fw-odr').textContent=lat.fastest_odr.toFixed(1);
+    if(lat.temperature!=null){
+      document.getElementById('temp-hdr').textContent=lat.temperature.toFixed(1);
+      document.getElementById('temp').textContent=lat.temperature.toFixed(2);
+    }
+    if(lat.tof){
+      const t=lat.tof;
+      [['l','left'],['c','centre'],['r','right']].forEach(([s,k])=>{
+        document.getElementById('tof-'+s).textContent=t[k].dist+' mm';
+        const el=document.getElementById('tof-'+s+'-st');
+        el.textContent=stText(t[k].status);
+        el.className='vstatus '+stClass(t[k].status);
+      });
+    }
+    const xyz=(pfx,obj)=>{if(!obj)return;
+      document.getElementById(pfx+'x').textContent=obj.x;
+      document.getElementById(pfx+'y').textContent=obj.y;
+      document.getElementById(pfx+'z').textContent=obj.z;};
+    xyz('a1',lat.accel1);xyz('g',lat.gyro);xyz('a2',lat.accel2);xyz('m',lat.mag);
 
-        self.line_accel2_x, = self.ax_accel2.plot([], [], label='Accel2 X', color='r')
-        self.line_accel2_y, = self.ax_accel2.plot([], [], label='Accel2 Y', color='g')
-        self.line_accel2_z, = self.ax_accel2.plot([], [], label='Accel2 Z', color='b')
-        self.ax_accel2.set_ylabel('Accel2 (mg)')
-        self.ax_accel2.legend(loc='upper right', fontsize=8)
-        self.ax_accel2.grid(True)
+    const h=d.history;
+    setChartSeries(charts.tof, [h.tof_left_distance,h.tof_centre_distance,h.tof_right_distance]);
+    setChartSeries(charts.a1,  [h.accel1_x,h.accel1_y,h.accel1_z]);
+    setChartSeries(charts.gyro,[h.gyro_x,h.gyro_y,h.gyro_z]);
+    setChartSeries(charts.a2,  [h.accel2_x,h.accel2_y,h.accel2_z]);
+    setChartSeries(charts.mag, [h.mag_x,h.mag_y,h.mag_z]);
+    setChartSeries(charts.temp,[h.temperature]);
+  }catch(e){
+    document.getElementById('status-badge').textContent='Error';
+    document.getElementById('status-badge').className='badge err';
+    console.error(e);
+  }
+}
+setInterval(poll,250);
+poll();
+</script>
+</body>
+</html>"""
 
-        self.line_gyro_x, = self.ax_gyro.plot([], [], label='Gyro X', color='r')
-        self.line_gyro_y, = self.ax_gyro.plot([], [], label='Gyro Y', color='g')
-        self.line_gyro_z, = self.ax_gyro.plot([], [], label='Gyro Z', color='b')
-        self.ax_gyro.set_ylabel('Gyro (dps)')
-        self.ax_gyro.legend(loc='upper right', fontsize=8)
-        self.ax_gyro.grid(True)
 
-        self.line_temp, = self.ax_temp.plot([], [], label='Temperature', color='orange')
-        self.ax_temp.set_ylabel('Temperature (°C)')
-        self.ax_temp.legend(loc='upper right', fontsize=8)
-        self.ax_temp.grid(True)
+# ---------------------------------------------------------------------------
+# Flask dashboard backend
+# ---------------------------------------------------------------------------
+class FlaskDashboard:
+    MAX_HISTORY = 100
 
-        self.line_mag_x, = self.ax_mag.plot([], [], label='Mag X', color='r')
-        self.line_mag_y, = self.ax_mag.plot([], [], label='Mag Y', color='g')
-        self.line_mag_z, = self.ax_mag.plot([], [], label='Mag Z', color='b')
-        self.ax_mag.set_ylabel('Magnetometer (mGauss)')
-        self.ax_mag.legend(loc='upper right', fontsize=8)
-        self.ax_mag.grid(True)
+    def __init__(self):
+        self.lock = threading.Lock()
+        self.latest: Optional[DataPacket] = None
+        self.history: deque = deque(maxlen=self.MAX_HISTORY)
+        self.packet_times: deque = deque(maxlen=200)
+        self.config: dict = {}
+        # Suppress per-request werkzeug logs
+        logging.getLogger('werkzeug').setLevel(logging.ERROR)
+        self.app = Flask(__name__)
+        self._setup_routes()
 
-        self.line_tof_left, = self.ax_tof_dist.plot([], [], label='ToF Left', color='r', marker='o')
-        self.line_tof_center, = self.ax_tof_dist.plot([], [], label='ToF Center', color='g', marker='s')
-        self.line_tof_right, = self.ax_tof_dist.plot([], [], label='ToF Right', color='b', marker='^')
-        self.ax_tof_dist.set_ylabel('Distance (mm)')
-        self.ax_tof_dist.legend(loc='upper right', fontsize=8)
-        self.ax_tof_dist.grid(True)
-
-        self.line_ambient_left, = self.ax_tof_ambient.plot([], [], label='Left', color='r')
-        self.line_ambient_center, = self.ax_tof_ambient.plot([], [], label='Center', color='g')
-        self.line_ambient_right, = self.ax_tof_ambient.plot([], [], label='Right', color='b')
-        self.ax_tof_ambient.set_ylabel('Ambient Rate (kcps)')
-        self.ax_tof_ambient.legend(loc='upper right', fontsize=8)
-        self.ax_tof_ambient.grid(True)
-
-        self.line_signal_left, = self.ax_tof_signal.plot([], [], label='Left', color='r')
-        self.line_signal_center, = self.ax_tof_signal.plot([], [], label='Center', color='g')
-        self.line_signal_right, = self.ax_tof_signal.plot([], [], label='Right', color='b')
-        self.ax_tof_signal.set_ylabel('Signal Rate (kcps)')
-        self.ax_tof_signal.legend(loc='upper right', fontsize=8)
-        self.ax_tof_signal.grid(True)
-
-        self.line_counter, = self.ax_counter.plot([], [], label='Packet Counter', color='purple')
-        self.ax_counter.set_ylabel('Count')
-        self.ax_counter.legend(loc='upper right', fontsize=8)
-        self.ax_counter.grid(True)
-
-        self.line_status_left, = self.ax_status.plot([], [], label='Left Status', color='r', marker='x')
-        self.line_status_center, = self.ax_status.plot([], [], label='Center Status', color='g', marker='x')
-        self.line_status_right, = self.ax_status.plot([], [], label='Right Status', color='b', marker='x')
-        self.ax_status.set_ylabel('Range Status')
-        self.ax_status.set_ylim(-1, 8)
-        self.ax_status.legend(loc='upper right', fontsize=8)
-        self.ax_status.grid(True)
-
-        self.tof_heatmap = None
+    def set_config(self, cfg: dict):
+        with self.lock:
+            self.config = cfg
 
     def add_packet(self, packet: DataPacket):
-        """Add a new packet and update plots"""
-        self.packets.append(packet)
-        if self.packet_type is None:
-            self.packet_type = type(packet)
+        with self.lock:
+            self.latest = packet
+            self.history.append(packet)
+            self.packet_times.append(time.time())
 
-    def update(self, frame):
-        """Update plot data"""
-        if not self.packets:
-            return []
+    def _get_rate(self) -> float:
+        with self.lock:
+            times = list(self.packet_times)
+        if len(times) < 2:
+            return 0.0
+        elapsed = times[-1] - times[0]
+        return 0.0 if elapsed <= 0 else (len(times) - 1) / elapsed
 
-        # Extract data from all packets
-        indices = np.arange(len(self.packets))
+    def _packet_to_dict(self, p: DataPacket) -> dict:
+        if isinstance(p, CombinedPacket):
+            return {
+                'type': 'combined', 'timestamp': p.timestamp, 'counter': p.counter,
+                'tof': {
+                    'left':   {'dist': p.tof_left_distance,   'ambient': p.tof_left_ambient,   'signal': p.tof_left_signal,   'status': p.tof_left_status},
+                    'centre': {'dist': p.tof_centre_distance, 'ambient': p.tof_centre_ambient, 'signal': p.tof_centre_signal, 'status': p.tof_centre_status},
+                    'right':  {'dist': p.tof_right_distance,  'ambient': p.tof_right_ambient,  'signal': p.tof_right_signal,  'status': p.tof_right_status},
+                },
+                'accel1': {'x': p.accel1_x, 'y': p.accel1_y, 'z': p.accel1_z},
+                'gyro':   {'x': p.gyro_x,   'y': p.gyro_y,   'z': p.gyro_z},
+                'accel2': {'x': p.accel2_x, 'y': p.accel2_y, 'z': p.accel2_z},
+                'mag':    {'x': p.mag_x,    'y': p.mag_y,    'z': p.mag_z},
+                'temperature': p.temperature,
+                'fastest_odr': p.fastest_odr,
+            }
+        if isinstance(p, IKS02A1Packet):
+            return {
+                'type': 'imu', 'timestamp': p.timestamp, 'counter': p.counter,
+                'accel1': {'x': p.accel1_x, 'y': p.accel1_y, 'z': p.accel1_z},
+                'gyro':   {'x': p.gyro_x,   'y': p.gyro_y,   'z': p.gyro_z},
+                'accel2': {'x': p.accel2_x, 'y': p.accel2_y, 'z': p.accel2_z},
+                'mag':    {'x': p.mag_x,    'y': p.mag_y,    'z': p.mag_z},
+                'temperature': p.temperature, 'fastest_odr': p.fastest_odr,
+            }
+        if isinstance(p, VL53L1A1Packet):
+            return {
+                'type': 'tof1', 'timestamp': p.timestamp, 'counter': p.counter,
+                'tof': {
+                    'left':   {'dist': p.tof_left_distance,   'ambient': p.tof_left_ambient,   'signal': p.tof_left_signal,   'status': p.tof_left_status},
+                    'centre': {'dist': p.tof_centre_distance, 'ambient': p.tof_centre_ambient, 'signal': p.tof_centre_signal, 'status': p.tof_centre_status},
+                    'right':  {'dist': p.tof_right_distance,  'ambient': p.tof_right_ambient,  'signal': p.tof_right_signal,  'status': p.tof_right_status},
+                },
+            }
+        if isinstance(p, VL53L8A1Packet):
+            return {'type': 'tof8', 'timestamp': p.timestamp, 'counter': p.counter,
+                    'tof_matrix': p.tof_distance_matrix.tolist()}
+        return {'type': 'unknown'}
 
-        artists = []
+    def _setup_routes(self):
+        app = self.app
+        db = self
 
-        # Determine packet type and extract relevant data
-        for i, packet in enumerate(self.packets):
-            if isinstance(packet, (IKS02A1Packet, CombinedPacket)):
-                # Update accelerometer 1
-                if i == len(self.packets) - 1:  # Only update on last packet
-                    pass
+        @app.route('/')
+        def index():
+            return Response(HTML_DASHBOARD, mimetype='text/html')
 
-        # Create data arrays
-        if isinstance(self.packets[-1], IKS02A1Packet):
-            accel1_x_data = np.array([p.accel1_x for p in self.packets])
-            accel1_y_data = np.array([p.accel1_y for p in self.packets])
-            accel1_z_data = np.array([p.accel1_z for p in self.packets])
-            gyro_x_data = np.array([p.gyro_x for p in self.packets])
-            gyro_y_data = np.array([p.gyro_y for p in self.packets])
-            gyro_z_data = np.array([p.gyro_z for p in self.packets])
-            accel2_x_data = np.array([p.accel2_x for p in self.packets])
-            accel2_y_data = np.array([p.accel2_y for p in self.packets])
-            accel2_z_data = np.array([p.accel2_z for p in self.packets])
-            temp_data = np.array([p.temperature for p in self.packets])
-            mag_x_data = np.array([p.mag_x for p in self.packets])
-            mag_y_data = np.array([p.mag_y for p in self.packets])
-            mag_z_data = np.array([p.mag_z for p in self.packets])
-            counter_data = np.array([p.counter for p in self.packets])
+        @app.route('/data')
+        def data():
+            with db.lock:
+                latest = db.latest
+                history = list(db.history)
+                config = dict(db.config)
+            rate = db._get_rate()
 
-            # Update lines
-            self.line_accel1_x.set_data(indices, accel1_x_data)
-            self.line_accel1_y.set_data(indices, accel1_y_data)
-            self.line_accel1_z.set_data(indices, accel1_z_data)
-            artists.extend([self.line_accel1_x, self.line_accel1_y, self.line_accel1_z])
+            def imu(attr):
+                return [getattr(p, attr) for p in history if isinstance(p, (CombinedPacket, IKS02A1Packet))]
 
-            self.line_accel2_x.set_data(indices, accel2_x_data)
-            self.line_accel2_y.set_data(indices, accel2_y_data)
-            self.line_accel2_z.set_data(indices, accel2_z_data)
-            artists.extend([self.line_accel2_x, self.line_accel2_y, self.line_accel2_z])
+            def tof(attr):
+                return [getattr(p, attr) for p in history if isinstance(p, (CombinedPacket, VL53L1A1Packet))]
 
-            self.line_gyro_x.set_data(indices, gyro_x_data)
-            self.line_gyro_y.set_data(indices, gyro_y_data)
-            self.line_gyro_z.set_data(indices, gyro_z_data)
-            artists.extend([self.line_gyro_x, self.line_gyro_y, self.line_gyro_z])
+            return jsonify({
+                'rate_hz': round(rate, 1),
+                'config': config,
+                'latest': db._packet_to_dict(latest) if latest else None,
+                'history': {
+                    'tof_left_distance':   tof('tof_left_distance'),
+                    'tof_centre_distance': tof('tof_centre_distance'),
+                    'tof_right_distance':  tof('tof_right_distance'),
+                    'accel1_x': imu('accel1_x'), 'accel1_y': imu('accel1_y'), 'accel1_z': imu('accel1_z'),
+                    'gyro_x':   imu('gyro_x'),   'gyro_y':   imu('gyro_y'),   'gyro_z':   imu('gyro_z'),
+                    'accel2_x': imu('accel2_x'), 'accel2_y': imu('accel2_y'), 'accel2_z': imu('accel2_z'),
+                    'mag_x':    imu('mag_x'),    'mag_y':    imu('mag_y'),    'mag_z':    imu('mag_z'),
+                    'temperature': imu('temperature'),
+                },
+            })
 
-            self.line_temp.set_data(indices, temp_data)
-            artists.append(self.line_temp)
-
-            self.line_mag_x.set_data(indices, mag_x_data)
-            self.line_mag_y.set_data(indices, mag_y_data)
-            self.line_mag_z.set_data(indices, mag_z_data)
-            artists.extend([self.line_mag_x, self.line_mag_y, self.line_mag_z])
-
-            self.line_counter.set_data(indices, counter_data)
-            artists.append(self.line_counter)
-
-            # Rescale axes
-            self._rescale_axes(
-                [self.ax_accel1, self.ax_accel2, self.ax_gyro, self.ax_temp, self.ax_mag, self.ax_counter],
-                indices
-            )
-
-        if isinstance(self.packets[-1], (VL53L1A1Packet, CombinedPacket)):
-            tof_left_dist_data = np.array([p.tof_left_distance for p in self.packets])
-            tof_center_dist_data = np.array([p.tof_centre_distance for p in self.packets])
-            tof_right_dist_data = np.array([p.tof_right_distance for p in self.packets])
-
-            tof_left_ambient_data = np.array([p.tof_left_ambient for p in self.packets])
-            tof_center_ambient_data = np.array([p.tof_centre_ambient for p in self.packets])
-            tof_right_ambient_data = np.array([p.tof_right_ambient for p in self.packets])
-
-            tof_left_signal_data = np.array([p.tof_left_signal for p in self.packets])
-            tof_center_signal_data = np.array([p.tof_centre_signal for p in self.packets])
-            tof_right_signal_data = np.array([p.tof_right_signal for p in self.packets])
-
-            tof_left_status_data = np.array([p.tof_left_status for p in self.packets])
-            tof_center_status_data = np.array([p.tof_centre_status for p in self.packets])
-            tof_right_status_data = np.array([p.tof_right_status for p in self.packets])
-
-            # Update lines
-            self.line_tof_left.set_data(indices, tof_left_dist_data)
-            self.line_tof_center.set_data(indices, tof_center_dist_data)
-            self.line_tof_right.set_data(indices, tof_right_dist_data)
-            artists.extend([self.line_tof_left, self.line_tof_center, self.line_tof_right])
-
-            self.line_ambient_left.set_data(indices, tof_left_ambient_data)
-            self.line_ambient_center.set_data(indices, tof_center_ambient_data)
-            self.line_ambient_right.set_data(indices, tof_right_ambient_data)
-            artists.extend([self.line_ambient_left, self.line_ambient_center, self.line_ambient_right])
-
-            self.line_signal_left.set_data(indices, tof_left_signal_data)
-            self.line_signal_center.set_data(indices, tof_center_signal_data)
-            self.line_signal_right.set_data(indices, tof_right_signal_data)
-            artists.extend([self.line_signal_left, self.line_signal_center, self.line_signal_right])
-
-            self.line_status_left.set_data(indices, tof_left_status_data)
-            self.line_status_center.set_data(indices, tof_center_status_data)
-            self.line_status_right.set_data(indices, tof_right_status_data)
-            artists.extend([self.line_status_left, self.line_status_center, self.line_status_right])
-
-            # Rescale axes
-            self._rescale_axes(
-                [self.ax_tof_dist, self.ax_tof_ambient, self.ax_tof_signal, self.ax_status],
-                indices
-            )
-
-        if isinstance(self.packets[-1], VL53L8A1Packet):
-            # Update heatmap for 8x8 ToF
-            latest_packet = self.packets[-1]
-            if self.tof_heatmap is None:
-                self.tof_heatmap = self.ax_tof_heatmap.imshow(
-                    latest_packet.tof_distance_matrix, 
-                    cmap='hot', 
-                    aspect='auto',
-                    interpolation='nearest'
-                )
-                plt.colorbar(self.tof_heatmap, ax=self.ax_tof_heatmap, label='Distance (mm)')
-                self.ax_tof_heatmap.set_title('VL53L8A1 8x8 Distance Matrix')
-            else:
-                self.tof_heatmap.set_data(latest_packet.tof_distance_matrix)
-                self.tof_heatmap.set_clim(
-                    vmin=latest_packet.tof_distance_matrix.min(),
-                    vmax=latest_packet.tof_distance_matrix.max()
-                )
-            artists.append(self.tof_heatmap)
-
-        return artists
-
-    def _rescale_axes(self, axes_list, indices):
-        """Rescale y-axis for a list of axes"""
-        for ax in axes_list:
-            ax.relim()
-            ax.autoscale_view()
-            if len(indices) > 0:
-                ax.set_xlim(indices[0], indices[-1])
+    def start(self, host: str = '127.0.0.1', port: int = 10000):
+        url = f'http://{host}:{port}'
+        print(f"Dashboard: {url}")
+        threading.Timer(1.2, lambda: webbrowser.open(url)).start()
+        self.app.run(host=host, port=port, debug=False, use_reloader=False, threaded=True)
 
 
+# ---------------------------------------------------------------------------
+# VCP monitor (serial reader + dashboard orchestrator)
+# ---------------------------------------------------------------------------
 class VCPMonitor:
     """Main class for monitoring VCP data"""
 
-    def __init__(self, port: str, baudrate: int = 1843200):
+    def __init__(self, port: str, baudrate: int = 1843200, preset: str = "iks02a1-vl53l1a1-both",
+                 verbose: bool = False, web_port: int = 10000):
         self.port = port
         self.baudrate = baudrate
+        self.preset = preset
+        self.verbose = verbose
+        self.web_port = web_port
         self.ser = None
-        self.parser = VCPDataParser()
-        self.plotter = DataPlotter()
+        self.parser = VCPDataParser(self.verbose)
+        self.dashboard = FlaskDashboard()
         self.running = False
         self.read_thread = None
+
+    def send_initial_calibration(self):
+        """Send startup calibration/config frame required by current firmware preset."""
+        if not self.ser or self.preset != "iks02a1-vl53l1a1-both":
+            return
+
+        # Config values — must match main.c receivedFromSimulink() byte layout:
+        # [tof_fsr(i32), tof_odr(i32), accel1_fsr(i32), accel1_odr(f32),
+        #  gyro_fsr(i32), gyro_odr(f32), accel2_fsr(i32), accel2_odr(f32), mag_odr(f32)]
+        tof_fsr    = 2       # ranging profile: 1=short range, 2=long range
+        tof_odr    = 10      # Hz
+        accel1_fsr = 4       # ±g
+        accel1_odr = 104.0   # Hz
+        gyro_fsr   = 1000    # ±dps
+        gyro_odr   = 104.0   # Hz
+        accel2_fsr = 4       # ±g
+        accel2_odr = 104.0   # Hz
+        mag_odr    = 100.0   # Hz
+
+        payload = struct.pack(
+            '<iiifififf',
+            tof_fsr, tof_odr,
+            accel1_fsr, accel1_odr,
+            gyro_fsr, gyro_odr,
+            accel2_fsr, accel2_odr,
+            mag_odr,
+        )
+        packet = b'J_A' + payload + b'A_J'
+        self.ser.write(packet)
+        self.ser.flush()
+        if self.verbose:
+            print(f"TX: {packet.hex()}")
+
+        tof_profile = "Short Range" if tof_fsr == 1 else "Long Range"
+        print("Calibration packet sent — configuration:")
+        print(f"  ToF:    Profile={tof_profile} (FSR={tof_fsr})   ODR={tof_odr} Hz")
+        print(f"  Accel1: FSR=\u00b1{accel1_fsr}g   ODR={accel1_odr:.1f} Hz")
+        print(f"  Gyro:   FSR=\u00b1{gyro_fsr} dps   ODR={gyro_odr:.1f} Hz")
+        print(f"  Accel2: FSR=\u00b1{accel2_fsr}g   ODR={accel2_odr:.1f} Hz")
+        print(f"  Mag:    ODR={mag_odr:.1f} Hz")
+
+        self.dashboard.set_config({
+            'tof_fsr': tof_fsr, 'tof_odr': tof_odr, 'tof_profile': tof_profile,
+            'accel1_fsr': accel1_fsr, 'accel1_odr': accel1_odr,
+            'gyro_fsr': gyro_fsr, 'gyro_odr': gyro_odr,
+            'accel2_fsr': accel2_fsr, 'accel2_odr': accel2_odr,
+            'mag_odr': mag_odr,
+        })
 
     def connect(self):
         """Connect to serial port"""
@@ -737,6 +874,7 @@ class VCPMonitor:
                 timeout=1.0
             )
             print(f"Connected to {self.port} at {self.baudrate} baud")
+            self.send_initial_calibration()
             return True
         except Exception as e:
             print(f"Failed to connect to {self.port}: {e}")
@@ -748,9 +886,11 @@ class VCPMonitor:
             try:
                 if self.ser and self.ser.in_waiting > 0:
                     data = self.ser.read(self.ser.in_waiting)
+                    if self.verbose:
+                        print(f"RX: {data.hex()}")
                     packets = self.parser.add_data(data)
                     for packet in packets:
-                        self.plotter.add_packet(packet)
+                        self.dashboard.add_packet(packet)
             except Exception as e:
                 print(f"Error reading data: {e}")
             time.sleep(0.01)
@@ -764,16 +904,7 @@ class VCPMonitor:
         self.read_thread = threading.Thread(target=self.read_data, daemon=True)
         self.read_thread.start()
 
-        # Setup animation
-        ani = FuncAnimation(
-            self.plotter.fig,
-            self.plotter.update,
-            interval=100,
-            blit=True,
-            cache_frame_data=False
-        )
-
-        plt.show()
+        self.dashboard.start(port=self.web_port)
         return True
 
     def stop(self):
@@ -800,24 +931,17 @@ def list_ports():
 
 def main():
     parser = argparse.ArgumentParser(
-        description='VCP Data Parser and Plotter for AP_01 Sensor Board'
+        description='VCP Data Parser and Dashboard for AP_01 Sensor Board'
     )
-    parser.add_argument(
-        '--port',
-        type=str,
-        help='Serial port (e.g., COM3, /dev/ttyUSB0)'
-    )
-    parser.add_argument(
-        '--baud',
-        type=int,
-        default=1843200,
-        help='Baud rate (default: 1843200)'
-    )
-    parser.add_argument(
-        '--list-ports',
-        action='store_true',
-        help='List available COM ports and exit'
-    )
+    parser.add_argument('--port', type=str, help='Serial port (e.g., COM3, /dev/ttyUSB0)')
+    parser.add_argument('--baud', type=int, default=1843200, help='Baud rate (default: 1843200)')
+    parser.add_argument('--list-ports', action='store_true', help='List available COM ports and exit')
+    parser.add_argument('--preset', type=str, default='iks02a1-vl53l1a1-both',
+                        choices=['iks02a1-vl53l1a1-both', 'auto'],
+                        help='Firmware preset (default: iks02a1-vl53l1a1-both)')
+    parser.add_argument('--web-port', type=int, default=10000,
+                        help='Flask dashboard port (default: 10000)')
+    parser.add_argument('-v', '--verbose', action='store_true', help='Enable verbose output')
 
     args = parser.parse_args()
 
@@ -829,7 +953,7 @@ def main():
         print("Error: --port is required. Use --list-ports to see available ports.")
         sys.exit(1)
 
-    monitor = VCPMonitor(args.port, args.baud)
+    monitor = VCPMonitor(args.port, args.baud, args.preset, args.verbose, args.web_port)
     try:
         monitor.start()
     except KeyboardInterrupt:
@@ -840,3 +964,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

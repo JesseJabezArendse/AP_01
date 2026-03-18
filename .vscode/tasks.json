@@ -1,0 +1,210 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "CMake: configure (IKS02A1 VL53L1A1)",
+      "type": "shell",
+      "command": "cmake",
+      "args": [
+        "--preset",
+        "app",
+        "-S",
+        "${workspaceFolder}/src/IKS02A1 VL53L1A1 Source Code Both"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "CMake: build",
+      "type": "shell",
+      "command": "cmake",
+      "args": [
+        "--build",
+        "${workspaceFolder}/src/IKS02A1 VL53L1A1 Source Code Both/build",
+        "--parallel",
+        "4"
+      ],
+      "dependsOn": "CMake: configure (IKS02A1 VL53L1A1)",
+      "dependsOrder": "sequence",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "problemMatcher": [
+        "$gcc"
+      ]
+    },
+    {
+      "label": "🔌 Start OpenOCD (ST-Link)",
+      "type": "shell",
+      "windows": {
+        "command": "${workspaceFolder}/../../tools/openOCD/bin/openocd.exe",
+        "args": [
+          "-f", "interface/${config:stm32.openocd.interface}.cfg",
+          "-f", "target/${config:stm32.openocd.target}.cfg",
+          "-c", "adapter speed 4000",
+          "-c", "gdb port ${config:stm32.gdbServer.port}",
+          "-c", "telnet port 4444",
+          "-c", "tcl port 6666",
+          "-c", "${config:stm32.openocd.target}.cpu configure -gdb-max-connections 10",
+          "-c", "${config:stm32.openocd.target}.cpu configure -event reset-start { adapter speed 4000 }",
+          "-c", "${config:stm32.openocd.target}.cpu configure -event reset-init { adapter speed 4000 }",
+          "-c", "init",
+          "-c", "adapter speed 4000",
+          "-c", "arm semihosting enable",
+          "-c", "arm semihosting_fileio enable"
+        ]
+      },
+      "osx": {
+        "command": "openocd",
+        "args": [
+          "-f", "interface/${config:stm32.openocd.interface}.cfg",
+          "-f", "target/${config:stm32.openocd.target}.cfg",
+          "-c", "adapter speed 4000",
+          "-c", "gdb port ${config:stm32.gdbServer.port}",
+          "-c", "telnet port 4444",
+          "-c", "tcl port 6666",
+          "-c", "${config:stm32.openocd.target}.cpu configure -gdb-max-connections 10",
+          "-c", "${config:stm32.openocd.target}.cpu configure -event reset-start { adapter speed 4000 }",
+          "-c", "${config:stm32.openocd.target}.cpu configure -event reset-init { adapter speed 4000 }",
+          "-c", "init",
+          "-c", "adapter speed 4000",
+          "-c", "arm semihosting enable",
+          "-c", "arm semihosting_fileio enable"
+        ]
+      },
+      "linux": {
+        "command": "openocd",
+        "args": [
+          "-f", "interface/${config:stm32.openocd.interface}.cfg",
+          "-f", "target/${config:stm32.openocd.target}.cfg",
+          "-c", "adapter speed 4000",
+          "-c", "gdb port ${config:stm32.gdbServer.port}",
+          "-c", "telnet port 4444",
+          "-c", "tcl port 6666",
+          "-c", "${config:stm32.openocd.target}.cpu configure -gdb-max-connections 10",
+          "-c", "${config:stm32.openocd.target}.cpu configure -event reset-start { adapter speed 4000 }",
+          "-c", "${config:stm32.openocd.target}.cpu configure -event reset-init { adapter speed 4000 }",
+          "-c", "init",
+          "-c", "adapter speed 4000",
+          "-c", "arm semihosting enable",
+          "-c", "arm semihosting_fileio enable"
+        ]
+      }
+    },
+    {
+      "label": "⚡ Flash Firmware",
+      "type": "shell",
+      "windows": {
+        "command": "${workspaceFolder}/../../tools/arm-gcc-toolchain/bin/arm-none-eabi-gdb.exe",
+        "args": [
+          "-q",
+          "${command:cmake.launchTargetPath}",
+          "-ex", "target extended-remote ${config:stm32.gdbServer.host}:${config:stm32.gdbServer.port}",
+          "-ex", "load",
+          "-ex", "verify",
+          "-ex", "reset",
+          "-ex", "exit"
+        ]
+      },
+      "osx": {
+        "command": "arm-none-eabi-gdb",
+        "args": [
+          "-q",
+          "${command:cmake.launchTargetPath}",
+          "-ex", "target extended-remote ${config:stm32.gdbServer.host}:${config:stm32.gdbServer.port}",
+          "-ex", "load",
+          "-ex", "verify",
+          "-ex", "reset",
+          "-ex", "exit"
+        ]
+      },
+      "linux": {
+        "command": "arm-none-eabi-gdb",
+        "args": [
+          "-q",
+          "${command:cmake.launchTargetPath}",
+          "-ex", "target extended-remote ${config:stm32.gdbServer.host}:${config:stm32.gdbServer.port}",
+          "-ex", "load",
+          "-ex", "verify",
+          "-ex", "reset",
+          "-ex", "exit"
+        ]
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/Tests"
+      }
+    },
+    {
+      "label": "👀 Start GDB Client (Attach Only)",
+      "type": "shell",
+      "windows": {
+        "command": "${workspaceFolder}/../../tools/arm-gcc-toolchain/bin/arm-none-eabi-gdb.exe",
+        "args": [
+          "-q",
+          "${command:cmake.launchTargetPath}",
+          "-ex", "target extended-remote ${config:stm32.gdbServer.host}:${config:stm32.gdbServer.port}",
+          "-ex", "set confirm off",
+          "-ex", "set pagination off"
+        ]
+      },
+      "osx": {
+        "command": "arm-none-eabi-gdb",
+        "args": [
+          "-q",
+          "${command:cmake.launchTargetPath}",
+          "-ex", "target extended-remote ${config:stm32.gdbServer.host}:${config:stm32.gdbServer.port}",
+          "-ex", "set confirm off",
+          "-ex", "set pagination off"
+        ]
+      },
+      "linux": {
+        "command": "arm-none-eabi-gdb",
+        "args": [
+          "-q",
+          "${command:cmake.launchTargetPath}",
+          "-ex", "target extended-remote ${config:stm32.gdbServer.host}:${config:stm32.gdbServer.port}",
+          "-ex", "set confirm off",
+          "-ex", "set pagination off"
+        ]
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/Tests"
+      }
+    },
+    {
+      "label": "🔪 Kill All GDB Processes",
+      "type": "shell",
+      "windows": {
+        "command": "taskkill",
+        "args": [
+          "/F",
+          "/IM", "arm-none-eabi-gdb.exe"
+        ]
+      },
+      "osx": {
+        "command": "pkill",
+        "args": [
+          "-9",
+          "gdb"
+        ]
+      },
+      "linux": {
+        "command": "pkill",
+        "args": [
+          "-9",
+          "gdb"
+        ]
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": false,
+        "clear": true
+      }
+    }
+  ]
+}

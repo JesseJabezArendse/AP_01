@@ -1,0 +1,29 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "🎯 Debug Active CMake Target (ST-Link)",
+      "type": "cortex-debug",
+      "request": "launch",
+      "servertype": "external",
+      "gdbTarget": "${config:stm32.gdbServer.host}:${config:stm32.gdbServer.port}",
+      "cwd": "${workspaceFolder}",
+      "executable": "${workspaceFolder}/src/IKS02A1 VL53L1A1 Source Code Both/build/bin/NucleoMX_IKS02A1_VL53L1A1.elf",
+      "device": "STM32F411RE",
+      "runToEntryPoint": "main",
+      "liveWatch": {
+        "enabled": true,
+        "samplesPerSecond": 10
+      },
+      "preLaunchTask": "CMake: build",
+      "postRestartCommands": [
+        "break main",
+        "continue"
+      ],
+      "gdbPath": "arm-none-eabi-gdb",
+      "objdumpPath": "arm-none-eabi-objdump",
+      "toolchainPrefix": "arm-none-eabi"
+    }
+  ]
+}
+

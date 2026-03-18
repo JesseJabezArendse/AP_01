@@ -1,0 +1,21 @@
+{
+    "cmake.clearOutputBeforeBuild": false,
+    "cmake.buildTask": false,
+    "cmake.configureSettings": {
+        "CMAKE_MAKE_PROGRAM": "ninja"
+    },
+    "[windows]": {
+        "cmake.configureSettings": {
+            "CMAKE_MAKE_PROGRAM": "${workspaceFolder}/tools/ninja/ninja.exe"
+        }
+    },
+    "stm32.gdbServer.host": "127.0.0.1",
+    "stm32.gdbServer.port": 3333,
+    "stm32.gdbServer.host_runner": "10.242.136.78",
+    "stm32.targetMCU": "STM32F411RE",
+    "stm32.openocd.interface": "stlink",
+    "stm32.openocd.target": "stm32f4x",
+    "cortex-debug.armToolchainPath": "/Users/jesse/Library/Application Support/Code/User/globalStorage/bmd.stm32-for-vscode/@xpack-dev-tools/arm-none-eabi-gcc/14.2.1-1.1.1/.content/bin",
+    "cortex-debug.openocdPath": "/Users/jesse/Library/Application Support/Code/User/globalStorage/bmd.stm32-for-vscode/@xpack-dev-tools/openocd/0.12.0-6.1/.content/bin/openocd",
+    "cortex-debug.variableUseNaturalFormat": false
+}

@@ -7,16 +7,10 @@
       "description": "Build configuration for NucleoMX_IKS02A1_VL53L8A1 application",
       "generator": "Unix Makefiles",
       "binaryDir": "${sourceDir}/build",
+      "toolchainFile": "${sourceDir}/arm-toolchain.cmake",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release"
-      },
-      "environment": {
-        "CC": "arm-none-eabi-gcc",
-        "CXX": "arm-none-eabi-g++",
-        "AR": "arm-none-eabi-ar",
-        "OBJCOPY": "arm-none-eabi-objcopy",
-        "OBJDUMP": "arm-none-eabi-objdump",
-        "SIZE": "arm-none-eabi-size"
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
       }
     }
   ],

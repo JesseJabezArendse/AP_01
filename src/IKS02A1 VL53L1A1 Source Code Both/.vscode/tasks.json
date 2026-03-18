@@ -2,6 +2,53 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
+			"label": "CMake Configure",
+			"type": "shell",
+			"command": "cmake",
+			"args": [
+				"--preset",
+				"app",
+				"-S",
+				"${workspaceFolder}"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			]
+		},
+		{
+			"label": "CMake Build",
+			"type": "shell",
+			"command": "cmake",
+			"args": [
+				"--build",
+				"${workspaceFolder}/build",
+				"--parallel",
+				"4"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": [
+				"$gcc"
+			]
+		},
+		{
+			"label": "CMake Configure + Build",
+			"dependsOn": [
+				"CMake Configure",
+				"CMake Build"
+			],
+			"dependsOrder": "sequence",
+			"problemMatcher": []
+		},
+		{
 			"label": "Build STM",
 			"type": "process",
 			"command": "${command:stm32-for-vscode.build}",
@@ -10,7 +57,7 @@
 			},
 			"group": {
 				"kind": "build",
-				"isDefault": true
+				"isDefault": false
 			},
 			"problemMatcher": [
 				"$gcc"
@@ -25,7 +72,7 @@
 			},
 			"group": {
 				"kind": "build",
-				"isDefault": true
+				"isDefault": false
 			},
 			"problemMatcher": [
 				"$gcc"
@@ -40,7 +87,7 @@
 			},
 			"group": {
 				"kind": "build",
-				"isDefault": true
+				"isDefault": false
 			},
 			"problemMatcher": [
 				"$gcc"
